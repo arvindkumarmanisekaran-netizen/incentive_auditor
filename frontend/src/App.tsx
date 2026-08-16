@@ -1,122 +1,105 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import { runInvestigation } from "./api/investigation";
+import type { InvestigationResult } from "./types/investigation";
+import InvestigationForm from "./components/InvestigationForm";
+import RiskSummary from "./components/RiskSummary";
+import FindingsList from "./components/FindingsList";
+import SpecialistAnalysis from "./components/SpecialistAnalysis";
+import FinalReport from "./components/FinalReport";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [representativeId, setRepresentativeId] = useState("FR001");
+  const [productId, setProductId] = useState("P001");
+  const [month, setMonth] = useState("2026-07");
+
+  const [result, setResult] = useState<InvestigationResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleInvestigation() {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await runInvestigation(
+        representativeId,
+        productId,
+        month
+      );
+
+      setResult(data);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unknown error"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main style={{ padding: "24px", fontFamily: "Arial, sans-serif" }}>
+      <h1>Incentive Auditor</h1>
 
-      <div className="ticks"></div>
+      <p>
+        AI-assisted pharmaceutical field representative incentive investigation
+      </p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+       <InvestigationForm
+        representativeId={representativeId}
+        productId={productId}
+        month={month}
+        loading={loading}
+        onRepresentativeChange={setRepresentativeId}
+        onProductChange={setProductId}
+        onMonthChange={setMonth}
+        onSubmit={handleInvestigation}
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {error && (
+        <p style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
+
+      {result && (
+        <>
+           <RiskSummary
+            representativeId={result.representative_id}
+            productId={result.product_id}
+            month={result.month}
+            riskScore={result.overall_risk_score}
+            severity={result.overall_severity}
+          />
+
+        <FindingsList
+          findings={result.findings}
+        />
+
+          <SpecialistAnalysis
+            title="Sales / Prescription Analysis"
+            analysis={result.sales_rx_analysis}
+          />
+
+          <SpecialistAnalysis
+            title="Doctor / Territory Analysis"
+            analysis={result.doctor_territory_analysis}
+          />
+
+          <SpecialistAnalysis
+            title="Payout Analysis"
+            analysis={result.payout_analysis}
+          />
+
+          <FinalReport
+          report={result.final_report}
+        />
+        </>
+      )}
+    </main>
+  );
 }
 
-export default App
+export default App;

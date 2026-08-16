@@ -5,11 +5,22 @@ from .api.incentives import router as incentives_router
 from .api.anomalies import router as anomalies_router
 from .api.analytics import router as analytics_router
 from .api.investigation import router as investigation_router
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Incentive Auditor API",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
