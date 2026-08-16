@@ -1,0 +1,50 @@
+# -------------------------
+# Web API
+# -------------------------
+fastapi
+uvicorn[standard]
+
+# -------------------------
+# Configuration & Validation
+# -------------------------
+pydantic
+pydantic-settings
+python-dotenv
+
+# -------------------------
+# Database
+# -------------------------
+sqlalchemy
+psycopg[binary]
+alembic
+
+# -------------------------
+# Data Analysis
+# -------------------------
+pandas
+numpy
+scipy
+
+# -------------------------
+# Machine Learning
+# -------------------------
+scikit-learn
+
+# -------------------------
+# LangGraph / LangChain
+# -------------------------
+langgraph
+langchain
+langchain-core
+langchain-openai
+
+# -------------------------
+# HTTP / API utilities
+# -------------------------
+httpx
+
+# -------------------------
+# Testing
+# -------------------------
+pytest
+pytest-asyncio

@@ -1,0 +1,27 @@
+from fastapi import FastAPI
+
+from .api.representatives import router as representatives_router
+from .api.incentives import router as incentives_router
+from .api.anomalies import router as anomalies_router
+from .api.analytics import router as analytics_router
+from .api.investigation import router as investigation_router
+
+
+app = FastAPI(
+    title="Incentive Auditor API",
+    version="1.0.0",
+)
+
+
+@app.get("/")
+def root():
+    return {
+        "message": "Incentive Auditor API is running"
+    }
+
+
+app.include_router(representatives_router)
+app.include_router(incentives_router)
+app.include_router(anomalies_router)
+app.include_router(analytics_router)
+app.include_router(investigation_router)
