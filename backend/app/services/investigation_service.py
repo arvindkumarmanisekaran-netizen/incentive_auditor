@@ -107,7 +107,7 @@ def investigate(
                 }
             )
 
-        mismatch_query = text("""
+    mismatch_query = text("""
         WITH monthly_sales AS (
             SELECT
                 rda.representative_id,
@@ -160,12 +160,16 @@ def investigate(
             COALESCE(ms.month, mp.month) AS month,
             COALESCE(ms.sales_amount, 0) AS sales_amount,
             COALESCE(mp.prescription_quantity, 0) AS prescription_quantity
+
         FROM monthly_sales ms
+
         FULL OUTER JOIN monthly_prescriptions mp
             ON mp.representative_id = ms.representative_id
             AND mp.product_id = ms.product_id
             AND mp.month = ms.month
+
         WHERE COALESCE(ms.month, mp.month) <= :target_month
+
         ORDER BY month
     """)
 
@@ -219,41 +223,41 @@ def investigate(
                 }
             )
 
-        doctor_query = text("""
-        SELECT
-            s.doctor_id,
-            d.doctor_name,
-            SUM(s.sales_amount) AS doctor_sales
+    doctor_query = text("""
+    SELECT
+        s.doctor_id,
+        d.doctor_name,
+        SUM(s.sales_amount) AS doctor_sales
 
-        FROM sales s
+    FROM sales s
 
-        JOIN doctors d
-            ON d.doctor_id = s.doctor_id
+    JOIN doctors d
+        ON d.doctor_id = s.doctor_id
 
-        JOIN representative_doctor_assignments rda
-            ON rda.doctor_id = s.doctor_id
-            AND s.sale_date >= rda.effective_from
-            AND (
-                rda.effective_to IS NULL
-                OR s.sale_date <= rda.effective_to
-            )
+    JOIN representative_doctor_assignments rda
+        ON rda.doctor_id = s.doctor_id
+        AND s.sale_date >= rda.effective_from
+        AND (
+            rda.effective_to IS NULL
+            OR s.sale_date <= rda.effective_to
+        )
 
-        WHERE
-            rda.representative_id = :representative_id
-            AND s.product_id = :product_id
-            AND DATE_TRUNC(
-                'month',
-                s.sale_date
-            )::date = :target_month
-            AND s.status = 'Valid'
+    WHERE
+        rda.representative_id = :representative_id
+        AND s.product_id = :product_id
+        AND DATE_TRUNC(
+            'month',
+            s.sale_date
+        )::date = :target_month
+        AND s.status = 'Valid'
 
-        GROUP BY
-            s.doctor_id,
-            d.doctor_name
+    GROUP BY
+        s.doctor_id,
+        d.doctor_name
 
-        ORDER BY
-            doctor_sales DESC
-    """)
+    ORDER BY
+        doctor_sales DESC
+        """)
 
     doctor_rows = db.execute(
         doctor_query,
@@ -286,44 +290,44 @@ def investigate(
             }
         )
 
-        territory_query = text("""
-        SELECT
-            r.territory_id AS home_territory_id,
-            s.selling_territory_id,
-            t.territory_name,
-            SUM(s.sales_amount) AS territory_sales
+    territory_query = text("""
+    SELECT
+        r.territory_id AS home_territory_id,
+        s.selling_territory_id,
+        t.territory_name,
+        SUM(s.sales_amount) AS territory_sales
 
-        FROM sales s
+    FROM sales s
 
-        JOIN representative_doctor_assignments rda
-            ON rda.doctor_id = s.doctor_id
-            AND s.sale_date >= rda.effective_from
-            AND (
-                rda.effective_to IS NULL
-                OR s.sale_date <= rda.effective_to
-            )
+    JOIN representative_doctor_assignments rda
+        ON rda.doctor_id = s.doctor_id
+        AND s.sale_date >= rda.effective_from
+        AND (
+            rda.effective_to IS NULL
+            OR s.sale_date <= rda.effective_to
+        )
 
-        JOIN representatives r
-            ON r.representative_id = rda.representative_id
+    JOIN representatives r
+        ON r.representative_id = rda.representative_id
 
-        JOIN territories t
-            ON t.territory_id = s.selling_territory_id
+    JOIN territories t
+        ON t.territory_id = s.selling_territory_id
 
-        WHERE
-            rda.representative_id = :representative_id
-            AND s.product_id = :product_id
-            AND DATE_TRUNC(
-                'month',
-                s.sale_date
-            )::date = :target_month
-            AND s.status = 'Valid'
+    WHERE
+        rda.representative_id = :representative_id
+        AND s.product_id = :product_id
+        AND DATE_TRUNC(
+            'month',
+            s.sale_date
+        )::date = :target_month
+        AND s.status = 'Valid'
 
-        GROUP BY
-            r.territory_id,
-            s.selling_territory_id,
-            t.territory_name
+    GROUP BY
+        r.territory_id,
+        s.selling_territory_id,
+        t.territory_name
 
-        ORDER BY territory_sales DESC
+    ORDER BY territory_sales DESC
     """)
 
     territory_rows = db.execute(

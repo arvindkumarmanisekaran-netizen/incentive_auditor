@@ -1,3 +1,4 @@
+import "../App.css";
 import type { FinalReport as FinalReportType } from "../types/investigation";
 
 

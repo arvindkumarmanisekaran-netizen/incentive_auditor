@@ -1,11 +1,16 @@
+import "../App.css";
 import type { SpecialistAnalysis as SpecialistAnalysisType } from "../types/investigation";
-
 
 type SpecialistAnalysisProps = {
   title: string;
   analysis?: SpecialistAnalysisType;
 };
 
+function severityClass(severity?: string) {
+  return `severity severity-${(
+    severity ?? "unknown"
+  ).toLowerCase()}`;
+}
 
 function SpecialistAnalysis({
   title,
@@ -16,30 +21,17 @@ function SpecialistAnalysis({
   }
 
   return (
-    <section
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        padding: "16px",
-        marginBottom: "16px",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "12px",
-          marginBottom: "12px",
-        }}
-      >
-        <h2 style={{ margin: 0 }}>
-          {title}
-        </h2>
+    <section className="analysis-card">
+      <div className="card-header">
+        <h2>{title}</h2>
 
-        <strong>
+        <span
+          className={severityClass(
+            analysis.severity
+          )}
+        >
           {analysis.severity ?? "UNKNOWN"}
-        </strong>
+        </span>
       </div>
 
       {analysis.summary && (
@@ -69,7 +61,6 @@ function SpecialistAnalysis({
       {analysis.investigation_priority && (
         <>
           <h3>Investigation Priority</h3>
-
           <p>
             {analysis.investigation_priority}
           </p>
@@ -78,6 +69,5 @@ function SpecialistAnalysis({
     </section>
   );
 }
-
 
 export default SpecialistAnalysis;

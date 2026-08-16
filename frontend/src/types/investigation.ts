@@ -1,30 +1,37 @@
+export type Evidence = {
+  [key: string]: unknown;
+};
+
+
 export type Finding = {
   type: string;
   severity: string;
-  evidence: Record<string, unknown>;
+  evidence: Evidence;
 };
+
 
 export type SpecialistAnalysis = {
-  severity?: string;
-  summary?: string;
-  key_observations?: string[];
-  investigation_priority?: string;
+  severity: string;
+  summary: string;
+  key_observations: string[];
+  investigation_priority: string;
 };
+
+
+export type InvestigationPriority = {
+  priority: number;
+  finding_type: string;
+  reason: string;
+};
+
 
 export type FinalReport = {
-  overall_assessment?: string;
-  overall_severity?: string;
-  top_risk_drivers?: string[];
-
-  specialist_summary?: {
-    sales_rx?: string;
-    doctor_territory?: string;
-    payout?: string;
-  };
-
-  recommended_actions?: string[];
-  human_review_required?: boolean;
+  overall_assessment: string;
+  key_findings: string[];
+  investigation_priorities: InvestigationPriority[];
+  recommended_next_action: string;
 };
+
 
 export type InvestigationResult = {
   representative_id: string;
@@ -36,11 +43,9 @@ export type InvestigationResult = {
 
   findings: Finding[];
 
-  sales_rx_analysis?: SpecialistAnalysis;
-  doctor_territory_analysis?: SpecialistAnalysis;
-  payout_analysis?: SpecialistAnalysis;
+  sales_rx_analysis: SpecialistAnalysis;
+  doctor_territory_analysis: SpecialistAnalysis;
+  payout_analysis: SpecialistAnalysis;
 
-  final_report?: FinalReport;
+  final_report: FinalReport;
 };
-
-
