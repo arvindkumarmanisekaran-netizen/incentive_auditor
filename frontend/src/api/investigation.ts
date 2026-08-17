@@ -1,6 +1,6 @@
 import type { InvestigationResult } from "../types/investigation";
 
-const API_BASE_URL = "http://localhost:8000";
+import { API_BASE_URL } from "./config";
 
 export async function runInvestigation(
   representativeId: string,
