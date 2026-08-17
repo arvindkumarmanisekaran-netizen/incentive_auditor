@@ -36,6 +36,8 @@ import InvestigationInsights
 import InvestigationCharts
   from "./components/InvestigationCharts";
 
+import DocumentProcessingCard  from "./components/DocumentProcessingCard";
+
 import "./App.css";
 
 
@@ -631,61 +633,7 @@ function App() {
                 DOCUMENT PROCESSING
             ============================================ */}
 
-            <article className="admin-card">
-
-              <div className="admin-card-icon">
-                📁
-              </div>
-
-              <div className="admin-card-content">
-
-                <h3>
-                  Document Processing
-                </h3>
-
-                <p>
-                  Select a folder containing supporting
-                  investigation documents. The system
-                  will scan supported files and extract
-                  relevant evidence.
-                </p>
-
-
-                <div className="admin-card-meta">
-
-                  <span>
-                    PDF
-                  </span>
-
-                  <span>
-                    DOCX
-                  </span>
-
-                  <span>
-                    XLSX
-                  </span>
-
-                  <span>
-                    CSV
-                  </span>
-
-                  <span>
-                    TXT
-                  </span>
-
-                </div>
-
-
-                <button
-                  type="button"
-                  className="primary-button"
-                >
-                  Select Document Folder
-                </button>
-
-              </div>
-
-            </article>
+            <DocumentProcessingCard />
 
 
             {/* ============================================

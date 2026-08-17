@@ -1,0 +1,21 @@
+territory_id,territory_name,region_name,active
+T001,Nagpur Zone 1,North,True
+T002,Sambalpur Zone 2,North,True
+T003,Kolhapur Zone 3,East,True
+T004,Bongaigaon Zone 4,South,True
+T005,Gudivada Zone 5,South,True
+T006,Patna Zone 6,South,True
+T007,Tiruchirappalli Zone 7,North,True
+T008,Muzaffarpur Zone 8,Central,True
+T009,Kishanganj Zone 9,North,True
+T010,Bongaigaon Zone 10,Central,True
+T011,Muzaffarnagar Zone 11,West,True
+T012,Giridih Zone 12,North,True
+T013,Chennai Zone 13,North,True
+T014,Bhusawal Zone 14,North,True
+T015,Alwar Zone 15,South,True
+T016,Thrissur Zone 16,South,True
+T017,Kota Zone 17,Central,True
+T018,Nadiad Zone 18,Central,True
+T019,Secunderabad Zone 19,North,True
+T020,Mahbubnagar Zone 20,Central,True

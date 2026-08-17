@@ -1,0 +1,7002 @@
+[
+  {
+    "doctor_id": "D000001",
+    "doctor_name": "Dr Oni Virk",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000002",
+    "doctor_name": "Dr Advika Jayaraman",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000003",
+    "doctor_name": "Dr William Lanka",
+    "territory_id": "T001",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000004",
+    "doctor_name": "Dr Karan Mital",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000005",
+    "doctor_name": "Dr Diya Bora",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000006",
+    "doctor_name": "Dr Tara Chaudhry",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000007",
+    "doctor_name": "Dr Tanay Toor",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000008",
+    "doctor_name": "Dr Kevin Palla",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000009",
+    "doctor_name": "Dr Yash Pingle",
+    "territory_id": "T007",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000010",
+    "doctor_name": "Dr Nakul Sarma",
+    "territory_id": "T019",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000011",
+    "doctor_name": "Dr Abhiram Mistry",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000012",
+    "doctor_name": "Dr Krish Lalla",
+    "territory_id": "T014",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000013",
+    "doctor_name": "Dr Hredhaan Dugal",
+    "territory_id": "T004",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000014",
+    "doctor_name": "Dr Baghyawati Kade",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000015",
+    "doctor_name": "Dr Samar Lalla",
+    "territory_id": "T014",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000016",
+    "doctor_name": "Dr Zayan Behl",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000017",
+    "doctor_name": "Dr Pallavi Malhotra",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000018",
+    "doctor_name": "Dr Aarush Nath",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000019",
+    "doctor_name": "Dr Adweta Edwin",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000020",
+    "doctor_name": "Dr Prisha Andra",
+    "territory_id": "T007",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000021",
+    "doctor_name": "Dr Faqid Dixit",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000022",
+    "doctor_name": "Dr Kala Divan",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000023",
+    "doctor_name": "Dr Joshua Barman",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000024",
+    "doctor_name": "Dr Janya Baral",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000025",
+    "doctor_name": "Dr Shivansh Krish",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000026",
+    "doctor_name": "Dr Irya Ray",
+    "territory_id": "T018",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000027",
+    "doctor_name": "Dr Warjas Gaba",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000028",
+    "doctor_name": "Dr Nitara Bakshi",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000029",
+    "doctor_name": "Dr Gaurangi Sabharwal",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000030",
+    "doctor_name": "Dr Amara Dutta",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000031",
+    "doctor_name": "Dr Lavanya Barad",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000032",
+    "doctor_name": "Dr Tristan Iyengar",
+    "territory_id": "T002",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000033",
+    "doctor_name": "Dr Inaya Mody",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000034",
+    "doctor_name": "Dr Udant Bajwa",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000035",
+    "doctor_name": "Dr Mohini Narasimhan",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000036",
+    "doctor_name": "Dr Ekaraj Mallick",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000037",
+    "doctor_name": "Dr Yashodhara Ratta",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000038",
+    "doctor_name": "Dr Ayaan D’Alia",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000039",
+    "doctor_name": "Dr Pranav Lanka",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000040",
+    "doctor_name": "Dr Ikbal Saraf",
+    "territory_id": "T011",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000041",
+    "doctor_name": "Dr Dipta Sarin",
+    "territory_id": "T002",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000042",
+    "doctor_name": "Dr Lekha Gupta",
+    "territory_id": "T017",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000043",
+    "doctor_name": "Dr Chaitanya Sarin",
+    "territory_id": "T002",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000044",
+    "doctor_name": "Dr Zinal Yohannan",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000045",
+    "doctor_name": "Dr Januja Sankar",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000046",
+    "doctor_name": "Dr Ganga Murthy",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000047",
+    "doctor_name": "Dr Charita Tripathi",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000048",
+    "doctor_name": "Dr Nilima Narain",
+    "territory_id": "T019",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000049",
+    "doctor_name": "Dr Chakrika Datta",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000050",
+    "doctor_name": "Dr Osha Raghavan",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000051",
+    "doctor_name": "Dr Charvi Ravi",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000052",
+    "doctor_name": "Dr Daksha Mangat",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000053",
+    "doctor_name": "Dr Qushi Nagy",
+    "territory_id": "T009",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000054",
+    "doctor_name": "Dr Riya Sathe",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000055",
+    "doctor_name": "Dr Yasti Solanki",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000056",
+    "doctor_name": "Dr Frado Mander",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000057",
+    "doctor_name": "Dr Girik Keer",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000058",
+    "doctor_name": "Dr Umang Issac",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000059",
+    "doctor_name": "Dr Aryan Batra",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000060",
+    "doctor_name": "Dr Vaishnavi Bora",
+    "territory_id": "T005",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000061",
+    "doctor_name": "Dr Oeshi Hayer",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000062",
+    "doctor_name": "Dr Warda Ratta",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000063",
+    "doctor_name": "Dr Manbir Ahluwalia",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000064",
+    "doctor_name": "Dr Pavani Kanda",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000065",
+    "doctor_name": "Dr Zarna Shetty",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000066",
+    "doctor_name": "Dr Zaid Dara",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000067",
+    "doctor_name": "Dr Kiaan Shetty",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000068",
+    "doctor_name": "Dr Saanvi Thaman",
+    "territory_id": "T009",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000069",
+    "doctor_name": "Dr Sanaya Dutt",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000070",
+    "doctor_name": "Dr Shivani Lad",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000071",
+    "doctor_name": "Dr Aradhana Verma",
+    "territory_id": "T020",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000072",
+    "doctor_name": "Dr William Maharaj",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000073",
+    "doctor_name": "Dr Faras Mangal",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000074",
+    "doctor_name": "Dr Anita Nayak",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000075",
+    "doctor_name": "Dr Faris Devi",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000076",
+    "doctor_name": "Dr Vihaan Rajagopal",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000077",
+    "doctor_name": "Dr Tanish Bhatt",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000078",
+    "doctor_name": "Dr Nikita Narayanan",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000079",
+    "doctor_name": "Dr Ojasvi Bhatia",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000080",
+    "doctor_name": "Dr Osha Ramachandran",
+    "territory_id": "T018",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000081",
+    "doctor_name": "Dr Lajita Sood",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000082",
+    "doctor_name": "Dr Indira Misra",
+    "territory_id": "T004",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000083",
+    "doctor_name": "Dr Oni Yohannan",
+    "territory_id": "T005",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000084",
+    "doctor_name": "Dr Vinaya Kanda",
+    "territory_id": "T012",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000085",
+    "doctor_name": "Dr Rajata Sunder",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000086",
+    "doctor_name": "Dr Lopa Nayar",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000087",
+    "doctor_name": "Dr Noah Sibal",
+    "territory_id": "T012",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000088",
+    "doctor_name": "Dr Avi Ramesh",
+    "territory_id": "T012",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000089",
+    "doctor_name": "Dr Fiyaz Sangha",
+    "territory_id": "T008",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000090",
+    "doctor_name": "Dr Triya Gopal",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000091",
+    "doctor_name": "Dr Abha Raghavan",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000092",
+    "doctor_name": "Dr Siddharth Sha",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000093",
+    "doctor_name": "Dr Geetika Raghavan",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000094",
+    "doctor_name": "Dr Oviya Krishnan",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000095",
+    "doctor_name": "Dr Upma Bahl",
+    "territory_id": "T011",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000096",
+    "doctor_name": "Dr Inaya Kapur",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000097",
+    "doctor_name": "Dr Banjeet Balasubramanian",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000098",
+    "doctor_name": "Dr Ryan Bahri",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000099",
+    "doctor_name": "Dr William Date",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000100",
+    "doctor_name": "Dr Ishwar Kamdar",
+    "territory_id": "T007",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000101",
+    "doctor_name": "Dr Aahana Pillay",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000102",
+    "doctor_name": "Dr Ishwar Gade",
+    "territory_id": "T008",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000103",
+    "doctor_name": "Dr Hritik Bal",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000104",
+    "doctor_name": "Dr Keya Ranganathan",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000105",
+    "doctor_name": "Dr Faqid Kibe",
+    "territory_id": "T009",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000106",
+    "doctor_name": "Dr Charvi Dara",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000107",
+    "doctor_name": "Dr Idika Walia",
+    "territory_id": "T017",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000108",
+    "doctor_name": "Dr Kamala Biswas",
+    "territory_id": "T018",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000109",
+    "doctor_name": "Dr Advik Salvi",
+    "territory_id": "T001",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000110",
+    "doctor_name": "Dr Hitesh Sant",
+    "territory_id": "T009",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000111",
+    "doctor_name": "Dr Tripti Dua",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000112",
+    "doctor_name": "Dr Patrick Vig",
+    "territory_id": "T002",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000113",
+    "doctor_name": "Dr Veda Shroff",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000114",
+    "doctor_name": "Dr Amrita Naidu",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000115",
+    "doctor_name": "Dr Gabriel Mallick",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000116",
+    "doctor_name": "Dr Yagnesh Shetty",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000117",
+    "doctor_name": "Dr Gayathri Balakrishnan",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000118",
+    "doctor_name": "Dr Ekta Gopal",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000119",
+    "doctor_name": "Dr Simon Pant",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000120",
+    "doctor_name": "Dr Harini Mammen",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000121",
+    "doctor_name": "Dr Advaith Varughese",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000122",
+    "doctor_name": "Dr Frederick Khurana",
+    "territory_id": "T020",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000123",
+    "doctor_name": "Dr Vrinda Khosla",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000124",
+    "doctor_name": "Dr Vritti Sem",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000125",
+    "doctor_name": "Dr Girik Menon",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000126",
+    "doctor_name": "Dr Nidhi Kohli",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000127",
+    "doctor_name": "Dr Jyoti Solanki",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000128",
+    "doctor_name": "Dr Pavani Narayanan",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000129",
+    "doctor_name": "Dr Sudiksha Madan",
+    "territory_id": "T013",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000130",
+    "doctor_name": "Dr Zayan Kashyap",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000131",
+    "doctor_name": "Dr Reyansh Mutti",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000132",
+    "doctor_name": "Dr Qasim Handa",
+    "territory_id": "T010",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000133",
+    "doctor_name": "Dr Veda Malhotra",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000134",
+    "doctor_name": "Dr Harish Hari",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000135",
+    "doctor_name": "Dr Utkarsh Patel",
+    "territory_id": "T015",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000136",
+    "doctor_name": "Dr Chasmum Atwal",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000137",
+    "doctor_name": "Dr Anusha Bath",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000138",
+    "doctor_name": "Dr Brinda Date",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000139",
+    "doctor_name": "Dr Harshil Arora",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000140",
+    "doctor_name": "Dr Upasna Srinivas",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000141",
+    "doctor_name": "Dr Harini Gour",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000142",
+    "doctor_name": "Dr Zayyan Sridhar",
+    "territory_id": "T007",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000143",
+    "doctor_name": "Dr Dhruv Rattan",
+    "territory_id": "T001",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000144",
+    "doctor_name": "Dr Ethan Bera",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000145",
+    "doctor_name": "Dr Manthan Modi",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000146",
+    "doctor_name": "Dr Yuvraj Dani",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000147",
+    "doctor_name": "Dr Upkaar Virk",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000148",
+    "doctor_name": "Dr Shravya Savant",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000149",
+    "doctor_name": "Dr Pushti Mody",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000150",
+    "doctor_name": "Dr Hardik Johal",
+    "territory_id": "T005",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000151",
+    "doctor_name": "Dr Aishani Bumb",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000152",
+    "doctor_name": "Dr Wriddhish Ghose",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000153",
+    "doctor_name": "Dr Naksh Agate",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000154",
+    "doctor_name": "Dr Shravya Singhal",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000155",
+    "doctor_name": "Dr Bachittar Kata",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000156",
+    "doctor_name": "Dr Barkha Setty",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000157",
+    "doctor_name": "Dr Vivaan Lalla",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000158",
+    "doctor_name": "Dr Pavani Contractor",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000159",
+    "doctor_name": "Dr Manthan Lata",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000160",
+    "doctor_name": "Dr Ekbal Bhasin",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000161",
+    "doctor_name": "Dr Damyanti Mani",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000162",
+    "doctor_name": "Dr Jeet Sidhu",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000163",
+    "doctor_name": "Dr Neha Magar",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000164",
+    "doctor_name": "Dr Raksha Buch",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000165",
+    "doctor_name": "Dr Rachana Naidu",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000166",
+    "doctor_name": "Dr Atharv Chand",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000167",
+    "doctor_name": "Dr Ansh Luthra",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000168",
+    "doctor_name": "Dr Parth Singhal",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000169",
+    "doctor_name": "Dr Arunima Golla",
+    "territory_id": "T005",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000170",
+    "doctor_name": "Dr Vyanjana Chand",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000171",
+    "doctor_name": "Dr Ijaya Rege",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000172",
+    "doctor_name": "Dr Ekani Cheema",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000173",
+    "doctor_name": "Dr Forum Sabharwal",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000174",
+    "doctor_name": "Dr Bhavya Rattan",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000175",
+    "doctor_name": "Dr Suhani Chakrabarti",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000176",
+    "doctor_name": "Dr Zayyan Naik",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000177",
+    "doctor_name": "Dr Netra Varkey",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000178",
+    "doctor_name": "Dr Turvi Sachdev",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000179",
+    "doctor_name": "Dr Raghav Vasa",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000180",
+    "doctor_name": "Dr Wishi Sathe",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000181",
+    "doctor_name": "Dr Samar Loke",
+    "territory_id": "T013",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000182",
+    "doctor_name": "Dr Bhavna Sarma",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000183",
+    "doctor_name": "Dr Jairaj Balakrishnan",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000184",
+    "doctor_name": "Dr Nathan Mukhopadhyay",
+    "territory_id": "T009",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000185",
+    "doctor_name": "Dr Nikita Chander",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000186",
+    "doctor_name": "Dr Ishaan Shenoy",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000187",
+    "doctor_name": "Dr Mitesh Tara",
+    "territory_id": "T013",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000188",
+    "doctor_name": "Dr Yashodhara Mahajan",
+    "territory_id": "T015",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000189",
+    "doctor_name": "Dr Vasudha Sodhi",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000190",
+    "doctor_name": "Dr Tanmayi Dhillon",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000191",
+    "doctor_name": "Dr Rayaan Trivedi",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000192",
+    "doctor_name": "Dr Ekaraj Majumdar",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000193",
+    "doctor_name": "Dr Harini Tripathi",
+    "territory_id": "T006",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000194",
+    "doctor_name": "Dr Aarnav Mandal",
+    "territory_id": "T009",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000195",
+    "doctor_name": "Dr Vrishti Dixit",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000196",
+    "doctor_name": "Dr Veda Pai",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000197",
+    "doctor_name": "Dr Krishna Shah",
+    "territory_id": "T011",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000198",
+    "doctor_name": "Dr Ranbir Khare",
+    "territory_id": "T009",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000199",
+    "doctor_name": "Dr Vivaan Roy",
+    "territory_id": "T009",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000200",
+    "doctor_name": "Dr Eesha Solanki",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000201",
+    "doctor_name": "Dr Libni Doshi",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000202",
+    "doctor_name": "Dr Balhaar Date",
+    "territory_id": "T012",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000203",
+    "doctor_name": "Dr Harish Sarraf",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000204",
+    "doctor_name": "Dr Tanmayi Aurora",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000205",
+    "doctor_name": "Dr Nimrat Dubey",
+    "territory_id": "T007",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000206",
+    "doctor_name": "Dr Upasna Lanka",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000207",
+    "doctor_name": "Dr Mitali Buch",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000208",
+    "doctor_name": "Dr Lajita Nadig",
+    "territory_id": "T016",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000209",
+    "doctor_name": "Dr Balendra Biswas",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000210",
+    "doctor_name": "Dr Bhavna Karan",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000211",
+    "doctor_name": "Dr Radha Chaudhari",
+    "territory_id": "T012",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000212",
+    "doctor_name": "Dr Sachi Ganesan",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000213",
+    "doctor_name": "Dr Ayush Batra",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000214",
+    "doctor_name": "Dr Daksh Memon",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000215",
+    "doctor_name": "Dr Kavya Sankar",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000216",
+    "doctor_name": "Dr Yash Wali",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000217",
+    "doctor_name": "Dr Pranit Garde",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000218",
+    "doctor_name": "Dr Farhan Raja",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000219",
+    "doctor_name": "Dr Widisha Dhar",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000220",
+    "doctor_name": "Dr Triya Kumar",
+    "territory_id": "T019",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000221",
+    "doctor_name": "Dr Aadhya Andra",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000222",
+    "doctor_name": "Dr Bhavna Dugar",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000223",
+    "doctor_name": "Dr Riya Pai",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000224",
+    "doctor_name": "Dr Panini Krishna",
+    "territory_id": "T001",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000225",
+    "doctor_name": "Dr Chasmum Issac",
+    "territory_id": "T016",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000226",
+    "doctor_name": "Dr Vasudha Chhabra",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000227",
+    "doctor_name": "Dr Lakshmi Parmer",
+    "territory_id": "T015",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000228",
+    "doctor_name": "Dr Chakrika Bains",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000229",
+    "doctor_name": "Dr Anvi Anand",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000230",
+    "doctor_name": "Dr Watika Mangat",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000231",
+    "doctor_name": "Dr Indira Kanda",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000232",
+    "doctor_name": "Dr Zashil Devan",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000233",
+    "doctor_name": "Dr Balveer More",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000234",
+    "doctor_name": "Dr Bahadurjit Patla",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000235",
+    "doctor_name": "Dr Gautam Merchant",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000236",
+    "doctor_name": "Dr Ojasvi Gill",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000237",
+    "doctor_name": "Dr Kevin Zacharia",
+    "territory_id": "T011",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000238",
+    "doctor_name": "Dr Yachana Mahajan",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000239",
+    "doctor_name": "Dr Aarini Subramaniam",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000240",
+    "doctor_name": "Dr Hamsini Contractor",
+    "territory_id": "T007",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000241",
+    "doctor_name": "Dr Faqid Dhaliwal",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000242",
+    "doctor_name": "Dr Mekhala Pau",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000243",
+    "doctor_name": "Dr Megha Atwal",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000244",
+    "doctor_name": "Dr Jatin Sha",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000245",
+    "doctor_name": "Dr Adweta Raj",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000246",
+    "doctor_name": "Dr Hritik Kaur",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000247",
+    "doctor_name": "Dr Aryan Narang",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000248",
+    "doctor_name": "Dr Dev Shetty",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000249",
+    "doctor_name": "Dr Nilima Dada",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000250",
+    "doctor_name": "Dr Chakradev Barad",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000251",
+    "doctor_name": "Dr Waida D’Alia",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000252",
+    "doctor_name": "Dr Wahab Yogi",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000253",
+    "doctor_name": "Dr Lipika Setty",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000254",
+    "doctor_name": "Dr Oni Dubey",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000255",
+    "doctor_name": "Dr Hardik Suri",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000256",
+    "doctor_name": "Dr Ati Bali",
+    "territory_id": "T012",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000257",
+    "doctor_name": "Dr Teerth Sawhney",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000258",
+    "doctor_name": "Dr Warinder Patil",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000259",
+    "doctor_name": "Dr Jhalak Parmer",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000260",
+    "doctor_name": "Dr Mitali Majumdar",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000261",
+    "doctor_name": "Dr Jason Sha",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000262",
+    "doctor_name": "Dr Simon Bail",
+    "territory_id": "T007",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000263",
+    "doctor_name": "Dr Gauri Kohli",
+    "territory_id": "T016",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000264",
+    "doctor_name": "Dr Samesh Biswas",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000265",
+    "doctor_name": "Dr Tarak Kaul",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000266",
+    "doctor_name": "Dr Manbir Agate",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000267",
+    "doctor_name": "Dr Maanav De",
+    "territory_id": "T012",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000268",
+    "doctor_name": "Dr Owen Choudhary",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000269",
+    "doctor_name": "Dr Karan Aurora",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000270",
+    "doctor_name": "Dr Wazir Naik",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000271",
+    "doctor_name": "Dr Owen Lanka",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000272",
+    "doctor_name": "Dr Jonathan Sama",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000273",
+    "doctor_name": "Dr Devansh Soni",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000274",
+    "doctor_name": "Dr Janaki Varghese",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000275",
+    "doctor_name": "Dr Siya Thakur",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000276",
+    "doctor_name": "Dr Caleb Verma",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000277",
+    "doctor_name": "Dr Tara Balasubramanian",
+    "territory_id": "T006",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000278",
+    "doctor_name": "Dr Varenya Ratti",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000279",
+    "doctor_name": "Dr Hritik Swaminathan",
+    "territory_id": "T004",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000280",
+    "doctor_name": "Dr Ethan Buch",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000281",
+    "doctor_name": "Dr Manbir Bhatti",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000282",
+    "doctor_name": "Dr Anvi Nair",
+    "territory_id": "T005",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000283",
+    "doctor_name": "Dr Chaitaly Setty",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000284",
+    "doctor_name": "Dr Hardik Contractor",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000285",
+    "doctor_name": "Dr Qushi Seth",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000286",
+    "doctor_name": "Dr Odika Nori",
+    "territory_id": "T020",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000287",
+    "doctor_name": "Dr Mohini Sagar",
+    "territory_id": "T017",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000288",
+    "doctor_name": "Dr Dhriti Sane",
+    "territory_id": "T015",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000289",
+    "doctor_name": "Dr Aadhya Prasad",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000290",
+    "doctor_name": "Dr Urvi Bhavsar",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000291",
+    "doctor_name": "Dr Frederick Chander",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000292",
+    "doctor_name": "Dr Gopal Pradhan",
+    "territory_id": "T007",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000293",
+    "doctor_name": "Dr Darpan Narayan",
+    "territory_id": "T009",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000294",
+    "doctor_name": "Dr Nirja Pandya",
+    "territory_id": "T006",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000295",
+    "doctor_name": "Dr Charan Mani",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000296",
+    "doctor_name": "Dr Indira Chawla",
+    "territory_id": "T006",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000297",
+    "doctor_name": "Dr Mohammed Subramaniam",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000298",
+    "doctor_name": "Dr Hritik Palla",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000299",
+    "doctor_name": "Dr Ishwar Mallick",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000300",
+    "doctor_name": "Dr Pushti Bal",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000301",
+    "doctor_name": "Dr Ayush Gole",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000302",
+    "doctor_name": "Dr Dayamai Nori",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000303",
+    "doctor_name": "Dr Abeer Golla",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000304",
+    "doctor_name": "Dr Nandini Boase",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000305",
+    "doctor_name": "Dr Azaan Chand",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000306",
+    "doctor_name": "Dr Krisha Saini",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000307",
+    "doctor_name": "Dr Harita Dugar",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000308",
+    "doctor_name": "Dr Devika Nair",
+    "territory_id": "T002",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000309",
+    "doctor_name": "Dr Charles Dugal",
+    "territory_id": "T010",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000310",
+    "doctor_name": "Dr Chandran Bumb",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000311",
+    "doctor_name": "Dr Saanvi Samra",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000312",
+    "doctor_name": "Dr Riya Sachdeva",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000313",
+    "doctor_name": "Dr Tanveer Vala",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000314",
+    "doctor_name": "Dr Hemani Sani",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000315",
+    "doctor_name": "Dr Bhanumati Sur",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000316",
+    "doctor_name": "Dr Chakradev Kannan",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000317",
+    "doctor_name": "Dr Christopher Amble",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000318",
+    "doctor_name": "Dr Charvi Kakar",
+    "territory_id": "T001",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000319",
+    "doctor_name": "Dr Aadhya Mann",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000320",
+    "doctor_name": "Dr Jagdish Amble",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000321",
+    "doctor_name": "Dr Qushi Gill",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000322",
+    "doctor_name": "Dr Lajita Walia",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000323",
+    "doctor_name": "Dr Xiti Pandya",
+    "territory_id": "T009",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000324",
+    "doctor_name": "Dr Mekhala Basak",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000325",
+    "doctor_name": "Dr Anirudh Sharaf",
+    "territory_id": "T016",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000326",
+    "doctor_name": "Dr Dhriti Sanghvi",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000327",
+    "doctor_name": "Dr Omisha Mann",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000328",
+    "doctor_name": "Dr Nidhi Bail",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000329",
+    "doctor_name": "Dr Onveer Sharma",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000330",
+    "doctor_name": "Dr Gaurang Sarkar",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000331",
+    "doctor_name": "Dr Yagnesh Sarin",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000332",
+    "doctor_name": "Dr Farhan Randhawa",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000333",
+    "doctor_name": "Dr Harinakshi Kant",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000334",
+    "doctor_name": "Dr Om Bose",
+    "territory_id": "T011",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000335",
+    "doctor_name": "Dr Yashvi Hari",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000336",
+    "doctor_name": "Dr Indali Divan",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000337",
+    "doctor_name": "Dr Harshil Dhingra",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000338",
+    "doctor_name": "Dr Rudra Ghose",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000339",
+    "doctor_name": "Dr Faqid Goel",
+    "territory_id": "T007",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000340",
+    "doctor_name": "Dr Ucchal Sen",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000341",
+    "doctor_name": "Dr Diya Dora",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000342",
+    "doctor_name": "Dr Ekansh Singh",
+    "territory_id": "T007",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000343",
+    "doctor_name": "Dr Chavvi Maharaj",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000344",
+    "doctor_name": "Dr Indira Tripathi",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000345",
+    "doctor_name": "Dr Dayita Shenoy",
+    "territory_id": "T016",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000346",
+    "doctor_name": "Dr Baljiwan Bhandari",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000347",
+    "doctor_name": "Dr Bhavini Bose",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000348",
+    "doctor_name": "Dr Yashica Rajagopalan",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000349",
+    "doctor_name": "Dr Benjamin Sengupta",
+    "territory_id": "T018",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000350",
+    "doctor_name": "Dr Ekanta Soni",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000351",
+    "doctor_name": "Dr David Seshadri",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000352",
+    "doctor_name": "Dr Hemal Chad",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000353",
+    "doctor_name": "Dr Balveer Kota",
+    "territory_id": "T016",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000354",
+    "doctor_name": "Dr Reva Viswanathan",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000355",
+    "doctor_name": "Dr Januja Pradhan",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000356",
+    "doctor_name": "Dr Lila Rege",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000357",
+    "doctor_name": "Dr Charles Natt",
+    "territory_id": "T015",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000358",
+    "doctor_name": "Dr Forum Chandra",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000359",
+    "doctor_name": "Dr Bhanumati Krishnan",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000360",
+    "doctor_name": "Dr Gauri Bumb",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000361",
+    "doctor_name": "Dr Inaya Mukherjee",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000362",
+    "doctor_name": "Dr Kai Chad",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000363",
+    "doctor_name": "Dr Krisha Narasimhan",
+    "territory_id": "T001",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000364",
+    "doctor_name": "Dr Girik Sampath",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000365",
+    "doctor_name": "Dr Andrew Patil",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000366",
+    "doctor_name": "Dr Pranit Kala",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000367",
+    "doctor_name": "Dr Vedika Handa",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000368",
+    "doctor_name": "Dr Laksh Dubey",
+    "territory_id": "T018",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000369",
+    "doctor_name": "Dr Chakrika Chaudhuri",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000370",
+    "doctor_name": "Dr Gayathri Deep",
+    "territory_id": "T007",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000371",
+    "doctor_name": "Dr Mitesh Gaba",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000372",
+    "doctor_name": "Dr Noah Sarma",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000373",
+    "doctor_name": "Dr Nirja Patla",
+    "territory_id": "T002",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000374",
+    "doctor_name": "Dr Sachi Mane",
+    "territory_id": "T016",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000375",
+    "doctor_name": "Dr Vivaan Walla",
+    "territory_id": "T013",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000376",
+    "doctor_name": "Dr Dayamai Singh",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000377",
+    "doctor_name": "Dr Jhalak Sastry",
+    "territory_id": "T005",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000378",
+    "doctor_name": "Dr Baghyawati Raja",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000379",
+    "doctor_name": "Dr Neel Iyengar",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000380",
+    "doctor_name": "Dr Zashil Ben",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000381",
+    "doctor_name": "Dr Kamya Chauhan",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000382",
+    "doctor_name": "Dr Bhavani Chacko",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000383",
+    "doctor_name": "Dr Anjali Sengupta",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000384",
+    "doctor_name": "Dr Rajeshri Chand",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000385",
+    "doctor_name": "Dr Shravya Palla",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000386",
+    "doctor_name": "Dr Oeshi Bera",
+    "territory_id": "T018",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000387",
+    "doctor_name": "Dr Yadavi Prakash",
+    "territory_id": "T011",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000388",
+    "doctor_name": "Dr Libni Bumb",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000389",
+    "doctor_name": "Dr Udarsh Bala",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000390",
+    "doctor_name": "Dr Hardik Nayak",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000391",
+    "doctor_name": "Dr Laksh Barad",
+    "territory_id": "T008",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000392",
+    "doctor_name": "Dr Urmi Dewan",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000393",
+    "doctor_name": "Dr Saumya Ahluwalia",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000394",
+    "doctor_name": "Dr Anirudh Kunda",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000395",
+    "doctor_name": "Dr Mason Wable",
+    "territory_id": "T001",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000396",
+    "doctor_name": "Dr Indrajit Mani",
+    "territory_id": "T011",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000397",
+    "doctor_name": "Dr Charvi Dara",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000398",
+    "doctor_name": "Dr William Saini",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000399",
+    "doctor_name": "Dr Dev Choudhry",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000400",
+    "doctor_name": "Dr Amol Varma",
+    "territory_id": "T017",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000401",
+    "doctor_name": "Dr Maanas Manne",
+    "territory_id": "T019",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000402",
+    "doctor_name": "Dr Aarav Pandit",
+    "territory_id": "T006",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000403",
+    "doctor_name": "Dr Omaja Grover",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000404",
+    "doctor_name": "Dr Jalsa Bir",
+    "territory_id": "T020",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000405",
+    "doctor_name": "Dr Madhavi Singhal",
+    "territory_id": "T016",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000406",
+    "doctor_name": "Dr Lila Prakash",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000407",
+    "doctor_name": "Dr Amol Parikh",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000408",
+    "doctor_name": "Dr Hemani Khosla",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000409",
+    "doctor_name": "Dr Gaurangi Deol",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000410",
+    "doctor_name": "Dr Indira Nigam",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000411",
+    "doctor_name": "Dr Ucchal Srinivas",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000412",
+    "doctor_name": "Dr Krishna Bhatnagar",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000413",
+    "doctor_name": "Dr Balhaar Memon",
+    "territory_id": "T014",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000414",
+    "doctor_name": "Dr Caleb Iyengar",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000415",
+    "doctor_name": "Dr Diya Mukherjee",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000416",
+    "doctor_name": "Dr Urvashi Kulkarni",
+    "territory_id": "T016",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000417",
+    "doctor_name": "Dr Rayaan Mangal",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000418",
+    "doctor_name": "Dr Champak Narula",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000419",
+    "doctor_name": "Dr Jeet Pillai",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000420",
+    "doctor_name": "Dr Mugdha Sarraf",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000421",
+    "doctor_name": "Dr Harinakshi Grover",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000422",
+    "doctor_name": "Dr Widisha Pillai",
+    "territory_id": "T001",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000423",
+    "doctor_name": "Dr Fitan Samra",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000424",
+    "doctor_name": "Dr Qushi Gole",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000425",
+    "doctor_name": "Dr Ekani Chauhan",
+    "territory_id": "T020",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000426",
+    "doctor_name": "Dr Falak Merchant",
+    "territory_id": "T008",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000427",
+    "doctor_name": "Dr Sanaya Sandhu",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000428",
+    "doctor_name": "Dr Sachi Panchal",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000429",
+    "doctor_name": "Dr Brijesh Pandit",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000430",
+    "doctor_name": "Dr Anvi Bhandari",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000431",
+    "doctor_name": "Dr Nidra Patla",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000432",
+    "doctor_name": "Dr Azaan Dhar",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000433",
+    "doctor_name": "Dr Bakhshi Date",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000434",
+    "doctor_name": "Dr Warinder Peri",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000435",
+    "doctor_name": "Dr Leela Bali",
+    "territory_id": "T007",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000436",
+    "doctor_name": "Dr Shivani Prabhakar",
+    "territory_id": "T018",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000437",
+    "doctor_name": "Dr Sachi Bose",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000438",
+    "doctor_name": "Dr Jeevika Rao",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000439",
+    "doctor_name": "Dr Arya Krish",
+    "territory_id": "T016",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000440",
+    "doctor_name": "Dr Atharv Grewal",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000441",
+    "doctor_name": "Dr Zarna Ram",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000442",
+    "doctor_name": "Dr Adweta Lad",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000443",
+    "doctor_name": "Dr Tanish Mangal",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000444",
+    "doctor_name": "Dr Ryan Das",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000445",
+    "doctor_name": "Dr Ethan Seth",
+    "territory_id": "T001",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000446",
+    "doctor_name": "Dr Sai Chahal",
+    "territory_id": "T018",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000447",
+    "doctor_name": "Dr Idika Bhattacharyya",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000448",
+    "doctor_name": "Dr Charita Dugar",
+    "territory_id": "T009",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000449",
+    "doctor_name": "Dr Janaki Trivedi",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000450",
+    "doctor_name": "Dr Jairaj Iyer",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000451",
+    "doctor_name": "Dr Warjas Tak",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000452",
+    "doctor_name": "Dr Jalsa Pillay",
+    "territory_id": "T020",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000453",
+    "doctor_name": "Dr Kai Chadha",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000454",
+    "doctor_name": "Dr Dayamai Rao",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000455",
+    "doctor_name": "Dr Nirja Rout",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000456",
+    "doctor_name": "Dr Jeremiah Nadig",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000457",
+    "doctor_name": "Dr Shivani Shukla",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000458",
+    "doctor_name": "Dr Kabir Gopal",
+    "territory_id": "T004",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000459",
+    "doctor_name": "Dr Rachita Thakkar",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000460",
+    "doctor_name": "Dr Jeet Vasa",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000461",
+    "doctor_name": "Dr Daksha Gala",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000462",
+    "doctor_name": "Dr Ekantika Kar",
+    "territory_id": "T019",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000463",
+    "doctor_name": "Dr Zilmil Mander",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000464",
+    "doctor_name": "Dr Zashil Hegde",
+    "territory_id": "T016",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000465",
+    "doctor_name": "Dr Jeremiah Mitter",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000466",
+    "doctor_name": "Dr Yadavi Ganguly",
+    "territory_id": "T012",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000467",
+    "doctor_name": "Dr Onveer Nazareth",
+    "territory_id": "T015",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000468",
+    "doctor_name": "Dr Ayush Bumb",
+    "territory_id": "T008",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000469",
+    "doctor_name": "Dr Alka Kade",
+    "territory_id": "T004",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000470",
+    "doctor_name": "Dr Azaan Tank",
+    "territory_id": "T018",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000471",
+    "doctor_name": "Dr Chasmum Subramanian",
+    "territory_id": "T002",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000472",
+    "doctor_name": "Dr Nidra Mishra",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000473",
+    "doctor_name": "Dr Elijah Bhasin",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000474",
+    "doctor_name": "Dr Ria Sagar",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000475",
+    "doctor_name": "Dr Ucchal Jani",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000476",
+    "doctor_name": "Dr Maanas Munshi",
+    "territory_id": "T002",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000477",
+    "doctor_name": "Dr Hemani Rastogi",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000478",
+    "doctor_name": "Dr Kamala Varma",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000479",
+    "doctor_name": "Dr Eiravati Khurana",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000480",
+    "doctor_name": "Dr Jason Loke",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000481",
+    "doctor_name": "Dr Yug Dhaliwal",
+    "territory_id": "T008",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000482",
+    "doctor_name": "Dr Chandresh Mannan",
+    "territory_id": "T005",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000483",
+    "doctor_name": "Dr Omya Kothari",
+    "territory_id": "T009",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000484",
+    "doctor_name": "Dr Falak Munshi",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000485",
+    "doctor_name": "Dr Nathaniel Tara",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000486",
+    "doctor_name": "Dr Wishi Morar",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000487",
+    "doctor_name": "Dr Arin Chana",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000488",
+    "doctor_name": "Dr Yashasvi Shankar",
+    "territory_id": "T008",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000489",
+    "doctor_name": "Dr Tanveer Pandit",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000490",
+    "doctor_name": "Dr Chandresh Manda",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000491",
+    "doctor_name": "Dr Upma Mangal",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000492",
+    "doctor_name": "Dr Hritik Sankar",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000493",
+    "doctor_name": "Dr Aishani Pau",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000494",
+    "doctor_name": "Dr Jasmit Bath",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000495",
+    "doctor_name": "Dr Charan Hayer",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000496",
+    "doctor_name": "Dr Bhavya Borah",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000497",
+    "doctor_name": "Dr Yamini Seshadri",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000498",
+    "doctor_name": "Dr Jagat Dave",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000499",
+    "doctor_name": "Dr Meera Prakash",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000500",
+    "doctor_name": "Dr Jasmit Dhawan",
+    "territory_id": "T002",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000501",
+    "doctor_name": "Dr Yashodhara Ratti",
+    "territory_id": "T013",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000502",
+    "doctor_name": "Dr Chakradev Barad",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000503",
+    "doctor_name": "Dr Gauri Som",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000504",
+    "doctor_name": "Dr Manthan Varma",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000505",
+    "doctor_name": "Dr Falak Nagar",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000506",
+    "doctor_name": "Dr Maya Mistry",
+    "territory_id": "T003",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000507",
+    "doctor_name": "Dr Yashica Upadhyay",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000508",
+    "doctor_name": "Dr Chandani Soman",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000509",
+    "doctor_name": "Dr Jyoti Narula",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000510",
+    "doctor_name": "Dr Omaja Morar",
+    "territory_id": "T004",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000511",
+    "doctor_name": "Dr Urvi Lanka",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000512",
+    "doctor_name": "Dr Charan Srinivasan",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000513",
+    "doctor_name": "Dr Lajita Divan",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000514",
+    "doctor_name": "Dr Azad Choudhary",
+    "territory_id": "T011",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000515",
+    "doctor_name": "Dr Anirudh Sastry",
+    "territory_id": "T013",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000516",
+    "doctor_name": "Dr Omya Doshi",
+    "territory_id": "T004",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000517",
+    "doctor_name": "Dr Samar Roy",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000518",
+    "doctor_name": "Dr David Devi",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000519",
+    "doctor_name": "Dr Ekta Sridhar",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000520",
+    "doctor_name": "Dr Dipta Ghose",
+    "territory_id": "T003",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000521",
+    "doctor_name": "Dr Hema Pandya",
+    "territory_id": "T003",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000522",
+    "doctor_name": "Dr Veda Handa",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000523",
+    "doctor_name": "Dr Arya Misra",
+    "territory_id": "T012",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000524",
+    "doctor_name": "Dr Chameli Mani",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000525",
+    "doctor_name": "Dr Vrinda Nadig",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000526",
+    "doctor_name": "Dr Ikshita Mahal",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000527",
+    "doctor_name": "Dr Jairaj Raghavan",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000528",
+    "doctor_name": "Dr Hemani Dhingra",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000529",
+    "doctor_name": "Dr Brijesh Mani",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000530",
+    "doctor_name": "Dr Hiral Sathe",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000531",
+    "doctor_name": "Dr Varenya Kala",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000532",
+    "doctor_name": "Dr Anika Magar",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000533",
+    "doctor_name": "Dr Ikbal Khatri",
+    "territory_id": "T008",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000534",
+    "doctor_name": "Dr Chandresh Wali",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000535",
+    "doctor_name": "Dr Viraj Ben",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000536",
+    "doctor_name": "Dr Odika Narayanan",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000537",
+    "doctor_name": "Dr Harish Devan",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000538",
+    "doctor_name": "Dr Nakul Ray",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000539",
+    "doctor_name": "Dr Vansha Iyengar",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000540",
+    "doctor_name": "Dr Ekani Mangal",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000541",
+    "doctor_name": "Dr Gaurav Kata",
+    "territory_id": "T011",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000542",
+    "doctor_name": "Dr Parth Sahni",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000543",
+    "doctor_name": "Dr Balhaar Ranganathan",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000544",
+    "doctor_name": "Dr Quincy Mann",
+    "territory_id": "T003",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000545",
+    "doctor_name": "Dr Aditya Misra",
+    "territory_id": "T001",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000546",
+    "doctor_name": "Dr Gautami Mane",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000547",
+    "doctor_name": "Dr Wakeeta Desai",
+    "territory_id": "T013",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000548",
+    "doctor_name": "Dr Anjali Hans",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000549",
+    "doctor_name": "Dr Ganga Gaba",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000550",
+    "doctor_name": "Dr Aarini Grewal",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000551",
+    "doctor_name": "Dr Geetika Merchant",
+    "territory_id": "T019",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000552",
+    "doctor_name": "Dr Parth Ravi",
+    "territory_id": "T002",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000553",
+    "doctor_name": "Dr Yutika Narang",
+    "territory_id": "T006",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000554",
+    "doctor_name": "Dr Nandini Chandran",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000555",
+    "doctor_name": "Dr Logan Sood",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000556",
+    "doctor_name": "Dr Yuvraj Ahuja",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000557",
+    "doctor_name": "Dr Leela Keer",
+    "territory_id": "T014",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000558",
+    "doctor_name": "Dr Amara Narayan",
+    "territory_id": "T007",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000559",
+    "doctor_name": "Dr Advay Lal",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000560",
+    "doctor_name": "Dr Warinder Bhatia",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000561",
+    "doctor_name": "Dr Udyati Mohanty",
+    "territory_id": "T019",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000562",
+    "doctor_name": "Dr Nidra Thakkar",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000563",
+    "doctor_name": "Dr Jacob Merchant",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000564",
+    "doctor_name": "Dr Timothy Kanda",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000565",
+    "doctor_name": "Dr Vanya Dua",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000566",
+    "doctor_name": "Dr Kashvi Sagar",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000567",
+    "doctor_name": "Dr Tejas Kota",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000568",
+    "doctor_name": "Dr Sanya Wable",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000569",
+    "doctor_name": "Dr Faras Choudhury",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000570",
+    "doctor_name": "Dr Yashasvi Jain",
+    "territory_id": "T016",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000571",
+    "doctor_name": "Dr Nitesh Narang",
+    "territory_id": "T006",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000572",
+    "doctor_name": "Dr Jackson Jha",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000573",
+    "doctor_name": "Dr Gavin Uppal",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000574",
+    "doctor_name": "Dr Christopher Setty",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000575",
+    "doctor_name": "Dr Yochana Sagar",
+    "territory_id": "T002",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000576",
+    "doctor_name": "Dr Dalbir Shere",
+    "territory_id": "T001",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000577",
+    "doctor_name": "Dr Anthony Randhawa",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000578",
+    "doctor_name": "Dr Aarush Kamdar",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000579",
+    "doctor_name": "Dr Chakradev Sampath",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000580",
+    "doctor_name": "Dr Devansh Bhasin",
+    "territory_id": "T014",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000581",
+    "doctor_name": "Dr Urmi Balay",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000582",
+    "doctor_name": "Dr Nilima Gole",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000583",
+    "doctor_name": "Dr Osha Prasad",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000584",
+    "doctor_name": "Dr Saumya Purohit",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000585",
+    "doctor_name": "Dr Faris Zacharia",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000586",
+    "doctor_name": "Dr Ijaya Dani",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000587",
+    "doctor_name": "Dr Maya Wadhwa",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000588",
+    "doctor_name": "Dr Udant Aggarwal",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000589",
+    "doctor_name": "Dr Chanchal Sheth",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000590",
+    "doctor_name": "Dr Ladli Karpe",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000591",
+    "doctor_name": "Dr Triveni Pal",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000592",
+    "doctor_name": "Dr Anya Gulati",
+    "territory_id": "T003",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000593",
+    "doctor_name": "Dr Azad Saini",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000594",
+    "doctor_name": "Dr Wridesh Jhaveri",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000595",
+    "doctor_name": "Dr Harrison Bandi",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000596",
+    "doctor_name": "Dr Chanakya Konda",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000597",
+    "doctor_name": "Dr Neelima Sarna",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000598",
+    "doctor_name": "Dr Teerth Bhalla",
+    "territory_id": "T006",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000599",
+    "doctor_name": "Dr Yahvi Mann",
+    "territory_id": "T003",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000600",
+    "doctor_name": "Dr Eiravati Nagi",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000601",
+    "doctor_name": "Dr Chasmum Dhar",
+    "territory_id": "T019",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000602",
+    "doctor_name": "Dr Odika Mital",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000603",
+    "doctor_name": "Dr Darsh Gill",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000604",
+    "doctor_name": "Dr Warhi Batta",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000605",
+    "doctor_name": "Dr Lakshmi Vohra",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000606",
+    "doctor_name": "Dr Omaja Rege",
+    "territory_id": "T010",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000607",
+    "doctor_name": "Dr Charita Puri",
+    "territory_id": "T019",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000608",
+    "doctor_name": "Dr Urvashi Khosla",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000609",
+    "doctor_name": "Dr Charita Dhawan",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000610",
+    "doctor_name": "Dr Dalbir Sachar",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000611",
+    "doctor_name": "Dr Krish Rama",
+    "territory_id": "T002",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000612",
+    "doctor_name": "Dr Aadhya Jani",
+    "territory_id": "T010",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000613",
+    "doctor_name": "Dr Farhan Sengupta",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000614",
+    "doctor_name": "Dr George Wason",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000615",
+    "doctor_name": "Dr Charan Loyal",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000616",
+    "doctor_name": "Dr Balveer Bora",
+    "territory_id": "T011",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000617",
+    "doctor_name": "Dr Teerth Srinivas",
+    "territory_id": "T017",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000618",
+    "doctor_name": "Dr Gaurangi Mitter",
+    "territory_id": "T002",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000619",
+    "doctor_name": "Dr Siddharth Gupta",
+    "territory_id": "T004",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000620",
+    "doctor_name": "Dr Varenya Kibe",
+    "territory_id": "T003",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000621",
+    "doctor_name": "Dr Mekhala Khatri",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000622",
+    "doctor_name": "Dr Barkha Rai",
+    "territory_id": "T015",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000623",
+    "doctor_name": "Dr Jagrati Morar",
+    "territory_id": "T017",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000624",
+    "doctor_name": "Dr Jagvi Varghese",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000625",
+    "doctor_name": "Dr Unnati Chaudhari",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000626",
+    "doctor_name": "Dr Ekaja Jani",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000627",
+    "doctor_name": "Dr Dhriti Sachdev",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000628",
+    "doctor_name": "Dr Timothy Dhingra",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000629",
+    "doctor_name": "Dr Advika Sahni",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000630",
+    "doctor_name": "Dr Michael Hayre",
+    "territory_id": "T018",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000631",
+    "doctor_name": "Dr Victor Raghavan",
+    "territory_id": "T010",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000632",
+    "doctor_name": "Dr Xalak Nazareth",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000633",
+    "doctor_name": "Dr Vrinda Swaminathan",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000634",
+    "doctor_name": "Dr Om Pandey",
+    "territory_id": "T019",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000635",
+    "doctor_name": "Dr Logan Suresh",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000636",
+    "doctor_name": "Dr Daniel Viswanathan",
+    "territory_id": "T013",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000637",
+    "doctor_name": "Dr Falan Bava",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000638",
+    "doctor_name": "Dr Nitara Devan",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000639",
+    "doctor_name": "Dr Ekansh Dora",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000640",
+    "doctor_name": "Dr Tejas Tiwari",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000641",
+    "doctor_name": "Dr Kashvi Bhasin",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000642",
+    "doctor_name": "Dr Vinaya Babu",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000643",
+    "doctor_name": "Dr Nisha Arora",
+    "territory_id": "T010",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000644",
+    "doctor_name": "Dr Anvi Wason",
+    "territory_id": "T007",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000645",
+    "doctor_name": "Dr Anay Thakkar",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000646",
+    "doctor_name": "Dr Praneel Chhabra",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000647",
+    "doctor_name": "Dr Manthan Khosla",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000648",
+    "doctor_name": "Dr Zayyan Pandya",
+    "territory_id": "T010",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000649",
+    "doctor_name": "Dr Mekhala Brar",
+    "territory_id": "T017",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000650",
+    "doctor_name": "Dr Nidra Sharaf",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000651",
+    "doctor_name": "Dr Upkaar Mital",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000652",
+    "doctor_name": "Dr Azad Chander",
+    "territory_id": "T005",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000653",
+    "doctor_name": "Dr Ladli Purohit",
+    "territory_id": "T006",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000654",
+    "doctor_name": "Dr Daksh Andra",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000655",
+    "doctor_name": "Dr Fitan Tata",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000656",
+    "doctor_name": "Dr Garima Chandran",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000657",
+    "doctor_name": "Dr Victor Kakar",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000658",
+    "doctor_name": "Dr Anika Batra",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000659",
+    "doctor_name": "Dr Avni Bali",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000660",
+    "doctor_name": "Dr Divya Babu",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000661",
+    "doctor_name": "Dr Maanas Rao",
+    "territory_id": "T007",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000662",
+    "doctor_name": "Dr Chandani Gaba",
+    "territory_id": "T019",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000663",
+    "doctor_name": "Dr Lopa Zachariah",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000664",
+    "doctor_name": "Dr Leena Dey",
+    "territory_id": "T013",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000665",
+    "doctor_name": "Dr Xiti Pal",
+    "territory_id": "T006",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000666",
+    "doctor_name": "Dr Guneet Sarkar",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000667",
+    "doctor_name": "Dr Faqid Oak",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000668",
+    "doctor_name": "Dr Eta Balan",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000669",
+    "doctor_name": "Dr Shravya Swaminathan",
+    "territory_id": "T018",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000670",
+    "doctor_name": "Dr Ishani Prashad",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000671",
+    "doctor_name": "Dr Quincy Rai",
+    "territory_id": "T010",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000672",
+    "doctor_name": "Dr Chakrika Koshy",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000673",
+    "doctor_name": "Dr Fitan Loyal",
+    "territory_id": "T015",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000674",
+    "doctor_name": "Dr Lajita Dube",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000675",
+    "doctor_name": "Dr Edhitha Patel",
+    "territory_id": "T008",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000676",
+    "doctor_name": "Dr Gavin Ahluwalia",
+    "territory_id": "T012",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000677",
+    "doctor_name": "Dr Sai Parsa",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000678",
+    "doctor_name": "Dr Harsh Deo",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000679",
+    "doctor_name": "Dr Rachit Sankar",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000680",
+    "doctor_name": "Dr Yauvani Reddy",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000681",
+    "doctor_name": "Dr Atharv Chakraborty",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000682",
+    "doctor_name": "Dr Girik Nair",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000683",
+    "doctor_name": "Dr Advik Manne",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000684",
+    "doctor_name": "Dr Lipika Chad",
+    "territory_id": "T005",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000685",
+    "doctor_name": "Dr Omkaar Rai",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000686",
+    "doctor_name": "Dr Liam Luthra",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000687",
+    "doctor_name": "Dr Amrita Tailor",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000688",
+    "doctor_name": "Dr Dev Ganesh",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000689",
+    "doctor_name": "Dr Anya Sama",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000690",
+    "doctor_name": "Dr Veda Bose",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000691",
+    "doctor_name": "Dr Zayan Koshy",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000692",
+    "doctor_name": "Dr Rohan Shankar",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000693",
+    "doctor_name": "Dr Krishna Modi",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000694",
+    "doctor_name": "Dr Meghana Natarajan",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000695",
+    "doctor_name": "Dr Forum Sarraf",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000696",
+    "doctor_name": "Dr Qushi Deshpande",
+    "territory_id": "T003",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000697",
+    "doctor_name": "Dr Ekani Iyer",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000698",
+    "doctor_name": "Dr Dipta Goel",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000699",
+    "doctor_name": "Dr Eiravati Manne",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000700",
+    "doctor_name": "Dr Xavier Nanda",
+    "territory_id": "T014",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000701",
+    "doctor_name": "Dr Avni Ramaswamy",
+    "territory_id": "T020",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000702",
+    "doctor_name": "Dr Ishaan Iyengar",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000703",
+    "doctor_name": "Dr Avi Shenoy",
+    "territory_id": "T006",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000704",
+    "doctor_name": "Dr Raksha Manne",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000705",
+    "doctor_name": "Dr Nilima Tata",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000706",
+    "doctor_name": "Dr Chavvi Khurana",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000707",
+    "doctor_name": "Dr Mitesh Sampath",
+    "territory_id": "T002",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000708",
+    "doctor_name": "Dr Ethan Sen",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000709",
+    "doctor_name": "Dr Nandini Warrior",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000710",
+    "doctor_name": "Dr Balhaar Parsa",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000711",
+    "doctor_name": "Dr Ikbal Kothari",
+    "territory_id": "T008",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000712",
+    "doctor_name": "Dr Ojas Basu",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000713",
+    "doctor_name": "Dr Garima Sani",
+    "territory_id": "T005",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000714",
+    "doctor_name": "Dr Advaith Chaudhari",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000715",
+    "doctor_name": "Dr Tristan Uppal",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000716",
+    "doctor_name": "Dr Sanaya Prasad",
+    "territory_id": "T016",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000717",
+    "doctor_name": "Dr Ubika Tella",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000718",
+    "doctor_name": "Dr Hemani Bakshi",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000719",
+    "doctor_name": "Dr Henry Merchant",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000720",
+    "doctor_name": "Dr Frederick D’Alia",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000721",
+    "doctor_name": "Dr Ijaya Muni",
+    "territory_id": "T002",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000722",
+    "doctor_name": "Dr Tamanna Jhaveri",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000723",
+    "doctor_name": "Dr Ijaya Soni",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000724",
+    "doctor_name": "Dr Raksha Sethi",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000725",
+    "doctor_name": "Dr Ekalinga Mital",
+    "territory_id": "T007",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000726",
+    "doctor_name": "Dr Ishwar Bajaj",
+    "territory_id": "T012",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000727",
+    "doctor_name": "Dr Ikbal Gala",
+    "territory_id": "T011",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000728",
+    "doctor_name": "Dr Zaitra Ghosh",
+    "territory_id": "T004",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000729",
+    "doctor_name": "Dr Ganga Sandhu",
+    "territory_id": "T014",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000730",
+    "doctor_name": "Dr Vincent Ravel",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000731",
+    "doctor_name": "Dr Quincy Sankaran",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000732",
+    "doctor_name": "Dr Ayush Hora",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000733",
+    "doctor_name": "Dr Pushti Ramachandran",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000734",
+    "doctor_name": "Dr Tanish Jha",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000735",
+    "doctor_name": "Dr Dev Chaudry",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000736",
+    "doctor_name": "Dr Jasmit Nanda",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000737",
+    "doctor_name": "Dr Tanvi Comar",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000738",
+    "doctor_name": "Dr Vrishti Wable",
+    "territory_id": "T011",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000739",
+    "doctor_name": "Dr Lipika Ramanathan",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000740",
+    "doctor_name": "Dr Ijaya Pandey",
+    "territory_id": "T010",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000741",
+    "doctor_name": "Dr Orinder Mishra",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000742",
+    "doctor_name": "Dr Krish Munshi",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000743",
+    "doctor_name": "Dr William Mody",
+    "territory_id": "T012",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000744",
+    "doctor_name": "Dr Qadim Prakash",
+    "territory_id": "T002",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000745",
+    "doctor_name": "Dr Yasti Rama",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000746",
+    "doctor_name": "Dr Lakshit Rajagopal",
+    "territory_id": "T009",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000747",
+    "doctor_name": "Dr Quincy Sur",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000748",
+    "doctor_name": "Dr Ojas Suri",
+    "territory_id": "T012",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000749",
+    "doctor_name": "Dr Logan Grover",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000750",
+    "doctor_name": "Dr Shravya Bera",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000751",
+    "doctor_name": "Dr Aditya Sundaram",
+    "territory_id": "T002",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000752",
+    "doctor_name": "Dr Robert Rajagopalan",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000753",
+    "doctor_name": "Dr Nilima Swamy",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000754",
+    "doctor_name": "Dr Sachi Suresh",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000755",
+    "doctor_name": "Dr Fitan Balasubramanian",
+    "territory_id": "T020",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000756",
+    "doctor_name": "Dr Brinda Bali",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000757",
+    "doctor_name": "Dr Umang Yogi",
+    "territory_id": "T012",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000758",
+    "doctor_name": "Dr Om Shankar",
+    "territory_id": "T003",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000759",
+    "doctor_name": "Dr Yasti Chowdhury",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000760",
+    "doctor_name": "Dr Amrita Peri",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000761",
+    "doctor_name": "Dr Ridhi Kamdar",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000762",
+    "doctor_name": "Dr Harsh Kota",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000763",
+    "doctor_name": "Dr Bachittar Sengupta",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000764",
+    "doctor_name": "Dr Ijaya Chahal",
+    "territory_id": "T017",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000765",
+    "doctor_name": "Dr Jacob Khalsa",
+    "territory_id": "T018",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000766",
+    "doctor_name": "Dr Indali Sangha",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000767",
+    "doctor_name": "Dr Liam Jhaveri",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000768",
+    "doctor_name": "Dr Daniel Panchal",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000769",
+    "doctor_name": "Dr Om Naik",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000770",
+    "doctor_name": "Dr Bimala Loke",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000771",
+    "doctor_name": "Dr Krishna Sabharwal",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000772",
+    "doctor_name": "Dr Aradhana Date",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000773",
+    "doctor_name": "Dr Zaid Dhingra",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000774",
+    "doctor_name": "Dr Yug Ramaswamy",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000775",
+    "doctor_name": "Dr Lucky Luthra",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000776",
+    "doctor_name": "Dr Keya Seth",
+    "territory_id": "T010",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000777",
+    "doctor_name": "Dr Girik Rau",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000778",
+    "doctor_name": "Dr Jyoti Sha",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000779",
+    "doctor_name": "Dr Falak Agate",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000780",
+    "doctor_name": "Dr Tara Parmar",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000781",
+    "doctor_name": "Dr Mitali Kamdar",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000782",
+    "doctor_name": "Dr Siddharth Talwar",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000783",
+    "doctor_name": "Dr Ekantika Mander",
+    "territory_id": "T015",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000784",
+    "doctor_name": "Dr Kalpit Sundaram",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000785",
+    "doctor_name": "Dr Chanakya Batra",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000786",
+    "doctor_name": "Dr Tripti Babu",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000787",
+    "doctor_name": "Dr Nakul Sastry",
+    "territory_id": "T017",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000788",
+    "doctor_name": "Dr Aadi Sangha",
+    "territory_id": "T014",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000789",
+    "doctor_name": "Dr Kevin Mittal",
+    "territory_id": "T005",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000790",
+    "doctor_name": "Dr Anusha Chander",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000791",
+    "doctor_name": "Dr Zashil Butala",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000792",
+    "doctor_name": "Dr Noah Ben",
+    "territory_id": "T005",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000793",
+    "doctor_name": "Dr Dalaja Kaur",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000794",
+    "doctor_name": "Dr Gavin Chandran",
+    "territory_id": "T017",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000795",
+    "doctor_name": "Dr Tanay Sood",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000796",
+    "doctor_name": "Dr Kevin Kara",
+    "territory_id": "T010",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000797",
+    "doctor_name": "Dr Aditya Anand",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000798",
+    "doctor_name": "Dr Jai Sami",
+    "territory_id": "T008",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000799",
+    "doctor_name": "Dr Vanya Bobal",
+    "territory_id": "T017",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000800",
+    "doctor_name": "Dr Leela Chakraborty",
+    "territory_id": "T003",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000801",
+    "doctor_name": "Dr Harshil Munshi",
+    "territory_id": "T007",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000802",
+    "doctor_name": "Dr Chandani Devan",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000803",
+    "doctor_name": "Dr Kiaan Dhar",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000804",
+    "doctor_name": "Dr Abhiram Gala",
+    "territory_id": "T017",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000805",
+    "doctor_name": "Dr Indali Kala",
+    "territory_id": "T019",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000806",
+    "doctor_name": "Dr Nisha Savant",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000807",
+    "doctor_name": "Dr Gabriel Chaudhry",
+    "territory_id": "T019",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000808",
+    "doctor_name": "Dr Jatin Rajagopalan",
+    "territory_id": "T001",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000809",
+    "doctor_name": "Dr Pushti Murty",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000810",
+    "doctor_name": "Dr Yug Malhotra",
+    "territory_id": "T007",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000811",
+    "doctor_name": "Dr Yuvraj Mane",
+    "territory_id": "T020",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000812",
+    "doctor_name": "Dr Charvi Jha",
+    "territory_id": "T016",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000813",
+    "doctor_name": "Dr Manya Merchant",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000814",
+    "doctor_name": "Dr Wriddhish Talwar",
+    "territory_id": "T008",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000815",
+    "doctor_name": "Dr Isaiah Khosla",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000816",
+    "doctor_name": "Dr Ekavir Wable",
+    "territory_id": "T003",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000817",
+    "doctor_name": "Dr Jalsa Nadig",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000818",
+    "doctor_name": "Dr Lila Salvi",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000819",
+    "doctor_name": "Dr Orinder Sinha",
+    "territory_id": "T015",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000820",
+    "doctor_name": "Dr Anay Bir",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000821",
+    "doctor_name": "Dr Adweta Kale",
+    "territory_id": "T011",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000822",
+    "doctor_name": "Dr Darpan Rao",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000823",
+    "doctor_name": "Dr Yachana Sagar",
+    "territory_id": "T005",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000824",
+    "doctor_name": "Dr Neelima Butala",
+    "territory_id": "T017",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000825",
+    "doctor_name": "Dr Arunima Chacko",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000826",
+    "doctor_name": "Dr Farhan Vaidya",
+    "territory_id": "T015",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000827",
+    "doctor_name": "Dr Nachiket Yadav",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000828",
+    "doctor_name": "Dr Mahika Bhatti",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000829",
+    "doctor_name": "Dr Rajeshri Khare",
+    "territory_id": "T004",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000830",
+    "doctor_name": "Dr Yash Chadha",
+    "territory_id": "T010",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000831",
+    "doctor_name": "Dr Jack Setty",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000832",
+    "doctor_name": "Dr Dayamai Gill",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000833",
+    "doctor_name": "Dr Advik Devan",
+    "territory_id": "T011",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000834",
+    "doctor_name": "Dr Nihal Taneja",
+    "territory_id": "T007",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000835",
+    "doctor_name": "Dr Zansi Lad",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000836",
+    "doctor_name": "Dr Kamya Date",
+    "territory_id": "T016",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000837",
+    "doctor_name": "Dr Jacob Balan",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000838",
+    "doctor_name": "Dr Pushti Magar",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000839",
+    "doctor_name": "Dr Adya Bose",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000840",
+    "doctor_name": "Dr Tamanna Vaidya",
+    "territory_id": "T008",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000841",
+    "doctor_name": "Dr Christopher Tata",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000842",
+    "doctor_name": "Dr Jhalak Dugar",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000843",
+    "doctor_name": "Dr Harshil D’Alia",
+    "territory_id": "T010",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000844",
+    "doctor_name": "Dr Yashodhara Agate",
+    "territory_id": "T020",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000845",
+    "doctor_name": "Dr Advik Konda",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000846",
+    "doctor_name": "Dr Urmi Patla",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000847",
+    "doctor_name": "Dr Mason Gola",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000848",
+    "doctor_name": "Dr Oni Kapur",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000849",
+    "doctor_name": "Dr Yuvraj Saha",
+    "territory_id": "T012",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000850",
+    "doctor_name": "Dr Anika Brahmbhatt",
+    "territory_id": "T013",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000851",
+    "doctor_name": "Dr Jagdish Thakkar",
+    "territory_id": "T019",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000852",
+    "doctor_name": "Dr Praneel Kapoor",
+    "territory_id": "T012",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000853",
+    "doctor_name": "Dr Nandini Biswas",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000854",
+    "doctor_name": "Dr Barkha Mukhopadhyay",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000855",
+    "doctor_name": "Dr Gabriel Shan",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000856",
+    "doctor_name": "Dr Jyoti Iyer",
+    "territory_id": "T020",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000857",
+    "doctor_name": "Dr Daksha Kibe",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000858",
+    "doctor_name": "Dr Jyoti Tak",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000859",
+    "doctor_name": "Dr Yatan Dora",
+    "territory_id": "T011",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000860",
+    "doctor_name": "Dr Nimrat Bajwa",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000861",
+    "doctor_name": "Dr Hiral Andra",
+    "territory_id": "T020",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000862",
+    "doctor_name": "Dr Aarav Puri",
+    "territory_id": "T017",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000863",
+    "doctor_name": "Dr Hemang Jha",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000864",
+    "doctor_name": "Dr Oni Swamy",
+    "territory_id": "T005",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000865",
+    "doctor_name": "Dr Lucky Mammen",
+    "territory_id": "T016",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000866",
+    "doctor_name": "Dr Caleb Kata",
+    "territory_id": "T005",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000867",
+    "doctor_name": "Dr Kashish Shanker",
+    "territory_id": "T011",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000868",
+    "doctor_name": "Dr Girish Tiwari",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000869",
+    "doctor_name": "Dr Meera Borde",
+    "territory_id": "T020",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000870",
+    "doctor_name": "Dr Radhika De",
+    "territory_id": "T019",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000871",
+    "doctor_name": "Dr Bishakha Lal",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000872",
+    "doctor_name": "Dr Maya Narain",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000873",
+    "doctor_name": "Dr Sneha Magar",
+    "territory_id": "T016",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000874",
+    "doctor_name": "Dr Falan Jain",
+    "territory_id": "T012",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000875",
+    "doctor_name": "Dr Ikbal Dugal",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000876",
+    "doctor_name": "Dr Nitesh Sengupta",
+    "territory_id": "T019",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000877",
+    "doctor_name": "Dr Dipta Ray",
+    "territory_id": "T001",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000878",
+    "doctor_name": "Dr Ishita Johal",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000879",
+    "doctor_name": "Dr Darika Sheth",
+    "territory_id": "T002",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000880",
+    "doctor_name": "Dr Jagdish Chana",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000881",
+    "doctor_name": "Dr Daksha Baria",
+    "territory_id": "T005",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000882",
+    "doctor_name": "Dr Falak Divan",
+    "territory_id": "T002",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000883",
+    "doctor_name": "Dr Yuvraj Parekh",
+    "territory_id": "T007",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000884",
+    "doctor_name": "Dr Yochana Bawa",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000885",
+    "doctor_name": "Dr Abha Ghosh",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000886",
+    "doctor_name": "Dr Nidhi Sethi",
+    "territory_id": "T014",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000887",
+    "doctor_name": "Dr Girindra Shere",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000888",
+    "doctor_name": "Dr Logan Dara",
+    "territory_id": "T002",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000889",
+    "doctor_name": "Dr David Kapadia",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000890",
+    "doctor_name": "Dr Rudra Rattan",
+    "territory_id": "T018",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000891",
+    "doctor_name": "Dr Frado Lad",
+    "territory_id": "T016",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000892",
+    "doctor_name": "Dr Anthony Bhattacharyya",
+    "territory_id": "T011",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000893",
+    "doctor_name": "Dr Sachi Dave",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000894",
+    "doctor_name": "Dr Garima Das",
+    "territory_id": "T018",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000895",
+    "doctor_name": "Dr Triya Bedi",
+    "territory_id": "T009",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000896",
+    "doctor_name": "Dr Rachita Rana",
+    "territory_id": "T007",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000897",
+    "doctor_name": "Dr Ayushman Raja",
+    "territory_id": "T009",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000898",
+    "doctor_name": "Dr Orinder Pandya",
+    "territory_id": "T008",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000899",
+    "doctor_name": "Dr Rachit Maharaj",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000900",
+    "doctor_name": "Dr Sanaya Dixit",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000901",
+    "doctor_name": "Dr Yatan Merchant",
+    "territory_id": "T016",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000902",
+    "doctor_name": "Dr Nisha Srinivas",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000903",
+    "doctor_name": "Dr Gagan Mammen",
+    "territory_id": "T010",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000904",
+    "doctor_name": "Dr Laksh Saini",
+    "territory_id": "T019",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000905",
+    "doctor_name": "Dr Zaid Bahl",
+    "territory_id": "T013",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000906",
+    "doctor_name": "Dr Jagrati Srinivasan",
+    "territory_id": "T005",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000907",
+    "doctor_name": "Dr Hemangini Thakkar",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000908",
+    "doctor_name": "Dr Lipika Madan",
+    "territory_id": "T003",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000909",
+    "doctor_name": "Dr Atharv Nagar",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000910",
+    "doctor_name": "Dr Ayushman Mand",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000911",
+    "doctor_name": "Dr Urmi Wagle",
+    "territory_id": "T007",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000912",
+    "doctor_name": "Dr Viraj Dutta",
+    "territory_id": "T018",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000913",
+    "doctor_name": "Dr Yug Khosla",
+    "territory_id": "T005",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000914",
+    "doctor_name": "Dr Daksh Kanda",
+    "territory_id": "T020",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000915",
+    "doctor_name": "Dr Isha Ghose",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000916",
+    "doctor_name": "Dr Warjas Nadkarni",
+    "territory_id": "T017",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000917",
+    "doctor_name": "Dr Ayaan Pandey",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000918",
+    "doctor_name": "Dr Raghav Tailor",
+    "territory_id": "T004",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000919",
+    "doctor_name": "Dr Parth Swaminathan",
+    "territory_id": "T011",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000920",
+    "doctor_name": "Dr Gautam Bhalla",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000921",
+    "doctor_name": "Dr Theodore Bahri",
+    "territory_id": "T001",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000922",
+    "doctor_name": "Dr Aadi Narula",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000923",
+    "doctor_name": "Dr Kalpit Oak",
+    "territory_id": "T016",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000924",
+    "doctor_name": "Dr Ekiya Bhargava",
+    "territory_id": "T010",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000925",
+    "doctor_name": "Dr Manbir Dhar",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000926",
+    "doctor_name": "Dr Janya Bora",
+    "territory_id": "T003",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000927",
+    "doctor_name": "Dr Meghana Chaudhuri",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000928",
+    "doctor_name": "Dr Chasmum Naidu",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000929",
+    "doctor_name": "Dr Nakul Sarkar",
+    "territory_id": "T006",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000930",
+    "doctor_name": "Dr Edhitha Ghosh",
+    "territory_id": "T013",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000931",
+    "doctor_name": "Dr Udant Gill",
+    "territory_id": "T006",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000932",
+    "doctor_name": "Dr Damyanti Menon",
+    "territory_id": "T002",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000933",
+    "doctor_name": "Dr Peter Agarwal",
+    "territory_id": "T010",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000934",
+    "doctor_name": "Dr Bachittar Gopal",
+    "territory_id": "T011",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000935",
+    "doctor_name": "Dr Timothy Chawla",
+    "territory_id": "T015",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000936",
+    "doctor_name": "Dr Lohit Narula",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000937",
+    "doctor_name": "Dr Wazir Palan",
+    "territory_id": "T009",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000938",
+    "doctor_name": "Dr Oliver Chakrabarti",
+    "territory_id": "T004",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000939",
+    "doctor_name": "Dr Sanya Apte",
+    "territory_id": "T006",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000940",
+    "doctor_name": "Dr Shaurya Krish",
+    "territory_id": "T009",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000941",
+    "doctor_name": "Dr Inaya Kunda",
+    "territory_id": "T001",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000942",
+    "doctor_name": "Dr Aarav Bava",
+    "territory_id": "T010",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000943",
+    "doctor_name": "Dr Raksha Saini",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000944",
+    "doctor_name": "Dr Odika Tailor",
+    "territory_id": "T014",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000945",
+    "doctor_name": "Dr Indali Prashad",
+    "territory_id": "T003",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000946",
+    "doctor_name": "Dr Varenya Kar",
+    "territory_id": "T004",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000947",
+    "doctor_name": "Dr Siya Borah",
+    "territory_id": "T005",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000948",
+    "doctor_name": "Dr Chaitaly Bahri",
+    "territory_id": "T011",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000949",
+    "doctor_name": "Dr Advika Cheema",
+    "territory_id": "T001",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000950",
+    "doctor_name": "Dr Hema Garde",
+    "territory_id": "T013",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000951",
+    "doctor_name": "Dr Naveen Borde",
+    "territory_id": "T015",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000952",
+    "doctor_name": "Dr Hamsini Subramanian",
+    "territory_id": "T011",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000953",
+    "doctor_name": "Dr Raagini Gala",
+    "territory_id": "T019",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000954",
+    "doctor_name": "Dr Naksh Bera",
+    "territory_id": "T009",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000955",
+    "doctor_name": "Dr Garima Jha",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000956",
+    "doctor_name": "Dr Nimrat Zachariah",
+    "territory_id": "T004",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000957",
+    "doctor_name": "Dr Baghyawati Mishra",
+    "territory_id": "T010",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000958",
+    "doctor_name": "Dr Gopal Bawa",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000959",
+    "doctor_name": "Dr Vritti Dube",
+    "territory_id": "T004",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000960",
+    "doctor_name": "Dr Jalsa Aggarwal",
+    "territory_id": "T012",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000961",
+    "doctor_name": "Dr Gagan Menon",
+    "territory_id": "T008",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000962",
+    "doctor_name": "Dr Ryan Chatterjee",
+    "territory_id": "T016",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000963",
+    "doctor_name": "Dr Samuel Garde",
+    "territory_id": "T015",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000964",
+    "doctor_name": "Dr Finn Solanki",
+    "territory_id": "T014",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000965",
+    "doctor_name": "Dr Darika Rao",
+    "territory_id": "T018",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000966",
+    "doctor_name": "Dr Vrinda Lanka",
+    "territory_id": "T008",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000967",
+    "doctor_name": "Dr Lila Goyal",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000968",
+    "doctor_name": "Dr Lakshmi Pingle",
+    "territory_id": "T017",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000969",
+    "doctor_name": "Dr Sanaya Basu",
+    "territory_id": "T003",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000970",
+    "doctor_name": "Dr Ria Shroff",
+    "territory_id": "T002",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000971",
+    "doctor_name": "Dr Upkaar Luthra",
+    "territory_id": "T019",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000972",
+    "doctor_name": "Dr Matthew Chatterjee",
+    "territory_id": "T006",
+    "speciality": "Pulmonology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000973",
+    "doctor_name": "Dr Hemangini Sachdev",
+    "territory_id": "T017",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000974",
+    "doctor_name": "Dr Darsh Ram",
+    "territory_id": "T004",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000975",
+    "doctor_name": "Dr Vaishnavi Keer",
+    "territory_id": "T019",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000976",
+    "doctor_name": "Dr Chandani Brar",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000977",
+    "doctor_name": "Dr Bakhshi Thakkar",
+    "territory_id": "T002",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000978",
+    "doctor_name": "Dr Jai Sen",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000979",
+    "doctor_name": "Dr Oliver Kakar",
+    "territory_id": "T015",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000980",
+    "doctor_name": "Dr Jonathan Basak",
+    "territory_id": "T018",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000981",
+    "doctor_name": "Dr Farhan Saran",
+    "territory_id": "T010",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000982",
+    "doctor_name": "Dr Manbir Kuruvilla",
+    "territory_id": "T013",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000983",
+    "doctor_name": "Dr Ekalinga Chahal",
+    "territory_id": "T001",
+    "speciality": "Neurology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000984",
+    "doctor_name": "Dr Mekhala Nanda",
+    "territory_id": "T019",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000985",
+    "doctor_name": "Dr Zinal Shanker",
+    "territory_id": "T002",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000986",
+    "doctor_name": "Dr Oni Chowdhury",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000987",
+    "doctor_name": "Dr Mason Divan",
+    "territory_id": "T018",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000988",
+    "doctor_name": "Dr Hitesh Chaudhuri",
+    "territory_id": "T003",
+    "speciality": "Orthopedics",
+    "active": true
+  },
+  {
+    "doctor_id": "D000989",
+    "doctor_name": "Dr Hemangini Roy",
+    "territory_id": "T002",
+    "speciality": "Dermatology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000990",
+    "doctor_name": "Dr Leela Sunder",
+    "territory_id": "T014",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000991",
+    "doctor_name": "Dr Baljiwan Gera",
+    "territory_id": "T005",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000992",
+    "doctor_name": "Dr Neha Dhawan",
+    "territory_id": "T012",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000993",
+    "doctor_name": "Dr Balvan Randhawa",
+    "territory_id": "T015",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000994",
+    "doctor_name": "Dr Wazir Bawa",
+    "territory_id": "T013",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000995",
+    "doctor_name": "Dr Amruta Pradhan",
+    "territory_id": "T018",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000996",
+    "doctor_name": "Dr Geetika Mitter",
+    "territory_id": "T012",
+    "speciality": "General Medicine",
+    "active": true
+  },
+  {
+    "doctor_id": "D000997",
+    "doctor_name": "Dr Avni Swamy",
+    "territory_id": "T006",
+    "speciality": "Gastroenterology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000998",
+    "doctor_name": "Dr Vedant Desai",
+    "territory_id": "T017",
+    "speciality": "Diabetology",
+    "active": true
+  },
+  {
+    "doctor_id": "D000999",
+    "doctor_name": "Dr Saanvi Nagi",
+    "territory_id": "T008",
+    "speciality": "Cardiology",
+    "active": true
+  },
+  {
+    "doctor_id": "D001000",
+    "doctor_name": "Dr Omaja Chakraborty",
+    "territory_id": "T001",
+    "speciality": "Dermatology",
+    "active": true
+  }
+]

@@ -1,0 +1,1001 @@
+doctor_id,doctor_name,territory_id,speciality,active
+D000001,Dr Oni Virk,T001,Neurology,True
+D000002,Dr Advika Jayaraman,T019,Neurology,True
+D000003,Dr William Lanka,T001,General Medicine,True
+D000004,Dr Karan Mital,T002,Neurology,True
+D000005,Dr Diya Bora,T003,Cardiology,True
+D000006,Dr Tara Chaudhry,T011,General Medicine,True
+D000007,Dr Tanay Toor,T017,Neurology,True
+D000008,Dr Kevin Palla,T009,Orthopedics,True
+D000009,Dr Yash Pingle,T007,Diabetology,True
+D000010,Dr Nakul Sarma,T019,Orthopedics,True
+D000011,Dr Abhiram Mistry,T008,Orthopedics,True
+D000012,Dr Krish Lalla,T014,Neurology,True
+D000013,Dr Hredhaan Dugal,T004,General Medicine,True
+D000014,Dr Baghyawati Kade,T014,Pulmonology,True
+D000015,Dr Samar Lalla,T014,Gastroenterology,True
+D000016,Dr Zayan Behl,T015,Cardiology,True
+D000017,Dr Pallavi Malhotra,T004,Cardiology,True
+D000018,Dr Aarush Nath,T013,Pulmonology,True
+D000019,Dr Adweta Edwin,T004,Neurology,True
+D000020,Dr Prisha Andra,T007,Neurology,True
+D000021,Dr Faqid Dixit,T018,Orthopedics,True
+D000022,Dr Kala Divan,T005,Gastroenterology,True
+D000023,Dr Joshua Barman,T006,Dermatology,True
+D000024,Dr Janya Baral,T015,Neurology,True
+D000025,Dr Shivansh Krish,T003,Orthopedics,True
+D000026,Dr Irya Ray,T018,General Medicine,True
+D000027,Dr Warjas Gaba,T002,Cardiology,True
+D000028,Dr Nitara Bakshi,T003,Neurology,True
+D000029,Dr Gaurangi Sabharwal,T006,Gastroenterology,True
+D000030,Dr Amara Dutta,T016,Orthopedics,True
+D000031,Dr Lavanya Barad,T007,Gastroenterology,True
+D000032,Dr Tristan Iyengar,T002,Diabetology,True
+D000033,Dr Inaya Mody,T013,Cardiology,True
+D000034,Dr Udant Bajwa,T013,Dermatology,True
+D000035,Dr Mohini Narasimhan,T015,Dermatology,True
+D000036,Dr Ekaraj Mallick,T014,Orthopedics,True
+D000037,Dr Yashodhara Ratta,T005,Neurology,True
+D000038,Dr Ayaan D’Alia,T010,Neurology,True
+D000039,Dr Pranav Lanka,T002,Cardiology,True
+D000040,Dr Ikbal Saraf,T011,Cardiology,True
+D000041,Dr Dipta Sarin,T002,Orthopedics,True
+D000042,Dr Lekha Gupta,T017,Diabetology,True
+D000043,Dr Chaitanya Sarin,T002,General Medicine,True
+D000044,Dr Zinal Yohannan,T006,General Medicine,True
+D000045,Dr Januja Sankar,T020,General Medicine,True
+D000046,Dr Ganga Murthy,T008,Gastroenterology,True
+D000047,Dr Charita Tripathi,T004,Neurology,True
+D000048,Dr Nilima Narain,T019,Cardiology,True
+D000049,Dr Chakrika Datta,T020,General Medicine,True
+D000050,Dr Osha Raghavan,T014,Pulmonology,True
+D000051,Dr Charvi Ravi,T009,Neurology,True
+D000052,Dr Daksha Mangat,T011,Neurology,True
+D000053,Dr Qushi Nagy,T009,Gastroenterology,True
+D000054,Dr Riya Sathe,T005,Dermatology,True
+D000055,Dr Yasti Solanki,T015,Pulmonology,True
+D000056,Dr Frado Mander,T003,Cardiology,True
+D000057,Dr Girik Keer,T015,General Medicine,True
+D000058,Dr Umang Issac,T003,Neurology,True
+D000059,Dr Aryan Batra,T017,Dermatology,True
+D000060,Dr Vaishnavi Bora,T005,Pulmonology,True
+D000061,Dr Oeshi Hayer,T003,Neurology,True
+D000062,Dr Warda Ratta,T012,Dermatology,True
+D000063,Dr Manbir Ahluwalia,T006,Orthopedics,True
+D000064,Dr Pavani Kanda,T018,Dermatology,True
+D000065,Dr Zarna Shetty,T020,Cardiology,True
+D000066,Dr Zaid Dara,T018,Dermatology,True
+D000067,Dr Kiaan Shetty,T004,Diabetology,True
+D000068,Dr Saanvi Thaman,T009,General Medicine,True
+D000069,Dr Sanaya Dutt,T004,Diabetology,True
+D000070,Dr Shivani Lad,T009,Dermatology,True
+D000071,Dr Aradhana Verma,T020,Neurology,True
+D000072,Dr William Maharaj,T011,Neurology,True
+D000073,Dr Faras Mangal,T009,Orthopedics,True
+D000074,Dr Anita Nayak,T009,Cardiology,True
+D000075,Dr Faris Devi,T003,Gastroenterology,True
+D000076,Dr Vihaan Rajagopal,T009,Cardiology,True
+D000077,Dr Tanish Bhatt,T001,Pulmonology,True
+D000078,Dr Nikita Narayanan,T005,Dermatology,True
+D000079,Dr Ojasvi Bhatia,T006,Orthopedics,True
+D000080,Dr Osha Ramachandran,T018,Gastroenterology,True
+D000081,Dr Lajita Sood,T018,Cardiology,True
+D000082,Dr Indira Misra,T004,General Medicine,True
+D000083,Dr Oni Yohannan,T005,Cardiology,True
+D000084,Dr Vinaya Kanda,T012,Diabetology,True
+D000085,Dr Rajata Sunder,T014,Diabetology,True
+D000086,Dr Lopa Nayar,T002,Dermatology,True
+D000087,Dr Noah Sibal,T012,Cardiology,True
+D000088,Dr Avi Ramesh,T012,Neurology,True
+D000089,Dr Fiyaz Sangha,T008,General Medicine,True
+D000090,Dr Triya Gopal,T012,Gastroenterology,True
+D000091,Dr Abha Raghavan,T020,Diabetology,True
+D000092,Dr Siddharth Sha,T008,Diabetology,True
+D000093,Dr Geetika Raghavan,T006,Gastroenterology,True
+D000094,Dr Oviya Krishnan,T001,Diabetology,True
+D000095,Dr Upma Bahl,T011,Gastroenterology,True
+D000096,Dr Inaya Kapur,T008,Dermatology,True
+D000097,Dr Banjeet Balasubramanian,T006,General Medicine,True
+D000098,Dr Ryan Bahri,T013,Cardiology,True
+D000099,Dr William Date,T016,Neurology,True
+D000100,Dr Ishwar Kamdar,T007,Orthopedics,True
+D000101,Dr Aahana Pillay,T012,Dermatology,True
+D000102,Dr Ishwar Gade,T008,Neurology,True
+D000103,Dr Hritik Bal,T001,Neurology,True
+D000104,Dr Keya Ranganathan,T013,Pulmonology,True
+D000105,Dr Faqid Kibe,T009,General Medicine,True
+D000106,Dr Charvi Dara,T009,Pulmonology,True
+D000107,Dr Idika Walia,T017,Gastroenterology,True
+D000108,Dr Kamala Biswas,T018,Pulmonology,True
+D000109,Dr Advik Salvi,T001,General Medicine,True
+D000110,Dr Hitesh Sant,T009,Diabetology,True
+D000111,Dr Tripti Dua,T019,Dermatology,True
+D000112,Dr Patrick Vig,T002,General Medicine,True
+D000113,Dr Veda Shroff,T020,Gastroenterology,True
+D000114,Dr Amrita Naidu,T012,Pulmonology,True
+D000115,Dr Gabriel Mallick,T014,General Medicine,True
+D000116,Dr Yagnesh Shetty,T013,Neurology,True
+D000117,Dr Gayathri Balakrishnan,T009,Cardiology,True
+D000118,Dr Ekta Gopal,T014,Cardiology,True
+D000119,Dr Simon Pant,T017,Neurology,True
+D000120,Dr Harini Mammen,T012,Gastroenterology,True
+D000121,Dr Advaith Varughese,T003,Pulmonology,True
+D000122,Dr Frederick Khurana,T020,Pulmonology,True
+D000123,Dr Vrinda Khosla,T004,Dermatology,True
+D000124,Dr Vritti Sem,T017,Dermatology,True
+D000125,Dr Girik Menon,T014,Pulmonology,True
+D000126,Dr Nidhi Kohli,T013,Dermatology,True
+D000127,Dr Jyoti Solanki,T018,Diabetology,True
+D000128,Dr Pavani Narayanan,T007,Gastroenterology,True
+D000129,Dr Sudiksha Madan,T013,Diabetology,True
+D000130,Dr Zayan Kashyap,T020,Dermatology,True
+D000131,Dr Reyansh Mutti,T013,Cardiology,True
+D000132,Dr Qasim Handa,T010,Dermatology,True
+D000133,Dr Veda Malhotra,T007,Gastroenterology,True
+D000134,Dr Harish Hari,T019,Pulmonology,True
+D000135,Dr Utkarsh Patel,T015,Orthopedics,True
+D000136,Dr Chasmum Atwal,T015,Neurology,True
+D000137,Dr Anusha Bath,T017,Orthopedics,True
+D000138,Dr Brinda Date,T006,General Medicine,True
+D000139,Dr Harshil Arora,T010,Pulmonology,True
+D000140,Dr Upasna Srinivas,T003,Neurology,True
+D000141,Dr Harini Gour,T010,Neurology,True
+D000142,Dr Zayyan Sridhar,T007,Diabetology,True
+D000143,Dr Dhruv Rattan,T001,Cardiology,True
+D000144,Dr Ethan Bera,T008,Orthopedics,True
+D000145,Dr Manthan Modi,T020,General Medicine,True
+D000146,Dr Yuvraj Dani,T015,Gastroenterology,True
+D000147,Dr Upkaar Virk,T019,Neurology,True
+D000148,Dr Shravya Savant,T013,Orthopedics,True
+D000149,Dr Pushti Mody,T013,Neurology,True
+D000150,Dr Hardik Johal,T005,Cardiology,True
+D000151,Dr Aishani Bumb,T004,Gastroenterology,True
+D000152,Dr Wriddhish Ghose,T008,Diabetology,True
+D000153,Dr Naksh Agate,T017,Orthopedics,True
+D000154,Dr Shravya Singhal,T002,Neurology,True
+D000155,Dr Bachittar Kata,T004,Orthopedics,True
+D000156,Dr Barkha Setty,T005,Orthopedics,True
+D000157,Dr Vivaan Lalla,T017,Pulmonology,True
+D000158,Dr Pavani Contractor,T015,Gastroenterology,True
+D000159,Dr Manthan Lata,T018,Orthopedics,True
+D000160,Dr Ekbal Bhasin,T006,Orthopedics,True
+D000161,Dr Damyanti Mani,T015,Dermatology,True
+D000162,Dr Jeet Sidhu,T008,Dermatology,True
+D000163,Dr Neha Magar,T017,Orthopedics,True
+D000164,Dr Raksha Buch,T008,Dermatology,True
+D000165,Dr Rachana Naidu,T015,General Medicine,True
+D000166,Dr Atharv Chand,T010,Neurology,True
+D000167,Dr Ansh Luthra,T009,Pulmonology,True
+D000168,Dr Parth Singhal,T011,General Medicine,True
+D000169,Dr Arunima Golla,T005,Diabetology,True
+D000170,Dr Vyanjana Chand,T008,Gastroenterology,True
+D000171,Dr Ijaya Rege,T005,Neurology,True
+D000172,Dr Ekani Cheema,T003,Gastroenterology,True
+D000173,Dr Forum Sabharwal,T014,Pulmonology,True
+D000174,Dr Bhavya Rattan,T018,Orthopedics,True
+D000175,Dr Suhani Chakrabarti,T014,Cardiology,True
+D000176,Dr Zayyan Naik,T007,Gastroenterology,True
+D000177,Dr Netra Varkey,T013,Cardiology,True
+D000178,Dr Turvi Sachdev,T019,Gastroenterology,True
+D000179,Dr Raghav Vasa,T016,Cardiology,True
+D000180,Dr Wishi Sathe,T012,Dermatology,True
+D000181,Dr Samar Loke,T013,Gastroenterology,True
+D000182,Dr Bhavna Sarma,T018,Neurology,True
+D000183,Dr Jairaj Balakrishnan,T016,Neurology,True
+D000184,Dr Nathan Mukhopadhyay,T009,Gastroenterology,True
+D000185,Dr Nikita Chander,T016,Cardiology,True
+D000186,Dr Ishaan Shenoy,T013,Pulmonology,True
+D000187,Dr Mitesh Tara,T013,Diabetology,True
+D000188,Dr Yashodhara Mahajan,T015,Diabetology,True
+D000189,Dr Vasudha Sodhi,T020,Cardiology,True
+D000190,Dr Tanmayi Dhillon,T013,Cardiology,True
+D000191,Dr Rayaan Trivedi,T003,Gastroenterology,True
+D000192,Dr Ekaraj Majumdar,T005,Orthopedics,True
+D000193,Dr Harini Tripathi,T006,Cardiology,True
+D000194,Dr Aarnav Mandal,T009,Gastroenterology,True
+D000195,Dr Vrishti Dixit,T011,Neurology,True
+D000196,Dr Veda Pai,T015,Pulmonology,True
+D000197,Dr Krishna Shah,T011,Gastroenterology,True
+D000198,Dr Ranbir Khare,T009,Gastroenterology,True
+D000199,Dr Vivaan Roy,T009,General Medicine,True
+D000200,Dr Eesha Solanki,T016,Cardiology,True
+D000201,Dr Libni Doshi,T018,Cardiology,True
+D000202,Dr Balhaar Date,T012,Neurology,True
+D000203,Dr Harish Sarraf,T003,Cardiology,True
+D000204,Dr Tanmayi Aurora,T001,Neurology,True
+D000205,Dr Nimrat Dubey,T007,Cardiology,True
+D000206,Dr Upasna Lanka,T020,Diabetology,True
+D000207,Dr Mitali Buch,T008,Diabetology,True
+D000208,Dr Lajita Nadig,T016,General Medicine,True
+D000209,Dr Balendra Biswas,T019,Neurology,True
+D000210,Dr Bhavna Karan,T015,Dermatology,True
+D000211,Dr Radha Chaudhari,T012,Diabetology,True
+D000212,Dr Sachi Ganesan,T020,General Medicine,True
+D000213,Dr Ayush Batra,T006,Dermatology,True
+D000214,Dr Daksh Memon,T004,Cardiology,True
+D000215,Dr Kavya Sankar,T010,Gastroenterology,True
+D000216,Dr Yash Wali,T013,Neurology,True
+D000217,Dr Pranit Garde,T003,Neurology,True
+D000218,Dr Farhan Raja,T004,Dermatology,True
+D000219,Dr Widisha Dhar,T020,General Medicine,True
+D000220,Dr Triya Kumar,T019,Cardiology,True
+D000221,Dr Aadhya Andra,T012,Gastroenterology,True
+D000222,Dr Bhavna Dugar,T012,General Medicine,True
+D000223,Dr Riya Pai,T017,Pulmonology,True
+D000224,Dr Panini Krishna,T001,Gastroenterology,True
+D000225,Dr Chasmum Issac,T016,General Medicine,True
+D000226,Dr Vasudha Chhabra,T014,Pulmonology,True
+D000227,Dr Lakshmi Parmer,T015,Diabetology,True
+D000228,Dr Chakrika Bains,T014,Diabetology,True
+D000229,Dr Anvi Anand,T017,Dermatology,True
+D000230,Dr Watika Mangat,T020,Orthopedics,True
+D000231,Dr Indira Kanda,T015,Gastroenterology,True
+D000232,Dr Zashil Devan,T019,Dermatology,True
+D000233,Dr Balveer More,T011,Neurology,True
+D000234,Dr Bahadurjit Patla,T003,Dermatology,True
+D000235,Dr Gautam Merchant,T015,Neurology,True
+D000236,Dr Ojasvi Gill,T015,Gastroenterology,True
+D000237,Dr Kevin Zacharia,T011,Cardiology,True
+D000238,Dr Yachana Mahajan,T016,Pulmonology,True
+D000239,Dr Aarini Subramaniam,T006,Orthopedics,True
+D000240,Dr Hamsini Contractor,T007,Pulmonology,True
+D000241,Dr Faqid Dhaliwal,T009,Pulmonology,True
+D000242,Dr Mekhala Pau,T009,Dermatology,True
+D000243,Dr Megha Atwal,T018,Cardiology,True
+D000244,Dr Jatin Sha,T017,Neurology,True
+D000245,Dr Adweta Raj,T003,Neurology,True
+D000246,Dr Hritik Kaur,T014,Orthopedics,True
+D000247,Dr Aryan Narang,T018,Neurology,True
+D000248,Dr Dev Shetty,T016,Orthopedics,True
+D000249,Dr Nilima Dada,T015,Cardiology,True
+D000250,Dr Chakradev Barad,T003,Dermatology,True
+D000251,Dr Waida D’Alia,T008,Gastroenterology,True
+D000252,Dr Wahab Yogi,T008,Dermatology,True
+D000253,Dr Lipika Setty,T019,Pulmonology,True
+D000254,Dr Oni Dubey,T016,Pulmonology,True
+D000255,Dr Hardik Suri,T014,Pulmonology,True
+D000256,Dr Ati Bali,T012,Orthopedics,True
+D000257,Dr Teerth Sawhney,T009,Dermatology,True
+D000258,Dr Warinder Patil,T009,Neurology,True
+D000259,Dr Jhalak Parmer,T004,Neurology,True
+D000260,Dr Mitali Majumdar,T011,General Medicine,True
+D000261,Dr Jason Sha,T018,Diabetology,True
+D000262,Dr Simon Bail,T007,Neurology,True
+D000263,Dr Gauri Kohli,T016,Dermatology,True
+D000264,Dr Samesh Biswas,T019,Dermatology,True
+D000265,Dr Tarak Kaul,T004,Neurology,True
+D000266,Dr Manbir Agate,T010,Neurology,True
+D000267,Dr Maanav De,T012,Diabetology,True
+D000268,Dr Owen Choudhary,T010,Cardiology,True
+D000269,Dr Karan Aurora,T018,Diabetology,True
+D000270,Dr Wazir Naik,T009,Cardiology,True
+D000271,Dr Owen Lanka,T002,Dermatology,True
+D000272,Dr Jonathan Sama,T005,Orthopedics,True
+D000273,Dr Devansh Soni,T004,Cardiology,True
+D000274,Dr Janaki Varghese,T019,Dermatology,True
+D000275,Dr Siya Thakur,T016,Orthopedics,True
+D000276,Dr Caleb Verma,T015,Pulmonology,True
+D000277,Dr Tara Balasubramanian,T006,Cardiology,True
+D000278,Dr Varenya Ratti,T009,Orthopedics,True
+D000279,Dr Hritik Swaminathan,T004,General Medicine,True
+D000280,Dr Ethan Buch,T013,Orthopedics,True
+D000281,Dr Manbir Bhatti,T003,Cardiology,True
+D000282,Dr Anvi Nair,T005,Diabetology,True
+D000283,Dr Chaitaly Setty,T019,Dermatology,True
+D000284,Dr Hardik Contractor,T003,Neurology,True
+D000285,Dr Qushi Seth,T004,Gastroenterology,True
+D000286,Dr Odika Nori,T020,Neurology,True
+D000287,Dr Mohini Sagar,T017,Gastroenterology,True
+D000288,Dr Dhriti Sane,T015,Orthopedics,True
+D000289,Dr Aadhya Prasad,T010,Gastroenterology,True
+D000290,Dr Urvi Bhavsar,T010,Cardiology,True
+D000291,Dr Frederick Chander,T020,General Medicine,True
+D000292,Dr Gopal Pradhan,T007,Neurology,True
+D000293,Dr Darpan Narayan,T009,General Medicine,True
+D000294,Dr Nirja Pandya,T006,Neurology,True
+D000295,Dr Charan Mani,T006,General Medicine,True
+D000296,Dr Indira Chawla,T006,Cardiology,True
+D000297,Dr Mohammed Subramaniam,T014,Orthopedics,True
+D000298,Dr Hritik Palla,T020,Orthopedics,True
+D000299,Dr Ishwar Mallick,T010,Cardiology,True
+D000300,Dr Pushti Bal,T008,Dermatology,True
+D000301,Dr Ayush Gole,T010,Orthopedics,True
+D000302,Dr Dayamai Nori,T003,Neurology,True
+D000303,Dr Abeer Golla,T009,Neurology,True
+D000304,Dr Nandini Boase,T014,General Medicine,True
+D000305,Dr Azaan Chand,T018,Neurology,True
+D000306,Dr Krisha Saini,T005,Dermatology,True
+D000307,Dr Harita Dugar,T005,General Medicine,True
+D000308,Dr Devika Nair,T002,Diabetology,True
+D000309,Dr Charles Dugal,T010,Dermatology,True
+D000310,Dr Chandran Bumb,T015,General Medicine,True
+D000311,Dr Saanvi Samra,T015,Dermatology,True
+D000312,Dr Riya Sachdeva,T013,Dermatology,True
+D000313,Dr Tanveer Vala,T017,Orthopedics,True
+D000314,Dr Hemani Sani,T015,General Medicine,True
+D000315,Dr Bhanumati Sur,T020,Cardiology,True
+D000316,Dr Chakradev Kannan,T014,Pulmonology,True
+D000317,Dr Christopher Amble,T020,Dermatology,True
+D000318,Dr Charvi Kakar,T001,General Medicine,True
+D000319,Dr Aadhya Mann,T008,Cardiology,True
+D000320,Dr Jagdish Amble,T009,Cardiology,True
+D000321,Dr Qushi Gill,T006,Orthopedics,True
+D000322,Dr Lajita Walia,T017,Orthopedics,True
+D000323,Dr Xiti Pandya,T009,Diabetology,True
+D000324,Dr Mekhala Basak,T019,Gastroenterology,True
+D000325,Dr Anirudh Sharaf,T016,General Medicine,True
+D000326,Dr Dhriti Sanghvi,T016,Pulmonology,True
+D000327,Dr Omisha Mann,T014,Pulmonology,True
+D000328,Dr Nidhi Bail,T011,General Medicine,True
+D000329,Dr Onveer Sharma,T006,Pulmonology,True
+D000330,Dr Gaurang Sarkar,T014,Orthopedics,True
+D000331,Dr Yagnesh Sarin,T010,Gastroenterology,True
+D000332,Dr Farhan Randhawa,T018,Cardiology,True
+D000333,Dr Harinakshi Kant,T015,General Medicine,True
+D000334,Dr Om Bose,T011,Dermatology,True
+D000335,Dr Yashvi Hari,T011,General Medicine,True
+D000336,Dr Indali Divan,T013,Cardiology,True
+D000337,Dr Harshil Dhingra,T018,Orthopedics,True
+D000338,Dr Rudra Ghose,T014,Cardiology,True
+D000339,Dr Faqid Goel,T007,Pulmonology,True
+D000340,Dr Ucchal Sen,T020,Orthopedics,True
+D000341,Dr Diya Dora,T015,Cardiology,True
+D000342,Dr Ekansh Singh,T007,Dermatology,True
+D000343,Dr Chavvi Maharaj,T018,Diabetology,True
+D000344,Dr Indira Tripathi,T010,Orthopedics,True
+D000345,Dr Dayita Shenoy,T016,General Medicine,True
+D000346,Dr Baljiwan Bhandari,T001,Neurology,True
+D000347,Dr Bhavini Bose,T006,Dermatology,True
+D000348,Dr Yashica Rajagopalan,T018,Cardiology,True
+D000349,Dr Benjamin Sengupta,T018,Gastroenterology,True
+D000350,Dr Ekanta Soni,T003,Neurology,True
+D000351,Dr David Seshadri,T004,Orthopedics,True
+D000352,Dr Hemal Chad,T004,Diabetology,True
+D000353,Dr Balveer Kota,T016,Dermatology,True
+D000354,Dr Reva Viswanathan,T017,Dermatology,True
+D000355,Dr Januja Pradhan,T014,Orthopedics,True
+D000356,Dr Lila Rege,T016,Neurology,True
+D000357,Dr Charles Natt,T015,Diabetology,True
+D000358,Dr Forum Chandra,T013,Neurology,True
+D000359,Dr Bhanumati Krishnan,T020,Diabetology,True
+D000360,Dr Gauri Bumb,T003,Dermatology,True
+D000361,Dr Inaya Mukherjee,T014,Pulmonology,True
+D000362,Dr Kai Chad,T017,Dermatology,True
+D000363,Dr Krisha Narasimhan,T001,Dermatology,True
+D000364,Dr Girik Sampath,T010,Orthopedics,True
+D000365,Dr Andrew Patil,T005,Orthopedics,True
+D000366,Dr Pranit Kala,T018,Orthopedics,True
+D000367,Dr Vedika Handa,T012,Pulmonology,True
+D000368,Dr Laksh Dubey,T018,Gastroenterology,True
+D000369,Dr Chakrika Chaudhuri,T015,Pulmonology,True
+D000370,Dr Gayathri Deep,T007,Neurology,True
+D000371,Dr Mitesh Gaba,T019,Gastroenterology,True
+D000372,Dr Noah Sarma,T008,Gastroenterology,True
+D000373,Dr Nirja Patla,T002,Pulmonology,True
+D000374,Dr Sachi Mane,T016,Gastroenterology,True
+D000375,Dr Vivaan Walla,T013,Diabetology,True
+D000376,Dr Dayamai Singh,T016,Cardiology,True
+D000377,Dr Jhalak Sastry,T005,Pulmonology,True
+D000378,Dr Baghyawati Raja,T004,Orthopedics,True
+D000379,Dr Neel Iyengar,T004,Orthopedics,True
+D000380,Dr Zashil Ben,T001,Diabetology,True
+D000381,Dr Kamya Chauhan,T014,Diabetology,True
+D000382,Dr Bhavani Chacko,T003,Orthopedics,True
+D000383,Dr Anjali Sengupta,T009,Pulmonology,True
+D000384,Dr Rajeshri Chand,T020,Gastroenterology,True
+D000385,Dr Shravya Palla,T003,Pulmonology,True
+D000386,Dr Oeshi Bera,T018,Gastroenterology,True
+D000387,Dr Yadavi Prakash,T011,Orthopedics,True
+D000388,Dr Libni Bumb,T018,Cardiology,True
+D000389,Dr Udarsh Bala,T020,General Medicine,True
+D000390,Dr Hardik Nayak,T008,Dermatology,True
+D000391,Dr Laksh Barad,T008,General Medicine,True
+D000392,Dr Urmi Dewan,T014,General Medicine,True
+D000393,Dr Saumya Ahluwalia,T004,Orthopedics,True
+D000394,Dr Anirudh Kunda,T006,Dermatology,True
+D000395,Dr Mason Wable,T001,Cardiology,True
+D000396,Dr Indrajit Mani,T011,Cardiology,True
+D000397,Dr Charvi Dara,T010,Pulmonology,True
+D000398,Dr William Saini,T012,Gastroenterology,True
+D000399,Dr Dev Choudhry,T005,Neurology,True
+D000400,Dr Amol Varma,T017,Gastroenterology,True
+D000401,Dr Maanas Manne,T019,Diabetology,True
+D000402,Dr Aarav Pandit,T006,Diabetology,True
+D000403,Dr Omaja Grover,T003,Gastroenterology,True
+D000404,Dr Jalsa Bir,T020,Neurology,True
+D000405,Dr Madhavi Singhal,T016,Diabetology,True
+D000406,Dr Lila Prakash,T008,Orthopedics,True
+D000407,Dr Amol Parikh,T009,Orthopedics,True
+D000408,Dr Hemani Khosla,T009,Cardiology,True
+D000409,Dr Gaurangi Deol,T015,Dermatology,True
+D000410,Dr Indira Nigam,T018,Diabetology,True
+D000411,Dr Ucchal Srinivas,T003,Orthopedics,True
+D000412,Dr Krishna Bhatnagar,T012,Dermatology,True
+D000413,Dr Balhaar Memon,T014,Dermatology,True
+D000414,Dr Caleb Iyengar,T015,Dermatology,True
+D000415,Dr Diya Mukherjee,T007,Gastroenterology,True
+D000416,Dr Urvashi Kulkarni,T016,General Medicine,True
+D000417,Dr Rayaan Mangal,T008,Gastroenterology,True
+D000418,Dr Champak Narula,T019,Pulmonology,True
+D000419,Dr Jeet Pillai,T019,Dermatology,True
+D000420,Dr Mugdha Sarraf,T010,Cardiology,True
+D000421,Dr Harinakshi Grover,T013,Dermatology,True
+D000422,Dr Widisha Pillai,T001,Cardiology,True
+D000423,Dr Fitan Samra,T020,Orthopedics,True
+D000424,Dr Qushi Gole,T010,Neurology,True
+D000425,Dr Ekani Chauhan,T020,Pulmonology,True
+D000426,Dr Falak Merchant,T008,Neurology,True
+D000427,Dr Sanaya Sandhu,T020,Dermatology,True
+D000428,Dr Sachi Panchal,T005,General Medicine,True
+D000429,Dr Brijesh Pandit,T002,Dermatology,True
+D000430,Dr Anvi Bhandari,T015,Cardiology,True
+D000431,Dr Nidra Patla,T019,Pulmonology,True
+D000432,Dr Azaan Dhar,T005,General Medicine,True
+D000433,Dr Bakhshi Date,T010,Pulmonology,True
+D000434,Dr Warinder Peri,T014,Diabetology,True
+D000435,Dr Leela Bali,T007,Diabetology,True
+D000436,Dr Shivani Prabhakar,T018,Pulmonology,True
+D000437,Dr Sachi Bose,T017,Dermatology,True
+D000438,Dr Jeevika Rao,T006,Dermatology,True
+D000439,Dr Arya Krish,T016,Dermatology,True
+D000440,Dr Atharv Grewal,T011,General Medicine,True
+D000441,Dr Zarna Ram,T015,General Medicine,True
+D000442,Dr Adweta Lad,T005,Neurology,True
+D000443,Dr Tanish Mangal,T013,Pulmonology,True
+D000444,Dr Ryan Das,T003,Gastroenterology,True
+D000445,Dr Ethan Seth,T001,Dermatology,True
+D000446,Dr Sai Chahal,T018,General Medicine,True
+D000447,Dr Idika Bhattacharyya,T015,Pulmonology,True
+D000448,Dr Charita Dugar,T009,Gastroenterology,True
+D000449,Dr Janaki Trivedi,T012,General Medicine,True
+D000450,Dr Jairaj Iyer,T008,Orthopedics,True
+D000451,Dr Warjas Tak,T001,Pulmonology,True
+D000452,Dr Jalsa Pillay,T020,Neurology,True
+D000453,Dr Kai Chadha,T003,Orthopedics,True
+D000454,Dr Dayamai Rao,T010,Gastroenterology,True
+D000455,Dr Nirja Rout,T004,Diabetology,True
+D000456,Dr Jeremiah Nadig,T002,Cardiology,True
+D000457,Dr Shivani Shukla,T010,Orthopedics,True
+D000458,Dr Kabir Gopal,T004,General Medicine,True
+D000459,Dr Rachita Thakkar,T008,Diabetology,True
+D000460,Dr Jeet Vasa,T013,Orthopedics,True
+D000461,Dr Daksha Gala,T012,Gastroenterology,True
+D000462,Dr Ekantika Kar,T019,Diabetology,True
+D000463,Dr Zilmil Mander,T014,General Medicine,True
+D000464,Dr Zashil Hegde,T016,Gastroenterology,True
+D000465,Dr Jeremiah Mitter,T009,Cardiology,True
+D000466,Dr Yadavi Ganguly,T012,Neurology,True
+D000467,Dr Onveer Nazareth,T015,Orthopedics,True
+D000468,Dr Ayush Bumb,T008,Pulmonology,True
+D000469,Dr Alka Kade,T004,Pulmonology,True
+D000470,Dr Azaan Tank,T018,Pulmonology,True
+D000471,Dr Chasmum Subramanian,T002,Gastroenterology,True
+D000472,Dr Nidra Mishra,T009,Neurology,True
+D000473,Dr Elijah Bhasin,T004,Orthopedics,True
+D000474,Dr Ria Sagar,T003,Neurology,True
+D000475,Dr Ucchal Jani,T020,Cardiology,True
+D000476,Dr Maanas Munshi,T002,Pulmonology,True
+D000477,Dr Hemani Rastogi,T008,Diabetology,True
+D000478,Dr Kamala Varma,T019,Neurology,True
+D000479,Dr Eiravati Khurana,T003,Neurology,True
+D000480,Dr Jason Loke,T019,Neurology,True
+D000481,Dr Yug Dhaliwal,T008,Pulmonology,True
+D000482,Dr Chandresh Mannan,T005,Cardiology,True
+D000483,Dr Omya Kothari,T009,Diabetology,True
+D000484,Dr Falak Munshi,T005,Dermatology,True
+D000485,Dr Nathaniel Tara,T006,General Medicine,True
+D000486,Dr Wishi Morar,T001,Diabetology,True
+D000487,Dr Arin Chana,T001,Pulmonology,True
+D000488,Dr Yashasvi Shankar,T008,Pulmonology,True
+D000489,Dr Tanveer Pandit,T001,Diabetology,True
+D000490,Dr Chandresh Manda,T009,Cardiology,True
+D000491,Dr Upma Mangal,T005,Gastroenterology,True
+D000492,Dr Hritik Sankar,T017,General Medicine,True
+D000493,Dr Aishani Pau,T003,Orthopedics,True
+D000494,Dr Jasmit Bath,T015,Pulmonology,True
+D000495,Dr Charan Hayer,T017,General Medicine,True
+D000496,Dr Bhavya Borah,T015,Neurology,True
+D000497,Dr Yamini Seshadri,T020,Cardiology,True
+D000498,Dr Jagat Dave,T017,Dermatology,True
+D000499,Dr Meera Prakash,T015,Cardiology,True
+D000500,Dr Jasmit Dhawan,T002,Orthopedics,True
+D000501,Dr Yashodhara Ratti,T013,Gastroenterology,True
+D000502,Dr Chakradev Barad,T004,Orthopedics,True
+D000503,Dr Gauri Som,T015,General Medicine,True
+D000504,Dr Manthan Varma,T003,Pulmonology,True
+D000505,Dr Falak Nagar,T020,Diabetology,True
+D000506,Dr Maya Mistry,T003,Diabetology,True
+D000507,Dr Yashica Upadhyay,T009,Pulmonology,True
+D000508,Dr Chandani Soman,T013,Dermatology,True
+D000509,Dr Jyoti Narula,T015,Gastroenterology,True
+D000510,Dr Omaja Morar,T004,General Medicine,True
+D000511,Dr Urvi Lanka,T018,Neurology,True
+D000512,Dr Charan Srinivasan,T014,Orthopedics,True
+D000513,Dr Lajita Divan,T008,Gastroenterology,True
+D000514,Dr Azad Choudhary,T011,Orthopedics,True
+D000515,Dr Anirudh Sastry,T013,Gastroenterology,True
+D000516,Dr Omya Doshi,T004,Pulmonology,True
+D000517,Dr Samar Roy,T014,Pulmonology,True
+D000518,Dr David Devi,T009,Pulmonology,True
+D000519,Dr Ekta Sridhar,T005,Orthopedics,True
+D000520,Dr Dipta Ghose,T003,General Medicine,True
+D000521,Dr Hema Pandya,T003,General Medicine,True
+D000522,Dr Veda Handa,T014,General Medicine,True
+D000523,Dr Arya Misra,T012,Diabetology,True
+D000524,Dr Chameli Mani,T018,Cardiology,True
+D000525,Dr Vrinda Nadig,T019,Pulmonology,True
+D000526,Dr Ikshita Mahal,T004,Gastroenterology,True
+D000527,Dr Jairaj Raghavan,T012,Gastroenterology,True
+D000528,Dr Hemani Dhingra,T002,Dermatology,True
+D000529,Dr Brijesh Mani,T020,Dermatology,True
+D000530,Dr Hiral Sathe,T012,General Medicine,True
+D000531,Dr Varenya Kala,T019,Neurology,True
+D000532,Dr Anika Magar,T005,Orthopedics,True
+D000533,Dr Ikbal Khatri,T008,General Medicine,True
+D000534,Dr Chandresh Wali,T012,Pulmonology,True
+D000535,Dr Viraj Ben,T004,Dermatology,True
+D000536,Dr Odika Narayanan,T019,Neurology,True
+D000537,Dr Harish Devan,T014,Cardiology,True
+D000538,Dr Nakul Ray,T020,Dermatology,True
+D000539,Dr Vansha Iyengar,T001,Diabetology,True
+D000540,Dr Ekani Mangal,T009,Dermatology,True
+D000541,Dr Gaurav Kata,T011,Pulmonology,True
+D000542,Dr Parth Sahni,T001,Diabetology,True
+D000543,Dr Balhaar Ranganathan,T005,Gastroenterology,True
+D000544,Dr Quincy Mann,T003,Diabetology,True
+D000545,Dr Aditya Misra,T001,General Medicine,True
+D000546,Dr Gautami Mane,T017,Neurology,True
+D000547,Dr Wakeeta Desai,T013,Gastroenterology,True
+D000548,Dr Anjali Hans,T015,Pulmonology,True
+D000549,Dr Ganga Gaba,T006,Pulmonology,True
+D000550,Dr Aarini Grewal,T010,Pulmonology,True
+D000551,Dr Geetika Merchant,T019,General Medicine,True
+D000552,Dr Parth Ravi,T002,Diabetology,True
+D000553,Dr Yutika Narang,T006,Cardiology,True
+D000554,Dr Nandini Chandran,T003,Dermatology,True
+D000555,Dr Logan Sood,T015,Gastroenterology,True
+D000556,Dr Yuvraj Ahuja,T016,Orthopedics,True
+D000557,Dr Leela Keer,T014,Dermatology,True
+D000558,Dr Amara Narayan,T007,General Medicine,True
+D000559,Dr Advay Lal,T012,Gastroenterology,True
+D000560,Dr Warinder Bhatia,T004,Dermatology,True
+D000561,Dr Udyati Mohanty,T019,Orthopedics,True
+D000562,Dr Nidra Thakkar,T017,Dermatology,True
+D000563,Dr Jacob Merchant,T002,Neurology,True
+D000564,Dr Timothy Kanda,T013,Cardiology,True
+D000565,Dr Vanya Dua,T001,Neurology,True
+D000566,Dr Kashvi Sagar,T010,Neurology,True
+D000567,Dr Tejas Kota,T005,Dermatology,True
+D000568,Dr Sanya Wable,T010,Pulmonology,True
+D000569,Dr Faras Choudhury,T004,Cardiology,True
+D000570,Dr Yashasvi Jain,T016,Gastroenterology,True
+D000571,Dr Nitesh Narang,T006,Diabetology,True
+D000572,Dr Jackson Jha,T013,Neurology,True
+D000573,Dr Gavin Uppal,T017,Pulmonology,True
+D000574,Dr Christopher Setty,T003,Gastroenterology,True
+D000575,Dr Yochana Sagar,T002,Gastroenterology,True
+D000576,Dr Dalbir Shere,T001,Orthopedics,True
+D000577,Dr Anthony Randhawa,T003,Pulmonology,True
+D000578,Dr Aarush Kamdar,T019,Gastroenterology,True
+D000579,Dr Chakradev Sampath,T019,Gastroenterology,True
+D000580,Dr Devansh Bhasin,T014,Dermatology,True
+D000581,Dr Urmi Balay,T004,Gastroenterology,True
+D000582,Dr Nilima Gole,T001,Pulmonology,True
+D000583,Dr Osha Prasad,T006,Orthopedics,True
+D000584,Dr Saumya Purohit,T012,General Medicine,True
+D000585,Dr Faris Zacharia,T014,General Medicine,True
+D000586,Dr Ijaya Dani,T008,Gastroenterology,True
+D000587,Dr Maya Wadhwa,T019,Gastroenterology,True
+D000588,Dr Udant Aggarwal,T017,General Medicine,True
+D000589,Dr Chanchal Sheth,T013,Dermatology,True
+D000590,Dr Ladli Karpe,T011,Neurology,True
+D000591,Dr Triveni Pal,T011,Diabetology,True
+D000592,Dr Anya Gulati,T003,General Medicine,True
+D000593,Dr Azad Saini,T017,Neurology,True
+D000594,Dr Wridesh Jhaveri,T012,Pulmonology,True
+D000595,Dr Harrison Bandi,T005,Neurology,True
+D000596,Dr Chanakya Konda,T004,Diabetology,True
+D000597,Dr Neelima Sarna,T009,Neurology,True
+D000598,Dr Teerth Bhalla,T006,Diabetology,True
+D000599,Dr Yahvi Mann,T003,Diabetology,True
+D000600,Dr Eiravati Nagi,T016,Orthopedics,True
+D000601,Dr Chasmum Dhar,T019,Orthopedics,True
+D000602,Dr Odika Mital,T019,Pulmonology,True
+D000603,Dr Darsh Gill,T011,Diabetology,True
+D000604,Dr Warhi Batta,T015,General Medicine,True
+D000605,Dr Lakshmi Vohra,T016,Orthopedics,True
+D000606,Dr Omaja Rege,T010,Dermatology,True
+D000607,Dr Charita Puri,T019,Cardiology,True
+D000608,Dr Urvashi Khosla,T012,General Medicine,True
+D000609,Dr Charita Dhawan,T010,Orthopedics,True
+D000610,Dr Dalbir Sachar,T015,Cardiology,True
+D000611,Dr Krish Rama,T002,Pulmonology,True
+D000612,Dr Aadhya Jani,T010,General Medicine,True
+D000613,Dr Farhan Sengupta,T003,Gastroenterology,True
+D000614,Dr George Wason,T015,Cardiology,True
+D000615,Dr Charan Loyal,T015,Neurology,True
+D000616,Dr Balveer Bora,T011,Orthopedics,True
+D000617,Dr Teerth Srinivas,T017,Diabetology,True
+D000618,Dr Gaurangi Mitter,T002,Orthopedics,True
+D000619,Dr Siddharth Gupta,T004,Pulmonology,True
+D000620,Dr Varenya Kibe,T003,Diabetology,True
+D000621,Dr Mekhala Khatri,T002,Neurology,True
+D000622,Dr Barkha Rai,T015,Orthopedics,True
+D000623,Dr Jagrati Morar,T017,Diabetology,True
+D000624,Dr Jagvi Varghese,T012,Pulmonology,True
+D000625,Dr Unnati Chaudhari,T010,Gastroenterology,True
+D000626,Dr Ekaja Jani,T014,Pulmonology,True
+D000627,Dr Dhriti Sachdev,T020,Cardiology,True
+D000628,Dr Timothy Dhingra,T011,General Medicine,True
+D000629,Dr Advika Sahni,T011,General Medicine,True
+D000630,Dr Michael Hayre,T018,Gastroenterology,True
+D000631,Dr Victor Raghavan,T010,Dermatology,True
+D000632,Dr Xalak Nazareth,T020,Diabetology,True
+D000633,Dr Vrinda Swaminathan,T011,General Medicine,True
+D000634,Dr Om Pandey,T019,Diabetology,True
+D000635,Dr Logan Suresh,T012,Dermatology,True
+D000636,Dr Daniel Viswanathan,T013,Diabetology,True
+D000637,Dr Falan Bava,T020,General Medicine,True
+D000638,Dr Nitara Devan,T010,Gastroenterology,True
+D000639,Dr Ekansh Dora,T011,Diabetology,True
+D000640,Dr Tejas Tiwari,T017,General Medicine,True
+D000641,Dr Kashvi Bhasin,T014,Pulmonology,True
+D000642,Dr Vinaya Babu,T001,Pulmonology,True
+D000643,Dr Nisha Arora,T010,Diabetology,True
+D000644,Dr Anvi Wason,T007,Pulmonology,True
+D000645,Dr Anay Thakkar,T016,Neurology,True
+D000646,Dr Praneel Chhabra,T008,Diabetology,True
+D000647,Dr Manthan Khosla,T005,General Medicine,True
+D000648,Dr Zayyan Pandya,T010,General Medicine,True
+D000649,Dr Mekhala Brar,T017,Cardiology,True
+D000650,Dr Nidra Sharaf,T011,Diabetology,True
+D000651,Dr Upkaar Mital,T020,Gastroenterology,True
+D000652,Dr Azad Chander,T005,Diabetology,True
+D000653,Dr Ladli Purohit,T006,Diabetology,True
+D000654,Dr Daksh Andra,T015,Cardiology,True
+D000655,Dr Fitan Tata,T014,Pulmonology,True
+D000656,Dr Garima Chandran,T008,Orthopedics,True
+D000657,Dr Victor Kakar,T020,Dermatology,True
+D000658,Dr Anika Batra,T015,Neurology,True
+D000659,Dr Avni Bali,T018,Neurology,True
+D000660,Dr Divya Babu,T010,Orthopedics,True
+D000661,Dr Maanas Rao,T007,Pulmonology,True
+D000662,Dr Chandani Gaba,T019,Orthopedics,True
+D000663,Dr Lopa Zachariah,T015,Dermatology,True
+D000664,Dr Leena Dey,T013,Gastroenterology,True
+D000665,Dr Xiti Pal,T006,Neurology,True
+D000666,Dr Guneet Sarkar,T020,Diabetology,True
+D000667,Dr Faqid Oak,T009,Cardiology,True
+D000668,Dr Eta Balan,T016,Pulmonology,True
+D000669,Dr Shravya Swaminathan,T018,General Medicine,True
+D000670,Dr Ishani Prashad,T017,General Medicine,True
+D000671,Dr Quincy Rai,T010,General Medicine,True
+D000672,Dr Chakrika Koshy,T006,Dermatology,True
+D000673,Dr Fitan Loyal,T015,Diabetology,True
+D000674,Dr Lajita Dube,T014,General Medicine,True
+D000675,Dr Edhitha Patel,T008,Orthopedics,True
+D000676,Dr Gavin Ahluwalia,T012,Cardiology,True
+D000677,Dr Sai Parsa,T014,Cardiology,True
+D000678,Dr Harsh Deo,T013,Pulmonology,True
+D000679,Dr Rachit Sankar,T008,Gastroenterology,True
+D000680,Dr Yauvani Reddy,T003,Pulmonology,True
+D000681,Dr Atharv Chakraborty,T008,Cardiology,True
+D000682,Dr Girik Nair,T011,General Medicine,True
+D000683,Dr Advik Manne,T011,Diabetology,True
+D000684,Dr Lipika Chad,T005,Cardiology,True
+D000685,Dr Omkaar Rai,T010,Orthopedics,True
+D000686,Dr Liam Luthra,T005,Orthopedics,True
+D000687,Dr Amrita Tailor,T015,Cardiology,True
+D000688,Dr Dev Ganesh,T003,Cardiology,True
+D000689,Dr Anya Sama,T009,Neurology,True
+D000690,Dr Veda Bose,T005,Gastroenterology,True
+D000691,Dr Zayan Koshy,T004,Dermatology,True
+D000692,Dr Rohan Shankar,T008,Dermatology,True
+D000693,Dr Krishna Modi,T004,Cardiology,True
+D000694,Dr Meghana Natarajan,T008,Gastroenterology,True
+D000695,Dr Forum Sarraf,T020,Orthopedics,True
+D000696,Dr Qushi Deshpande,T003,General Medicine,True
+D000697,Dr Ekani Iyer,T016,Cardiology,True
+D000698,Dr Dipta Goel,T017,Neurology,True
+D000699,Dr Eiravati Manne,T005,Dermatology,True
+D000700,Dr Xavier Nanda,T014,Cardiology,True
+D000701,Dr Avni Ramaswamy,T020,Pulmonology,True
+D000702,Dr Ishaan Iyengar,T008,Gastroenterology,True
+D000703,Dr Avi Shenoy,T006,General Medicine,True
+D000704,Dr Raksha Manne,T017,Pulmonology,True
+D000705,Dr Nilima Tata,T003,Cardiology,True
+D000706,Dr Chavvi Khurana,T013,Orthopedics,True
+D000707,Dr Mitesh Sampath,T002,Gastroenterology,True
+D000708,Dr Ethan Sen,T012,Dermatology,True
+D000709,Dr Nandini Warrior,T001,Pulmonology,True
+D000710,Dr Balhaar Parsa,T003,Pulmonology,True
+D000711,Dr Ikbal Kothari,T008,General Medicine,True
+D000712,Dr Ojas Basu,T019,Pulmonology,True
+D000713,Dr Garima Sani,T005,Cardiology,True
+D000714,Dr Advaith Chaudhari,T012,Pulmonology,True
+D000715,Dr Tristan Uppal,T006,Orthopedics,True
+D000716,Dr Sanaya Prasad,T016,Diabetology,True
+D000717,Dr Ubika Tella,T005,General Medicine,True
+D000718,Dr Hemani Bakshi,T015,Cardiology,True
+D000719,Dr Henry Merchant,T010,Neurology,True
+D000720,Dr Frederick D’Alia,T002,Neurology,True
+D000721,Dr Ijaya Muni,T002,Pulmonology,True
+D000722,Dr Tamanna Jhaveri,T010,Gastroenterology,True
+D000723,Dr Ijaya Soni,T018,Orthopedics,True
+D000724,Dr Raksha Sethi,T009,Cardiology,True
+D000725,Dr Ekalinga Mital,T007,Dermatology,True
+D000726,Dr Ishwar Bajaj,T012,Cardiology,True
+D000727,Dr Ikbal Gala,T011,Dermatology,True
+D000728,Dr Zaitra Ghosh,T004,Pulmonology,True
+D000729,Dr Ganga Sandhu,T014,Gastroenterology,True
+D000730,Dr Vincent Ravel,T015,Gastroenterology,True
+D000731,Dr Quincy Sankaran,T011,Diabetology,True
+D000732,Dr Ayush Hora,T016,Orthopedics,True
+D000733,Dr Pushti Ramachandran,T012,Dermatology,True
+D000734,Dr Tanish Jha,T003,Gastroenterology,True
+D000735,Dr Dev Chaudry,T003,Gastroenterology,True
+D000736,Dr Jasmit Nanda,T020,Diabetology,True
+D000737,Dr Tanvi Comar,T018,Dermatology,True
+D000738,Dr Vrishti Wable,T011,General Medicine,True
+D000739,Dr Lipika Ramanathan,T003,Pulmonology,True
+D000740,Dr Ijaya Pandey,T010,Dermatology,True
+D000741,Dr Orinder Mishra,T015,Gastroenterology,True
+D000742,Dr Krish Munshi,T006,Orthopedics,True
+D000743,Dr William Mody,T012,Orthopedics,True
+D000744,Dr Qadim Prakash,T002,Pulmonology,True
+D000745,Dr Yasti Rama,T020,Gastroenterology,True
+D000746,Dr Lakshit Rajagopal,T009,Cardiology,True
+D000747,Dr Quincy Sur,T003,Gastroenterology,True
+D000748,Dr Ojas Suri,T012,Diabetology,True
+D000749,Dr Logan Grover,T001,Diabetology,True
+D000750,Dr Shravya Bera,T020,Orthopedics,True
+D000751,Dr Aditya Sundaram,T002,Diabetology,True
+D000752,Dr Robert Rajagopalan,T003,Neurology,True
+D000753,Dr Nilima Swamy,T012,Pulmonology,True
+D000754,Dr Sachi Suresh,T013,Cardiology,True
+D000755,Dr Fitan Balasubramanian,T020,Diabetology,True
+D000756,Dr Brinda Bali,T015,Pulmonology,True
+D000757,Dr Umang Yogi,T012,Orthopedics,True
+D000758,Dr Om Shankar,T003,Diabetology,True
+D000759,Dr Yasti Chowdhury,T017,Pulmonology,True
+D000760,Dr Amrita Peri,T013,Pulmonology,True
+D000761,Dr Ridhi Kamdar,T009,Neurology,True
+D000762,Dr Harsh Kota,T004,Cardiology,True
+D000763,Dr Bachittar Sengupta,T006,Orthopedics,True
+D000764,Dr Ijaya Chahal,T017,Gastroenterology,True
+D000765,Dr Jacob Khalsa,T018,General Medicine,True
+D000766,Dr Indali Sangha,T009,Dermatology,True
+D000767,Dr Liam Jhaveri,T015,Neurology,True
+D000768,Dr Daniel Panchal,T020,Dermatology,True
+D000769,Dr Om Naik,T016,Neurology,True
+D000770,Dr Bimala Loke,T004,Diabetology,True
+D000771,Dr Krishna Sabharwal,T003,Orthopedics,True
+D000772,Dr Aradhana Date,T006,Orthopedics,True
+D000773,Dr Zaid Dhingra,T003,Pulmonology,True
+D000774,Dr Yug Ramaswamy,T012,General Medicine,True
+D000775,Dr Lucky Luthra,T018,Dermatology,True
+D000776,Dr Keya Seth,T010,Diabetology,True
+D000777,Dr Girik Rau,T006,Pulmonology,True
+D000778,Dr Jyoti Sha,T017,Neurology,True
+D000779,Dr Falak Agate,T004,Neurology,True
+D000780,Dr Tara Parmar,T005,Neurology,True
+D000781,Dr Mitali Kamdar,T016,Cardiology,True
+D000782,Dr Siddharth Talwar,T012,Pulmonology,True
+D000783,Dr Ekantika Mander,T015,Diabetology,True
+D000784,Dr Kalpit Sundaram,T020,General Medicine,True
+D000785,Dr Chanakya Batra,T003,Dermatology,True
+D000786,Dr Tripti Babu,T013,Orthopedics,True
+D000787,Dr Nakul Sastry,T017,Gastroenterology,True
+D000788,Dr Aadi Sangha,T014,General Medicine,True
+D000789,Dr Kevin Mittal,T005,Pulmonology,True
+D000790,Dr Anusha Chander,T003,Orthopedics,True
+D000791,Dr Zashil Butala,T015,Pulmonology,True
+D000792,Dr Noah Ben,T005,Diabetology,True
+D000793,Dr Dalaja Kaur,T005,Gastroenterology,True
+D000794,Dr Gavin Chandran,T017,Cardiology,True
+D000795,Dr Tanay Sood,T004,Diabetology,True
+D000796,Dr Kevin Kara,T010,Diabetology,True
+D000797,Dr Aditya Anand,T006,Pulmonology,True
+D000798,Dr Jai Sami,T008,Pulmonology,True
+D000799,Dr Vanya Bobal,T017,Dermatology,True
+D000800,Dr Leela Chakraborty,T003,Dermatology,True
+D000801,Dr Harshil Munshi,T007,Dermatology,True
+D000802,Dr Chandani Devan,T005,Dermatology,True
+D000803,Dr Kiaan Dhar,T020,General Medicine,True
+D000804,Dr Abhiram Gala,T017,Diabetology,True
+D000805,Dr Indali Kala,T019,Diabetology,True
+D000806,Dr Nisha Savant,T006,Pulmonology,True
+D000807,Dr Gabriel Chaudhry,T019,Cardiology,True
+D000808,Dr Jatin Rajagopalan,T001,General Medicine,True
+D000809,Dr Pushti Murty,T002,Dermatology,True
+D000810,Dr Yug Malhotra,T007,Gastroenterology,True
+D000811,Dr Yuvraj Mane,T020,Cardiology,True
+D000812,Dr Charvi Jha,T016,Dermatology,True
+D000813,Dr Manya Merchant,T010,Orthopedics,True
+D000814,Dr Wriddhish Talwar,T008,Gastroenterology,True
+D000815,Dr Isaiah Khosla,T010,Orthopedics,True
+D000816,Dr Ekavir Wable,T003,Cardiology,True
+D000817,Dr Jalsa Nadig,T006,Orthopedics,True
+D000818,Dr Lila Salvi,T014,Orthopedics,True
+D000819,Dr Orinder Sinha,T015,Neurology,True
+D000820,Dr Anay Bir,T011,Diabetology,True
+D000821,Dr Adweta Kale,T011,Pulmonology,True
+D000822,Dr Darpan Rao,T012,Gastroenterology,True
+D000823,Dr Yachana Sagar,T005,Pulmonology,True
+D000824,Dr Neelima Butala,T017,General Medicine,True
+D000825,Dr Arunima Chacko,T011,Neurology,True
+D000826,Dr Farhan Vaidya,T015,General Medicine,True
+D000827,Dr Nachiket Yadav,T009,Orthopedics,True
+D000828,Dr Mahika Bhatti,T008,Diabetology,True
+D000829,Dr Rajeshri Khare,T004,Cardiology,True
+D000830,Dr Yash Chadha,T010,Gastroenterology,True
+D000831,Dr Jack Setty,T020,Gastroenterology,True
+D000832,Dr Dayamai Gill,T008,Diabetology,True
+D000833,Dr Advik Devan,T011,Pulmonology,True
+D000834,Dr Nihal Taneja,T007,Diabetology,True
+D000835,Dr Zansi Lad,T016,Orthopedics,True
+D000836,Dr Kamya Date,T016,Dermatology,True
+D000837,Dr Jacob Balan,T016,Cardiology,True
+D000838,Dr Pushti Magar,T003,Gastroenterology,True
+D000839,Dr Adya Bose,T017,Orthopedics,True
+D000840,Dr Tamanna Vaidya,T008,Neurology,True
+D000841,Dr Christopher Tata,T019,Pulmonology,True
+D000842,Dr Jhalak Dugar,T002,Cardiology,True
+D000843,Dr Harshil D’Alia,T010,Orthopedics,True
+D000844,Dr Yashodhara Agate,T020,Orthopedics,True
+D000845,Dr Advik Konda,T010,Cardiology,True
+D000846,Dr Urmi Patla,T004,Gastroenterology,True
+D000847,Dr Mason Gola,T005,Dermatology,True
+D000848,Dr Oni Kapur,T012,Gastroenterology,True
+D000849,Dr Yuvraj Saha,T012,Cardiology,True
+D000850,Dr Anika Brahmbhatt,T013,Cardiology,True
+D000851,Dr Jagdish Thakkar,T019,Neurology,True
+D000852,Dr Praneel Kapoor,T012,Dermatology,True
+D000853,Dr Nandini Biswas,T003,Gastroenterology,True
+D000854,Dr Barkha Mukhopadhyay,T017,Orthopedics,True
+D000855,Dr Gabriel Shan,T018,Dermatology,True
+D000856,Dr Jyoti Iyer,T020,General Medicine,True
+D000857,Dr Daksha Kibe,T005,General Medicine,True
+D000858,Dr Jyoti Tak,T013,Pulmonology,True
+D000859,Dr Yatan Dora,T011,Pulmonology,True
+D000860,Dr Nimrat Bajwa,T005,Neurology,True
+D000861,Dr Hiral Andra,T020,Gastroenterology,True
+D000862,Dr Aarav Puri,T017,Cardiology,True
+D000863,Dr Hemang Jha,T002,Cardiology,True
+D000864,Dr Oni Swamy,T005,Pulmonology,True
+D000865,Dr Lucky Mammen,T016,Orthopedics,True
+D000866,Dr Caleb Kata,T005,Diabetology,True
+D000867,Dr Kashish Shanker,T011,Pulmonology,True
+D000868,Dr Girish Tiwari,T006,Gastroenterology,True
+D000869,Dr Meera Borde,T020,Dermatology,True
+D000870,Dr Radhika De,T019,Pulmonology,True
+D000871,Dr Bishakha Lal,T017,Orthopedics,True
+D000872,Dr Maya Narain,T019,Dermatology,True
+D000873,Dr Sneha Magar,T016,Cardiology,True
+D000874,Dr Falan Jain,T012,Pulmonology,True
+D000875,Dr Ikbal Dugal,T004,Gastroenterology,True
+D000876,Dr Nitesh Sengupta,T019,Dermatology,True
+D000877,Dr Dipta Ray,T001,Orthopedics,True
+D000878,Dr Ishita Johal,T009,Neurology,True
+D000879,Dr Darika Sheth,T002,Orthopedics,True
+D000880,Dr Jagdish Chana,T006,Gastroenterology,True
+D000881,Dr Daksha Baria,T005,Neurology,True
+D000882,Dr Falak Divan,T002,General Medicine,True
+D000883,Dr Yuvraj Parekh,T007,Cardiology,True
+D000884,Dr Yochana Bawa,T015,Pulmonology,True
+D000885,Dr Abha Ghosh,T014,Diabetology,True
+D000886,Dr Nidhi Sethi,T014,Neurology,True
+D000887,Dr Girindra Shere,T014,Orthopedics,True
+D000888,Dr Logan Dara,T002,Diabetology,True
+D000889,Dr David Kapadia,T017,Neurology,True
+D000890,Dr Rudra Rattan,T018,Pulmonology,True
+D000891,Dr Frado Lad,T016,Gastroenterology,True
+D000892,Dr Anthony Bhattacharyya,T011,Diabetology,True
+D000893,Dr Sachi Dave,T015,Pulmonology,True
+D000894,Dr Garima Das,T018,Pulmonology,True
+D000895,Dr Triya Bedi,T009,Orthopedics,True
+D000896,Dr Rachita Rana,T007,Neurology,True
+D000897,Dr Ayushman Raja,T009,Dermatology,True
+D000898,Dr Orinder Pandya,T008,Dermatology,True
+D000899,Dr Rachit Maharaj,T010,Neurology,True
+D000900,Dr Sanaya Dixit,T016,Pulmonology,True
+D000901,Dr Yatan Merchant,T016,Pulmonology,True
+D000902,Dr Nisha Srinivas,T018,Dermatology,True
+D000903,Dr Gagan Mammen,T010,General Medicine,True
+D000904,Dr Laksh Saini,T019,Gastroenterology,True
+D000905,Dr Zaid Bahl,T013,Pulmonology,True
+D000906,Dr Jagrati Srinivasan,T005,Dermatology,True
+D000907,Dr Hemangini Thakkar,T002,Dermatology,True
+D000908,Dr Lipika Madan,T003,Pulmonology,True
+D000909,Dr Atharv Nagar,T015,Dermatology,True
+D000910,Dr Ayushman Mand,T016,Neurology,True
+D000911,Dr Urmi Wagle,T007,Dermatology,True
+D000912,Dr Viraj Dutta,T018,Dermatology,True
+D000913,Dr Yug Khosla,T005,General Medicine,True
+D000914,Dr Daksh Kanda,T020,Neurology,True
+D000915,Dr Isha Ghose,T008,Cardiology,True
+D000916,Dr Warjas Nadkarni,T017,Neurology,True
+D000917,Dr Ayaan Pandey,T008,Cardiology,True
+D000918,Dr Raghav Tailor,T004,Gastroenterology,True
+D000919,Dr Parth Swaminathan,T011,Orthopedics,True
+D000920,Dr Gautam Bhalla,T004,Diabetology,True
+D000921,Dr Theodore Bahri,T001,Diabetology,True
+D000922,Dr Aadi Narula,T014,Orthopedics,True
+D000923,Dr Kalpit Oak,T016,Neurology,True
+D000924,Dr Ekiya Bhargava,T010,Pulmonology,True
+D000925,Dr Manbir Dhar,T010,Cardiology,True
+D000926,Dr Janya Bora,T003,Neurology,True
+D000927,Dr Meghana Chaudhuri,T018,Cardiology,True
+D000928,Dr Chasmum Naidu,T006,Gastroenterology,True
+D000929,Dr Nakul Sarkar,T006,Cardiology,True
+D000930,Dr Edhitha Ghosh,T013,Orthopedics,True
+D000931,Dr Udant Gill,T006,Dermatology,True
+D000932,Dr Damyanti Menon,T002,Cardiology,True
+D000933,Dr Peter Agarwal,T010,General Medicine,True
+D000934,Dr Bachittar Gopal,T011,Dermatology,True
+D000935,Dr Timothy Chawla,T015,Orthopedics,True
+D000936,Dr Lohit Narula,T005,Orthopedics,True
+D000937,Dr Wazir Palan,T009,Neurology,True
+D000938,Dr Oliver Chakrabarti,T004,Pulmonology,True
+D000939,Dr Sanya Apte,T006,Orthopedics,True
+D000940,Dr Shaurya Krish,T009,Diabetology,True
+D000941,Dr Inaya Kunda,T001,Pulmonology,True
+D000942,Dr Aarav Bava,T010,Neurology,True
+D000943,Dr Raksha Saini,T006,Gastroenterology,True
+D000944,Dr Odika Tailor,T014,Pulmonology,True
+D000945,Dr Indali Prashad,T003,Gastroenterology,True
+D000946,Dr Varenya Kar,T004,Diabetology,True
+D000947,Dr Siya Borah,T005,Orthopedics,True
+D000948,Dr Chaitaly Bahri,T011,Neurology,True
+D000949,Dr Advika Cheema,T001,Dermatology,True
+D000950,Dr Hema Garde,T013,Neurology,True
+D000951,Dr Naveen Borde,T015,Dermatology,True
+D000952,Dr Hamsini Subramanian,T011,Dermatology,True
+D000953,Dr Raagini Gala,T019,Cardiology,True
+D000954,Dr Naksh Bera,T009,Pulmonology,True
+D000955,Dr Garima Jha,T008,Cardiology,True
+D000956,Dr Nimrat Zachariah,T004,Orthopedics,True
+D000957,Dr Baghyawati Mishra,T010,Diabetology,True
+D000958,Dr Gopal Bawa,T013,Dermatology,True
+D000959,Dr Vritti Dube,T004,Dermatology,True
+D000960,Dr Jalsa Aggarwal,T012,Neurology,True
+D000961,Dr Gagan Menon,T008,Diabetology,True
+D000962,Dr Ryan Chatterjee,T016,Diabetology,True
+D000963,Dr Samuel Garde,T015,Pulmonology,True
+D000964,Dr Finn Solanki,T014,Orthopedics,True
+D000965,Dr Darika Rao,T018,Neurology,True
+D000966,Dr Vrinda Lanka,T008,General Medicine,True
+D000967,Dr Lila Goyal,T017,Orthopedics,True
+D000968,Dr Lakshmi Pingle,T017,Pulmonology,True
+D000969,Dr Sanaya Basu,T003,General Medicine,True
+D000970,Dr Ria Shroff,T002,Neurology,True
+D000971,Dr Upkaar Luthra,T019,Diabetology,True
+D000972,Dr Matthew Chatterjee,T006,Pulmonology,True
+D000973,Dr Hemangini Sachdev,T017,Orthopedics,True
+D000974,Dr Darsh Ram,T004,Neurology,True
+D000975,Dr Vaishnavi Keer,T019,Orthopedics,True
+D000976,Dr Chandani Brar,T003,Orthopedics,True
+D000977,Dr Bakhshi Thakkar,T002,Orthopedics,True
+D000978,Dr Jai Sen,T005,Gastroenterology,True
+D000979,Dr Oliver Kakar,T015,Cardiology,True
+D000980,Dr Jonathan Basak,T018,Orthopedics,True
+D000981,Dr Farhan Saran,T010,Cardiology,True
+D000982,Dr Manbir Kuruvilla,T013,Dermatology,True
+D000983,Dr Ekalinga Chahal,T001,Neurology,True
+D000984,Dr Mekhala Nanda,T019,General Medicine,True
+D000985,Dr Zinal Shanker,T002,Gastroenterology,True
+D000986,Dr Oni Chowdhury,T012,General Medicine,True
+D000987,Dr Mason Divan,T018,Cardiology,True
+D000988,Dr Hitesh Chaudhuri,T003,Orthopedics,True
+D000989,Dr Hemangini Roy,T002,Dermatology,True
+D000990,Dr Leela Sunder,T014,Diabetology,True
+D000991,Dr Baljiwan Gera,T005,Gastroenterology,True
+D000992,Dr Neha Dhawan,T012,Gastroenterology,True
+D000993,Dr Balvan Randhawa,T015,Gastroenterology,True
+D000994,Dr Wazir Bawa,T013,General Medicine,True
+D000995,Dr Amruta Pradhan,T018,Diabetology,True
+D000996,Dr Geetika Mitter,T012,General Medicine,True
+D000997,Dr Avni Swamy,T006,Gastroenterology,True
+D000998,Dr Vedant Desai,T017,Diabetology,True
+D000999,Dr Saanvi Nagi,T008,Cardiology,True
+D001000,Dr Omaja Chakraborty,T001,Dermatology,True

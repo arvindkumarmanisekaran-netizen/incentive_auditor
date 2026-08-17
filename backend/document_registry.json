@@ -1,0 +1,20 @@
+{
+ "sales": {
+
+   "table":"sales",
+
+   "required_columns":[
+
+     "sale_id",
+     "sale_date",
+     "doctor_id",
+     "product_id",
+     "quantity",
+     "sales_amount"
+
+   ],
+
+   "column_mapping":"sales"
+
+ }
+}

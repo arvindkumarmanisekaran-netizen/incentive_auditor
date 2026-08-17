@@ -50,3 +50,11 @@ pytest
 pytest-asyncio
 
 google-genai
+
+
+pypdf 
+pdfplumber
+
+pymupdf
+pillow
+pytesseract
