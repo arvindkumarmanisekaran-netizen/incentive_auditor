@@ -5,8 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // Option A: Allow your specific ngrok domain
     allowedHosts: ['unempirical-hermila-enunciatory.ngrok-free.dev'],
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    }
   }
 })
 
