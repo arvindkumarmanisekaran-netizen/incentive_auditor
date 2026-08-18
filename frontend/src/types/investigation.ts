@@ -1,51 +1,82 @@
-export type Evidence = {
-  [key: string]: unknown;
-};
+export interface FindingEvidence {
+  [key: string]: any;
+}
 
 
-export type Finding = {
+export interface Finding {
+
   type: string;
+
   severity: string;
-  evidence: Evidence;
-};
+
+  evidence: FindingEvidence;
+
+}
 
 
-export type SpecialistAnalysis = {
-  severity: string;
-  summary: string;
-  key_observations: string[];
-  investigation_priority: string;
-};
+
+export interface AIAnalysis {
+
+  severity?: string;
+
+  summary?: string;
+
+  key_observations?: string[];
+
+  investigation_priority?: string;
+
+}
 
 
-export type InvestigationPriority = {
-  priority: number;
-  finding_type: string;
-  reason: string;
-};
+
+export interface FinalReport {
+
+  overall_assessment?: string;
+
+  overall_severity?: string;
+
+  top_risk_drivers?: string[];
+
+  specialist_summary?: {
+
+    sales_rx?: string;
+
+    doctor_territory?: string;
+
+    payout?: string;
+
+  };
+
+  recommended_actions?: string[];
+
+  recommended_next_action?: string;
+
+  human_review_required?: boolean;
+
+}
+
+export interface InvestigationResult {
+
+    representative_id: string;
+
+    product_id: string;
+
+    month: string;
 
 
-export type FinalReport = {
-  overall_assessment: string;
-  key_findings: string[];
-  investigation_priorities: InvestigationPriority[];
-  recommended_next_action: string;
-};
+    findings: Finding[];
 
 
-export type InvestigationResult = {
-  representative_id: string;
-  product_id: string;
-  month: string;
+    overall_risk_score: number;
 
-  overall_risk_score: number;
-  overall_severity: string;
+    overall_severity: string;
 
-  findings: Finding[];
 
-  sales_rx_analysis: SpecialistAnalysis;
-  doctor_territory_analysis: SpecialistAnalysis;
-  payout_analysis: SpecialistAnalysis;
+    sales_rx_analysis?: AIAnalysis;
 
-  final_report: FinalReport;
-};
+    doctor_territory_analysis?: AIAnalysis;
+
+    payout_analysis?: AIAnalysis;
+
+    final_report?: FinalReport;
+}

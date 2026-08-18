@@ -1,31 +1,40 @@
-from fastapi import APIRouter, Depends
+from fastapi import (
+    APIRouter,
+    Depends,
+)
+
 from sqlalchemy import text
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db.session import get_db
 
 
 router = APIRouter(
     prefix="/api/products",
-    tags=["Products"],
+    tags=[
+        "Products"
+    ],
 )
 
 
 @router.get("")
-def get_products(
-    db: Session = Depends(get_db),
+async def get_products(
+    db: AsyncSession = Depends(get_db),
 ):
-    result = db.execute(
-        text("""
+
+    result = await db.execute(
+        text(
+            """
             SELECT
                 product_id,
                 product_name
             FROM products
             ORDER BY product_name
-        """)
+            """
+        )
     )
 
     return [
         dict(row._mapping)
-        for row in result
+        for row in result.fetchall()
     ]

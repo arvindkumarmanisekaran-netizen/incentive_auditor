@@ -7,6 +7,8 @@ from .api.analytics import router as analytics_router
 from .api.investigation import router as investigation_router
 from fastapi.middleware.cors import CORSMiddleware
 from .api.products import router as products_router
+from .api.document_processing import router as document_processing_router
+
 
 app = FastAPI(
     title="Incentive Auditor API",
@@ -35,3 +37,5 @@ app.include_router(anomalies_router)
 app.include_router(analytics_router)
 app.include_router(investigation_router)
 app.include_router(products_router)
+app.include_router(document_processing_router)
+

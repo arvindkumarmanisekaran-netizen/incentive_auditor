@@ -109,7 +109,7 @@ function RiskSummary({
 
           <span
             className={
-              `severity-badge severity-${severity.toLowerCase()}`
+              `severity-badge severity-${(severity ?? "NORMAL").toLowerCase()}`
             }
           >
             {severity}

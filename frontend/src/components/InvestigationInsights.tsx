@@ -65,49 +65,46 @@ function InvestigationInsights({
   result,
 }: Props) {
 
+ 
   /* =======================================================
      FINDINGS
   ======================================================= */
 
+  const findings =
+    result?.findings ?? [];
+   
   const salesFinding =
-    result.findings.find(
+    findings.find(
       (finding) =>
-        finding.type ===
-        "sales_deviation"
+        finding.type === "sales_deviation"
     );
 
 
   const mismatchFinding =
-    result.findings.find(
+    findings.find(
       (finding) =>
-        finding.type ===
-        "sales_prescription_mismatch"
+        finding.type === "sales_prescription_mismatch"
     );
 
 
   const doctorFinding =
-    result.findings.find(
+    findings.find(
       (finding) =>
-        finding.type ===
-        "doctor_concentration"
+        finding.type === "doctor_concentration"
     );
 
 
   const territoryFinding =
-    result.findings.find(
-      (finding) =>
-        finding.type ===
-        "cross_territory_concentration"
-    );
-
+    findings.find(
+        (finding) =>
+          finding.type === "cross_territory_concentration"
+      );
 
   const payoutFinding =
-    result.findings.find(
+    findings.find(
       (finding) =>
-        finding.type ===
-        "payout_discrepancy"
+        finding.type === "payout_discrepancy"
     );
-
 
   /* =======================================================
      SALES / RX
@@ -133,42 +130,44 @@ function InvestigationInsights({
     );
 
 
-  const salesRxData = [
-    {
-      name: "Sales",
-      change: salesChange,
-    },
-    {
-      name: "Prescriptions",
-      change: rxChange,
-    },
-  ];
+ const salesRxData =
+[
+  {
+    name:"Sales",
+    change:
+      salesFinding
+      ? safeNumber(
+          salesFinding.evidence.deviation_percent
+        )
+      : 0
+  },
 
+  {
+    name:"Prescriptions",
+    change:
+      mismatchFinding
+      ? safeNumber(
+          mismatchFinding.evidence.prescription_change_percent
+        )
+      : 0
+  }
+];
 
   /* =======================================================
      DOCTOR / TERRITORY
   ======================================================= */
 
-  const doctorConcentration =
-    safeNumber(
-      doctorFinding?.evidence
-        ?.top_doctor_percentage ??
-      doctorFinding?.evidence
-        ?.top_doctor_concentration ??
-      doctorFinding?.evidence
-        ?.concentration_percentage
-    );
+   const doctorConcentration =
+  safeNumber(
+    doctorFinding?.evidence
+      ?.top_doctor_share_percent
+  );
 
-
-  const crossTerritory =
-    safeNumber(
-      territoryFinding?.evidence
-        ?.cross_territory_percentage ??
-      territoryFinding?.evidence
-        ?.cross_territory_percent ??
-      territoryFinding?.evidence
-        ?.outside_territory_percentage
-    );
+ const crossTerritory =
+  safeNumber(
+    territoryFinding?.evidence
+      ?.cross_territory_share_percent
+  );
 
 
   const concentrationData = [
@@ -257,28 +256,35 @@ function InvestigationInsights({
 
 
   const riskFindingCount =
-    result.findings.filter(
-      (finding) =>
-        finding.severity !== "NORMAL" &&
-        finding.severity !== "UNKNOWN"
-    ).length;
+  findings.filter(
+    (finding) => {
+      const severity =
+        finding.severity?.toUpperCase();
+
+      return (
+        severity !== "NORMAL" &&
+        severity !== "UNKNOWN"
+      );
+    }
+  ).length;
 
 
   /* =======================================================
      AI ANALYSIS
   ======================================================= */
 
-  const salesAnalysis =
-    result.sales_rx_analysis;
-
   const doctorAnalysis =
-    result.doctor_territory_analysis;
+    result?.doctor_territory_analysis ??
+    {};
+
+  const salesAnalysis =
+    result?.sales_rx_analysis ?? {};
 
   const payoutAnalysis =
-    result.payout_analysis;
+    result?.payout_analysis ?? {};
 
   const finalReport =
-    result.final_report;
+    result?.final_report ?? {};
 
 
   return (
@@ -488,20 +494,21 @@ function InvestigationInsights({
               >
 
                 <RadialBarChart
-                  cx="50%"
-                  cy="50%"
-                  innerRadius="25%"
-                  outerRadius="90%"
-                  barSize={18}
-                  data={concentrationData}
-                  startAngle={90}
-                  endAngle={-270}
-                >
+  cx="50%"
+  cy="45%"
+  innerRadius="55%"
+  outerRadius="92%"
+  barSize={20}
+  data={concentrationData}
+  startAngle={90}
+  endAngle={-270}
+>
 
                   <RadialBar
                     dataKey="value"
                     background
                     cornerRadius={8}
+                    barSize={12}
                   />
 
                   <Legend
@@ -527,18 +534,16 @@ function InvestigationInsights({
               </ResponsiveContainer>
 
 
-              <div className="chart-center-label">
-                <strong>
-                  {doctorConcentration.toFixed(
-                    0
-                  )}
-                  %
-                </strong>
+             <div className="chart-center-label concentration-center-label">
+            <strong>
+              {doctorConcentration.toFixed(0)}%
+            </strong>
 
-                <span>
-                  Top Doctor
-                </span>
-              </div>
+            <span>
+              Doctor
+            </span>
+
+          </div>
 
             </div>
 
@@ -876,7 +881,7 @@ function InvestigationInsights({
 
 
               {finalReport
-                ?.recommended_next_action && (
+                ?.recommended_actions?.length && (
 
                 <div className="recommended-action">
 
@@ -885,10 +890,9 @@ function InvestigationInsights({
                   </span>
 
                   <p>
-                    {
-                      finalReport
-                        .recommended_next_action
-                    }
+                  {
+                    finalReport.recommended_actions[0]
+                  }
                   </p>
 
                 </div>

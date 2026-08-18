@@ -1,0 +1,218 @@
+{
+  "doctor_master": {
+    "table": "doctors",
+    "required_columns": [
+      "doctor_id",
+      "doctor_name",
+      "territory_id"
+    ],
+    "optional_columns": [
+      "specialization",
+      "status"
+    ],
+    "duplicate_keys": [
+      "doctor_id"
+    ]
+  },
+
+  "representative_master": {
+    "table": "representatives",
+    "required_columns": [
+      "representative_id",
+      "first_name",
+      "last_name",
+      "territory_id"
+    ],
+    "optional_columns": [
+      "joining_date",
+      "status"
+    ],
+    "duplicate_keys": [
+      "representative_id"
+    ]
+  },
+
+  "product_master": {
+    "table": "products",
+    "required_columns": [
+      "product_id",
+      "product_name"
+    ],
+    "optional_columns": [
+      "product_category",
+      "status"
+    ],
+    "duplicate_keys": [
+      "product_id"
+    ]
+  },
+
+  "territory_master": {
+    "table": "territories",
+    "required_columns": [
+      "territory_id",
+      "territory_name",
+      "region",
+      "country"
+    ],
+    "optional_columns": [
+      "status"
+    ],
+    "duplicate_keys": [
+      "territory_id"
+    ]
+  },
+
+  "sales_report": {
+    "table": "sales",
+    "required_columns": [
+      "sale_id",
+      "sale_date",
+      "doctor_id",
+      "product_id",
+      "selling_territory_id",
+      "quantity",
+      "sales_amount"
+    ],
+    "optional_columns": [
+      "status"
+    ],
+    "duplicate_keys": [
+      "sale_id"
+    ]
+  },
+
+  "prescription": {
+    "table": "prescriptions",
+    "required_columns": [
+      "prescription_id",
+      "prescription_date",
+      "doctor_id",
+      "product_id",
+      "quantity"
+    ],
+    "optional_columns": [
+      "status"
+    ],
+    "duplicate_keys": [
+      "prescription_id"
+    ]
+  },
+
+  "territory_assignment": {
+    "table": "representative_doctor_assignments",
+    "required_columns": [
+      "assignment_id",
+      "representative_id",
+      "doctor_id",
+      "effective_from"
+    ],
+    "optional_columns": [
+      "effective_to",
+      "status"
+    ],
+    "duplicate_keys": [
+      "assignment_id"
+    ]
+  },
+
+  "target_sheet": {
+    "table": "sales_targets",
+    "required_columns": [
+      "representative_id",
+      "product_id",
+      "target_month",
+      "target_amount"
+    ],
+    "optional_columns": [
+      "target_id",
+      "status"
+    ],
+    "duplicate_keys": [
+      "representative_id",
+      "product_id",
+      "target_month"
+    ]
+  },
+
+  "incentive_program": {
+    "table": "incentive_programs",
+    "required_columns": [
+      "program_id",
+      "program_name",
+      "effective_from"
+    ],
+    "optional_columns": [
+      "period_type",
+      "effective_to",
+      "minimum_sales_achievement",
+      "maximum_payout_multiplier",
+      "status"
+    ],
+    "duplicate_keys": [
+      "program_id"
+    ]
+  },
+
+  "incentive_tier": {
+    "table": "incentive_tiers",
+    "required_columns": [
+      "tier_id",
+      "program_id",
+      "minimum_achievement",
+      "payout_multiplier"
+    ],
+    "optional_columns": [
+      "maximum_achievement"
+    ],
+    "duplicate_keys": [
+      "tier_id"
+    ]
+  },
+
+  "product_incentive_rate": {
+    "table": "product_incentive_rates",
+    "required_columns": [
+      "program_id",
+      "product_id",
+      "incentive_rate"
+    ],
+    "optional_columns": [
+      "rate_id"
+    ],
+    "duplicate_keys": [
+      "program_id",
+      "product_id"
+    ]
+  },
+
+  "payout_statement": {
+    "table": "incentive_payouts",
+    "required_columns": [
+      "representative_id",
+      "product_id",
+      "program_id",
+      "payout_month",
+      "actual_payout"
+    ],
+    "optional_columns": [
+      "payout_id",
+      "sales_target",
+      "actual_sales",
+      "sales_achievement",
+      "base_incentive",
+      "achievement_multiplier",
+      "calculated_payout",
+      "maximum_payout",
+      "expected_payout",
+      "payout_difference",
+      "status"
+    ],
+    "duplicate_keys": [
+      "representative_id",
+      "product_id",
+      "program_id",
+      "payout_month"
+    ]
+  }
+}

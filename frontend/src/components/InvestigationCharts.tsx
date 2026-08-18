@@ -17,9 +17,8 @@ import type {
 
 
 type Props = {
-  findings: Finding[];
+  findings?: Finding[];
 };
-
 
 const COLORS = {
   blue: "#2563EB",
@@ -66,19 +65,19 @@ function formatMoney(
 
 
 function getFinding(
-  findings: Finding[],
+  findings: Finding[] = [],
   type: string
 ) {
   return findings.find(
-    (finding) => finding.type === type
+    (finding) =>
+      finding.type === type
   );
 }
 
 
 function InvestigationCharts({
-  findings,
+  findings = [],
 }: Props) {
-
   // --------------------------------------------------
   // Find individual deterministic findings
   // --------------------------------------------------

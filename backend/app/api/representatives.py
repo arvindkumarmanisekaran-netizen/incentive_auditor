@@ -1,5 +1,9 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import (
+    APIRouter,
+    Depends,
+)
+
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
 from ..db.session import get_db
@@ -7,12 +11,16 @@ from ..db.session import get_db
 
 router = APIRouter(
     prefix="/api/representatives",
-    tags=["Representatives"]
+    tags=[
+        "Representatives"
+    ],
 )
 
 
 @router.get("")
-def get_representatives(db: Session = Depends(get_db)):
+async def get_representatives(
+    db: AsyncSession = Depends(get_db),
+):
 
     query = text("""
         SELECT
@@ -29,11 +37,11 @@ def get_representatives(db: Session = Depends(get_db)):
         ORDER BY r.representative_id
     """)
 
-    result = db.execute(query)
-
+    result = await db.execute(query)
+     
     representatives = [
         dict(row._mapping)
-        for row in result
+        for row in result.fetchall()
     ]
 
     return representatives

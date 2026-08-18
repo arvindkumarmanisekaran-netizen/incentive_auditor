@@ -243,15 +243,51 @@ function App() {
 
     try {
 
+
+
       const data =
-        await runInvestigation(
-          representativeId,
-          productId,
-          month
-        );
+  await runInvestigation(
+    representativeId,
+    productId,
+    month
+  );
+
+          console.log(
+  "API RESPONSE", data
+);
 
 
-      setResult(data);
+setResult({
+  representative_id:
+    data.representative_id,
+
+  product_id:
+    data.product_id,
+
+  month:
+    data.month,
+
+  findings:
+    data.findings ?? [],
+
+  overall_risk_score:
+    data.overall_risk_score ?? 0,
+
+  overall_severity:
+    data.overall_severity ?? "NORMAL",
+
+  sales_rx_analysis:
+    data.sales_rx_analysis,
+
+  doctor_territory_analysis:
+    data.doctor_territory_analysis,
+
+  payout_analysis:
+    data.payout_analysis,
+
+  final_report:
+    data.final_report,
+});
 
     } catch (err) {
 
@@ -276,19 +312,25 @@ function App() {
 
 
   // ==================================================
+  // FINDINGS SAFE ACCESS
+  // ==================================================
+
+  const findings =
+    result?.findings ?? [];
+
+  // ==================================================
   // FIND INDIVIDUAL FINDINGS
   // ==================================================
 
   const salesFinding =
-    result?.findings.find(
+    findings.find(
       (finding) =>
-        finding.type ===
-        "sales_deviation"
+        finding.type === "sales_deviation"
     );
 
 
   const mismatchFinding =
-    result?.findings.find(
+    findings.find(
       (finding) =>
         finding.type ===
         "sales_prescription_mismatch"
@@ -296,7 +338,7 @@ function App() {
 
 
   const payoutFinding =
-    result?.findings.find(
+    findings.find(
       (finding) =>
         finding.type ===
         "payout_discrepancy"
@@ -310,12 +352,10 @@ function App() {
   const salesChange =
     salesFinding
       ? Number(
-          salesFinding.evidence
-            .deviation_percent ??
-          salesFinding.evidence
-            .sales_change_percent ??
-          salesFinding.evidence
-            .percentage_deviation
+          salesFinding.evidence?.deviation_percent ??
+          salesFinding.evidence?.sales_change_percent ??
+          salesFinding.evidence?.percentage_deviation ??
+          0
         )
       : null;
 
@@ -327,12 +367,10 @@ function App() {
   const rxChange =
     mismatchFinding
       ? Number(
-          mismatchFinding.evidence
-            .prescription_change_percent ??
-          mismatchFinding.evidence
-            .rx_change_percent ??
-          mismatchFinding.evidence
-            .prescription_deviation_percent
+          mismatchFinding.evidence?.prescription_change_percent ??
+          mismatchFinding.evidence?.rx_change_percent ??
+          mismatchFinding.evidence?.prescription_deviation_percent ??
+          0
         )
       : null;
 
@@ -344,8 +382,7 @@ function App() {
   const payoutDifference =
     payoutFinding
       ? Number(
-          payoutFinding.evidence
-            .payout_difference
+          payoutFinding.evidence?.payout_difference ?? 0
         )
       : null;
 
@@ -355,18 +392,21 @@ function App() {
   // ==================================================
 
   const riskFindingCount =
-    result?.findings.filter(
+    findings.filter(
       (finding) => {
 
         const severity =
-          finding.severity.toUpperCase();
+          finding.severity?.toUpperCase()
+          ?? "UNKNOWN";
+
 
         return (
           severity !== "NORMAL" &&
           severity !== "UNKNOWN"
         );
+
       }
-    ).length ?? 0;
+    ).length;
 
 
   // ==================================================
@@ -374,8 +414,10 @@ function App() {
   // ==================================================
 
   return (
-    <main className="dashboard">
 
+  
+    <main className="dashboard">
+      
       {/* ==================================================
           HEADER
       ================================================== */}
@@ -539,56 +581,56 @@ function App() {
               RESULTS
           ---------------------------------------------- */}
 
+          
           {result && (
 
             <>
-
               <RiskSummary
-                riskScore={
-                  result.overall_risk_score
-                }
 
-                severity={
-                  result.overall_severity
-                }
+              riskScore={
+                result.overall_risk_score ?? 0
+              }
 
-                salesChange={
-                  salesChange
-                }
+              severity={
+                result.overall_severity ?? "NORMAL"
+              }
 
-                rxChange={
-                  rxChange
-                }
+              salesChange={
+                salesChange
+              }
 
-                payoutDifference={
-                  payoutDifference
-                }
+              rxChange={
+                rxChange
+              }
 
-                findingCount={
-                  riskFindingCount
-                }
-              />
+              payoutDifference={
+                payoutDifference
+              }
+
+              findingCount={
+                riskFindingCount
+              }
+
+            />
 
 
               <InvestigationCharts
-                findings={
-                  result.findings
-                }
+                findings={findings}
               />
 
 
               <FindingsList
-                findings={
-                  result.findings
-                }
+                findings={findings}
               />
 
 
-              <InvestigationInsights
-                result={
-                  result
-                }
-              />
+              {result && (
+
+                <InvestigationInsights
+                    result={result}
+                />
+
+            )}
 
             </>
 
