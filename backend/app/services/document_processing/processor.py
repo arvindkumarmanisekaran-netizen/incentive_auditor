@@ -33,16 +33,13 @@ def get_document_config(
 
     registry = load_document_registry()
 
-    config = registry.get(
-        document_type
-    )
+    config = registry.get(document_type)
 
     if config is None:
         raise ValueError(
             f"No document registry configuration "
-            f"found for '{document_type}'."
+            f"found for '{document_type}'."  # noqa: E501
         )
-
     return config
 
 
@@ -64,8 +61,7 @@ def extract_incoming_records(
 
     new_records = [
         item["incoming_record"]
-        for item
-        in duplicate_result.get(
+        for item in duplicate_result.get(
             "new_records",
             [],
         )
@@ -73,8 +69,7 @@ def extract_incoming_records(
 
     duplicate_records = [
         item["incoming_record"]
-        for item
-        in duplicate_result.get(
+        for item in duplicate_result.get(
             "duplicate_records",
             [],
         )
@@ -129,20 +124,11 @@ async def process_document(
     except Exception as exc:
 
         return {
-            "filename":
-                filename,
-
-            "status":
-                "parse_failed",
-
-            "success":
-                False,
-
-            "action_required":
-                False,
-
-            "error":
-                str(exc),
+            "filename": filename,
+            "status": "parse_failed",
+            "success": False,
+            "action_required": False,
+            "error": str(exc),
         }
 
     # -------------------------------------------------
@@ -150,11 +136,7 @@ async def process_document(
     # Extract uploaded column names
     # -------------------------------------------------
 
-    source_columns = (
-        extract_source_columns(
-            source_records
-        )
-    )
+    source_columns = extract_source_columns(source_records)
 
     # -------------------------------------------------
     # STEP 3
@@ -163,32 +145,17 @@ async def process_document(
 
     try:
 
-        classification = (
-            classify_document(
-                source_columns
-            )
-        )
+        classification = classify_document(source_columns)
 
     except Exception as exc:
 
         return {
-            "filename":
-                filename,
-
-            "status":
-                "classification_failed",
-
-            "success":
-                False,
-
-            "action_required":
-                False,
-
-            "source_columns":
-                source_columns,
-
-            "error":
-                str(exc),
+            "filename": filename,
+            "status": "classification_failed",
+            "success": False,
+            "action_required": False,
+            "source_columns": source_columns,
+            "error": str(exc),
         }
 
     if not classification.get(
@@ -197,59 +164,36 @@ async def process_document(
     ):
 
         return {
-            "filename":
-                filename,
-
-            "status":
-                classification.get(
-                    "status",
-                    "unidentified",
-                ),
-
-            "success":
-                False,
-
-            "action_required":
-                False,
-
-            "source_columns":
-                source_columns,
-
-            "classification":
-                classification,
+            "filename": filename,
+            "status": classification.get(
+                "status",
+                "unidentified",
+            ),
+            "success": False,
+            "action_required": False,
+            "source_columns": source_columns,
+            "classification": classification,
         }
 
-    document_type = classification[
-        "document_type"
-    ]
+    document_type = classification["document_type"]
 
-    table_name = classification[
-        "table"
-    ]
+    table_name = classification["table"]
 
     # -------------------------------------------------
     # STEP 4
     # Load registry configuration
     # -------------------------------------------------
 
-    document_config = (
-        get_document_config(
-            document_type
-        )
+    document_config = get_document_config(document_type)
+
+    required_columns = document_config.get(
+        "required_columns",
+        [],
     )
 
-    required_columns = (
-        document_config.get(
-            "required_columns",
-            [],
-        )
-    )
-
-    duplicate_keys = (
-        document_config.get(
-            "duplicate_keys",
-            [],
-        )
+    duplicate_keys = document_config.get(
+        "duplicate_keys",
+        [],
     )
 
     # -------------------------------------------------
@@ -258,13 +202,9 @@ async def process_document(
     # database column names.
     # -------------------------------------------------
 
-    canonical_records = (
-        apply_column_mapping(
-            source_records,
-            classification[
-                "mapping"
-            ],
-        )
+    canonical_records = apply_column_mapping(
+        source_records,
+        classification["mapping"],
     )
 
     # -------------------------------------------------
@@ -278,44 +218,19 @@ async def process_document(
         required_columns=required_columns,
     )
 
-    if not validation[
-        "valid"
-    ]:
+    if not validation["valid"]:
 
         return {
-            "filename":
-                filename,
-
-            "status":
-                "validation_failed",
-
-            "success":
-                False,
-
-            "action_required":
-                False,
-
-            "document_type":
-                document_type,
-
-            "target_table":
-                table_name,
-
-            "classification_confidence":
-                classification[
-                    "confidence"
-                ],
-
-            "source_columns":
-                source_columns,
-
-            "column_mapping":
-                classification[
-                    "mapping"
-                ],
-
-            "validation":
-                validation,
+            "filename": filename,
+            "status": "validation_failed",
+            "success": False,
+            "action_required": False,
+            "document_type": document_type,
+            "target_table": table_name,
+            "classification_confidence": classification["confidence"],
+            "source_columns": source_columns,
+            "column_mapping": classification["mapping"],
+            "validation": validation,
         }
 
     # -------------------------------------------------
@@ -325,58 +240,33 @@ async def process_document(
 
     try:
 
-        duplicate_result = (
-            await check_duplicates(
-                session=session,
-                table_name=table_name,
-                records=canonical_records,
-                duplicate_keys=duplicate_keys,
-            )
+        duplicate_result = await check_duplicates(
+            session=session,
+            table_name=table_name,
+            records=canonical_records,
+            duplicate_keys=duplicate_keys,
         )
 
     except Exception as exc:
 
         return {
-            "filename":
-                filename,
-
-            "status":
-                "duplicate_check_failed",
-
-            "success":
-                False,
-
-            "action_required":
-                False,
-
-            "document_type":
-                document_type,
-
-            "target_table":
-                table_name,
-
-            "error":
-                str(exc),
+            "filename": filename,
+            "status": "duplicate_check_failed",
+            "success": False,
+            "action_required": False,
+            "document_type": document_type,
+            "target_table": table_name,
+            "error": str(exc),
         }
 
     (
         new_records,
         duplicate_records,
-    ) = extract_incoming_records(
-        duplicate_result
-    )
+    ) = extract_incoming_records(duplicate_result)
 
-    duplicate_count = (
-        duplicate_result[
-            "duplicate_record_count"
-        ]
-    )
+    duplicate_count = duplicate_result["duplicate_record_count"]
 
-    new_count = (
-        duplicate_result[
-            "new_record_count"
-        ]
-    )
+    new_count = duplicate_result["new_record_count"]
 
     # -------------------------------------------------
     # STEP 8
@@ -385,9 +275,7 @@ async def process_document(
 
     if duplicate_count > 0:
 
-        status = (
-            "duplicates_found"
-        )
+        status = "duplicates_found"
 
         action_required = True
 
@@ -416,79 +304,36 @@ async def process_document(
     # -------------------------------------------------
 
     return {
-        "filename":
-            filename,
-
-        "success":
-            True,
-
-        "status":
-            status,
-
-        "document_type":
-            document_type,
-
-        "target_table":
-            table_name,
-
-        "classification_confidence":
-            classification[
-                "confidence"
-            ],
-
-        "source_columns":
-            source_columns,
-
-        "column_mapping":
-            classification[
-                "mapping"
-            ],
-
-        "validation":
-            validation,
-
-        "total_records":
-            len(canonical_records),
-
-        "new_record_count":
-            new_count,
-
-        "duplicate_record_count":
-            duplicate_count,
-
-        "has_duplicates":
-            duplicate_count > 0,
-
-        "action_required":
-            action_required,
-
-        "available_actions":
-            available_actions,
-
+        "filename": filename,
+        "success": True,
+        "status": status,
+        "document_type": document_type,
+        "target_table": table_name,
+        "classification_confidence": classification["confidence"],
+        "source_columns": source_columns,
+        "column_mapping": classification["mapping"],
+        "validation": validation,
+        "total_records": len(canonical_records),
+        "new_record_count": new_count,
+        "duplicate_record_count": duplicate_count,
+        "has_duplicates": duplicate_count > 0,
+        "action_required": action_required,
+        "available_actions": available_actions,
         # These are needed by the confirmation
         # endpoint in the first implementation.
         #
         # The confirmation endpoint MUST validate
         # them again before writing to PostgreSQL.
-
-        "pending_data":
-            {
-                "duplicate_keys":
-                    duplicate_keys,
-
-                "new_records":
-                    new_records,
-
-                "duplicate_records":
-                    duplicate_records,
-            },
-
+        "pending_data": {
+            "file_name": filename,
+            "duplicate_keys": duplicate_keys,
+            "new_records": new_records,
+            "duplicate_records": duplicate_records,
+        },
         # Useful for showing the user what already
         # exists without exposing every row.
-
-        "duplicate_preview":
-            duplicate_result.get(
-                "duplicate_records",
-                [],
-            )[:20],
+        "duplicate_preview": duplicate_result.get(
+            "duplicate_records",
+            [],
+        )[:20],
     }

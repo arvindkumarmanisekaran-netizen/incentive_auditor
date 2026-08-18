@@ -6,9 +6,9 @@ import json
 from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree
+import logging
 
 import pandas as pd
-
 
 SUPPORTED_EXTENSIONS = {
     "csv",
@@ -18,31 +18,24 @@ SUPPORTED_EXTENSIONS = {
 }
 
 
+logger = logging.getLogger(__name__)
+
+
 def get_extension(
     filename: str,
 ) -> str:
 
-    return (
-        Path(filename)
-        .suffix
-        .lower()
-        .lstrip(".")
-    )
+    return Path(filename).suffix.lower().lstrip(".")
 
 
 def validate_extension(
     filename: str,
 ) -> str:
 
-    extension = get_extension(
-        filename
-    )
+    extension = get_extension(filename)
 
     if extension not in SUPPORTED_EXTENSIONS:
-        raise ValueError(
-            f"Unsupported document type: "
-            f"{extension or 'unknown'}"
-        )
+        raise ValueError(f"Unsupported document type: " f"{extension or 'unknown'}")  # noqa: E501
 
     return extension
 
@@ -55,21 +48,14 @@ def normalize_record(
     services receive consistent Python values.
     """
 
-    normalized: dict[
-        str,
-        Any
-    ] = {}
+    normalized: dict[str, Any] = {}
 
     for key, value in record.items():
 
-        column_name = str(
-            key
-        ).strip()
+        column_name = str(key).strip()
 
         if pd.isna(value):
-            normalized[
-                column_name
-            ] = None
+            normalized[column_name] = None
             continue
 
         # Pandas Timestamp -> ISO date/time
@@ -79,9 +65,7 @@ def normalize_record(
             pd.Timestamp,
         ):
 
-            normalized[
-                column_name
-            ] = value.isoformat()
+            normalized[column_name] = value.isoformat()
 
             continue
 
@@ -102,9 +86,7 @@ def normalize_record(
             ):
                 pass
 
-        normalized[
-            column_name
-        ] = value
+        normalized[column_name] = value
 
     return normalized
 
@@ -113,30 +95,16 @@ def parse_csv(
     content: bytes,
 ) -> list[dict[str, Any]]:
 
-    text = content.decode(
-        "utf-8-sig"
-    )
+    text = content.decode("utf-8-sig")
 
-    buffer = io.StringIO(
-        text
-    )
+    buffer = io.StringIO(text)
 
-    reader = csv.DictReader(
-        buffer
-    )
+    reader = csv.DictReader(buffer)
 
     if not reader.fieldnames:
-        raise ValueError(
-            "CSV file does not contain "
-            "a header row."
-        )
+        raise ValueError("CSV file does not contain " "a header row.")
 
-    records = [
-        normalize_record(
-            dict(row)
-        )
-        for row in reader
-    ]
+    records = [normalize_record(dict(row)) for row in reader]
 
     return records
 
@@ -145,41 +113,41 @@ def parse_xlsx(
     content: bytes,
 ) -> list[dict[str, Any]]:
 
-    buffer = io.BytesIO(
-        content
-    )
+    logger.info("===== XLSX DEBUG =====")
+
+    print("===== XLSX DEBUG =====")
+    buffer = io.BytesIO(content)
 
     dataframe = pd.read_excel(
         buffer,
         engine="openpyxl",
     )
 
+    print("===== XLSX DEBUG =====")
+    print("Columns:", list(dataframe.columns))
+    print("Shape:", dataframe.shape)
+    print("First rows:")
+    print(dataframe.head(3).to_dict())
+    print("======================")
+
     if dataframe.empty:
         return []
 
-    records = dataframe.to_dict(
-        orient="records"
-    )
+    records = dataframe.to_dict(orient="records")
 
-    return [
-        normalize_record(
-            record
-        )
-        for record in records
-    ]
+    print("RECORD COUNT:", len(records))
+    print("FIRST RECORD:", records[0] if records else None)
+
+    return [normalize_record(record) for record in records]
 
 
 def parse_json(
     content: bytes,
 ) -> list[dict[str, Any]]:
 
-    decoded = content.decode(
-        "utf-8-sig"
-    )
+    decoded = content.decode("utf-8-sig")
 
-    parsed = json.loads(
-        decoded
-    )
+    parsed = json.loads(decoded)
 
     # ----------------------------------------
     # JSON array
@@ -202,17 +170,9 @@ def parse_json(
             )
             for item in parsed
         ):
-            raise ValueError(
-                "JSON arrays must contain "
-                "objects."
-            )
+            raise ValueError("JSON arrays must contain " "objects.")
 
-        return [
-            normalize_record(
-                item
-            )
-            for item in parsed
-        ]
+        return [normalize_record(item) for item in parsed]
 
     # ----------------------------------------
     # JSON object
@@ -235,48 +195,31 @@ def parse_json(
 
         for value in parsed.values():
 
-            if (
+            if isinstance(
+                value,
+                list,
+            ) and all(
                 isinstance(
-                    value,
-                    list,
+                    item,
+                    dict,
                 )
-                and all(
-                    isinstance(
-                        item,
-                        dict,
-                    )
-                    for item in value
-                )
+                for item in value
             ):
 
-                return [
-                    normalize_record(
-                        item
-                    )
-                    for item in value
-                ]
+                return [normalize_record(item) for item in value]
 
         # Single-record JSON object
 
-        return [
-            normalize_record(
-                parsed
-            )
-        ]
+        return [normalize_record(parsed)]
 
-    raise ValueError(
-        "Unsupported JSON structure."
-    )
+    raise ValueError("Unsupported JSON structure.")
 
 
 def xml_element_to_record(
     element: ElementTree.Element,
 ) -> dict[str, Any]:
 
-    record: dict[
-        str,
-        Any
-    ] = {}
+    record: dict[str, Any] = {}
 
     for child in element:
 
@@ -285,17 +228,9 @@ def xml_element_to_record(
 
         if len(child) == 0:
 
-            record[
-                child.tag
-            ] = (
-                child.text.strip()
-                if child.text
-                else None
-            )
+            record[child.tag] = child.text.strip() if child.text else None
 
-    return normalize_record(
-        record
-    )
+    return normalize_record(record)
 
 
 def parse_xml(
@@ -304,19 +239,13 @@ def parse_xml(
 
     try:
 
-        root = ElementTree.fromstring(
-            content
-        )
+        root = ElementTree.fromstring(content)
 
     except ElementTree.ParseError as exc:
 
-        raise ValueError(
-            f"Invalid XML document: {exc}"
-        ) from exc
+        raise ValueError(f"Invalid XML document: {exc}") from exc
 
-    records: list[
-        dict[str, Any]
-    ] = []
+    records: list[dict[str, Any]] = []
 
     # Typical structure:
     #
@@ -327,32 +256,20 @@ def parse_xml(
 
     for child in root:
 
-        record = (
-            xml_element_to_record(
-                child
-            )
-        )
+        record = xml_element_to_record(child)
 
         if record:
-            records.append(
-                record
-            )
+            records.append(record)
 
     # If root itself represents
     # one single record.
 
     if not records:
 
-        record = (
-            xml_element_to_record(
-                root
-            )
-        )
+        record = xml_element_to_record(root)
 
         if record:
-            records.append(
-                record
-            )
+            records.append(record)
 
     return records
 
@@ -366,58 +283,39 @@ def parse_document(
     processing service.
     """
 
-    extension = validate_extension(
-        filename
-    )
+    extension = validate_extension(filename)
 
     if not content:
-        raise ValueError(
-            "Uploaded document is empty."
-        )
+        raise ValueError("Uploaded document is empty.")
 
     if extension == "csv":
 
-        records = parse_csv(
-            content
-        )
+        records = parse_csv(content)
 
     elif extension == "xlsx":
 
-        records = parse_xlsx(
-            content
-        )
+        records = parse_xlsx(content)
 
     elif extension == "json":
 
-        records = parse_json(
-            content
-        )
+        records = parse_json(content)
 
     elif extension == "xml":
 
-        records = parse_xml(
-            content
-        )
+        records = parse_xml(content)
 
     else:
 
-        raise ValueError(
-            f"No parser configured for "
-            f"{extension}"
-        )
+        raise ValueError(f"No parser configured for " f"{extension}")
 
     if not records:
-        raise ValueError(
-            "Document contains no records."
-        )
+        raise ValueError("Document contains no records.")
 
     return records
 
 
 def extract_source_columns(
-    records: list[
-        dict[str, Any]
-    ],
+    records: list[dict[str, Any]],
 ) -> list[str]:
     """
     Collect every source column present
@@ -437,12 +335,8 @@ def extract_source_columns(
 
             if column not in seen:
 
-                seen.add(
-                    column
-                )
+                seen.add(column)
 
-                columns.append(
-                    column
-                )
+                columns.append(column)
 
     return columns

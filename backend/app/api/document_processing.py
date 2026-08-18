@@ -30,10 +30,12 @@ from ..services.document_processing.classifier import (
 from ..services.document_processing.duplicate_checker import (
     check_duplicates,
 )
-
+from ..services.document_processing.dependency_validator import (
+    validate_foreign_keys,
+)
 
 router = APIRouter(
-    prefix="/document-processing",
+    prefix="/api/document-processing",
     tags=["document-processing"],
 )
 
@@ -47,6 +49,7 @@ SUPPORTED_EXTENSIONS = {
 
 
 class PendingData(BaseModel):
+    file_name: str | None = None
     duplicate_keys: list[str]
     new_records: list[dict[str, Any]]
     duplicate_records: list[dict[str, Any]]
@@ -98,14 +101,9 @@ async def upload_document(
     This endpoint performs no database writes.
     """
 
-    filename = (
-        document.filename
-        or "uploaded_document"
-    )
+    filename = document.filename or "uploaded_document"
 
-    extension = get_file_extension(
-        filename
-    )
+    extension = get_file_extension(filename)
 
     if extension not in SUPPORTED_EXTENSIONS:
 
@@ -114,7 +112,7 @@ async def upload_document(
             detail=(
                 "Unsupported document type. "
                 "Supported formats are "
-                "CSV, XLSX, JSON, and XML."
+                "CSV, XLSX, JSON, and XML."  # noqa: E501
             ),
         )
 
@@ -144,10 +142,7 @@ async def upload_document(
 
         raise HTTPException(
             status_code=500,
-            detail=(
-                "Document processing failed: "
-                f"{exc}"
-            ),
+            detail=("Document processing failed: " f"{exc}"),
         ) from exc
 
     finally:
@@ -180,32 +175,22 @@ async def confirm_document(
 
     registry = load_document_registry()
 
-    document_config = registry.get(
-        payload.document_type
-    )
+    document_config = registry.get(payload.document_type)
 
     if document_config is None:
 
         raise HTTPException(
             status_code=400,
-            detail=(
-                "Unknown document type: "
-                f"{payload.document_type}"
-            ),
+            detail=("Unknown document type: " f"{payload.document_type}"),
         )
 
-    configured_table = document_config.get(
-        "table"
-    )
+    configured_table = document_config.get("table")
 
     if configured_table != payload.target_table:
 
         raise HTTPException(
             status_code=400,
-            detail=(
-                "Target table does not match "
-                "the configured document type."
-            ),
+            detail=("Target table does not match " "the configured document type."),  # noqa: E501
         )
 
     required_columns = document_config.get(
@@ -213,24 +198,19 @@ async def confirm_document(
         [],
     )
 
-    configured_duplicate_keys = (
-        document_config.get(
-            "duplicate_keys",
-            [],
-        )
+    configured_duplicate_keys = document_config.get(
+        "duplicate_keys",
+        [],
     )
 
-    if (
-        payload.pending_data.duplicate_keys
-        != configured_duplicate_keys
-    ):
+    if payload.pending_data.duplicate_keys != configured_duplicate_keys:
 
         raise HTTPException(
             status_code=400,
             detail=(
                 "Duplicate key configuration "
-                "does not match backend configuration."
-            ),
+                "does not match backend configuration."  # noqa: E501
+            ),  # noqa: E501
         )
 
     all_records = [
@@ -238,6 +218,7 @@ async def confirm_document(
         *payload.pending_data.duplicate_records,
     ]
 
+    file_name = payload.pending_data.file_name or "uploaded_document"
     if not all_records:
 
         raise HTTPException(
@@ -253,21 +234,40 @@ async def confirm_document(
         table_name=payload.target_table,
         records=all_records,
         required_columns=required_columns,
+        file_name=file_name,
     )
 
     if not validation["valid"]:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "type": "VALIDATION_ERROR",
+                "message": "Some records cannot be inserted because referenced data "  # noqa: E501
+                "is missing.",  # noqa: E501
+                "errors": validation.get("errors", []),
+            },
+        )
+
+    # -------------------------------------------------
+    # Foreign key dependency validation
+    # -------------------------------------------------
+
+    dependency_errors = await validate_foreign_keys(
+        session=session,
+        table_name=payload.target_table,
+        records=all_records,
+    )
+
+    if dependency_errors:
 
         raise HTTPException(
             status_code=400,
             detail={
-                "message":
-                    (
-                        "Validation failed before "
-                        "database confirmation."
-                    ),
-
-                "validation":
-                    validation,
+                "message": (
+                    "Dependency validation failed. "
+                    "No records were inserted."  # noqa: E501
+                ),  # noqa: E501
+                "errors": dependency_errors,
             },
         )
 
@@ -288,24 +288,15 @@ async def confirm_document(
 
         raise HTTPException(
             status_code=500,
-            detail=(
-                "Duplicate verification failed: "
-                f"{exc}"
-            ),
+            detail=("Duplicate verification failed: " f"{exc}"),
         ) from exc
 
     current_new_records = [
-        item["incoming_record"]
-        for item in duplicate_result[
-            "new_records"
-        ]
-    ]
+        item["incoming_record"] for item in duplicate_result["new_records"]
+    ]  # noqa: E501
 
     current_duplicate_records = [
-        item["incoming_record"]
-        for item in duplicate_result[
-            "duplicate_records"
-        ]
+        item["incoming_record"] for item in duplicate_result["duplicate_records"]  # noqa: E501
     ]
 
     # -------------------------------------------------
@@ -319,17 +310,12 @@ async def confirm_document(
             raise HTTPException(
                 status_code=409,
                 detail={
-                    "message":
-                        (
-                            "Duplicates now exist. "
-                            "Please review the document "
-                            "again before inserting."
-                        ),
-
-                    "duplicate_record_count":
-                        len(
-                            current_duplicate_records
-                        ),
+                    "message": (
+                        "Duplicates now exist. "
+                        "Please review the document "
+                        "again before inserting."
+                    ),
+                    "duplicate_record_count": len(current_duplicate_records),
                 },
             )
 
@@ -347,10 +333,7 @@ async def confirm_document(
 
             raise HTTPException(
                 status_code=500,
-                detail=(
-                    "Database insert failed: "
-                    f"{exc}"
-                ),
+                detail=("Database insert failed: " f"{exc}"),
             ) from exc
 
         return {
@@ -365,19 +348,14 @@ async def confirm_document(
     # Incoming duplicate rows are ignored.
     # -------------------------------------------------
 
-    if (
-        payload.action
-        == "discard_duplicates"
-    ):
+    if payload.action == "discard_duplicates":
 
         try:
 
-            result = (
-                await discard_duplicates_and_insert_new(
-                    session=session,
-                    table_name=payload.target_table,
-                    new_records=current_new_records,
-                )
+            result = await discard_duplicates_and_insert_new(
+                session=session,
+                table_name=payload.target_table,
+                new_records=current_new_records,
             )
 
         except Exception as exc:
@@ -386,18 +364,12 @@ async def confirm_document(
 
             raise HTTPException(
                 status_code=500,
-                detail=(
-                    "Database operation failed: "
-                    f"{exc}"
-                ),
+                detail=("Database operation failed: " f"{exc}"),
             ) from exc
 
         return {
             "success": True,
-            "discarded":
-                len(
-                    current_duplicate_records
-                ),
+            "discarded": len(current_duplicate_records),
             **result,
         }
 
@@ -408,21 +380,16 @@ async def confirm_document(
     # Existing duplicate rows are updated.
     # -------------------------------------------------
 
-    if (
-        payload.action
-        == "overwrite_duplicates"
-    ):
+    if payload.action == "overwrite_duplicates":
 
         try:
 
-            result = (
-                await overwrite_duplicates_and_insert_new(
-                    session=session,
-                    table_name=payload.target_table,
-                    new_records=current_new_records,
-                    duplicate_records=current_duplicate_records,
-                    duplicate_keys=configured_duplicate_keys,
-                )
+            result = await overwrite_duplicates_and_insert_new(
+                session=session,
+                table_name=payload.target_table,
+                new_records=current_new_records,
+                duplicate_records=current_duplicate_records,
+                duplicate_keys=configured_duplicate_keys,
             )
 
         except Exception as exc:
@@ -431,10 +398,7 @@ async def confirm_document(
 
             raise HTTPException(
                 status_code=500,
-                detail=(
-                    "Database overwrite failed: "
-                    f"{exc}"
-                ),
+                detail=("Database overwrite failed: " f"{exc}"),
             ) from exc
 
         return {

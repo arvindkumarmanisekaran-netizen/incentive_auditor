@@ -1,61 +1,50 @@
-
 from __future__ import annotations
 
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-
 ALLOWED_STATUS_VALUES: dict[str, set[str]] = {
     "territories": {
         "Active",
         "Inactive",
     },
-
     "representatives": {
         "Active",
         "Inactive",
     },
-
     "doctors": {
         "Active",
         "Inactive",
     },
-
     "products": {
         "Active",
         "Inactive",
     },
-
     "representative_doctor_assignments": {
         "Active",
         "Inactive",
         "Cancelled",
     },
-
     "sales": {
         "Valid",
         "Cancelled",
         "Returned",
         "Adjusted",
     },
-
     "prescriptions": {
         "Valid",
         "Cancelled",
         "Reversed",
     },
-
     "sales_targets": {
         "Active",
         "Inactive",
     },
-
     "incentive_programs": {
         "Active",
         "Inactive",
     },
-
     "incentive_payouts": {
         "Pending",
         "Paid",
@@ -265,9 +254,7 @@ def parse_decimal_value(
 
     try:
 
-        return Decimal(
-            str(value).strip()
-        )
+        return Decimal(str(value).strip())
 
     except (
         InvalidOperation,
@@ -282,9 +269,7 @@ def validate_required_columns(
     required_columns: list[str],
 ) -> list[dict[str, Any]]:
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
@@ -293,29 +278,14 @@ def validate_required_columns(
 
         for column in required_columns:
 
-            if (
-                column not in record
-                or is_missing(
-                    record.get(column)
-                )
-            ):
+            if column not in record or is_missing(record.get(column)):
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "code":
-                            "required",
-
-                        "message":
-                            (
-                                f"Required value "
-                                f"'{column}' is missing."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "code": "required",
+                        "message": (f"Required value " f"'{column}' is missing."),  # noqa: E501
                     }
                 )
 
@@ -326,9 +296,7 @@ def validate_dates(
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
@@ -340,38 +308,22 @@ def validate_dates(
             if column not in record:
                 continue
 
-            value = record[
-                column
-            ]
+            value = record[column]
 
             if is_missing(value):
                 continue
 
-            parsed = parse_date_value(
-                value
-            )
+            parsed = parse_date_value(value)
 
             if parsed is None:
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "value":
-                            value,
-
-                        "code":
-                            "invalid_date",
-
-                        "message":
-                            (
-                                f"Invalid date value "
-                                f"for '{column}'."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "value": value,
+                        "code": "invalid_date",
+                        "message": (f"Invalid date value " f"for '{column}'."),
                     }
                 )
 
@@ -382,9 +334,7 @@ def validate_integers(
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
@@ -396,68 +346,36 @@ def validate_integers(
             if column not in record:
                 continue
 
-            value = record[
-                column
-            ]
+            value = record[column]
 
             if is_missing(value):
                 continue
 
-            parsed = parse_integer_value(
-                value
-            )
+            parsed = parse_integer_value(value)
 
             if parsed is None:
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "value":
-                            value,
-
-                        "code":
-                            "invalid_integer",
-
-                        "message":
-                            (
-                                f"'{column}' must "
-                                f"be an integer."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "value": value,
+                        "code": "invalid_integer",
+                        "message": (f"'{column}' must " f"be an integer."),
                     }
                 )
 
                 continue
 
-            if (
-                column
-                in POSITIVE_INTEGER_COLUMNS
-                and parsed <= 0
-            ):
+            if column in POSITIVE_INTEGER_COLUMNS and parsed <= 0:
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "value":
-                            value,
-
-                        "code":
-                            "must_be_positive",
-
-                        "message":
-                            (
-                                f"'{column}' must "
-                                f"be greater than 0."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "value": value,
+                        "code": "must_be_positive",
+                        "message": (f"'{column}' must " f"be greater than 0."),
                     }
                 )
 
@@ -468,9 +386,7 @@ def validate_decimals(
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
@@ -482,68 +398,36 @@ def validate_decimals(
             if column not in record:
                 continue
 
-            value = record[
-                column
-            ]
+            value = record[column]
 
             if is_missing(value):
                 continue
 
-            parsed = parse_decimal_value(
-                value
-            )
+            parsed = parse_decimal_value(value)
 
             if parsed is None:
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "value":
-                            value,
-
-                        "code":
-                            "invalid_number",
-
-                        "message":
-                            (
-                                f"'{column}' must "
-                                f"be numeric."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "value": value,
+                        "code": "invalid_number",
+                        "message": (f"'{column}' must " f"be numeric."),
                     }
                 )
 
                 continue
 
-            if (
-                column
-                in NON_NEGATIVE_COLUMNS
-                and parsed < 0
-            ):
+            if column in NON_NEGATIVE_COLUMNS and parsed < 0:
 
                 errors.append(
                     {
-                        "row":
-                            row_number,
-
-                        "column":
-                            column,
-
-                        "value":
-                            value,
-
-                        "code":
-                            "negative_value",
-
-                        "message":
-                            (
-                                f"'{column}' cannot "
-                                f"be negative."
-                            ),
+                        "row": row_number,
+                        "column": column,
+                        "value": value,
+                        "code": "negative_value",
+                        "message": (f"'{column}' cannot " f"be negative."),
                     }
                 )
 
@@ -555,16 +439,12 @@ def validate_status(
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
 
-    allowed = ALLOWED_STATUS_VALUES.get(
-        table_name
-    )
+    allowed = ALLOWED_STATUS_VALUES.get(table_name)
 
     if not allowed:
         return []
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
@@ -574,40 +454,27 @@ def validate_status(
         if "status" not in record:
             continue
 
-        value = record[
-            "status"
-        ]
+        value = record["status"]
 
         if is_missing(value):
             continue
 
-        status = str(
-            value
-        ).strip()
+        status = str(value).strip()
 
         if status not in allowed:
 
             errors.append(
                 {
-                    "row":
-                        row_number,
-
-                    "column":
-                        "status",
-
-                    "value":
-                        value,
-
-                    "code":
-                        "invalid_status",
-
-                    "message":
-                        (
-                            f"Invalid status "
-                            f"'{status}'. Allowed "
-                            f"values: "
-                            f"{', '.join(sorted(allowed))}"
-                        ),
+                    "row": row_number,
+                    "column": "status",
+                    "value": value,
+                    "code": "invalid_status",
+                    "message": (
+                        f"Invalid status "
+                        f"'{status}'. Allowed "
+                        f"values: "
+                        f"{', '.join(sorted(allowed))}"
+                    ),
                 }
             )
 
@@ -619,9 +486,7 @@ def validate_date_ranges(
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     if table_name not in {
         "representative_doctor_assignments",
@@ -634,42 +499,22 @@ def validate_date_ranges(
         start=1,
     ):
 
-        effective_from = parse_date_value(
-            record.get(
-                "effective_from"
-            )
-        )
+        effective_from = parse_date_value(record.get("effective_from"))
 
-        effective_to = parse_date_value(
-            record.get(
-                "effective_to"
-            )
-        )
+        effective_to = parse_date_value(record.get("effective_to"))
 
-        if (
-            effective_from
-            and effective_to
-            and effective_to
-            < effective_from
-        ):
+        if effective_from and effective_to and effective_to < effective_from:
 
             errors.append(
                 {
-                    "row":
-                        row_number,
-
-                    "column":
-                        "effective_to",
-
-                    "code":
-                        "invalid_date_range",
-
-                    "message":
-                        (
-                            "effective_to cannot "
-                            "be earlier than "
-                            "effective_from."
-                        ),
+                    "row": row_number,
+                    "column": "effective_to",
+                    "code": "invalid_date_range",
+                    "message": (
+                        "effective_to cannot "
+                        "be earlier than "
+                        "effective_from."  # noqa: E501
+                    ),
                 }
             )
 
@@ -684,50 +529,29 @@ def validate_tier_ranges(
     if table_name != "incentive_tiers":
         return []
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
     for row_number, record in enumerate(
         records,
         start=1,
     ):
 
-        minimum = parse_decimal_value(
-            record.get(
-                "minimum_achievement"
-            )
-        )
+        minimum = parse_decimal_value(record.get("minimum_achievement"))
 
-        maximum = parse_decimal_value(
-            record.get(
-                "maximum_achievement"
-            )
-        )
+        maximum = parse_decimal_value(record.get("maximum_achievement"))
 
-        if (
-            minimum is not None
-            and maximum is not None
-            and maximum <= minimum
-        ):
+        if minimum is not None and maximum is not None and maximum <= minimum:
 
             errors.append(
                 {
-                    "row":
-                        row_number,
-
-                    "column":
-                        "maximum_achievement",
-
-                    "code":
-                        "invalid_tier_range",
-
-                    "message":
-                        (
-                            "maximum_achievement "
-                            "must be greater than "
-                            "minimum_achievement."
-                        ),
+                    "row": row_number,
+                    "column": "maximum_achievement",
+                    "code": "invalid_tier_range",
+                    "message": (
+                        "maximum_achievement "
+                        "must be greater than "
+                        "minimum_achievement."  # noqa: E501
+                    ),
                 }
             )
 
@@ -738,85 +562,74 @@ def validate_records(
     table_name: str,
     records: list[dict[str, Any]],
     required_columns: list[str],
+    file_name: str | None = None,
 ) -> dict[str, Any]:
     """
     Main validation entry point.
     """
 
-    errors: list[
-        dict[str, Any]
-    ] = []
+    errors: list[dict[str, Any]] = []
 
-    errors.extend(
+    validation_errors = []
+
+    validation_errors.extend(
         validate_required_columns(
             records,
             required_columns,
         )
     )
 
-    errors.extend(
-        validate_dates(
-            records
-        )
-    )
+    validation_errors.extend(validate_dates(records))
 
-    errors.extend(
-        validate_integers(
-            records
-        )
-    )
+    validation_errors.extend(validate_integers(records))
 
-    errors.extend(
-        validate_decimals(
-            records
-        )
-    )
+    validation_errors.extend(validate_decimals(records))
 
-    errors.extend(
+    validation_errors.extend(
         validate_status(
             table_name,
             records,
         )
     )
 
-    errors.extend(
+    validation_errors.extend(
         validate_date_ranges(
             table_name,
             records,
         )
     )
 
-    errors.extend(
+    validation_errors.extend(
         validate_tier_ranges(
             table_name,
             records,
         )
     )
 
+    # -----------------------------------------
+    # Attach frontend-friendly metadata
+    # -----------------------------------------
+
+    for error in validation_errors:
+
+        row_number = error.get("row") or error.get("row_id") or 0
+
+        errors.append(
+            {
+                "file_name": file_name or "unknown",
+                "row_id": row_number,
+                **error,
+            }
+        )
+
     invalid_rows = sorted(
-        {
-            error["row"]
-            for error in errors
-            if "row" in error
-        }
-    )
+        {error["row_id"] for error in errors if error.get("row_id")}
+    )  # noqa: E501
 
     return {
-        "valid":
-            len(errors) == 0,
-
-        "total_records":
-            len(records),
-
-        "invalid_record_count":
-            len(
-                invalid_rows
-            ),
-
-        "valid_record_count":
-            len(records)
-            - len(invalid_rows),
-
-        "errors":
-            errors,
+        "valid": len(errors) == 0,
+        "total_records": len(records),
+        "invalid_record_count": len(invalid_rows),
+        "valid_record_count": len(records) - len(invalid_rows),
+        "errors": errors,
     }
