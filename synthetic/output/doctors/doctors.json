@@ -1,72 +1,72 @@
 [
   {
     "physician id": "D000001",
-    "dr name": "Dr Nandini Loyal",
-    "area code": "T005",
-    "speciality": "Neurology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000002",
-    "dr name": "Dr Siddharth Murty",
-    "area code": "T018",
+    "physician": "Dr Mohini Pathak",
+    "area code": "T015",
     "speciality": "Dermatology",
     "status": "ACTIVE"
   },
   {
+    "physician id": "D000002",
+    "physician": "Dr Lakshit Upadhyay",
+    "area code": "T018",
+    "speciality": "Cardiology",
+    "status": "ACTIVE"
+  },
+  {
     "physician id": "D000003",
-    "dr name": "Dr Xalak Randhawa",
-    "area code": "T019",
-    "speciality": "Gastroenterology",
+    "physician": "Dr Gavin Batta",
+    "area code": "T004",
+    "speciality": "Dermatology",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000004",
-    "dr name": "Dr Luke Lanka",
-    "area code": "T019",
-    "speciality": "Gastroenterology",
+    "physician": "Dr Michael Dutta",
+    "area code": "T011",
+    "speciality": "General Medicine",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000005",
-    "dr name": "Dr Yatin Yohannan",
-    "area code": "T012",
-    "speciality": "Neurology",
+    "physician": "Dr Devansh Rajan",
+    "area code": "T010",
+    "speciality": "Gastroenterology",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000006",
-    "dr name": "Dr Priya Rastogi",
-    "area code": "T005",
+    "physician": "Dr Upadhriti Wadhwa",
+    "area code": "T006",
     "speciality": "Orthopedics",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000007",
-    "dr name": "Dr Theodore Devi",
-    "area code": "T003",
-    "speciality": "Cardiology",
+    "physician": "Dr Advay Contractor",
+    "area code": "T001",
+    "speciality": "Dermatology",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000008",
-    "dr name": "Dr Gavin Batta",
-    "area code": "T004",
+    "physician": "Dr Harini Choudhury",
+    "area code": "T017",
     "speciality": "Diabetology",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000009",
-    "dr name": "Dr Michael Dutta",
-    "area code": "T006",
-    "speciality": "Gastroenterology",
+    "physician": "Dr Radhika Dugar",
+    "area code": "T017",
+    "speciality": "General Medicine",
     "status": "ACTIVE"
   },
   {
     "physician id": "D000010",
-    "dr name": "Dr Devansh Rajan",
-    "area code": "T020",
-    "speciality": "General Medicine",
+    "physician": "Dr Aarush Lall",
+    "area code": "T010",
+    "speciality": "Neurology",
     "status": "ACTIVE"
   }
 ]

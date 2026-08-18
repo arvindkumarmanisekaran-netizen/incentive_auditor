@@ -104,6 +104,10 @@ def generate_territories(
         "Central",
     ]
 
+    countries = [
+        "India",
+    ]
+
     territories = []
 
     for i in range(1, count + 1):
@@ -112,10 +116,9 @@ def generate_territories(
             {
                 "territory_id": f"T{i:03d}",
                 "territory_name": (f"{fake.city()} Zone {i}"),
-                # registry expects region
                 "region": random.choice(regions),
-                # registry expects status
-                "status": "ACTIVE",
+                "country": random.choice(countries),
+                "status": "Active",
             }
         )
 
@@ -130,7 +133,9 @@ def generate_representatives(
     representatives = []
 
     for i in range(1, count + 1):
+
         first_name = fake.first_name()
+
         last_name = fake.last_name()
 
         territory = random.choice(territories)
@@ -141,8 +146,13 @@ def generate_representatives(
                 "first_name": first_name,
                 "last_name": last_name,
                 "territory_id": (territory["territory_id"]),
-                "email": (f"{first_name}.{last_name}" f"{i}@example.com").lower(),  # noqa: E501
-                "status": "ACTIVE",
+                "joining_date": (
+                    fake.date_between(
+                        start_date="-5y",
+                        end_date="today",
+                    ).isoformat()
+                ),
+                "status": "Active",
             }
         )
 

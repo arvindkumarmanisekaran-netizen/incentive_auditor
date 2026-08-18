@@ -1,7 +1,7 @@
 [
   {
     "assignment_id": 1,
-    "representative_id": "FR0007",
+    "representative_id": "FR0002",
     "doctor_id": "D000001",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -9,7 +9,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0002",
+    "representative_id": "FR0007",
     "doctor_id": "D000002",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -17,7 +17,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0006",
+    "representative_id": "FR0004",
     "doctor_id": "D000003",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -25,7 +25,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0006",
+    "representative_id": "FR0009",
     "doctor_id": "D000004",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -33,7 +33,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0009",
+    "representative_id": "FR0008",
     "doctor_id": "D000005",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -41,7 +41,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0001",
+    "representative_id": "FR0010",
     "doctor_id": "D000006",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -49,7 +49,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0002",
+    "representative_id": "FR0006",
     "doctor_id": "D000007",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -57,7 +57,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0009",
+    "representative_id": "FR0008",
     "doctor_id": "D000008",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -65,7 +65,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0009",
+    "representative_id": "FR0001",
     "doctor_id": "D000009",
     "effective_from": "2026-01-01",
     "effective_to": null,
@@ -73,7 +73,7 @@
   },
   {
     "assignment_id": 1,
-    "representative_id": "FR0006",
+    "representative_id": "FR0008",
     "doctor_id": "D000010",
     "effective_from": "2026-01-01",
     "effective_to": null,

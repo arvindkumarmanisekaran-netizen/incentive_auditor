@@ -113,22 +113,12 @@ def parse_xlsx(
     content: bytes,
 ) -> list[dict[str, Any]]:
 
-    logger.info("===== XLSX DEBUG =====")
-
-    print("===== XLSX DEBUG =====")
     buffer = io.BytesIO(content)
 
     dataframe = pd.read_excel(
         buffer,
         engine="openpyxl",
     )
-
-    print("===== XLSX DEBUG =====")
-    print("Columns:", list(dataframe.columns))
-    print("Shape:", dataframe.shape)
-    print("First rows:")
-    print(dataframe.head(3).to_dict())
-    print("======================")
 
     if dataframe.empty:
         return []

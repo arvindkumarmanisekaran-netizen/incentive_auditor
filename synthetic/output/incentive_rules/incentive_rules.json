@@ -5,8 +5,8 @@
     "rule_name": "P001 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 6.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 3.0,
     "active": true
   },
   {
@@ -16,7 +16,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 50000,
-    "payout_percentage": 6.0,
+    "payout_percentage": 5.0,
     "active": true
   },
   {
@@ -35,8 +35,8 @@
     "rule_name": "P004 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 3.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -45,8 +45,8 @@
     "rule_name": "P005 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 4.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -55,8 +55,8 @@
     "rule_name": "P006 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 6.0,
+    "threshold_amount": 100000,
+    "payout_percentage": 7.5,
     "active": true
   },
   {
@@ -65,7 +65,7 @@
     "rule_name": "P007 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 50000,
+    "threshold_amount": 0,
     "payout_percentage": 5.0,
     "active": true
   },
@@ -75,8 +75,8 @@
     "rule_name": "P008 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 3.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 7.5,
     "active": true
   },
   {
@@ -86,7 +86,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 100000,
-    "payout_percentage": 3.0,
+    "payout_percentage": 4.0,
     "active": true
   },
   {
@@ -95,8 +95,8 @@
     "rule_name": "P010 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 4.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 5.0,
     "active": true
   },
   {
@@ -105,8 +105,8 @@
     "rule_name": "P011 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 7.5,
+    "threshold_amount": 0,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -125,8 +125,8 @@
     "rule_name": "P013 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 3.0,
+    "threshold_amount": 100000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -136,7 +136,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 100000,
-    "payout_percentage": 5.0,
+    "payout_percentage": 4.0,
     "active": true
   },
   {
@@ -145,8 +145,8 @@
     "rule_name": "P015 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 7.5,
+    "threshold_amount": 50000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -155,8 +155,8 @@
     "rule_name": "P016 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 3.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -165,8 +165,8 @@
     "rule_name": "P017 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 5.0,
+    "threshold_amount": 50000,
+    "payout_percentage": 3.0,
     "active": true
   },
   {
@@ -175,7 +175,7 @@
     "rule_name": "P018 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
+    "threshold_amount": 100000,
     "payout_percentage": 4.0,
     "active": true
   },
@@ -186,7 +186,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 100000,
-    "payout_percentage": 4.0,
+    "payout_percentage": 7.5,
     "active": true
   },
   {
@@ -195,8 +195,8 @@
     "rule_name": "P020 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 6.0,
+    "threshold_amount": 0,
+    "payout_percentage": 7.5,
     "active": true
   },
   {
@@ -206,7 +206,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 0,
-    "payout_percentage": 5.0,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -215,8 +215,8 @@
     "rule_name": "P022 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 7.5,
+    "threshold_amount": 100000,
+    "payout_percentage": 4.0,
     "active": true
   },
   {
@@ -225,8 +225,8 @@
     "rule_name": "P023 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 7.5,
+    "threshold_amount": 50000,
+    "payout_percentage": 5.0,
     "active": true
   },
   {
@@ -235,8 +235,8 @@
     "rule_name": "P024 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 50000,
-    "payout_percentage": 7.5,
+    "threshold_amount": 100000,
+    "payout_percentage": 3.0,
     "active": true
   },
   {
@@ -255,8 +255,8 @@
     "rule_name": "P026 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 4.0,
+    "threshold_amount": 0,
+    "payout_percentage": 5.0,
     "active": true
   },
   {
@@ -265,8 +265,8 @@
     "rule_name": "P027 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 100000,
-    "payout_percentage": 3.0,
+    "threshold_amount": 0,
+    "payout_percentage": 5.0,
     "active": true
   },
   {
@@ -276,7 +276,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 100000,
-    "payout_percentage": 5.0,
+    "payout_percentage": 4.0,
     "active": true
   },
   {
@@ -285,8 +285,8 @@
     "rule_name": "P029 Standard Incentive",
     "effective_from": "2026-01-01",
     "effective_to": null,
-    "threshold_amount": 0,
-    "payout_percentage": 3.0,
+    "threshold_amount": 100000,
+    "payout_percentage": 6.0,
     "active": true
   },
   {
@@ -296,7 +296,7 @@
     "effective_from": "2026-01-01",
     "effective_to": null,
     "threshold_amount": 50000,
-    "payout_percentage": 4.0,
+    "payout_percentage": 3.0,
     "active": true
   }
 ]

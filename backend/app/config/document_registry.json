@@ -8,8 +8,15 @@
 
   "representative_master": {
     "table": "representatives",
-    "required_columns": ["representative_id", "first_name", "last_name", "territory_id"],
-    "optional_columns": ["joining_date", "status"],
+    "required_columns": [
+      "representative_id",
+      "first_name",
+      "last_name",
+      "territory_id",
+      "joining_date",
+      "status"
+    ],
+    "optional_columns": [],
     "duplicate_keys": ["representative_id"]
   },
 

@@ -81,6 +81,43 @@ def extract_incoming_records(
     )
 
 
+def normalize_status_values(
+    records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Normalize values of columns containing
+    'status' in the column name.
+
+    Examples:
+        active       -> Active
+        ACTIVE       -> Active
+        in active    -> Inactive
+        in-active    -> Inactive
+        pending ok   -> Pendingok
+    """
+
+    normalized_records = []
+
+    for record in records:
+
+        normalized = {}
+
+        for column, value in record.items():
+
+            if "status" in column.lower() and value is not None:
+
+                value = str(value).strip().replace(" ", "").replace("-", "").lower()  # noqa: E501
+
+                if value:
+                    value = value[0].upper() + value[1:]
+
+            normalized[column] = value
+
+        normalized_records.append(normalized)
+
+    return normalized_records
+
+
 async def process_document(
     *,
     session: AsyncSession,
@@ -130,6 +167,8 @@ async def process_document(
             "action_required": False,
             "error": str(exc),
         }
+
+    source_records = normalize_status_values(source_records)
 
     # -------------------------------------------------
     # STEP 2

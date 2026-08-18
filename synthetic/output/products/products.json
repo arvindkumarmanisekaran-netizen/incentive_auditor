@@ -1,212 +1,212 @@
 [
   {
-    "drug code": "P001",
-    "item name": "TemporaCare 1",
-    "product category": "Dermatology",
-    "unit_price": 766.89,
+    "drug id": "P001",
+    "product name": "FugitCare 1",
+    "therapy area": "Respiratory",
+    "unit_price": 1790.97,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P002",
-    "item name": "MaioresCare 2",
-    "product category": "Respiratory",
-    "unit_price": 2397.31,
+    "drug id": "P002",
+    "product name": "TemporeCare 2",
+    "therapy area": "Cardiology",
+    "unit_price": 1687.03,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P003",
-    "item name": "DoloremCare 3",
-    "product category": "Dermatology",
-    "unit_price": 345.3,
+    "drug id": "P003",
+    "product name": "VoluptasCare 3",
+    "therapy area": "Gastroenterology",
+    "unit_price": 2464.53,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P004",
-    "item name": "MaximeCare 4",
-    "product category": "Pain",
-    "unit_price": 332.12,
+    "drug id": "P004",
+    "product name": "QuosCare 4",
+    "therapy area": "Respiratory",
+    "unit_price": 2179.56,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P005",
-    "item name": "LiberoCare 5",
-    "product category": "Dermatology",
-    "unit_price": 1548.94,
+    "drug id": "P005",
+    "product name": "EstCare 5",
+    "therapy area": "Pain",
+    "unit_price": 767.14,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P006",
-    "item name": "EosCare 6",
-    "product category": "Cardiology",
-    "unit_price": 1851.36,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P007",
-    "item name": "VelitCare 7",
-    "product category": "Diabetes",
-    "unit_price": 2435.48,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P008",
-    "item name": "FugiatCare 8",
-    "product category": "Pain",
-    "unit_price": 289.12,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P009",
-    "item name": "VoluptatesCare 9",
-    "product category": "Gastroenterology",
-    "unit_price": 2090.57,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P010",
-    "item name": "VeroCare 10",
-    "product category": "Dermatology",
-    "unit_price": 1485.65,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P011",
-    "item name": "TeneturCare 11",
-    "product category": "Diabetes",
-    "unit_price": 209.98,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P012",
-    "item name": "AutCare 12",
-    "product category": "Respiratory",
-    "unit_price": 1955.36,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P013",
-    "item name": "SequiCare 13",
-    "product category": "Diabetes",
-    "unit_price": 2152.76,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P014",
-    "item name": "TemporaCare 14",
-    "product category": "Diabetes",
-    "unit_price": 1012.3,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P015",
-    "item name": "DoloresCare 15",
-    "product category": "Antibiotic",
-    "unit_price": 1625.64,
-    "status": "ACTIVE"
-  },
-  {
-    "drug code": "P016",
-    "item name": "QuibusdamCare 16",
-    "product category": "Dermatology",
+    "drug id": "P006",
+    "product name": "VitaeCare 6",
+    "therapy area": "Dermatology",
     "unit_price": 490.37,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P017",
-    "item name": "ExercitationemCare 17",
-    "product category": "Dermatology",
+    "drug id": "P007",
+    "product name": "ItaqueCare 7",
+    "therapy area": "Dermatology",
     "unit_price": 602.82,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P018",
-    "item name": "DoloremCare 18",
-    "product category": "Gastroenterology",
+    "drug id": "P008",
+    "product name": "AspernaturCare 8",
+    "therapy area": "Gastroenterology",
     "unit_price": 1784.37,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P019",
-    "item name": "OfficiisCare 19",
-    "product category": "Diabetes",
+    "drug id": "P009",
+    "product name": "EumCare 9",
+    "therapy area": "Diabetes",
     "unit_price": 1561.91,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P020",
-    "item name": "ModiCare 20",
-    "product category": "Neurology",
+    "drug id": "P010",
+    "product name": "AliquidCare 10",
+    "therapy area": "Neurology",
     "unit_price": 1381.94,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P021",
-    "item name": "FugitCare 21",
-    "product category": "Respiratory",
+    "drug id": "P011",
+    "product name": "IpsamCare 11",
+    "therapy area": "Respiratory",
     "unit_price": 492.17,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P022",
-    "item name": "TemporeCare 22",
-    "product category": "Pain",
+    "drug id": "P012",
+    "product name": "NatusCare 12",
+    "therapy area": "Pain",
     "unit_price": 747.87,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P023",
-    "item name": "VoluptasCare 23",
-    "product category": "Respiratory",
+    "drug id": "P013",
+    "product name": "FugiatCare 13",
+    "therapy area": "Respiratory",
     "unit_price": 1743.07,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P024",
-    "item name": "QuosCare 24",
-    "product category": "Cardiology",
+    "drug id": "P014",
+    "product name": "AtCare 14",
+    "therapy area": "Cardiology",
     "unit_price": 649.72,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P025",
-    "item name": "EstCare 25",
-    "product category": "Cardiology",
+    "drug id": "P015",
+    "product name": "ErrorCare 15",
+    "therapy area": "Cardiology",
     "unit_price": 2032.11,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P026",
-    "item name": "VitaeCare 26",
-    "product category": "Pain",
+    "drug id": "P016",
+    "product name": "ReiciendisCare 16",
+    "therapy area": "Pain",
     "unit_price": 742.58,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P027",
-    "item name": "ItaqueCare 27",
-    "product category": "Respiratory",
+    "drug id": "P017",
+    "product name": "IpsamCare 17",
+    "therapy area": "Respiratory",
     "unit_price": 2291.53,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P028",
-    "item name": "AspernaturCare 28",
-    "product category": "Dermatology",
+    "drug id": "P018",
+    "product name": "ErrorCare 18",
+    "therapy area": "Dermatology",
     "unit_price": 610.3,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P029",
-    "item name": "EumCare 29",
-    "product category": "Antibiotic",
+    "drug id": "P019",
+    "product name": "UllamCare 19",
+    "therapy area": "Antibiotic",
     "unit_price": 1049.52,
     "status": "ACTIVE"
   },
   {
-    "drug code": "P030",
-    "item name": "AliquidCare 30",
-    "product category": "Antibiotic",
+    "drug id": "P020",
+    "product name": "PraesentiumCare 20",
+    "therapy area": "Antibiotic",
     "unit_price": 442.89,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P021",
+    "product name": "NamCare 21",
+    "therapy area": "Neurology",
+    "unit_price": 691.91,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P022",
+    "product name": "TemporibusCare 22",
+    "therapy area": "Gastroenterology",
+    "unit_price": 1892.83,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P023",
+    "product name": "OfficiaCare 23",
+    "therapy area": "Pain",
+    "unit_price": 2254.77,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P024",
+    "product name": "DictaCare 24",
+    "therapy area": "Pain",
+    "unit_price": 968.79,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P025",
+    "product name": "FugaCare 25",
+    "therapy area": "Neurology",
+    "unit_price": 1322.86,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P026",
+    "product name": "DeseruntCare 26",
+    "therapy area": "Diabetes",
+    "unit_price": 1913.88,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P027",
+    "product name": "ExpeditaCare 27",
+    "therapy area": "Diabetes",
+    "unit_price": 466.82,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P028",
+    "product name": "RationeCare 28",
+    "therapy area": "Neurology",
+    "unit_price": 2000.99,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P029",
+    "product name": "QuidemCare 29",
+    "therapy area": "Pain",
+    "unit_price": 1531.38,
+    "status": "ACTIVE"
+  },
+  {
+    "drug id": "P030",
+    "product name": "FugaCare 30",
+    "therapy area": "Pain",
+    "unit_price": 1015.89,
     "status": "ACTIVE"
   }
 ]

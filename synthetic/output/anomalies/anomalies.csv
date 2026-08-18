@@ -1,15 +1,18 @@
 representative_id,product_id,month,anomaly_types
-FR0001,P014,2026-01,"['rx_drop', 'sales_spike', 'cross_territory']"
-FR0001,P006,2026-04,"['rx_drop', 'sales_spike', 'doctor_concentration']"
-FR0002,P019,2026-01,"['payout_discrepancy', 'doctor_concentration']"
-FR0002,P004,2026-03,['doctor_concentration']
-FR0002,P018,2026-07,"['rx_drop', 'cross_territory']"
-FR0002,P007,2026-07,"['cross_territory', 'sales_spike']"
-FR0006,P026,2026-01,"['rx_drop', 'doctor_concentration', 'cross_territory']"
-FR0006,P004,2026-01,['doctor_concentration']
-FR0006,P018,2026-05,['payout_discrepancy']
-FR0007,P011,2026-06,['doctor_concentration']
-FR0007,P008,2026-07,"['sales_spike', 'doctor_concentration', 'payout_discrepancy']"
-FR0007,P027,2026-02,"['rx_drop', 'sales_spike']"
-FR0007,P027,2026-04,"['cross_territory', 'payout_discrepancy']"
-FR0009,P028,2026-07,"['cross_territory', 'payout_discrepancy']"
+FR0001,P029,2026-05,['sales_spike']
+FR0001,P026,2026-03,"['payout_discrepancy', 'doctor_concentration', 'rx_drop']"
+FR0002,P014,2026-01,"['rx_drop', 'doctor_concentration', 'payout_discrepancy']"
+FR0002,P004,2026-05,"['cross_territory', 'rx_drop']"
+FR0006,P014,2026-06,['cross_territory']
+FR0006,P011,2026-05,"['cross_territory', 'rx_drop']"
+FR0006,P004,2026-04,['payout_discrepancy']
+FR0006,P004,2026-07,"['rx_drop', 'sales_spike']"
+FR0007,P004,2026-03,"['payout_discrepancy', 'sales_spike']"
+FR0007,P018,2026-02,['doctor_concentration']
+FR0008,P011,2026-04,['payout_discrepancy']
+FR0008,P006,2026-02,['doctor_concentration']
+FR0008,P003,2026-01,['payout_discrepancy']
+FR0009,P028,2026-07,['doctor_concentration']
+FR0010,P019,2026-04,"['cross_territory', 'payout_discrepancy']"
+FR0010,P018,2026-05,['rx_drop']
+FR0010,P028,2026-05,"['doctor_concentration', 'sales_spike']"

@@ -1,11 +1,11 @@
-dr code,doctor name,area id,speciality,doctor status
-D000001,Dr Nandini Loyal,T005,Neurology,ACTIVE
-D000002,Dr Siddharth Murty,T018,Dermatology,ACTIVE
-D000003,Dr Xalak Randhawa,T019,Gastroenterology,ACTIVE
-D000004,Dr Luke Lanka,T019,Gastroenterology,ACTIVE
-D000005,Dr Yatin Yohannan,T012,Neurology,ACTIVE
-D000006,Dr Priya Rastogi,T005,Orthopedics,ACTIVE
-D000007,Dr Theodore Devi,T003,Cardiology,ACTIVE
-D000008,Dr Gavin Batta,T004,Diabetology,ACTIVE
-D000009,Dr Michael Dutta,T006,Gastroenterology,ACTIVE
-D000010,Dr Devansh Rajan,T020,General Medicine,ACTIVE
+physician code,doctor name,territory code,speciality,active status
+D000001,Dr Mohini Pathak,T015,Dermatology,ACTIVE
+D000002,Dr Lakshit Upadhyay,T018,Cardiology,ACTIVE
+D000003,Dr Gavin Batta,T004,Dermatology,ACTIVE
+D000004,Dr Michael Dutta,T011,General Medicine,ACTIVE
+D000005,Dr Devansh Rajan,T010,Gastroenterology,ACTIVE
+D000006,Dr Upadhriti Wadhwa,T006,Orthopedics,ACTIVE
+D000007,Dr Advay Contractor,T001,Dermatology,ACTIVE
+D000008,Dr Harini Choudhury,T017,Diabetology,ACTIVE
+D000009,Dr Radhika Dugar,T017,General Medicine,ACTIVE
+D000010,Dr Aarush Lall,T010,Neurology,ACTIVE
