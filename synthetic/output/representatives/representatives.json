@@ -1,0 +1,82 @@
+[
+  {
+    "employee id": "FR0001",
+    "first name": "Aishani",
+    "surname": "Bassi",
+    "territory code": "T007",
+    "email": "aishani.bassi1@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0002",
+    "first name": "Tripti",
+    "surname": "Yadav",
+    "territory code": "T018",
+    "email": "tripti.yadav2@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0003",
+    "first name": "Jeet",
+    "surname": "Radhakrishnan",
+    "territory code": "T014",
+    "email": "jeet.radhakrishnan3@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0004",
+    "first name": "Farhan",
+    "surname": "Memon",
+    "territory code": "T008",
+    "email": "farhan.memon4@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0005",
+    "first name": "Janaki",
+    "surname": "Handa",
+    "territory code": "T015",
+    "email": "janaki.handa5@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0006",
+    "first name": "Ekaraj",
+    "surname": "Bath",
+    "territory code": "T019",
+    "email": "ekaraj.bath6@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0007",
+    "first name": "Vedant",
+    "surname": "Mann",
+    "territory code": "T009",
+    "email": "vedant.mann7@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0008",
+    "first name": "Fariq",
+    "surname": "Kaul",
+    "territory code": "T001",
+    "email": "fariq.kaul8@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0009",
+    "first name": "Harrison",
+    "surname": "Rai",
+    "territory code": "T006",
+    "email": "harrison.rai9@example.com",
+    "employee status": "ACTIVE"
+  },
+  {
+    "employee id": "FR0010",
+    "first name": "Arunima",
+    "surname": "Setty",
+    "territory code": "T014",
+    "email": "arunima.setty10@example.com",
+    "employee status": "ACTIVE"
+  }
+]

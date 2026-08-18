@@ -1,0 +1,1962 @@
+[
+  {
+    "target_id": 1,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-01-01",
+    "target_amount": 179657.07
+  },
+  {
+    "target_id": 2,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-01-01",
+    "target_amount": 193719.63
+  },
+  {
+    "target_id": 3,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-01-01",
+    "target_amount": 52816.84
+  },
+  {
+    "target_id": 4,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-01-01",
+    "target_amount": 117422.44
+  },
+  {
+    "target_id": 5,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-02-01",
+    "target_amount": 109004.85
+  },
+  {
+    "target_id": 6,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-02-01",
+    "target_amount": 184880.23
+  },
+  {
+    "target_id": 7,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-02-01",
+    "target_amount": 88632.26
+  },
+  {
+    "target_id": 8,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-02-01",
+    "target_amount": 172190.9
+  },
+  {
+    "target_id": 9,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-03-01",
+    "target_amount": 177745.16
+  },
+  {
+    "target_id": 10,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-03-01",
+    "target_amount": 131098.07
+  },
+  {
+    "target_id": 11,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-03-01",
+    "target_amount": 135540.65
+  },
+  {
+    "target_id": 12,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-03-01",
+    "target_amount": 115585.33
+  },
+  {
+    "target_id": 13,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-04-01",
+    "target_amount": 130166.65
+  },
+  {
+    "target_id": 14,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-04-01",
+    "target_amount": 69077.02
+  },
+  {
+    "target_id": 15,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-04-01",
+    "target_amount": 246337.04
+  },
+  {
+    "target_id": 16,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-04-01",
+    "target_amount": 145490.82
+  },
+  {
+    "target_id": 17,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-05-01",
+    "target_amount": 237165.08
+  },
+  {
+    "target_id": 18,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-05-01",
+    "target_amount": 51366.02
+  },
+  {
+    "target_id": 19,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-05-01",
+    "target_amount": 126714.88
+  },
+  {
+    "target_id": 20,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-05-01",
+    "target_amount": 139347.1
+  },
+  {
+    "target_id": 21,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-06-01",
+    "target_amount": 103398.87
+  },
+  {
+    "target_id": 22,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-06-01",
+    "target_amount": 115925.06
+  },
+  {
+    "target_id": 23,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-06-01",
+    "target_amount": 166492.15
+  },
+  {
+    "target_id": 24,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-06-01",
+    "target_amount": 164575.47
+  },
+  {
+    "target_id": 25,
+    "representative_id": "FR0001",
+    "product_id": "P011",
+    "target_month": "2026-07-01",
+    "target_amount": 102310.63
+  },
+  {
+    "target_id": 26,
+    "representative_id": "FR0001",
+    "product_id": "P006",
+    "target_month": "2026-07-01",
+    "target_amount": 121910.42
+  },
+  {
+    "target_id": 27,
+    "representative_id": "FR0001",
+    "product_id": "P024",
+    "target_month": "2026-07-01",
+    "target_amount": 97260.52
+  },
+  {
+    "target_id": 28,
+    "representative_id": "FR0001",
+    "product_id": "P015",
+    "target_month": "2026-07-01",
+    "target_amount": 183557.22
+  },
+  {
+    "target_id": 29,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-01-01",
+    "target_amount": 187214.72
+  },
+  {
+    "target_id": 30,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-01-01",
+    "target_amount": 234621.2
+  },
+  {
+    "target_id": 31,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-01-01",
+    "target_amount": 227560.28
+  },
+  {
+    "target_id": 32,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-01-01",
+    "target_amount": 203968.21
+  },
+  {
+    "target_id": 33,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-02-01",
+    "target_amount": 188058.08
+  },
+  {
+    "target_id": 34,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-02-01",
+    "target_amount": 177742.27
+  },
+  {
+    "target_id": 35,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-02-01",
+    "target_amount": 238127.12
+  },
+  {
+    "target_id": 36,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-02-01",
+    "target_amount": 123508.78
+  },
+  {
+    "target_id": 37,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-03-01",
+    "target_amount": 94169.85
+  },
+  {
+    "target_id": 38,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-03-01",
+    "target_amount": 241472.11
+  },
+  {
+    "target_id": 39,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-03-01",
+    "target_amount": 145636.38
+  },
+  {
+    "target_id": 40,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-03-01",
+    "target_amount": 140995.73
+  },
+  {
+    "target_id": 41,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-04-01",
+    "target_amount": 247767.59
+  },
+  {
+    "target_id": 42,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-04-01",
+    "target_amount": 124724.97
+  },
+  {
+    "target_id": 43,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-04-01",
+    "target_amount": 190388.15
+  },
+  {
+    "target_id": 44,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-04-01",
+    "target_amount": 232559.38
+  },
+  {
+    "target_id": 45,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-05-01",
+    "target_amount": 201470.1
+  },
+  {
+    "target_id": 46,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-05-01",
+    "target_amount": 210399.0
+  },
+  {
+    "target_id": 47,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-05-01",
+    "target_amount": 215120.7
+  },
+  {
+    "target_id": 48,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-05-01",
+    "target_amount": 202371.92
+  },
+  {
+    "target_id": 49,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-06-01",
+    "target_amount": 186068.38
+  },
+  {
+    "target_id": 50,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-06-01",
+    "target_amount": 169162.89
+  },
+  {
+    "target_id": 51,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-06-01",
+    "target_amount": 207474.14
+  },
+  {
+    "target_id": 52,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-06-01",
+    "target_amount": 155101.33
+  },
+  {
+    "target_id": 53,
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "target_month": "2026-07-01",
+    "target_amount": 155634.62
+  },
+  {
+    "target_id": 54,
+    "representative_id": "FR0002",
+    "product_id": "P010",
+    "target_month": "2026-07-01",
+    "target_amount": 122356.97
+  },
+  {
+    "target_id": 55,
+    "representative_id": "FR0002",
+    "product_id": "P006",
+    "target_month": "2026-07-01",
+    "target_amount": 233448.94
+  },
+  {
+    "target_id": 56,
+    "representative_id": "FR0002",
+    "product_id": "P013",
+    "target_month": "2026-07-01",
+    "target_amount": 72441.76
+  },
+  {
+    "target_id": 57,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-01-01",
+    "target_amount": 90431.36
+  },
+  {
+    "target_id": 58,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-01-01",
+    "target_amount": 157332.03
+  },
+  {
+    "target_id": 59,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-01-01",
+    "target_amount": 82907.43
+  },
+  {
+    "target_id": 60,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-01-01",
+    "target_amount": 220897.2
+  },
+  {
+    "target_id": 61,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-02-01",
+    "target_amount": 138368.11
+  },
+  {
+    "target_id": 62,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-02-01",
+    "target_amount": 186059.05
+  },
+  {
+    "target_id": 63,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-02-01",
+    "target_amount": 193383.59
+  },
+  {
+    "target_id": 64,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-02-01",
+    "target_amount": 147765.59
+  },
+  {
+    "target_id": 65,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-03-01",
+    "target_amount": 229777.87
+  },
+  {
+    "target_id": 66,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-03-01",
+    "target_amount": 139096.54
+  },
+  {
+    "target_id": 67,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-03-01",
+    "target_amount": 61127.16
+  },
+  {
+    "target_id": 68,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-03-01",
+    "target_amount": 76388.87
+  },
+  {
+    "target_id": 69,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-04-01",
+    "target_amount": 133084.91
+  },
+  {
+    "target_id": 70,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-04-01",
+    "target_amount": 162782.24
+  },
+  {
+    "target_id": 71,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-04-01",
+    "target_amount": 161759.44
+  },
+  {
+    "target_id": 72,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-04-01",
+    "target_amount": 184553.54
+  },
+  {
+    "target_id": 73,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-05-01",
+    "target_amount": 111633.91
+  },
+  {
+    "target_id": 74,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-05-01",
+    "target_amount": 54354.09
+  },
+  {
+    "target_id": 75,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-05-01",
+    "target_amount": 100891.44
+  },
+  {
+    "target_id": 76,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-05-01",
+    "target_amount": 50603.09
+  },
+  {
+    "target_id": 77,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-06-01",
+    "target_amount": 93580.26
+  },
+  {
+    "target_id": 78,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-06-01",
+    "target_amount": 64605.91
+  },
+  {
+    "target_id": 79,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-06-01",
+    "target_amount": 134739.48
+  },
+  {
+    "target_id": 80,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-06-01",
+    "target_amount": 190076.98
+  },
+  {
+    "target_id": 81,
+    "representative_id": "FR0003",
+    "product_id": "P027",
+    "target_month": "2026-07-01",
+    "target_amount": 158232.7
+  },
+  {
+    "target_id": 82,
+    "representative_id": "FR0003",
+    "product_id": "P018",
+    "target_month": "2026-07-01",
+    "target_amount": 62051.13
+  },
+  {
+    "target_id": 83,
+    "representative_id": "FR0003",
+    "product_id": "P029",
+    "target_month": "2026-07-01",
+    "target_amount": 228843.69
+  },
+  {
+    "target_id": 84,
+    "representative_id": "FR0003",
+    "product_id": "P017",
+    "target_month": "2026-07-01",
+    "target_amount": 247227.45
+  },
+  {
+    "target_id": 85,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-01-01",
+    "target_amount": 85996.27
+  },
+  {
+    "target_id": 86,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-01-01",
+    "target_amount": 77085.77
+  },
+  {
+    "target_id": 87,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-01-01",
+    "target_amount": 178305.0
+  },
+  {
+    "target_id": 88,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-01-01",
+    "target_amount": 195857.9
+  },
+  {
+    "target_id": 89,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-02-01",
+    "target_amount": 242756.51
+  },
+  {
+    "target_id": 90,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-02-01",
+    "target_amount": 124892.18
+  },
+  {
+    "target_id": 91,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-02-01",
+    "target_amount": 228266.72
+  },
+  {
+    "target_id": 92,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-02-01",
+    "target_amount": 139707.43
+  },
+  {
+    "target_id": 93,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-03-01",
+    "target_amount": 233423.02
+  },
+  {
+    "target_id": 94,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-03-01",
+    "target_amount": 125499.27
+  },
+  {
+    "target_id": 95,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-03-01",
+    "target_amount": 66050.0
+  },
+  {
+    "target_id": 96,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-03-01",
+    "target_amount": 242828.88
+  },
+  {
+    "target_id": 97,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-04-01",
+    "target_amount": 224910.74
+  },
+  {
+    "target_id": 98,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-04-01",
+    "target_amount": 76597.96
+  },
+  {
+    "target_id": 99,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-04-01",
+    "target_amount": 222057.32
+  },
+  {
+    "target_id": 100,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-04-01",
+    "target_amount": 73726.63
+  },
+  {
+    "target_id": 101,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-05-01",
+    "target_amount": 248569.36
+  },
+  {
+    "target_id": 102,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-05-01",
+    "target_amount": 128611.73
+  },
+  {
+    "target_id": 103,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-05-01",
+    "target_amount": 75469.42
+  },
+  {
+    "target_id": 104,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-05-01",
+    "target_amount": 245744.88
+  },
+  {
+    "target_id": 105,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-06-01",
+    "target_amount": 216964.32
+  },
+  {
+    "target_id": 106,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-06-01",
+    "target_amount": 201235.88
+  },
+  {
+    "target_id": 107,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-06-01",
+    "target_amount": 245698.14
+  },
+  {
+    "target_id": 108,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-06-01",
+    "target_amount": 142600.78
+  },
+  {
+    "target_id": 109,
+    "representative_id": "FR0004",
+    "product_id": "P016",
+    "target_month": "2026-07-01",
+    "target_amount": 193818.8
+  },
+  {
+    "target_id": 110,
+    "representative_id": "FR0004",
+    "product_id": "P002",
+    "target_month": "2026-07-01",
+    "target_amount": 134825.61
+  },
+  {
+    "target_id": 111,
+    "representative_id": "FR0004",
+    "product_id": "P010",
+    "target_month": "2026-07-01",
+    "target_amount": 125855.29
+  },
+  {
+    "target_id": 112,
+    "representative_id": "FR0004",
+    "product_id": "P014",
+    "target_month": "2026-07-01",
+    "target_amount": 95932.81
+  },
+  {
+    "target_id": 113,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-01-01",
+    "target_amount": 87696.09
+  },
+  {
+    "target_id": 114,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-01-01",
+    "target_amount": 225041.63
+  },
+  {
+    "target_id": 115,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-01-01",
+    "target_amount": 203097.99
+  },
+  {
+    "target_id": 116,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-01-01",
+    "target_amount": 56443.46
+  },
+  {
+    "target_id": 117,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-02-01",
+    "target_amount": 182039.54
+  },
+  {
+    "target_id": 118,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-02-01",
+    "target_amount": 172984.64
+  },
+  {
+    "target_id": 119,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-02-01",
+    "target_amount": 237247.59
+  },
+  {
+    "target_id": 120,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-02-01",
+    "target_amount": 227808.27
+  },
+  {
+    "target_id": 121,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-03-01",
+    "target_amount": 98133.26
+  },
+  {
+    "target_id": 122,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-03-01",
+    "target_amount": 63458.18
+  },
+  {
+    "target_id": 123,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-03-01",
+    "target_amount": 168788.83
+  },
+  {
+    "target_id": 124,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-03-01",
+    "target_amount": 139288.21
+  },
+  {
+    "target_id": 125,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-04-01",
+    "target_amount": 184404.73
+  },
+  {
+    "target_id": 126,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-04-01",
+    "target_amount": 224442.48
+  },
+  {
+    "target_id": 127,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-04-01",
+    "target_amount": 98946.83
+  },
+  {
+    "target_id": 128,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-04-01",
+    "target_amount": 58847.35
+  },
+  {
+    "target_id": 129,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-05-01",
+    "target_amount": 137792.56
+  },
+  {
+    "target_id": 130,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-05-01",
+    "target_amount": 157951.96
+  },
+  {
+    "target_id": 131,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-05-01",
+    "target_amount": 200877.14
+  },
+  {
+    "target_id": 132,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-05-01",
+    "target_amount": 205212.72
+  },
+  {
+    "target_id": 133,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-06-01",
+    "target_amount": 78027.12
+  },
+  {
+    "target_id": 134,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-06-01",
+    "target_amount": 248696.69
+  },
+  {
+    "target_id": 135,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-06-01",
+    "target_amount": 96832.3
+  },
+  {
+    "target_id": 136,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-06-01",
+    "target_amount": 233279.41
+  },
+  {
+    "target_id": 137,
+    "representative_id": "FR0005",
+    "product_id": "P015",
+    "target_month": "2026-07-01",
+    "target_amount": 165222.07
+  },
+  {
+    "target_id": 138,
+    "representative_id": "FR0005",
+    "product_id": "P012",
+    "target_month": "2026-07-01",
+    "target_amount": 165494.96
+  },
+  {
+    "target_id": 139,
+    "representative_id": "FR0005",
+    "product_id": "P005",
+    "target_month": "2026-07-01",
+    "target_amount": 204507.64
+  },
+  {
+    "target_id": 140,
+    "representative_id": "FR0005",
+    "product_id": "P009",
+    "target_month": "2026-07-01",
+    "target_amount": 213676.5
+  },
+  {
+    "target_id": 141,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-01-01",
+    "target_amount": 247139.11
+  },
+  {
+    "target_id": 142,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-01-01",
+    "target_amount": 154250.21
+  },
+  {
+    "target_id": 143,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-01-01",
+    "target_amount": 132712.04
+  },
+  {
+    "target_id": 144,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-01-01",
+    "target_amount": 105030.78
+  },
+  {
+    "target_id": 145,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-02-01",
+    "target_amount": 161343.62
+  },
+  {
+    "target_id": 146,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-02-01",
+    "target_amount": 168333.42
+  },
+  {
+    "target_id": 147,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-02-01",
+    "target_amount": 197042.42
+  },
+  {
+    "target_id": 148,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-02-01",
+    "target_amount": 85026.64
+  },
+  {
+    "target_id": 149,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-03-01",
+    "target_amount": 185750.02
+  },
+  {
+    "target_id": 150,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-03-01",
+    "target_amount": 161170.13
+  },
+  {
+    "target_id": 151,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-03-01",
+    "target_amount": 59376.82
+  },
+  {
+    "target_id": 152,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-03-01",
+    "target_amount": 118882.97
+  },
+  {
+    "target_id": 153,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-04-01",
+    "target_amount": 178663.21
+  },
+  {
+    "target_id": 154,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-04-01",
+    "target_amount": 126230.93
+  },
+  {
+    "target_id": 155,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-04-01",
+    "target_amount": 154892.61
+  },
+  {
+    "target_id": 156,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-04-01",
+    "target_amount": 189261.68
+  },
+  {
+    "target_id": 157,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-05-01",
+    "target_amount": 131651.84
+  },
+  {
+    "target_id": 158,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-05-01",
+    "target_amount": 109977.7
+  },
+  {
+    "target_id": 159,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-05-01",
+    "target_amount": 86775.8
+  },
+  {
+    "target_id": 160,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-05-01",
+    "target_amount": 157585.65
+  },
+  {
+    "target_id": 161,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-06-01",
+    "target_amount": 98193.64
+  },
+  {
+    "target_id": 162,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-06-01",
+    "target_amount": 95068.91
+  },
+  {
+    "target_id": 163,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-06-01",
+    "target_amount": 221508.25
+  },
+  {
+    "target_id": 164,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-06-01",
+    "target_amount": 78870.35
+  },
+  {
+    "target_id": 165,
+    "representative_id": "FR0006",
+    "product_id": "P008",
+    "target_month": "2026-07-01",
+    "target_amount": 142605.03
+  },
+  {
+    "target_id": 166,
+    "representative_id": "FR0006",
+    "product_id": "P010",
+    "target_month": "2026-07-01",
+    "target_amount": 61524.79
+  },
+  {
+    "target_id": 167,
+    "representative_id": "FR0006",
+    "product_id": "P029",
+    "target_month": "2026-07-01",
+    "target_amount": 132535.5
+  },
+  {
+    "target_id": 168,
+    "representative_id": "FR0006",
+    "product_id": "P005",
+    "target_month": "2026-07-01",
+    "target_amount": 133301.57
+  },
+  {
+    "target_id": 169,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-01-01",
+    "target_amount": 100999.13
+  },
+  {
+    "target_id": 170,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-01-01",
+    "target_amount": 116052.6
+  },
+  {
+    "target_id": 171,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-01-01",
+    "target_amount": 65814.09
+  },
+  {
+    "target_id": 172,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-01-01",
+    "target_amount": 139957.37
+  },
+  {
+    "target_id": 173,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-02-01",
+    "target_amount": 124215.5
+  },
+  {
+    "target_id": 174,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-02-01",
+    "target_amount": 157127.11
+  },
+  {
+    "target_id": 175,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-02-01",
+    "target_amount": 215881.26
+  },
+  {
+    "target_id": 176,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-02-01",
+    "target_amount": 60307.33
+  },
+  {
+    "target_id": 177,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-03-01",
+    "target_amount": 125433.59
+  },
+  {
+    "target_id": 178,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-03-01",
+    "target_amount": 170993.89
+  },
+  {
+    "target_id": 179,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-03-01",
+    "target_amount": 57909.51
+  },
+  {
+    "target_id": 180,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-03-01",
+    "target_amount": 64556.87
+  },
+  {
+    "target_id": 181,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-04-01",
+    "target_amount": 210930.12
+  },
+  {
+    "target_id": 182,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-04-01",
+    "target_amount": 167516.74
+  },
+  {
+    "target_id": 183,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-04-01",
+    "target_amount": 184290.1
+  },
+  {
+    "target_id": 184,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-04-01",
+    "target_amount": 93403.3
+  },
+  {
+    "target_id": 185,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-05-01",
+    "target_amount": 91777.82
+  },
+  {
+    "target_id": 186,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-05-01",
+    "target_amount": 231406.57
+  },
+  {
+    "target_id": 187,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-05-01",
+    "target_amount": 110637.61
+  },
+  {
+    "target_id": 188,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-05-01",
+    "target_amount": 231798.83
+  },
+  {
+    "target_id": 189,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-06-01",
+    "target_amount": 92361.55
+  },
+  {
+    "target_id": 190,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-06-01",
+    "target_amount": 88004.74
+  },
+  {
+    "target_id": 191,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-06-01",
+    "target_amount": 198295.04
+  },
+  {
+    "target_id": 192,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-06-01",
+    "target_amount": 199375.85
+  },
+  {
+    "target_id": 193,
+    "representative_id": "FR0007",
+    "product_id": "P017",
+    "target_month": "2026-07-01",
+    "target_amount": 200866.15
+  },
+  {
+    "target_id": 194,
+    "representative_id": "FR0007",
+    "product_id": "P005",
+    "target_month": "2026-07-01",
+    "target_amount": 232888.26
+  },
+  {
+    "target_id": 195,
+    "representative_id": "FR0007",
+    "product_id": "P013",
+    "target_month": "2026-07-01",
+    "target_amount": 189125.26
+  },
+  {
+    "target_id": 196,
+    "representative_id": "FR0007",
+    "product_id": "P008",
+    "target_month": "2026-07-01",
+    "target_amount": 190753.72
+  },
+  {
+    "target_id": 197,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-01-01",
+    "target_amount": 114323.0
+  },
+  {
+    "target_id": 198,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-01-01",
+    "target_amount": 106611.84
+  },
+  {
+    "target_id": 199,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-01-01",
+    "target_amount": 143250.09
+  },
+  {
+    "target_id": 200,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-01-01",
+    "target_amount": 179744.27
+  },
+  {
+    "target_id": 201,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-02-01",
+    "target_amount": 111684.46
+  },
+  {
+    "target_id": 202,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-02-01",
+    "target_amount": 121928.92
+  },
+  {
+    "target_id": 203,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-02-01",
+    "target_amount": 226562.39
+  },
+  {
+    "target_id": 204,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-02-01",
+    "target_amount": 143200.81
+  },
+  {
+    "target_id": 205,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-03-01",
+    "target_amount": 210563.32
+  },
+  {
+    "target_id": 206,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-03-01",
+    "target_amount": 194482.71
+  },
+  {
+    "target_id": 207,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-03-01",
+    "target_amount": 202325.79
+  },
+  {
+    "target_id": 208,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-03-01",
+    "target_amount": 114046.66
+  },
+  {
+    "target_id": 209,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-04-01",
+    "target_amount": 90625.5
+  },
+  {
+    "target_id": 210,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-04-01",
+    "target_amount": 112584.4
+  },
+  {
+    "target_id": 211,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-04-01",
+    "target_amount": 59143.09
+  },
+  {
+    "target_id": 212,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-04-01",
+    "target_amount": 222816.97
+  },
+  {
+    "target_id": 213,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-05-01",
+    "target_amount": 198250.48
+  },
+  {
+    "target_id": 214,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-05-01",
+    "target_amount": 53243.98
+  },
+  {
+    "target_id": 215,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-05-01",
+    "target_amount": 160662.31
+  },
+  {
+    "target_id": 216,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-05-01",
+    "target_amount": 166806.38
+  },
+  {
+    "target_id": 217,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-06-01",
+    "target_amount": 194002.39
+  },
+  {
+    "target_id": 218,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-06-01",
+    "target_amount": 109038.46
+  },
+  {
+    "target_id": 219,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-06-01",
+    "target_amount": 89238.36
+  },
+  {
+    "target_id": 220,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-06-01",
+    "target_amount": 96003.73
+  },
+  {
+    "target_id": 221,
+    "representative_id": "FR0008",
+    "product_id": "P013",
+    "target_month": "2026-07-01",
+    "target_amount": 163957.9
+  },
+  {
+    "target_id": 222,
+    "representative_id": "FR0008",
+    "product_id": "P030",
+    "target_month": "2026-07-01",
+    "target_amount": 99146.0
+  },
+  {
+    "target_id": 223,
+    "representative_id": "FR0008",
+    "product_id": "P008",
+    "target_month": "2026-07-01",
+    "target_amount": 160128.51
+  },
+  {
+    "target_id": 224,
+    "representative_id": "FR0008",
+    "product_id": "P018",
+    "target_month": "2026-07-01",
+    "target_amount": 238692.91
+  },
+  {
+    "target_id": 225,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-01-01",
+    "target_amount": 147724.22
+  },
+  {
+    "target_id": 226,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-01-01",
+    "target_amount": 194711.59
+  },
+  {
+    "target_id": 227,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-01-01",
+    "target_amount": 197918.82
+  },
+  {
+    "target_id": 228,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-01-01",
+    "target_amount": 142165.8
+  },
+  {
+    "target_id": 229,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-02-01",
+    "target_amount": 196554.45
+  },
+  {
+    "target_id": 230,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-02-01",
+    "target_amount": 120435.23
+  },
+  {
+    "target_id": 231,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-02-01",
+    "target_amount": 77991.71
+  },
+  {
+    "target_id": 232,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-02-01",
+    "target_amount": 159309.27
+  },
+  {
+    "target_id": 233,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-03-01",
+    "target_amount": 86809.55
+  },
+  {
+    "target_id": 234,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-03-01",
+    "target_amount": 227872.91
+  },
+  {
+    "target_id": 235,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-03-01",
+    "target_amount": 248064.71
+  },
+  {
+    "target_id": 236,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-03-01",
+    "target_amount": 241447.38
+  },
+  {
+    "target_id": 237,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-04-01",
+    "target_amount": 154788.88
+  },
+  {
+    "target_id": 238,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-04-01",
+    "target_amount": 217813.7
+  },
+  {
+    "target_id": 239,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-04-01",
+    "target_amount": 64866.08
+  },
+  {
+    "target_id": 240,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-04-01",
+    "target_amount": 213599.18
+  },
+  {
+    "target_id": 241,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-05-01",
+    "target_amount": 59702.88
+  },
+  {
+    "target_id": 242,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-05-01",
+    "target_amount": 51276.76
+  },
+  {
+    "target_id": 243,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-05-01",
+    "target_amount": 77498.31
+  },
+  {
+    "target_id": 244,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-05-01",
+    "target_amount": 176140.33
+  },
+  {
+    "target_id": 245,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-06-01",
+    "target_amount": 63593.59
+  },
+  {
+    "target_id": 246,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-06-01",
+    "target_amount": 80205.93
+  },
+  {
+    "target_id": 247,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-06-01",
+    "target_amount": 93743.93
+  },
+  {
+    "target_id": 248,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-06-01",
+    "target_amount": 141201.93
+  },
+  {
+    "target_id": 249,
+    "representative_id": "FR0009",
+    "product_id": "P011",
+    "target_month": "2026-07-01",
+    "target_amount": 62090.02
+  },
+  {
+    "target_id": 250,
+    "representative_id": "FR0009",
+    "product_id": "P009",
+    "target_month": "2026-07-01",
+    "target_amount": 177545.72
+  },
+  {
+    "target_id": 251,
+    "representative_id": "FR0009",
+    "product_id": "P025",
+    "target_month": "2026-07-01",
+    "target_amount": 236780.74
+  },
+  {
+    "target_id": 252,
+    "representative_id": "FR0009",
+    "product_id": "P027",
+    "target_month": "2026-07-01",
+    "target_amount": 232550.29
+  },
+  {
+    "target_id": 253,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-01-01",
+    "target_amount": 160328.71
+  },
+  {
+    "target_id": 254,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-01-01",
+    "target_amount": 52370.19
+  },
+  {
+    "target_id": 255,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-01-01",
+    "target_amount": 155883.53
+  },
+  {
+    "target_id": 256,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-01-01",
+    "target_amount": 104948.15
+  },
+  {
+    "target_id": 257,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-02-01",
+    "target_amount": 245495.87
+  },
+  {
+    "target_id": 258,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-02-01",
+    "target_amount": 53428.52
+  },
+  {
+    "target_id": 259,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-02-01",
+    "target_amount": 212631.44
+  },
+  {
+    "target_id": 260,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-02-01",
+    "target_amount": 184806.59
+  },
+  {
+    "target_id": 261,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-03-01",
+    "target_amount": 211233.54
+  },
+  {
+    "target_id": 262,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-03-01",
+    "target_amount": 231954.67
+  },
+  {
+    "target_id": 263,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-03-01",
+    "target_amount": 71403.29
+  },
+  {
+    "target_id": 264,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-03-01",
+    "target_amount": 69262.78
+  },
+  {
+    "target_id": 265,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-04-01",
+    "target_amount": 79779.5
+  },
+  {
+    "target_id": 266,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-04-01",
+    "target_amount": 88386.41
+  },
+  {
+    "target_id": 267,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-04-01",
+    "target_amount": 155291.2
+  },
+  {
+    "target_id": 268,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-04-01",
+    "target_amount": 213042.88
+  },
+  {
+    "target_id": 269,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-05-01",
+    "target_amount": 103464.95
+  },
+  {
+    "target_id": 270,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-05-01",
+    "target_amount": 129379.28
+  },
+  {
+    "target_id": 271,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-05-01",
+    "target_amount": 124610.32
+  },
+  {
+    "target_id": 272,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-05-01",
+    "target_amount": 131205.48
+  },
+  {
+    "target_id": 273,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-06-01",
+    "target_amount": 163000.44
+  },
+  {
+    "target_id": 274,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-06-01",
+    "target_amount": 248046.61
+  },
+  {
+    "target_id": 275,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-06-01",
+    "target_amount": 95171.45
+  },
+  {
+    "target_id": 276,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-06-01",
+    "target_amount": 186808.33
+  },
+  {
+    "target_id": 277,
+    "representative_id": "FR0010",
+    "product_id": "P022",
+    "target_month": "2026-07-01",
+    "target_amount": 219573.42
+  },
+  {
+    "target_id": 278,
+    "representative_id": "FR0010",
+    "product_id": "P016",
+    "target_month": "2026-07-01",
+    "target_amount": 180747.14
+  },
+  {
+    "target_id": 279,
+    "representative_id": "FR0010",
+    "product_id": "P001",
+    "target_month": "2026-07-01",
+    "target_amount": 221643.83
+  },
+  {
+    "target_id": 280,
+    "representative_id": "FR0010",
+    "product_id": "P018",
+    "target_month": "2026-07-01",
+    "target_amount": 201917.17
+  }
+]

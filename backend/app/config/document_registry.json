@@ -22,8 +22,8 @@
 
   "territory_master": {
     "table": "territories",
-    "required_columns": ["territory_id", "territory_name", "region"],
-    "optional_columns": ["status", "country"],
+    "required_columns": ["territory_id", "territory_name", "region", "country"],
+    "optional_columns": ["status"],
     "duplicate_keys": ["territory_id"]
   },
 

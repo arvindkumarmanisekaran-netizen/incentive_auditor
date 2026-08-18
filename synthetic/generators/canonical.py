@@ -1,10 +1,8 @@
-
 from __future__ import annotations
 
 import random
 
 from faker import Faker
-
 
 SEED = 42
 
@@ -34,18 +32,14 @@ def generate_canonical_data(
             "2026-07",
         ]
 
-    territories = generate_territories(
-        num_territories
-    )
+    territories = generate_territories(num_territories)
 
     representatives = generate_representatives(
         num_representatives,
         territories,
     )
 
-    products = generate_products(
-        num_products
-    )
+    products = generate_products(num_products)
 
     doctors = generate_doctors(
         num_doctors,
@@ -57,15 +51,13 @@ def generate_canonical_data(
         doctors,
     )
 
-    sales, prescriptions, anomalies = (
-        generate_sales_and_prescriptions(
-            representatives=representatives,
-            products=products,
-            doctors=doctors,
-            assignments=assignments,
-            months=months,
-            anomaly_rate=anomaly_rate,
-        )
+    sales, prescriptions, anomalies = generate_sales_and_prescriptions(
+        representatives=representatives,
+        products=products,
+        doctors=doctors,
+        assignments=assignments,
+        months=months,
+        anomaly_rate=anomaly_rate,
     )
 
     targets = generate_targets(
@@ -74,9 +66,7 @@ def generate_canonical_data(
         months,
     )
 
-    incentive_rules = generate_incentive_rules(
-        products
-    )
+    incentive_rules = generate_incentive_rules(products)
 
     payouts = generate_payouts(
         representatives=representatives,
@@ -117,16 +107,15 @@ def generate_territories(
     territories = []
 
     for i in range(1, count + 1):
+
         territories.append(
             {
                 "territory_id": f"T{i:03d}",
-                "territory_name": (
-                    f"{fake.city()} Zone {i}"
-                ),
-                "region_name": random.choice(
-                    regions
-                ),
-                "active": True,
+                "territory_name": (f"{fake.city()} Zone {i}"),
+                # registry expects region
+                "region": random.choice(regions),
+                # registry expects status
+                "status": "ACTIVE",
             }
         )
 
@@ -144,25 +133,16 @@ def generate_representatives(
         first_name = fake.first_name()
         last_name = fake.last_name()
 
-        territory = random.choice(
-            territories
-        )
+        territory = random.choice(territories)
 
         representatives.append(
             {
-                "representative_id": (
-                    f"FR{i:04d}"
-                ),
+                "representative_id": (f"FR{i:04d}"),
                 "first_name": first_name,
                 "last_name": last_name,
-                "territory_id": (
-                    territory["territory_id"]
-                ),
-                "email": (
-                    f"{first_name}.{last_name}"
-                    f"{i}@example.com"
-                ).lower(),
-                "active": True,
+                "territory_id": (territory["territory_id"]),
+                "email": (f"{first_name}.{last_name}" f"{i}@example.com").lower(),  # noqa: E501
+                "status": "ACTIVE",
             }
         )
 
@@ -190,14 +170,8 @@ def generate_products(
         products.append(
             {
                 "product_id": f"P{i:03d}",
-                "product_name": (
-                    f"{fake.word().title()}Care {i}"
-                ),
-                "product_category": (
-                    random.choice(
-                        categories
-                    )
-                ),
+                "product_name": (f"{fake.word().title()}Care {i}"),
+                "product_category": (random.choice(categories)),
                 "unit_price": round(
                     random.uniform(
                         100,
@@ -205,7 +179,7 @@ def generate_products(
                     ),
                     2,
                 ),
-                "active": True,
+                "status": "ACTIVE",
             }
         )
 
@@ -231,25 +205,15 @@ def generate_doctors(
     doctors = []
 
     for i in range(1, count + 1):
-        territory = random.choice(
-            territories
-        )
+        territory = random.choice(territories)
 
         doctors.append(
             {
                 "doctor_id": f"D{i:06d}",
-                "doctor_name": (
-                    f"Dr {fake.name()}"
-                ),
-                "territory_id": (
-                    territory["territory_id"]
-                ),
-                "speciality": (
-                    random.choice(
-                        specialties
-                    )
-                ),
-                "active": True,
+                "doctor_name": (f"Dr {fake.name()}"),
+                "territory_id": (territory["territory_id"]),
+                "speciality": (random.choice(specialties)),
+                "status": "ACTIVE",
             }
         )
 
@@ -274,34 +238,28 @@ def generate_assignments(
 
     assignments = []
 
+    assignment_id = 1
+
     for doctor in doctors:
-        possible_reps = (
-            reps_by_territory.get(
-                doctor["territory_id"],
-                representatives,
-            )
+        possible_reps = reps_by_territory.get(
+            doctor["territory_id"],
+            representatives,
         )
 
-        rep = random.choice(
-            possible_reps
-        )
+        rep = random.choice(possible_reps)
 
         assignments.append(
             {
-                "representative_id": (
-                    rep[
-                        "representative_id"
-                    ]
-                ),
-                "doctor_id": (
-                    doctor["doctor_id"]
-                ),
-                "effective_from": (
-                    "2026-01-01"
-                ),
+                "assignment_id": assignment_id,
+                "representative_id": (rep["representative_id"]),
+                "doctor_id": (doctor["doctor_id"]),
+                "effective_from": ("2026-01-01"),
                 "effective_to": None,
+                "status": "ACTIVE",
             }
         )
+
+    assignment_id += 1
 
     return assignments
 
@@ -326,13 +284,9 @@ def generate_sales_and_prescriptions(
 
     for assignment in assignments:
         assigned_doctors_by_rep.setdefault(
-            assignment[
-                "representative_id"
-            ],
+            assignment["representative_id"],
             [],
-        ).append(
-            assignment["doctor_id"]
-        )
+        ).append(assignment["doctor_id"])
 
     sales: list[dict] = []
     prescriptions: list[dict] = []
@@ -343,219 +297,135 @@ def generate_sales_and_prescriptions(
 
     for rep in representatives:
 
-        rep_id = rep[
-            "representative_id"
-        ]
+        rep_id = rep["representative_id"]
 
-        assigned_doctors = (
-            assigned_doctors_by_rep.get(
-                rep_id,
-                [],
-            )
+        assigned_doctors = assigned_doctors_by_rep.get(
+            rep_id,
+            [],
         )
 
         if not assigned_doctors:
             continue
 
-        selected_products = (
-            random.sample(
-                products,
-                k=min(
-                    random.randint(
-                        3,
-                        7,
-                    ),
-                    len(products),
+        selected_products = random.sample(
+            products,
+            k=min(
+                random.randint(
+                    3,
+                    7,
                 ),
-            )
+                len(products),
+            ),
         )
 
         for product in selected_products:
 
-            historical_sales_base = (
-                random.uniform(
-                    40000,
-                    160000,
-                )
+            historical_sales_base = random.uniform(
+                40000,
+                160000,
             )
 
-            historical_rx_base = (
-                random.uniform(
-                    40,
-                    250,
-                )
+            historical_rx_base = random.uniform(
+                40,
+                250,
             )
 
             for month in months:
 
                 anomaly_types: list[str] = []
 
-                is_anomaly = (
-                    random.random()
-                    < anomaly_rate
+                is_anomaly = random.random() < anomaly_rate
+
+                sales_multiplier = random.uniform(
+                    0.90,
+                    1.12,
                 )
 
-                sales_multiplier = (
-                    random.uniform(
-                        0.90,
-                        1.12,
-                    )
-                )
-
-                rx_multiplier = (
-                    random.uniform(
-                        0.90,
-                        1.12,
-                    )
+                rx_multiplier = random.uniform(
+                    0.90,
+                    1.12,
                 )
 
                 if is_anomaly:
 
-                    anomaly_types = (
-                        random.sample(
-                            [
-                                "sales_spike",
-                                "rx_drop",
-                                "doctor_concentration",
-                                "cross_territory",
-                                "payout_discrepancy",
-                            ],
-                            k=random.randint(
-                                1,
-                                3,
-                            ),
-                        )
+                    anomaly_types = random.sample(
+                        [
+                            "sales_spike",
+                            "rx_drop",
+                            "doctor_concentration",
+                            "cross_territory",
+                            "payout_discrepancy",
+                        ],
+                        k=random.randint(
+                            1,
+                            3,
+                        ),
                     )
 
-                    if (
-                        "sales_spike"
-                        in anomaly_types
-                    ):
-                        sales_multiplier *= (
-                            random.uniform(
-                                1.5,
-                                2.3,
-                            )
+                    if "sales_spike" in anomaly_types:
+                        sales_multiplier *= random.uniform(
+                            1.5,
+                            2.3,
                         )
 
-                    if (
-                        "rx_drop"
-                        in anomaly_types
-                    ):
-                        rx_multiplier *= (
-                            random.uniform(
-                                0.15,
-                                0.5,
-                            )
+                    if "rx_drop" in anomaly_types:
+                        rx_multiplier *= random.uniform(
+                            0.15,
+                            0.5,
                         )
 
-                monthly_sales = (
-                    historical_sales_base
-                    * sales_multiplier
-                )
+                monthly_sales = historical_sales_base * sales_multiplier
 
-                monthly_rx = (
-                    historical_rx_base
-                    * rx_multiplier
-                )
+                monthly_rx = historical_rx_base * rx_multiplier
 
                 doctor_count = min(
                     random.randint(
                         2,
                         6,
                     ),
-                    len(
-                        assigned_doctors
-                    ),
+                    len(assigned_doctors),
                 )
 
-                chosen_doctors = (
-                    random.sample(
-                        assigned_doctors,
-                        k=doctor_count,
-                    )
+                chosen_doctors = random.sample(
+                    assigned_doctors,
+                    k=doctor_count,
                 )
 
-                if (
-                    "doctor_concentration"
-                    in anomaly_types
-                ):
-                    chosen_doctors = [
-                        random.choice(
-                            chosen_doctors
-                        )
-                    ]
+                if "doctor_concentration" in anomaly_types:
+                    chosen_doctors = [random.choice(chosen_doctors)]
 
-                sales_per_doctor = (
-                    monthly_sales
-                    / len(chosen_doctors)
-                )
+                sales_per_doctor = monthly_sales / len(chosen_doctors)
 
-                rx_per_doctor = (
-                    monthly_rx
-                    / len(chosen_doctors)
-                )
+                rx_per_doctor = monthly_rx / len(chosen_doctors)
 
-                for doctor_id in (
-                    chosen_doctors
-                ):
+                for doctor_id in chosen_doctors:
 
-                    selling_territory_id = (
-                        rep["territory_id"]
-                    )
+                    selling_territory_id = rep["territory_id"]
 
-                    if (
-                        "cross_territory"
-                        in anomaly_types
-                        and random.random()
-                        < 0.65
-                    ):
+                    if "cross_territory" in anomaly_types and random.random() < 0.65:  # noqa: E501
                         other_territories = [
                             d["territory_id"]
                             for d in doctors
-                            if d["territory_id"]
-                            != rep[
-                                "territory_id"
-                            ]
+                            if d["territory_id"] != rep["territory_id"]
                         ]
 
                         if other_territories:
-                            selling_territory_id = (
-                                random.choice(
-                                    other_territories
-                                )
-                            )
+                            selling_territory_id = random.choice(other_territories)  # noqa: E501
 
-                    unit_price = float(
-                        product[
-                            "unit_price"
-                        ]
-                    )
+                    unit_price = float(product["unit_price"])
 
                     quantity = max(
                         1,
-                        round(
-                            sales_per_doctor
-                            / unit_price
-                        ),
+                        round(sales_per_doctor / unit_price),
                     )
 
                     sales.append(
                         {
                             "sale_id": sale_id,
-                            "representative_id": (
-                                rep_id
-                            ),
+                            "representative_id": (rep_id),
                             "doctor_id": doctor_id,
-                            "product_id": (
-                                product[
-                                    "product_id"
-                                ]
-                            ),
-                            "sale_date": (
-                                f"{month}-"
-                                f"{random.randint(1, 27):02d}"
-                            ),
+                            "product_id": (product["product_id"]),
+                            "sale_date": (f"{month}-" f"{random.randint(1, 27):02d}"),  # noqa: E501
                             "sales_amount": (
                                 round(
                                     sales_per_doctor,
@@ -563,31 +433,20 @@ def generate_sales_and_prescriptions(
                                 )
                             ),
                             "quantity": quantity,
-                            "selling_territory_id": (
-                                selling_territory_id
-                            ),
+                            "selling_territory_id": (selling_territory_id),
                             "status": "Valid",
                         }
                     )
 
                     prescriptions.append(
                         {
-                            "prescription_id": (
-                                prescription_id
-                            ),
-                            "representative_id": (
-                                rep_id
-                            ),
+                            "prescription_id": (prescription_id),
+                            "representative_id": (rep_id),
                             "doctor_id": doctor_id,
-                            "product_id": (
-                                product[
-                                    "product_id"
-                                ]
-                            ),
+                            "product_id": (product["product_id"]),
                             "prescription_date": (
-                                f"{month}-"
-                                f"{random.randint(1, 27):02d}"
-                            ),
+                                f"{month}-" f"{random.randint(1, 27):02d}"
+                            ),  # noqa: E501
                             "quantity": round(
                                 rx_per_doctor,
                                 2,
@@ -602,18 +461,10 @@ def generate_sales_and_prescriptions(
                 if anomaly_types:
                     anomalies.append(
                         {
-                            "representative_id": (
-                                rep_id
-                            ),
-                            "product_id": (
-                                product[
-                                    "product_id"
-                                ]
-                            ),
+                            "representative_id": (rep_id),
+                            "product_id": (product["product_id"]),
                             "month": month,
-                            "anomaly_types": (
-                                anomaly_types
-                            ),
+                            "anomaly_types": (anomaly_types),
                         }
                     )
 
@@ -636,40 +487,24 @@ def generate_targets(
 
     for rep in representatives:
 
-        selected_products = (
-            random.sample(
-                products,
-                k=min(
-                    4,
-                    len(products),
-                ),
-            )
+        selected_products = random.sample(
+            products,
+            k=min(
+                4,
+                len(products),
+            ),
         )
 
         for month in months:
 
-            for product in (
-                selected_products
-            ):
+            for product in selected_products:
 
                 targets.append(
                     {
-                        "target_id": (
-                            target_id
-                        ),
-                        "representative_id": (
-                            rep[
-                                "representative_id"
-                            ]
-                        ),
-                        "product_id": (
-                            product[
-                                "product_id"
-                            ]
-                        ),
-                        "target_month": (
-                            f"{month}-01"
-                        ),
+                        "target_id": (target_id),
+                        "representative_id": (rep["representative_id"]),
+                        "product_id": (product["product_id"]),
+                        "target_month": (f"{month}-01"),
                         "target_amount": (
                             round(
                                 random.uniform(
@@ -699,21 +534,10 @@ def generate_incentive_rules(
 
         rules.append(
             {
-                "incentive_rule_id": (
-                    rule_id
-                ),
-                "product_id": (
-                    product[
-                        "product_id"
-                    ]
-                ),
-                "rule_name": (
-                    f"{product['product_id']} "
-                    f"Standard Incentive"
-                ),
-                "effective_from": (
-                    "2026-01-01"
-                ),
+                "incentive_rule_id": (rule_id),
+                "product_id": (product["product_id"]),
+                "rule_name": (f"{product['product_id']} " f"Standard Incentive"),  # noqa: E501
+                "effective_from": ("2026-01-01"),
                 "effective_to": None,
                 "threshold_amount": (
                     random.choice(
@@ -753,24 +577,15 @@ def generate_payouts(
     incentive_rules: list[dict],
 ) -> list[dict]:
 
-    rule_by_product = {
-        rule["product_id"]: rule
-        for rule in incentive_rules
-    }
+    rule_by_product = {rule["product_id"]: rule for rule in incentive_rules}
 
     anomaly_lookup = {
         (
-            anomaly[
-                "representative_id"
-            ],
-            anomaly[
-                "product_id"
-            ],
+            anomaly["representative_id"],
+            anomaly["product_id"],
             anomaly["month"],
-        ):
-        anomaly["anomaly_types"]
-        for anomaly
-        in anomalies
+        ): anomaly["anomaly_types"]
+        for anomaly in anomalies
     }
 
     sales_totals: dict[
@@ -780,32 +595,18 @@ def generate_payouts(
 
     for sale in sales:
 
-        month = sale[
-            "sale_date"
-        ][:7]
+        month = sale["sale_date"][:7]
 
         key = (
-            sale[
-                "representative_id"
-            ],
-            sale[
-                "product_id"
-            ],
+            sale["representative_id"],
+            sale["product_id"],
             month,
         )
 
-        sales_totals[key] = (
-            sales_totals.get(
-                key,
-                0,
-            )
-            +
-            float(
-                sale[
-                    "sales_amount"
-                ]
-            )
-        )
+        sales_totals[key] = sales_totals.get(
+            key,
+            0,
+        ) + float(sale["sales_amount"])
 
     payouts = []
 
@@ -815,79 +616,44 @@ def generate_payouts(
         rep_id,
         product_id,
         month,
-    ), sales_amount in (
-        sales_totals.items()
-    ):
+    ), sales_amount in sales_totals.items():
 
-        rule = (
-            rule_by_product[
-                product_id
-            ]
-        )
+        rule = rule_by_product[product_id]
 
-        threshold = float(
-            rule[
-                "threshold_amount"
-            ]
-        )
+        threshold = float(rule["threshold_amount"])
 
-        payout_percent = float(
-            rule[
-                "payout_percentage"
-            ]
-        )
+        payout_percent = float(rule["payout_percentage"])
 
         eligible_sales = max(
             sales_amount - threshold,
             0,
         )
 
-        expected_payout = (
-            eligible_sales
-            * payout_percent
-            / 100
+        expected_payout = eligible_sales * payout_percent / 100
+
+        actual_payout = expected_payout
+
+        anomaly_types = anomaly_lookup.get(
+            (
+                rep_id,
+                product_id,
+                month,
+            ),
+            [],
         )
 
-        actual_payout = (
-            expected_payout
-        )
-
-        anomaly_types = (
-            anomaly_lookup.get(
-                (
-                    rep_id,
-                    product_id,
-                    month,
-                ),
-                [],
-            )
-        )
-
-        if (
-            "payout_discrepancy"
-            in anomaly_types
-        ):
-            actual_payout += (
-                random.uniform(
-                    1000,
-                    10000,
-                )
+        if "payout_discrepancy" in anomaly_types:
+            actual_payout += random.uniform(
+                1000,
+                10000,
             )
 
         payouts.append(
             {
-                "payout_id": (
-                    payout_id
-                ),
-                "representative_id": (
-                    rep_id
-                ),
-                "product_id": (
-                    product_id
-                ),
-                "payout_month": (
-                    f"{month}-01"
-                ),
+                "payout_id": (payout_id),
+                "representative_id": (rep_id),
+                "product_id": (product_id),
+                "payout_month": (f"{month}-01"),
                 "expected_payout": (
                     round(
                         expected_payout,
@@ -902,15 +668,11 @@ def generate_payouts(
                 ),
                 "payout_difference": (
                     round(
-                        actual_payout
-                        -
-                        expected_payout,
+                        actual_payout - expected_payout,
                         2,
                     )
                 ),
-                "status": (
-                    "Processed"
-                ),
+                "status": ("Processed"),
             }
         )
 

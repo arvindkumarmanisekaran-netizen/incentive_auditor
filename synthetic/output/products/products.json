@@ -1,0 +1,212 @@
+[
+  {
+    "drug code": "P001",
+    "item name": "TemporaCare 1",
+    "product category": "Dermatology",
+    "unit_price": 766.89,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P002",
+    "item name": "MaioresCare 2",
+    "product category": "Respiratory",
+    "unit_price": 2397.31,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P003",
+    "item name": "DoloremCare 3",
+    "product category": "Dermatology",
+    "unit_price": 345.3,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P004",
+    "item name": "MaximeCare 4",
+    "product category": "Pain",
+    "unit_price": 332.12,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P005",
+    "item name": "LiberoCare 5",
+    "product category": "Dermatology",
+    "unit_price": 1548.94,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P006",
+    "item name": "EosCare 6",
+    "product category": "Cardiology",
+    "unit_price": 1851.36,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P007",
+    "item name": "VelitCare 7",
+    "product category": "Diabetes",
+    "unit_price": 2435.48,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P008",
+    "item name": "FugiatCare 8",
+    "product category": "Pain",
+    "unit_price": 289.12,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P009",
+    "item name": "VoluptatesCare 9",
+    "product category": "Gastroenterology",
+    "unit_price": 2090.57,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P010",
+    "item name": "VeroCare 10",
+    "product category": "Dermatology",
+    "unit_price": 1485.65,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P011",
+    "item name": "TeneturCare 11",
+    "product category": "Diabetes",
+    "unit_price": 209.98,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P012",
+    "item name": "AutCare 12",
+    "product category": "Respiratory",
+    "unit_price": 1955.36,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P013",
+    "item name": "SequiCare 13",
+    "product category": "Diabetes",
+    "unit_price": 2152.76,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P014",
+    "item name": "TemporaCare 14",
+    "product category": "Diabetes",
+    "unit_price": 1012.3,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P015",
+    "item name": "DoloresCare 15",
+    "product category": "Antibiotic",
+    "unit_price": 1625.64,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P016",
+    "item name": "QuibusdamCare 16",
+    "product category": "Dermatology",
+    "unit_price": 490.37,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P017",
+    "item name": "ExercitationemCare 17",
+    "product category": "Dermatology",
+    "unit_price": 602.82,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P018",
+    "item name": "DoloremCare 18",
+    "product category": "Gastroenterology",
+    "unit_price": 1784.37,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P019",
+    "item name": "OfficiisCare 19",
+    "product category": "Diabetes",
+    "unit_price": 1561.91,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P020",
+    "item name": "ModiCare 20",
+    "product category": "Neurology",
+    "unit_price": 1381.94,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P021",
+    "item name": "FugitCare 21",
+    "product category": "Respiratory",
+    "unit_price": 492.17,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P022",
+    "item name": "TemporeCare 22",
+    "product category": "Pain",
+    "unit_price": 747.87,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P023",
+    "item name": "VoluptasCare 23",
+    "product category": "Respiratory",
+    "unit_price": 1743.07,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P024",
+    "item name": "QuosCare 24",
+    "product category": "Cardiology",
+    "unit_price": 649.72,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P025",
+    "item name": "EstCare 25",
+    "product category": "Cardiology",
+    "unit_price": 2032.11,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P026",
+    "item name": "VitaeCare 26",
+    "product category": "Pain",
+    "unit_price": 742.58,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P027",
+    "item name": "ItaqueCare 27",
+    "product category": "Respiratory",
+    "unit_price": 2291.53,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P028",
+    "item name": "AspernaturCare 28",
+    "product category": "Dermatology",
+    "unit_price": 610.3,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P029",
+    "item name": "EumCare 29",
+    "product category": "Antibiotic",
+    "unit_price": 1049.52,
+    "status": "ACTIVE"
+  },
+  {
+    "drug code": "P030",
+    "item name": "AliquidCare 30",
+    "product category": "Antibiotic",
+    "unit_price": 442.89,
+    "status": "ACTIVE"
+  }
+]

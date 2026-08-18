@@ -1,0 +1,3557 @@
+[
+  {
+    "rx number": 1,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-01-10",
+    "units": 242.74,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 2,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-02-25",
+    "units": 226.79,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 3,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-03-12",
+    "units": 247.94,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 4,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-04-03",
+    "units": 232.53,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 5,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-05-22",
+    "units": 219.93,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 6,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-06-18",
+    "units": 230.28,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 7,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P010",
+    "rx date": "2026-07-17",
+    "units": 253.96,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 8,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-01-17",
+    "units": 16.05,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 9,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-02-26",
+    "units": 87.19,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 10,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-03-14",
+    "units": 84.76,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 11,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-04-24",
+    "units": 96.49,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 12,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-05-14",
+    "units": 87.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 13,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-06-18",
+    "units": 100.57,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 14,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P014",
+    "rx date": "2026-07-08",
+    "units": 93.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 15,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-01-09",
+    "units": 129.62,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 16,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-02-07",
+    "units": 136.7,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 17,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-03-11",
+    "units": 145.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 18,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-04-04",
+    "units": 30.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 19,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-05-22",
+    "units": 145.87,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 20,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-06-09",
+    "units": 156.98,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 21,
+    "representative_id": "FR0001",
+    "doctor code": "D000006",
+    "drug code": "P006",
+    "rx date": "2026-07-15",
+    "units": 137.16,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 22,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-01-09",
+    "units": 109.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 23,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-02-11",
+    "units": 57.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 24,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-02-22",
+    "units": 57.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 25,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-03-09",
+    "units": 57.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 26,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-03-01",
+    "units": 57.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 27,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-04-01",
+    "units": 63.19,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 28,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-04-03",
+    "units": 63.19,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 29,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-05-05",
+    "units": 52.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 30,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-05-10",
+    "units": 52.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 31,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-06-08",
+    "units": 63.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 32,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-06-04",
+    "units": 63.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 33,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P019",
+    "rx date": "2026-07-26",
+    "units": 61.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 34,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P019",
+    "rx date": "2026-07-06",
+    "units": 61.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 35,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-01-23",
+    "units": 24.97,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 36,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-01-13",
+    "units": 24.97,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 37,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-02-26",
+    "units": 21.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 38,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-02-08",
+    "units": 21.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 39,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-03-09",
+    "units": 43.95,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 40,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-04-26",
+    "units": 21.66,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 41,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-04-14",
+    "units": 21.66,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 42,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-05-23",
+    "units": 22.26,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 43,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-05-01",
+    "units": 22.26,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 44,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-06-22",
+    "units": 23.76,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 45,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-06-20",
+    "units": 23.76,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 46,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P004",
+    "rx date": "2026-07-13",
+    "units": 23.92,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 47,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P004",
+    "rx date": "2026-07-10",
+    "units": 23.92,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 48,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-01-27",
+    "units": 42.74,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 49,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-01-10",
+    "units": 42.74,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 50,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-02-22",
+    "units": 41.25,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 51,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-02-17",
+    "units": 41.25,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 52,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-03-22",
+    "units": 43.16,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 53,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-03-20",
+    "units": 43.16,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 54,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-04-01",
+    "units": 42.76,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 55,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-04-08",
+    "units": 42.76,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 56,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-05-23",
+    "units": 42.92,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 57,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-05-16",
+    "units": 42.92,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 58,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-06-26",
+    "units": 42.2,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 59,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-06-17",
+    "units": 42.2,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 60,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P003",
+    "rx date": "2026-07-15",
+    "units": 44.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 61,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P003",
+    "rx date": "2026-07-17",
+    "units": 44.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 62,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-01-24",
+    "units": 85.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 63,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-01-15",
+    "units": 85.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 64,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-02-15",
+    "units": 85.85,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 65,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-02-23",
+    "units": 85.85,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 66,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-03-08",
+    "units": 80.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 67,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-03-23",
+    "units": 80.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 68,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-04-07",
+    "units": 81.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 69,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-04-14",
+    "units": 81.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 70,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-05-12",
+    "units": 91.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 71,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-05-25",
+    "units": 91.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 72,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-06-09",
+    "units": 89.44,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 73,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-06-16",
+    "units": 89.44,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 74,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P018",
+    "rx date": "2026-07-21",
+    "units": 40.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 75,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P018",
+    "rx date": "2026-07-02",
+    "units": 40.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 76,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-01-03",
+    "units": 59.46,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 77,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-01-01",
+    "units": 59.46,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 78,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-02-01",
+    "units": 60.32,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 79,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-02-07",
+    "units": 60.32,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 80,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-03-23",
+    "units": 51.79,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 81,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-03-25",
+    "units": 51.79,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 82,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-04-19",
+    "units": 60.46,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 83,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-04-10",
+    "units": 60.46,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 84,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-05-23",
+    "units": 53.42,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 85,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-05-10",
+    "units": 53.42,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 86,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-06-14",
+    "units": 50.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 87,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-06-12",
+    "units": 50.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 88,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P007",
+    "rx date": "2026-07-09",
+    "units": 49.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 89,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P007",
+    "rx date": "2026-07-16",
+    "units": 49.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 90,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-01-25",
+    "units": 101.79,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 91,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-01-19",
+    "units": 101.79,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 92,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-02-12",
+    "units": 96.71,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 93,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-02-09",
+    "units": 96.71,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 94,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-03-08",
+    "units": 112.49,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 95,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-03-14",
+    "units": 112.49,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 96,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-04-10",
+    "units": 112.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 97,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-04-13",
+    "units": 112.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 98,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-05-18",
+    "units": 109.68,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 99,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-05-12",
+    "units": 109.68,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 100,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-06-24",
+    "units": 101.93,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 101,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-06-25",
+    "units": 101.93,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 102,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P017",
+    "rx date": "2026-07-07",
+    "units": 113.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 103,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P017",
+    "rx date": "2026-07-08",
+    "units": 113.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 104,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-01-25",
+    "units": 47.08,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 105,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-01-04",
+    "units": 47.08,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 106,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-02-09",
+    "units": 51.91,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 107,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-02-04",
+    "units": 51.91,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 108,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-03-19",
+    "units": 47.41,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 109,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-03-03",
+    "units": 47.41,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 110,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-04-15",
+    "units": 55.27,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 111,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-04-19",
+    "units": 55.27,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 112,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-05-07",
+    "units": 53.63,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 113,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-05-22",
+    "units": 53.63,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 114,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-06-23",
+    "units": 52.85,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 115,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-06-16",
+    "units": 52.85,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 116,
+    "representative_id": "FR0002",
+    "doctor code": "D000002",
+    "drug code": "P009",
+    "rx date": "2026-07-26",
+    "units": 54.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 117,
+    "representative_id": "FR0002",
+    "doctor code": "D000007",
+    "drug code": "P009",
+    "rx date": "2026-07-21",
+    "units": 54.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 118,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-01-15",
+    "units": 72.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 119,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-01-10",
+    "units": 72.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 120,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-01-13",
+    "units": 72.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 121,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-02-24",
+    "units": 116.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 122,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-02-20",
+    "units": 116.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 123,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-03-02",
+    "units": 85.51,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 124,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-03-25",
+    "units": 85.51,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 125,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-03-16",
+    "units": 85.51,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 126,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-04-12",
+    "units": 73.94,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 127,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-04-11",
+    "units": 73.94,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 128,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-04-22",
+    "units": 73.94,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 129,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-05-03",
+    "units": 76.2,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 130,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-05-09",
+    "units": 76.2,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 131,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-05-04",
+    "units": 76.2,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 132,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P022",
+    "rx date": "2026-06-02",
+    "units": 116.91,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 133,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-06-17",
+    "units": 116.91,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 134,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P022",
+    "rx date": "2026-07-05",
+    "units": 119.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 135,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P022",
+    "rx date": "2026-07-15",
+    "units": 119.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 136,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-01-27",
+    "units": 23.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 137,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-02-15",
+    "units": 45.57,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 138,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-02-05",
+    "units": 45.57,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 139,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P026",
+    "rx date": "2026-02-07",
+    "units": 45.57,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 140,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-03-26",
+    "units": 77.52,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 141,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-03-09",
+    "units": 77.52,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 142,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-04-18",
+    "units": 45.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 143,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-04-12",
+    "units": 45.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 144,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P026",
+    "rx date": "2026-04-18",
+    "units": 45.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 145,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-05-25",
+    "units": 52.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 146,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P026",
+    "rx date": "2026-05-02",
+    "units": 52.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 147,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-05-24",
+    "units": 52.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 148,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-06-19",
+    "units": 46.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 149,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P026",
+    "rx date": "2026-06-04",
+    "units": 46.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 150,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-06-04",
+    "units": 46.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 151,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P026",
+    "rx date": "2026-07-26",
+    "units": 50.05,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 152,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P026",
+    "rx date": "2026-07-11",
+    "units": 50.05,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 153,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P026",
+    "rx date": "2026-07-23",
+    "units": 50.05,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 154,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-01-03",
+    "units": 19.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 155,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-01-21",
+    "units": 19.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 156,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-01-10",
+    "units": 19.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 157,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-02-06",
+    "units": 28.3,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 158,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-02-10",
+    "units": 28.3,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 159,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-03-08",
+    "units": 20.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 160,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-03-14",
+    "units": 20.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 161,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-03-22",
+    "units": 20.38,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 162,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-04-05",
+    "units": 17.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 163,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-04-15",
+    "units": 17.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 164,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-04-09",
+    "units": 17.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 165,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-05-12",
+    "units": 20.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 166,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-05-10",
+    "units": 20.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 167,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-05-14",
+    "units": 20.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 168,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-06-19",
+    "units": 18.32,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 169,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-06-19",
+    "units": 18.32,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 170,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-06-23",
+    "units": 18.32,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 171,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P007",
+    "rx date": "2026-07-10",
+    "units": 19.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 172,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P007",
+    "rx date": "2026-07-26",
+    "units": 19.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 173,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P007",
+    "rx date": "2026-07-20",
+    "units": 19.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 174,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-01-26",
+    "units": 30.56,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 175,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-01-02",
+    "units": 30.56,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 176,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-01-12",
+    "units": 30.56,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 177,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-02-18",
+    "units": 27.66,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 178,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-02-17",
+    "units": 27.66,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 179,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-02-09",
+    "units": 27.66,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 180,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-03-03",
+    "units": 31.0,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 181,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-03-25",
+    "units": 31.0,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 182,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-03-22",
+    "units": 31.0,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 183,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-04-09",
+    "units": 31.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 184,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-04-04",
+    "units": 31.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 185,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-04-12",
+    "units": 31.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 186,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-05-20",
+    "units": 29.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 187,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-05-11",
+    "units": 29.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 188,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-05-08",
+    "units": 29.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 189,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-06-02",
+    "units": 28.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 190,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-06-10",
+    "units": 28.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 191,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-06-04",
+    "units": 28.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 192,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P014",
+    "rx date": "2026-07-21",
+    "units": 26.65,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 193,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P014",
+    "rx date": "2026-07-27",
+    "units": 26.65,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 194,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P014",
+    "rx date": "2026-07-20",
+    "units": 26.65,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 195,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-01-13",
+    "units": 239.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 196,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-02-26",
+    "units": 88.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 197,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-02-08",
+    "units": 88.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 198,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-02-26",
+    "units": 88.64,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 199,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-03-25",
+    "units": 85.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 200,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-03-26",
+    "units": 85.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 201,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-03-01",
+    "units": 85.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 202,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-04-01",
+    "units": 89.31,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 203,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-04-01",
+    "units": 89.31,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 204,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-04-26",
+    "units": 89.31,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 205,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-05-04",
+    "units": 72.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 206,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-05-03",
+    "units": 72.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 207,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-05-15",
+    "units": 72.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 208,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-06-21",
+    "units": 73.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 209,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-06-02",
+    "units": 73.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 210,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-06-13",
+    "units": 73.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 211,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P004",
+    "rx date": "2026-07-05",
+    "units": 84.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 212,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P004",
+    "rx date": "2026-07-05",
+    "units": 84.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 213,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P004",
+    "rx date": "2026-07-20",
+    "units": 84.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 214,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-01-23",
+    "units": 52.58,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 215,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-01-21",
+    "units": 52.58,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 216,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-01-25",
+    "units": 52.58,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 217,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-02-14",
+    "units": 51.44,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 218,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-02-04",
+    "units": 51.44,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 219,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-02-14",
+    "units": 51.44,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 220,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-03-14",
+    "units": 57.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 221,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-03-24",
+    "units": 57.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 222,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-03-12",
+    "units": 57.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 223,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-04-12",
+    "units": 53.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 224,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-04-25",
+    "units": 53.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 225,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-04-24",
+    "units": 53.22,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 226,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-05-04",
+    "units": 50.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 227,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-05-18",
+    "units": 50.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 228,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-05-04",
+    "units": 50.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 229,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-06-06",
+    "units": 55.73,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 230,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-06-23",
+    "units": 55.73,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 231,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-06-10",
+    "units": 55.73,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 232,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P018",
+    "rx date": "2026-07-24",
+    "units": 48.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 233,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P018",
+    "rx date": "2026-07-01",
+    "units": 48.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 234,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P018",
+    "rx date": "2026-07-24",
+    "units": 48.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 235,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-01-06",
+    "units": 38.42,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 236,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-01-20",
+    "units": 38.42,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 237,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-01-22",
+    "units": 38.42,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 238,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-02-25",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 239,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-02-04",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 240,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-02-14",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 241,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-03-13",
+    "units": 40.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 242,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-03-02",
+    "units": 40.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 243,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-03-07",
+    "units": 40.88,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 244,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-04-16",
+    "units": 36.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 245,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-04-14",
+    "units": 36.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 246,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-04-05",
+    "units": 36.9,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 247,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-05-01",
+    "units": 40.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 248,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-05-03",
+    "units": 40.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 249,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-05-19",
+    "units": 40.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 250,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-06-06",
+    "units": 41.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 251,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-06-20",
+    "units": 41.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 252,
+    "representative_id": "FR0006",
+    "doctor code": "D000010",
+    "drug code": "P008",
+    "rx date": "2026-06-27",
+    "units": 41.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 253,
+    "representative_id": "FR0006",
+    "doctor code": "D000003",
+    "drug code": "P008",
+    "rx date": "2026-07-13",
+    "units": 59.27,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 254,
+    "representative_id": "FR0006",
+    "doctor code": "D000004",
+    "drug code": "P008",
+    "rx date": "2026-07-03",
+    "units": 59.27,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 255,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-01-27",
+    "units": 52.83,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 256,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-02-20",
+    "units": 51.7,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 257,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-03-19",
+    "units": 51.36,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 258,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-04-11",
+    "units": 61.83,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 259,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-05-02",
+    "units": 55.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 260,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-06-27",
+    "units": 56.13,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 261,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P028",
+    "rx date": "2026-07-19",
+    "units": 62.49,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 262,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-01-16",
+    "units": 222.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 263,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-02-21",
+    "units": 206.1,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 264,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-03-12",
+    "units": 205.52,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 265,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-04-21",
+    "units": 220.8,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 266,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-05-24",
+    "units": 189.94,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 267,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-06-19",
+    "units": 213.01,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 268,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P010",
+    "rx date": "2026-07-23",
+    "units": 199.73,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 269,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-01-22",
+    "units": 113.3,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 270,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-02-25",
+    "units": 102.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 271,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-03-04",
+    "units": 97.69,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 272,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-04-11",
+    "units": 111.58,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 273,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-05-27",
+    "units": 108.31,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 274,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-06-12",
+    "units": 115.36,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 275,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P024",
+    "rx date": "2026-07-18",
+    "units": 104.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 276,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-01-25",
+    "units": 228.86,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 277,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-02-20",
+    "units": 246.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 278,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-03-17",
+    "units": 252.74,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 279,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-04-05",
+    "units": 259.26,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 280,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-05-14",
+    "units": 267.13,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 281,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-06-27",
+    "units": 231.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 282,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P011",
+    "rx date": "2026-07-16",
+    "units": 226.3,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 283,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-01-07",
+    "units": 62.31,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 284,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-02-25",
+    "units": 73.29,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 285,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-03-04",
+    "units": 62.96,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 286,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-04-05",
+    "units": 70.39,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 287,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-05-22",
+    "units": 67.6,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 288,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-06-16",
+    "units": 67.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 289,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P008",
+    "rx date": "2026-07-12",
+    "units": 67.91,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 290,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-01-05",
+    "units": 211.3,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 291,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-02-13",
+    "units": 97.06,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 292,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-03-25",
+    "units": 201.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 293,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-04-23",
+    "units": 202.43,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 294,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-05-14",
+    "units": 213.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 295,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-06-11",
+    "units": 215.05,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 296,
+    "representative_id": "FR0007",
+    "doctor code": "D000001",
+    "drug code": "P027",
+    "rx date": "2026-07-15",
+    "units": 217.71,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 297,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-01-17",
+    "units": 138.35,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 298,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-01-24",
+    "units": 138.35,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 299,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-02-03",
+    "units": 77.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 300,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-02-25",
+    "units": 77.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 301,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-02-12",
+    "units": 77.5,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 302,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-03-15",
+    "units": 75.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 303,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-03-03",
+    "units": 75.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 304,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-03-05",
+    "units": 75.48,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 305,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-04-17",
+    "units": 86.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 306,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-04-18",
+    "units": 86.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 307,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-04-09",
+    "units": 86.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 308,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-05-05",
+    "units": 78.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 309,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-05-15",
+    "units": 78.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 310,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-05-23",
+    "units": 78.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 311,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-06-18",
+    "units": 87.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 312,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-06-10",
+    "units": 87.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 313,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-06-23",
+    "units": 87.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 314,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P015",
+    "rx date": "2026-07-26",
+    "units": 78.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 315,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P015",
+    "rx date": "2026-07-08",
+    "units": 78.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 316,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P015",
+    "rx date": "2026-07-16",
+    "units": 78.07,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 317,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-01-23",
+    "units": 53.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 318,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-01-16",
+    "units": 53.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 319,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-01-14",
+    "units": 53.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 320,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-02-22",
+    "units": 47.75,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 321,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-02-12",
+    "units": 47.75,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 322,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-02-27",
+    "units": 47.75,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 323,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-03-05",
+    "units": 48.99,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 324,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-03-06",
+    "units": 48.99,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 325,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-03-11",
+    "units": 48.99,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 326,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-04-21",
+    "units": 57.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 327,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-04-09",
+    "units": 57.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 328,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-04-21",
+    "units": 57.77,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 329,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-05-20",
+    "units": 52.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 330,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-05-20",
+    "units": 52.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 331,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-05-27",
+    "units": 52.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 332,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-06-07",
+    "units": 85.21,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 333,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-06-19",
+    "units": 85.21,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 334,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P002",
+    "rx date": "2026-07-26",
+    "units": 52.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 335,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P002",
+    "rx date": "2026-07-22",
+    "units": 52.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 336,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P002",
+    "rx date": "2026-07-10",
+    "units": 52.61,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 337,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-01-11",
+    "units": 61.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 338,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-01-12",
+    "units": 61.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 339,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-01-05",
+    "units": 61.67,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 340,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-02-08",
+    "units": 56.82,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 341,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-02-04",
+    "units": 56.82,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 342,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-02-10",
+    "units": 56.82,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 343,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-03-06",
+    "units": 61.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 344,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-03-17",
+    "units": 61.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 345,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-03-16",
+    "units": 61.04,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 346,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-04-19",
+    "units": 56.6,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 347,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-04-02",
+    "units": 56.6,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 348,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-04-10",
+    "units": 56.6,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 349,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-05-05",
+    "units": 64.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 350,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-05-24",
+    "units": 64.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 351,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-05-25",
+    "units": 64.24,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 352,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-06-13",
+    "units": 56.08,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 353,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P024",
+    "rx date": "2026-06-15",
+    "units": 56.08,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 354,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-06-18",
+    "units": 56.08,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 355,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P024",
+    "rx date": "2026-07-12",
+    "units": 96.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 356,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P024",
+    "rx date": "2026-07-11",
+    "units": 96.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 357,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-01-23",
+    "units": 57.71,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 358,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-01-26",
+    "units": 57.71,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 359,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-02-13",
+    "units": 40.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 360,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-02-24",
+    "units": 40.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 361,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-02-10",
+    "units": 40.23,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 362,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-03-01",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 363,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-03-11",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 364,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-03-04",
+    "units": 39.4,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 365,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-04-21",
+    "units": 62.78,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 366,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-04-25",
+    "units": 62.78,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 367,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-05-22",
+    "units": 35.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 368,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-05-02",
+    "units": 35.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 369,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-05-23",
+    "units": 35.47,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 370,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-06-25",
+    "units": 37.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 371,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-06-16",
+    "units": 37.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 372,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-06-24",
+    "units": 37.72,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 373,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P028",
+    "rx date": "2026-07-16",
+    "units": 36.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 374,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P028",
+    "rx date": "2026-07-18",
+    "units": 36.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 375,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P028",
+    "rx date": "2026-07-10",
+    "units": 36.81,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 376,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-01-27",
+    "units": 63.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 377,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-01-25",
+    "units": 63.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 378,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-01-05",
+    "units": 63.09,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 379,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-02-07",
+    "units": 65.17,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 380,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-02-18",
+    "units": 65.17,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 381,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-02-18",
+    "units": 65.17,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 382,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-03-17",
+    "units": 63.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 383,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-03-21",
+    "units": 63.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 384,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-03-02",
+    "units": 63.84,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 385,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-04-16",
+    "units": 61.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 386,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-04-21",
+    "units": 61.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 387,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-04-25",
+    "units": 61.89,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 388,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-05-24",
+    "units": 96.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 389,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-05-02",
+    "units": 96.37,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 390,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-06-24",
+    "units": 67.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 391,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-06-02",
+    "units": 67.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 392,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-06-10",
+    "units": 67.45,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 393,
+    "representative_id": "FR0009",
+    "doctor code": "D000008",
+    "drug code": "P030",
+    "rx date": "2026-07-15",
+    "units": 68.82,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 394,
+    "representative_id": "FR0009",
+    "doctor code": "D000009",
+    "drug code": "P030",
+    "rx date": "2026-07-07",
+    "units": 68.82,
+    "prescription status": "Valid"
+  },
+  {
+    "rx number": 395,
+    "representative_id": "FR0009",
+    "doctor code": "D000005",
+    "drug code": "P030",
+    "rx date": "2026-07-04",
+    "units": 68.82,
+    "prescription status": "Valid"
+  }
+]

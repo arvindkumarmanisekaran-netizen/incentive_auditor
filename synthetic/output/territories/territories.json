@@ -1,0 +1,122 @@
+[
+  {
+    "area code": "T001",
+    "territory": "Nagpur Zone 1",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T002",
+    "territory": "Sambalpur Zone 2",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T003",
+    "territory": "Kolhapur Zone 3",
+    "region name": "East",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T004",
+    "territory": "Bongaigaon Zone 4",
+    "region name": "South",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T005",
+    "territory": "Gudivada Zone 5",
+    "region name": "South",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T006",
+    "territory": "Patna Zone 6",
+    "region name": "South",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T007",
+    "territory": "Tiruchirappalli Zone 7",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T008",
+    "territory": "Muzaffarpur Zone 8",
+    "region name": "Central",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T009",
+    "territory": "Kishanganj Zone 9",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T010",
+    "territory": "Bongaigaon Zone 10",
+    "region name": "Central",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T011",
+    "territory": "Muzaffarnagar Zone 11",
+    "region name": "West",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T012",
+    "territory": "Giridih Zone 12",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T013",
+    "territory": "Chennai Zone 13",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T014",
+    "territory": "Bhusawal Zone 14",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T015",
+    "territory": "Alwar Zone 15",
+    "region name": "South",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T016",
+    "territory": "Thrissur Zone 16",
+    "region name": "South",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T017",
+    "territory": "Kota Zone 17",
+    "region name": "Central",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T018",
+    "territory": "Nadiad Zone 18",
+    "region name": "Central",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T019",
+    "territory": "Secunderabad Zone 19",
+    "region name": "North",
+    "status": "ACTIVE"
+  },
+  {
+    "area code": "T020",
+    "territory": "Mahbubnagar Zone 20",
+    "region name": "Central",
+    "status": "ACTIVE"
+  }
+]
