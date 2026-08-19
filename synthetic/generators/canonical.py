@@ -51,7 +51,7 @@ def generate_canonical_data(
         doctors,
     )
 
-    sales, prescriptions, anomalies = generate_sales_and_prescriptions(
+    sales, prescriptions, anomalies = generate_prescriptions(
         representatives=representatives,
         products=products,
         doctors=doctors,
@@ -66,15 +66,15 @@ def generate_canonical_data(
         months,
     )
 
-    incentive_rules = generate_incentive_rules(products)
+    incentive_programs = generate_incentive_programs(products)
+
+    incentive_tiers = generate_incentive_tiers(incentive_programs)
 
     payouts = generate_payouts(
-        representatives=representatives,
-        products=products,
-        months=months,
         sales=sales,
         anomalies=anomalies,
-        incentive_rules=incentive_rules,
+        incentive_programs=incentive_programs,
+        incentive_tiers=incentive_tiers,
     )
 
     return {
@@ -87,7 +87,8 @@ def generate_canonical_data(
         "prescriptions": prescriptions,
         "targets": targets,
         "payouts": payouts,
-        "incentive_rules": incentive_rules,
+        "incentive_programs": incentive_programs,
+        "incentive_tiers": incentive_tiers,
         "anomalies": anomalies,
     }
 
@@ -235,46 +236,36 @@ def generate_assignments(
     doctors: list[dict],
 ) -> list[dict]:
 
-    reps_by_territory: dict[
-        str,
-        list[dict],
-    ] = {}
-
-    for rep in representatives:
-        reps_by_territory.setdefault(
-            rep["territory_id"],
-            [],
-        ).append(rep)
-
     assignments = []
 
     assignment_id = 1
 
     for doctor in doctors:
-        possible_reps = reps_by_territory.get(
-            doctor["territory_id"],
-            representatives,
-        )
 
-        rep = random.choice(possible_reps)
+        representative = random.choice(representatives)
 
         assignments.append(
             {
-                "assignment_id": assignment_id,
-                "representative_id": (rep["representative_id"]),
-                "doctor_id": (doctor["doctor_id"]),
-                "effective_from": ("2026-01-01"),
+                "assignment_id": f"A{assignment_id:06d}",
+                "representative_id": representative["representative_id"],
+                "doctor_id": doctor["doctor_id"],
+                "effective_from": "2026-01-01",
                 "effective_to": None,
-                "status": "ACTIVE",
+                "status": random.choice(
+                    [
+                        "Active",
+                        "Inactive",
+                    ]
+                ),
             }
         )
 
-    assignment_id += 1
+        assignment_id += 1
 
     return assignments
 
 
-def generate_sales_and_prescriptions(
+def generate_prescriptions(
     representatives: list[dict],
     products: list[dict],
     doctors: list[dict],
@@ -413,13 +404,15 @@ def generate_sales_and_prescriptions(
                     selling_territory_id = rep["territory_id"]
 
                     if "cross_territory" in anomaly_types and random.random() < 0.65:  # noqa: E501
+
                         other_territories = [
-                            d["territory_id"]
-                            for d in doctors
-                            if d["territory_id"] != rep["territory_id"]
+                            doctor["territory_id"]
+                            for doctor in doctors
+                            if doctor["territory_id"] != rep["territory_id"]
                         ]
 
                         if other_territories:
+
                             selling_territory_id = random.choice(other_territories)  # noqa: E501
 
                     unit_price = float(product["unit_price"])
@@ -429,39 +422,69 @@ def generate_sales_and_prescriptions(
                         round(sales_per_doctor / unit_price),
                     )
 
+                    # ---------------------------------
+                    # SALES
+                    # ---------------------------------
+
                     sales.append(
                         {
                             "sale_id": sale_id,
-                            "representative_id": (rep_id),
+                            "representative_id": rep_id,
                             "doctor_id": doctor_id,
                             "product_id": (product["product_id"]),
                             "sale_date": (f"{month}-" f"{random.randint(1, 27):02d}"),  # noqa: E501
-                            "sales_amount": (
-                                round(
-                                    sales_per_doctor,
-                                    2,
-                                )
+                            "sales_amount": round(
+                                sales_per_doctor,
+                                2,
                             ),
                             "quantity": quantity,
                             "selling_territory_id": (selling_territory_id),
-                            "status": "Valid",
+                            "status": random.choice(
+                                [
+                                    "Valid",
+                                    "Cancelled",
+                                    "Returned",
+                                    "Adjusted",
+                                ]
+                            ),
                         }
                     )
 
+                    # ---------------------------------
+                    # PRESCRIPTIONS
+                    #
+                    # Matches document_registry.json:
+                    #
+                    # required:
+                    # prescription_id
+                    # prescription_date
+                    # doctor_id
+                    # product_id
+                    # quantity
+                    #
+                    # optional:
+                    # status
+                    # ---------------------------------
+
                     prescriptions.append(
                         {
-                            "prescription_id": (prescription_id),
-                            "representative_id": (rep_id),
-                            "doctor_id": doctor_id,
-                            "product_id": (product["product_id"]),
+                            "prescription_id": f"RX{prescription_id:06d}",
                             "prescription_date": (
                                 f"{month}-" f"{random.randint(1, 27):02d}"
                             ),  # noqa: E501
-                            "quantity": round(
-                                rx_per_doctor,
-                                2,
+                            "doctor_id": doctor_id,
+                            "product_id": (product["product_id"]),
+                            "quantity": max(
+                                1,
+                                round(rx_per_doctor),
                             ),
-                            "status": "Valid",
+                            "status": random.choice(
+                                [
+                                    "Valid",
+                                    "Cancelled",
+                                    "Reversed",
+                                ]
+                            ),
                         }
                     )
 
@@ -469,9 +492,10 @@ def generate_sales_and_prescriptions(
                     prescription_id += 1
 
                 if anomaly_types:
+
                     anomalies.append(
                         {
-                            "representative_id": (rep_id),
+                            "representative_id": rep_id,
                             "product_id": (product["product_id"]),
                             "month": month,
                             "anomaly_types": (anomaly_types),
@@ -491,9 +515,14 @@ def generate_targets(
     months: list[str],
 ) -> list[dict]:
 
-    targets = []
+    targets: list[dict] = []
 
     target_id = 1
+
+    statuses = [
+        "Active",
+        "Inactive",
+    ]
 
     for rep in representatives:
 
@@ -511,19 +540,18 @@ def generate_targets(
 
                 targets.append(
                     {
-                        "target_id": (target_id),
+                        "target_id": f"TARGET_{target_id:06d}",
                         "representative_id": (rep["representative_id"]),
                         "product_id": (product["product_id"]),
                         "target_month": (f"{month}-01"),
-                        "target_amount": (
-                            round(
-                                random.uniform(
-                                    50000,
-                                    250000,
-                                ),
-                                2,
-                            )
+                        "target_amount": round(
+                            random.uniform(
+                                50000,
+                                250000,
+                            ),
+                            2,
                         ),
+                        "status": random.choice(statuses),
                     }
                 )
 
@@ -532,62 +560,156 @@ def generate_targets(
     return targets
 
 
-def generate_incentive_rules(
+def generate_incentive_programs(
     products: list[dict],
 ) -> list[dict]:
 
-    rules = []
+    programs = []
 
-    rule_id = 1
+    program_types = [
+        "Monthly Incentive Program",
+        "Quarterly Sales Program",
+        "Product Growth Scheme",
+        "Achievement Bonus Program",
+    ]
+
+    period_types = [
+        "Monthly",
+        "Quarterly",
+    ]
+
+    statuses = [
+        "Active",
+        "Inactive",
+    ]
 
     for product in products:
 
-        rules.append(
+        product_id = product["product_id"]
+
+        programs.append(
             {
-                "incentive_rule_id": (rule_id),
-                "product_id": (product["product_id"]),
-                "rule_name": (f"{product['product_id']} " f"Standard Incentive"),  # noqa: E501
+                "program_id": (f"PROGRAM_{product_id}"),
+                "program_name": (f"{product_id} " f"{random.choice(program_types)}"),  # noqa: E501
+                "period_type": (random.choice(period_types)),
                 "effective_from": ("2026-01-01"),
                 "effective_to": None,
-                "threshold_amount": (
+                "minimum_sales_achievement": round(
                     random.choice(
                         [
-                            0,
-                            50000,
-                            100000,
+                            50,
+                            70,
+                            80,
                         ]
-                    )
+                    ),
+                    2,
                 ),
-                "payout_percentage": (
+                "maximum_payout_multiplier": round(
                     random.choice(
                         [
-                            3.0,
-                            4.0,
-                            5.0,
-                            6.0,
-                            7.5,
+                            1.5,
+                            2.0,
+                            2.5,
                         ]
-                    )
+                    ),
+                    2,
                 ),
-                "active": True,
+                "status": (random.choice(statuses)),
             }
         )
 
-        rule_id += 1
+    return programs
 
-    return rules
+
+def generate_incentive_tiers(
+    programs: list[dict],
+) -> list[dict]:
+
+    tiers = []
+
+    tier_id = 1
+
+    tier_definitions = [
+        {
+            "minimum": 0,
+            "maximum": 50,
+            "multiplier": 0.5,
+        },
+        {
+            "minimum": 50,
+            "maximum": 75,
+            "multiplier": 1.0,
+        },
+        {
+            "minimum": 75,
+            "maximum": 100,
+            "multiplier": 1.25,
+        },
+        {
+            "minimum": 100,
+            "maximum": None,
+            "multiplier": 1.5,
+        },
+    ]
+
+    for program in programs:
+
+        for tier in tier_definitions:
+
+            tiers.append(
+                {
+                    "tier_id": (f"TIER_{tier_id:06d}"),
+                    "program_id": (program["program_id"]),
+                    "minimum_achievement": (tier["minimum"]),
+                    "maximum_achievement": (tier["maximum"]),
+                    "payout_multiplier": (tier["multiplier"]),
+                }
+            )
+
+            tier_id += 1
+
+    return tiers
 
 
 def generate_payouts(
-    representatives: list[dict],
-    products: list[dict],
-    months: list[str],
     sales: list[dict],
     anomalies: list[dict],
-    incentive_rules: list[dict],
+    incentive_programs: list[dict],
+    incentive_tiers: list[dict],
 ) -> list[dict]:
 
-    rule_by_product = {rule["product_id"]: rule for rule in incentive_rules}
+    # -----------------------------------------
+    # Program lookup
+    # PROGRAM_P001 -> P001
+    # -----------------------------------------
+
+    program_by_product = {
+        program["program_id"].replace(
+            "PROGRAM_",
+            "",
+        ): program
+        for program in incentive_programs
+    }
+
+    # -----------------------------------------
+    # Tier lookup
+    # -----------------------------------------
+
+    tiers_by_program: dict[
+        str,
+        list[dict],
+    ] = {}
+
+    for tier in incentive_tiers:
+
+        tiers_by_program.setdefault(
+            tier["program_id"],
+            [],
+        ).append(tier)
+
+    # -----------------------------------------
+    # Anomaly lookup
+    # -----------------------------------------
 
     anomaly_lookup = {
         (
@@ -597,6 +719,10 @@ def generate_payouts(
         ): anomaly["anomaly_types"]
         for anomaly in anomalies
     }
+
+    # -----------------------------------------
+    # Aggregate sales
+    # -----------------------------------------
 
     sales_totals: dict[
         tuple[str, str, str],
@@ -622,26 +748,68 @@ def generate_payouts(
 
     payout_id = 1
 
+    # -----------------------------------------
+    # Generate payout rows
+    # -----------------------------------------
+
     for (
         rep_id,
         product_id,
         month,
-    ), sales_amount in sales_totals.items():
+    ), actual_sales in sales_totals.items():
 
-        rule = rule_by_product[product_id]
+        program = program_by_product.get(product_id)
 
-        threshold = float(rule["threshold_amount"])
+        if not program:
+            continue
 
-        payout_percent = float(rule["payout_percentage"])
+        program_id = program["program_id"]
 
-        eligible_sales = max(
-            sales_amount - threshold,
-            0,
+        sales_target = random.uniform(
+            100000,
+            300000,
         )
 
-        expected_payout = eligible_sales * payout_percent / 100
+        sales_achievement = actual_sales / sales_target * 100
+
+        # -------------------------------------
+        # Find matching achievement tier
+        # -------------------------------------
+
+        achievement_multiplier = 0.0
+
+        for tier in tiers_by_program.get(
+            program_id,
+            [],
+        ):
+
+            minimum = float(tier["minimum_achievement"])
+
+            maximum = tier.get("maximum_achievement")
+
+            if sales_achievement >= minimum and (
+                maximum is None or sales_achievement <= float(maximum)
+            ):
+
+                achievement_multiplier = float(tier["payout_multiplier"])
+
+                break
+
+        # -------------------------------------
+        # Calculate payout
+        # -------------------------------------
+
+        base_incentive = actual_sales * 0.05
+
+        calculated_payout = base_incentive * achievement_multiplier
+
+        expected_payout = calculated_payout
 
         actual_payout = expected_payout
+
+        # -------------------------------------
+        # Inject anomaly
+        # -------------------------------------
 
         anomaly_types = anomaly_lookup.get(
             (
@@ -653,36 +821,75 @@ def generate_payouts(
         )
 
         if "payout_discrepancy" in anomaly_types:
+
             actual_payout += random.uniform(
                 1000,
                 10000,
             )
 
+        maximum_multiplier = float(
+            program.get(
+                "maximum_payout_multiplier",
+                2.0,
+            )
+        )
+
+        maximum_payout = base_incentive * maximum_multiplier
+
         payouts.append(
             {
-                "payout_id": (payout_id),
-                "representative_id": (rep_id),
-                "product_id": (product_id),
-                "payout_month": (f"{month}-01"),
-                "expected_payout": (
-                    round(
-                        expected_payout,
-                        2,
-                    )
+                "payout_id": (f"PAYOUT_{payout_id:06d}"),
+                "representative_id": rep_id,
+                "product_id": product_id,
+                "program_id": program_id,
+                "payout_month": f"{month}-01",
+                "sales_target": round(
+                    sales_target,
+                    2,
                 ),
-                "actual_payout": (
-                    round(
-                        actual_payout,
-                        2,
-                    )
+                "actual_sales": round(
+                    actual_sales,
+                    2,
                 ),
-                "payout_difference": (
-                    round(
-                        actual_payout - expected_payout,
-                        2,
-                    )
+                "sales_achievement": round(
+                    sales_achievement,
+                    2,
                 ),
-                "status": ("Processed"),
+                "base_incentive": round(
+                    base_incentive,
+                    2,
+                ),
+                "achievement_multiplier": round(
+                    achievement_multiplier,
+                    2,
+                ),
+                "calculated_payout": round(
+                    calculated_payout,
+                    2,
+                ),
+                "maximum_payout": round(
+                    maximum_payout,
+                    2,
+                ),
+                "expected_payout": round(
+                    expected_payout,
+                    2,
+                ),
+                "actual_payout": round(
+                    actual_payout,
+                    2,
+                ),
+                "payout_difference": round(
+                    actual_payout - expected_payout,
+                    2,
+                ),
+                "status": random.choice(
+                    [
+                        "Pending",
+                        "Paid",
+                        "Adjusted",
+                    ]
+                ),
             }
         )
 

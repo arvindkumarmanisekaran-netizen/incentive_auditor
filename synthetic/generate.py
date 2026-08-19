@@ -71,8 +71,8 @@ def main():
     # ----------------------------------------------
 
     data = generate_canonical_data(
-        num_territories=20,
-        num_representatives=10,
+        num_territories=50,
+        num_representatives=30,
         num_products=30,
         num_doctors=10,
         anomaly_rate=0.08,

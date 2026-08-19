@@ -11,6 +11,8 @@ export default function DocumentProcessingCard() {
     validationErrors,
     clearValidationErrors,
     handleConfirm,
+    successMessage,
+    clearSuccessMessage,
   } = useDocumentUpload();
 
   console.log("CARD validationErrors", validationErrors.length, validationErrors);
@@ -134,6 +136,22 @@ export default function DocumentProcessingCard() {
         )}
 
         {error && !validationErrors.length && <p className="error-message">{error}</p>}
+
+        {successMessage && (
+          <>
+            <div className="validation-overlay"></div>
+
+            <div className="validation-popup success-popup">
+              <h4>Import Successful</h4>
+
+              <p>{successMessage}</p>
+
+              <button type="button" className="secondary-button" onClick={clearSuccessMessage}>
+                Close
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </article>
   );

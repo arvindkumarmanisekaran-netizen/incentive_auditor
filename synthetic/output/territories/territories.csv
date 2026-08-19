@@ -1,4 +1,4 @@
-territory id,territory,zone,country,status
+territory_code,area name,region name,country,record status
 T001,Nagpur Zone 1,North,India,Active
 T002,Sambalpur Zone 2,East,India,Active
 T003,Kolhapur Zone 3,South,India,Active
@@ -19,3 +19,33 @@ T017,Kota Zone 17,North,India,Active
 T018,Nadiad Zone 18,West,India,Active
 T019,Secunderabad Zone 19,East,India,Active
 T020,Mahbubnagar Zone 20,Central,India,Active
+T021,Varanasi Zone 21,North,India,Active
+T022,Jorhat Zone 22,Central,India,Active
+T023,Burhanpur Zone 23,West,India,Active
+T024,Suryapet Zone 24,Central,India,Active
+T025,Tadipatri Zone 25,Central,India,Active
+T026,Gangtok Zone 26,Central,India,Active
+T027,Coimbatore Zone 27,North,India,Active
+T028,Ambattur Zone 28,South,India,Active
+T029,Vijayawada Zone 29,North,India,Active
+T030,Salem Zone 30,North,India,Active
+T031,Alwar Zone 31,East,India,Active
+T032,Bharatpur Zone 32,East,India,Active
+T033,Uluberia Zone 33,East,India,Active
+T034,Bhagalpur Zone 34,South,India,Active
+T035,Madurai Zone 35,North,India,Active
+T036,Deoghar Zone 36,Central,India,Active
+T037,Ujjain Zone 37,South,India,Active
+T038,Nadiad Zone 38,West,India,Active
+T039,Proddatur Zone 39,Central,India,Active
+T040,Anantapur Zone 40,East,India,Active
+T041,Berhampur Zone 41,South,India,Active
+T042,Satna Zone 42,East,India,Active
+T043,Agartala Zone 43,East,India,Active
+T044,Rajpur Sonarpur Zone 44,South,India,Active
+T045,Rajpur Sonarpur Zone 45,South,India,Active
+T046,Tenali Zone 46,West,India,Active
+T047,Asansol Zone 47,South,India,Active
+T048,Kolhapur Zone 48,South,India,Active
+T049,Kishanganj Zone 49,Central,India,Active
+T050,Bhimavaram Zone 50,Central,India,Active

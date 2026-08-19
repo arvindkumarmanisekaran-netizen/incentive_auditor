@@ -1,2801 +1,2410 @@
 [
   {
-    "prescription id": 1,
-    "representative_id": "FR0001",
+    "rx number": "RX000001",
+    "rx date": "2026-01-16",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 163,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000002",
+    "rx date": "2026-02-10",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 166,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000003",
+    "rx date": "2026-03-07",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 190,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000004",
+    "rx date": "2026-04-17",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 188,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000005",
+    "rx date": "2026-05-22",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 162,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000006",
+    "rx date": "2026-06-14",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 181,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000007",
+    "rx date": "2026-07-13",
+    "doctor code": "D000004",
+    "product code": "P008",
+    "qty": 196,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000008",
+    "rx date": "2026-01-17",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 94,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000009",
+    "rx date": "2026-02-15",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 94,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000010",
+    "rx date": "2026-03-22",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 115,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000011",
+    "rx date": "2026-04-20",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 95,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000012",
+    "rx date": "2026-05-03",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 107,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000013",
+    "rx date": "2026-06-18",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 93,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000014",
+    "rx date": "2026-07-19",
+    "doctor code": "D000004",
+    "product code": "P028",
+    "qty": 94,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000015",
+    "rx date": "2026-01-22",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 72,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000016",
+    "rx date": "2026-02-26",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 73,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000017",
+    "rx date": "2026-03-09",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 71,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000018",
+    "rx date": "2026-04-12",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 73,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000019",
+    "rx date": "2026-05-03",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 63,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000020",
+    "rx date": "2026-06-09",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 70,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000021",
+    "rx date": "2026-07-14",
+    "doctor code": "D000004",
+    "product code": "P003",
+    "qty": 61,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000022",
+    "rx date": "2026-01-12",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 58,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000023",
+    "rx date": "2026-02-18",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 63,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000024",
+    "rx date": "2026-03-10",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 63,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000025",
+    "rx date": "2026-04-22",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 66,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000026",
+    "rx date": "2026-05-03",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 71,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000027",
+    "rx date": "2026-06-20",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 61,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000028",
+    "rx date": "2026-07-05",
+    "doctor code": "D000004",
+    "product code": "P015",
+    "qty": 66,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000029",
+    "rx date": "2026-01-02",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 244,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000030",
+    "rx date": "2026-02-20",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 228,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000031",
+    "rx date": "2026-03-15",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 250,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000032",
+    "rx date": "2026-04-09",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 219,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000033",
+    "rx date": "2026-05-23",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 218,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000034",
+    "rx date": "2026-06-16",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 66,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000035",
+    "rx date": "2026-07-09",
+    "doctor code": "D000004",
+    "product code": "P026",
+    "qty": 224,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000036",
+    "rx date": "2026-01-13",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 129,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000037",
+    "rx date": "2026-02-09",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 127,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000038",
+    "rx date": "2026-03-09",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 119,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000039",
+    "rx date": "2026-04-25",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 111,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000040",
+    "rx date": "2026-05-22",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 116,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000041",
+    "rx date": "2026-06-25",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 128,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000042",
+    "rx date": "2026-07-03",
+    "doctor code": "D000004",
+    "product code": "P018",
+    "qty": 110,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000043",
+    "rx date": "2026-01-03",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-01-22",
-    "qty": 225.93,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 178,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 2,
-    "representative_id": "FR0001",
+    "rx number": "RX000044",
+    "rx date": "2026-02-21",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-02-18",
-    "qty": 215.03,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 165,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 3,
-    "representative_id": "FR0001",
+    "rx number": "RX000045",
+    "rx date": "2026-03-27",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-03-17",
-    "qty": 237.14,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 176,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 4,
-    "representative_id": "FR0001",
+    "rx number": "RX000046",
+    "rx date": "2026-04-25",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-04-08",
-    "qty": 205.1,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 158,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 5,
-    "representative_id": "FR0001",
+    "rx number": "RX000047",
+    "rx date": "2026-05-07",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-05-22",
-    "qty": 204.85,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 162,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 6,
-    "representative_id": "FR0001",
+    "rx number": "RX000048",
+    "rx date": "2026-06-03",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-06-26",
-    "qty": 237.65,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 182,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 7,
-    "representative_id": "FR0001",
+    "rx number": "RX000049",
+    "rx date": "2026-07-03",
     "doctor code": "D000009",
-    "drug code": "P029",
-    "prescription date": "2026-07-14",
-    "qty": 206.6,
-    "prescription status": "Valid"
+    "product code": "P004",
+    "qty": 177,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 8,
-    "representative_id": "FR0001",
+    "rx number": "RX000050",
+    "rx date": "2026-01-12",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-01-04",
-    "qty": 177.98,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 186,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 9,
-    "representative_id": "FR0001",
+    "rx number": "RX000051",
+    "rx date": "2026-02-07",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-02-15",
-    "qty": 192.85,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 176,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 10,
-    "representative_id": "FR0001",
+    "rx number": "RX000052",
+    "rx date": "2026-03-10",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-03-21",
-    "qty": 192.62,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 191,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 11,
-    "representative_id": "FR0001",
+    "rx number": "RX000053",
+    "rx date": "2026-04-18",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-04-16",
-    "qty": 214.96,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 196,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 12,
-    "representative_id": "FR0001",
+    "rx number": "RX000054",
+    "rx date": "2026-05-16",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-05-13",
-    "qty": 212.13,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 202,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 13,
-    "representative_id": "FR0001",
+    "rx number": "RX000055",
+    "rx date": "2026-06-13",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-06-07",
-    "qty": 193.13,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 169,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 14,
-    "representative_id": "FR0001",
+    "rx number": "RX000056",
+    "rx date": "2026-07-18",
     "doctor code": "D000009",
-    "drug code": "P027",
-    "prescription date": "2026-07-11",
-    "qty": 198.4,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 169,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 15,
-    "representative_id": "FR0001",
+    "rx number": "RX000057",
+    "rx date": "2026-01-10",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-01-03",
-    "qty": 152.04,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 206,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 16,
-    "representative_id": "FR0001",
+    "rx number": "RX000058",
+    "rx date": "2026-02-06",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-02-20",
-    "qty": 154.83,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 219,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 17,
-    "representative_id": "FR0001",
+    "rx number": "RX000059",
+    "rx date": "2026-03-08",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-03-05",
-    "qty": 37.64,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 186,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 18,
-    "representative_id": "FR0001",
+    "rx number": "RX000060",
+    "rx date": "2026-04-14",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-04-20",
-    "qty": 157.73,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 206,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 19,
-    "representative_id": "FR0001",
+    "rx number": "RX000061",
+    "rx date": "2026-05-26",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-05-12",
-    "qty": 149.03,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 227,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 20,
-    "representative_id": "FR0001",
+    "rx number": "RX000062",
+    "rx date": "2026-06-23",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-06-18",
-    "qty": 159.63,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 227,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 21,
-    "representative_id": "FR0001",
+    "rx number": "RX000063",
+    "rx date": "2026-07-20",
     "doctor code": "D000009",
-    "drug code": "P026",
-    "prescription date": "2026-07-27",
-    "qty": 181.74,
-    "prescription status": "Valid"
+    "product code": "P025",
+    "qty": 208,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 22,
-    "representative_id": "FR0001",
+    "rx number": "RX000064",
+    "rx date": "2026-01-25",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-01-10",
-    "qty": 225.81,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 91,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 23,
-    "representative_id": "FR0001",
+    "rx number": "RX000065",
+    "rx date": "2026-02-03",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-02-02",
-    "qty": 222.66,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 97,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 24,
-    "representative_id": "FR0001",
+    "rx number": "RX000066",
+    "rx date": "2026-03-10",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-03-05",
-    "qty": 226.45,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 92,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 25,
-    "representative_id": "FR0001",
+    "rx number": "RX000067",
+    "rx date": "2026-04-11",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-04-01",
-    "qty": 250.53,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 90,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 26,
-    "representative_id": "FR0001",
+    "rx number": "RX000068",
+    "rx date": "2026-05-07",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-05-12",
-    "qty": 247.93,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 89,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 27,
-    "representative_id": "FR0001",
+    "rx number": "RX000069",
+    "rx date": "2026-06-10",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-06-02",
-    "qty": 218.71,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 91,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 28,
-    "representative_id": "FR0001",
+    "rx number": "RX000070",
+    "rx date": "2026-07-10",
     "doctor code": "D000009",
-    "drug code": "P010",
-    "prescription date": "2026-07-18",
-    "qty": 225.04,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 80,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 29,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-01-01",
-    "qty": 138.45,
-    "prescription status": "Valid"
+    "rx number": "RX000071",
+    "rx date": "2026-01-17",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 226,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 30,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-02-06",
-    "qty": 134.38,
-    "prescription status": "Valid"
+    "rx number": "RX000072",
+    "rx date": "2026-02-13",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 242,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 31,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-03-27",
-    "qty": 136.86,
-    "prescription status": "Valid"
+    "rx number": "RX000073",
+    "rx date": "2026-03-11",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 237,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 32,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-04-22",
-    "qty": 135.43,
-    "prescription status": "Valid"
+    "rx number": "RX000074",
+    "rx date": "2026-04-18",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 230,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 33,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-05-17",
-    "qty": 136.64,
-    "prescription status": "Valid"
+    "rx number": "RX000075",
+    "rx date": "2026-05-19",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 221,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 34,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-06-06",
-    "qty": 127.59,
-    "prescription status": "Valid"
+    "rx number": "RX000076",
+    "rx date": "2026-06-16",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 197,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 35,
-    "representative_id": "FR0001",
-    "doctor code": "D000009",
-    "drug code": "P008",
-    "prescription date": "2026-07-24",
-    "qty": 113.86,
-    "prescription status": "Valid"
+    "rx number": "RX000077",
+    "rx date": "2026-07-01",
+    "doctor code": "D000010",
+    "product code": "P018",
+    "qty": 211,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 36,
-    "representative_id": "FR0002",
+    "rx number": "RX000078",
+    "rx date": "2026-01-21",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 239,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000079",
+    "rx date": "2026-02-18",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 243,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000080",
+    "rx date": "2026-03-14",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 234,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000081",
+    "rx date": "2026-04-11",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 206,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000082",
+    "rx date": "2026-05-06",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 208,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000083",
+    "rx date": "2026-06-22",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 231,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000084",
+    "rx date": "2026-07-12",
+    "doctor code": "D000010",
+    "product code": "P014",
+    "qty": 215,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000085",
+    "rx date": "2026-01-13",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 234,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000086",
+    "rx date": "2026-02-19",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 255,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000087",
+    "rx date": "2026-03-20",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 266,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000088",
+    "rx date": "2026-04-10",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 231,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000089",
+    "rx date": "2026-05-27",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 225,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000090",
+    "rx date": "2026-06-15",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 243,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000091",
+    "rx date": "2026-07-01",
+    "doctor code": "D000010",
+    "product code": "P003",
+    "qty": 264,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000092",
+    "rx date": "2026-01-21",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 202,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000093",
+    "rx date": "2026-02-02",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 224,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000094",
+    "rx date": "2026-03-12",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 202,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000095",
+    "rx date": "2026-04-27",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 217,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000096",
+    "rx date": "2026-05-08",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 205,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000097",
+    "rx date": "2026-06-07",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 217,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000098",
+    "rx date": "2026-07-08",
+    "doctor code": "D000008",
+    "product code": "P004",
+    "qty": 196,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000099",
+    "rx date": "2026-01-26",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 86,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000100",
+    "rx date": "2026-02-05",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 77,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000101",
+    "rx date": "2026-03-05",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 86,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000102",
+    "rx date": "2026-04-15",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 76,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000103",
+    "rx date": "2026-05-02",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 88,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000104",
+    "rx date": "2026-06-20",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 77,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000105",
+    "rx date": "2026-07-21",
+    "doctor code": "D000008",
+    "product code": "P015",
+    "qty": 86,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000106",
+    "rx date": "2026-01-13",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 171,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000107",
+    "rx date": "2026-02-03",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 151,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000108",
+    "rx date": "2026-03-19",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 144,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000109",
+    "rx date": "2026-04-12",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 154,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000110",
+    "rx date": "2026-05-04",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 163,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000111",
+    "rx date": "2026-06-01",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 169,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000112",
+    "rx date": "2026-07-19",
+    "doctor code": "D000008",
+    "product code": "P012",
+    "qty": 172,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000113",
+    "rx date": "2026-01-11",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 74,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000114",
+    "rx date": "2026-02-06",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 75,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000115",
+    "rx date": "2026-03-14",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 70,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000116",
+    "rx date": "2026-04-20",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 70,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000117",
+    "rx date": "2026-05-24",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 66,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000118",
+    "rx date": "2026-06-24",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 74,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000119",
+    "rx date": "2026-07-23",
+    "doctor code": "D000008",
+    "product code": "P022",
+    "qty": 64,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000120",
+    "rx date": "2026-01-10",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 69,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000121",
+    "rx date": "2026-02-25",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 60,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000122",
+    "rx date": "2026-03-09",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 67,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000123",
+    "rx date": "2026-04-15",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 68,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000124",
+    "rx date": "2026-05-05",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 71,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000125",
+    "rx date": "2026-06-02",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 62,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000126",
+    "rx date": "2026-07-15",
+    "doctor code": "D000008",
+    "product code": "P024",
+    "qty": 67,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000127",
+    "rx date": "2026-01-17",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 98,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000128",
+    "rx date": "2026-02-10",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 107,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000129",
+    "rx date": "2026-03-18",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 111,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000130",
+    "rx date": "2026-04-19",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 117,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000131",
+    "rx date": "2026-05-10",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 120,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000132",
+    "rx date": "2026-06-17",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 116,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000133",
+    "rx date": "2026-07-22",
+    "doctor code": "D000008",
+    "product code": "P027",
+    "qty": 27,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000134",
+    "rx date": "2026-01-02",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 160,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000135",
+    "rx date": "2026-02-08",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 189,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000136",
+    "rx date": "2026-03-15",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 182,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000137",
+    "rx date": "2026-04-09",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 168,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000138",
+    "rx date": "2026-05-25",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 174,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000139",
+    "rx date": "2026-06-12",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 158,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000140",
+    "rx date": "2026-07-01",
+    "doctor code": "D000008",
+    "product code": "P009",
+    "qty": 167,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000141",
+    "rx date": "2026-01-07",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 71,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000142",
+    "rx date": "2026-02-04",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 72,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000143",
+    "rx date": "2026-03-20",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 73,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000144",
+    "rx date": "2026-04-06",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 67,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000145",
+    "rx date": "2026-05-02",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 69,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000146",
+    "rx date": "2026-06-24",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 75,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000147",
+    "rx date": "2026-07-18",
+    "doctor code": "D000007",
+    "product code": "P027",
+    "qty": 75,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000148",
+    "rx date": "2026-01-02",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 81,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000149",
+    "rx date": "2026-02-27",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 84,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000150",
+    "rx date": "2026-03-21",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 80,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000151",
+    "rx date": "2026-04-06",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 76,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000152",
+    "rx date": "2026-05-03",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 83,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000153",
+    "rx date": "2026-06-22",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 78,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000154",
+    "rx date": "2026-07-24",
+    "doctor code": "D000007",
+    "product code": "P023",
+    "qty": 76,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000155",
+    "rx date": "2026-01-01",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 120,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000156",
+    "rx date": "2026-02-12",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 131,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000157",
+    "rx date": "2026-03-25",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 123,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000158",
+    "rx date": "2026-04-24",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 130,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000159",
+    "rx date": "2026-05-07",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 134,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000160",
+    "rx date": "2026-06-06",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 132,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000161",
+    "rx date": "2026-07-18",
+    "doctor code": "D000007",
+    "product code": "P021",
+    "qty": 138,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000162",
+    "rx date": "2026-01-01",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-01-10",
-    "qty": 14.15,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 178,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 37,
-    "representative_id": "FR0002",
+    "rx number": "RX000163",
+    "rx date": "2026-02-03",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-02-14",
-    "qty": 77.66,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 201,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 38,
-    "representative_id": "FR0002",
+    "rx number": "RX000164",
+    "rx date": "2026-03-05",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-03-18",
-    "qty": 85.08,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 188,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 39,
-    "representative_id": "FR0002",
+    "rx number": "RX000165",
+    "rx date": "2026-04-25",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-04-15",
-    "qty": 75.62,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 196,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 40,
-    "representative_id": "FR0002",
+    "rx number": "RX000166",
+    "rx date": "2026-05-06",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-05-17",
-    "qty": 80.24,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 171,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 41,
-    "representative_id": "FR0002",
+    "rx number": "RX000167",
+    "rx date": "2026-06-07",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-06-26",
-    "qty": 73.57,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 207,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 42,
-    "representative_id": "FR0002",
+    "rx number": "RX000168",
+    "rx date": "2026-07-19",
     "doctor code": "D000001",
-    "drug code": "P014",
-    "prescription date": "2026-07-14",
-    "qty": 76.23,
-    "prescription status": "Valid"
+    "product code": "P029",
+    "qty": 194,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 43,
-    "representative_id": "FR0002",
+    "rx number": "RX000169",
+    "rx date": "2026-01-03",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-01-25",
-    "qty": 158.95,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 194,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 44,
-    "representative_id": "FR0002",
+    "rx number": "RX000170",
+    "rx date": "2026-02-16",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-02-18",
-    "qty": 152.55,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 171,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 45,
-    "representative_id": "FR0002",
+    "rx number": "RX000171",
+    "rx date": "2026-03-03",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-03-15",
-    "qty": 160.96,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 172,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 46,
-    "representative_id": "FR0002",
+    "rx number": "RX000172",
+    "rx date": "2026-04-24",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-04-24",
-    "qty": 162.67,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 179,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 47,
-    "representative_id": "FR0002",
+    "rx number": "RX000173",
+    "rx date": "2026-05-15",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-05-08",
-    "qty": 171.41,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 175,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 48,
-    "representative_id": "FR0002",
+    "rx number": "RX000174",
+    "rx date": "2026-06-08",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-06-18",
-    "qty": 154.92,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 164,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 49,
-    "representative_id": "FR0002",
+    "rx number": "RX000175",
+    "rx date": "2026-07-16",
     "doctor code": "D000001",
-    "drug code": "P020",
-    "prescription date": "2026-07-14",
-    "qty": 158.36,
-    "prescription status": "Valid"
+    "product code": "P010",
+    "qty": 189,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 50,
-    "representative_id": "FR0002",
+    "rx number": "RX000176",
+    "rx date": "2026-01-10",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-01-19",
-    "qty": 152.78,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 56,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 51,
-    "representative_id": "FR0002",
+    "rx number": "RX000177",
+    "rx date": "2026-02-05",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-02-24",
-    "qty": 150.47,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 62,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 52,
-    "representative_id": "FR0002",
+    "rx number": "RX000178",
+    "rx date": "2026-03-12",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-03-14",
-    "qty": 168.96,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 58,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 53,
-    "representative_id": "FR0002",
+    "rx number": "RX000179",
+    "rx date": "2026-04-05",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-04-15",
-    "qty": 161.21,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 59,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 54,
-    "representative_id": "FR0002",
+    "rx number": "RX000180",
+    "rx date": "2026-05-17",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-05-21",
-    "qty": 156.64,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 57,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 55,
-    "representative_id": "FR0002",
+    "rx number": "RX000181",
+    "rx date": "2026-06-13",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-06-07",
-    "qty": 144.71,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 57,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 56,
-    "representative_id": "FR0002",
+    "rx number": "RX000182",
+    "rx date": "2026-07-16",
     "doctor code": "D000001",
-    "drug code": "P017",
-    "prescription date": "2026-07-27",
-    "qty": 168.35,
-    "prescription status": "Valid"
+    "product code": "P028",
+    "qty": 57,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 57,
-    "representative_id": "FR0002",
+    "rx number": "RX000183",
+    "rx date": "2026-01-24",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-01-01",
-    "qty": 43.06,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 195,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 58,
-    "representative_id": "FR0002",
+    "rx number": "RX000184",
+    "rx date": "2026-02-02",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-02-16",
-    "qty": 39.86,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 188,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 59,
-    "representative_id": "FR0002",
+    "rx number": "RX000185",
+    "rx date": "2026-03-23",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-03-20",
-    "qty": 41.78,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 164,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 60,
-    "representative_id": "FR0002",
+    "rx number": "RX000186",
+    "rx date": "2026-04-18",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-04-19",
-    "qty": 40.77,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 200,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 61,
-    "representative_id": "FR0002",
+    "rx number": "RX000187",
+    "rx date": "2026-05-18",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-05-22",
-    "qty": 8.16,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 178,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 62,
-    "representative_id": "FR0002",
+    "rx number": "RX000188",
+    "rx date": "2026-06-09",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-06-14",
-    "qty": 49.2,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 191,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 63,
-    "representative_id": "FR0002",
+    "rx number": "RX000189",
+    "rx date": "2026-07-11",
     "doctor code": "D000001",
-    "drug code": "P004",
-    "prescription date": "2026-07-16",
-    "qty": 45.94,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 203,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 64,
-    "representative_id": "FR0002",
+    "rx number": "RX000190",
+    "rx date": "2026-01-25",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-01-17",
-    "qty": 255.21,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 219,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 65,
-    "representative_id": "FR0002",
+    "rx number": "RX000191",
+    "rx date": "2026-02-24",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-02-14",
-    "qty": 260.58,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 250,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 66,
-    "representative_id": "FR0002",
+    "rx number": "RX000192",
+    "rx date": "2026-03-20",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-03-15",
-    "qty": 234.73,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 227,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 67,
-    "representative_id": "FR0002",
+    "rx number": "RX000193",
+    "rx date": "2026-04-02",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-04-16",
-    "qty": 250.05,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 247,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 68,
-    "representative_id": "FR0002",
+    "rx number": "RX000194",
+    "rx date": "2026-05-14",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-05-20",
-    "qty": 228.87,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 218,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 69,
-    "representative_id": "FR0002",
+    "rx number": "RX000195",
+    "rx date": "2026-06-21",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-06-24",
-    "qty": 218.13,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 237,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 70,
-    "representative_id": "FR0002",
+    "rx number": "RX000196",
+    "rx date": "2026-07-27",
     "doctor code": "D000001",
-    "drug code": "P013",
-    "prescription date": "2026-07-26",
-    "qty": 230.37,
-    "prescription status": "Valid"
+    "product code": "P023",
+    "qty": 242,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 71,
-    "representative_id": "FR0004",
+    "rx number": "RX000197",
+    "rx date": "2026-01-11",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-01-18",
-    "qty": 93.08,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 259,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 72,
-    "representative_id": "FR0004",
+    "rx number": "RX000198",
+    "rx date": "2026-02-26",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-02-24",
-    "qty": 87.41,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 240,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 73,
-    "representative_id": "FR0004",
+    "rx number": "RX000199",
+    "rx date": "2026-03-26",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-03-24",
-    "qty": 92.72,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 247,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 74,
-    "representative_id": "FR0004",
+    "rx number": "RX000200",
+    "rx date": "2026-04-03",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-04-27",
-    "qty": 101.56,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 222,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 75,
-    "representative_id": "FR0004",
+    "rx number": "RX000201",
+    "rx date": "2026-05-13",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-05-02",
-    "qty": 85.58,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 220,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 76,
-    "representative_id": "FR0004",
+    "rx number": "RX000202",
+    "rx date": "2026-06-23",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-06-01",
-    "qty": 95.96,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 230,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 77,
-    "representative_id": "FR0004",
+    "rx number": "RX000203",
+    "rx date": "2026-07-08",
     "doctor code": "D000003",
-    "drug code": "P003",
-    "prescription date": "2026-07-16",
-    "qty": 90.81,
-    "prescription status": "Valid"
+    "product code": "P027",
+    "qty": 229,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 78,
-    "representative_id": "FR0004",
+    "rx number": "RX000204",
+    "rx date": "2026-01-22",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-01-19",
-    "qty": 56.46,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 143,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 79,
-    "representative_id": "FR0004",
+    "rx number": "RX000205",
+    "rx date": "2026-02-02",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-02-20",
-    "qty": 51.28,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 135,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 80,
-    "representative_id": "FR0004",
+    "rx number": "RX000206",
+    "rx date": "2026-03-04",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-03-19",
-    "qty": 54.53,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 138,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 81,
-    "representative_id": "FR0004",
+    "rx number": "RX000207",
+    "rx date": "2026-04-15",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-04-07",
-    "qty": 55.69,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 125,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 82,
-    "representative_id": "FR0004",
+    "rx number": "RX000208",
+    "rx date": "2026-05-13",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-05-03",
-    "qty": 49.31,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 124,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 83,
-    "representative_id": "FR0004",
+    "rx number": "RX000209",
+    "rx date": "2026-06-18",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-06-08",
-    "qty": 56.5,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 139,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 84,
-    "representative_id": "FR0004",
+    "rx number": "RX000210",
+    "rx date": "2026-07-25",
     "doctor code": "D000003",
-    "drug code": "P010",
-    "prescription date": "2026-07-26",
-    "qty": 58.51,
-    "prescription status": "Valid"
+    "product code": "P013",
+    "qty": 150,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 85,
-    "representative_id": "FR0004",
+    "rx number": "RX000211",
+    "rx date": "2026-01-03",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-01-27",
-    "qty": 151.61,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 275,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 86,
-    "representative_id": "FR0004",
+    "rx number": "RX000212",
+    "rx date": "2026-02-17",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-02-04",
-    "qty": 176.04,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 228,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 87,
-    "representative_id": "FR0004",
+    "rx number": "RX000213",
+    "rx date": "2026-03-18",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-03-03",
-    "qty": 161.98,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 221,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 88,
-    "representative_id": "FR0004",
+    "rx number": "RX000214",
+    "rx date": "2026-04-02",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-04-03",
-    "qty": 173.95,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 240,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 89,
-    "representative_id": "FR0004",
+    "rx number": "RX000215",
+    "rx date": "2026-05-04",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-05-22",
-    "qty": 178.49,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 269,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 90,
-    "representative_id": "FR0004",
+    "rx number": "RX000216",
+    "rx date": "2026-06-25",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-06-21",
-    "qty": 174.98,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 106,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 91,
-    "representative_id": "FR0004",
+    "rx number": "RX000217",
+    "rx date": "2026-07-08",
     "doctor code": "D000003",
-    "drug code": "P008",
-    "prescription date": "2026-07-16",
-    "qty": 183.41,
-    "prescription status": "Valid"
+    "product code": "P026",
+    "qty": 234,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 92,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-01-03",
-    "qty": 124.94,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 93,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-02-18",
-    "qty": 140.79,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 94,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-03-15",
-    "qty": 128.22,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 95,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-04-16",
-    "qty": 129.08,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 96,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-05-18",
-    "qty": 130.74,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 97,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-06-23",
-    "qty": 120.05,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 98,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P014",
-    "prescription date": "2026-07-05",
-    "qty": 141.07,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 99,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-01-26",
-    "qty": 254.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 100,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-02-15",
-    "qty": 224.77,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 101,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-03-11",
-    "qty": 238.6,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 102,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-04-14",
-    "qty": 222.51,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 103,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-05-04",
-    "qty": 79.7,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 104,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-06-05",
-    "qty": 237.26,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 105,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P011",
-    "prescription date": "2026-07-20",
-    "qty": 218.17,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 106,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-01-23",
-    "qty": 192.18,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 107,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-02-21",
-    "qty": 179.82,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 108,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-03-25",
-    "qty": 167.65,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 109,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-04-11",
-    "qty": 176.04,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 110,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-05-14",
-    "qty": 173.37,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 111,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-06-22",
-    "qty": 165.42,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 112,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P022",
-    "prescription date": "2026-07-09",
-    "qty": 164.38,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 113,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-01-19",
-    "qty": 233.4,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 114,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-02-13",
-    "qty": 240.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 115,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-03-10",
-    "qty": 225.09,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 116,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-04-10",
-    "qty": 225.81,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 117,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-05-09",
-    "qty": 246.25,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 118,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-06-21",
-    "qty": 239.07,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 119,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P004",
-    "prescription date": "2026-07-05",
-    "qty": 54.87,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 120,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-01-16",
-    "qty": 215.08,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 121,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-02-05",
-    "qty": 244.56,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 122,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-03-26",
-    "qty": 234.99,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 123,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-04-13",
-    "qty": 207.74,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 124,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-05-20",
-    "qty": 206.99,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 125,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-06-27",
-    "qty": 246.77,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 126,
-    "representative_id": "FR0006",
-    "doctor code": "D000007",
-    "drug code": "P028",
-    "prescription date": "2026-07-02",
-    "qty": 233.65,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 127,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-01-21",
-    "qty": 149.89,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 128,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-02-12",
-    "qty": 133.88,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 129,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-03-12",
-    "qty": 128.76,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 130,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-04-04",
-    "qty": 132.41,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 131,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-05-26",
-    "qty": 124.47,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 132,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-06-25",
-    "qty": 145.16,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 133,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P016",
-    "prescription date": "2026-07-05",
-    "qty": 145.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 134,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-01-06",
-    "qty": 184.52,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 135,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-02-11",
-    "qty": 153.43,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 136,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-03-12",
-    "qty": 153.25,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 137,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-04-26",
-    "qty": 166.95,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 138,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-05-13",
-    "qty": 159.6,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 139,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-06-11",
-    "qty": 174.53,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 140,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P004",
-    "prescription date": "2026-07-20",
-    "qty": 158.63,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 141,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-01-15",
-    "qty": 142.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 142,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-02-04",
-    "qty": 146.38,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 143,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-03-03",
-    "qty": 129.34,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 144,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-04-02",
-    "qty": 124.63,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 145,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-05-22",
-    "qty": 131.56,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 146,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-06-10",
-    "qty": 149.01,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 147,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P008",
-    "prescription date": "2026-07-12",
-    "qty": 128.08,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 148,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-01-22",
-    "qty": 126.28,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 149,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-02-01",
-    "qty": 110.12,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 150,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-03-21",
-    "qty": 122.42,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 151,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-04-11",
-    "qty": 119.15,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 152,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-05-05",
-    "qty": 113.83,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 153,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-06-14",
-    "qty": 122.84,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 154,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P029",
-    "prescription date": "2026-07-14",
-    "qty": 112.51,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 155,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-01-02",
-    "qty": 176.56,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 156,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-02-16",
-    "qty": 172.66,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 157,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-03-13",
-    "qty": 179.44,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 158,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-04-14",
-    "qty": 164.94,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 159,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-05-11",
-    "qty": 180.95,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 160,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-06-04",
-    "qty": 182.65,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 161,
-    "representative_id": "FR0007",
-    "doctor code": "D000002",
-    "drug code": "P018",
-    "prescription date": "2026-07-11",
-    "qty": 185.21,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 162,
-    "representative_id": "FR0008",
+    "rx number": "RX000218",
+    "rx date": "2026-01-21",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-01-07",
-    "qty": 20.82,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 58,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 163,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-01-20",
-    "qty": 20.82,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 164,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-01-25",
-    "qty": 20.82,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 165,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-02-11",
-    "qty": 23.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 166,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-02-15",
-    "qty": 23.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 167,
-    "representative_id": "FR0008",
+    "rx number": "RX000219",
+    "rx date": "2026-02-06",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-02-16",
-    "qty": 23.64,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 56,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 168,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-03-15",
-    "qty": 30.71,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 169,
-    "representative_id": "FR0008",
+    "rx number": "RX000220",
+    "rx date": "2026-03-14",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-03-02",
-    "qty": 30.71,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 51,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 170,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-04-18",
-    "qty": 19.54,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 171,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-04-24",
-    "qty": 19.54,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 172,
-    "representative_id": "FR0008",
+    "rx number": "RX000221",
+    "rx date": "2026-04-03",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-04-15",
-    "qty": 19.54,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 50,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 173,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-05-04",
-    "qty": 20.07,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 174,
-    "representative_id": "FR0008",
+    "rx number": "RX000222",
+    "rx date": "2026-05-26",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-05-27",
-    "qty": 20.07,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 51,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 175,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-05-23",
-    "qty": 20.07,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 176,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-06-10",
-    "qty": 19.37,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 177,
-    "representative_id": "FR0008",
+    "rx number": "RX000223",
+    "rx date": "2026-06-07",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-06-14",
-    "qty": 19.37,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 53,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 178,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-06-11",
-    "qty": 19.37,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 179,
-    "representative_id": "FR0008",
+    "rx number": "RX000224",
+    "rx date": "2026-07-18",
     "doctor code": "D000005",
-    "drug code": "P011",
-    "prescription date": "2026-07-22",
-    "qty": 22.14,
-    "prescription status": "Valid"
+    "product code": "P022",
+    "qty": 53,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 180,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P011",
-    "prescription date": "2026-07-10",
-    "qty": 22.14,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 181,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P011",
-    "prescription date": "2026-07-24",
-    "qty": 22.14,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 182,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-01-20",
-    "qty": 74.21,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 183,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-01-03",
-    "qty": 74.21,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 184,
-    "representative_id": "FR0008",
+    "rx number": "RX000225",
+    "rx date": "2026-01-26",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-01-18",
-    "qty": 74.21,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 115,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 185,
-    "representative_id": "FR0008",
+    "rx number": "RX000226",
+    "rx date": "2026-02-19",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-02-12",
-    "qty": 87.22,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 132,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 186,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-02-06",
-    "qty": 87.22,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 187,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-02-11",
-    "qty": 87.22,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 188,
-    "representative_id": "FR0008",
+    "rx number": "RX000227",
+    "rx date": "2026-03-07",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-03-04",
-    "qty": 76.79,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 123,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 189,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-03-25",
-    "qty": 76.79,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 190,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-03-27",
-    "qty": 76.79,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 191,
-    "representative_id": "FR0008",
+    "rx number": "RX000228",
+    "rx date": "2026-04-24",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-04-06",
-    "qty": 84.53,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 114,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 192,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-04-23",
-    "qty": 84.53,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 193,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-04-20",
-    "qty": 84.53,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 194,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-05-10",
-    "qty": 80.54,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 195,
-    "representative_id": "FR0008",
+    "rx number": "RX000229",
+    "rx date": "2026-05-06",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-05-24",
-    "qty": 80.54,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 127,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 196,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-05-15",
-    "qty": 80.54,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 197,
-    "representative_id": "FR0008",
+    "rx number": "RX000230",
+    "rx date": "2026-06-14",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-06-25",
-    "qty": 89.93,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 122,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 198,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-06-25",
-    "qty": 89.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 199,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-06-17",
-    "qty": 89.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 200,
-    "representative_id": "FR0008",
+    "rx number": "RX000231",
+    "rx date": "2026-07-12",
     "doctor code": "D000005",
-    "drug code": "P025",
-    "prescription date": "2026-07-16",
-    "qty": 87.29,
-    "prescription status": "Valid"
+    "product code": "P017",
+    "qty": 127,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 201,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P025",
-    "prescription date": "2026-07-18",
-    "qty": 87.29,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 202,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P025",
-    "prescription date": "2026-07-23",
-    "qty": 87.29,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 203,
-    "representative_id": "FR0008",
+    "rx number": "RX000232",
+    "rx date": "2026-01-17",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-01-27",
-    "qty": 70.0,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 181,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 204,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-01-12",
-    "qty": 70.0,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 205,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-01-14",
-    "qty": 70.0,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 206,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-02-11",
-    "qty": 208.22,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 207,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-03-20",
-    "qty": 70.23,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 208,
-    "representative_id": "FR0008",
+    "rx number": "RX000233",
+    "rx date": "2026-02-17",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-03-03",
-    "qty": 70.23,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 163,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 209,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-03-09",
-    "qty": 70.23,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 210,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-04-10",
-    "qty": 80.71,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 211,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-04-10",
-    "qty": 80.71,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 212,
-    "representative_id": "FR0008",
+    "rx number": "RX000234",
+    "rx date": "2026-03-03",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-04-02",
-    "qty": 80.71,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 172,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 213,
-    "representative_id": "FR0008",
+    "rx number": "RX000235",
+    "rx date": "2026-04-21",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-05-18",
-    "qty": 113.42,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 172,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 214,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-05-21",
-    "qty": 113.42,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 215,
-    "representative_id": "FR0008",
+    "rx number": "RX000236",
+    "rx date": "2026-05-23",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-06-14",
-    "qty": 67.93,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 177,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 216,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-06-22",
-    "qty": 67.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 217,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-06-03",
-    "qty": 67.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 218,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P006",
-    "prescription date": "2026-07-02",
-    "qty": 80.92,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 219,
-    "representative_id": "FR0008",
+    "rx number": "RX000237",
+    "rx date": "2026-06-08",
     "doctor code": "D000005",
-    "drug code": "P006",
-    "prescription date": "2026-07-13",
-    "qty": 80.92,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 188,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 220,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P006",
-    "prescription date": "2026-07-09",
-    "qty": 80.92,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 221,
-    "representative_id": "FR0008",
+    "rx number": "RX000238",
+    "rx date": "2026-07-18",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-01-11",
-    "qty": 40.04,
-    "prescription status": "Valid"
+    "product code": "P008",
+    "qty": 184,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 222,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-01-21",
-    "qty": 40.04,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 223,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-01-27",
-    "qty": 40.04,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 224,
-    "representative_id": "FR0008",
+    "rx number": "RX000239",
+    "rx date": "2026-01-06",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-02-10",
-    "qty": 40.36,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 73,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 225,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-02-02",
-    "qty": 40.36,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 226,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-02-07",
-    "qty": 40.36,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 227,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-03-25",
-    "qty": 37.11,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 228,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-03-07",
-    "qty": 37.11,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 229,
-    "representative_id": "FR0008",
+    "rx number": "RX000240",
+    "rx date": "2026-02-26",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-03-12",
-    "qty": 37.11,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 77,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 230,
-    "representative_id": "FR0008",
+    "rx number": "RX000241",
+    "rx date": "2026-03-27",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-04-24",
-    "qty": 40.03,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 87,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 231,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-04-13",
-    "qty": 40.03,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 232,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-04-06",
-    "qty": 40.03,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 233,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-05-14",
-    "qty": 42.29,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 234,
-    "representative_id": "FR0008",
+    "rx number": "RX000242",
+    "rx date": "2026-04-26",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-05-27",
-    "qty": 42.29,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 86,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 235,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-05-18",
-    "qty": 42.29,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 236,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-06-23",
-    "qty": 37.26,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 237,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-06-12",
-    "qty": 37.26,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 238,
-    "representative_id": "FR0008",
+    "rx number": "RX000243",
+    "rx date": "2026-05-03",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-06-02",
-    "qty": 37.26,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 86,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 239,
-    "representative_id": "FR0008",
-    "doctor code": "D000008",
-    "drug code": "P003",
-    "prescription date": "2026-07-21",
-    "qty": 39.68,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 240,
-    "representative_id": "FR0008",
+    "rx number": "RX000244",
+    "rx date": "2026-06-24",
     "doctor code": "D000005",
-    "drug code": "P003",
-    "prescription date": "2026-07-12",
-    "qty": 39.68,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 71,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 241,
-    "representative_id": "FR0008",
-    "doctor code": "D000010",
-    "drug code": "P003",
-    "prescription date": "2026-07-26",
-    "qty": 39.68,
-    "prescription status": "Valid"
+    "rx number": "RX000245",
+    "rx date": "2026-07-04",
+    "doctor code": "D000005",
+    "product code": "P014",
+    "qty": 70,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 242,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-01-02",
-    "qty": 137.55,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 243,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-02-03",
-    "qty": 146.37,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 244,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-03-01",
-    "qty": 130.37,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 245,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-04-25",
-    "qty": 130.05,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 246,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-05-04",
-    "qty": 147.75,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 247,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-06-22",
-    "qty": 123.83,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 248,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P001",
-    "prescription date": "2026-07-06",
-    "qty": 138.21,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 249,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-01-05",
-    "qty": 237.54,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 250,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-02-26",
-    "qty": 229.9,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 251,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-03-23",
-    "qty": 256.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 252,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-04-11",
-    "qty": 250.99,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 253,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-05-25",
-    "qty": 246.39,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 254,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-06-02",
-    "qty": 250.91,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 255,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P005",
-    "prescription date": "2026-07-08",
-    "qty": 226.97,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 256,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-01-21",
-    "qty": 226.93,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 257,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-02-22",
-    "qty": 240.1,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 258,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-03-01",
-    "qty": 231.48,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 259,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-04-19",
-    "qty": 254.13,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 260,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-05-10",
-    "qty": 239.86,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 261,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-06-23",
-    "qty": 249.64,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 262,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P028",
-    "prescription date": "2026-07-11",
-    "qty": 239.14,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 263,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-01-08",
-    "qty": 216.68,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 264,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-02-13",
-    "qty": 210.73,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 265,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-03-24",
-    "qty": 245.44,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 266,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-04-10",
-    "qty": 222.89,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 267,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-05-19",
-    "qty": 217.79,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 268,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-06-01",
-    "qty": 222.72,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 269,
-    "representative_id": "FR0009",
-    "doctor code": "D000004",
-    "drug code": "P020",
-    "prescription date": "2026-07-02",
-    "qty": 241.55,
-    "prescription status": "Valid"
-  },
-  {
-    "prescription id": 270,
-    "representative_id": "FR0010",
+    "rx number": "RX000246",
+    "rx date": "2026-01-10",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-01-04",
-    "qty": 131.01,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 151,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 271,
-    "representative_id": "FR0010",
+    "rx number": "RX000247",
+    "rx date": "2026-02-06",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-02-20",
-    "qty": 118.06,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 162,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 272,
-    "representative_id": "FR0010",
+    "rx number": "RX000248",
+    "rx date": "2026-03-10",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-03-16",
-    "qty": 110.23,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 138,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 273,
-    "representative_id": "FR0010",
+    "rx number": "RX000249",
+    "rx date": "2026-04-05",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-04-11",
-    "qty": 132.82,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 164,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 274,
-    "representative_id": "FR0010",
+    "rx number": "RX000250",
+    "rx date": "2026-05-16",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-05-27",
-    "qty": 128.72,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 160,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 275,
-    "representative_id": "FR0010",
+    "rx number": "RX000251",
+    "rx date": "2026-06-09",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-06-11",
-    "qty": 124.02,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 143,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 276,
-    "representative_id": "FR0010",
+    "rx number": "RX000252",
+    "rx date": "2026-07-24",
     "doctor code": "D000006",
-    "drug code": "P002",
-    "prescription date": "2026-07-21",
-    "qty": 124.58,
-    "prescription status": "Valid"
+    "product code": "P006",
+    "qty": 139,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 277,
-    "representative_id": "FR0010",
+    "rx number": "RX000253",
+    "rx date": "2026-01-08",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-01-27",
-    "qty": 208.75,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 77,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 278,
-    "representative_id": "FR0010",
+    "rx number": "RX000254",
+    "rx date": "2026-02-19",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-02-15",
-    "qty": 225.04,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 90,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 279,
-    "representative_id": "FR0010",
+    "rx number": "RX000255",
+    "rx date": "2026-03-23",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-03-24",
-    "qty": 213.53,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 92,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 280,
-    "representative_id": "FR0010",
+    "rx number": "RX000256",
+    "rx date": "2026-04-19",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-04-18",
-    "qty": 191.95,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 78,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 281,
-    "representative_id": "FR0010",
+    "rx number": "RX000257",
+    "rx date": "2026-05-09",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-05-08",
-    "qty": 214.89,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 90,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 282,
-    "representative_id": "FR0010",
+    "rx number": "RX000258",
+    "rx date": "2026-06-13",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-06-07",
-    "qty": 224.74,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 86,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 283,
-    "representative_id": "FR0010",
+    "rx number": "RX000259",
+    "rx date": "2026-07-10",
     "doctor code": "D000006",
-    "drug code": "P019",
-    "prescription date": "2026-07-04",
-    "qty": 204.12,
-    "prescription status": "Valid"
+    "product code": "P014",
+    "qty": 85,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 284,
-    "representative_id": "FR0010",
+    "rx number": "RX000260",
+    "rx date": "2026-01-17",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-01-10",
-    "qty": 150.36,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 57,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 285,
-    "representative_id": "FR0010",
+    "rx number": "RX000261",
+    "rx date": "2026-02-02",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-02-07",
-    "qty": 169.98,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 61,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 286,
-    "representative_id": "FR0010",
+    "rx number": "RX000262",
+    "rx date": "2026-03-18",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-03-20",
-    "qty": 157.71,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 60,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 287,
-    "representative_id": "FR0010",
+    "rx number": "RX000263",
+    "rx date": "2026-04-13",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-04-08",
-    "qty": 140.38,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 58,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 288,
-    "representative_id": "FR0010",
+    "rx number": "RX000264",
+    "rx date": "2026-05-07",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-05-21",
-    "qty": 24.74,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 58,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 289,
-    "representative_id": "FR0010",
+    "rx number": "RX000265",
+    "rx date": "2026-06-07",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-06-10",
-    "qty": 154.85,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 53,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 290,
-    "representative_id": "FR0010",
+    "rx number": "RX000266",
+    "rx date": "2026-07-19",
     "doctor code": "D000006",
-    "drug code": "P018",
-    "prescription date": "2026-07-24",
-    "qty": 141.7,
-    "prescription status": "Valid"
+    "product code": "P015",
+    "qty": 58,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 291,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-01-13",
-    "qty": 258.97,
-    "prescription status": "Valid"
+    "rx number": "RX000267",
+    "rx date": "2026-01-10",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 173,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 292,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-02-10",
-    "qty": 252.03,
-    "prescription status": "Valid"
+    "rx number": "RX000268",
+    "rx date": "2026-02-14",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 191,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 293,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-03-18",
-    "qty": 264.22,
-    "prescription status": "Valid"
+    "rx number": "RX000269",
+    "rx date": "2026-03-05",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 208,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 294,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-04-07",
-    "qty": 220.02,
-    "prescription status": "Valid"
+    "rx number": "RX000270",
+    "rx date": "2026-04-07",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 172,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 295,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-05-24",
-    "qty": 251.1,
-    "prescription status": "Valid"
+    "rx number": "RX000271",
+    "rx date": "2026-05-16",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 190,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 296,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-06-21",
-    "qty": 248.15,
-    "prescription status": "Valid"
+    "rx number": "RX000272",
+    "rx date": "2026-06-18",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 201,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 297,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P007",
-    "prescription date": "2026-07-04",
-    "qty": 239.86,
-    "prescription status": "Valid"
+    "rx number": "RX000273",
+    "rx date": "2026-07-09",
+    "doctor code": "D000002",
+    "product code": "P012",
+    "qty": 200,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 298,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-01-09",
-    "qty": 66.56,
-    "prescription status": "Valid"
+    "rx number": "RX000274",
+    "rx date": "2026-01-24",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 124,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 299,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-02-12",
-    "qty": 73.63,
-    "prescription status": "Valid"
+    "rx number": "RX000275",
+    "rx date": "2026-02-15",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 131,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 300,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-03-22",
-    "qty": 64.38,
-    "prescription status": "Valid"
+    "rx number": "RX000276",
+    "rx date": "2026-03-06",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 126,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 301,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-04-10",
-    "qty": 73.34,
-    "prescription status": "Valid"
+    "rx number": "RX000277",
+    "rx date": "2026-04-20",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 111,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 302,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-05-24",
-    "qty": 77.22,
-    "prescription status": "Valid"
+    "rx number": "RX000278",
+    "rx date": "2026-05-05",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 113,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 303,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-06-08",
-    "qty": 73.31,
-    "prescription status": "Valid"
+    "rx number": "RX000279",
+    "rx date": "2026-06-23",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 128,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 304,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P012",
-    "prescription date": "2026-07-23",
-    "qty": 74.62,
-    "prescription status": "Valid"
+    "rx number": "RX000280",
+    "rx date": "2026-07-21",
+    "doctor code": "D000002",
+    "product code": "P028",
+    "qty": 123,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 305,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-01-11",
-    "qty": 255.57,
-    "prescription status": "Valid"
+    "rx number": "RX000281",
+    "rx date": "2026-01-11",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 55,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 306,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-02-17",
-    "qty": 244.17,
-    "prescription status": "Valid"
+    "rx number": "RX000282",
+    "rx date": "2026-02-11",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 59,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 307,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-03-02",
-    "qty": 216.11,
-    "prescription status": "Valid"
+    "rx number": "RX000283",
+    "rx date": "2026-03-02",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 57,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 308,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-04-27",
-    "qty": 225.13,
-    "prescription status": "Valid"
+    "rx number": "RX000284",
+    "rx date": "2026-04-14",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 50,
+    "rx status": "Valid"
   },
   {
-    "prescription id": 309,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-05-10",
-    "qty": 213.1,
-    "prescription status": "Valid"
+    "rx number": "RX000285",
+    "rx date": "2026-05-21",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 61,
+    "rx status": "Cancelled"
   },
   {
-    "prescription id": 310,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-06-15",
-    "qty": 248.55,
-    "prescription status": "Valid"
+    "rx number": "RX000286",
+    "rx date": "2026-06-24",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 61,
+    "rx status": "Reversed"
   },
   {
-    "prescription id": 311,
-    "representative_id": "FR0010",
-    "doctor code": "D000006",
-    "drug code": "P028",
-    "prescription date": "2026-07-12",
-    "qty": 228.58,
-    "prescription status": "Valid"
+    "rx number": "RX000287",
+    "rx date": "2026-07-03",
+    "doctor code": "D000002",
+    "product code": "P015",
+    "qty": 51,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000288",
+    "rx date": "2026-01-16",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 145,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000289",
+    "rx date": "2026-02-05",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 161,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000290",
+    "rx date": "2026-03-20",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 139,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000291",
+    "rx date": "2026-04-07",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 141,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000292",
+    "rx date": "2026-05-26",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 138,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000293",
+    "rx date": "2026-06-22",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 142,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000294",
+    "rx date": "2026-07-26",
+    "doctor code": "D000002",
+    "product code": "P020",
+    "qty": 140,
+    "rx status": "Valid"
+  },
+  {
+    "rx number": "RX000295",
+    "rx date": "2026-01-13",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 65,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000296",
+    "rx date": "2026-02-01",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 60,
+    "rx status": "Cancelled"
+  },
+  {
+    "rx number": "RX000297",
+    "rx date": "2026-03-14",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 71,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000298",
+    "rx date": "2026-04-03",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 65,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000299",
+    "rx date": "2026-05-10",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 59,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000300",
+    "rx date": "2026-06-15",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 61,
+    "rx status": "Reversed"
+  },
+  {
+    "rx number": "RX000301",
+    "rx date": "2026-07-23",
+    "doctor code": "D000002",
+    "product code": "P006",
+    "qty": 68,
+    "rx status": "Valid"
   }
 ]

@@ -125,9 +125,6 @@ def parse_xlsx(
 
     records = dataframe.to_dict(orient="records")
 
-    print("RECORD COUNT:", len(records))
-    print("FIRST RECORD:", records[0] if records else None)
-
     return [normalize_record(record) for record in records]
 
 
@@ -279,7 +276,6 @@ def parse_document(
         raise ValueError("Uploaded document is empty.")
 
     if extension == "csv":
-
         records = parse_csv(content)
 
     elif extension == "xlsx":

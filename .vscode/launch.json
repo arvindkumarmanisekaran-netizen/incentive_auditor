@@ -12,6 +12,18 @@
             ],
             "console": "integratedTerminal",
             "justMyCode": true
-        }
+        },
+       {
+        "name": "Attach to Mullvad (9222)",
+        "type": "chrome",
+        "request": "attach",
+        "port": 9222,
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}/frontend/src",
+        "sourceMaps": true,
+        "skipFiles": ["<node_internals>/**"]
+    }
+
+
     ]
 }

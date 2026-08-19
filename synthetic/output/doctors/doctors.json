@@ -1,72 +1,72 @@
 [
   {
-    "physician id": "D000001",
-    "physician": "Dr Mohini Pathak",
-    "area code": "T015",
-    "speciality": "Dermatology",
-    "status": "ACTIVE"
+    "dr id": "D000001",
+    "doctor name": "Dr Qadim Mallick",
+    "territory id": "T003",
+    "speciality": "Pulmonology",
+    "active status": "ACTIVE"
   },
   {
-    "physician id": "D000002",
-    "physician": "Dr Lakshit Upadhyay",
-    "area code": "T018",
-    "speciality": "Cardiology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000003",
-    "physician": "Dr Gavin Batta",
-    "area code": "T004",
-    "speciality": "Dermatology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000004",
-    "physician": "Dr Michael Dutta",
-    "area code": "T011",
-    "speciality": "General Medicine",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000005",
-    "physician": "Dr Devansh Rajan",
-    "area code": "T010",
-    "speciality": "Gastroenterology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000006",
-    "physician": "Dr Upadhriti Wadhwa",
-    "area code": "T006",
-    "speciality": "Orthopedics",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000007",
-    "physician": "Dr Advay Contractor",
-    "area code": "T001",
-    "speciality": "Dermatology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000008",
-    "physician": "Dr Harini Choudhury",
-    "area code": "T017",
-    "speciality": "Diabetology",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000009",
-    "physician": "Dr Radhika Dugar",
-    "area code": "T017",
-    "speciality": "General Medicine",
-    "status": "ACTIVE"
-  },
-  {
-    "physician id": "D000010",
-    "physician": "Dr Aarush Lall",
-    "area code": "T010",
+    "dr id": "D000002",
+    "doctor name": "Dr Zaid Borra",
+    "territory id": "T005",
     "speciality": "Neurology",
-    "status": "ACTIVE"
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000003",
+    "doctor name": "Dr Guneet Bedi",
+    "territory id": "T018",
+    "speciality": "Orthopedics",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000004",
+    "doctor name": "Dr Girik Khalsa",
+    "territory id": "T014",
+    "speciality": "Diabetology",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000005",
+    "doctor name": "Dr Niharika Sunder",
+    "territory id": "T047",
+    "speciality": "Orthopedics",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000006",
+    "doctor name": "Dr Tanay Rattan",
+    "territory id": "T016",
+    "speciality": "Orthopedics",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000007",
+    "doctor name": "Dr Nitesh Raghavan",
+    "territory id": "T027",
+    "speciality": "Neurology",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000008",
+    "doctor name": "Dr Madhavi Lanka",
+    "territory id": "T007",
+    "speciality": "General Medicine",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000009",
+    "doctor name": "Dr Bhavika Sampath",
+    "territory id": "T043",
+    "speciality": "Gastroenterology",
+    "active status": "ACTIVE"
+  },
+  {
+    "dr id": "D000010",
+    "doctor name": "Dr Mohammed Gupta",
+    "territory id": "T023",
+    "speciality": "Gastroenterology",
+    "active status": "ACTIVE"
   }
 ]

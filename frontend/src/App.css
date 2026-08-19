@@ -2056,3 +2056,7 @@ border: 1px solid #e5e7eb;
 .validation-error-item strong {
 color: #dc2626;
 }
+
+.success-popup h4 {
+  color: green;
+}

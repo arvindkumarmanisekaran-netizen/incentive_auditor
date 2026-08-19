@@ -1,11 +1,11 @@
-physician code,doctor name,territory code,speciality,active status
-D000001,Dr Mohini Pathak,T015,Dermatology,ACTIVE
-D000002,Dr Lakshit Upadhyay,T018,Cardiology,ACTIVE
-D000003,Dr Gavin Batta,T004,Dermatology,ACTIVE
-D000004,Dr Michael Dutta,T011,General Medicine,ACTIVE
-D000005,Dr Devansh Rajan,T010,Gastroenterology,ACTIVE
-D000006,Dr Upadhriti Wadhwa,T006,Orthopedics,ACTIVE
-D000007,Dr Advay Contractor,T001,Dermatology,ACTIVE
-D000008,Dr Harini Choudhury,T017,Diabetology,ACTIVE
-D000009,Dr Radhika Dugar,T017,General Medicine,ACTIVE
-D000010,Dr Aarush Lall,T010,Neurology,ACTIVE
+physician id,physician name,area code,speciality,active status
+D000001,Dr Qadim Mallick,T003,Pulmonology,ACTIVE
+D000002,Dr Zaid Borra,T005,Neurology,ACTIVE
+D000003,Dr Guneet Bedi,T018,Orthopedics,ACTIVE
+D000004,Dr Girik Khalsa,T014,Diabetology,ACTIVE
+D000005,Dr Niharika Sunder,T047,Orthopedics,ACTIVE
+D000006,Dr Tanay Rattan,T016,Orthopedics,ACTIVE
+D000007,Dr Nitesh Raghavan,T027,Neurology,ACTIVE
+D000008,Dr Madhavi Lanka,T007,General Medicine,ACTIVE
+D000009,Dr Bhavika Sampath,T043,Gastroenterology,ACTIVE
+D000010,Dr Mohammed Gupta,T023,Gastroenterology,ACTIVE

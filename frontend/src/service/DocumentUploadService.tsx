@@ -14,6 +14,8 @@ export function useDocumentUpload() {
     value: string;
   };
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -27,6 +29,10 @@ export function useDocumentUpload() {
   function clearValidationErrors() {
     setValidationErrors([]);
   }
+
+  const clearSuccessMessage = () => {
+    setSuccessMessage("");
+  };
 
   function selectFolder() {
     inputRef.current?.click();
@@ -69,37 +75,42 @@ export function useDocumentUpload() {
     }
 
     try {
-      await confirmDocument({
+      setError("");
+      setValidationErrors([]);
+
+      const response = await confirmDocument({
         document_type: result.document_type,
-
         target_table: result.target_table,
-
         action,
-
         pending_data: result.pending_data,
       });
 
-      // clear successful import state
+      if (response.success) {
+        setResult(null);
 
-      setResult(null);
+        setValidationErrors([]);
 
-      setValidationErrors([]);
+        setSuccessMessage(response.message);
 
-      setError(null);
+        setError("");
+
+        return;
+      }
+
+      setError(response.message ?? "Document import failed");
     } catch (err: any) {
       console.error("Document confirmation failed:", err);
 
-      if (err.type === "VALIDATION_ERROR") {
+      if (err?.type === "VALIDATION_ERROR") {
         setValidationErrors(err.errors ?? []);
 
         return;
       }
 
-      setError(err.message ?? "Document import failed");
+      setError(err?.message ?? "Document import failed");
     }
   }
 
-  console.log("RENDER POPUP ERRORS", validationErrors.length);
   return {
     inputRef,
     selectFolder,
@@ -110,5 +121,7 @@ export function useDocumentUpload() {
     validationErrors,
     clearValidationErrors,
     handleConfirm,
+    successMessage,
+    clearSuccessMessage,
   };
 }

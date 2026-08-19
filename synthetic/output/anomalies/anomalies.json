@@ -1,39 +1,45 @@
 [
   {
-    "representative_id": "FR0001",
-    "product_id": "P029",
+    "representative_id": "FR0002",
+    "product_id": "P015",
+    "month": "2026-02",
+    "anomaly_types": [
+      "sales_spike",
+      "doctor_concentration"
+    ]
+  },
+  {
+    "representative_id": "FR0002",
+    "product_id": "P026",
     "month": "2026-05",
     "anomaly_types": [
+      "payout_discrepancy",
       "sales_spike"
     ]
   },
   {
-    "representative_id": "FR0001",
+    "representative_id": "FR0002",
     "product_id": "P026",
-    "month": "2026-03",
+    "month": "2026-06",
     "anomaly_types": [
-      "payout_discrepancy",
-      "doctor_concentration",
+      "sales_spike",
       "rx_drop"
     ]
   },
   {
     "representative_id": "FR0002",
-    "product_id": "P014",
-    "month": "2026-01",
+    "product_id": "P018",
+    "month": "2026-05",
     "anomaly_types": [
-      "rx_drop",
-      "doctor_concentration",
       "payout_discrepancy"
     ]
   },
   {
-    "representative_id": "FR0002",
-    "product_id": "P004",
-    "month": "2026-05",
+    "representative_id": "FR0005",
+    "product_id": "P023",
+    "month": "2026-07",
     "anomaly_types": [
-      "cross_territory",
-      "rx_drop"
+      "payout_discrepancy"
     ]
   },
   {
@@ -46,34 +52,62 @@
   },
   {
     "representative_id": "FR0006",
-    "product_id": "P011",
+    "product_id": "P003",
     "month": "2026-05",
     "anomaly_types": [
-      "cross_territory",
-      "rx_drop"
+      "doctor_concentration",
+      "cross_territory"
     ]
   },
   {
-    "representative_id": "FR0006",
-    "product_id": "P004",
-    "month": "2026-04",
+    "representative_id": "FR0007",
+    "product_id": "P015",
+    "month": "2026-02",
     "anomaly_types": [
       "payout_discrepancy"
     ]
   },
   {
-    "representative_id": "FR0006",
-    "product_id": "P004",
+    "representative_id": "FR0007",
+    "product_id": "P015",
     "month": "2026-07",
     "anomaly_types": [
-      "rx_drop",
+      "doctor_concentration",
+      "cross_territory",
+      "payout_discrepancy"
+    ]
+  },
+  {
+    "representative_id": "FR0007",
+    "product_id": "P022",
+    "month": "2026-03",
+    "anomaly_types": [
+      "cross_territory",
+      "payout_discrepancy"
+    ]
+  },
+  {
+    "representative_id": "FR0007",
+    "product_id": "P022",
+    "month": "2026-05",
+    "anomaly_types": [
+      "doctor_concentration"
+    ]
+  },
+  {
+    "representative_id": "FR0007",
+    "product_id": "P024",
+    "month": "2026-01",
+    "anomaly_types": [
+      "cross_territory",
+      "doctor_concentration",
       "sales_spike"
     ]
   },
   {
     "representative_id": "FR0007",
-    "product_id": "P004",
-    "month": "2026-03",
+    "product_id": "P024",
+    "month": "2026-06",
     "anomaly_types": [
       "payout_discrepancy",
       "sales_spike"
@@ -81,66 +115,78 @@
   },
   {
     "representative_id": "FR0007",
-    "product_id": "P018",
-    "month": "2026-02",
-    "anomaly_types": [
-      "doctor_concentration"
-    ]
-  },
-  {
-    "representative_id": "FR0008",
-    "product_id": "P011",
-    "month": "2026-04",
-    "anomaly_types": [
-      "payout_discrepancy"
-    ]
-  },
-  {
-    "representative_id": "FR0008",
-    "product_id": "P006",
-    "month": "2026-02",
-    "anomaly_types": [
-      "doctor_concentration"
-    ]
-  },
-  {
-    "representative_id": "FR0008",
-    "product_id": "P003",
-    "month": "2026-01",
-    "anomaly_types": [
-      "payout_discrepancy"
-    ]
-  },
-  {
-    "representative_id": "FR0009",
-    "product_id": "P028",
+    "product_id": "P027",
     "month": "2026-07",
     "anomaly_types": [
+      "cross_territory",
+      "rx_drop"
+    ]
+  },
+  {
+    "representative_id": "FR0008",
+    "product_id": "P027",
+    "month": "2026-01",
+    "anomaly_types": [
+      "cross_territory"
+    ]
+  },
+  {
+    "representative_id": "FR0008",
+    "product_id": "P027",
+    "month": "2026-04",
+    "anomaly_types": [
       "doctor_concentration"
     ]
   },
   {
-    "representative_id": "FR0010",
-    "product_id": "P019",
+    "representative_id": "FR0014",
+    "product_id": "P010",
     "month": "2026-04",
     "anomaly_types": [
-      "cross_territory",
-      "payout_discrepancy"
+      "doctor_concentration"
     ]
   },
   {
-    "representative_id": "FR0010",
-    "product_id": "P018",
-    "month": "2026-05",
+    "representative_id": "FR0014",
+    "product_id": "P028",
+    "month": "2026-06",
+    "anomaly_types": [
+      "payout_discrepancy",
+      "cross_territory"
+    ]
+  },
+  {
+    "representative_id": "FR0022",
+    "product_id": "P027",
+    "month": "2026-07",
+    "anomaly_types": [
+      "payout_discrepancy",
+      "doctor_concentration"
+    ]
+  },
+  {
+    "representative_id": "FR0022",
+    "product_id": "P026",
+    "month": "2026-06",
     "anomaly_types": [
       "rx_drop"
     ]
   },
   {
-    "representative_id": "FR0010",
-    "product_id": "P028",
+    "representative_id": "FR0026",
+    "product_id": "P006",
     "month": "2026-05",
     "anomaly_types": [
+      "doctor_concentration",
+      "cross_territory"
+    ]
+  },
+  {
+    "representative_id": "FR0028",
+    "product_id": "P015",
+    "month": "2026-02",
+    "anomaly_types": [
+      "cross_territory",
       "doctor_concentration",
       "sales_spike"
     ]

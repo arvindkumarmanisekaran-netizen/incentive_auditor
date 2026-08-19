@@ -75,6 +75,7 @@ export async function uploadDocument(file: File): Promise<DocumentProcessingResu
 
   return response.json();
 }
+
 export async function confirmDocument(payload: unknown) {
   const response = await fetch(`${API_BASE_URL}/document-processing/confirm`, {
     method: "POST",
@@ -86,14 +87,10 @@ export async function confirmDocument(payload: unknown) {
     body: JSON.stringify(payload),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    const error = await response.json();
-
-    const detail = error.detail;
-
-    // ---------------------------------------
-    // Validation / dependency failure
-    // ---------------------------------------
+    const detail = data.detail;
 
     if (detail?.errors && Array.isArray(detail.errors)) {
       throw {
@@ -105,10 +102,6 @@ export async function confirmDocument(payload: unknown) {
       };
     }
 
-    // ---------------------------------------
-    // Normal API failure
-    // ---------------------------------------
-
     throw {
       type: "API_ERROR",
 
@@ -119,5 +112,53 @@ export async function confirmDocument(payload: unknown) {
     };
   }
 
-  return response.json();
+  return {
+    success: data.success ?? false,
+
+    status: data.status ?? "completed",
+
+    action: data.action ?? payload,
+
+    inserted: data.inserted ?? 0,
+
+    updated: data.updated ?? 0,
+
+    discarded: data.discarded ?? 0,
+
+    message: data.message ?? buildSuccessMessage(data),
+
+    raw: data,
+  };
+}
+
+function buildSuccessMessage(data: any): string {
+  if (data.status === "cancelled") {
+    return "Document import cancelled";
+  }
+
+  const inserted = data.inserted ?? 0;
+
+  const updated = data.updated ?? 0;
+
+  const discarded = data.discarded ?? 0;
+
+  const parts: string[] = [];
+
+  if (inserted > 0) {
+    parts.push(`${inserted} records inserted`);
+  }
+
+  if (updated > 0) {
+    parts.push(`${updated} records updated`);
+  }
+
+  if (discarded > 0) {
+    parts.push(`${discarded} duplicate records discarded`);
+  }
+
+  if (!parts.length) {
+    return "Document processed successfully";
+  }
+
+  return parts.join(", ");
 }

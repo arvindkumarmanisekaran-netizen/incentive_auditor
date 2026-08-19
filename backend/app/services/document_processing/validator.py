@@ -45,11 +45,7 @@ ALLOWED_STATUS_VALUES: dict[str, set[str]] = {
         "Active",
         "Inactive",
     },
-    "incentive_payouts": {
-        "Pending",
-        "Paid",
-        "Adjusted",
-    },
+    "incentive_payouts": {"Pending", "Paid", "Adjusted"},
 }
 
 
