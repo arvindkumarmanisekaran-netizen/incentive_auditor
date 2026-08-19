@@ -30,9 +30,6 @@ from ..services.document_processing.classifier import (
 from ..services.document_processing.duplicate_checker import (
     check_duplicates,
 )
-from ..services.document_processing.dependency_validator import (
-    validate_foreign_keys,
-)
 
 router = APIRouter(
     prefix="/api/document-processing",
@@ -245,29 +242,6 @@ async def confirm_document(
                 "message": "Some records cannot be inserted because referenced data "  # noqa: E501
                 "is missing.",  # noqa: E501
                 "errors": validation.get("errors", []),
-            },
-        )
-
-    # -------------------------------------------------
-    # Foreign key dependency validation
-    # -------------------------------------------------
-
-    dependency_errors = await validate_foreign_keys(
-        session=session,
-        table_name=payload.target_table,
-        records=all_records,
-    )
-
-    if dependency_errors:
-
-        raise HTTPException(
-            status_code=400,
-            detail={
-                "message": (
-                    "Dependency validation failed. "
-                    "No records were inserted."  # noqa: E501
-                ),  # noqa: E501
-                "errors": dependency_errors,
             },
         )
 

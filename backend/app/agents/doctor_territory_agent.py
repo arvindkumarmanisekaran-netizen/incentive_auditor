@@ -4,7 +4,6 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 
-
 SYSTEM_PROMPT = """
 You are the Doctor and Territory Analysis specialist
 in a pharmaceutical incentive investigation system.
@@ -50,56 +49,75 @@ async def doctor_territory_agent(
 
     relevant_findings = [
         finding
-        for finding in state["findings"]
+        for finding in state.get(
+            "findings",
+            [],
+        )
         if finding.get("type") in relevant_types
     ]
 
     if not relevant_findings:
+
         return {
             "doctor_territory_analysis": {
                 "severity": "UNKNOWN",
-                "summary": (
-                    "No doctor or territory findings available."
-                ),
+                "summary": ("No doctor or territory findings available."),
                 "key_observations": [],
-                "investigation_priority": "No review available",
+                "investigation_priority": ("No review available"),
             }
         }
 
     evidence = {
-        "representative_id": state["representative_id"],
-        "product_id": state["product_id"],
-        "month": state["month"],
+        "representative_id": state.get("representative_id"),
+        "start_date": state.get("start_date"),
+        "end_date": state.get("end_date"),
+        "products_analyzed": state.get(
+            "products_analyzed",
+            [],
+        ),
         "findings": relevant_findings,
     }
 
     prompt = f"""
-{SYSTEM_PROMPT}
+            {SYSTEM_PROMPT}
 
-Analyze only the following doctor and territory evidence:
+            Analyze only the following doctor and territory evidence:
 
-{json.dumps(evidence, indent=2)}
+            {json.dumps(
+                evidence,
+                indent=2,
+                default=str,
+            )}
 
-Return JSON only.
-"""
+            Return JSON only.
+            """
 
-    response_text = await gemini_chat_with_fallback(
-        prompt
+    response_text = await gemini_chat_with_fallback(prompt)
+
+    # Gemini sometimes returns ```json blocks
+    cleaned_response = (
+        response_text.replace(
+            "```json",
+            "",
+        )
+        .replace(
+            "```",
+            "",
+        )
+        .strip()
     )
 
     try:
-        parsed = json.loads(response_text)
+
+        parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
+
         parsed = {
             "severity": "UNKNOWN",
             "summary": response_text,
             "key_observations": [],
-            "investigation_priority": (
-                "AI response could not be parsed as JSON."
-            ),
+            "investigation_priority": ("AI response could not be parsed as JSON."),
         }
 
-    return {
-        "doctor_territory_analysis": parsed
-    }
+    return {"doctor_territory_analysis": parsed}

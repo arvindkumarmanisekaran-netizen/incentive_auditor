@@ -4,7 +4,6 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 
-
 SYSTEM_PROMPT = """
 You are the Payout Validation specialist
 in a pharmaceutical incentive investigation system.
@@ -50,58 +49,59 @@ async def payout_validator_agent(
         "payout_variance",
     }
 
-    relevant_findings = [
-        finding
-        for finding in state["findings"]
-        if finding.get("type") in relevant_types
-    ]
+    findings = state.get("findings", [])
+
+    relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
 
     if not relevant_findings:
+
         return {
             "payout_analysis": {
                 "severity": "UNKNOWN",
                 "summary": "No payout discrepancy evidence is available.",
                 "key_observations": [],
-                "investigation_priority": (
-                    "Payout validation could not be performed."
-                ),
+                "investigation_priority": "Payout validation could not be performed.",
             }
         }
 
     evidence = {
-        "representative_id": state["representative_id"],
-        "product_id": state["product_id"],
-        "month": state["month"],
-        "findings": relevant_findings,
+        "representative_id": state.get("representative_id"),
+        "start_date": state.get("start_date"),
+        "end_date": state.get("end_date"),
+        "products_analyzed": state.get(
+            "products_analyzed",
+            [],
+        ),
+        "payout_findings": relevant_findings,
     }
 
     prompt = f"""
-{SYSTEM_PROMPT}
+        {SYSTEM_PROMPT}
 
-Analyze only the following payout evidence:
+        Analyze only the following payout evidence:
 
-{json.dumps(evidence, indent=2)}
+        {json.dumps(
+            evidence,
+            indent=2,
+            default=str,
+        )}
 
-Return JSON only.
-"""
+        Return JSON only.
+        """
 
-    response_text = await gemini_chat_with_fallback(
-        prompt
-    )
+    response_text = await gemini_chat_with_fallback(prompt)
 
     try:
+
         parsed = json.loads(response_text)
 
     except json.JSONDecodeError:
+
         parsed = {
             "severity": "UNKNOWN",
             "summary": response_text,
             "key_observations": [],
-            "investigation_priority": (
-                "AI response could not be parsed as JSON."
-            ),
+            "investigation_priority": "AI response could not be parsed as JSON.",
         }
 
-    return {
-        "payout_analysis": parsed
-    }
+    return {"payout_analysis": parsed}

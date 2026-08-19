@@ -162,7 +162,9 @@ select {
 }
 
 .dashboard-tab-content {
-  min-width: 0;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 
@@ -2114,4 +2116,191 @@ select {
 
   font-size: 16px;
 
+}
+
+.admin-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+
+.admin-card-header > div:nth-child(2) {
+  flex: 1;
+}
+
+
+.database-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 650px;
+
+  padding-top: 10px;
+}
+
+
+.document-plus-button {
+  position: absolute;
+  top: -50px;
+  right: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 4px 6px;
+}
+
+.folder-toggle-icon {
+  position: relative;
+
+  font-size: 34px;
+  line-height: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease;
+}
+
+.folder-toggle-badge {
+  position: absolute;
+
+  right: -5px;
+  bottom: -5px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid white;
+}
+
+.folder-toggle-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.document-plus-button.plus-state .folder-toggle-badge {
+  background: #2563eb;
+}
+
+.document-plus-button.minus-state .folder-toggle-badge {
+  background: #f97316;
+}
+
+.document-plus-button:hover .folder-toggle-icon {
+  transform: scale(1.05);
+}
+/* =====================================================
+   DOCUMENT PROCESSING - COMPACT CENTERED LAYOUT
+===================================================== */
+
+.document-processing-expand .admin-card {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 1%;
+  padding: 22px 26px;
+  text-align: center;
+}
+
+.document-processing-expand .admin-card-icon {
+  margin: 0 auto 8px;
+}
+
+.document-processing-expand .admin-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.document-processing-expand .admin-card-content h3 {
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.document-processing-expand .admin-card-content > p {
+  max-width: 620px;
+  margin: 0 auto 12px;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.document-processing-expand .admin-card-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin: 0 0 14px;
+}
+
+.document-processing-expand .admin-card-meta span {
+  padding: 4px 9px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.document-processing-expand .primary-button {
+  margin: 0 auto;
+}
+
+.document-processing-expand .document-result {
+  width: 100%;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.database-management-center {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+
+.database-management-card {
+  width: 100%;
+  min-height: 120px;
+
+  padding: 32px;
+}
+
+
+.database-management-card .admin-card-content {
+  width: 100%;
+}
+
+
+.database-management-card .admin-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 20px;
+  margin-bottom: 24px;
 }

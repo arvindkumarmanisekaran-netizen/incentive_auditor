@@ -1,128 +1,51 @@
-import type {
-  InvestigationResult,
-} from "../types/investigation";
+import type { InvestigationResult } from "../types/investigation";
 
-
-import {
-  API_BASE_URL,
-} from "./config";
+import { API_BASE_URL } from "./config";
 
 export async function runInvestigation(
   representativeId: string,
-  productId: string,
-  month: string
+  startDate: string,
+  endDate: string,
 ): Promise<InvestigationResult> {
+  const params = new URLSearchParams({
+    representative_id: representativeId,
 
-  const params =
-    new URLSearchParams({
+    start_date: startDate,
 
-      representative_id:
-        representativeId,
+    end_date: endDate,
+  });
 
-      product_id:
-        productId,
-
-      month,
-
-    });
-
-
-  const response =
-    await fetch(
-      `${API_BASE_URL}/api/investigation/ai-summary?${params}`
-    );
-
+  const response = await fetch(`${API_BASE_URL}/api/investigation/ai-summary?${params}`);
 
   if (!response.ok) {
-
-    throw new Error(
-      `Investigation failed: ${response.status}`
-    );
-
+    throw new Error(`Investigation failed: ${response.status}`);
   }
 
+  const data = await response.json();
 
-  const data =
-    await response.json();
-
+  const investigation = data.investigation ?? data;
 
   return {
+    representative_id: investigation.representative_id ?? representativeId,
 
-    // deterministic investigation data
-    representative_id:
-      data.representative_id
-      ??
-      data.investigation?.representative_id,
+    start_date: investigation.start_date ?? startDate,
 
+    end_date: investigation.end_date ?? endDate,
 
-    product_id:
-      data.product_id
-      ??
-      data.investigation?.product_id,
+    products_analyzed: investigation.products_analyzed ?? [],
 
+    findings: investigation.findings ?? [],
 
-    month:
-      data.month
-      ??
-      data.investigation?.month,
+    overall_risk_score: investigation.overall_risk_score ?? 0,
 
+    overall_severity: investigation.overall_severity ?? "NORMAL",
 
-    findings:
-      data.findings
-      ??
-      data.investigation?.findings
-      ??
-      [],
+    sales_rx_analysis: investigation.sales_rx_analysis ?? {},
 
+    doctor_territory_analysis: investigation.doctor_territory_analysis ?? {},
 
-    overall_risk_score:
-      data.overall_risk_score
-      ??
-      data.investigation?.overall_risk_score
-      ??
-      0,
+    payout_analysis: investigation.payout_analysis ?? {},
 
-
-    overall_severity:
-      data.overall_severity
-      ??
-      data.investigation?.overall_severity
-      ??
-      "NORMAL",
-
-
-    // AI analysis
-    sales_rx_analysis:
-      data.sales_rx_analysis
-      ??
-      data.ai_analysis?.sales_rx_analysis
-      ??
-      {},
-
-
-    doctor_territory_analysis:
-      data.doctor_territory_analysis
-      ??
-      data.ai_analysis?.doctor_territory_analysis
-      ??
-      {},
-
-
-    payout_analysis:
-      data.payout_analysis
-      ??
-      data.ai_analysis?.payout_analysis
-      ??
-      {},
-
-
-    final_report:
-      data.final_report
-      ??
-      data.ai_analysis?.final_report
-      ??
-      {},
-
+    final_report: investigation.final_report ?? {},
   };
-
 }

@@ -1,6 +1,10 @@
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ..analytics.cross_territory import (
+    calculate_cross_territory_concentration,
+)
+
 from ..analytics.sales_anomaly import (
     calculate_sales_deviation,
 )
@@ -13,151 +17,178 @@ from ..analytics.doctor_concentration import (
     calculate_doctor_concentration,
 )
 
-from ..analytics.cross_territory import (
-    calculate_cross_territory_concentration,
-)
-
 
 async def investigate(
     db: AsyncSession,
     representative_id: str,
-    product_id: str,
-    month: str,
+    start_date: str,
+    end_date: str,
 ) -> dict:
-
-    target_month = f"{month}-01"
 
     findings = []
 
+    products_analyzed = []
+
     # ==================================================
-    # SALES DEVIATION
+    # FIND PRODUCTS SOLD BY REPRESENTATIVE
     # ==================================================
 
-    sales_query = text(
-        """
-        WITH monthly_sales AS (
+    products_query = text("""
+        SELECT DISTINCT
 
-            SELECT
+            s.product_id
 
-                rda.representative_id,
-
-                s.product_id,
-
-                DATE_TRUNC(
-                    'month',
-                    s.sale_date
-                )::date AS sales_month,
+        FROM sales s
 
 
-                SUM(
-                    s.sales_amount
-                ) AS total_sales
+        JOIN representative_doctor_assignments rda
 
+            ON rda.doctor_id = s.doctor_id
 
-            FROM sales s
+            AND s.sale_date >= rda.effective_from
 
+            AND (
+                rda.effective_to IS NULL
 
-            JOIN representative_doctor_assignments rda
-
-                ON rda.doctor_id = s.doctor_id
-
-                AND s.sale_date >= rda.effective_from
-
-                AND (
-                    rda.effective_to IS NULL
-
-                    OR s.sale_date <= rda.effective_to
-                )
-
-
-            WHERE
-
-                s.status = 'Valid'
-
-                AND rda.representative_id =
-                    :representative_id
-
-                AND s.product_id =
-                    :product_id
-
-
-            GROUP BY
-
-                rda.representative_id,
-
-                s.product_id,
-
-                DATE_TRUNC(
-                    'month',
-                    s.sale_date
-                )::date
-        )
-
-
-        SELECT
-
-            sales_month,
-
-            total_sales
-
-
-        FROM monthly_sales
+                OR s.sale_date <= rda.effective_to
+            )
 
 
         WHERE
 
-            sales_month <= :target_month
+            rda.representative_id =
+                :representative_id
+
+            AND s.sale_date BETWEEN
+                :start_date
+                AND
+                :end_date
+
+            AND s.status = 'Valid'
 
 
-        ORDER BY sales_month
+        ORDER BY
 
-        """
-    )
+            s.product_id
+        """)
 
-    sales_result = await db.execute(
-        sales_query,
+    product_result = await db.execute(
+        products_query,
         {
             "representative_id": representative_id,
-            "product_id": product_id,
-            "target_month": target_month,
+            "start_date": start_date,
+            "end_date": end_date,
         },
     )
 
-    sales_rows = sales_result.fetchall()
+    products = product_result.fetchall()
 
-    if sales_rows:
+    products_analyzed = [row.product_id for row in products]
 
-        current_row = None
+    # ==================================================
+    # ANALYZE EACH PRODUCT
+    # ==================================================
 
-        historical_rows = []
+    for product_id in products_analyzed:
 
-        for row in sales_rows:
+        # ==================================================
+        # SALES DEVIATION
+        # ==================================================
 
-            if str(row.sales_month) == target_month:
+        sales_query = text("""
+            WITH monthly_sales AS (
 
-                current_row = row
+                SELECT
 
-            else:
+                    DATE_TRUNC(
+                        'month',
+                        s.sale_date
+                    )::date AS sales_month,
 
-                historical_rows.append(row)
 
-        if current_row and historical_rows:
+                    SUM(
+                        s.sales_amount
+                    ) AS total_sales
 
-            current_sales = float(
-                current_row.total_sales
+
+                FROM sales s
+
+
+                JOIN representative_doctor_assignments rda
+
+                    ON rda.doctor_id =
+                       s.doctor_id
+
+
+                    AND s.sale_date >=
+                        rda.effective_from
+
+
+                    AND (
+                        rda.effective_to IS NULL
+
+                        OR s.sale_date <=
+                           rda.effective_to
+                    )
+
+
+                WHERE
+
+                    rda.representative_id =
+                        :representative_id
+
+
+                    AND s.product_id =
+                        :product_id
+
+
+                    AND s.status =
+                        'Valid'
+
+
+                    AND s.sale_date <=
+                        :end_date
+
+
+                GROUP BY
+
+                    DATE_TRUNC(
+                        'month',
+                        s.sale_date
+                    )::date
+
             )
 
-            historical_average = (
 
-                sum(
-                    float(row.total_sales)
-                    for row in historical_rows
-                )
+            SELECT *
 
-                /
+            FROM monthly_sales
 
-                len(historical_rows)
 
+            ORDER BY
+
+                sales_month
+            """)
+
+        sales_result = await db.execute(
+            sales_query,
+            {
+                "representative_id": representative_id,
+                "product_id": product_id,
+                "end_date": end_date,
+            },
+        )
+
+        sales_rows = sales_result.fetchall()
+
+        if len(sales_rows) >= 2:
+
+            current_sales = float(sales_rows[-1].total_sales)
+
+            historical_rows = sales_rows[:-1]
+
+            historical_average = sum(float(row.total_sales) for row in historical_rows) / len(
+                historical_rows
             )
 
             analysis = calculate_sales_deviation(
@@ -167,268 +198,213 @@ async def investigate(
 
             findings.append(
                 {
-                    "type":
-                        "sales_deviation",
-
-                    "severity":
-                        analysis["severity"],
-
-                    "evidence":
-                        analysis,
+                    "type": "sales_deviation",
+                    "product_id": product_id,
+                    "severity": analysis["severity"],
+                    "evidence": analysis,
                 }
             )
 
-    # ==================================================
-    # SALES PRESCRIPTION MISMATCH
-    # ==================================================
+        # ==================================================
+        # SALES PRESCRIPTION MISMATCH
+        # ==================================================
 
-    mismatch_query = text(
-        """
-        WITH monthly_sales AS (
+        mismatch_query = text("""
+            WITH sales_data AS (
+
+                SELECT
+
+                    DATE_TRUNC(
+                        'month',
+                        s.sale_date
+                    )::date AS month,
+
+
+                    SUM(
+                        s.sales_amount
+                    ) AS sales_amount
+
+
+                FROM sales s
+
+
+                JOIN representative_doctor_assignments rda
+
+                    ON rda.doctor_id =
+                       s.doctor_id
+
+
+                    AND s.sale_date >=
+                        rda.effective_from
+
+
+                    AND (
+                        rda.effective_to IS NULL
+
+                        OR s.sale_date <=
+                           rda.effective_to
+                    )
+
+
+                WHERE
+
+                    rda.representative_id =
+                        :representative_id
+
+
+                    AND s.product_id =
+                        :product_id
+
+
+                    AND s.status =
+                        'Valid'
+
+
+                    AND s.sale_date <=
+                        :end_date
+
+
+                GROUP BY
+
+                    DATE_TRUNC(
+                        'month',
+                        s.sale_date
+                    )::date
+
+            ),
+
+
+            prescription_data AS (
+
+                SELECT
+
+                    DATE_TRUNC(
+                        'month',
+                        p.prescription_date
+                    )::date AS month,
+
+
+                    SUM(
+                        p.quantity
+                    ) AS prescription_quantity
+
+
+                FROM prescriptions p
+
+
+                JOIN representative_doctor_assignments rda
+
+                    ON rda.doctor_id =
+                       p.doctor_id
+
+
+                    AND p.prescription_date >=
+                        rda.effective_from
+
+
+                    AND (
+                        rda.effective_to IS NULL
+
+                        OR p.prescription_date <=
+                           rda.effective_to
+                    )
+
+
+                WHERE
+
+                    rda.representative_id =
+                        :representative_id
+
+
+                    AND p.product_id =
+                        :product_id
+
+
+                    AND p.status =
+                        'Valid'
+
+
+                    AND p.prescription_date <=
+                        :end_date
+
+
+                GROUP BY
+
+                    DATE_TRUNC(
+                        'month',
+                        p.prescription_date
+                    )::date
+
+            )
+
 
             SELECT
 
-                rda.representative_id,
-
-                s.product_id,
-
-                DATE_TRUNC(
-                    'month',
-                    s.sale_date
-                )::date AS month,
+                COALESCE(
+                    s.month,
+                    p.month
+                ) AS month,
 
 
-                SUM(
-                    s.sales_amount
-                ) AS sales_amount
+                COALESCE(
+                    s.sales_amount,
+                    0
+                ) AS sales_amount,
 
 
-            FROM sales s
-
-
-            JOIN representative_doctor_assignments rda
-
-                ON rda.doctor_id = s.doctor_id
-
-                AND s.sale_date >= rda.effective_from
-
-                AND (
-                    rda.effective_to IS NULL
-
-                    OR s.sale_date <= rda.effective_to
-                )
-
-
-            WHERE
-
-                s.status='Valid'
-
-                AND rda.representative_id =
-                    :representative_id
-
-                AND s.product_id =
-                    :product_id
-
-
-            GROUP BY
-
-                rda.representative_id,
-
-                s.product_id,
-
-                DATE_TRUNC(
-                    'month',
-                    s.sale_date
-                )::date
-
-        ),
-
-
-        monthly_prescriptions AS (
-
-            SELECT
-
-                rda.representative_id,
-
-                p.product_id,
-
-
-                DATE_TRUNC(
-                    'month',
-                    p.prescription_date
-                )::date AS month,
-
-
-                SUM(
-                    p.quantity
+                COALESCE(
+                    p.prescription_quantity,
+                    0
                 ) AS prescription_quantity
 
 
-            FROM prescriptions p
+            FROM sales_data s
 
 
-            JOIN representative_doctor_assignments rda
+            FULL OUTER JOIN prescription_data p
 
-                ON rda.doctor_id = p.doctor_id
-
-
-                AND p.prescription_date >=
-                    rda.effective_from
+                ON s.month = p.month
 
 
-                AND (
-                    rda.effective_to IS NULL
+            ORDER BY month
+            """)
 
-                    OR p.prescription_date <=
-                       rda.effective_to
-                )
-
-
-            WHERE
-
-                p.status='Valid'
-
-                AND rda.representative_id =
-                    :representative_id
-
-                AND p.product_id =
-                    :product_id
-
-
-            GROUP BY
-
-                rda.representative_id,
-
-                p.product_id,
-
-                DATE_TRUNC(
-                    'month',
-                    p.prescription_date
-                )::date
-
+        mismatch_result = await db.execute(
+            mismatch_query,
+            {
+                "representative_id": representative_id,
+                "product_id": product_id,
+                "end_date": end_date,
+            },
         )
 
+        mismatch_rows = mismatch_result.fetchall()
 
-        SELECT
+        if len(mismatch_rows) >= 2:
 
-            COALESCE(
-                ms.month,
-                mp.month
-            ) AS month,
+            current = mismatch_rows[-1]
 
+            history = mismatch_rows[:-1]
 
-            COALESCE(
-                ms.sales_amount,
-                0
-            ) AS sales_amount,
+            sales_average = sum(float(row.sales_amount) for row in history) / len(
+                history
+            )  # noqa: E501
 
+            rx_average = sum(float(row.prescription_quantity) for row in history) / len(history)
 
-            COALESCE(
-                mp.prescription_quantity,
-                0
-            ) AS prescription_quantity
-
-
-        FROM monthly_sales ms
-
-
-        FULL OUTER JOIN monthly_prescriptions mp
-
-            ON mp.representative_id =
-               ms.representative_id
-
-            AND mp.product_id =
-                ms.product_id
-
-            AND mp.month =
-                ms.month
-
-
-        WHERE COALESCE(
-            ms.month,
-            mp.month
-        ) <= :target_month
-
-
-        ORDER BY month
-
-        """
-    )
-
-    mismatch_result = await db.execute(
-        mismatch_query,
-        {
-            "representative_id": representative_id,
-            "product_id": product_id,
-            "target_month": target_month,
-        },
-    )
-
-    mismatch_rows = mismatch_result.fetchall()
-
-    if mismatch_rows:
-
-        current_row = None
-
-        historical_rows = []
-
-        for row in mismatch_rows:
-
-            if str(row.month) == target_month:
-
-                current_row = row
-
-            else:
-
-                historical_rows.append(row)
-
-        if current_row and historical_rows:
-            sales_avg = (
-                sum(
-                    float(row.sales_amount)
-                    for row in historical_rows
-                )
-                /
-                len(historical_rows)
-            )
-
-            rx_avg = (
-                sum(
-                    float(
-                        row.prescription_quantity
-                    )
-                    for row in historical_rows
-                )
-                /
-                len(historical_rows)
-            )
-
-            analysis = (
-                calculate_sales_prescription_mismatch(
-                    current_sales=float(
-                        current_row.sales_amount
-                    ),
-
-                    historical_sales_average=sales_avg,
-
-                    current_prescriptions=float(
-                        current_row.prescription_quantity
-                    ),
-
-                    historical_prescription_average=rx_avg,
-                )
+            analysis = calculate_sales_prescription_mismatch(
+                current_sales=float(current.sales_amount),
+                historical_sales_average=sales_average,
+                current_prescriptions=float(current.prescription_quantity),
+                historical_prescription_average=rx_average,
             )
 
             findings.append(
                 {
-                    "type":
-                        "sales_prescription_mismatch",
-
-                    "severity":
-                        analysis["severity"],
-
-                    "evidence":
-                        analysis,
+                    "type": "sales_prescription_mismatch",
+                    "product_id": product_id,
+                    "severity": analysis["severity"],
+                    "evidence": analysis,
                 }
             )
 
@@ -436,8 +412,7 @@ async def investigate(
     # DOCTOR CONCENTRATION
     # ==================================================
 
-    doctor_query = text(
-        """
+    doctor_query = text("""
         SELECT
 
             s.doctor_id,
@@ -455,22 +430,24 @@ async def investigate(
         JOIN doctors d
 
             ON d.doctor_id =
-            s.doctor_id
+               s.doctor_id
 
 
         JOIN representative_doctor_assignments rda
 
             ON rda.doctor_id =
-            s.doctor_id
+               s.doctor_id
+
 
             AND s.sale_date >=
                 rda.effective_from
+
 
             AND (
                 rda.effective_to IS NULL
 
                 OR s.sale_date <=
-                rda.effective_to
+                   rda.effective_to
             )
 
 
@@ -479,14 +456,12 @@ async def investigate(
             rda.representative_id =
                 :representative_id
 
-            AND s.product_id =
-                :product_id
 
-            AND DATE_TRUNC(
-                'month',
-                s.sale_date
-            )::date =
-                :target_month
+            AND s.sale_date BETWEEN
+                :start_date
+                AND
+                :end_date
+
 
             AND s.status =
                 'Valid'
@@ -502,21 +477,14 @@ async def investigate(
         ORDER BY
 
             doctor_sales DESC
-
-        """
-    )
+        """)
 
     doctor_result = await db.execute(
         doctor_query,
         {
-            "representative_id":
-                representative_id,
-
-            "product_id":
-                product_id,
-
-            "target_month":
-                target_month,
+            "representative_id": representative_id,
+            "start_date": start_date,
+            "end_date": end_date,
         },
     )
 
@@ -525,38 +493,22 @@ async def investigate(
     if doctor_rows:
 
         doctor_sales = [
-
             {
-                "doctor_id":
-                    row.doctor_id,
-
-                "doctor_name":
-                    row.doctor_name,
-
-                "sales":
-                    float(
-                        row.doctor_sales
-                    ),
+                "doctor_id": row.doctor_id,
+                "doctor_name": row.doctor_name,
+                "sales": float(row.doctor_sales),
             }
-
             for row in doctor_rows
-
         ]
 
-        analysis = calculate_doctor_concentration(
-            doctor_sales
-        )
+        analysis = calculate_doctor_concentration(doctor_sales)
 
         findings.append(
             {
-                "type":
-                    "doctor_concentration",
-
-                "severity":
-                    analysis["severity"],
-
-                "evidence":
-                    analysis,
+                "type": "doctor_concentration",
+                "product_id": "ALL",
+                "severity": analysis["severity"],
+                "evidence": analysis,
             }
         )
 
@@ -564,8 +516,7 @@ async def investigate(
     # CROSS TERRITORY CONCENTRATION
     # ==================================================
 
-    territory_query = text(
-        """
+    territory_query = text("""
         SELECT
 
             r.territory_id AS home_territory_id,
@@ -585,29 +536,31 @@ async def investigate(
         JOIN representative_doctor_assignments rda
 
             ON rda.doctor_id =
-            s.doctor_id
+               s.doctor_id
+
 
             AND s.sale_date >=
                 rda.effective_from
+
 
             AND (
                 rda.effective_to IS NULL
 
                 OR s.sale_date <=
-                rda.effective_to
+                   rda.effective_to
             )
 
 
         JOIN representatives r
 
             ON r.representative_id =
-            rda.representative_id
+               rda.representative_id
 
 
         JOIN territories t
 
             ON t.territory_id =
-            s.selling_territory_id
+               s.selling_territory_id
 
 
         WHERE
@@ -615,14 +568,12 @@ async def investigate(
             rda.representative_id =
                 :representative_id
 
-            AND s.product_id =
-                :product_id
 
-            AND DATE_TRUNC(
-                'month',
-                s.sale_date
-            )::date =
-                :target_month
+            AND s.sale_date BETWEEN
+                :start_date
+                AND
+                :end_date
+
 
             AND s.status =
                 'Valid'
@@ -640,21 +591,14 @@ async def investigate(
         ORDER BY
 
             territory_sales DESC
-
-        """
-    )
+        """)
 
     territory_result = await db.execute(
         territory_query,
         {
-            "representative_id":
-                representative_id,
-
-            "product_id":
-                product_id,
-
-            "target_month":
-                target_month,
+            "representative_id": representative_id,
+            "start_date": start_date,
+            "end_date": end_date,
         },
     )
 
@@ -662,47 +606,28 @@ async def investigate(
 
     if territory_rows:
 
-        home_territory_id = (
-            territory_rows[0]
-            .home_territory_id
-        )
+        home_territory_id = territory_rows[0].home_territory_id
 
         territory_sales = [
-
             {
-                "territory_id":
-                    row.selling_territory_id,
-
-                "territory_name":
-                    row.territory_name,
-
-                "sales":
-                    float(
-                        row.territory_sales
-                    ),
+                "territory_id": row.selling_territory_id,
+                "territory_name": row.territory_name,
+                "sales": float(row.territory_sales),
             }
-
             for row in territory_rows
-
         ]
 
-        analysis = (
-            calculate_cross_territory_concentration(
-                home_territory_id=home_territory_id,
-                territory_sales=territory_sales,
-            )
+        analysis = calculate_cross_territory_concentration(
+            home_territory_id=home_territory_id,
+            territory_sales=territory_sales,
         )
 
         findings.append(
             {
-                "type":
-                    "cross_territory_concentration",
-
-                "severity":
-                    analysis["severity"],
-
-                "evidence":
-                    analysis,
+                "type": "cross_territory_concentration",
+                "product_id": "ALL",
+                "severity": analysis["severity"],
+                "evidence": analysis,
             }
         )
 
@@ -710,13 +635,10 @@ async def investigate(
     # PAYOUT DISCREPANCY
     # ==================================================
 
-    payout_query = text(
-        """
+    payout_query = text("""
         SELECT
 
             payout_id,
-
-            representative_id,
 
             product_id,
 
@@ -737,40 +659,42 @@ async def investigate(
             representative_id =
                 :representative_id
 
-            AND product_id =
-                :product_id
 
-            AND payout_month =
-                :target_month
+            AND payout_month BETWEEN
 
-        """
-    )
+                DATE_TRUNC(
+                    'month',
+                    CAST(:start_date AS DATE)
+                )::date
+
+                AND
+
+                DATE_TRUNC(
+                    'month',
+                    CAST(:end_date AS DATE)
+                )::date
+        """)
 
     payout_result = await db.execute(
         payout_query,
         {
-            "representative_id":
-                representative_id,
-
-            "product_id":
-                product_id,
-
-            "target_month":
-                target_month,
+            "representative_id": representative_id,
+            "start_date": start_date,
+            "end_date": end_date,
         },
     )
 
-    payout_row = payout_result.fetchone()
+    payout_rows = payout_result.fetchall()
 
-    if payout_row:
-        difference = float(
-            payout_row.payout_difference
-        )
+    for payout in payout_rows:
 
-        if (
-            payout_row.expected_payout == 0
-            and payout_row.actual_payout > 0
-        ):
+        difference = float(payout.payout_difference)
+
+        expected = float(payout.expected_payout)
+
+        actual = float(payout.actual_payout)
+
+        if expected == 0 and actual > 0:
 
             severity = "HIGH"
 
@@ -792,33 +716,16 @@ async def investigate(
 
         findings.append(
             {
-                "type":
-                    "payout_discrepancy",
-
-                "severity":
-                    severity,
-
-                "evidence":
-                    {
-                        "payout_id":
-                            payout_row.payout_id,
-
-                        "expected_payout":
-                            float(
-                                payout_row.expected_payout
-                            ),
-
-                        "actual_payout":
-                            float(
-                                payout_row.actual_payout
-                            ),
-
-                        "payout_difference":
-                            difference,
-
-                        "payout_status":
-                            payout_row.status,
-                    },
+                "type": "payout_discrepancy",
+                "product_id": payout.product_id,
+                "severity": severity,
+                "evidence": {
+                    "payout_id": payout.payout_id,
+                    "expected_payout": expected,
+                    "actual_payout": actual,
+                    "payout_difference": difference,
+                    "status": payout.status,
+                },
             }
         )
 
@@ -827,17 +734,10 @@ async def investigate(
     # ==================================================
 
     severity_scores = {
-
         "NORMAL": 0,
-
         "LOW": 25,
-
         "MEDIUM": 50,
-
         "HIGH": 75,
-
-        "UNKNOWN": 0,
-
     }
 
     overall_risk_score = 0
@@ -845,20 +745,11 @@ async def investigate(
     if findings:
 
         overall_risk_score = max(
-
             severity_scores.get(
-
-                finding.get(
-                    "severity",
-                    "UNKNOWN"
-                ),
-
+                finding.get("severity", "NORMAL"),
                 0,
-
             )
-
             for finding in findings
-
         )
 
     if overall_risk_score >= 75:
@@ -878,32 +769,15 @@ async def investigate(
         overall_severity = "NORMAL"
 
     # ==================================================
-    # FINAL INVESTIGATION RESULT
+    # FINAL RESPONSE
     # ==================================================
 
     return {
-
-        "representative_id":
-            representative_id,
-
-
-        "product_id":
-            product_id,
-
-
-        "month":
-            month,
-
-
-        "findings":
-            findings,
-
-
-        "overall_risk_score":
-            overall_risk_score,
-
-
-        "overall_severity":
-            overall_severity,
-
+        "representative_id": representative_id,
+        "start_date": start_date,
+        "end_date": end_date,
+        "products_analyzed": products_analyzed,
+        "findings": findings,
+        "overall_risk_score": overall_risk_score,
+        "overall_severity": overall_severity,
     }

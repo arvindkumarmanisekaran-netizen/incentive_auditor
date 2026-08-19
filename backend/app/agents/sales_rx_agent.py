@@ -4,7 +4,6 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 
-
 SYSTEM_PROMPT = """
 You are the Sales and Prescription Analysis specialist
 in a pharmaceutical incentive investigation system.
@@ -27,7 +26,7 @@ STRICT RULES:
 9. Do not analyze payout calculations.
 10. If evidence is insufficient, say so.
 
-Return valid JSON only with this shape:
+Return valid JSON only:
 
 {
   "severity": "NORMAL|LOW|MEDIUM|HIGH|UNKNOWN",
@@ -49,55 +48,74 @@ async def sales_rx_agent(
 
     relevant_findings = [
         finding
-        for finding in state["findings"]
+        for finding in state.get(
+            "findings",
+            [],
+        )
         if finding.get("type") in relevant_types
     ]
 
     if not relevant_findings:
+
         return {
             "sales_rx_analysis": {
                 "severity": "UNKNOWN",
-                "summary": (
-                    "No sales or prescription findings available."
-                ),
+                "summary": ("No sales or prescription findings available."),
                 "key_observations": [],
-                "investigation_priority": "No review available",
+                "investigation_priority": ("No review available"),
             }
         }
 
     evidence = {
-        "representative_id": state["representative_id"],
-        "product_id": state["product_id"],
-        "month": state["month"],
-        "findings": relevant_findings,
+        "representative_id": state.get("representative_id"),
+        "start_date": state.get("start_date"),
+        "end_date": state.get("end_date"),
+        "products_analyzed": state.get(
+            "products_analyzed",
+            [],
+        ),
+        "sales_rx_findings": relevant_findings,
     }
 
     prompt = f"""
-{SYSTEM_PROMPT}
+            {SYSTEM_PROMPT}
 
-Analyze this evidence:
+            Analyze only the following sales and prescription evidence:
 
-{json.dumps(evidence, indent=2)}
+            {json.dumps(
+                evidence,
+                indent=2,
+                default=str,
+            )}
 
-Return JSON only.
-"""
+            Return JSON only.
+            """
 
-    response_text = await gemini_chat_with_fallback(
-        prompt
+    response_text = await gemini_chat_with_fallback(prompt)
+
+    cleaned_response = (
+        response_text.replace(
+            "```json",
+            "",
+        )
+        .replace(
+            "```",
+            "",
+        )
+        .strip()
     )
 
     try:
-        parsed = json.loads(response_text)
+
+        parsed = json.loads(cleaned_response)
+
     except json.JSONDecodeError:
+
         parsed = {
             "severity": "UNKNOWN",
             "summary": response_text,
             "key_observations": [],
-            "investigation_priority": (
-                "AI response could not be parsed as JSON."
-            ),
+            "investigation_priority": ("AI response could not be parsed as JSON."),
         }
 
-    return {
-        "sales_rx_analysis": parsed
-    }
+    return {"sales_rx_analysis": parsed}

@@ -2,21 +2,15 @@ export interface FindingEvidence {
   [key: string]: any;
 }
 
-
 export interface Finding {
-
   type: string;
 
   severity: string;
 
   evidence: FindingEvidence;
-
 }
 
-
-
 export interface AIAnalysis {
-
   severity?: string;
 
   summary?: string;
@@ -24,13 +18,9 @@ export interface AIAnalysis {
   key_observations?: string[];
 
   investigation_priority?: string;
-
 }
 
-
-
 export interface FinalReport {
-
   overall_assessment?: string;
 
   overall_severity?: string;
@@ -38,13 +28,11 @@ export interface FinalReport {
   top_risk_drivers?: string[];
 
   specialist_summary?: {
-
     sales_rx?: string;
 
     doctor_territory?: string;
 
     payout?: string;
-
   };
 
   recommended_actions?: string[];
@@ -52,31 +40,28 @@ export interface FinalReport {
   recommended_next_action?: string;
 
   human_review_required?: boolean;
-
 }
 
 export interface InvestigationResult {
+  representative_id: string;
 
-    representative_id: string;
+  start_date: string;
 
-    product_id: string;
+  end_date: string;
 
-    month: string;
+  products_analyzed: string[];
 
+  findings: Finding[];
 
-    findings: Finding[];
+  overall_risk_score: number;
 
+  overall_severity: string;
 
-    overall_risk_score: number;
+  sales_rx_analysis?: AIAnalysis;
 
-    overall_severity: string;
+  doctor_territory_analysis?: AIAnalysis;
 
+  payout_analysis?: AIAnalysis;
 
-    sales_rx_analysis?: AIAnalysis;
-
-    doctor_territory_analysis?: AIAnalysis;
-
-    payout_analysis?: AIAnalysis;
-
-    final_report?: FinalReport;
+  final_report?: FinalReport;
 }

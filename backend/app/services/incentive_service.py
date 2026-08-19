@@ -16,8 +16,7 @@ async def calculate_incentives(
 
     target_month = f"{month}-01"
 
-    query = text(
-        """
+    query = text("""
         WITH attributed_sales AS (
 
             SELECT
@@ -382,26 +381,13 @@ async def calculate_incentives(
 
             p.product_id
 
-        """
-    )
+        """)
 
     result = await db.execute(
-
         query,
-
-        {
-            "target_month":
-                target_month
-        },
-
+        {"target_month": target_month},
     )
 
     rows = result.fetchall()
 
-    return [
-
-        dict(row._mapping)
-
-        for row in rows
-
-    ]
+    return [dict(row._mapping) for row in rows]

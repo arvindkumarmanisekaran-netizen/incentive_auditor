@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import (
 
 from ..config import settings
 
-
 DATABASE_URL = settings.database_url
 
 
@@ -16,9 +15,7 @@ DATABASE_URL = settings.database_url
 # into:
 # postgresql+asyncpg://...
 
-if DATABASE_URL.startswith(
-    "postgresql://"
-):
+if DATABASE_URL.startswith("postgresql://"):
     DATABASE_URL = DATABASE_URL.replace(
         "postgresql://",
         "postgresql+asyncpg://",
@@ -46,7 +43,6 @@ async def get_db():
     async with AsyncSessionLocal() as session:
 
         try:
-
             yield session
 
         finally:

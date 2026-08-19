@@ -1,6 +1,5 @@
-
-  {
-    "python.terminal.useEnvFile": true,
+{
+  "python.terminal.useEnvFile": true,
   "editor.formatOnSave": true,
 
   "[python]": {
@@ -36,6 +35,11 @@
   "black-formatter.args": [
     "--line-length",
     "100"
+  ],
+
+  "flake8.args": [
+    "--max-line-length=100",
+    "--extend-ignore=E203"
   ],
 
   "prettier.printWidth": 100,
