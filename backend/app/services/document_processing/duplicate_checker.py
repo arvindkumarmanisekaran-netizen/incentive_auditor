@@ -233,6 +233,7 @@ async def check_duplicates(
     table_name,
     records,
     duplicate_keys,
+    filename=None,
 ):
 
     table = await reflect_table(
@@ -316,6 +317,7 @@ async def check_duplicates(
             )
 
     return {
+        "filename": filename,
         "table": table_name,
         "total_records": len(records),
         "new_record_count": len(new_records),

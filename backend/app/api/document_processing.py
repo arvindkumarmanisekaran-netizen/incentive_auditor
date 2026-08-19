@@ -282,6 +282,7 @@ async def confirm_document(
             table_name=payload.target_table,
             records=all_records,
             duplicate_keys=configured_duplicate_keys,
+            filename=file_name,
         )
 
     except Exception as exc:

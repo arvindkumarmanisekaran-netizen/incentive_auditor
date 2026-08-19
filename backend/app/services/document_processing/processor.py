@@ -50,13 +50,12 @@ def extract_incoming_records(
     list[dict[str, Any]],
 ]:
     """
-    Extract the actual canonical records from
-    duplicate-checker output.
+    Extract records for database operations.
 
     Returns:
 
         new_records
-        duplicate_records
+        duplicate_records_for_processing
     """
 
     new_records = [
@@ -68,7 +67,7 @@ def extract_incoming_records(
     ]
 
     duplicate_records = [
-        item["incoming_record"]
+        item
         for item in duplicate_result.get(
             "duplicate_records",
             [],
@@ -284,6 +283,7 @@ async def process_document(
             table_name=table_name,
             records=canonical_records,
             duplicate_keys=duplicate_keys,
+            filename=filename,
         )
 
     except Exception as exc:

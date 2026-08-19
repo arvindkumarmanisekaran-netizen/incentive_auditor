@@ -34,10 +34,18 @@ export interface DocumentProcessingResult {
 
     new_records: Record<string, unknown>[];
 
-    duplicate_records: Record<string, unknown>[];
+    duplicate_records: DuplicateRecord[];
   };
 
   error?: string;
+}
+
+export interface DuplicateRecord {
+  row: number;
+
+  incoming_record: Record<string, unknown>;
+
+  existing_record: Record<string, unknown>;
 }
 
 export async function uploadDocument(file: File): Promise<DocumentProcessingResult> {

@@ -1,5 +1,7 @@
 import { useDocumentUpload } from "../service/DocumentUploadService";
 
+import { useEffect, useState } from "react";
+
 export default function DocumentProcessingCard() {
   const {
     inputRef,
@@ -15,7 +17,13 @@ export default function DocumentProcessingCard() {
     clearSuccessMessage,
   } = useDocumentUpload();
 
-  console.log("CARD validationErrors", validationErrors.length, validationErrors);
+  const [showDuplicatePopup, setShowDuplicatePopup] = useState(false);
+
+  useEffect(() => {
+    if (result?.has_duplicates) {
+      setShowDuplicatePopup(true);
+    }
+  }, [result]);
 
   return (
     <article className="admin-card">
@@ -60,6 +68,8 @@ export default function DocumentProcessingCard() {
           <div className="document-result">
             <h4>Detected Document</h4>
 
+            {result.filename && <p>File: {result.filename}</p>}
+
             <p>Table: {result.target_table}</p>
 
             <p>Records: {result.total_records}</p>
@@ -91,6 +101,59 @@ export default function DocumentProcessingCard() {
             )}
           </div>
         )}
+
+        {/* Duplicate Records Popup */}
+
+        {showDuplicatePopup && result?.pending_data?.duplicate_records && (
+          <>
+            <div className="validation-overlay"></div>
+
+            <div className="validation-popup">
+              <h4>Duplicate Records Found</h4>
+
+              <p>The uploaded document contains existing database records.</p>
+
+              {result.filename && <p>File: {result.filename}</p>}
+
+              <p>Table: {result.target_table}</p>
+
+              <div className="validation-error-list">
+                {result?.pending_data?.duplicate_records.slice(0, 50).map((item, index) => (
+                  <div key={`${item.row}-${index}`} className="validation-error-item">
+                    <strong>Row {item.row}</strong>
+
+                    <br />
+
+                    <span>Incoming Record:</span>
+
+                    <pre>{JSON.stringify(item.incoming_record, null, 2)}</pre>
+
+                    <span>Existing Record:</span>
+
+                    <pre>{JSON.stringify(item.existing_record, null, 2)}</pre>
+                  </div>
+                ))}
+              </div>
+
+              {result?.pending_data?.duplicate_records.length > 50 && (
+                <p>
+                  Showing first 50 duplicates out of{" "}
+                  {result?.pending_data?.duplicate_records.length}
+                </p>
+              )}
+
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => setShowDuplicatePopup(false)}
+              >
+                Close
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* Validation Errors Popup */}
 
         {validationErrors.length > 0 && (
           <>
@@ -136,6 +199,8 @@ export default function DocumentProcessingCard() {
         )}
 
         {error && !validationErrors.length && <p className="error-message">{error}</p>}
+
+        {/* Success Popup */}
 
         {successMessage && (
           <>
