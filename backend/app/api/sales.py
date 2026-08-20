@@ -8,39 +8,43 @@ from ..db.session import get_db
 from ..services.document_processing.validator import validate_status
 
 router = APIRouter(
-    prefix="/api/products",
-    tags=["Products"],
+    prefix="/api/sales",
+    tags=["Sales"],
 )
 
 
 @router.get("")
-async def get_products(
+async def get_sales(
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(text("""
             SELECT
+                sale_id,
+                sale_date,
+                doctor_id,
                 product_id,
-                product_name,
-                product_category,
+                selling_territory_id,
+                quantity,
+                sales_amount,
                 status,
                 created_at,
                 updated_at
-            FROM products
-            ORDER BY product_id
+            FROM sales
+            ORDER BY sale_date DESC, sale_id
             """))
 
     return [dict(row._mapping) for row in result.fetchall()]
 
 
-@router.put("/{product_id}")
-async def update_product(
-    product_id: str,
+@router.put("/{sale_id}")
+async def update_sale(
+    sale_id: str,
     payload: dict[str, Any] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
 
     status_errors = validate_status(
-        "products",
+        "sales",
         [payload],
     )
 
@@ -51,8 +55,12 @@ async def update_product(
         )
 
     allowed_fields = {
-        "product_name",
-        "product_category",
+        "sale_date",
+        "doctor_id",
+        "product_id",
+        "selling_territory_id",
+        "quantity",
+        "sales_amount",
         "status",
     }
 
@@ -66,45 +74,47 @@ async def update_product(
 
     existing = await db.execute(
         text("""
-            SELECT product_id
-            FROM products
-            WHERE product_id = :product_id
+            SELECT sale_id
+            FROM sales
+            WHERE sale_id = :sale_id
             """),
-        {"product_id": product_id},
+        {
+            "sale_id": sale_id,
+        },
     )
 
     if existing.first() is None:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Sale not found",
         )
 
     set_clause = ", ".join(f"{column} = :{column}" for column in update_values)
 
     await db.execute(
         text(f"""
-            UPDATE products
+            UPDATE sales
             SET
                 {set_clause},
                 updated_at = CURRENT_TIMESTAMP
-            WHERE product_id = :product_id
+            WHERE sale_id = :sale_id
             """),
         {
             **update_values,
-            "product_id": product_id,
+            "sale_id": sale_id,
         },
     )
 
     await db.commit()
 
     return {
-        "message": "Product updated successfully",
-        "product_id": product_id,
+        "message": "Sale updated successfully",
+        "sale_id": sale_id,
     }
 
 
 @router.delete("/bulk-delete")
-async def bulk_delete_products(
+async def bulk_delete_sales(
     payload: dict[str, list[str]] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
@@ -113,50 +123,54 @@ async def bulk_delete_products(
     if not ids:
         raise HTTPException(
             status_code=400,
-            detail="No product IDs supplied",
+            detail="No sale IDs supplied",
         )
 
     query = text("""
-        DELETE FROM products
-        WHERE product_id IN :ids
+        DELETE FROM sales
+        WHERE sale_id IN :ids
         """).bindparams(bindparam("ids", expanding=True))
 
     result = await db.execute(
         query,
-        {"ids": ids},
+        {
+            "ids": ids,
+        },
     )
 
     await db.commit()
 
     return {
-        "message": "Products deleted successfully",
+        "message": "Sales deleted successfully",
         "deleted_count": result.rowcount,
         "deleted_ids": ids,
     }
 
 
-@router.delete("/{product_id}")
-async def delete_product(
-    product_id: str,
+@router.delete("/{sale_id}")
+async def delete_sale(
+    sale_id: str,
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
         text("""
-            DELETE FROM products
-            WHERE product_id = :product_id
+            DELETE FROM sales
+            WHERE sale_id = :sale_id
             """),
-        {"product_id": product_id},
+        {
+            "sale_id": sale_id,
+        },
     )
 
     if result.rowcount == 0:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Sale not found",
         )
 
     await db.commit()
 
     return {
-        "message": "Product deleted successfully",
-        "product_id": product_id,
+        "message": "Sale deleted successfully",
+        "sale_id": sale_id,
     }

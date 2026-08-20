@@ -5,55 +5,44 @@ from sqlalchemy import bindparam, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db.session import get_db
-from ..services.document_processing.validator import validate_status
 
 router = APIRouter(
-    prefix="/api/products",
-    tags=["Products"],
+    prefix="/api/incentive-tiers",
+    tags=["Incentive Tiers"],
 )
 
 
 @router.get("")
-async def get_products(
+async def get_incentive_tiers(
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(text("""
             SELECT
-                product_id,
-                product_name,
-                product_category,
-                status,
+                tier_id,
+                program_id,
+                minimum_achievement,
+                maximum_achievement,
+                payout_multiplier,
                 created_at,
                 updated_at
-            FROM products
-            ORDER BY product_id
+            FROM incentive_tiers
+            ORDER BY program_id, minimum_achievement, tier_id
             """))
 
     return [dict(row._mapping) for row in result.fetchall()]
 
 
-@router.put("/{product_id}")
-async def update_product(
-    product_id: str,
+@router.put("/{tier_id}")
+async def update_incentive_tier(
+    tier_id: str,
     payload: dict[str, Any] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
-
-    status_errors = validate_status(
-        "products",
-        [payload],
-    )
-
-    if status_errors:
-        raise HTTPException(
-            status_code=400,
-            detail=status_errors[0]["message"],
-        )
-
     allowed_fields = {
-        "product_name",
-        "product_category",
-        "status",
+        "program_id",
+        "minimum_achievement",
+        "maximum_achievement",
+        "payout_multiplier",
     }
 
     update_values = {key: value for key, value in payload.items() if key in allowed_fields}
@@ -66,45 +55,50 @@ async def update_product(
 
     existing = await db.execute(
         text("""
-            SELECT product_id
-            FROM products
-            WHERE product_id = :product_id
+            SELECT tier_id
+            FROM incentive_tiers
+            WHERE tier_id = :tier_id
             """),
-        {"product_id": product_id},
+        {"tier_id": tier_id},
     )
 
     if existing.first() is None:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Incentive tier not found",
         )
 
     set_clause = ", ".join(f"{column} = :{column}" for column in update_values)
 
-    await db.execute(
-        text(f"""
-            UPDATE products
-            SET
-                {set_clause},
-                updated_at = CURRENT_TIMESTAMP
-            WHERE product_id = :product_id
-            """),
-        {
-            **update_values,
-            "product_id": product_id,
-        },
-    )
+    try:
+        await db.execute(
+            text(f"""
+                UPDATE incentive_tiers
+                SET
+                    {set_clause},
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE tier_id = :tier_id
+                """),
+            {
+                **update_values,
+                "tier_id": tier_id,
+            },
+        )
 
-    await db.commit()
+        await db.commit()
+
+    except Exception:
+        await db.rollback()
+        raise
 
     return {
-        "message": "Product updated successfully",
-        "product_id": product_id,
+        "message": "Incentive tier updated successfully",
+        "tier_id": tier_id,
     }
 
 
 @router.delete("/bulk-delete")
-async def bulk_delete_products(
+async def bulk_delete_incentive_tiers(
     payload: dict[str, list[str]] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
@@ -113,12 +107,12 @@ async def bulk_delete_products(
     if not ids:
         raise HTTPException(
             status_code=400,
-            detail="No product IDs supplied",
+            detail="No tier IDs supplied",
         )
 
     query = text("""
-        DELETE FROM products
-        WHERE product_id IN :ids
+        DELETE FROM incentive_tiers
+        WHERE tier_id IN :ids
         """).bindparams(bindparam("ids", expanding=True))
 
     result = await db.execute(
@@ -129,34 +123,34 @@ async def bulk_delete_products(
     await db.commit()
 
     return {
-        "message": "Products deleted successfully",
+        "message": "Incentive tiers deleted successfully",
         "deleted_count": result.rowcount,
         "deleted_ids": ids,
     }
 
 
-@router.delete("/{product_id}")
-async def delete_product(
-    product_id: str,
+@router.delete("/{tier_id}")
+async def delete_incentive_tier(
+    tier_id: str,
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
         text("""
-            DELETE FROM products
-            WHERE product_id = :product_id
+            DELETE FROM incentive_tiers
+            WHERE tier_id = :tier_id
             """),
-        {"product_id": product_id},
+        {"tier_id": tier_id},
     )
 
     if result.rowcount == 0:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Incentive tier not found",
         )
 
     await db.commit()
 
     return {
-        "message": "Product deleted successfully",
-        "product_id": product_id,
+        "message": "Incentive tier deleted successfully",
+        "tier_id": tier_id,
     }

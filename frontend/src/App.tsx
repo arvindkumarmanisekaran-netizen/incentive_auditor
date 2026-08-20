@@ -20,6 +20,8 @@ import InvestigationCharts from "./components/InvestigationCharts";
 
 import DocumentProcessingCard from "./components/DocumentProcessingCard";
 
+import DatabaseManagementCard from "./components/DatabaseManagementCard";
+
 import "./App.css";
 
 type DashboardTab = "analysis" | "database";
@@ -65,30 +67,37 @@ function App() {
   // LOAD MASTER DATA
   // ==================================================
 
-  useEffect(() => {
-    async function loadMasterData() {
-      setMasterDataLoading(true);
+  async function loadRepresentatives() {
+    setMasterDataLoading(true);
+    setError(null);
 
-      setError(null);
+    try {
+      const representativeData = await getRepresentatives();
 
-      try {
-        const representativeData = await getRepresentatives();
+      setRepresentatives(representativeData);
 
-        setRepresentatives(representativeData);
+      if (representativeData.length > 0) {
+        const stillExists = representativeData.some(
+          (rep) => rep.representative_id === representativeId,
+        );
 
-        if (representativeData.length > 0) {
+        if (!stillExists) {
           setRepresentativeId(representativeData[0].representative_id);
         }
-      } catch (err) {
-        console.error("Master data loading failed:", err);
-
-        setError(err instanceof Error ? err.message : "Failed to load master data");
-      } finally {
-        setMasterDataLoading(false);
+      } else {
+        setRepresentativeId("");
       }
-    }
+    } catch (err) {
+      console.error("Representative loading failed:", err);
 
-    loadMasterData();
+      setError(err instanceof Error ? err.message : "Failed to load representatives");
+    } finally {
+      setMasterDataLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadRepresentatives();
   }, []);
 
   // ==================================================
@@ -233,7 +242,10 @@ function App() {
         <button
           type="button"
           className={activeTab === "analysis" ? "dashboard-tab active" : "dashboard-tab"}
-          onClick={() => setActiveTab("analysis")}
+          onClick={() => {
+            setActiveTab("analysis");
+            loadRepresentatives();
+          }}
         >
           Analysis
         </button>
@@ -324,7 +336,6 @@ function App() {
               showDocumentProcessing ? "minus-state" : "plus-state"
             }`}
             onClick={() => setShowDocumentProcessing(!showDocumentProcessing)}
-            aria-label="Toggle document processing"
             title="Add Records"
           >
             <span className="folder-toggle-icon">
@@ -342,32 +353,7 @@ function App() {
           )}
 
           <div className="database-management-center">
-            <article className="admin-card database-management-card">
-              <div className="admin-card-icon">🗄️</div>
-
-              <div className="admin-card-content">
-                <h3>Database Management</h3>
-
-                <p>
-                  Review and maintain representatives, products, doctors, territories, assignments,
-                  targets, incentive rules and payout records.
-                </p>
-
-                <div className="admin-card-meta">
-                  <span>Representatives</span>
-                  <span>Doctors</span>
-                  <span>Products</span>
-                  <span>Territories</span>
-                  <span>Assignments</span>
-                  <span>Targets</span>
-                  <span>Payouts</span>
-                </div>
-
-                <button type="button" className="secondary-button">
-                  Manage Database
-                </button>
-              </div>
-            </article>
+            <DatabaseManagementCard />
           </div>
         </section>
       )}

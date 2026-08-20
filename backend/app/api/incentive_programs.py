@@ -8,39 +8,42 @@ from ..db.session import get_db
 from ..services.document_processing.validator import validate_status
 
 router = APIRouter(
-    prefix="/api/products",
-    tags=["Products"],
+    prefix="/api/incentive-programs",
+    tags=["Incentive Programs"],
 )
 
 
 @router.get("")
-async def get_products(
+async def get_incentive_programs(
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(text("""
             SELECT
-                product_id,
-                product_name,
-                product_category,
+                program_id,
+                program_name,
+                period_type,
+                effective_from,
+                effective_to,
+                minimum_sales_achievement,
+                maximum_payout_multiplier,
                 status,
                 created_at,
                 updated_at
-            FROM products
-            ORDER BY product_id
+            FROM incentive_programs
+            ORDER BY program_id
             """))
 
     return [dict(row._mapping) for row in result.fetchall()]
 
 
-@router.put("/{product_id}")
-async def update_product(
-    product_id: str,
+@router.put("/{program_id}")
+async def update_incentive_program(
+    program_id: str,
     payload: dict[str, Any] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
-
     status_errors = validate_status(
-        "products",
+        "incentive_programs",
         [payload],
     )
 
@@ -51,8 +54,12 @@ async def update_product(
         )
 
     allowed_fields = {
-        "product_name",
-        "product_category",
+        "program_name",
+        "period_type",
+        "effective_from",
+        "effective_to",
+        "minimum_sales_achievement",
+        "maximum_payout_multiplier",
         "status",
     }
 
@@ -66,45 +73,45 @@ async def update_product(
 
     existing = await db.execute(
         text("""
-            SELECT product_id
-            FROM products
-            WHERE product_id = :product_id
+            SELECT program_id
+            FROM incentive_programs
+            WHERE program_id = :program_id
             """),
-        {"product_id": product_id},
+        {"program_id": program_id},
     )
 
     if existing.first() is None:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Incentive program not found",
         )
 
     set_clause = ", ".join(f"{column} = :{column}" for column in update_values)
 
     await db.execute(
         text(f"""
-            UPDATE products
+            UPDATE incentive_programs
             SET
                 {set_clause},
                 updated_at = CURRENT_TIMESTAMP
-            WHERE product_id = :product_id
+            WHERE program_id = :program_id
             """),
         {
             **update_values,
-            "product_id": product_id,
+            "program_id": program_id,
         },
     )
 
     await db.commit()
 
     return {
-        "message": "Product updated successfully",
-        "product_id": product_id,
+        "message": "Incentive program updated successfully",
+        "program_id": program_id,
     }
 
 
 @router.delete("/bulk-delete")
-async def bulk_delete_products(
+async def bulk_delete_incentive_programs(
     payload: dict[str, list[str]] = Body(...),
     db: AsyncSession = Depends(get_db),
 ):
@@ -113,12 +120,12 @@ async def bulk_delete_products(
     if not ids:
         raise HTTPException(
             status_code=400,
-            detail="No product IDs supplied",
+            detail="No program IDs supplied",
         )
 
     query = text("""
-        DELETE FROM products
-        WHERE product_id IN :ids
+        DELETE FROM incentive_programs
+        WHERE program_id IN :ids
         """).bindparams(bindparam("ids", expanding=True))
 
     result = await db.execute(
@@ -129,34 +136,34 @@ async def bulk_delete_products(
     await db.commit()
 
     return {
-        "message": "Products deleted successfully",
+        "message": "Incentive programs deleted successfully",
         "deleted_count": result.rowcount,
         "deleted_ids": ids,
     }
 
 
-@router.delete("/{product_id}")
-async def delete_product(
-    product_id: str,
+@router.delete("/{program_id}")
+async def delete_incentive_program(
+    program_id: str,
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
         text("""
-            DELETE FROM products
-            WHERE product_id = :product_id
+            DELETE FROM incentive_programs
+            WHERE program_id = :program_id
             """),
-        {"product_id": product_id},
+        {"program_id": program_id},
     )
 
     if result.rowcount == 0:
         raise HTTPException(
             status_code=404,
-            detail="Product not found",
+            detail="Incentive program not found",
         )
 
     await db.commit()
 
     return {
-        "message": "Product deleted successfully",
-        "product_id": product_id,
+        "message": "Incentive program deleted successfully",
+        "program_id": program_id,
     }
