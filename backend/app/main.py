@@ -17,6 +17,7 @@ from .api.prescriptions import router as prescriptions_router
 from .api.sales_targets import router as sales_targets_router
 from .api.incentive_tiers import router as incentive_tiers_router
 from .api.product_incentive_rates import router as product_incentive_rates_router
+from .api.chat import router as chat_router
 
 app = FastAPI(
     title="Incentive Auditor API",
@@ -53,3 +54,4 @@ app.include_router(prescriptions_router)
 app.include_router(sales_targets_router)
 app.include_router(incentive_tiers_router)
 app.include_router(product_incentive_rates_router)
+app.include_router(chat_router)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { runInvestigation } from "./api/investigation";
 
@@ -21,6 +21,8 @@ import InvestigationCharts from "./components/InvestigationCharts";
 import DocumentProcessingCard from "./components/DocumentProcessingCard";
 
 import DatabaseManagementCard from "./components/DatabaseManagementCard";
+
+import AIChatAssistant from "./components/AIChatAssistant";
 
 import "./App.css";
 
@@ -63,12 +65,15 @@ function App() {
 
   const [showDocumentProcessing, setShowDocumentProcessing] = useState(false);
 
+  const [pendingChatRun, setPendingChatRun] = useState(false);
+
   // ==================================================
   // LOAD MASTER DATA
   // ==================================================
 
-  async function loadRepresentatives() {
+  async function loadRepresentatives(preferredId?: string) {
     setMasterDataLoading(true);
+    const currentId = preferredId ?? representativeId;
     setError(null);
 
     try {
@@ -77,9 +82,7 @@ function App() {
       setRepresentatives(representativeData);
 
       if (representativeData.length > 0) {
-        const stillExists = representativeData.some(
-          (rep) => rep.representative_id === representativeId,
-        );
+        const stillExists = representativeData.some((rep) => rep.representative_id === currentId);
 
         if (!stillExists) {
           setRepresentativeId(representativeData[0].representative_id);
@@ -97,14 +100,16 @@ function App() {
   }
 
   useEffect(() => {
-    loadRepresentatives();
-  }, []);
+    if (activeTab === "analysis") {
+      loadRepresentatives();
+    }
+  }, [activeTab]);
 
   // ==================================================
   // RUN INVESTIGATION
   // ==================================================
 
-  async function handleInvestigation() {
+  const handleInvestigation = useCallback(async () => {
     if (!representativeId || !startDate || !endDate) {
       setError("Please select representative and date range.");
 
@@ -152,7 +157,15 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [representativeId, startDate, endDate]);
+
+  useEffect(() => {
+    if (pendingChatRun && representativeId && startDate && endDate) {
+      setPendingChatRun(false);
+
+      handleInvestigation();
+    }
+  }, [pendingChatRun, representativeId, startDate, endDate, handleInvestigation]);
 
   // ==================================================
   // FINDINGS SAFE ACCESS
@@ -244,7 +257,6 @@ function App() {
           className={activeTab === "analysis" ? "dashboard-tab active" : "dashboard-tab"}
           onClick={() => {
             setActiveTab("analysis");
-            loadRepresentatives();
           }}
         >
           Analysis
@@ -357,6 +369,28 @@ function App() {
           </div>
         </section>
       )}
+
+      <AIChatAssistant
+        onInvestigationRequest={(representativeId, startDate, endDate) => {
+          setResult(null);
+
+          setError(null);
+
+          setRepresentativeId(representativeId);
+
+          setStartDate(startDate);
+
+          setEndDate(endDate);
+
+          setLoading(true);
+
+          setActiveTab("analysis");
+
+          loadRepresentatives(representativeId);
+
+          setPendingChatRun(true);
+        }}
+      />
     </main>
   );
 }
