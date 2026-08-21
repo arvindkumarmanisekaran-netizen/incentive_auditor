@@ -55,7 +55,7 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/chat/investigation", {
+      const response = await fetch("/api/chat/investigation", {
         method: "POST",
 
         headers: {

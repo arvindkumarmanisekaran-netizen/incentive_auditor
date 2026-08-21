@@ -62,7 +62,7 @@ interface SectionConfig {
   apiPath: string;
 }
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "";
 const sections: SectionConfig[] = [
   {
     id: "territories",
