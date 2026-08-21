@@ -254,6 +254,7 @@ async def process_document(
         table_name=table_name,
         records=canonical_records,
         required_columns=required_columns,
+        file_name=filename,
     )
 
     if not validation["valid"]:

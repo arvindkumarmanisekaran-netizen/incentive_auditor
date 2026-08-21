@@ -1,0 +1,93 @@
+[
+  {
+    "area code": "T029",
+    "territory name": "Vijayawada Zone 29",
+    "region": "South",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T025",
+    "territory name": "Tadipatri Zone 25",
+    "region": "West",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T018",
+    "territory name": "Nadiad Zone 18",
+    "region": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T035",
+    "territory name": "Madurai Zone 35",
+    "region": "East",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T031",
+    "territory name": "Alwar Zone 31",
+    "region": "East",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T036",
+    "territory name": "Deoghar Zone 36",
+    "region": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T026",
+    "territory name": "Gangtok Zone 26",
+    "region": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T039",
+    "territory name": "Proddatur Zone 39",
+    "region": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T034",
+    "territory name": "Bhagalpur Zone 34",
+    "region": "South",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T013",
+    "territory name": "Chennai Zone 13",
+    "region": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T007",
+    "territory name": "Tiruchirappalli Zone 7",
+    "region": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T017",
+    "territory name": "Kota Zone 17",
+    "region": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "area code": "T011",
+    "territory name": "Muzaffarnagar Zone 11",
+    "region": "West",
+    "country": "India",
+    "status": "Active"
+  }
+]

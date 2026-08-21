@@ -1,0 +1,66 @@
+[
+  {
+    "representative id": "FR0004",
+    "first name": "Nathaniel",
+    "surname": "Sami",
+    "territory code": "T024",
+    "date joined": "2024-03-27",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0017",
+    "first name": "Farhan",
+    "surname": "Chada",
+    "territory code": "T025",
+    "date joined": "2024-10-29",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0024",
+    "first name": "Siya",
+    "surname": "Dara",
+    "territory code": "T023",
+    "date joined": "2022-09-19",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0012",
+    "first name": "Chanchal",
+    "surname": "Tripathi",
+    "territory code": "T050",
+    "date joined": "2024-04-16",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0025",
+    "first name": "Devansh",
+    "surname": "Nigam",
+    "territory code": "T014",
+    "date joined": "2021-09-22",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0018",
+    "first name": "Ekapad",
+    "surname": "Walia",
+    "territory code": "T018",
+    "date joined": "2024-12-22",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0015",
+    "first name": "Isaac",
+    "surname": "Patil",
+    "territory code": "T015",
+    "date joined": "2025-06-20",
+    "status": "Active"
+  },
+  {
+    "representative id": "FR0013",
+    "first name": "Michael",
+    "surname": "Prakash",
+    "territory code": "T019",
+    "date joined": "2024-12-17",
+    "status": "Active"
+  }
+]

@@ -1,12 +1,23 @@
-import { API_BASE_URL } from "./config";
+import { API_BASE_URL } from "../config";
+
 async function fetchTable<T>(path: string): Promise<T[]> {
   const response = await fetch(`${API_BASE_URL}${path}`);
 
   if (!response.ok) {
-    throw new Error(`Failed to load ${path}`);
+    throw new Error(`Failed to fetch ${path}`);
   }
 
   return response.json();
+}
+
+export interface TerritoryRow {
+  territory_id: string;
+  territory_name: string;
+  region: string;
+  country: string;
+  status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface RepresentativeRow {
@@ -16,29 +27,27 @@ export interface RepresentativeRow {
   territory_id: string;
   joining_date: string;
   status: string;
-}
-
-export interface DoctorRow {
-  doctor_id: string;
-  doctor_name: string;
-  specialization?: string;
-  territory_id: string;
-  status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface ProductRow {
   product_id: string;
   product_name: string;
-  product_category?: string;
+  product_category?: string | null;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
-export interface TerritoryRow {
+export interface DoctorRow {
+  doctor_id: string;
+  doctor_name: string;
+  specialization?: string | null;
   territory_id: string;
-  territory_name: string;
-  region: string;
-  country: string;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface AssignmentRow {
@@ -48,31 +57,19 @@ export interface AssignmentRow {
   effective_from: string;
   effective_to?: string | null;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
-export interface ProgramRow {
-  program_id: string;
-  program_name: string;
-  period_type: string;
-  effective_from: string;
-  effective_to?: string | null;
-  minimum_sales_achievement: number;
-  maximum_payout_multiplier: number;
-  status: string;
-}
-
-export interface PayoutRow {
-  payout_id: string;
-  representative_id: string;
+export interface PrescriptionRow {
+  prescription_id: string;
+  prescription_date: string;
+  doctor_id: string;
   product_id: string;
-  program_id: string;
-  payout_month: string;
-  sales_target: number;
-  actual_sales: number;
-  expected_payout: number;
-  actual_payout: number;
-  payout_difference: number;
+  quantity: number;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface SaleRow {
@@ -84,84 +81,58 @@ export interface SaleRow {
   quantity: number;
   sales_amount: number;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
-export interface PrescriptionRow {
-  prescription_id: string;
-  prescription_date: string;
-  doctor_id: string;
-  product_id: string;
-  quantity: number;
-  status: string;
-}
-
-export interface SalesTargetRow {
-  target_id: string;
+export interface IncentivePayoutRow {
+  payout_id: string;
   representative_id: string;
   product_id: string;
-  target_month: string;
-  target_amount: number;
+  payout_month: string;
+  sales_target: number;
+  actual_sales: number;
+  sales_achievement: number;
+  base_incentive: number;
+  achievement_multiplier: number;
+  calculated_payout: number;
+  maximum_payout: number;
+  expected_payout: number;
+  actual_payout: number;
+  payout_difference: number;
   status: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
-export interface IncentiveTierRow {
-  tier_id: string;
-  program_id: string;
-  minimum_achievement: number;
-  maximum_achievement?: number | null;
-  payout_multiplier: number;
-}
-
-export interface ProductIncentiveRateRow {
-  rate_id: string;
-  program_id: string;
-  product_id: string;
-  incentive_rate: number;
-}
-
-export function getSalesTargets() {
-  return fetchTable<SalesTargetRow>("/api/sales-targets");
-}
-
-export function getIncentiveTiers() {
-  return fetchTable<IncentiveTierRow>("/api/incentive-tiers");
-}
-
-export function getProductIncentiveRates() {
-  return fetchTable<ProductIncentiveRateRow>("/api/product-incentive-rates");
-}
-
-export function getSales() {
-  return fetchTable<SaleRow>("/api/sales");
-}
-
-export function getPrescriptions() {
-  return fetchTable<PrescriptionRow>("/api/prescriptions");
-}
-export function getDatabaseRepresentatives() {
-  return fetchTable<RepresentativeRow>("/api/representatives");
-}
-
-export function getDoctors() {
-  return fetchTable<DoctorRow>("/api/doctors");
-}
-
-export function getProducts() {
-  return fetchTable<ProductRow>("/api/products");
-}
-
-export function getTerritories() {
+export async function getTerritories() {
   return fetchTable<TerritoryRow>("/api/territories");
 }
 
-export function getAssignments() {
+export async function getDatabaseRepresentatives() {
+  return fetchTable<RepresentativeRow>("/api/representatives");
+}
+
+export async function getProducts() {
+  return fetchTable<ProductRow>("/api/products");
+}
+
+export async function getDoctors() {
+  return fetchTable<DoctorRow>("/api/doctors");
+}
+
+export async function getAssignments() {
   return fetchTable<AssignmentRow>("/api/assignments");
 }
 
-export function getPrograms() {
-  return fetchTable<ProgramRow>("/api/incentive-programs");
+export async function getPrescriptions() {
+  return fetchTable<PrescriptionRow>("/api/prescriptions");
 }
 
-export function getPayouts() {
-  return fetchTable<PayoutRow>("/api/incentive-payouts");
+export async function getSales() {
+  return fetchTable<SaleRow>("/api/sales");
+}
+
+export async function getPayouts() {
+  return fetchTable<IncentivePayoutRow>("/api/incentive-payouts");
 }

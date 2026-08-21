@@ -1,0 +1,50 @@
+[
+  {
+    "medicine id": "P007",
+    "product name": "EaqueCare 7",
+    "category": "Gastroenterology",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P011",
+    "product name": "NonCare 11",
+    "category": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P019",
+    "product name": "TeneturCare 19",
+    "category": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P026",
+    "product name": "EarumCare 26",
+    "category": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P021",
+    "product name": "AssumendaCare 21",
+    "category": "Pain Management",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P005",
+    "product name": "PariaturCare 5",
+    "category": "Antibiotic",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P001",
+    "product name": "RemCare 1",
+    "category": "Diabetes",
+    "status": "Active"
+  },
+  {
+    "medicine id": "P018",
+    "product name": "UllamCare 18",
+    "category": "Dermatology",
+    "status": "Active"
+  }
+]

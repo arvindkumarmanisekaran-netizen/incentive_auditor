@@ -1,0 +1,527 @@
+[
+  {
+    "dr id": "D000159",
+    "physician": "Dr Zayyan Sridhar",
+    "specialization": "Pulmonology",
+    "territory code": "T026",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000292",
+    "physician": "Dr Siya Thakur",
+    "specialization": "Gastroenterology",
+    "territory code": "T001",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000231",
+    "physician": "Dr Daksh Memon",
+    "specialization": "Pulmonology",
+    "territory code": "T022",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000261",
+    "physician": "Dr Jatin Sha",
+    "specialization": "Neurology",
+    "territory code": "T021",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000138",
+    "physician": "Dr Advaith Varughese",
+    "specialization": "Diabetology",
+    "territory code": "T028",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000179",
+    "physician": "Dr Jeet Sidhu",
+    "specialization": "Dermatology",
+    "territory code": "T047",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000064",
+    "physician": "Dr Charita Tripathi",
+    "specialization": "Neurology",
+    "territory code": "T007",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000013",
+    "physician": "Dr Vansha Thakkar",
+    "specialization": "Dermatology",
+    "territory code": "T044",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000252",
+    "physician": "Dr Gautam Merchant",
+    "specialization": "Gastroenterology",
+    "territory code": "T043",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000069",
+    "physician": "Dr Daksha Mangat",
+    "specialization": "Neurology",
+    "territory code": "T030",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000250",
+    "physician": "Dr Balveer More",
+    "specialization": "Cardiology",
+    "territory code": "T032",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000140",
+    "physician": "Dr Vrinda Khosla",
+    "specialization": "Cardiology",
+    "territory code": "T024",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000039",
+    "physician": "Dr Kala Divan",
+    "specialization": "Pulmonology",
+    "territory code": "T026",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000289",
+    "physician": "Dr Jonathan Sama",
+    "specialization": "Gastroenterology",
+    "territory code": "T023",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000297",
+    "physician": "Dr Ethan Buch",
+    "specialization": "Diabetology",
+    "territory code": "T028",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000216",
+    "physician": "Dr Vivaan Roy",
+    "specialization": "Orthopedics",
+    "territory code": "T008",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000113",
+    "physician": "Dr Inaya Kapur",
+    "specialization": "Dermatology",
+    "territory code": "T035",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000285",
+    "physician": "Dr Owen Choudhary",
+    "specialization": "Neurology",
+    "territory code": "T005",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000266",
+    "physician": "Dr Nilima Dada",
+    "specialization": "Cardiology",
+    "territory code": "T031",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000007",
+    "physician": "Dr Nitesh Raghavan",
+    "specialization": "General Medicine",
+    "territory code": "T039",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000042",
+    "physician": "Dr Shivansh Krish",
+    "specialization": "General Medicine",
+    "territory code": "T015",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000127",
+    "physician": "Dr Hitesh Sant",
+    "specialization": "Cardiology",
+    "territory code": "T018",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000133",
+    "physician": "Dr Yagnesh Shetty",
+    "specialization": "Cardiology",
+    "territory code": "T036",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000082",
+    "physician": "Dr Zarna Shetty",
+    "specialization": "Neurology",
+    "territory code": "T010",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000207",
+    "physician": "Dr Tanmayi Dhillon",
+    "specialization": "Gastroenterology",
+    "territory code": "T046",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000001",
+    "physician": "Dr Qadim Mallick",
+    "specialization": "Diabetology",
+    "territory code": "T015",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000192",
+    "physician": "Dr Suhani Chakrabarti",
+    "specialization": "Pulmonology",
+    "territory code": "T038",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000211",
+    "physician": "Dr Aarnav Mandal",
+    "specialization": "General Medicine",
+    "territory code": "T049",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000148",
+    "physician": "Dr Reyansh Mutti",
+    "specialization": "Diabetology",
+    "territory code": "T002",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000282",
+    "physician": "Dr Tarak Kaul",
+    "specialization": "Cardiology",
+    "territory code": "T038",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000105",
+    "physician": "Dr Avi Ramesh",
+    "specialization": "Orthopedics",
+    "territory code": "T001",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000137",
+    "physician": "Dr Harini Mammen",
+    "specialization": "Diabetology",
+    "territory code": "T024",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000182",
+    "physician": "Dr Rachana Naidu",
+    "specialization": "Gastroenterology",
+    "territory code": "T021",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000058",
+    "physician": "Dr Dipta Sarin",
+    "specialization": "Gastroenterology",
+    "territory code": "T023",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000224",
+    "physician": "Dr Mitali Buch",
+    "specialization": "Neurology",
+    "territory code": "T049",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000074",
+    "physician": "Dr Girik Keer",
+    "specialization": "Gastroenterology",
+    "territory code": "T011",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000174",
+    "physician": "Dr Vivaan Lalla",
+    "specialization": "Neurology",
+    "territory code": "T001",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000295",
+    "physician": "Dr Varenya Ratti",
+    "specialization": "Orthopedics",
+    "territory code": "T041",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000255",
+    "physician": "Dr Yachana Mahajan",
+    "specialization": "Cardiology",
+    "territory code": "T040",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000198",
+    "physician": "Dr Samar Loke",
+    "specialization": "Pulmonology",
+    "territory code": "T019",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000236",
+    "physician": "Dr Widisha Dhar",
+    "specialization": "Neurology",
+    "territory code": "T046",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000181",
+    "physician": "Dr Raksha Buch",
+    "specialization": "Gastroenterology",
+    "territory code": "T043",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000268",
+    "physician": "Dr Waida D’Alia",
+    "specialization": "Neurology",
+    "territory code": "T023",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000270",
+    "physician": "Dr Lipika Setty",
+    "specialization": "Cardiology",
+    "territory code": "T050",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000056",
+    "physician": "Dr Pranav Lanka",
+    "specialization": "General Medicine",
+    "territory code": "T007",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000239",
+    "physician": "Dr Bhavna Dugar",
+    "specialization": "Orthopedics",
+    "territory code": "T035",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000155",
+    "physician": "Dr Brinda Date",
+    "specialization": "Orthopedics",
+    "territory code": "T013",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000136",
+    "physician": "Dr Simon Pant",
+    "specialization": "Cardiology",
+    "territory code": "T035",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000208",
+    "physician": "Dr Rayaan Trivedi",
+    "specialization": "Gastroenterology",
+    "territory code": "T032",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000160",
+    "physician": "Dr Dhruv Rattan",
+    "specialization": "General Medicine",
+    "territory code": "T018",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000038",
+    "physician": "Dr Faqid Dixit",
+    "specialization": "Dermatology",
+    "territory code": "T046",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000019",
+    "physician": "Dr Advika Jayaraman",
+    "specialization": "Diabetology",
+    "territory code": "T033",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000230",
+    "physician": "Dr Ayush Batra",
+    "specialization": "Dermatology",
+    "territory code": "T016",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000123",
+    "physician": "Dr Charvi Dara",
+    "specialization": "Dermatology",
+    "territory code": "T014",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000118",
+    "physician": "Dr Aahana Pillay",
+    "specialization": "General Medicine",
+    "territory code": "T008",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000222",
+    "physician": "Dr Nimrat Dubey",
+    "specialization": "Orthopedics",
+    "territory code": "T011",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000158",
+    "physician": "Dr Harini Gour",
+    "specialization": "Neurology",
+    "territory code": "T002",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000028",
+    "physician": "Dr Abhiram Mistry",
+    "specialization": "Pulmonology",
+    "territory code": "T008",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000200",
+    "physician": "Dr Jairaj Balakrishnan",
+    "specialization": "Dermatology",
+    "territory code": "T044",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000191",
+    "physician": "Dr Bhavya Rattan",
+    "specialization": "Gastroenterology",
+    "territory code": "T014",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000293",
+    "physician": "Dr Caleb Verma",
+    "specialization": "General Medicine",
+    "territory code": "T032",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000045",
+    "physician": "Dr Nitara Bakshi",
+    "specialization": "Neurology",
+    "territory code": "T038",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000061",
+    "physician": "Dr Zinal Yohannan",
+    "specialization": "General Medicine",
+    "territory code": "T044",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000004",
+    "physician": "Dr Girik Khalsa",
+    "specialization": "Diabetology",
+    "territory code": "T008",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000090",
+    "physician": "Dr Faras Mangal",
+    "specialization": "General Medicine",
+    "territory code": "T012",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000281",
+    "physician": "Dr Samesh Biswas",
+    "specialization": "General Medicine",
+    "territory code": "T020",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000120",
+    "physician": "Dr Hritik Bal",
+    "specialization": "Dermatology",
+    "territory code": "T018",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000106",
+    "physician": "Dr Fiyaz Sangha",
+    "specialization": "General Medicine",
+    "territory code": "T040",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000026",
+    "physician": "Dr Yash Pingle",
+    "specialization": "Pulmonology",
+    "territory code": "T039",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000233",
+    "physician": "Dr Yash Wali",
+    "specialization": "Diabetology",
+    "territory code": "T009",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000204",
+    "physician": "Dr Mitesh Tara",
+    "specialization": "General Medicine",
+    "territory code": "T031",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000189",
+    "physician": "Dr Ekani Cheema",
+    "specialization": "Cardiology",
+    "territory code": "T026",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000291",
+    "physician": "Dr Janaki Varghese",
+    "specialization": "Pulmonology",
+    "territory code": "T005",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000017",
+    "physician": "Dr Yatin Baral",
+    "specialization": "Cardiology",
+    "territory code": "T030",
+    "status": "Active"
+  },
+  {
+    "dr id": "D000051",
+    "physician": "Dr Udant Bajwa",
+    "specialization": "Orthopedics",
+    "territory code": "T018",
+    "status": "Active"
+  }
+]

@@ -1,31 +1,24 @@
+import { API_BASE_URL } from "../config";
+
+import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   getDatabaseRepresentatives,
   getDoctors,
   getProducts,
   getTerritories,
   getAssignments,
-  getPrograms,
   getPayouts,
   getSales,
   getPrescriptions,
-  getSalesTargets,
-  getIncentiveTiers,
-  getProductIncentiveRates,
   type RepresentativeRow,
   type DoctorRow,
   type ProductRow,
   type TerritoryRow,
   type AssignmentRow,
-  type ProgramRow,
-  type PayoutRow,
   type SaleRow,
   type PrescriptionRow,
-  type SalesTargetRow,
-  type IncentiveTierRow,
-  type ProductIncentiveRateRow,
+  type IncentivePayoutRow,
 } from "../api/databaseManagement";
-
-import { Fragment, useEffect, useMemo, useState } from "react";
 
 type Section =
   | "territories"
@@ -35,25 +28,17 @@ type Section =
   | "assignments"
   | "prescriptions"
   | "sales"
-  | "salesTargets"
-  | "programs"
-  | "tiers"
-  | "productRates"
   | "payouts";
 
 type RowData =
-  | RepresentativeRow
-  | DoctorRow
-  | ProductRow
   | TerritoryRow
+  | RepresentativeRow
+  | ProductRow
+  | DoctorRow
   | AssignmentRow
-  | ProgramRow
-  | PayoutRow
-  | SaleRow
   | PrescriptionRow
-  | SalesTargetRow
-  | IncentiveTierRow
-  | ProductIncentiveRateRow;
+  | SaleRow
+  | IncentivePayoutRow;
 
 interface SectionConfig {
   id: Section;
@@ -62,8 +47,7 @@ interface SectionConfig {
   apiPath: string;
 }
 
-const API_BASE_URL = "";
-const sections: SectionConfig[] = [
+const SECTIONS: SectionConfig[] = [
   {
     id: "territories",
     title: "Territories",
@@ -90,7 +74,7 @@ const sections: SectionConfig[] = [
   },
   {
     id: "assignments",
-    title: "Doctor Assignments",
+    title: "Assignments",
     primaryKey: "assignment_id",
     apiPath: "/api/assignments",
   },
@@ -107,30 +91,6 @@ const sections: SectionConfig[] = [
     apiPath: "/api/sales",
   },
   {
-    id: "salesTargets",
-    title: "Sales Targets",
-    primaryKey: "target_id",
-    apiPath: "/api/sales-targets",
-  },
-  {
-    id: "programs",
-    title: "Incentive Programs",
-    primaryKey: "program_id",
-    apiPath: "/api/incentive-programs",
-  },
-  {
-    id: "tiers",
-    title: "Incentive Tiers",
-    primaryKey: "tier_id",
-    apiPath: "/api/incentive-tiers",
-  },
-  {
-    id: "productRates",
-    title: "Product Incentive Rates",
-    primaryKey: "rate_id",
-    apiPath: "/api/product-incentive-rates",
-  },
-  {
     id: "payouts",
     title: "Incentive Payouts",
     primaryKey: "payout_id",
@@ -140,23 +100,12 @@ const sections: SectionConfig[] = [
 
 const STATUS_OPTIONS: Partial<Record<Section, string[]>> = {
   territories: ["Active", "Inactive"],
-
   representatives: ["Active", "Inactive"],
-
   doctors: ["Active", "Inactive"],
-
   products: ["Active", "Inactive"],
-
   assignments: ["Active", "Inactive", "Cancelled"],
-
   sales: ["Valid", "Cancelled", "Returned", "Adjusted"],
-
   prescriptions: ["Valid", "Cancelled", "Reversed"],
-
-  salesTargets: ["Active", "Inactive"],
-
-  programs: ["Active", "Inactive"],
-
   payouts: ["Pending", "Paid", "Adjusted"],
 };
 
@@ -180,7 +129,7 @@ export default function DatabaseManagementCard() {
   const [editValues, setEditValues] = useState<Record<string, unknown>>({});
 
   const activeConfig = useMemo(
-    () => sections.find((section) => section.id === activeSection)!,
+    () => SECTIONS.find((section) => section.id === activeSection)!,
     [activeSection],
   );
 
@@ -193,6 +142,8 @@ export default function DatabaseManagementCard() {
     setError(null);
     setSelectedIds([]);
     setEditingRow(null);
+    setEditValues({});
+    setEditError(null);
 
     try {
       let data: RowData[] = [];
@@ -226,22 +177,6 @@ export default function DatabaseManagementCard() {
           data = await getSales();
           break;
 
-        case "programs":
-          data = await getPrograms();
-          break;
-
-        case "salesTargets":
-          data = await getSalesTargets();
-          break;
-
-        case "tiers":
-          data = await getIncentiveTiers();
-          break;
-
-        case "productRates":
-          data = await getProductIncentiveRates();
-          break;
-
         case "payouts":
           data = await getPayouts();
           break;
@@ -249,7 +184,7 @@ export default function DatabaseManagementCard() {
 
       setRows(data);
     } catch (err) {
-      console.error(err);
+      console.error("Load table failed:", err);
 
       setError(err instanceof Error ? err.message : "Unable to load database records");
     } finally {
@@ -265,6 +200,7 @@ export default function DatabaseManagementCard() {
   function getRowId(row: RowData) {
     return String(getCellValue(row, activeConfig.primaryKey) ?? "");
   }
+
   function toggleRow(row: RowData) {
     const id = getRowId(row);
 
@@ -274,12 +210,12 @@ export default function DatabaseManagementCard() {
   }
 
   function toggleSelectAll() {
-    if (selectedIds.length === rows.length) {
+    if (rows.length > 0 && selectedIds.length === rows.length) {
       setSelectedIds([]);
       return;
     }
 
-    setSelectedIds(rows.map((row) => getRowId(row)));
+    setSelectedIds(rows.map((row) => getRowId(row)).filter((id) => id !== ""));
   }
 
   async function deleteSingle(row: RowData) {
@@ -308,10 +244,8 @@ export default function DatabaseManagementCard() {
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
 
-        throw new Error(errorData?.detail ?? "Failed to delete record");
+        throw new Error(getErrorMessage(errorData, "Failed to delete record"));
       }
-
-      setSelectedIds((current) => current.filter((selectedId) => selectedId !== id));
 
       if (editingRow && getRowId(editingRow) === id) {
         cancelEdit();
@@ -337,6 +271,8 @@ export default function DatabaseManagementCard() {
     }
 
     try {
+      setError(null);
+
       const response = await fetch(`${API_BASE_URL}${activeConfig.apiPath}/bulk-delete`, {
         method: "DELETE",
         headers: {
@@ -348,13 +284,17 @@ export default function DatabaseManagementCard() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete selected records");
+        const errorData = await response.json().catch(() => null);
+
+        throw new Error(getErrorMessage(errorData, "Failed to delete selected records"));
       }
 
       setSelectedIds([]);
 
       await loadTable(activeSection);
     } catch (err) {
+      console.error("Bulk delete failed:", err);
+
       setError(err instanceof Error ? err.message : "Bulk delete failed");
     }
   }
@@ -387,10 +327,15 @@ export default function DatabaseManagementCard() {
 
     const id = getRowId(editingRow);
 
+    if (!id) {
+      setEditError("Unable to determine record ID.");
+      return;
+    }
+
     try {
       setEditError(null);
 
-      const payload = {
+      const payload: Record<string, unknown> = {
         ...editValues,
       };
 
@@ -410,22 +355,10 @@ export default function DatabaseManagementCard() {
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
 
-        const detail = errorData?.detail;
-
-        if (typeof detail === "string") {
-          throw new Error(detail);
-        }
-
-        if (detail?.message) {
-          throw new Error(detail.message);
-        }
-
-        throw new Error("Failed to update record");
+        throw new Error(getErrorMessage(errorData, "Failed to update record"));
       }
 
-      setEditingRow(null);
-      setEditValues({});
-      setEditError(null);
+      cancelEdit();
 
       await loadTable(activeSection);
     } catch (err) {
@@ -443,7 +376,7 @@ export default function DatabaseManagementCard() {
         <h3>Database Management</h3>
 
         <div className="database-sections">
-          {sections.map((section) => (
+          {SECTIONS.map((section) => (
             <button
               key={section.id}
               type="button"
@@ -502,6 +435,7 @@ export default function DatabaseManagementCard() {
                 <tbody>
                   {rows.map((row) => {
                     const id = getRowId(row);
+
                     const isEditing = editingRow !== null && getRowId(editingRow) === id;
 
                     return (
@@ -595,10 +529,7 @@ export default function DatabaseManagementCard() {
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
-                                              [column]:
-                                                getInputType(column) === "number"
-                                                  ? event.target.value
-                                                  : event.target.value,
+                                              [column]: event.target.value,
                                             }))
                                           }
                                         />
@@ -606,9 +537,11 @@ export default function DatabaseManagementCard() {
                                     </label>
                                   ))}
                                 </div>
+
                                 {editError && (
                                   <div className="database-edit-error">{editError}</div>
                                 )}
+
                                 <div className="database-edit-actions">
                                   <button
                                     type="button"
@@ -666,20 +599,12 @@ function getInputType(column: string) {
     "effective_to",
     "sale_date",
     "prescription_date",
-    "target_month",
     "payout_month",
   ]);
 
   const numberColumns = new Set([
     "quantity",
     "sales_amount",
-    "target_amount",
-    "minimum_sales_achievement",
-    "maximum_payout_multiplier",
-    "minimum_achievement",
-    "maximum_achievement",
-    "payout_multiplier",
-    "incentive_rate",
     "sales_target",
     "actual_sales",
     "sales_achievement",
@@ -713,4 +638,28 @@ function getInputStep(column: string) {
   }
 
   return undefined;
+}
+
+function getErrorMessage(errorData: unknown, fallback: string) {
+  if (!errorData || typeof errorData !== "object") {
+    return fallback;
+  }
+
+  const data = errorData as {
+    detail?:
+      | string
+      | {
+          message?: string;
+        };
+  };
+
+  if (typeof data.detail === "string") {
+    return data.detail;
+  }
+
+  if (typeof data.detail === "object" && data.detail?.message) {
+    return data.detail.message;
+  }
+
+  return fallback;
 }

@@ -2,53 +2,130 @@ from __future__ import annotations
 
 import csv
 import json
-
+import random
 from pathlib import Path
 from typing import Any
 
 from docx import Document
 from openpyxl import Workbook
 
-# ======================================================
-# Folder helper
-# ======================================================
+SEED = 42
+
+FORMATS = [
+    "csv",
+    "json",
+    "xlsx",
+    "docx",
+]
 
 
-def ensure_folder(
-    base_dir: Path,
-    relative_path: str,
-) -> Path:
+def export_structured_data(
+    documents: dict[str, list[dict[str, Any]]],
+    output_dir: Path,
+) -> None:
 
-    folder = base_dir / relative_path
-
-    folder.mkdir(
+    output_dir.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    return folder
+    rng = random.Random(SEED)
+
+    for document_name, records in documents.items():
+
+        if not records:
+            continue
+
+        shuffled_records = [dict(record) for record in records]
+
+        rng.shuffle(shuffled_records)
+
+        format_records = split_records(
+            shuffled_records,
+            len(FORMATS),
+        )
+
+        base_name = Path(document_name).stem
+
+        for file_format, rows in zip(
+            FORMATS,
+            format_records,
+        ):
+
+            if not rows:
+                continue
+
+            filename = f"{base_name}.{file_format}"
+
+            output_path = output_dir / filename
+
+            if file_format == "csv":
+                export_csv(
+                    rows,
+                    output_path,
+                )
+
+            elif file_format == "json":
+                export_json(
+                    rows,
+                    output_path,
+                )
+
+            elif file_format == "xlsx":
+                export_xlsx(
+                    rows,
+                    output_path,
+                )
+
+            elif file_format == "docx":
+                export_docx(
+                    rows,
+                    output_path,
+                )
+
+            print(f"  {filename:40} " f"{len(rows):,} records")
 
 
-# ======================================================
-# File writers
-# ======================================================
-def write_csv(
+# ============================================================
+# SPLIT DATA
+# ============================================================
+
+
+def split_records(
     records: list[dict[str, Any]],
-    output_path: Path,
+    parts: int,
+) -> list[list[dict[str, Any]]]:
+
+    result: list[list[dict[str, Any]]] = [[] for _ in range(parts)]
+
+    # Round-robin distribution ensures different records
+    # go into each format while keeping sizes balanced.
+    for index, record in enumerate(records):
+
+        result[index % parts].append(record)
+
+    return result
+
+
+# ============================================================
+# CSV
+# ============================================================
+
+
+def export_csv(
+    records: list[dict[str, Any]],
+    path: Path,
 ) -> None:
 
     if not records:
         return
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
+    columns = collect_columns(
+        records,
     )
 
-    fieldnames = list(records[0].keys())
-
     with open(
-        output_path,
+        path,
         "w",
         newline="",
         encoding="utf-8",
@@ -56,28 +133,34 @@ def write_csv(
 
         writer = csv.DictWriter(
             file,
-            fieldnames=fieldnames,
+            fieldnames=columns,
+            extrasaction="ignore",
         )
 
         writer.writeheader()
 
         for record in records:
 
-            writer.writerow({key: record.get(key) for key in fieldnames})
+            writer.writerow(
+                normalize_record(
+                    record,
+                    columns,
+                )
+            )
 
 
-def write_json(
+# ============================================================
+# JSON
+# ============================================================
+
+
+def export_json(
     records: list[dict[str, Any]],
-    output_path: Path,
+    path: Path,
 ) -> None:
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
     with open(
-        output_path,
+        path,
         "w",
         encoding="utf-8",
     ) as file:
@@ -87,222 +170,185 @@ def write_json(
             file,
             indent=2,
             ensure_ascii=False,
+            default=str,
         )
 
 
-def write_xlsx(
+# ============================================================
+# XLSX
+# ============================================================
+
+
+def export_xlsx(
     records: list[dict[str, Any]],
-    output_path: Path,
-    sheet_name: str,
+    path: Path,
 ) -> None:
 
     if not records:
         return
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
+    columns = collect_columns(
+        records,
     )
 
     workbook = Workbook()
 
-    sheet = workbook.active
-    sheet.title = sheet_name[:31]
+    worksheet = workbook.active
 
-    headers = list(records[0].keys())
+    worksheet.title = "Data"
 
-    sheet.append(headers)
+    worksheet.append(columns)
 
     for record in records:
 
-        sheet.append([excel_value(record.get(header)) for header in headers])
+        normalized = normalize_record(
+            record,
+            columns,
+        )
 
-    workbook.save(output_path)
+        worksheet.append([normalize_cell_value(normalized[column]) for column in columns])
+
+    workbook.save(path)
 
 
-def write_docx(
+# ============================================================
+# DOCX
+# ============================================================
+
+
+def export_docx(
     records: list[dict[str, Any]],
-    output_path: Path,
+    path: Path,
 ) -> None:
 
     if not records:
         return
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
+    columns = collect_columns(
+        records,
     )
 
     document = Document()
 
-    headers = list(records[0].keys())
+    document.add_heading(
+        "Structured Data Export",
+        level=1,
+    )
+
+    document.add_paragraph(f"Total records: {len(records)}")
 
     table = document.add_table(
         rows=1,
-        cols=len(headers),
+        cols=len(columns),
     )
 
-    for index, header in enumerate(headers):
+    table.style = "Table Grid"
 
-        table.rows[0].cells[index].text = str(header)
+    header_cells = table.rows[0].cells
+
+    for index, column in enumerate(columns):
+
+        header_cells[index].text = str(column)
 
     for record in records:
 
-        row = table.add_row()
+        normalized = normalize_record(
+            record,
+            columns,
+        )
 
-        for index, header in enumerate(headers):
+        row_cells = table.add_row().cells
 
-            row.cells[index].text = str(
-                record.get(
-                    header,
-                    "",
-                )
-            )
+        for index, column in enumerate(columns):
 
-    document.save(output_path)
+            value = normalized.get(column)
 
+            row_cells[index].text = format_docx_value(value)
 
-# ======================================================
-# Format exporters
-# ======================================================
+    document.save(path)
 
 
-def export_csv(
-    table: str,
+# ============================================================
+# HELPERS
+# ============================================================
+
+
+def collect_columns(
     records: list[dict[str, Any]],
-    output_dir: Path,
-):
+) -> list[str]:
 
-    folder = ensure_folder(
-        output_dir,
-        table,
-    )
+    columns: list[str] = []
 
-    write_csv(
-        records,
-        folder / f"{table}.csv",
-    )
+    seen: set[str] = set()
 
+    for record in records:
 
-def export_json(
-    table: str,
-    records: list[dict[str, Any]],
-    output_dir: Path,
-):
+        for key in record.keys():
 
-    folder = ensure_folder(
-        output_dir,
-        table,
-    )
+            if key not in seen:
 
-    write_json(
-        records,
-        folder / f"{table}.json",
-    )
+                seen.add(key)
+
+                columns.append(key)
+
+    return columns
 
 
-def excel_value(value):
+def normalize_record(
+    record: dict[str, Any],
+    columns: list[str],
+) -> dict[str, Any]:
 
-    if isinstance(value, list):
-        return ",".join(str(item) for item in value)
+    return {column: record.get(column) for column in columns}
 
-    if isinstance(value, dict):
-        return ",".join(f"{key}:{val}" for key, val in value.items())
+
+def normalize_cell_value(
+    value: Any,
+) -> Any:
+
+    if value is None:
+        return ""
+
+    if isinstance(
+        value,
+        (
+            dict,
+            list,
+            tuple,
+            set,
+        ),
+    ):
+
+        return json.dumps(
+            value,
+            ensure_ascii=False,
+            default=str,
+        )
 
     return value
 
 
-def export_xlsx(
-    table: str,
-    records: list[dict[str, Any]],
-    output_dir: Path,
-):
+def format_docx_value(
+    value: Any,
+) -> str:
 
-    folder = ensure_folder(
-        output_dir,
-        table,
-    )
+    if value is None:
+        return ""
 
-    write_xlsx(
-        records,
-        folder / f"{table}.xlsx",
-        table.title(),
-    )
+    if isinstance(
+        value,
+        (
+            dict,
+            list,
+            tuple,
+            set,
+        ),
+    ):
 
-
-def export_docx(
-    table: str,
-    records: list[dict[str, Any]],
-    output_dir: Path,
-):
-
-    folder = ensure_folder(
-        output_dir,
-        table,
-    )
-
-    write_docx(
-        records,
-        folder / f"{table}.docx",
-    )
-
-
-# ======================================================
-# Main exporter
-# ======================================================
-
-
-def export_structured_data(
-    documents: dict[str, list[dict[str, Any]]],
-    output_dir: Path,
-):
-
-    output_dir.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    for document_name, records in documents.items():
-
-        table, extension = document_name.rsplit(
-            ".",
-            1,
+        return json.dumps(
+            value,
+            ensure_ascii=False,
+            default=str,
         )
 
-        extension = extension.lower()
-
-        if extension == "csv":
-
-            export_csv(
-                table,
-                records,
-                output_dir,
-            )
-
-        elif extension == "xlsx":
-
-            export_xlsx(
-                table,
-                records,
-                output_dir,
-            )
-
-        elif extension == "json":
-
-            export_json(
-                table,
-                records,
-                output_dir,
-            )
-
-        elif extension == "docx":
-
-            export_docx(
-                table,
-                records,
-                output_dir,
-            )
-
-        else:
-
-            print(f"Skipping unsupported format: {extension}")
+    return str(value)

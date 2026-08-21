@@ -69,49 +69,9 @@
     "duplicate_keys": ["assignment_id"]
   },
 
-  "target_sheet": {
-    "table": "sales_targets",
-    "required_columns": ["representative_id", "product_id", "target_month", "target_amount"],
-    "optional_columns": ["target_id", "status"],
-    "duplicate_keys": ["representative_id", "product_id", "target_month"]
-  },
-
-  "incentive_program": {
-    "table": "incentive_programs",
-    "required_columns": ["program_id", "program_name", "effective_from"],
-    "optional_columns": [
-      "period_type",
-      "effective_to",
-      "minimum_sales_achievement",
-      "maximum_payout_multiplier",
-      "status"
-    ],
-    "duplicate_keys": ["program_id"]
-  },
-
-  "incentive_tier": {
-    "table": "incentive_tiers",
-    "required_columns": ["tier_id", "program_id", "minimum_achievement", "payout_multiplier"],
-    "optional_columns": ["maximum_achievement"],
-    "duplicate_keys": ["tier_id"]
-  },
-
-  "product_incentive_rate": {
-    "table": "product_incentive_rates",
-    "required_columns": ["program_id", "product_id", "incentive_rate"],
-    "optional_columns": ["rate_id"],
-    "duplicate_keys": ["program_id", "product_id"]
-  },
-
   "payout_statement": {
     "table": "incentive_payouts",
-    "required_columns": [
-      "representative_id",
-      "product_id",
-      "program_id",
-      "payout_month",
-      "actual_payout"
-    ],
+    "required_columns": ["representative_id", "product_id", "payout_month", "actual_payout"],
     "optional_columns": [
       "payout_id",
       "sales_target",
@@ -125,6 +85,6 @@
       "payout_difference",
       "status"
     ],
-    "duplicate_keys": ["representative_id", "product_id", "program_id", "payout_month"]
+    "duplicate_keys": ["representative_id", "product_id", "payout_month"]
   }
 }

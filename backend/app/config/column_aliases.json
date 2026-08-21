@@ -1,31 +1,10 @@
 {
   "territories": {
-    "territory_id": [
-      "territory id",
-      "territory code",
-      "territory_code",
-      "area id",
-      "area code"
-    ],
-    "territory_name": [
-      "territory name",
-      "territory",
-      "area name"
-    ],
-    "region": [
-      "region",
-      "region name",
-      "zone"
-    ],
-    "country": [
-      "country",
-      "country name"
-    ],
-    "status": [
-      "status",
-      "record status",
-      "active status"
-    ]
+    "territory_id": ["territory id", "territory code", "territory_code", "area id", "area code"],
+    "territory_name": ["territory name", "territory", "area name"],
+    "region": ["region", "region name", "zone"],
+    "country": ["country", "country name"],
+    "status": ["status", "record status", "active status"]
   },
 
   "representatives": {
@@ -37,32 +16,11 @@
       "field rep id",
       "employee id"
     ],
-    "first_name": [
-      "first name",
-      "firstname",
-      "given name"
-    ],
-    "last_name": [
-      "last name",
-      "lastname",
-      "surname"
-    ],
-    "territory_id": [
-      "territory id",
-      "territory code",
-      "area code"
-    ],
-    "joining_date": [
-      "joining date",
-      "join date",
-      "date joined",
-      "start date"
-    ],
-    "status": [
-      "status",
-      "employee status",
-      "active status"
-    ]
+    "first_name": ["first name", "firstname", "given name"],
+    "last_name": ["last name", "lastname", "surname"],
+    "territory_id": ["territory id", "territory code", "area code"],
+    "joining_date": ["joining date", "join date", "date joined", "start date"],
+    "status": ["status", "employee status", "active status"]
   },
 
   "products": {
@@ -75,56 +33,17 @@
       "medicine code",
       "sku"
     ],
-    "product_name": [
-      "product name",
-      "drug name",
-      "medicine name",
-      "item name"
-    ],
-    "product_category": [
-      "product category",
-      "category",
-      "therapy area",
-      "therapeutic area"
-    ],
-    "status": [
-      "status",
-      "product status"
-    ]
+    "product_name": ["product name", "drug name", "medicine name", "item name"],
+    "product_category": ["product category", "category", "therapy area", "therapeutic area"],
+    "status": ["status", "product status"]
   },
 
   "doctors": {
-    "doctor_id": [
-      "doctor id",
-      "doctor code",
-      "dr id",
-      "dr code",
-      "physician id",
-      "physician code"
-    ],
-    "doctor_name": [
-      "doctor name",
-      "dr name",
-      "physician name",
-      "physician"
-    ],
-    "specialization": [
-      "specialization",
-      "specialisation",
-      "specialty",
-      "speciality"
-    ],
-    "territory_id": [
-      "territory id",
-      "territory code",
-      "area id",
-      "area code"
-    ],
-    "status": [
-      "status",
-      "doctor status",
-      "active status"
-    ]
+    "doctor_id": ["doctor id", "doctor code", "dr id", "dr code", "physician id", "physician code"],
+    "doctor_name": ["doctor name", "dr name", "physician name", "physician"],
+    "specialization": ["specialization", "specialisation", "specialty", "speciality"],
+    "territory_id": ["territory id", "territory code", "area id", "area code"],
+    "status": ["status", "doctor status", "active status"]
   },
 
   "sales": {
@@ -137,27 +56,9 @@
       "invoice id",
       "invoice number"
     ],
-    "sale_date": [
-      "sale date",
-      "sales date",
-      "transaction date",
-      "invoice date",
-      "billing date"
-    ],
-    "doctor_id": [
-      "doctor id",
-      "doctor code",
-      "dr code",
-      "physician id",
-      "physician code"
-    ],
-    "product_id": [
-      "product id",
-      "product code",
-      "drug code",
-      "medicine code",
-      "sku"
-    ],
+    "sale_date": ["sale date", "sales date", "transaction date", "invoice date", "billing date"],
+    "doctor_id": ["doctor id", "doctor code", "dr code", "physician id", "physician code"],
+    "product_id": ["product id", "product code", "drug code", "medicine code", "sku"],
     "selling_territory_id": [
       "selling territory id",
       "selling territory",
@@ -166,13 +67,7 @@
       "sales territory",
       "area code"
     ],
-    "quantity": [
-      "quantity",
-      "qty",
-      "units",
-      "units sold",
-      "sales quantity"
-    ],
+    "quantity": ["quantity", "qty", "units", "units sold", "sales quantity"],
     "sales_amount": [
       "sales amount",
       "sale amount",
@@ -182,288 +77,42 @@
       "revenue",
       "amount"
     ],
-    "status": [
-      "status",
-      "sale status",
-      "transaction status"
-    ]
+    "status": ["status", "sale status", "transaction status"]
   },
 
   "prescriptions": {
-    "prescription_id": [
-      "prescription id",
-      "prescription number",
-      "rx id",
-      "rx number"
-    ],
-    "prescription_date": [
-      "prescription date",
-      "rx date",
-      "prescribed date"
-    ],
-    "doctor_id": [
-      "doctor id",
-      "doctor code",
-      "dr code",
-      "physician id"
-    ],
-    "product_id": [
-      "product id",
-      "product code",
-      "drug code",
-      "medicine code"
-    ],
-    "quantity": [
-      "quantity",
-      "qty",
-      "units",
-      "units prescribed"
-    ],
-    "status": [
-      "status",
-      "prescription status",
-      "rx status"
-    ]
+    "prescription_id": ["prescription id", "prescription number", "rx id", "rx number"],
+    "prescription_date": ["prescription date", "rx date", "prescribed date"],
+    "doctor_id": ["doctor id", "doctor code", "dr code", "physician id"],
+    "product_id": ["product id", "product code", "drug code", "medicine code"],
+    "quantity": ["quantity", "qty", "units", "units prescribed"],
+    "status": ["status", "prescription status", "rx status"]
   },
 
   "representative_doctor_assignments": {
-    "assignment_id": [
-      "assignment id",
-      "assignment code"
-    ],
-    "representative_id": [
-      "representative id",
-      "rep id",
-      "rep code",
-      "employee id"
-    ],
-    "doctor_id": [
-      "doctor id",
-      "doctor code",
-      "physician id"
-    ],
-    "effective_from": [
-      "effective from",
-      "effective date",
-      "start date",
-      "valid from"
-    ],
-    "effective_to": [
-      "effective to",
-      "end date",
-      "valid to"
-    ],
-    "status": [
-      "status",
-      "assignment status"
-    ]
-  },
-
-  "sales_targets": {
-    "target_id": [
-      "target id",
-      "target code"
-    ],
-    "representative_id": [
-      "representative id",
-      "rep id",
-      "rep code",
-      "employee id"
-    ],
-    "product_id": [
-      "product id",
-      "product code",
-      "drug code"
-    ],
-    "target_month": [
-      "target month",
-      "month",
-      "period",
-      "target period"
-    ],
-    "target_amount": [
-      "target amount",
-      "sales target",
-      "target value",
-      "target sales"
-    ],
-    "status": [
-      "status",
-      "target status"
-    ]
-  },
-
-  "incentive_programs": {
-    "program_id": [
-      "program id",
-      "programme id",
-      "scheme id",
-      "incentive program id"
-    ],
-    "program_name": [
-      "program name",
-      "programme name",
-      "scheme name",
-      "incentive program"
-    ],
-    "period_type": [
-      "period type",
-      "frequency",
-      "payout frequency"
-    ],
-    "effective_from": [
-      "effective from",
-      "start date",
-      "valid from"
-    ],
-    "effective_to": [
-      "effective to",
-      "end date",
-      "valid to"
-    ],
-    "minimum_sales_achievement": [
-      "minimum sales achievement",
-      "minimum achievement",
-      "minimum threshold"
-    ],
-    "maximum_payout_multiplier": [
-      "maximum payout multiplier",
-      "max payout multiplier",
-      "maximum multiplier"
-    ],
-    "status": [
-      "status",
-      "program status"
-    ]
-  },
-
-  "incentive_tiers": {
-    "tier_id": [
-      "tier id",
-      "tier code"
-    ],
-    "program_id": [
-      "program id",
-      "programme id",
-      "scheme id"
-    ],
-    "minimum_achievement": [
-      "minimum achievement",
-      "min achievement",
-      "lower threshold"
-    ],
-    "maximum_achievement": [
-      "maximum achievement",
-      "max achievement",
-      "upper threshold"
-    ],
-    "payout_multiplier": [
-      "payout multiplier",
-      "multiplier",
-      "incentive multiplier"
-    ]
-  },
-
-  "product_incentive_rates": {
-    "rate_id": [
-      "rate id",
-      "rate code"
-    ],
-    "program_id": [
-      "program id",
-      "programme id",
-      "scheme id"
-    ],
-    "product_id": [
-      "product id",
-      "product code",
-      "drug code"
-    ],
-    "incentive_rate": [
-      "incentive rate",
-      "rate",
-      "incentive percentage",
-      "incentive percent"
-    ]
+    "assignment_id": ["assignment id", "assignment code"],
+    "representative_id": ["representative id", "rep id", "rep code", "employee id"],
+    "doctor_id": ["doctor id", "doctor code", "physician id"],
+    "effective_from": ["effective from", "effective date", "start date", "valid from"],
+    "effective_to": ["effective to", "end date", "valid to"],
+    "status": ["status", "assignment status"]
   },
 
   "incentive_payouts": {
-    "payout_id": [
-      "payout id",
-      "payout code",
-      "payment id"
-    ],
-    "representative_id": [
-      "representative id",
-      "rep id",
-      "rep code",
-      "employee id"
-    ],
-    "product_id": [
-      "product id",
-      "product code",
-      "drug code"
-    ],
-    "program_id": [
-      "program id",
-      "scheme id",
-      "incentive program id"
-    ],
-    "payout_month": [
-      "payout month",
-      "month",
-      "payment month",
-      "period"
-    ],
-    "sales_target": [
-      "sales target",
-      "target sales",
-      "target amount"
-    ],
-    "actual_sales": [
-      "actual sales",
-      "sales achieved",
-      "sales amount"
-    ],
-    "sales_achievement": [
-      "sales achievement",
-      "achievement percent",
-      "achievement percentage"
-    ],
-    "base_incentive": [
-      "base incentive",
-      "base payout"
-    ],
-    "achievement_multiplier": [
-      "achievement multiplier",
-      "multiplier"
-    ],
-    "calculated_payout": [
-      "calculated payout",
-      "computed payout"
-    ],
-    "maximum_payout": [
-      "maximum payout",
-      "max payout"
-    ],
-    "expected_payout": [
-      "expected payout",
-      "expected incentive"
-    ],
-    "actual_payout": [
-      "actual payout",
-      "paid amount",
-      "actual incentive"
-    ],
-    "payout_difference": [
-      "payout difference",
-      "difference",
-      "variance"
-    ],
-    "status": [
-      "status",
-      "payout status",
-      "payment status"
-    ]
+    "payout_id": ["payout id", "payout code", "payment id"],
+    "representative_id": ["representative id", "rep id", "rep code", "employee id"],
+    "product_id": ["product id", "product code", "drug code"],
+    "payout_month": ["payout month", "month", "payment month", "period"],
+    "sales_target": ["sales target", "target sales", "target amount"],
+    "actual_sales": ["actual sales", "sales achieved", "sales amount"],
+    "sales_achievement": ["sales achievement", "achievement percent", "achievement percentage"],
+    "base_incentive": ["base incentive", "base payout"],
+    "achievement_multiplier": ["achievement multiplier", "multiplier"],
+    "calculated_payout": ["calculated payout", "computed payout"],
+    "maximum_payout": ["maximum payout", "max payout"],
+    "expected_payout": ["expected payout", "expected incentive"],
+    "actual_payout": ["actual payout", "paid amount", "actual incentive"],
+    "payout_difference": ["payout difference", "difference", "variance"],
+    "status": ["status", "payout status", "payment status"]
   }
 }

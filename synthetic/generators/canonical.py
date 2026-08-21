@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date
 import random
 
 from faker import Faker
@@ -12,13 +13,17 @@ fake = Faker("en_IN")
 Faker.seed(SEED)
 
 
+# =====================================================
+# MAIN GENERATOR
+# =====================================================
+
+
 def generate_canonical_data(
     num_territories: int = 20,
     num_representatives: int = 100,
     num_products: int = 30,
     num_doctors: int = 1000,
     months: list[str] | None = None,
-    anomaly_rate: float = 0.08,
 ) -> dict:
 
     if months is None:
@@ -32,14 +37,18 @@ def generate_canonical_data(
             "2026-07",
         ]
 
-    territories = generate_territories(num_territories)
+    territories = generate_territories(
+        num_territories,
+    )
 
     representatives = generate_representatives(
         num_representatives,
         territories,
     )
 
-    products = generate_products(num_products)
+    products = generate_products(
+        num_products,
+    )
 
     doctors = generate_doctors(
         num_doctors,
@@ -51,30 +60,17 @@ def generate_canonical_data(
         doctors,
     )
 
-    sales, prescriptions, anomalies = generate_prescriptions(
+    sales, prescriptions = generate_sales_and_prescriptions(
         representatives=representatives,
         products=products,
         doctors=doctors,
         assignments=assignments,
         months=months,
-        anomaly_rate=anomaly_rate,
     )
-
-    targets = generate_targets(
-        representatives,
-        products,
-        months,
-    )
-
-    incentive_programs = generate_incentive_programs(products)
-
-    incentive_tiers = generate_incentive_tiers(incentive_programs)
 
     payouts = generate_payouts(
         sales=sales,
-        anomalies=anomalies,
-        incentive_programs=incentive_programs,
-        incentive_tiers=incentive_tiers,
+        assignments=assignments,
     )
 
     return {
@@ -85,12 +81,13 @@ def generate_canonical_data(
         "assignments": assignments,
         "sales": sales,
         "prescriptions": prescriptions,
-        "targets": targets,
         "payouts": payouts,
-        "incentive_programs": incentive_programs,
-        "incentive_tiers": incentive_tiers,
-        "anomalies": anomalies,
     }
+
+
+# =====================================================
+# TERRITORIES
+# =====================================================
 
 
 def generate_territories(
@@ -105,20 +102,16 @@ def generate_territories(
         "Central",
     ]
 
-    countries = [
-        "India",
-    ]
-
-    territories = []
+    territories: list[dict] = []
 
     for i in range(1, count + 1):
 
         territories.append(
             {
                 "territory_id": f"T{i:03d}",
-                "territory_name": (f"{fake.city()} Zone {i}"),
+                "territory_name": f"{fake.city()} Zone {i}",
                 "region": random.choice(regions),
-                "country": random.choice(countries),
+                "country": "India",
                 "status": "Active",
             }
         )
@@ -126,38 +119,44 @@ def generate_territories(
     return territories
 
 
+# =====================================================
+# REPRESENTATIVES
+# =====================================================
+
+
 def generate_representatives(
     count: int,
     territories: list[dict],
 ) -> list[dict]:
 
-    representatives = []
+    representatives: list[dict] = []
 
     for i in range(1, count + 1):
 
-        first_name = fake.first_name()
-
-        last_name = fake.last_name()
-
-        territory = random.choice(territories)
+        territory = random.choice(
+            territories,
+        )
 
         representatives.append(
             {
-                "representative_id": (f"FR{i:04d}"),
-                "first_name": first_name,
-                "last_name": last_name,
-                "territory_id": (territory["territory_id"]),
-                "joining_date": (
-                    fake.date_between(
-                        start_date="-5y",
-                        end_date="today",
-                    ).isoformat()
-                ),
+                "representative_id": f"FR{i:04d}",
+                "first_name": fake.first_name(),
+                "last_name": fake.last_name(),
+                "territory_id": territory["territory_id"],
+                "joining_date": fake.date_between(
+                    start_date="-5y",
+                    end_date=date(2025, 12, 31),
+                ).isoformat(),
                 "status": "Active",
             }
         )
 
     return representatives
+
+
+# =====================================================
+# PRODUCTS
+# =====================================================
 
 
 def generate_products(
@@ -171,30 +170,31 @@ def generate_products(
         "Respiratory",
         "Gastroenterology",
         "Dermatology",
-        "Pain",
+        "Pain Management",
         "Antibiotic",
     ]
 
-    products = []
+    products: list[dict] = []
 
     for i in range(1, count + 1):
+
         products.append(
             {
                 "product_id": f"P{i:03d}",
-                "product_name": (f"{fake.word().title()}Care {i}"),
-                "product_category": (random.choice(categories)),
-                "unit_price": round(
-                    random.uniform(
-                        100,
-                        2500,
-                    ),
-                    2,
+                "product_name": f"{fake.word().title()}Care {i}",
+                "product_category": random.choice(
+                    categories,
                 ),
-                "status": "ACTIVE",
+                "status": "Active",
             }
         )
 
     return products
+
+
+# =====================================================
+# DOCTORS
+# =====================================================
 
 
 def generate_doctors(
@@ -202,7 +202,7 @@ def generate_doctors(
     territories: list[dict],
 ) -> list[dict]:
 
-    specialties = [
+    specializations = [
         "Cardiology",
         "General Medicine",
         "Diabetology",
@@ -213,22 +213,32 @@ def generate_doctors(
         "Orthopedics",
     ]
 
-    doctors = []
+    doctors: list[dict] = []
 
     for i in range(1, count + 1):
-        territory = random.choice(territories)
+
+        territory = random.choice(
+            territories,
+        )
 
         doctors.append(
             {
                 "doctor_id": f"D{i:06d}",
-                "doctor_name": (f"Dr {fake.name()}"),
-                "territory_id": (territory["territory_id"]),
-                "speciality": (random.choice(specialties)),
-                "status": "ACTIVE",
+                "doctor_name": f"Dr {fake.name()}",
+                "specialization": random.choice(
+                    specializations,
+                ),
+                "territory_id": territory["territory_id"],
+                "status": "Active",
             }
         )
 
     return doctors
+
+
+# =====================================================
+# REPRESENTATIVE / DOCTOR ASSIGNMENTS
+# =====================================================
 
 
 def generate_assignments(
@@ -236,13 +246,38 @@ def generate_assignments(
     doctors: list[dict],
 ) -> list[dict]:
 
-    assignments = []
+    assignments: list[dict] = []
+
+    reps_by_territory: dict[str, list[dict]] = {}
+
+    for rep in representatives:
+
+        reps_by_territory.setdefault(
+            rep["territory_id"],
+            [],
+        ).append(rep)
 
     assignment_id = 1
 
     for doctor in doctors:
 
-        representative = random.choice(representatives)
+        territory_id = doctor["territory_id"]
+
+        territory_reps = reps_by_territory.get(
+            territory_id,
+            [],
+        )
+
+        # Prefer a representative from the doctor's
+        # own territory.
+        if territory_reps:
+            representative = random.choice(
+                territory_reps,
+            )
+        else:
+            representative = random.choice(
+                representatives,
+            )
 
         assignments.append(
             {
@@ -251,12 +286,7 @@ def generate_assignments(
                 "doctor_id": doctor["doctor_id"],
                 "effective_from": "2026-01-01",
                 "effective_to": None,
-                "status": random.choice(
-                    [
-                        "Active",
-                        "Inactive",
-                    ]
-                ),
+                "status": "Active",
             }
         )
 
@@ -265,15 +295,18 @@ def generate_assignments(
     return assignments
 
 
-def generate_prescriptions(
+# =====================================================
+# SALES + PRESCRIPTIONS
+# =====================================================
+
+
+def generate_sales_and_prescriptions(
     representatives: list[dict],
     products: list[dict],
     doctors: list[dict],
     assignments: list[dict],
     months: list[str],
-    anomaly_rate: float,
 ) -> tuple[
-    list[dict],
     list[dict],
     list[dict],
 ]:
@@ -284,17 +317,37 @@ def generate_prescriptions(
     ] = {}
 
     for assignment in assignments:
+
+        if assignment["status"] != "Active":
+            continue
+
         assigned_doctors_by_rep.setdefault(
             assignment["representative_id"],
             [],
-        ).append(assignment["doctor_id"])
+        ).append(
+            assignment["doctor_id"],
+        )
+
+    doctor_by_id = {doctor["doctor_id"]: doctor for doctor in doctors}
 
     sales: list[dict] = []
     prescriptions: list[dict] = []
-    anomalies: list[dict] = []
 
     sale_id = 1
     prescription_id = 1
+
+    # Product prices are used internally only.
+    # They are NOT written to the products table.
+    product_prices = {
+        product["product_id"]: round(
+            random.uniform(
+                100,
+                2500,
+            ),
+            2,
+        )
+        for product in products
+    }
 
     for rep in representatives:
 
@@ -308,19 +361,27 @@ def generate_prescriptions(
         if not assigned_doctors:
             continue
 
+        product_count = min(
+            random.randint(
+                3,
+                7,
+            ),
+            len(products),
+        )
+
         selected_products = random.sample(
             products,
-            k=min(
-                random.randint(
-                    3,
-                    7,
-                ),
-                len(products),
-            ),
+            k=product_count,
         )
 
         for product in selected_products:
 
+            product_id = product["product_id"]
+
+            unit_price = product_prices[product_id]
+
+            # Each representative/product gets
+            # a relatively stable historical baseline.
             historical_sales_base = random.uniform(
                 40000,
                 160000,
@@ -331,12 +392,11 @@ def generate_prescriptions(
                 250,
             )
 
-            for month in months:
+            for month_index, month in enumerate(
+                months,
+            ):
 
-                anomaly_types: list[str] = []
-
-                is_anomaly = random.random() < anomaly_rate
-
+                # Normal month-to-month movement.
                 sales_multiplier = random.uniform(
                     0.90,
                     1.12,
@@ -347,37 +407,60 @@ def generate_prescriptions(
                     1.12,
                 )
 
-                if is_anomaly:
+                # -------------------------------------------------
+                # Generate naturally varied data.
+                #
+                # There is NO separate anomaly dataset anymore.
+                # These variations exist only as characteristics
+                # of the sales/prescription records.
+                # -------------------------------------------------
 
-                    anomaly_types = random.sample(
-                        [
-                            "sales_spike",
-                            "rx_drop",
-                            "doctor_concentration",
-                            "cross_territory",
-                            "payout_discrepancy",
-                        ],
-                        k=random.randint(
-                            1,
-                            3,
-                        ),
+                pattern_roll = random.random()
+
+                cross_territory = False
+                doctor_concentration = False
+
+                if pattern_roll < 0.03:
+
+                    # Occasionally produce a large sales month.
+                    sales_multiplier *= random.uniform(
+                        1.5,
+                        2.2,
                     )
 
-                    if "sales_spike" in anomaly_types:
-                        sales_multiplier *= random.uniform(
-                            1.5,
-                            2.3,
-                        )
+                elif pattern_roll < 0.05:
 
-                    if "rx_drop" in anomaly_types:
-                        rx_multiplier *= random.uniform(
-                            0.15,
-                            0.5,
-                        )
+                    # Sales/Rx divergence.
+                    sales_multiplier *= random.uniform(
+                        1.25,
+                        1.70,
+                    )
 
-                monthly_sales = historical_sales_base * sales_multiplier
+                    rx_multiplier *= random.uniform(
+                        0.30,
+                        0.60,
+                    )
 
-                monthly_rx = historical_rx_base * rx_multiplier
+                elif pattern_roll < 0.07:
+
+                    doctor_concentration = True
+
+                elif pattern_roll < 0.09:
+
+                    cross_territory = True
+
+                # Add slight gradual growth/decline variation.
+                trend = 1 + (
+                    month_index
+                    * random.uniform(
+                        -0.015,
+                        0.025,
+                    )
+                )
+
+                monthly_sales = historical_sales_base * sales_multiplier * trend
+
+                monthly_rx = historical_rx_base * rx_multiplier * trend
 
                 doctor_count = min(
                     random.randint(
@@ -392,8 +475,15 @@ def generate_prescriptions(
                     k=doctor_count,
                 )
 
-                if "doctor_concentration" in anomaly_types:
-                    chosen_doctors = [random.choice(chosen_doctors)]
+                if doctor_concentration and chosen_doctors:
+                    chosen_doctors = [
+                        random.choice(
+                            chosen_doctors,
+                        )
+                    ]
+
+                if not chosen_doctors:
+                    continue
 
                 sales_per_doctor = monthly_sales / len(chosen_doctors)
 
@@ -401,328 +491,163 @@ def generate_prescriptions(
 
                 for doctor_id in chosen_doctors:
 
+                    doctor = doctor_by_id.get(
+                        doctor_id,
+                    )
+
+                    if doctor is None:
+                        continue
+
                     selling_territory_id = rep["territory_id"]
 
-                    if "cross_territory" in anomaly_types and random.random() < 0.65:  # noqa: E501
+                    if cross_territory and random.random() < 0.65:
 
-                        other_territories = [
-                            doctor["territory_id"]
-                            for doctor in doctors
-                            if doctor["territory_id"] != rep["territory_id"]
-                        ]
+                        other_territories = list(
+                            {
+                                item["territory_id"]
+                                for item in doctors
+                                if item["territory_id"] != rep["territory_id"]
+                            }
+                        )
 
                         if other_territories:
-
-                            selling_territory_id = random.choice(other_territories)  # noqa: E501
-
-                    unit_price = float(product["unit_price"])
+                            selling_territory_id = random.choice(
+                                other_territories,
+                            )
 
                     quantity = max(
                         1,
                         round(sales_per_doctor / unit_price),
                     )
 
-                    # ---------------------------------
+                    # =============================================
                     # SALES
-                    # ---------------------------------
+                    #
+                    # IMPORTANT:
+                    # Sales has NO representative_id column.
+                    # Representative attribution comes through
+                    # representative_doctor_assignments.
+                    # =============================================
 
                     sales.append(
                         {
-                            "sale_id": sale_id,
-                            "representative_id": rep_id,
+                            "sale_id": f"S{sale_id:07d}",
+                            "sale_date": (f"{month}-" f"{random.randint(1, 27):02d}"),
                             "doctor_id": doctor_id,
-                            "product_id": (product["product_id"]),
-                            "sale_date": (f"{month}-" f"{random.randint(1, 27):02d}"),  # noqa: E501
+                            "product_id": product_id,
+                            "selling_territory_id": (selling_territory_id),
+                            "quantity": quantity,
                             "sales_amount": round(
                                 sales_per_doctor,
                                 2,
                             ),
-                            "quantity": quantity,
-                            "selling_territory_id": (selling_territory_id),
-                            "status": random.choice(
-                                [
-                                    "Valid",
-                                    "Cancelled",
-                                    "Returned",
-                                    "Adjusted",
-                                ]
-                            ),
+                            "status": choose_sales_status(),
                         }
                     )
 
-                    # ---------------------------------
+                    # =============================================
                     # PRESCRIPTIONS
-                    #
-                    # Matches document_registry.json:
-                    #
-                    # required:
-                    # prescription_id
-                    # prescription_date
-                    # doctor_id
-                    # product_id
-                    # quantity
-                    #
-                    # optional:
-                    # status
-                    # ---------------------------------
+                    # =============================================
 
                     prescriptions.append(
                         {
-                            "prescription_id": f"RX{prescription_id:06d}",
-                            "prescription_date": (
-                                f"{month}-" f"{random.randint(1, 27):02d}"
-                            ),  # noqa: E501
+                            "prescription_id": (f"RX{prescription_id:07d}"),
+                            "prescription_date": (f"{month}-" f"{random.randint(1, 27):02d}"),
                             "doctor_id": doctor_id,
-                            "product_id": (product["product_id"]),
+                            "product_id": product_id,
                             "quantity": max(
                                 1,
-                                round(rx_per_doctor),
+                                round(
+                                    rx_per_doctor,
+                                ),
                             ),
-                            "status": random.choice(
-                                [
-                                    "Valid",
-                                    "Cancelled",
-                                    "Reversed",
-                                ]
-                            ),
+                            "status": (choose_prescription_status()),
                         }
                     )
 
                     sale_id += 1
                     prescription_id += 1
 
-                if anomaly_types:
-
-                    anomalies.append(
-                        {
-                            "representative_id": rep_id,
-                            "product_id": (product["product_id"]),
-                            "month": month,
-                            "anomaly_types": (anomaly_types),
-                        }
-                    )
-
     return (
         sales,
         prescriptions,
-        anomalies,
     )
 
 
-def generate_targets(
-    representatives: list[dict],
-    products: list[dict],
-    months: list[str],
-) -> list[dict]:
-
-    targets: list[dict] = []
-
-    target_id = 1
-
-    statuses = [
-        "Active",
-        "Inactive",
-    ]
-
-    for rep in representatives:
-
-        selected_products = random.sample(
-            products,
-            k=min(
-                4,
-                len(products),
-            ),
-        )
-
-        for month in months:
-
-            for product in selected_products:
-
-                targets.append(
-                    {
-                        "target_id": f"TARGET_{target_id:06d}",
-                        "representative_id": (rep["representative_id"]),
-                        "product_id": (product["product_id"]),
-                        "target_month": (f"{month}-01"),
-                        "target_amount": round(
-                            random.uniform(
-                                50000,
-                                250000,
-                            ),
-                            2,
-                        ),
-                        "status": random.choice(statuses),
-                    }
-                )
-
-                target_id += 1
-
-    return targets
+# =====================================================
+# SALES STATUS
+# =====================================================
 
 
-def generate_incentive_programs(
-    products: list[dict],
-) -> list[dict]:
+def choose_sales_status() -> str:
 
-    programs = []
+    roll = random.random()
 
-    program_types = [
-        "Monthly Incentive Program",
-        "Quarterly Sales Program",
-        "Product Growth Scheme",
-        "Achievement Bonus Program",
-    ]
+    if roll < 0.94:
+        return "Valid"
 
-    period_types = [
-        "Monthly",
-        "Quarterly",
-    ]
+    if roll < 0.965:
+        return "Adjusted"
 
-    statuses = [
-        "Active",
-        "Inactive",
-    ]
+    if roll < 0.985:
+        return "Returned"
 
-    for product in products:
-
-        product_id = product["product_id"]
-
-        programs.append(
-            {
-                "program_id": (f"PROGRAM_{product_id}"),
-                "program_name": (f"{product_id} " f"{random.choice(program_types)}"),  # noqa: E501
-                "period_type": (random.choice(period_types)),
-                "effective_from": ("2026-01-01"),
-                "effective_to": None,
-                "minimum_sales_achievement": round(
-                    random.choice(
-                        [
-                            50,
-                            70,
-                            80,
-                        ]
-                    ),
-                    2,
-                ),
-                "maximum_payout_multiplier": round(
-                    random.choice(
-                        [
-                            1.5,
-                            2.0,
-                            2.5,
-                        ]
-                    ),
-                    2,
-                ),
-                "status": (random.choice(statuses)),
-            }
-        )
-
-    return programs
+    return "Cancelled"
 
 
-def generate_incentive_tiers(
-    programs: list[dict],
-) -> list[dict]:
+# =====================================================
+# PRESCRIPTION STATUS
+# =====================================================
 
-    tiers = []
 
-    tier_id = 1
+def choose_prescription_status() -> str:
 
-    tier_definitions = [
-        {
-            "minimum": 0,
-            "maximum": 50,
-            "multiplier": 0.5,
-        },
-        {
-            "minimum": 50,
-            "maximum": 75,
-            "multiplier": 1.0,
-        },
-        {
-            "minimum": 75,
-            "maximum": 100,
-            "multiplier": 1.25,
-        },
-        {
-            "minimum": 100,
-            "maximum": None,
-            "multiplier": 1.5,
-        },
-    ]
+    roll = random.random()
 
-    for program in programs:
+    if roll < 0.96:
+        return "Valid"
 
-        for tier in tier_definitions:
+    if roll < 0.985:
+        return "Reversed"
 
-            tiers.append(
-                {
-                    "tier_id": (f"TIER_{tier_id:06d}"),
-                    "program_id": (program["program_id"]),
-                    "minimum_achievement": (tier["minimum"]),
-                    "maximum_achievement": (tier["maximum"]),
-                    "payout_multiplier": (tier["multiplier"]),
-                }
-            )
+    return "Cancelled"
 
-            tier_id += 1
 
-    return tiers
+# =====================================================
+# PAYOUTS
+# =====================================================
 
 
 def generate_payouts(
     sales: list[dict],
-    anomalies: list[dict],
-    incentive_programs: list[dict],
-    incentive_tiers: list[dict],
+    assignments: list[dict],
 ) -> list[dict]:
 
-    # -----------------------------------------
-    # Program lookup
-    # PROGRAM_P001 -> P001
-    # -----------------------------------------
+    # -------------------------------------------------
+    # Resolve representative through doctor assignment.
+    #
+    # Sales itself intentionally has no representative_id.
+    # -------------------------------------------------
 
-    program_by_product = {
-        program["program_id"].replace(
-            "PROGRAM_",
-            "",
-        ): program
-        for program in incentive_programs
-    }
-
-    # -----------------------------------------
-    # Tier lookup
-    # -----------------------------------------
-
-    tiers_by_program: dict[
+    representative_by_doctor: dict[
         str,
-        list[dict],
+        str,
     ] = {}
 
-    for tier in incentive_tiers:
+    for assignment in assignments:
 
-        tiers_by_program.setdefault(
-            tier["program_id"],
-            [],
-        ).append(tier)
+        if assignment["status"] != "Active":
+            continue
 
-    # -----------------------------------------
-    # Anomaly lookup
-    # -----------------------------------------
+        representative_by_doctor[assignment["doctor_id"]] = assignment["representative_id"]
 
-    anomaly_lookup = {
-        (
-            anomaly["representative_id"],
-            anomaly["product_id"],
-            anomaly["month"],
-        ): anomaly["anomaly_types"]
-        for anomaly in anomalies
-    }
-
-    # -----------------------------------------
-    # Aggregate sales
-    # -----------------------------------------
+    # -------------------------------------------------
+    # Aggregate valid sales by:
+    #
+    # representative
+    # product
+    # month
+    # -------------------------------------------------
 
     sales_totals: dict[
         tuple[str, str, str],
@@ -731,118 +656,124 @@ def generate_payouts(
 
     for sale in sales:
 
+        if sale["status"] not in {
+            "Valid",
+            "Adjusted",
+        }:
+            continue
+
+        representative_id = representative_by_doctor.get(sale["doctor_id"])
+
+        if representative_id is None:
+            continue
+
         month = sale["sale_date"][:7]
 
         key = (
-            sale["representative_id"],
+            representative_id,
             sale["product_id"],
             month,
         )
 
         sales_totals[key] = sales_totals.get(
             key,
-            0,
+            0.0,
         ) + float(sale["sales_amount"])
 
-    payouts = []
+    payouts: list[dict] = []
 
     payout_id = 1
 
-    # -----------------------------------------
-    # Generate payout rows
-    # -----------------------------------------
-
     for (
-        rep_id,
+        representative_id,
         product_id,
         month,
     ), actual_sales in sales_totals.items():
 
-        program = program_by_product.get(product_id)
-
-        if not program:
-            continue
-
-        program_id = program["program_id"]
-
+        # Target generated around actual historical range.
         sales_target = random.uniform(
-            100000,
-            300000,
+            60000,
+            180000,
         )
 
-        sales_achievement = actual_sales / sales_target * 100
+        if sales_target <= 0:
+            sales_achievement = 0.0
+        else:
+            sales_achievement = actual_sales / sales_target * 100
 
-        # -------------------------------------
-        # Find matching achievement tier
-        # -------------------------------------
+        # -------------------------------------------------
+        # Achievement multiplier
+        # -------------------------------------------------
 
-        achievement_multiplier = 0.0
+        if sales_achievement < 50:
+            achievement_multiplier = 0.50
 
-        for tier in tiers_by_program.get(
-            program_id,
-            [],
-        ):
+        elif sales_achievement < 75:
+            achievement_multiplier = 0.75
 
-            minimum = float(tier["minimum_achievement"])
+        elif sales_achievement < 100:
+            achievement_multiplier = 1.00
 
-            maximum = tier.get("maximum_achievement")
+        elif sales_achievement < 125:
+            achievement_multiplier = 1.25
 
-            if sales_achievement >= minimum and (
-                maximum is None or sales_achievement <= float(maximum)
-            ):
+        else:
+            achievement_multiplier = 1.50
 
-                achievement_multiplier = float(tier["payout_multiplier"])
-
-                break
-
-        # -------------------------------------
-        # Calculate payout
-        # -------------------------------------
+        # -------------------------------------------------
+        # Payout calculation
+        # -------------------------------------------------
 
         base_incentive = actual_sales * 0.05
 
         calculated_payout = base_incentive * achievement_multiplier
 
-        expected_payout = calculated_payout
+        maximum_payout = base_incentive * 1.50
 
-        actual_payout = expected_payout
-
-        # -------------------------------------
-        # Inject anomaly
-        # -------------------------------------
-
-        anomaly_types = anomaly_lookup.get(
-            (
-                rep_id,
-                product_id,
-                month,
-            ),
-            [],
+        expected_payout = min(
+            calculated_payout,
+            maximum_payout,
         )
 
-        if "payout_discrepancy" in anomaly_types:
+        # Normally payout matches expected payout.
+        actual_payout = expected_payout
+
+        # Occasionally create payout variation directly
+        # in the business data.
+        #
+        # There is NO anomaly table or anomaly object.
+        payout_roll = random.random()
+
+        if payout_roll < 0.025:
 
             actual_payout += random.uniform(
                 1000,
-                10000,
+                8000,
             )
 
-        maximum_multiplier = float(
-            program.get(
-                "maximum_payout_multiplier",
-                2.0,
-            )
-        )
+        elif payout_roll < 0.04:
 
-        maximum_payout = base_incentive * maximum_multiplier
+            actual_payout = max(
+                0,
+                actual_payout
+                - random.uniform(
+                    500,
+                    5000,
+                ),
+            )
+
+        payout_difference = actual_payout - expected_payout
 
         payouts.append(
             {
-                "payout_id": (f"PAYOUT_{payout_id:06d}"),
-                "representative_id": rep_id,
+                "payout_id": (f"PAYOUT_{payout_id:07d}"),
+                "representative_id": (representative_id),
                 "product_id": product_id,
-                "program_id": program_id,
-                "payout_month": f"{month}-01",
+                # incentive_programs table was removed,
+                # but program_id is still present on
+                # incentive_payouts.
+                "program_id": "PG001",
+                "payout_month": (f"{month}-01"),
                 "sales_target": round(
                     sales_target,
                     2,
@@ -880,19 +811,31 @@ def generate_payouts(
                     2,
                 ),
                 "payout_difference": round(
-                    actual_payout - expected_payout,
+                    payout_difference,
                     2,
                 ),
-                "status": random.choice(
-                    [
-                        "Pending",
-                        "Paid",
-                        "Adjusted",
-                    ]
-                ),
+                "status": choose_payout_status(),
             }
         )
 
         payout_id += 1
 
     return payouts
+
+
+# =====================================================
+# PAYOUT STATUS
+# =====================================================
+
+
+def choose_payout_status() -> str:
+
+    roll = random.random()
+
+    if roll < 0.75:
+        return "Paid"
+
+    if roll < 0.90:
+        return "Pending"
+
+    return "Adjusted"

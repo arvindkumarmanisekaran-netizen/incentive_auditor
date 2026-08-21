@@ -41,7 +41,7 @@ SUPPORTED_EXTENSIONS = {
     ".csv",
     ".xlsx",
     ".json",
-    ".xml",
+    ".docx",
 }
 
 
@@ -85,40 +85,23 @@ async def upload_document(
     document: UploadFile = File(...),
     session: AsyncSession = Depends(get_db),
 ) -> dict[str, Any]:
-    """
-    Upload and analyze one structured document.
-
-    Supported:
-        CSV
-        XLSX
-        JSON
-        XML
-
-    IMPORTANT:
-    This endpoint performs no database writes.
-    """
 
     filename = document.filename or "uploaded_document"
 
     extension = get_file_extension(filename)
 
-    if extension not in SUPPORTED_EXTENSIONS:
-
+    if not extension:
         raise HTTPException(
             status_code=400,
             detail=(
-                "Unsupported document type. "
-                "Supported formats are "
-                "CSV, XLSX, JSON, and XML."  # noqa: E501
+                "Unsupported document type. " "Supported formats are CSV, XLSX, JSON, and DOCX."
             ),
         )
 
     try:
-
         content = await document.read()
 
         if not content:
-
             raise HTTPException(
                 status_code=400,
                 detail="Uploaded document is empty.",
@@ -130,21 +113,24 @@ async def upload_document(
             content=content,
         )
 
+        # process_document can return success=False
+        # without throwing an exception.
+        if not result.get(
+            "success",
+            False,
+        ):
+            return result
+
         return result
 
     except HTTPException:
         raise
 
     except Exception as exc:
-
         raise HTTPException(
             status_code=500,
             detail=("Document processing failed: " f"{exc}"),
         ) from exc
-
-    finally:
-
-        await document.close()
 
 
 @router.post("/confirm")
@@ -210,9 +196,21 @@ async def confirm_document(
             ),  # noqa: E501
         )
 
+    duplicate_incoming_records: list[dict[str, Any]] = []
+
+    for item in payload.pending_data.duplicate_records:
+
+        incoming_record = item.get("incoming_record")
+
+        if isinstance(
+            incoming_record,
+            dict,
+        ):
+            duplicate_incoming_records.append(incoming_record)
+
     all_records = [
         *payload.pending_data.new_records,
-        *payload.pending_data.duplicate_records,
+        *duplicate_incoming_records,
     ]
 
     file_name = payload.pending_data.file_name or "uploaded_document"

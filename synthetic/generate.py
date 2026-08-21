@@ -1,6 +1,6 @@
 from pathlib import Path
-import shutil
 import json
+import shutil
 
 from generators.canonical import (
     generate_canonical_data,
@@ -24,10 +24,7 @@ OUTPUT_DIR = BASE_DIR / "output"
 
 PROJECT_ROOT = BASE_DIR.parent
 
-
-CUSTOM_ALIAS_PATH = (
-    PROJECT_ROOT / "backend" / "app" / "config" / "column_aliases.json"
-)  # noqa: E501
+CUSTOM_ALIAS_PATH = PROJECT_ROOT / "backend" / "app" / "config" / "column_aliases.json"
 
 
 # --------------------------------------------------
@@ -35,7 +32,6 @@ CUSTOM_ALIAS_PATH = (
 # --------------------------------------------------
 
 if not CUSTOM_ALIAS_PATH.exists():
-
     raise FileNotFoundError(f"Alias file not found: {CUSTOM_ALIAS_PATH}")
 
 
@@ -44,7 +40,6 @@ with open(
     "r",
     encoding="utf-8",
 ) as file:
-
     CUSTOM_ALIASES = json.load(file)
 
 
@@ -53,12 +48,15 @@ with open(
 # --------------------------------------------------
 
 
-def main():
+def main() -> None:
 
     print("Generating canonical data...")
 
-    if OUTPUT_DIR.exists():
+    # ----------------------------------------------
+    # Clear previous generated output
+    # ----------------------------------------------
 
+    if OUTPUT_DIR.exists():
         shutil.rmtree(OUTPUT_DIR)
 
     OUTPUT_DIR.mkdir(
@@ -67,31 +65,37 @@ def main():
     )
 
     # ----------------------------------------------
-    # Generate clean canonical dataset
+    # Generate canonical dataset
+    #
+    # Current tables:
+    # territories
+    # representatives
+    # products
+    # doctors
+    # assignments
+    # sales
+    # prescriptions
+    # payouts
     # ----------------------------------------------
 
     data = generate_canonical_data(
         num_territories=50,
         num_representatives=30,
         num_products=30,
-        num_doctors=10,
-        anomaly_rate=0.08,
+        num_doctors=300,
     )
 
     print()
-
     print("Canonical data generated:")
 
     for key, records in data.items():
-
-        print(f"  {key:25}{len(records):,}")
+        print(f"  {key:25} {len(records):,}")
 
     # ----------------------------------------------
-    # Apply random schema variations
+    # Apply column alias / schema variations
     # ----------------------------------------------
 
     print()
-
     print("Applying document variations...")
 
     upload_documents = generate_alias_documents(
@@ -100,19 +104,16 @@ def main():
     )
 
     print()
-
     print("Alias documents generated:")
 
     for document_name, records in upload_documents.items():
-
-        print(f"  {document_name:25}{len(records):,}")
+        print(f"  {document_name:25} {len(records):,}")
 
     # ----------------------------------------------
     # Export documents
     # ----------------------------------------------
 
     print()
-
     print("Exporting mixed formats...")
 
     export_structured_data(
@@ -121,12 +122,9 @@ def main():
     )
 
     print()
-
     print("Finished.")
-
     print(f"Output: {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":
-
     main()

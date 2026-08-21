@@ -1,0 +1,9 @@
+medicine id,product name,category,status
+P020,ConsequunturCare 20,Antibiotic,Active
+P015,OmnisCare 15,Gastroenterology,Active
+P025,ExpeditaCare 25,Neurology,Active
+P017,VeniamCare 17,Respiratory,Active
+P022,NecessitatibusCare 22,Antibiotic,Active
+P027,EaqueCare 27,Gastroenterology,Active
+P004,ExercitationemCare 4,Neurology,Active
+P023,LaboreCare 23,Neurology,Active

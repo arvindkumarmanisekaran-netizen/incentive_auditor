@@ -18,28 +18,29 @@ async def get_incentive_payouts(
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(text("""
-            SELECT
-                payout_id,
-                representative_id,
-                product_id,
-                program_id,
-                payout_month,
-                sales_target,
-                actual_sales,
-                sales_achievement,
-                base_incentive,
-                achievement_multiplier,
-                calculated_payout,
-                maximum_payout,
-                expected_payout,
-                actual_payout,
-                payout_difference,
-                status,
-                created_at,
-                updated_at
-            FROM incentive_payouts
-            ORDER BY payout_month DESC, payout_id
-            """))
+        SELECT
+            payout_id,
+            representative_id,
+            product_id,
+            payout_month,
+            sales_target,
+            actual_sales,
+            sales_achievement,
+            base_incentive,
+            achievement_multiplier,
+            calculated_payout,
+            maximum_payout,
+            expected_payout,
+            actual_payout,
+            payout_difference,
+            status,
+            created_at,
+            updated_at
+        FROM incentive_payouts
+        ORDER BY payout_month DESC,
+                 representative_id,
+                 product_id
+    """))
 
     return [dict(row._mapping) for row in result.fetchall()]
 
@@ -64,7 +65,6 @@ async def update_incentive_payout(
     allowed_fields = {
         "representative_id",
         "product_id",
-        "program_id",
         "payout_month",
         "sales_target",
         "actual_sales",

@@ -3,18 +3,18 @@ from __future__ import annotations
 import csv
 import io
 import json
+import logging
 from pathlib import Path
 from typing import Any
-from xml.etree import ElementTree
-import logging
 
 import pandas as pd
+from docx import Document
 
 SUPPORTED_EXTENSIONS = {
     "csv",
     "xlsx",
     "json",
-    "xml",
+    "docx",
 }
 
 
@@ -24,18 +24,18 @@ logger = logging.getLogger(__name__)
 def get_extension(
     filename: str,
 ) -> str:
-
     return Path(filename).suffix.lower().lstrip(".")
 
 
 def validate_extension(
     filename: str,
 ) -> str:
-
     extension = get_extension(filename)
 
     if extension not in SUPPORTED_EXTENSIONS:
-        raise ValueError(f"Unsupported document type: " f"{extension or 'unknown'}")  # noqa: E501
+        raise ValueError(
+            "Unsupported document type. " "Supported formats are CSV, XLSX, JSON, and DOCX."
+        )
 
     return extension
 
@@ -51,32 +51,36 @@ def normalize_record(
     normalized: dict[str, Any] = {}
 
     for key, value in record.items():
-
         column_name = str(key).strip()
 
-        if pd.isna(value):
+        if not column_name:
+            continue
+
+        if value is None:
             normalized[column_name] = None
             continue
 
-        # Pandas Timestamp -> ISO date/time
+        try:
+            if pd.isna(value):
+                normalized[column_name] = None
+                continue
+        except (TypeError, ValueError):
+            pass
 
+        # Pandas Timestamp -> ISO date/time
         if isinstance(
             value,
             pd.Timestamp,
         ):
-
             normalized[column_name] = value.isoformat()
-
             continue
 
         # Convert numpy scalar values
         # into normal Python values.
-
         if hasattr(
             value,
             "item",
         ):
-
             try:
                 value = value.item()
 
@@ -86,6 +90,13 @@ def normalize_record(
             ):
                 pass
 
+        # Normalize string whitespace.
+        if isinstance(value, str):
+            value = value.strip()
+
+            if value == "":
+                value = None
+
         normalized[column_name] = value
 
     return normalized
@@ -94,7 +105,6 @@ def normalize_record(
 def parse_csv(
     content: bytes,
 ) -> list[dict[str, Any]]:
-
     text = content.decode("utf-8-sig")
 
     buffer = io.StringIO(text)
@@ -102,7 +112,7 @@ def parse_csv(
     reader = csv.DictReader(buffer)
 
     if not reader.fieldnames:
-        raise ValueError("CSV file does not contain " "a header row.")
+        raise ValueError("CSV file does not contain a header row.")
 
     records = [normalize_record(dict(row)) for row in reader]
 
@@ -112,7 +122,6 @@ def parse_csv(
 def parse_xlsx(
     content: bytes,
 ) -> list[dict[str, Any]]:
-
     buffer = io.BytesIO(content)
 
     dataframe = pd.read_excel(
@@ -123,7 +132,9 @@ def parse_xlsx(
     if dataframe.empty:
         return []
 
-    records = dataframe.to_dict(orient="records")
+    records = dataframe.to_dict(
+        orient="records",
+    )
 
     return [normalize_record(record) for record in records]
 
@@ -131,8 +142,9 @@ def parse_xlsx(
 def parse_json(
     content: bytes,
 ) -> list[dict[str, Any]]:
-
-    decoded = content.decode("utf-8-sig")
+    decoded = content.decode(
+        "utf-8-sig",
+    )
 
     parsed = json.loads(decoded)
 
@@ -149,7 +161,6 @@ def parse_json(
         parsed,
         list,
     ):
-
         if not all(
             isinstance(
                 item,
@@ -157,7 +168,7 @@ def parse_json(
             )
             for item in parsed
         ):
-            raise ValueError("JSON arrays must contain " "objects.")
+            raise ValueError("JSON arrays must contain objects.")
 
         return [normalize_record(item) for item in parsed]
 
@@ -179,9 +190,7 @@ def parse_json(
         parsed,
         dict,
     ):
-
         for value in parsed.values():
-
             if isinstance(
                 value,
                 list,
@@ -192,71 +201,83 @@ def parse_json(
                 )
                 for item in value
             ):
-
                 return [normalize_record(item) for item in value]
 
         # Single-record JSON object
-
         return [normalize_record(parsed)]
 
     raise ValueError("Unsupported JSON structure.")
 
 
-def xml_element_to_record(
-    element: ElementTree.Element,
-) -> dict[str, Any]:
-
-    record: dict[str, Any] = {}
-
-    for child in element:
-
-        # Only handle flat structured XML
-        # in the first version.
-
-        if len(child) == 0:
-
-            record[child.tag] = child.text.strip() if child.text else None
-
-    return normalize_record(record)
-
-
-def parse_xml(
+def parse_docx(
     content: bytes,
 ) -> list[dict[str, Any]]:
+    """
+    Parse structured DOCX files.
+
+    Expected format:
+
+    First table row:
+        column headers
+
+    Remaining rows:
+        record values
+
+    Multiple tables are supported.
+    """
 
     try:
+        document = Document(io.BytesIO(content))
 
-        root = ElementTree.fromstring(content)
+    except Exception as exc:
+        raise ValueError(f"Invalid DOCX document: {exc}") from exc
 
-    except ElementTree.ParseError as exc:
-
-        raise ValueError(f"Invalid XML document: {exc}") from exc
+    if not document.tables:
+        raise ValueError("DOCX document does not contain " "a structured table.")
 
     records: list[dict[str, Any]] = []
 
-    # Typical structure:
-    #
-    # <sales>
-    #   <record>...</record>
-    #   <record>...</record>
-    # </sales>
+    for table in document.tables:
+        if not table.rows:
+            continue
 
-    for child in root:
+        # ----------------------------------------
+        # Header row
+        # ----------------------------------------
 
-        record = xml_element_to_record(child)
+        headers = [cell.text.strip() for cell in table.rows[0].cells]
 
-        if record:
-            records.append(record)
+        if not any(headers):
+            continue
 
-    # If root itself represents
-    # one single record.
+        # ----------------------------------------
+        # Data rows
+        # ----------------------------------------
+
+        for row in table.rows[1:]:
+            values = [cell.text.strip() for cell in row.cells]
+
+            # Skip blank rows
+            if not any(values):
+                continue
+
+            record: dict[str, Any] = {}
+
+            for index, header in enumerate(headers):
+                if not header:
+                    continue
+
+                value = values[index] if index < len(values) else None
+
+                record[header] = value if value not in ("", None) else None
+
+            normalized = normalize_record(record)
+
+            if normalized:
+                records.append(normalized)
 
     if not records:
-
-        record = xml_element_to_record(root)
-
-        if record:
-            records.append(record)
+        raise ValueError("DOCX document contains no records.")
 
     return records
 
@@ -279,20 +300,16 @@ def parse_document(
         records = parse_csv(content)
 
     elif extension == "xlsx":
-
         records = parse_xlsx(content)
 
     elif extension == "json":
-
         records = parse_json(content)
 
-    elif extension == "xml":
-
-        records = parse_xml(content)
+    elif extension == "docx":
+        records = parse_docx(content)
 
     else:
-
-        raise ValueError(f"No parser configured for " f"{extension}")
+        raise ValueError(f"No parser configured for {extension}")
 
     if not records:
         raise ValueError("Document contains no records.")
@@ -308,7 +325,7 @@ def extract_source_columns(
     in the document.
 
     Do not rely only on the first row because
-    JSON/XML records may have inconsistent keys.
+    JSON records may have inconsistent keys.
     """
 
     columns: list[str] = []
@@ -316,11 +333,8 @@ def extract_source_columns(
     seen: set[str] = set()
 
     for record in records:
-
         for column in record.keys():
-
             if column not in seen:
-
                 seen.add(column)
 
                 columns.append(column)

@@ -1,0 +1,8746 @@
+[
+  {
+    "rx id": "RX0002776",
+    "rx date": "2026-05-19",
+    "dr code": "D000021",
+    "drug code": "P025",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004021",
+    "rx date": "2026-01-27",
+    "dr code": "D000163",
+    "drug code": "P030",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000433",
+    "rx date": "2026-05-04",
+    "dr code": "D000263",
+    "drug code": "P009",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003456",
+    "rx date": "2026-02-02",
+    "dr code": "D000010",
+    "drug code": "P028",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002646",
+    "rx date": "2026-02-06",
+    "dr code": "D000193",
+    "drug code": "P017",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001030",
+    "rx date": "2026-03-25",
+    "dr code": "D000050",
+    "drug code": "P007",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000018",
+    "rx date": "2026-07-05",
+    "dr code": "D000086",
+    "drug code": "P019",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003039",
+    "rx date": "2026-03-16",
+    "dr code": "D000131",
+    "drug code": "P019",
+    "units": 38,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002385",
+    "rx date": "2026-05-19",
+    "dr code": "D000055",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001236",
+    "rx date": "2026-06-05",
+    "dr code": "D000238",
+    "drug code": "P017",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003706",
+    "rx date": "2026-03-20",
+    "dr code": "D000233",
+    "drug code": "P023",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001845",
+    "rx date": "2026-03-15",
+    "dr code": "D000126",
+    "drug code": "P002",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001948",
+    "rx date": "2026-01-20",
+    "dr code": "D000032",
+    "drug code": "P018",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000002",
+    "rx date": "2026-01-25",
+    "dr code": "D000272",
+    "drug code": "P019",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000667",
+    "rx date": "2026-02-07",
+    "dr code": "D000148",
+    "drug code": "P024",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000396",
+    "rx date": "2026-01-24",
+    "dr code": "D000145",
+    "drug code": "P014",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003172",
+    "rx date": "2026-03-14",
+    "dr code": "D000039",
+    "drug code": "P028",
+    "units": 56,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000368",
+    "rx date": "2026-07-26",
+    "dr code": "D000117",
+    "drug code": "P001",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002719",
+    "rx date": "2026-07-10",
+    "dr code": "D000128",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002169",
+    "rx date": "2026-05-07",
+    "dr code": "D000064",
+    "drug code": "P021",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000640",
+    "rx date": "2026-03-06",
+    "dr code": "D000031",
+    "drug code": "P026",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002055",
+    "rx date": "2026-07-16",
+    "dr code": "D000154",
+    "drug code": "P025",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003714",
+    "rx date": "2026-04-02",
+    "dr code": "D000004",
+    "drug code": "P023",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001267",
+    "rx date": "2026-07-02",
+    "dr code": "D000139",
+    "drug code": "P026",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002800",
+    "rx date": "2026-06-15",
+    "dr code": "D000250",
+    "drug code": "P011",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003834",
+    "rx date": "2026-07-10",
+    "dr code": "D000228",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003799",
+    "rx date": "2026-06-07",
+    "dr code": "D000004",
+    "drug code": "P007",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001612",
+    "rx date": "2026-07-02",
+    "dr code": "D000161",
+    "drug code": "P014",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000306",
+    "rx date": "2026-03-09",
+    "dr code": "D000150",
+    "drug code": "P028",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000751",
+    "rx date": "2026-02-16",
+    "dr code": "D000108",
+    "drug code": "P023",
+    "units": 6,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001306",
+    "rx date": "2026-03-13",
+    "dr code": "D000143",
+    "drug code": "P025",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003367",
+    "rx date": "2026-04-23",
+    "dr code": "D000010",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003070",
+    "rx date": "2026-03-22",
+    "dr code": "D000131",
+    "drug code": "P003",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003587",
+    "rx date": "2026-01-18",
+    "dr code": "D000180",
+    "drug code": "P025",
+    "units": 15,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0001499",
+    "rx date": "2026-01-04",
+    "dr code": "D000239",
+    "drug code": "P020",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003626",
+    "rx date": "2026-02-25",
+    "dr code": "D000180",
+    "drug code": "P012",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003267",
+    "rx date": "2026-06-21",
+    "dr code": "D000268",
+    "drug code": "P028",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001015",
+    "rx date": "2026-04-27",
+    "dr code": "D000020",
+    "drug code": "P021",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002399",
+    "rx date": "2026-02-19",
+    "dr code": "D000151",
+    "drug code": "P018",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001797",
+    "rx date": "2026-05-09",
+    "dr code": "D000199",
+    "drug code": "P003",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003696",
+    "rx date": "2026-01-13",
+    "dr code": "D000051",
+    "drug code": "P023",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002925",
+    "rx date": "2026-07-17",
+    "dr code": "D000215",
+    "drug code": "P014",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003089",
+    "rx date": "2026-02-06",
+    "dr code": "D000112",
+    "drug code": "P015",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002005",
+    "rx date": "2026-02-05",
+    "dr code": "D000001",
+    "drug code": "P018",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003893",
+    "rx date": "2026-01-26",
+    "dr code": "D000183",
+    "drug code": "P010",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001605",
+    "rx date": "2026-04-20",
+    "dr code": "D000270",
+    "drug code": "P014",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003004",
+    "rx date": "2026-06-18",
+    "dr code": "D000279",
+    "drug code": "P011",
+    "units": 104,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003580",
+    "rx date": "2026-05-08",
+    "dr code": "D000044",
+    "drug code": "P024",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003112",
+    "rx date": "2026-01-08",
+    "dr code": "D000222",
+    "drug code": "P002",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000646",
+    "rx date": "2026-04-05",
+    "dr code": "D000094",
+    "drug code": "P026",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000664",
+    "rx date": "2026-02-14",
+    "dr code": "D000155",
+    "drug code": "P024",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002860",
+    "rx date": "2026-01-11",
+    "dr code": "D000175",
+    "drug code": "P022",
+    "units": 90,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004185",
+    "rx date": "2026-03-13",
+    "dr code": "D000210",
+    "drug code": "P019",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003961",
+    "rx date": "2026-05-05",
+    "dr code": "D000098",
+    "drug code": "P002",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003526",
+    "rx date": "2026-07-19",
+    "dr code": "D000166",
+    "drug code": "P009",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001784",
+    "rx date": "2026-01-08",
+    "dr code": "D000246",
+    "drug code": "P003",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001896",
+    "rx date": "2026-02-09",
+    "dr code": "D000257",
+    "drug code": "P007",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003419",
+    "rx date": "2026-05-26",
+    "dr code": "D000298",
+    "drug code": "P030",
+    "units": 76,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001213",
+    "rx date": "2026-01-02",
+    "dr code": "D000077",
+    "drug code": "P017",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004145",
+    "rx date": "2026-05-23",
+    "dr code": "D000261",
+    "drug code": "P024",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002572",
+    "rx date": "2026-02-11",
+    "dr code": "D000030",
+    "drug code": "P011",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002822",
+    "rx date": "2026-05-18",
+    "dr code": "D000022",
+    "drug code": "P024",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003502",
+    "rx date": "2026-07-13",
+    "dr code": "D000181",
+    "drug code": "P027",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003551",
+    "rx date": "2026-06-16",
+    "dr code": "D000267",
+    "drug code": "P020",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004313",
+    "rx date": "2026-07-09",
+    "dr code": "D000132",
+    "drug code": "P027",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003763",
+    "rx date": "2026-02-03",
+    "dr code": "D000004",
+    "drug code": "P006",
+    "units": 27,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0004353",
+    "rx date": "2026-02-01",
+    "dr code": "D000282",
+    "drug code": "P010",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004176",
+    "rx date": "2026-07-11",
+    "dr code": "D000006",
+    "drug code": "P002",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000790",
+    "rx date": "2026-02-23",
+    "dr code": "D000148",
+    "drug code": "P013",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002377",
+    "rx date": "2026-03-15",
+    "dr code": "D000190",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003436",
+    "rx date": "2026-03-01",
+    "dr code": "D000298",
+    "drug code": "P015",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000324",
+    "rx date": "2026-01-14",
+    "dr code": "D000150",
+    "drug code": "P013",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002924",
+    "rx date": "2026-07-14",
+    "dr code": "D000172",
+    "drug code": "P014",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001344",
+    "rx date": "2026-07-23",
+    "dr code": "D000085",
+    "drug code": "P008",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001131",
+    "rx date": "2026-05-24",
+    "dr code": "D000176",
+    "drug code": "P006",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003726",
+    "rx date": "2026-07-10",
+    "dr code": "D000228",
+    "drug code": "P023",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004237",
+    "rx date": "2026-05-05",
+    "dr code": "D000294",
+    "drug code": "P025",
+    "units": 48,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000583",
+    "rx date": "2026-04-02",
+    "dr code": "D000031",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002088",
+    "rx date": "2026-01-16",
+    "dr code": "D000042",
+    "drug code": "P009",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003481",
+    "rx date": "2026-01-22",
+    "dr code": "D000290",
+    "drug code": "P027",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004002",
+    "rx date": "2026-03-09",
+    "dr code": "D000287",
+    "drug code": "P014",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002613",
+    "rx date": "2026-01-01",
+    "dr code": "D000254",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004298",
+    "rx date": "2026-04-22",
+    "dr code": "D000258",
+    "drug code": "P027",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001653",
+    "rx date": "2026-05-16",
+    "dr code": "D000292",
+    "drug code": "P030",
+    "units": 97,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000977",
+    "rx date": "2026-01-19",
+    "dr code": "D000068",
+    "drug code": "P028",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004136",
+    "rx date": "2026-03-16",
+    "dr code": "D000028",
+    "drug code": "P024",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002948",
+    "rx date": "2026-05-06",
+    "dr code": "D000175",
+    "drug code": "P018",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000955",
+    "rx date": "2026-03-27",
+    "dr code": "D000122",
+    "drug code": "P007",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000107",
+    "rx date": "2026-06-10",
+    "dr code": "D000272",
+    "drug code": "P027",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002955",
+    "rx date": "2026-01-14",
+    "dr code": "D000243",
+    "drug code": "P016",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003440",
+    "rx date": "2026-03-19",
+    "dr code": "D000204",
+    "drug code": "P015",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003939",
+    "rx date": "2026-06-01",
+    "dr code": "D000183",
+    "drug code": "P024",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002509",
+    "rx date": "2026-02-21",
+    "dr code": "D000054",
+    "drug code": "P003",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000829",
+    "rx date": "2026-05-27",
+    "dr code": "D000155",
+    "drug code": "P012",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001152",
+    "rx date": "2026-02-21",
+    "dr code": "D000125",
+    "drug code": "P030",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003618",
+    "rx date": "2026-07-22",
+    "dr code": "D000057",
+    "drug code": "P025",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001972",
+    "rx date": "2026-06-24",
+    "dr code": "D000036",
+    "drug code": "P018",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002076",
+    "rx date": "2026-05-11",
+    "dr code": "D000154",
+    "drug code": "P022",
+    "units": 42,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0001122",
+    "rx date": "2026-02-02",
+    "dr code": "D000158",
+    "drug code": "P006",
+    "units": 117,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001964",
+    "rx date": "2026-05-17",
+    "dr code": "D000036",
+    "drug code": "P018",
+    "units": 19,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002142",
+    "rx date": "2026-06-21",
+    "dr code": "D000219",
+    "drug code": "P010",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000447",
+    "rx date": "2026-02-25",
+    "dr code": "D000066",
+    "drug code": "P024",
+    "units": 60,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001355",
+    "rx date": "2026-03-26",
+    "dr code": "D000085",
+    "drug code": "P020",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002941",
+    "rx date": "2026-04-17",
+    "dr code": "D000215",
+    "drug code": "P018",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001473",
+    "rx date": "2026-01-14",
+    "dr code": "D000002",
+    "drug code": "P018",
+    "units": 82,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001517",
+    "rx date": "2026-05-17",
+    "dr code": "D000213",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001763",
+    "rx date": "2026-03-08",
+    "dr code": "D000198",
+    "drug code": "P008",
+    "units": 91,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001555",
+    "rx date": "2026-05-19",
+    "dr code": "D000161",
+    "drug code": "P025",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003576",
+    "rx date": "2026-04-01",
+    "dr code": "D000115",
+    "drug code": "P024",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003423",
+    "rx date": "2026-06-22",
+    "dr code": "D000253",
+    "drug code": "P030",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001198",
+    "rx date": "2026-05-11",
+    "dr code": "D000049",
+    "drug code": "P020",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001748",
+    "rx date": "2026-05-06",
+    "dr code": "D000292",
+    "drug code": "P004",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004278",
+    "rx date": "2026-07-21",
+    "dr code": "D000210",
+    "drug code": "P024",
+    "units": 54,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000121",
+    "rx date": "2026-03-14",
+    "dr code": "D000045",
+    "drug code": "P017",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004188",
+    "rx date": "2026-04-18",
+    "dr code": "D000174",
+    "drug code": "P019",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001704",
+    "rx date": "2026-05-26",
+    "dr code": "D000232",
+    "drug code": "P028",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000703",
+    "rx date": "2026-05-09",
+    "dr code": "D000018",
+    "drug code": "P007",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000181",
+    "rx date": "2026-04-23",
+    "dr code": "D000109",
+    "drug code": "P012",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003548",
+    "rx date": "2026-05-11",
+    "dr code": "D000044",
+    "drug code": "P020",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001418",
+    "rx date": "2026-07-23",
+    "dr code": "D000134",
+    "drug code": "P002",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004023",
+    "rx date": "2026-02-04",
+    "dr code": "D000261",
+    "drug code": "P030",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002487",
+    "rx date": "2026-03-20",
+    "dr code": "D000151",
+    "drug code": "P029",
+    "units": 71,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000649",
+    "rx date": "2026-05-24",
+    "dr code": "D000089",
+    "drug code": "P026",
+    "units": 145,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001881",
+    "rx date": "2026-05-07",
+    "dr code": "D000032",
+    "drug code": "P017",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000378",
+    "rx date": "2026-02-26",
+    "dr code": "D000150",
+    "drug code": "P010",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002129",
+    "rx date": "2026-03-23",
+    "dr code": "D000053",
+    "drug code": "P010",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004364",
+    "rx date": "2026-05-25",
+    "dr code": "D000174",
+    "drug code": "P010",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002723",
+    "rx date": "2026-01-26",
+    "dr code": "D000130",
+    "drug code": "P018",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002293",
+    "rx date": "2026-02-14",
+    "dr code": "D000171",
+    "drug code": "P018",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000791",
+    "rx date": "2026-02-11",
+    "dr code": "D000108",
+    "drug code": "P013",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001630",
+    "rx date": "2026-05-26",
+    "dr code": "D000232",
+    "drug code": "P023",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001827",
+    "rx date": "2026-04-17",
+    "dr code": "D000246",
+    "drug code": "P021",
+    "units": 65,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001940",
+    "rx date": "2026-07-10",
+    "dr code": "D000199",
+    "drug code": "P012",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001146",
+    "rx date": "2026-01-24",
+    "dr code": "D000110",
+    "drug code": "P030",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001492",
+    "rx date": "2026-06-25",
+    "dr code": "D000157",
+    "drug code": "P018",
+    "units": 78,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000858",
+    "rx date": "2026-05-18",
+    "dr code": "D000122",
+    "drug code": "P003",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001104",
+    "rx date": "2026-05-10",
+    "dr code": "D000082",
+    "drug code": "P029",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001124",
+    "rx date": "2026-04-25",
+    "dr code": "D000107",
+    "drug code": "P006",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001913",
+    "rx date": "2026-06-01",
+    "dr code": "D000257",
+    "drug code": "P007",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000560",
+    "rx date": "2026-06-19",
+    "dr code": "D000031",
+    "drug code": "P001",
+    "units": 101,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003126",
+    "rx date": "2026-06-06",
+    "dr code": "D000222",
+    "drug code": "P002",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000625",
+    "rx date": "2026-07-03",
+    "dr code": "D000288",
+    "drug code": "P008",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000049",
+    "rx date": "2026-05-13",
+    "dr code": "D000086",
+    "drug code": "P028",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003308",
+    "rx date": "2026-01-16",
+    "dr code": "D000289",
+    "drug code": "P020",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002627",
+    "rx date": "2026-04-27",
+    "dr code": "D000103",
+    "drug code": "P020",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001978",
+    "rx date": "2026-07-05",
+    "dr code": "D000032",
+    "drug code": "P018",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003149",
+    "rx date": "2026-04-09",
+    "dr code": "D000140",
+    "drug code": "P020",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000927",
+    "rx date": "2026-02-08",
+    "dr code": "D000122",
+    "drug code": "P022",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003609",
+    "rx date": "2026-05-14",
+    "dr code": "D000115",
+    "drug code": "P025",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003831",
+    "rx date": "2026-07-26",
+    "dr code": "D000249",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003100",
+    "rx date": "2026-05-12",
+    "dr code": "D000131",
+    "drug code": "P015",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000530",
+    "rx date": "2026-05-18",
+    "dr code": "D000240",
+    "drug code": "P021",
+    "units": 70,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003743",
+    "rx date": "2026-05-07",
+    "dr code": "D000113",
+    "drug code": "P015",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001576",
+    "rx date": "2026-04-24",
+    "dr code": "D000212",
+    "drug code": "P022",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002828",
+    "rx date": "2026-07-03",
+    "dr code": "D000128",
+    "drug code": "P024",
+    "units": 48,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003284",
+    "rx date": "2026-04-02",
+    "dr code": "D000268",
+    "drug code": "P012",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001810",
+    "rx date": "2026-01-12",
+    "dr code": "D000221",
+    "drug code": "P021",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003294",
+    "rx date": "2026-05-12",
+    "dr code": "D000156",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000080",
+    "rx date": "2026-02-05",
+    "dr code": "D000272",
+    "drug code": "P015",
+    "units": 107,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001455",
+    "rx date": "2026-04-15",
+    "dr code": "D000223",
+    "drug code": "P003",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000166",
+    "rx date": "2026-07-08",
+    "dr code": "D000005",
+    "drug code": "P025",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002177",
+    "rx date": "2026-01-26",
+    "dr code": "D000019",
+    "drug code": "P014",
+    "units": 36,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0004264",
+    "rx date": "2026-04-12",
+    "dr code": "D000294",
+    "drug code": "P024",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001446",
+    "rx date": "2026-02-17",
+    "dr code": "D000223",
+    "drug code": "P003",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001952",
+    "rx date": "2026-03-04",
+    "dr code": "D000073",
+    "drug code": "P018",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000048",
+    "rx date": "2026-04-01",
+    "dr code": "D000045",
+    "drug code": "P028",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004073",
+    "rx date": "2026-02-11",
+    "dr code": "D000007",
+    "drug code": "P009",
+    "units": 10,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002692",
+    "rx date": "2026-01-23",
+    "dr code": "D000128",
+    "drug code": "P006",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000443",
+    "rx date": "2026-01-22",
+    "dr code": "D000240",
+    "drug code": "P024",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000865",
+    "rx date": "2026-06-27",
+    "dr code": "D000068",
+    "drug code": "P003",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001445",
+    "rx date": "2026-02-26",
+    "dr code": "D000234",
+    "drug code": "P003",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000351",
+    "rx date": "2026-04-04",
+    "dr code": "D000096",
+    "drug code": "P001",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002000",
+    "rx date": "2026-07-24",
+    "dr code": "D000011",
+    "drug code": "P019",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000900",
+    "rx date": "2026-02-26",
+    "dr code": "D000020",
+    "drug code": "P020",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001611",
+    "rx date": "2026-06-07",
+    "dr code": "D000212",
+    "drug code": "P014",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002845",
+    "rx date": "2026-03-20",
+    "dr code": "D000041",
+    "drug code": "P020",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004337",
+    "rx date": "2026-06-12",
+    "dr code": "D000174",
+    "drug code": "P002",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002597",
+    "rx date": "2026-03-26",
+    "dr code": "D000017",
+    "drug code": "P027",
+    "units": 90,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000382",
+    "rx date": "2026-03-16",
+    "dr code": "D000117",
+    "drug code": "P010",
+    "units": 81,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003509",
+    "rx date": "2026-01-25",
+    "dr code": "D000044",
+    "drug code": "P009",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004239",
+    "rx date": "2026-05-25",
+    "dr code": "D000211",
+    "drug code": "P025",
+    "units": 48,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001303",
+    "rx date": "2026-02-06",
+    "dr code": "D000284",
+    "drug code": "P025",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000951",
+    "rx date": "2026-02-18",
+    "dr code": "D000207",
+    "drug code": "P007",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002421",
+    "rx date": "2026-01-10",
+    "dr code": "D000088",
+    "drug code": "P016",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004273",
+    "rx date": "2026-06-11",
+    "dr code": "D000258",
+    "drug code": "P024",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001356",
+    "rx date": "2026-03-10",
+    "dr code": "D000134",
+    "drug code": "P020",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002447",
+    "rx date": "2026-07-03",
+    "dr code": "D000170",
+    "drug code": "P016",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003414",
+    "rx date": "2026-04-08",
+    "dr code": "D000052",
+    "drug code": "P030",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001056",
+    "rx date": "2026-03-06",
+    "dr code": "D000285",
+    "drug code": "P028",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003546",
+    "rx date": "2026-05-14",
+    "dr code": "D000115",
+    "drug code": "P020",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001162",
+    "rx date": "2026-04-23",
+    "dr code": "D000229",
+    "drug code": "P030",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000672",
+    "rx date": "2026-03-03",
+    "dr code": "D000108",
+    "drug code": "P024",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003416",
+    "rx date": "2026-04-18",
+    "dr code": "D000123",
+    "drug code": "P030",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002812",
+    "rx date": "2026-02-05",
+    "dr code": "D000194",
+    "drug code": "P024",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003101",
+    "rx date": "2026-05-06",
+    "dr code": "D000074",
+    "drug code": "P015",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002012",
+    "rx date": "2026-04-17",
+    "dr code": "D000260",
+    "drug code": "P018",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003827",
+    "rx date": "2026-06-23",
+    "dr code": "D000228",
+    "drug code": "P017",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000860",
+    "rx date": "2026-05-02",
+    "dr code": "D000296",
+    "drug code": "P003",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002507",
+    "rx date": "2026-02-08",
+    "dr code": "D000149",
+    "drug code": "P003",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004012",
+    "rx date": "2026-05-21",
+    "dr code": "D000200",
+    "drug code": "P014",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000592",
+    "rx date": "2026-05-27",
+    "dr code": "D000121",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003217",
+    "rx date": "2026-06-19",
+    "dr code": "D000140",
+    "drug code": "P021",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000582",
+    "rx date": "2026-04-03",
+    "dr code": "D000094",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000079",
+    "rx date": "2026-02-11",
+    "dr code": "D000086",
+    "drug code": "P015",
+    "units": 107,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000532",
+    "rx date": "2026-05-10",
+    "dr code": "D000100",
+    "drug code": "P021",
+    "units": 70,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001618",
+    "rx date": "2026-02-16",
+    "dr code": "D000083",
+    "drug code": "P023",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003374",
+    "rx date": "2026-05-19",
+    "dr code": "D000076",
+    "drug code": "P003",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003951",
+    "rx date": "2026-03-24",
+    "dr code": "D000214",
+    "drug code": "P002",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004372",
+    "rx date": "2026-07-20",
+    "dr code": "D000174",
+    "drug code": "P010",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003405",
+    "rx date": "2026-01-24",
+    "dr code": "D000241",
+    "drug code": "P030",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002178",
+    "rx date": "2026-01-11",
+    "dr code": "D000286",
+    "drug code": "P014",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000605",
+    "rx date": "2026-02-08",
+    "dr code": "D000031",
+    "drug code": "P008",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000185",
+    "rx date": "2026-06-18",
+    "dr code": "D000225",
+    "drug code": "P012",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002991",
+    "rx date": "2026-03-13",
+    "dr code": "D000224",
+    "drug code": "P011",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000564",
+    "rx date": "2026-07-22",
+    "dr code": "D000276",
+    "drug code": "P001",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000031",
+    "rx date": "2026-05-05",
+    "dr code": "D000086",
+    "drug code": "P011",
+    "units": 81,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000136",
+    "rx date": "2026-01-17",
+    "dr code": "D000295",
+    "drug code": "P025",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003262",
+    "rx date": "2026-04-06",
+    "dr code": "D000071",
+    "drug code": "P028",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001258",
+    "rx date": "2026-04-17",
+    "dr code": "D000139",
+    "drug code": "P026",
+    "units": 73,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003964",
+    "rx date": "2026-06-01",
+    "dr code": "D000244",
+    "drug code": "P002",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001944",
+    "rx date": "2026-07-17",
+    "dr code": "D000126",
+    "drug code": "P012",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002232",
+    "rx date": "2026-07-09",
+    "dr code": "D000053",
+    "drug code": "P013",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000120",
+    "rx date": "2026-03-13",
+    "dr code": "D000086",
+    "drug code": "P017",
+    "units": 35,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002361",
+    "rx date": "2026-06-23",
+    "dr code": "D000008",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002721",
+    "rx date": "2026-01-12",
+    "dr code": "D000194",
+    "drug code": "P018",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003806",
+    "rx date": "2026-07-12",
+    "dr code": "D000249",
+    "drug code": "P007",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001075",
+    "rx date": "2026-07-22",
+    "dr code": "D000237",
+    "drug code": "P028",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000733",
+    "rx date": "2026-06-11",
+    "dr code": "D000065",
+    "drug code": "P001",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000518",
+    "rx date": "2026-01-04",
+    "dr code": "D000100",
+    "drug code": "P021",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001280",
+    "rx date": "2026-03-20",
+    "dr code": "D000139",
+    "drug code": "P011",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001413",
+    "rx date": "2026-06-12",
+    "dr code": "D000284",
+    "drug code": "P002",
+    "units": 152,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002620",
+    "rx date": "2026-03-17",
+    "dr code": "D000103",
+    "drug code": "P020",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003677",
+    "rx date": "2026-04-21",
+    "dr code": "D000051",
+    "drug code": "P009",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001092",
+    "rx date": "2026-03-27",
+    "dr code": "D000202",
+    "drug code": "P029",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003188",
+    "rx date": "2026-07-19",
+    "dr code": "D000060",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000029",
+    "rx date": "2026-04-01",
+    "dr code": "D000045",
+    "drug code": "P011",
+    "units": 74,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003877",
+    "rx date": "2026-04-10",
+    "dr code": "D000135",
+    "drug code": "P023",
+    "units": 18,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000287",
+    "rx date": "2026-05-25",
+    "dr code": "D000275",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003500",
+    "rx date": "2026-07-16",
+    "dr code": "D000044",
+    "drug code": "P027",
+    "units": 18,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003701",
+    "rx date": "2026-02-17",
+    "dr code": "D000249",
+    "drug code": "P023",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000701",
+    "rx date": "2026-04-15",
+    "dr code": "D000018",
+    "drug code": "P007",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002308",
+    "rx date": "2026-06-08",
+    "dr code": "D000008",
+    "drug code": "P018",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002213",
+    "rx date": "2026-03-06",
+    "dr code": "D000040",
+    "drug code": "P013",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003923",
+    "rx date": "2026-02-16",
+    "dr code": "D000016",
+    "drug code": "P024",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000177",
+    "rx date": "2026-03-13",
+    "dr code": "D000295",
+    "drug code": "P012",
+    "units": 50,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004019",
+    "rx date": "2026-07-10",
+    "dr code": "D000012",
+    "drug code": "P014",
+    "units": 99,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003108",
+    "rx date": "2026-07-02",
+    "dr code": "D000222",
+    "drug code": "P015",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002453",
+    "rx date": "2026-01-22",
+    "dr code": "D000149",
+    "drug code": "P002",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000455",
+    "rx date": "2026-05-19",
+    "dr code": "D000100",
+    "drug code": "P024",
+    "units": 89,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002286",
+    "rx date": "2026-01-13",
+    "dr code": "D000055",
+    "drug code": "P018",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003366",
+    "rx date": "2026-04-13",
+    "dr code": "D000204",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002124",
+    "rx date": "2026-02-23",
+    "dr code": "D000286",
+    "drug code": "P010",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003934",
+    "rx date": "2026-04-20",
+    "dr code": "D000135",
+    "drug code": "P024",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000776",
+    "rx date": "2026-07-03",
+    "dr code": "D000155",
+    "drug code": "P023",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002140",
+    "rx date": "2026-06-19",
+    "dr code": "D000286",
+    "drug code": "P010",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001154",
+    "rx date": "2026-03-16",
+    "dr code": "D000034",
+    "drug code": "P030",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002942",
+    "rx date": "2026-04-17",
+    "dr code": "D000172",
+    "drug code": "P018",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000139",
+    "rx date": "2026-02-19",
+    "dr code": "D000225",
+    "drug code": "P025",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000889",
+    "rx date": "2026-06-19",
+    "dr code": "D000293",
+    "drug code": "P002",
+    "units": 27,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000779",
+    "rx date": "2026-07-07",
+    "dr code": "D000084",
+    "drug code": "P023",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000051",
+    "rx date": "2026-05-14",
+    "dr code": "D000272",
+    "drug code": "P028",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000607",
+    "rx date": "2026-02-04",
+    "dr code": "D000089",
+    "drug code": "P008",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001649",
+    "rx date": "2026-04-23",
+    "dr code": "D000198",
+    "drug code": "P030",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002967",
+    "rx date": "2026-05-03",
+    "dr code": "D000074",
+    "drug code": "P016",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003444",
+    "rx date": "2026-05-08",
+    "dr code": "D000037",
+    "drug code": "P015",
+    "units": 114,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001130",
+    "rx date": "2026-05-21",
+    "dr code": "D000050",
+    "drug code": "P006",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000221",
+    "rx date": "2026-01-18",
+    "dr code": "D000109",
+    "drug code": "P018",
+    "units": 82,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000978",
+    "rx date": "2026-02-09",
+    "dr code": "D000173",
+    "drug code": "P028",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001447",
+    "rx date": "2026-02-09",
+    "dr code": "D000239",
+    "drug code": "P003",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002342",
+    "rx date": "2026-02-09",
+    "dr code": "D000209",
+    "drug code": "P026",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003657",
+    "rx date": "2026-03-02",
+    "dr code": "D000160",
+    "drug code": "P002",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003232",
+    "rx date": "2026-02-06",
+    "dr code": "D000035",
+    "drug code": "P001",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003916",
+    "rx date": "2026-07-16",
+    "dr code": "D000098",
+    "drug code": "P010",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001024",
+    "rx date": "2026-06-26",
+    "dr code": "D000296",
+    "drug code": "P021",
+    "units": 84,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004300",
+    "rx date": "2026-04-03",
+    "dr code": "D000132",
+    "drug code": "P027",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002779",
+    "rx date": "2026-06-07",
+    "dr code": "D000227",
+    "drug code": "P025",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000478",
+    "rx date": "2026-04-20",
+    "dr code": "D000263",
+    "drug code": "P014",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004332",
+    "rx date": "2026-05-17",
+    "dr code": "D000282",
+    "drug code": "P002",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002007",
+    "rx date": "2026-02-24",
+    "dr code": "D000184",
+    "drug code": "P018",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000827",
+    "rx date": "2026-04-16",
+    "dr code": "D000018",
+    "drug code": "P012",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003702",
+    "rx date": "2026-02-03",
+    "dr code": "D000051",
+    "drug code": "P023",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000657",
+    "rx date": "2026-07-16",
+    "dr code": "D000121",
+    "drug code": "P026",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003270",
+    "rx date": "2026-07-12",
+    "dr code": "D000245",
+    "drug code": "P028",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003304",
+    "rx date": "2026-07-06",
+    "dr code": "D000067",
+    "drug code": "P012",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000622",
+    "rx date": "2026-06-11",
+    "dr code": "D000094",
+    "drug code": "P008",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002380",
+    "rx date": "2026-05-05",
+    "dr code": "D000171",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000055",
+    "rx date": "2026-07-20",
+    "dr code": "D000272",
+    "drug code": "P028",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002552",
+    "rx date": "2026-04-22",
+    "dr code": "D000120",
+    "drug code": "P012",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003917",
+    "rx date": "2026-07-17",
+    "dr code": "D000152",
+    "drug code": "P010",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002301",
+    "rx date": "2026-04-18",
+    "dr code": "D000190",
+    "drug code": "P018",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001770",
+    "rx date": "2026-05-11",
+    "dr code": "D000292",
+    "drug code": "P008",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002315",
+    "rx date": "2026-02-07",
+    "dr code": "D000251",
+    "drug code": "P007",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003295",
+    "rx date": "2026-06-24",
+    "dr code": "D000268",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004367",
+    "rx date": "2026-05-10",
+    "dr code": "D000164",
+    "drug code": "P010",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002626",
+    "rx date": "2026-04-18",
+    "dr code": "D000080",
+    "drug code": "P020",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000919",
+    "rx date": "2026-07-06",
+    "dr code": "D000236",
+    "drug code": "P020",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001403",
+    "rx date": "2026-02-24",
+    "dr code": "D000143",
+    "drug code": "P002",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001717",
+    "rx date": "2026-03-18",
+    "dr code": "D000292",
+    "drug code": "P027",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000475",
+    "rx date": "2026-03-03",
+    "dr code": "D000066",
+    "drug code": "P014",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002164",
+    "rx date": "2026-04-26",
+    "dr code": "D000217",
+    "drug code": "P021",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001128",
+    "rx date": "2026-04-25",
+    "dr code": "D000202",
+    "drug code": "P006",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003812",
+    "rx date": "2026-02-03",
+    "dr code": "D000127",
+    "drug code": "P017",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003969",
+    "rx date": "2026-07-03",
+    "dr code": "D000235",
+    "drug code": "P002",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000816",
+    "rx date": "2026-01-19",
+    "dr code": "D000108",
+    "drug code": "P012",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000681",
+    "rx date": "2026-06-23",
+    "dr code": "D000084",
+    "drug code": "P024",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002659",
+    "rx date": "2026-06-24",
+    "dr code": "D000103",
+    "drug code": "P017",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001187",
+    "rx date": "2026-03-03",
+    "dr code": "D000189",
+    "drug code": "P020",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003904",
+    "rx date": "2026-04-12",
+    "dr code": "D000235",
+    "drug code": "P010",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000766",
+    "rx date": "2026-05-22",
+    "dr code": "D000179",
+    "drug code": "P023",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004309",
+    "rx date": "2026-07-08",
+    "dr code": "D000174",
+    "drug code": "P027",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002892",
+    "rx date": "2026-01-25",
+    "dr code": "D000172",
+    "drug code": "P014",
+    "units": 37,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000032",
+    "rx date": "2026-05-06",
+    "dr code": "D000045",
+    "drug code": "P011",
+    "units": 81,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004143",
+    "rx date": "2026-04-22",
+    "dr code": "D000007",
+    "drug code": "P024",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004366",
+    "rx date": "2026-05-07",
+    "dr code": "D000210",
+    "drug code": "P010",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003339",
+    "rx date": "2026-04-21",
+    "dr code": "D000241",
+    "drug code": "P016",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000224",
+    "rx date": "2026-02-20",
+    "dr code": "D000005",
+    "drug code": "P018",
+    "units": 250,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001910",
+    "rx date": "2026-05-25",
+    "dr code": "D000032",
+    "drug code": "P007",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002961",
+    "rx date": "2026-03-06",
+    "dr code": "D000243",
+    "drug code": "P016",
+    "units": 70,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002842",
+    "rx date": "2026-03-18",
+    "dr code": "D000265",
+    "drug code": "P020",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002245",
+    "rx date": "2026-05-18",
+    "dr code": "D000190",
+    "drug code": "P011",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001439",
+    "rx date": "2026-01-12",
+    "dr code": "D000223",
+    "drug code": "P003",
+    "units": 61,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001118",
+    "rx date": "2026-01-08",
+    "dr code": "D000125",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002560",
+    "rx date": "2026-06-02",
+    "dr code": "D000088",
+    "drug code": "P012",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000135",
+    "rx date": "2026-01-10",
+    "dr code": "D000091",
+    "drug code": "P025",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003603",
+    "rx date": "2026-03-17",
+    "dr code": "D000044",
+    "drug code": "P025",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003289",
+    "rx date": "2026-05-18",
+    "dr code": "D000169",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000223",
+    "rx date": "2026-01-25",
+    "dr code": "D000206",
+    "drug code": "P018",
+    "units": 82,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000022",
+    "rx date": "2026-02-14",
+    "dr code": "D000045",
+    "drug code": "P011",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003960",
+    "rx date": "2026-04-13",
+    "dr code": "D000016",
+    "drug code": "P002",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002233",
+    "rx date": "2026-01-10",
+    "dr code": "D000171",
+    "drug code": "P011",
+    "units": 226,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000798",
+    "rx date": "2026-04-20",
+    "dr code": "D000179",
+    "drug code": "P013",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000908",
+    "rx date": "2026-04-12",
+    "dr code": "D000122",
+    "drug code": "P020",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000123",
+    "rx date": "2026-04-14",
+    "dr code": "D000272",
+    "drug code": "P017",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000407",
+    "rx date": "2026-04-25",
+    "dr code": "D000275",
+    "drug code": "P014",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003590",
+    "rx date": "2026-01-25",
+    "dr code": "D000186",
+    "drug code": "P025",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001450",
+    "rx date": "2026-03-12",
+    "dr code": "D000234",
+    "drug code": "P003",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003535",
+    "rx date": "2026-03-09",
+    "dr code": "D000180",
+    "drug code": "P020",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004178",
+    "rx date": "2026-07-23",
+    "dr code": "D000187",
+    "drug code": "P002",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002256",
+    "rx date": "2026-01-12",
+    "dr code": "D000079",
+    "drug code": "P020",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002434",
+    "rx date": "2026-04-06",
+    "dr code": "D000273",
+    "drug code": "P016",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003680",
+    "rx date": "2026-05-09",
+    "dr code": "D000127",
+    "drug code": "P009",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002187",
+    "rx date": "2026-03-26",
+    "dr code": "D000015",
+    "drug code": "P014",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001488",
+    "rx date": "2026-05-06",
+    "dr code": "D000023",
+    "drug code": "P018",
+    "units": 102,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002705",
+    "rx date": "2026-03-17",
+    "dr code": "D000227",
+    "drug code": "P006",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000587",
+    "rx date": "2026-05-01",
+    "dr code": "D000276",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003976",
+    "rx date": "2026-02-16",
+    "dr code": "D000152",
+    "drug code": "P005",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001921",
+    "rx date": "2026-01-20",
+    "dr code": "D000036",
+    "drug code": "P012",
+    "units": 82,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002690",
+    "rx date": "2026-07-09",
+    "dr code": "D000118",
+    "drug code": "P030",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001268",
+    "rx date": "2026-07-21",
+    "dr code": "D000203",
+    "drug code": "P026",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001120",
+    "rx date": "2026-01-12",
+    "dr code": "D000033",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003820",
+    "rx date": "2026-03-20",
+    "dr code": "D000160",
+    "drug code": "P017",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003373",
+    "rx date": "2026-05-22",
+    "dr code": "D000052",
+    "drug code": "P003",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000541",
+    "rx date": "2026-01-27",
+    "dr code": "D000288",
+    "drug code": "P001",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003980",
+    "rx date": "2026-03-22",
+    "dr code": "D000135",
+    "drug code": "P005",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003476",
+    "rx date": "2026-07-25",
+    "dr code": "D000191",
+    "drug code": "P028",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001072",
+    "rx date": "2026-06-26",
+    "dr code": "D000229",
+    "drug code": "P028",
+    "units": 75,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003735",
+    "rx date": "2026-03-14",
+    "dr code": "D000216",
+    "drug code": "P015",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002599",
+    "rx date": "2026-04-03",
+    "dr code": "D000103",
+    "drug code": "P027",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003872",
+    "rx date": "2026-03-07",
+    "dr code": "D000183",
+    "drug code": "P023",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001870",
+    "rx date": "2026-03-14",
+    "dr code": "D000199",
+    "drug code": "P017",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003786",
+    "rx date": "2026-03-09",
+    "dr code": "D000113",
+    "drug code": "P007",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002727",
+    "rx date": "2026-02-12",
+    "dr code": "D000021",
+    "drug code": "P018",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001368",
+    "rx date": "2026-07-19",
+    "dr code": "D000085",
+    "drug code": "P020",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002563",
+    "rx date": "2026-07-17",
+    "dr code": "D000120",
+    "drug code": "P012",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004208",
+    "rx date": "2026-03-14",
+    "dr code": "D000282",
+    "drug code": "P021",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001973",
+    "rx date": "2026-06-15",
+    "dr code": "D000073",
+    "drug code": "P018",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004080",
+    "rx date": "2026-03-25",
+    "dr code": "D000007",
+    "drug code": "P009",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001474",
+    "rx date": "2026-02-09",
+    "dr code": "D000201",
+    "drug code": "P018",
+    "units": 60,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000635",
+    "rx date": "2026-02-10",
+    "dr code": "D000089",
+    "drug code": "P026",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003358",
+    "rx date": "2026-02-08",
+    "dr code": "D000204",
+    "drug code": "P003",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001254",
+    "rx date": "2026-03-07",
+    "dr code": "D000024",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000473",
+    "rx date": "2026-03-24",
+    "dr code": "D000240",
+    "drug code": "P014",
+    "units": 25,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003897",
+    "rx date": "2026-02-05",
+    "dr code": "D000135",
+    "drug code": "P010",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000263",
+    "rx date": "2026-05-12",
+    "dr code": "D000096",
+    "drug code": "P026",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003467",
+    "rx date": "2026-05-25",
+    "dr code": "D000123",
+    "drug code": "P028",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003832",
+    "rx date": "2026-07-02",
+    "dr code": "D000004",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000492",
+    "rx date": "2026-01-06",
+    "dr code": "D000263",
+    "drug code": "P020",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000723",
+    "rx date": "2026-03-05",
+    "dr code": "D000185",
+    "drug code": "P001",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001760",
+    "rx date": "2026-02-22",
+    "dr code": "D000232",
+    "drug code": "P008",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002336",
+    "rx date": "2026-01-10",
+    "dr code": "D000251",
+    "drug code": "P026",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001699",
+    "rx date": "2026-04-08",
+    "dr code": "D000083",
+    "drug code": "P028",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003850",
+    "rx date": "2026-04-23",
+    "dr code": "D000101",
+    "drug code": "P026",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001084",
+    "rx date": "2026-02-10",
+    "dr code": "D000237",
+    "drug code": "P029",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002474",
+    "rx date": "2026-06-17",
+    "dr code": "D000149",
+    "drug code": "P002",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001177",
+    "rx date": "2026-01-01",
+    "dr code": "D000062",
+    "drug code": "P020",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004209",
+    "rx date": "2026-03-22",
+    "dr code": "D000132",
+    "drug code": "P021",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000898",
+    "rx date": "2026-02-11",
+    "dr code": "D000293",
+    "drug code": "P020",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002577",
+    "rx date": "2026-03-05",
+    "dr code": "D000088",
+    "drug code": "P011",
+    "units": 92,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003937",
+    "rx date": "2026-05-27",
+    "dr code": "D000098",
+    "drug code": "P024",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002698",
+    "rx date": "2026-02-07",
+    "dr code": "D000266",
+    "drug code": "P006",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000946",
+    "rx date": "2026-01-06",
+    "dr code": "D000075",
+    "drug code": "P007",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002962",
+    "rx date": "2026-04-18",
+    "dr code": "D000231",
+    "drug code": "P016",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000444",
+    "rx date": "2026-01-05",
+    "dr code": "D000066",
+    "drug code": "P024",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002322",
+    "rx date": "2026-05-24",
+    "dr code": "D000171",
+    "drug code": "P007",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001643",
+    "rx date": "2026-02-15",
+    "dr code": "D000292",
+    "drug code": "P030",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000503",
+    "rx date": "2026-04-25",
+    "dr code": "D000066",
+    "drug code": "P020",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001209",
+    "rx date": "2026-07-14",
+    "dr code": "D000203",
+    "drug code": "P020",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001670",
+    "rx date": "2026-03-24",
+    "dr code": "D000292",
+    "drug code": "P013",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002060",
+    "rx date": "2026-01-15",
+    "dr code": "D000133",
+    "drug code": "P022",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002482",
+    "rx date": "2026-01-26",
+    "dr code": "D000054",
+    "drug code": "P029",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003514",
+    "rx date": "2026-03-27",
+    "dr code": "D000057",
+    "drug code": "P009",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004069",
+    "rx date": "2026-01-18",
+    "dr code": "D000012",
+    "drug code": "P009",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004201",
+    "rx date": "2026-01-04",
+    "dr code": "D000269",
+    "drug code": "P021",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002030",
+    "rx date": "2026-02-10",
+    "dr code": "D000011",
+    "drug code": "P025",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001877",
+    "rx date": "2026-04-25",
+    "dr code": "D000246",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002551",
+    "rx date": "2026-04-06",
+    "dr code": "D000072",
+    "drug code": "P012",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002890",
+    "rx date": "2026-01-04",
+    "dr code": "D000175",
+    "drug code": "P014",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001662",
+    "rx date": "2026-01-21",
+    "dr code": "D000292",
+    "drug code": "P013",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002528",
+    "rx date": "2026-06-24",
+    "dr code": "D000072",
+    "drug code": "P003",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002503",
+    "rx date": "2026-07-07",
+    "dr code": "D000072",
+    "drug code": "P029",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002499",
+    "rx date": "2026-06-01",
+    "dr code": "D000088",
+    "drug code": "P029",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002951",
+    "rx date": "2026-06-03",
+    "dr code": "D000111",
+    "drug code": "P018",
+    "units": 138,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003044",
+    "rx date": "2026-05-02",
+    "dr code": "D000231",
+    "drug code": "P019",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002983",
+    "rx date": "2026-01-05",
+    "dr code": "D000243",
+    "drug code": "P011",
+    "units": 80,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003318",
+    "rx date": "2026-05-15",
+    "dr code": "D000162",
+    "drug code": "P020",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003796",
+    "rx date": "2026-05-16",
+    "dr code": "D000113",
+    "drug code": "P007",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000554",
+    "rx date": "2026-04-08",
+    "dr code": "D000276",
+    "drug code": "P001",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000522",
+    "rx date": "2026-03-01",
+    "dr code": "D000066",
+    "drug code": "P021",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000960",
+    "rx date": "2026-04-04",
+    "dr code": "D000068",
+    "drug code": "P007",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003216",
+    "rx date": "2026-05-15",
+    "dr code": "D000283",
+    "drug code": "P021",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004248",
+    "rx date": "2026-07-17",
+    "dr code": "D000174",
+    "drug code": "P025",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002111",
+    "rx date": "2026-06-18",
+    "dr code": "D000192",
+    "drug code": "P009",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000590",
+    "rx date": "2026-05-03",
+    "dr code": "D000094",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002072",
+    "rx date": "2026-04-23",
+    "dr code": "D000011",
+    "drug code": "P022",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000253",
+    "rx date": "2026-03-13",
+    "dr code": "D000124",
+    "drug code": "P026",
+    "units": 16,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000105",
+    "rx date": "2026-05-13",
+    "dr code": "D000086",
+    "drug code": "P027",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003849",
+    "rx date": "2026-03-11",
+    "dr code": "D000098",
+    "drug code": "P026",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002122",
+    "rx date": "2026-02-02",
+    "dr code": "D000281",
+    "drug code": "P010",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000830",
+    "rx date": "2026-05-27",
+    "dr code": "D000108",
+    "drug code": "P012",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001573",
+    "rx date": "2026-02-05",
+    "dr code": "D000212",
+    "drug code": "P022",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002654",
+    "rx date": "2026-05-16",
+    "dr code": "D000017",
+    "drug code": "P017",
+    "units": 128,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001155",
+    "rx date": "2026-03-18",
+    "dr code": "D000291",
+    "drug code": "P030",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000209",
+    "rx date": "2026-05-27",
+    "dr code": "D000109",
+    "drug code": "P017",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003079",
+    "rx date": "2026-06-10",
+    "dr code": "D000231",
+    "drug code": "P003",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000627",
+    "rx date": "2026-07-01",
+    "dr code": "D000094",
+    "drug code": "P008",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002843",
+    "rx date": "2026-03-14",
+    "dr code": "D000215",
+    "drug code": "P020",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003663",
+    "rx date": "2026-06-21",
+    "dr code": "D000113",
+    "drug code": "P002",
+    "units": 91,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002802",
+    "rx date": "2026-06-19",
+    "dr code": "D000026",
+    "drug code": "P011",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003298",
+    "rx date": "2026-06-12",
+    "dr code": "D000162",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000718",
+    "rx date": "2026-01-18",
+    "dr code": "D000065",
+    "drug code": "P001",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004246",
+    "rx date": "2026-07-05",
+    "dr code": "D000294",
+    "drug code": "P025",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003078",
+    "rx date": "2026-05-07",
+    "dr code": "D000231",
+    "drug code": "P003",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003084",
+    "rx date": "2026-07-22",
+    "dr code": "D000243",
+    "drug code": "P003",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003411",
+    "rx date": "2026-03-07",
+    "dr code": "D000204",
+    "drug code": "P030",
+    "units": 87,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000565",
+    "rx date": "2026-07-03",
+    "dr code": "D000121",
+    "drug code": "P001",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002290",
+    "rx date": "2026-02-27",
+    "dr code": "D000209",
+    "drug code": "P018",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001238",
+    "rx date": "2026-07-21",
+    "dr code": "D000090",
+    "drug code": "P017",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003841",
+    "rx date": "2026-01-10",
+    "dr code": "D000244",
+    "drug code": "P026",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001173",
+    "rx date": "2026-07-19",
+    "dr code": "D000291",
+    "drug code": "P030",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001934",
+    "rx date": "2026-05-10",
+    "dr code": "D000274",
+    "drug code": "P012",
+    "units": 114,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001034",
+    "rx date": "2026-04-21",
+    "dr code": "D000202",
+    "drug code": "P007",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001428",
+    "rx date": "2026-05-10",
+    "dr code": "D000063",
+    "drug code": "P005",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003421",
+    "rx date": "2026-06-17",
+    "dr code": "D000123",
+    "drug code": "P030",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003924",
+    "rx date": "2026-02-04",
+    "dr code": "D000101",
+    "drug code": "P024",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001249",
+    "rx date": "2026-02-10",
+    "dr code": "D000090",
+    "drug code": "P026",
+    "units": 107,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002518",
+    "rx date": "2026-04-05",
+    "dr code": "D000030",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001049",
+    "rx date": "2026-01-05",
+    "dr code": "D000125",
+    "drug code": "P028",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000760",
+    "rx date": "2026-04-10",
+    "dr code": "D000185",
+    "drug code": "P023",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001920",
+    "rx date": "2026-01-07",
+    "dr code": "D000168",
+    "drug code": "P012",
+    "units": 82,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003742",
+    "rx date": "2026-05-27",
+    "dr code": "D000051",
+    "drug code": "P015",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001792",
+    "rx date": "2026-03-08",
+    "dr code": "D000073",
+    "drug code": "P003",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003311",
+    "rx date": "2026-02-21",
+    "dr code": "D000058",
+    "drug code": "P020",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002083",
+    "rx date": "2026-07-27",
+    "dr code": "D000184",
+    "drug code": "P022",
+    "units": 64,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0001330",
+    "rx date": "2026-04-11",
+    "dr code": "D000178",
+    "drug code": "P008",
+    "units": 22,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002048",
+    "rx date": "2026-06-09",
+    "dr code": "D000192",
+    "drug code": "P025",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002675",
+    "rx date": "2026-03-06",
+    "dr code": "D000300",
+    "drug code": "P030",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001512",
+    "rx date": "2026-04-26",
+    "dr code": "D000023",
+    "drug code": "P020",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003276",
+    "rx date": "2026-02-19",
+    "dr code": "D000289",
+    "drug code": "P012",
+    "units": 63,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002677",
+    "rx date": "2026-04-15",
+    "dr code": "D000118",
+    "drug code": "P030",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002617",
+    "rx date": "2026-02-18",
+    "dr code": "D000205",
+    "drug code": "P020",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001228",
+    "rx date": "2026-04-05",
+    "dr code": "D000297",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001279",
+    "rx date": "2026-02-02",
+    "dr code": "D000167",
+    "drug code": "P011",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001427",
+    "rx date": "2026-04-05",
+    "dr code": "D000284",
+    "drug code": "P005",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002442",
+    "rx date": "2026-05-15",
+    "dr code": "D000151",
+    "drug code": "P016",
+    "units": 34,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0001016",
+    "rx date": "2026-05-25",
+    "dr code": "D000293",
+    "drug code": "P021",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002027",
+    "rx date": "2026-01-15",
+    "dr code": "D000133",
+    "drug code": "P025",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003260",
+    "rx date": "2026-03-26",
+    "dr code": "D000169",
+    "drug code": "P028",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002466",
+    "rx date": "2026-04-07",
+    "dr code": "D000271",
+    "drug code": "P002",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003350",
+    "rx date": "2026-06-14",
+    "dr code": "D000191",
+    "drug code": "P016",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002116",
+    "rx date": "2026-07-13",
+    "dr code": "D000042",
+    "drug code": "P009",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000535",
+    "rx date": "2026-06-18",
+    "dr code": "D000240",
+    "drug code": "P021",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002354",
+    "rx date": "2026-05-15",
+    "dr code": "D000008",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003010",
+    "rx date": "2026-07-09",
+    "dr code": "D000222",
+    "drug code": "P011",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000768",
+    "rx date": "2026-05-13",
+    "dr code": "D000108",
+    "drug code": "P023",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000449",
+    "rx date": "2026-03-01",
+    "dr code": "D000066",
+    "drug code": "P024",
+    "units": 120,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002302",
+    "rx date": "2026-05-15",
+    "dr code": "D000251",
+    "drug code": "P018",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002583",
+    "rx date": "2026-06-03",
+    "dr code": "D000030",
+    "drug code": "P011",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003544",
+    "rx date": "2026-05-26",
+    "dr code": "D000197",
+    "drug code": "P020",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001037",
+    "rx date": "2026-05-15",
+    "dr code": "D000034",
+    "drug code": "P007",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000170",
+    "rx date": "2026-01-27",
+    "dr code": "D000091",
+    "drug code": "P012",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002702",
+    "rx date": "2026-03-05",
+    "dr code": "D000194",
+    "drug code": "P006",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001065",
+    "rx date": "2026-05-13",
+    "dr code": "D000107",
+    "drug code": "P028",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003857",
+    "rx date": "2026-06-13",
+    "dr code": "D000135",
+    "drug code": "P026",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002268",
+    "rx date": "2026-04-23",
+    "dr code": "D000242",
+    "drug code": "P020",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002295",
+    "rx date": "2026-03-09",
+    "dr code": "D000251",
+    "drug code": "P018",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003075",
+    "rx date": "2026-05-08",
+    "dr code": "D000131",
+    "drug code": "P003",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000259",
+    "rx date": "2026-04-22",
+    "dr code": "D000150",
+    "drug code": "P026",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002851",
+    "rx date": "2026-06-09",
+    "dr code": "D000097",
+    "drug code": "P020",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002171",
+    "rx date": "2026-06-05",
+    "dr code": "D000286",
+    "drug code": "P021",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001554",
+    "rx date": "2026-05-21",
+    "dr code": "D000270",
+    "drug code": "P025",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002810",
+    "rx date": "2026-02-27",
+    "dr code": "D000250",
+    "drug code": "P024",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003362",
+    "rx date": "2026-03-12",
+    "dr code": "D000204",
+    "drug code": "P003",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003384",
+    "rx date": "2026-01-08",
+    "dr code": "D000241",
+    "drug code": "P024",
+    "units": 119,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002068",
+    "rx date": "2026-03-27",
+    "dr code": "D000192",
+    "drug code": "P022",
+    "units": 83,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002310",
+    "rx date": "2026-07-26",
+    "dr code": "D000078",
+    "drug code": "P018",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003900",
+    "rx date": "2026-03-09",
+    "dr code": "D000235",
+    "drug code": "P010",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002378",
+    "rx date": "2026-04-15",
+    "dr code": "D000055",
+    "drug code": "P021",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001817",
+    "rx date": "2026-02-20",
+    "dr code": "D000257",
+    "drug code": "P021",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002259",
+    "rx date": "2026-02-20",
+    "dr code": "D000171",
+    "drug code": "P020",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000652",
+    "rx date": "2026-06-08",
+    "dr code": "D000031",
+    "drug code": "P026",
+    "units": 74,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002529",
+    "rx date": "2026-06-05",
+    "dr code": "D000030",
+    "drug code": "P003",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000527",
+    "rx date": "2026-04-03",
+    "dr code": "D000240",
+    "drug code": "P021",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000493",
+    "rx date": "2026-01-05",
+    "dr code": "D000066",
+    "drug code": "P020",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000641",
+    "rx date": "2026-03-20",
+    "dr code": "D000276",
+    "drug code": "P026",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002375",
+    "rx date": "2026-03-02",
+    "dr code": "D000242",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002002",
+    "rx date": "2026-01-10",
+    "dr code": "D000011",
+    "drug code": "P018",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003482",
+    "rx date": "2026-02-14",
+    "dr code": "D000186",
+    "drug code": "P027",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000822",
+    "rx date": "2026-02-06",
+    "dr code": "D000148",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002700",
+    "rx date": "2026-02-04",
+    "dr code": "D000130",
+    "drug code": "P006",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002519",
+    "rx date": "2026-04-04",
+    "dr code": "D000054",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001327",
+    "rx date": "2026-03-08",
+    "dr code": "D000063",
+    "drug code": "P008",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002537",
+    "rx date": "2026-01-23",
+    "dr code": "D000120",
+    "drug code": "P012",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002697",
+    "rx date": "2026-02-09",
+    "dr code": "D000022",
+    "drug code": "P006",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002089",
+    "rx date": "2026-01-12",
+    "dr code": "D000133",
+    "drug code": "P009",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001530",
+    "rx date": "2026-01-07",
+    "dr code": "D000161",
+    "drug code": "P025",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002387",
+    "rx date": "2026-06-15",
+    "dr code": "D000209",
+    "drug code": "P021",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003497",
+    "rx date": "2026-06-04",
+    "dr code": "D000186",
+    "drug code": "P027",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002215",
+    "rx date": "2026-03-13",
+    "dr code": "D000064",
+    "drug code": "P013",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002524",
+    "rx date": "2026-05-07",
+    "dr code": "D000271",
+    "drug code": "P003",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001614",
+    "rx date": "2026-01-23",
+    "dr code": "D000232",
+    "drug code": "P023",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003263",
+    "rx date": "2026-04-05",
+    "dr code": "D000067",
+    "drug code": "P028",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002525",
+    "rx date": "2026-05-17",
+    "dr code": "D000093",
+    "drug code": "P003",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004131",
+    "rx date": "2026-02-03",
+    "dr code": "D000142",
+    "drug code": "P024",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003398",
+    "rx date": "2026-05-07",
+    "dr code": "D000253",
+    "drug code": "P024",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000301",
+    "rx date": "2026-01-01",
+    "dr code": "D000177",
+    "drug code": "P028",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002573",
+    "rx date": "2026-02-24",
+    "dr code": "D000072",
+    "drug code": "P011",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000497",
+    "rx date": "2026-02-18",
+    "dr code": "D000240",
+    "drug code": "P020",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002085",
+    "rx date": "2026-07-23",
+    "dr code": "D000192",
+    "drug code": "P022",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001832",
+    "rx date": "2026-05-04",
+    "dr code": "D000246",
+    "drug code": "P021",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003684",
+    "rx date": "2026-05-14",
+    "dr code": "D000160",
+    "drug code": "P009",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002227",
+    "rx date": "2026-06-01",
+    "dr code": "D000064",
+    "drug code": "P013",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003048",
+    "rx date": "2026-05-27",
+    "dr code": "D000279",
+    "drug code": "P019",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000304",
+    "rx date": "2026-02-16",
+    "dr code": "D000177",
+    "drug code": "P028",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002263",
+    "rx date": "2026-02-06",
+    "dr code": "D000055",
+    "drug code": "P020",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002175",
+    "rx date": "2026-07-27",
+    "dr code": "D000040",
+    "drug code": "P021",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000552",
+    "rx date": "2026-03-21",
+    "dr code": "D000031",
+    "drug code": "P001",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003283",
+    "rx date": "2026-04-02",
+    "dr code": "D000067",
+    "drug code": "P012",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003605",
+    "rx date": "2026-04-27",
+    "dr code": "D000099",
+    "drug code": "P025",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003744",
+    "rx date": "2026-05-02",
+    "dr code": "D000004",
+    "drug code": "P015",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000096",
+    "rx date": "2026-01-19",
+    "dr code": "D000272",
+    "drug code": "P027",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002465",
+    "rx date": "2026-04-25",
+    "dr code": "D000072",
+    "drug code": "P002",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002823",
+    "rx date": "2026-05-22",
+    "dr code": "D000194",
+    "drug code": "P024",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000746",
+    "rx date": "2026-01-12",
+    "dr code": "D000146",
+    "drug code": "P023",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000180",
+    "rx date": "2026-04-10",
+    "dr code": "D000195",
+    "drug code": "P012",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003253",
+    "rx date": "2026-02-18",
+    "dr code": "D000058",
+    "drug code": "P028",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002767",
+    "rx date": "2026-04-13",
+    "dr code": "D000194",
+    "drug code": "P025",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002345",
+    "rx date": "2026-03-18",
+    "dr code": "D000008",
+    "drug code": "P026",
+    "units": 96,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000501",
+    "rx date": "2026-03-14",
+    "dr code": "D000066",
+    "drug code": "P020",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000528",
+    "rx date": "2026-04-27",
+    "dr code": "D000263",
+    "drug code": "P021",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002356",
+    "rx date": "2026-05-13",
+    "dr code": "D000079",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000647",
+    "rx date": "2026-04-18",
+    "dr code": "D000121",
+    "drug code": "P026",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003109",
+    "rx date": "2026-07-18",
+    "dr code": "D000279",
+    "drug code": "P015",
+    "units": 58,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000570",
+    "rx date": "2026-01-16",
+    "dr code": "D000121",
+    "drug code": "P011",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000016",
+    "rx date": "2026-06-14",
+    "dr code": "D000086",
+    "drug code": "P019",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000793",
+    "rx date": "2026-03-11",
+    "dr code": "D000148",
+    "drug code": "P013",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001563",
+    "rx date": "2026-07-22",
+    "dr code": "D000226",
+    "drug code": "P025",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003361",
+    "rx date": "2026-02-14",
+    "dr code": "D000298",
+    "drug code": "P003",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000516",
+    "rx date": "2026-01-20",
+    "dr code": "D000066",
+    "drug code": "P021",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003713",
+    "rx date": "2026-04-05",
+    "dr code": "D000216",
+    "drug code": "P023",
+    "units": 13,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002977",
+    "rx date": "2026-07-26",
+    "dr code": "D000243",
+    "drug code": "P016",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004168",
+    "rx date": "2026-05-27",
+    "dr code": "D000261",
+    "drug code": "P002",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001567",
+    "rx date": "2026-01-22",
+    "dr code": "D000270",
+    "drug code": "P022",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002359",
+    "rx date": "2026-06-22",
+    "dr code": "D000171",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000226",
+    "rx date": "2026-03-06",
+    "dr code": "D000295",
+    "drug code": "P018",
+    "units": 110,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001666",
+    "rx date": "2026-02-13",
+    "dr code": "D000232",
+    "drug code": "P013",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002288",
+    "rx date": "2026-01-21",
+    "dr code": "D000251",
+    "drug code": "P018",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002966",
+    "rx date": "2026-04-06",
+    "dr code": "D000224",
+    "drug code": "P016",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003643",
+    "rx date": "2026-06-15",
+    "dr code": "D000252",
+    "drug code": "P012",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002249",
+    "rx date": "2026-06-19",
+    "dr code": "D000190",
+    "drug code": "P011",
+    "units": 114,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003648",
+    "rx date": "2026-01-09",
+    "dr code": "D000249",
+    "drug code": "P002",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002914",
+    "rx date": "2026-06-15",
+    "dr code": "D000041",
+    "drug code": "P014",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000242",
+    "rx date": "2026-07-26",
+    "dr code": "D000206",
+    "drug code": "P018",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003627",
+    "rx date": "2026-03-23",
+    "dr code": "D000197",
+    "drug code": "P012",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003159",
+    "rx date": "2026-06-27",
+    "dr code": "D000283",
+    "drug code": "P020",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002747",
+    "rx date": "2026-06-07",
+    "dr code": "D000194",
+    "drug code": "P018",
+    "units": 167,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003633",
+    "rx date": "2026-04-07",
+    "dr code": "D000252",
+    "drug code": "P012",
+    "units": 15,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000792",
+    "rx date": "2026-03-04",
+    "dr code": "D000146",
+    "drug code": "P013",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002110",
+    "rx date": "2026-06-20",
+    "dr code": "D000011",
+    "drug code": "P009",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000214",
+    "rx date": "2026-06-25",
+    "dr code": "D000247",
+    "drug code": "P017",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004217",
+    "rx date": "2026-05-05",
+    "dr code": "D000132",
+    "drug code": "P021",
+    "units": 97,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002660",
+    "rx date": "2026-06-18",
+    "dr code": "D000205",
+    "drug code": "P017",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001578",
+    "rx date": "2026-04-12",
+    "dr code": "D000270",
+    "drug code": "P022",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003190",
+    "rx date": "2026-07-14",
+    "dr code": "D000039",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000376",
+    "rx date": "2026-02-17",
+    "dr code": "D000188",
+    "drug code": "P010",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000903",
+    "rx date": "2026-03-03",
+    "dr code": "D000122",
+    "drug code": "P020",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003993",
+    "rx date": "2026-07-06",
+    "dr code": "D000183",
+    "drug code": "P005",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004346",
+    "rx date": "2026-01-13",
+    "dr code": "D000174",
+    "drug code": "P010",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001353",
+    "rx date": "2026-02-26",
+    "dr code": "D000218",
+    "drug code": "P020",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002602",
+    "rx date": "2026-05-16",
+    "dr code": "D000103",
+    "drug code": "P027",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000238",
+    "rx date": "2026-06-03",
+    "dr code": "D000206",
+    "drug code": "P018",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002003",
+    "rx date": "2026-01-21",
+    "dr code": "D000043",
+    "drug code": "P018",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002204",
+    "rx date": "2026-01-03",
+    "dr code": "D000015",
+    "drug code": "P013",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000322",
+    "rx date": "2026-01-02",
+    "dr code": "D000220",
+    "drug code": "P013",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001096",
+    "rx date": "2026-04-17",
+    "dr code": "D000285",
+    "drug code": "P029",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001456",
+    "rx date": "2026-04-21",
+    "dr code": "D000048",
+    "drug code": "P003",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002071",
+    "rx date": "2026-04-04",
+    "dr code": "D000260",
+    "drug code": "P022",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002505",
+    "rx date": "2026-01-24",
+    "dr code": "D000271",
+    "drug code": "P003",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004046",
+    "rx date": "2026-01-17",
+    "dr code": "D000287",
+    "drug code": "P007",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003967",
+    "rx date": "2026-07-18",
+    "dr code": "D000152",
+    "drug code": "P002",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000925",
+    "rx date": "2026-02-16",
+    "dr code": "D000248",
+    "drug code": "P022",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000682",
+    "rx date": "2026-06-19",
+    "dr code": "D000179",
+    "drug code": "P024",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001076",
+    "rx date": "2026-07-14",
+    "dr code": "D000291",
+    "drug code": "P028",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003415",
+    "rx date": "2026-04-21",
+    "dr code": "D000204",
+    "drug code": "P030",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003195",
+    "rx date": "2026-01-16",
+    "dr code": "D000039",
+    "drug code": "P021",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001859",
+    "rx date": "2026-06-19",
+    "dr code": "D000221",
+    "drug code": "P002",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002261",
+    "rx date": "2026-02-01",
+    "dr code": "D000190",
+    "drug code": "P020",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001260",
+    "rx date": "2026-05-22",
+    "dr code": "D000297",
+    "drug code": "P026",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002707",
+    "rx date": "2026-04-05",
+    "dr code": "D000138",
+    "drug code": "P006",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002704",
+    "rx date": "2026-03-25",
+    "dr code": "D000021",
+    "drug code": "P006",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001038",
+    "rx date": "2026-05-23",
+    "dr code": "D000082",
+    "drug code": "P007",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001730",
+    "rx date": "2026-06-07",
+    "dr code": "D000232",
+    "drug code": "P027",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002790",
+    "rx date": "2026-03-07",
+    "dr code": "D000021",
+    "drug code": "P011",
+    "units": 103,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002575",
+    "rx date": "2026-02-17",
+    "dr code": "D000088",
+    "drug code": "P011",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000740",
+    "rx date": "2026-07-10",
+    "dr code": "D000146",
+    "drug code": "P001",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000673",
+    "rx date": "2026-04-18",
+    "dr code": "D000108",
+    "drug code": "P024",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002788",
+    "rx date": "2026-02-08",
+    "dr code": "D000194",
+    "drug code": "P011",
+    "units": 108,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002780",
+    "rx date": "2026-06-24",
+    "dr code": "D000138",
+    "drug code": "P025",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004097",
+    "rx date": "2026-07-13",
+    "dr code": "D000142",
+    "drug code": "P009",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003583",
+    "rx date": "2026-06-21",
+    "dr code": "D000099",
+    "drug code": "P024",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002662",
+    "rx date": "2026-07-05",
+    "dr code": "D000262",
+    "drug code": "P017",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004056",
+    "rx date": "2026-03-15",
+    "dr code": "D000012",
+    "drug code": "P007",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001742",
+    "rx date": "2026-03-01",
+    "dr code": "D000083",
+    "drug code": "P004",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001278",
+    "rx date": "2026-02-05",
+    "dr code": "D000029",
+    "drug code": "P011",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001134",
+    "rx date": "2026-06-11",
+    "dr code": "D000176",
+    "drug code": "P006",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003009",
+    "rx date": "2026-07-03",
+    "dr code": "D000112",
+    "drug code": "P011",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003689",
+    "rx date": "2026-07-17",
+    "dr code": "D000113",
+    "drug code": "P009",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002326",
+    "rx date": "2026-06-09",
+    "dr code": "D000153",
+    "drug code": "P007",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002559",
+    "rx date": "2026-06-19",
+    "dr code": "D000170",
+    "drug code": "P012",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002396",
+    "rx date": "2026-02-08",
+    "dr code": "D000072",
+    "drug code": "P018",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000288",
+    "rx date": "2026-05-04",
+    "dr code": "D000114",
+    "drug code": "P011",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001911",
+    "rx date": "2026-06-16",
+    "dr code": "D000246",
+    "drug code": "P007",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000131",
+    "rx date": "2026-07-15",
+    "dr code": "D000086",
+    "drug code": "P017",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000821",
+    "rx date": "2026-02-11",
+    "dr code": "D000155",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001497",
+    "rx date": "2026-07-15",
+    "dr code": "D000048",
+    "drug code": "P018",
+    "units": 50,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001001",
+    "rx date": "2026-07-20",
+    "dr code": "D000068",
+    "drug code": "P028",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003277",
+    "rx date": "2026-02-15",
+    "dr code": "D000035",
+    "drug code": "P012",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001632",
+    "rx date": "2026-06-26",
+    "dr code": "D000232",
+    "drug code": "P023",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004277",
+    "rx date": "2026-06-24",
+    "dr code": "D000174",
+    "drug code": "P024",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000239",
+    "rx date": "2026-06-20",
+    "dr code": "D000109",
+    "drug code": "P018",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003191",
+    "rx date": "2026-07-04",
+    "dr code": "D000027",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003015",
+    "rx date": "2026-02-02",
+    "dr code": "D000279",
+    "drug code": "P017",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003054",
+    "rx date": "2026-07-14",
+    "dr code": "D000243",
+    "drug code": "P019",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004351",
+    "rx date": "2026-02-22",
+    "dr code": "D000210",
+    "drug code": "P010",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001967",
+    "rx date": "2026-05-05",
+    "dr code": "D000032",
+    "drug code": "P018",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000103",
+    "rx date": "2026-04-27",
+    "dr code": "D000086",
+    "drug code": "P027",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001720",
+    "rx date": "2026-04-02",
+    "dr code": "D000198",
+    "drug code": "P027",
+    "units": 76,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003748",
+    "rx date": "2026-06-20",
+    "dr code": "D000113",
+    "drug code": "P015",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003584",
+    "rx date": "2026-06-02",
+    "dr code": "D000044",
+    "drug code": "P024",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000567",
+    "rx date": "2026-01-01",
+    "dr code": "D000276",
+    "drug code": "P011",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000981",
+    "rx date": "2026-02-13",
+    "dr code": "D000075",
+    "drug code": "P028",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001534",
+    "rx date": "2026-02-11",
+    "dr code": "D000129",
+    "drug code": "P025",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002001",
+    "rx date": "2026-01-14",
+    "dr code": "D000260",
+    "drug code": "P018",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002087",
+    "rx date": "2026-01-15",
+    "dr code": "D000192",
+    "drug code": "P009",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001821",
+    "rx date": "2026-03-27",
+    "dr code": "D000168",
+    "drug code": "P021",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000557",
+    "rx date": "2026-05-22",
+    "dr code": "D000031",
+    "drug code": "P001",
+    "units": 65,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001891",
+    "rx date": "2026-01-03",
+    "dr code": "D000199",
+    "drug code": "P007",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001235",
+    "rx date": "2026-06-14",
+    "dr code": "D000139",
+    "drug code": "P017",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003331",
+    "rx date": "2026-02-11",
+    "dr code": "D000037",
+    "drug code": "P016",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004292",
+    "rx date": "2026-03-21",
+    "dr code": "D000132",
+    "drug code": "P027",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000804",
+    "rx date": "2026-05-26",
+    "dr code": "D000018",
+    "drug code": "P013",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000430",
+    "rx date": "2026-05-20",
+    "dr code": "D000240",
+    "drug code": "P009",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003173",
+    "rx date": "2026-03-20",
+    "dr code": "D000060",
+    "drug code": "P028",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002438",
+    "rx date": "2026-05-07",
+    "dr code": "D000120",
+    "drug code": "P016",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001246",
+    "rx date": "2026-01-19",
+    "dr code": "D000238",
+    "drug code": "P026",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000796",
+    "rx date": "2026-04-08",
+    "dr code": "D000065",
+    "drug code": "P013",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001342",
+    "rx date": "2026-06-03",
+    "dr code": "D000085",
+    "drug code": "P008",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001945",
+    "rx date": "2026-01-19",
+    "dr code": "D000246",
+    "drug code": "P018",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001883",
+    "rx date": "2026-06-22",
+    "dr code": "D000257",
+    "drug code": "P017",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002064",
+    "rx date": "2026-02-12",
+    "dr code": "D000192",
+    "drug code": "P022",
+    "units": 122,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000854",
+    "rx date": "2026-04-11",
+    "dr code": "D000293",
+    "drug code": "P003",
+    "units": 134,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001366",
+    "rx date": "2026-07-04",
+    "dr code": "D000218",
+    "drug code": "P020",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002250",
+    "rx date": "2026-06-01",
+    "dr code": "D000242",
+    "drug code": "P011",
+    "units": 114,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003471",
+    "rx date": "2026-06-09",
+    "dr code": "D000037",
+    "drug code": "P028",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001437",
+    "rx date": "2026-07-04",
+    "dr code": "D000081",
+    "drug code": "P005",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004089",
+    "rx date": "2026-05-18",
+    "dr code": "D000200",
+    "drug code": "P009",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003725",
+    "rx date": "2026-07-24",
+    "dr code": "D000233",
+    "drug code": "P023",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002793",
+    "rx date": "2026-04-24",
+    "dr code": "D000194",
+    "drug code": "P011",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000293",
+    "rx date": "2026-06-23",
+    "dr code": "D000096",
+    "drug code": "P011",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003733",
+    "rx date": "2026-02-09",
+    "dr code": "D000051",
+    "drug code": "P015",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003201",
+    "rx date": "2026-03-06",
+    "dr code": "D000137",
+    "drug code": "P021",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000533",
+    "rx date": "2026-06-07",
+    "dr code": "D000100",
+    "drug code": "P021",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001826",
+    "rx date": "2026-04-24",
+    "dr code": "D000257",
+    "drug code": "P021",
+    "units": 65,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002200",
+    "rx date": "2026-07-08",
+    "dr code": "D000208",
+    "drug code": "P014",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002298",
+    "rx date": "2026-03-01",
+    "dr code": "D000242",
+    "drug code": "P018",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000187",
+    "rx date": "2026-06-16",
+    "dr code": "D000206",
+    "drug code": "P012",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000940",
+    "rx date": "2026-06-22",
+    "dr code": "D000207",
+    "drug code": "P022",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001373",
+    "rx date": "2026-01-19",
+    "dr code": "D000159",
+    "drug code": "P003",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003462",
+    "rx date": "2026-04-05",
+    "dr code": "D000123",
+    "drug code": "P028",
+    "units": 21,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002358",
+    "rx date": "2026-06-05",
+    "dr code": "D000242",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001508",
+    "rx date": "2026-03-17",
+    "dr code": "D000157",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000741",
+    "rx date": "2026-07-06",
+    "dr code": "D000108",
+    "drug code": "P001",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001199",
+    "rx date": "2026-05-26",
+    "dr code": "D000090",
+    "drug code": "P020",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000393",
+    "rx date": "2026-07-03",
+    "dr code": "D000150",
+    "drug code": "P010",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002070",
+    "rx date": "2026-04-12",
+    "dr code": "D000192",
+    "drug code": "P022",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002674",
+    "rx date": "2026-02-03",
+    "dr code": "D000262",
+    "drug code": "P030",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004003",
+    "rx date": "2026-03-11",
+    "dr code": "D000061",
+    "drug code": "P014",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001380",
+    "rx date": "2026-05-12",
+    "dr code": "D000218",
+    "drug code": "P003",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002145",
+    "rx date": "2026-06-15",
+    "dr code": "D000217",
+    "drug code": "P010",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000337",
+    "rx date": "2026-06-27",
+    "dr code": "D000106",
+    "drug code": "P013",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003926",
+    "rx date": "2026-03-15",
+    "dr code": "D000244",
+    "drug code": "P024",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000092",
+    "rx date": "2026-07-25",
+    "dr code": "D000086",
+    "drug code": "P015",
+    "units": 115,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001674",
+    "rx date": "2026-04-21",
+    "dr code": "D000292",
+    "drug code": "P013",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002374",
+    "rx date": "2026-03-17",
+    "dr code": "D000171",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001844",
+    "rx date": "2026-02-02",
+    "dr code": "D000274",
+    "drug code": "P002",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003469",
+    "rx date": "2026-05-01",
+    "dr code": "D000298",
+    "drug code": "P028",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002501",
+    "rx date": "2026-07-16",
+    "dr code": "D000093",
+    "drug code": "P029",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001866",
+    "rx date": "2026-01-27",
+    "dr code": "D000168",
+    "drug code": "P017",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003047",
+    "rx date": "2026-05-02",
+    "dr code": "D000074",
+    "drug code": "P019",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000155",
+    "rx date": "2026-06-18",
+    "dr code": "D000195",
+    "drug code": "P025",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003737",
+    "rx date": "2026-03-21",
+    "dr code": "D000160",
+    "drug code": "P015",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000184",
+    "rx date": "2026-05-07",
+    "dr code": "D000295",
+    "drug code": "P012",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000394",
+    "rx date": "2026-07-03",
+    "dr code": "D000096",
+    "drug code": "P010",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001339",
+    "rx date": "2026-05-20",
+    "dr code": "D000102",
+    "drug code": "P008",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001749",
+    "rx date": "2026-05-25",
+    "dr code": "D000232",
+    "drug code": "P004",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002587",
+    "rx date": "2026-07-14",
+    "dr code": "D000072",
+    "drug code": "P011",
+    "units": 97,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003815",
+    "rx date": "2026-03-13",
+    "dr code": "D000233",
+    "drug code": "P017",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002292",
+    "rx date": "2026-02-03",
+    "dr code": "D000008",
+    "drug code": "P018",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000089",
+    "rx date": "2026-05-05",
+    "dr code": "D000272",
+    "drug code": "P015",
+    "units": 80,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001843",
+    "rx date": "2026-02-07",
+    "dr code": "D000036",
+    "drug code": "P002",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002272",
+    "rx date": "2026-04-23",
+    "dr code": "D000171",
+    "drug code": "P020",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000724",
+    "rx date": "2026-03-09",
+    "dr code": "D000179",
+    "drug code": "P001",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003957",
+    "rx date": "2026-04-10",
+    "dr code": "D000183",
+    "drug code": "P002",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002080",
+    "rx date": "2026-06-18",
+    "dr code": "D000001",
+    "drug code": "P022",
+    "units": 78,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0001787",
+    "rx date": "2026-02-10",
+    "dr code": "D000257",
+    "drug code": "P003",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004077",
+    "rx date": "2026-02-16",
+    "dr code": "D000187",
+    "drug code": "P009",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004291",
+    "rx date": "2026-03-05",
+    "dr code": "D000210",
+    "drug code": "P027",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002120",
+    "rx date": "2026-01-11",
+    "dr code": "D000219",
+    "drug code": "P010",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000784",
+    "rx date": "2026-01-23",
+    "dr code": "D000065",
+    "drug code": "P013",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002099",
+    "rx date": "2026-03-16",
+    "dr code": "D000154",
+    "drug code": "P009",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003944",
+    "rx date": "2026-01-16",
+    "dr code": "D000098",
+    "drug code": "P002",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002585",
+    "rx date": "2026-06-04",
+    "dr code": "D000273",
+    "drug code": "P011",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003110",
+    "rx date": "2026-07-13",
+    "dr code": "D000243",
+    "drug code": "P015",
+    "units": 58,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002773",
+    "rx date": "2026-05-12",
+    "dr code": "D000130",
+    "drug code": "P025",
+    "units": 31,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002561",
+    "rx date": "2026-07-26",
+    "dr code": "D000151",
+    "drug code": "P012",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002330",
+    "rx date": "2026-07-09",
+    "dr code": "D000078",
+    "drug code": "P007",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000950",
+    "rx date": "2026-02-05",
+    "dr code": "D000122",
+    "drug code": "P007",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000688",
+    "rx date": "2026-01-13",
+    "dr code": "D000108",
+    "drug code": "P007",
+    "units": 128,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002720",
+    "rx date": "2026-07-13",
+    "dr code": "D000021",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004191",
+    "rx date": "2026-05-22",
+    "dr code": "D000294",
+    "drug code": "P019",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000715",
+    "rx date": "2026-01-05",
+    "dr code": "D000148",
+    "drug code": "P001",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003853",
+    "rx date": "2026-05-10",
+    "dr code": "D000244",
+    "drug code": "P026",
+    "units": 104,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002526",
+    "rx date": "2026-06-21",
+    "dr code": "D000151",
+    "drug code": "P003",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000818",
+    "rx date": "2026-02-21",
+    "dr code": "D000179",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002734",
+    "rx date": "2026-03-22",
+    "dr code": "D000194",
+    "drug code": "P018",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004250",
+    "rx date": "2026-01-23",
+    "dr code": "D000269",
+    "drug code": "P024",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003582",
+    "rx date": "2026-06-03",
+    "dr code": "D000115",
+    "drug code": "P024",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000550",
+    "rx date": "2026-03-16",
+    "dr code": "D000121",
+    "drug code": "P001",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000160",
+    "rx date": "2026-06-16",
+    "dr code": "D000091",
+    "drug code": "P025",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003137",
+    "rx date": "2026-02-23",
+    "dr code": "D000137",
+    "drug code": "P020",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003408",
+    "rx date": "2026-02-01",
+    "dr code": "D000037",
+    "drug code": "P030",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000423",
+    "rx date": "2026-01-12",
+    "dr code": "D000100",
+    "drug code": "P009",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000034",
+    "rx date": "2026-06-12",
+    "dr code": "D000272",
+    "drug code": "P011",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000267",
+    "rx date": "2026-07-03",
+    "dr code": "D000150",
+    "drug code": "P026",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003014",
+    "rx date": "2026-02-04",
+    "dr code": "D000222",
+    "drug code": "P017",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002874",
+    "rx date": "2026-04-17",
+    "dr code": "D000175",
+    "drug code": "P022",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001261",
+    "rx date": "2026-05-10",
+    "dr code": "D000062",
+    "drug code": "P026",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001507",
+    "rx date": "2026-03-05",
+    "dr code": "D000201",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004146",
+    "rx date": "2026-05-15",
+    "dr code": "D000061",
+    "drug code": "P024",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000637",
+    "rx date": "2026-03-25",
+    "dr code": "D000121",
+    "drug code": "P026",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003336",
+    "rx date": "2026-03-12",
+    "dr code": "D000052",
+    "drug code": "P016",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002658",
+    "rx date": "2026-06-11",
+    "dr code": "D000277",
+    "drug code": "P017",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000060",
+    "rx date": "2026-01-13",
+    "dr code": "D000272",
+    "drug code": "P004",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000962",
+    "rx date": "2026-04-05",
+    "dr code": "D000293",
+    "drug code": "P007",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002760",
+    "rx date": "2026-02-20",
+    "dr code": "D000130",
+    "drug code": "P025",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004074",
+    "rx date": "2026-02-06",
+    "dr code": "D000013",
+    "drug code": "P009",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003337",
+    "rx date": "2026-03-23",
+    "dr code": "D000037",
+    "drug code": "P016",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002648",
+    "rx date": "2026-03-07",
+    "dr code": "D000080",
+    "drug code": "P017",
+    "units": 61,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001252",
+    "rx date": "2026-03-20",
+    "dr code": "D000090",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001204",
+    "rx date": "2026-06-20",
+    "dr code": "D000203",
+    "drug code": "P020",
+    "units": 46,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003674",
+    "rx date": "2026-03-08",
+    "dr code": "D000228",
+    "drug code": "P009",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001959",
+    "rx date": "2026-04-10",
+    "dr code": "D000036",
+    "drug code": "P018",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000787",
+    "rx date": "2026-02-22",
+    "dr code": "D000084",
+    "drug code": "P013",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000845",
+    "rx date": "2026-01-09",
+    "dr code": "D000236",
+    "drug code": "P003",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003399",
+    "rx date": "2026-06-21",
+    "dr code": "D000052",
+    "drug code": "P024",
+    "units": 92,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002666",
+    "rx date": "2026-07-15",
+    "dr code": "D000205",
+    "drug code": "P017",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001981",
+    "rx date": "2026-01-23",
+    "dr code": "D000192",
+    "drug code": "P019",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003520",
+    "rx date": "2026-05-13",
+    "dr code": "D000181",
+    "drug code": "P009",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002304",
+    "rx date": "2026-05-04",
+    "dr code": "D000209",
+    "drug code": "P018",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004180",
+    "rx date": "2026-01-09",
+    "dr code": "D000174",
+    "drug code": "P019",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002373",
+    "rx date": "2026-03-25",
+    "dr code": "D000209",
+    "drug code": "P021",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004137",
+    "rx date": "2026-03-20",
+    "dr code": "D000163",
+    "drug code": "P024",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004301",
+    "rx date": "2026-05-27",
+    "dr code": "D000132",
+    "drug code": "P027",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002710",
+    "rx date": "2026-04-26",
+    "dr code": "D000266",
+    "drug code": "P006",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001927",
+    "rx date": "2026-03-21",
+    "dr code": "D000003",
+    "drug code": "P012",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002471",
+    "rx date": "2026-06-04",
+    "dr code": "D000088",
+    "drug code": "P002",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003595",
+    "rx date": "2026-02-08",
+    "dr code": "D000099",
+    "drug code": "P025",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004214",
+    "rx date": "2026-04-15",
+    "dr code": "D000269",
+    "drug code": "P021",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002963",
+    "rx date": "2026-04-03",
+    "dr code": "D000074",
+    "drug code": "P016",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001467",
+    "rx date": "2026-07-27",
+    "dr code": "D000201",
+    "drug code": "P003",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000956",
+    "rx date": "2026-03-05",
+    "dr code": "D000047",
+    "drug code": "P007",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003692",
+    "rx date": "2026-07-21",
+    "dr code": "D000249",
+    "drug code": "P009",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003344",
+    "rx date": "2026-04-17",
+    "dr code": "D000052",
+    "drug code": "P016",
+    "units": 11,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000736",
+    "rx date": "2026-06-23",
+    "dr code": "D000146",
+    "drug code": "P001",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003028",
+    "rx date": "2026-06-07",
+    "dr code": "D000243",
+    "drug code": "P017",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001322",
+    "rx date": "2026-02-21",
+    "dr code": "D000284",
+    "drug code": "P008",
+    "units": 84,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003376",
+    "rx date": "2026-05-14",
+    "dr code": "D000298",
+    "drug code": "P003",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000434",
+    "rx date": "2026-06-26",
+    "dr code": "D000100",
+    "drug code": "P009",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000596",
+    "rx date": "2026-06-25",
+    "dr code": "D000094",
+    "drug code": "P011",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003320",
+    "rx date": "2026-05-10",
+    "dr code": "D000141",
+    "drug code": "P020",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000628",
+    "rx date": "2026-01-06",
+    "dr code": "D000094",
+    "drug code": "P026",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002401",
+    "rx date": "2026-04-27",
+    "dr code": "D000151",
+    "drug code": "P018",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001725",
+    "rx date": "2026-05-14",
+    "dr code": "D000292",
+    "drug code": "P027",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003861",
+    "rx date": "2026-01-15",
+    "dr code": "D000183",
+    "drug code": "P023",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001522",
+    "rx date": "2026-06-27",
+    "dr code": "D000223",
+    "drug code": "P020",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004210",
+    "rx date": "2026-03-25",
+    "dr code": "D000210",
+    "drug code": "P021",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000994",
+    "rx date": "2026-04-02",
+    "dr code": "D000293",
+    "drug code": "P028",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003719",
+    "rx date": "2026-06-24",
+    "dr code": "D000228",
+    "drug code": "P023",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002370",
+    "rx date": "2026-02-14",
+    "dr code": "D000251",
+    "drug code": "P021",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002515",
+    "rx date": "2026-04-05",
+    "dr code": "D000088",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000494",
+    "rx date": "2026-01-11",
+    "dr code": "D000240",
+    "drug code": "P020",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000909",
+    "rx date": "2026-05-09",
+    "dr code": "D000038",
+    "drug code": "P020",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002850",
+    "rx date": "2026-06-11",
+    "dr code": "D000265",
+    "drug code": "P020",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003756",
+    "rx date": "2026-07-22",
+    "dr code": "D000228",
+    "drug code": "P015",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002047",
+    "rx date": "2026-05-04",
+    "dr code": "D000001",
+    "drug code": "P025",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003128",
+    "rx date": "2026-06-03",
+    "dr code": "D000131",
+    "drug code": "P002",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000683",
+    "rx date": "2026-06-15",
+    "dr code": "D000185",
+    "drug code": "P024",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003903",
+    "rx date": "2026-04-16",
+    "dr code": "D000135",
+    "drug code": "P010",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002911",
+    "rx date": "2026-05-17",
+    "dr code": "D000119",
+    "drug code": "P014",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002351",
+    "rx date": "2026-05-20",
+    "dr code": "D000153",
+    "drug code": "P026",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003638",
+    "rx date": "2026-05-23",
+    "dr code": "D000267",
+    "drug code": "P012",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004107",
+    "rx date": "2026-03-08",
+    "dr code": "D000028",
+    "drug code": "P006",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000424",
+    "rx date": "2026-02-15",
+    "dr code": "D000066",
+    "drug code": "P009",
+    "units": 73,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000730",
+    "rx date": "2026-04-08",
+    "dr code": "D000146",
+    "drug code": "P001",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001889",
+    "rx date": "2026-07-11",
+    "dr code": "D000274",
+    "drug code": "P017",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000820",
+    "rx date": "2026-02-16",
+    "dr code": "D000018",
+    "drug code": "P012",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001665",
+    "rx date": "2026-01-21",
+    "dr code": "D000198",
+    "drug code": "P013",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003281",
+    "rx date": "2026-03-13",
+    "dr code": "D000289",
+    "drug code": "P012",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000316",
+    "rx date": "2026-05-03",
+    "dr code": "D000220",
+    "drug code": "P028",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002716",
+    "rx date": "2026-06-03",
+    "dr code": "D000026",
+    "drug code": "P006",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000389",
+    "rx date": "2026-05-09",
+    "dr code": "D000096",
+    "drug code": "P010",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001711",
+    "rx date": "2026-01-18",
+    "dr code": "D000232",
+    "drug code": "P027",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002238",
+    "rx date": "2026-03-14",
+    "dr code": "D000078",
+    "drug code": "P011",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002009",
+    "rx date": "2026-03-07",
+    "dr code": "D000154",
+    "drug code": "P018",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001294",
+    "rx date": "2026-07-10",
+    "dr code": "D000029",
+    "drug code": "P011",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001839",
+    "rx date": "2026-01-11",
+    "dr code": "D000126",
+    "drug code": "P002",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001955",
+    "rx date": "2026-03-20",
+    "dr code": "D000126",
+    "drug code": "P018",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004195",
+    "rx date": "2026-06-16",
+    "dr code": "D000210",
+    "drug code": "P019",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003792",
+    "rx date": "2026-04-10",
+    "dr code": "D000160",
+    "drug code": "P007",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001371",
+    "rx date": "2026-01-08",
+    "dr code": "D000143",
+    "drug code": "P003",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002671",
+    "rx date": "2026-02-23",
+    "dr code": "D000277",
+    "drug code": "P030",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002853",
+    "rx date": "2026-06-24",
+    "dr code": "D000041",
+    "drug code": "P020",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000359",
+    "rx date": "2026-05-19",
+    "dr code": "D000096",
+    "drug code": "P001",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000509",
+    "rx date": "2026-06-06",
+    "dr code": "D000240",
+    "drug code": "P020",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002104",
+    "rx date": "2026-05-12",
+    "dr code": "D000154",
+    "drug code": "P009",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002226",
+    "rx date": "2026-06-27",
+    "dr code": "D000208",
+    "drug code": "P013",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003970",
+    "rx date": "2026-07-24",
+    "dr code": "D000135",
+    "drug code": "P002",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004360",
+    "rx date": "2026-04-13",
+    "dr code": "D000294",
+    "drug code": "P010",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001148",
+    "rx date": "2026-02-15",
+    "dr code": "D000285",
+    "drug code": "P030",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001571",
+    "rx date": "2026-02-17",
+    "dr code": "D000014",
+    "drug code": "P022",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002638",
+    "rx date": "2026-07-20",
+    "dr code": "D000205",
+    "drug code": "P020",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002896",
+    "rx date": "2026-02-24",
+    "dr code": "D000111",
+    "drug code": "P014",
+    "units": 27,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0000742",
+    "rx date": "2026-07-01",
+    "dr code": "D000018",
+    "drug code": "P001",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004333",
+    "rx date": "2026-05-06",
+    "dr code": "D000294",
+    "drug code": "P002",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001645",
+    "rx date": "2026-02-10",
+    "dr code": "D000232",
+    "drug code": "P030",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002798",
+    "rx date": "2026-05-17",
+    "dr code": "D000130",
+    "drug code": "P011",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004344",
+    "rx date": "2026-07-10",
+    "dr code": "D000269",
+    "drug code": "P002",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003193",
+    "rx date": "2026-07-14",
+    "dr code": "D000140",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000887",
+    "rx date": "2026-06-08",
+    "dr code": "D000020",
+    "drug code": "P002",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002430",
+    "rx date": "2026-02-14",
+    "dr code": "D000271",
+    "drug code": "P016",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001545",
+    "rx date": "2026-04-17",
+    "dr code": "D000059",
+    "drug code": "P025",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003448",
+    "rx date": "2026-06-18",
+    "dr code": "D000241",
+    "drug code": "P015",
+    "units": 65,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004095",
+    "rx date": "2026-06-14",
+    "dr code": "D000092",
+    "drug code": "P009",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002179",
+    "rx date": "2026-01-03",
+    "dr code": "D000281",
+    "drug code": "P014",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000929",
+    "rx date": "2026-03-13",
+    "dr code": "D000068",
+    "drug code": "P022",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004078",
+    "rx date": "2026-03-23",
+    "dr code": "D000006",
+    "drug code": "P009",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000714",
+    "rx date": "2026-01-19",
+    "dr code": "D000146",
+    "drug code": "P001",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003771",
+    "rx date": "2026-05-11",
+    "dr code": "D000228",
+    "drug code": "P006",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003732",
+    "rx date": "2026-02-14",
+    "dr code": "D000228",
+    "drug code": "P015",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000004",
+    "rx date": "2026-02-10",
+    "dr code": "D000272",
+    "drug code": "P019",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004062",
+    "rx date": "2026-05-13",
+    "dr code": "D000187",
+    "drug code": "P007",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001602",
+    "rx date": "2026-03-02",
+    "dr code": "D000161",
+    "drug code": "P014",
+    "units": 50,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003753",
+    "rx date": "2026-07-24",
+    "dr code": "D000249",
+    "drug code": "P015",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003776",
+    "rx date": "2026-07-13",
+    "dr code": "D000127",
+    "drug code": "P006",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000891",
+    "rx date": "2026-07-14",
+    "dr code": "D000207",
+    "drug code": "P002",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000191",
+    "rx date": "2026-07-02",
+    "dr code": "D000247",
+    "drug code": "P012",
+    "units": 108,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004142",
+    "rx date": "2026-04-04",
+    "dr code": "D000013",
+    "drug code": "P024",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002231",
+    "rx date": "2026-07-27",
+    "dr code": "D000104",
+    "drug code": "P013",
+    "units": 55,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000850",
+    "rx date": "2026-03-25",
+    "dr code": "D000047",
+    "drug code": "P003",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000104",
+    "rx date": "2026-04-21",
+    "dr code": "D000272",
+    "drug code": "P027",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003180",
+    "rx date": "2026-05-01",
+    "dr code": "D000087",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001646",
+    "rx date": "2026-02-05",
+    "dr code": "D000083",
+    "drug code": "P030",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003965",
+    "rx date": "2026-06-18",
+    "dr code": "D000135",
+    "drug code": "P002",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001744",
+    "rx date": "2026-04-20",
+    "dr code": "D000083",
+    "drug code": "P004",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001701",
+    "rx date": "2026-05-16",
+    "dr code": "D000083",
+    "drug code": "P028",
+    "units": 56,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003094",
+    "rx date": "2026-03-21",
+    "dr code": "D000222",
+    "drug code": "P015",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004118",
+    "rx date": "2026-06-13",
+    "dr code": "D000007",
+    "drug code": "P006",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000968",
+    "rx date": "2026-05-12",
+    "dr code": "D000020",
+    "drug code": "P007",
+    "units": 13,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0001858",
+    "rx date": "2026-06-17",
+    "dr code": "D000274",
+    "drug code": "P002",
+    "units": 9,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003370",
+    "rx date": "2026-04-27",
+    "dr code": "D000052",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001620",
+    "rx date": "2026-02-27",
+    "dr code": "D000198",
+    "drug code": "P023",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002481",
+    "rx date": "2026-01-19",
+    "dr code": "D000273",
+    "drug code": "P029",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003709",
+    "rx date": "2026-04-27",
+    "dr code": "D000051",
+    "drug code": "P023",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001085",
+    "rx date": "2026-02-22",
+    "dr code": "D000202",
+    "drug code": "P029",
+    "units": 23,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002393",
+    "rx date": "2026-01-15",
+    "dr code": "D000088",
+    "drug code": "P018",
+    "units": 65,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003133",
+    "rx date": "2026-01-02",
+    "dr code": "D000140",
+    "drug code": "P020",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000027",
+    "rx date": "2026-03-12",
+    "dr code": "D000086",
+    "drug code": "P011",
+    "units": 79,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000427",
+    "rx date": "2026-03-22",
+    "dr code": "D000066",
+    "drug code": "P009",
+    "units": 62,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002184",
+    "rx date": "2026-03-13",
+    "dr code": "D000019",
+    "drug code": "P014",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000113",
+    "rx date": "2026-01-23",
+    "dr code": "D000086",
+    "drug code": "P017",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004189",
+    "rx date": "2026-04-21",
+    "dr code": "D000211",
+    "drug code": "P019",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000468",
+    "rx date": "2026-02-06",
+    "dr code": "D000240",
+    "drug code": "P014",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000207",
+    "rx date": "2026-05-09",
+    "dr code": "D000091",
+    "drug code": "P017",
+    "units": 32,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002863",
+    "rx date": "2026-02-08",
+    "dr code": "D000175",
+    "drug code": "P022",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001449",
+    "rx date": "2026-03-01",
+    "dr code": "D000048",
+    "drug code": "P003",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000755",
+    "rx date": "2026-03-12",
+    "dr code": "D000155",
+    "drug code": "P023",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002655",
+    "rx date": "2026-05-06",
+    "dr code": "D000080",
+    "drug code": "P017",
+    "units": 128,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002091",
+    "rx date": "2026-01-20",
+    "dr code": "D000260",
+    "drug code": "P009",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002459",
+    "rx date": "2026-03-20",
+    "dr code": "D000054",
+    "drug code": "P002",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001962",
+    "rx date": "2026-04-10",
+    "dr code": "D000257",
+    "drug code": "P018",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002787",
+    "rx date": "2026-02-12",
+    "dr code": "D000138",
+    "drug code": "P011",
+    "units": 108,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002202",
+    "rx date": "2026-07-07",
+    "dr code": "D000019",
+    "drug code": "P014",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001702",
+    "rx date": "2026-05-27",
+    "dr code": "D000292",
+    "drug code": "P028",
+    "units": 56,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003194",
+    "rx date": "2026-01-24",
+    "dr code": "D000137",
+    "drug code": "P021",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001585",
+    "rx date": "2026-05-13",
+    "dr code": "D000226",
+    "drug code": "P022",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004167",
+    "rx date": "2026-05-10",
+    "dr code": "D000006",
+    "drug code": "P002",
+    "units": 72,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003032",
+    "rx date": "2026-01-23",
+    "dr code": "D000279",
+    "drug code": "P019",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004261",
+    "rx date": "2026-03-03",
+    "dr code": "D000211",
+    "drug code": "P024",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000693",
+    "rx date": "2026-02-05",
+    "dr code": "D000108",
+    "drug code": "P007",
+    "units": 50,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004033",
+    "rx date": "2026-03-26",
+    "dr code": "D000163",
+    "drug code": "P030",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004050",
+    "rx date": "2026-01-13",
+    "dr code": "D000013",
+    "drug code": "P007",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000247",
+    "rx date": "2026-07-18",
+    "dr code": "D000225",
+    "drug code": "P018",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000999",
+    "rx date": "2026-06-11",
+    "dr code": "D000038",
+    "drug code": "P028",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003570",
+    "rx date": "2026-02-23",
+    "dr code": "D000116",
+    "drug code": "P024",
+    "units": 8,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001829",
+    "rx date": "2026-05-27",
+    "dr code": "D000199",
+    "drug code": "P021",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003401",
+    "rx date": "2026-07-19",
+    "dr code": "D000037",
+    "drug code": "P024",
+    "units": 69,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000183",
+    "rx date": "2026-05-16",
+    "dr code": "D000091",
+    "drug code": "P012",
+    "units": 66,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004044",
+    "rx date": "2026-07-01",
+    "dr code": "D000012",
+    "drug code": "P030",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004004",
+    "rx date": "2026-03-19",
+    "dr code": "D000163",
+    "drug code": "P014",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004104",
+    "rx date": "2026-03-26",
+    "dr code": "D000012",
+    "drug code": "P006",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001882",
+    "rx date": "2026-05-15",
+    "dr code": "D000036",
+    "drug code": "P017",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001119",
+    "rx date": "2026-01-14",
+    "dr code": "D000034",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003199",
+    "rx date": "2026-02-12",
+    "dr code": "D000087",
+    "drug code": "P021",
+    "units": 95,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004204",
+    "rx date": "2026-02-22",
+    "dr code": "D000164",
+    "drug code": "P021",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000194",
+    "rx date": "2026-01-18",
+    "dr code": "D000247",
+    "drug code": "P017",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001638",
+    "rx date": "2026-07-21",
+    "dr code": "D000292",
+    "drug code": "P023",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000697",
+    "rx date": "2026-03-06",
+    "dr code": "D000179",
+    "drug code": "P007",
+    "units": 65,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0002614",
+    "rx date": "2026-01-26",
+    "dr code": "D000069",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003634",
+    "rx date": "2026-05-13",
+    "dr code": "D000116",
+    "drug code": "P012",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002025",
+    "rx date": "2026-07-27",
+    "dr code": "D000184",
+    "drug code": "P018",
+    "units": 36,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003306",
+    "rx date": "2026-01-14",
+    "dr code": "D000141",
+    "drug code": "P020",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003179",
+    "rx date": "2026-05-22",
+    "dr code": "D000060",
+    "drug code": "P028",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003879",
+    "rx date": "2026-05-09",
+    "dr code": "D000244",
+    "drug code": "P023",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001123",
+    "rx date": "2026-03-12",
+    "dr code": "D000107",
+    "drug code": "P006",
+    "units": 245,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003537",
+    "rx date": "2026-03-17",
+    "dr code": "D000099",
+    "drug code": "P020",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003443",
+    "rx date": "2026-04-25",
+    "dr code": "D000253",
+    "drug code": "P015",
+    "units": 71,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003484",
+    "rx date": "2026-03-03",
+    "dr code": "D000166",
+    "drug code": "P027",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004231",
+    "rx date": "2026-02-25",
+    "dr code": "D000294",
+    "drug code": "P025",
+    "units": 80,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002796",
+    "rx date": "2026-05-13",
+    "dr code": "D000138",
+    "drug code": "P011",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001471",
+    "rx date": "2026-01-20",
+    "dr code": "D000023",
+    "drug code": "P018",
+    "units": 82,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001983",
+    "rx date": "2026-01-13",
+    "dr code": "D000011",
+    "drug code": "P019",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002783",
+    "rx date": "2026-07-01",
+    "dr code": "D000022",
+    "drug code": "P025",
+    "units": 200,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003223",
+    "rx date": "2026-01-14",
+    "dr code": "D000141",
+    "drug code": "P001",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001627",
+    "rx date": "2026-04-09",
+    "dr code": "D000083",
+    "drug code": "P023",
+    "units": 86,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000402",
+    "rx date": "2026-03-02",
+    "dr code": "D000150",
+    "drug code": "P014",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003360",
+    "rx date": "2026-02-11",
+    "dr code": "D000037",
+    "drug code": "P003",
+    "units": 26,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002995",
+    "rx date": "2026-04-04",
+    "dr code": "D000243",
+    "drug code": "P011",
+    "units": 63,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002517",
+    "rx date": "2026-04-22",
+    "dr code": "D000170",
+    "drug code": "P003",
+    "units": 28,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0003449",
+    "rx date": "2026-06-05",
+    "dr code": "D000037",
+    "drug code": "P015",
+    "units": 65,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003512",
+    "rx date": "2026-02-05",
+    "dr code": "D000197",
+    "drug code": "P009",
+    "units": 110,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000264",
+    "rx date": "2026-05-21",
+    "dr code": "D000275",
+    "drug code": "P026",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003700",
+    "rx date": "2026-02-21",
+    "dr code": "D000160",
+    "drug code": "P023",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001916",
+    "rx date": "2026-07-01",
+    "dr code": "D000003",
+    "drug code": "P007",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000470",
+    "rx date": "2026-02-26",
+    "dr code": "D000263",
+    "drug code": "P014",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001672",
+    "rx date": "2026-03-23",
+    "dr code": "D000232",
+    "drug code": "P013",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002632",
+    "rx date": "2026-06-22",
+    "dr code": "D000069",
+    "drug code": "P020",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001982",
+    "rx date": "2026-01-01",
+    "dr code": "D000260",
+    "drug code": "P019",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003506",
+    "rx date": "2026-01-05",
+    "dr code": "D000290",
+    "drug code": "P009",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003632",
+    "rx date": "2026-04-22",
+    "dr code": "D000099",
+    "drug code": "P012",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000922",
+    "rx date": "2026-01-15",
+    "dr code": "D000236",
+    "drug code": "P022",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004026",
+    "rx date": "2026-02-22",
+    "dr code": "D000142",
+    "drug code": "P030",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000832",
+    "rx date": "2026-05-18",
+    "dr code": "D000179",
+    "drug code": "P012",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000349",
+    "rx date": "2026-03-15",
+    "dr code": "D000117",
+    "drug code": "P001",
+    "units": 76,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002576",
+    "rx date": "2026-03-17",
+    "dr code": "D000120",
+    "drug code": "P011",
+    "units": 92,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002419",
+    "rx date": "2026-07-22",
+    "dr code": "D000030",
+    "drug code": "P018",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000452",
+    "rx date": "2026-04-17",
+    "dr code": "D000066",
+    "drug code": "P024",
+    "units": 67,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000757",
+    "rx date": "2026-03-06",
+    "dr code": "D000084",
+    "drug code": "P023",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001520",
+    "rx date": "2026-06-03",
+    "dr code": "D000002",
+    "drug code": "P020",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000543",
+    "rx date": "2026-01-01",
+    "dr code": "D000089",
+    "drug code": "P001",
+    "units": 42,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000973",
+    "rx date": "2026-07-22",
+    "dr code": "D000207",
+    "drug code": "P007",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002265",
+    "rx date": "2026-03-15",
+    "dr code": "D000153",
+    "drug code": "P020",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004162",
+    "rx date": "2026-04-09",
+    "dr code": "D000187",
+    "drug code": "P002",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000993",
+    "rx date": "2026-04-04",
+    "dr code": "D000207",
+    "drug code": "P028",
+    "units": 13,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000595",
+    "rx date": "2026-06-09",
+    "dr code": "D000031",
+    "drug code": "P011",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001196",
+    "rx date": "2026-05-01",
+    "dr code": "D000062",
+    "drug code": "P020",
+    "units": 47,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003483",
+    "rx date": "2026-02-25",
+    "dr code": "D000290",
+    "drug code": "P027",
+    "units": 51,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000158",
+    "rx date": "2026-06-10",
+    "dr code": "D000295",
+    "drug code": "P025",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003768",
+    "rx date": "2026-04-20",
+    "dr code": "D000113",
+    "drug code": "P006",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000939",
+    "rx date": "2026-06-21",
+    "dr code": "D000236",
+    "drug code": "P022",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004130",
+    "rx date": "2026-02-24",
+    "dr code": "D000092",
+    "drug code": "P024",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000410",
+    "rx date": "2026-05-18",
+    "dr code": "D000188",
+    "drug code": "P014",
+    "units": 18,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001806",
+    "rx date": "2026-07-11",
+    "dr code": "D000246",
+    "drug code": "P003",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002774",
+    "rx date": "2026-05-27",
+    "dr code": "D000182",
+    "drug code": "P025",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003759",
+    "rx date": "2026-02-27",
+    "dr code": "D000228",
+    "drug code": "P006",
+    "units": 27,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003365",
+    "rx date": "2026-03-16",
+    "dr code": "D000123",
+    "drug code": "P003",
+    "units": 31,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002918",
+    "rx date": "2026-06-21",
+    "dr code": "D000097",
+    "drug code": "P014",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004045",
+    "rx date": "2026-07-21",
+    "dr code": "D000025",
+    "drug code": "P030",
+    "units": 105,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001786",
+    "rx date": "2026-02-19",
+    "dr code": "D000274",
+    "drug code": "P003",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002449",
+    "rx date": "2026-07-24",
+    "dr code": "D000273",
+    "drug code": "P016",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003458",
+    "rx date": "2026-02-15",
+    "dr code": "D000191",
+    "drug code": "P028",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001768",
+    "rx date": "2026-04-06",
+    "dr code": "D000232",
+    "drug code": "P008",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000959",
+    "rx date": "2026-04-02",
+    "dr code": "D000020",
+    "drug code": "P007",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003822",
+    "rx date": "2026-04-03",
+    "dr code": "D000127",
+    "drug code": "P017",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000655",
+    "rx date": "2026-07-25",
+    "dr code": "D000276",
+    "drug code": "P026",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003210",
+    "rx date": "2026-04-18",
+    "dr code": "D000039",
+    "drug code": "P021",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002154",
+    "rx date": "2026-01-06",
+    "dr code": "D000281",
+    "drug code": "P021",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001738",
+    "rx date": "2026-02-09",
+    "dr code": "D000232",
+    "drug code": "P004",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003617",
+    "rx date": "2026-07-04",
+    "dr code": "D000166",
+    "drug code": "P025",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000684",
+    "rx date": "2026-07-11",
+    "dr code": "D000065",
+    "drug code": "P024",
+    "units": 22,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002957",
+    "rx date": "2026-02-23",
+    "dr code": "D000074",
+    "drug code": "P016",
+    "units": 112,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001535",
+    "rx date": "2026-02-24",
+    "dr code": "D000226",
+    "drug code": "P025",
+    "units": 30,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002736",
+    "rx date": "2026-03-06",
+    "dr code": "D000138",
+    "drug code": "P018",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004173",
+    "rx date": "2026-06-18",
+    "dr code": "D000163",
+    "drug code": "P002",
+    "units": 43,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0001025",
+    "rx date": "2026-07-13",
+    "dr code": "D000236",
+    "drug code": "P021",
+    "units": 115,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001867",
+    "rx date": "2026-02-14",
+    "dr code": "D000199",
+    "drug code": "P017",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003883",
+    "rx date": "2026-05-15",
+    "dr code": "D000135",
+    "drug code": "P023",
+    "units": 20,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003718",
+    "rx date": "2026-05-19",
+    "dr code": "D000160",
+    "drug code": "P023",
+    "units": 39,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002819",
+    "rx date": "2026-04-18",
+    "dr code": "D000022",
+    "drug code": "P024",
+    "units": 24,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000769",
+    "rx date": "2026-05-20",
+    "dr code": "D000018",
+    "drug code": "P023",
+    "units": 7,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000336",
+    "rx date": "2026-06-08",
+    "dr code": "D000145",
+    "drug code": "P013",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002804",
+    "rx date": "2026-07-25",
+    "dr code": "D000182",
+    "drug code": "P011",
+    "units": 94,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001577",
+    "rx date": "2026-04-20",
+    "dr code": "D000129",
+    "drug code": "P022",
+    "units": 11,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004192",
+    "rx date": "2026-05-23",
+    "dr code": "D000174",
+    "drug code": "P019",
+    "units": 17,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003116",
+    "rx date": "2026-02-17",
+    "dr code": "D000224",
+    "drug code": "P002",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004222",
+    "rx date": "2026-06-08",
+    "dr code": "D000174",
+    "drug code": "P021",
+    "units": 61,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0001367",
+    "rx date": "2026-07-02",
+    "dr code": "D000081",
+    "drug code": "P020",
+    "units": 52,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001958",
+    "rx date": "2026-04-06",
+    "dr code": "D000032",
+    "drug code": "P018",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000645",
+    "rx date": "2026-04-02",
+    "dr code": "D000276",
+    "drug code": "P026",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001834",
+    "rx date": "2026-06-11",
+    "dr code": "D000003",
+    "drug code": "P021",
+    "units": 103,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001141",
+    "rx date": "2026-07-04",
+    "dr code": "D000176",
+    "drug code": "P006",
+    "units": 43,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001719",
+    "rx date": "2026-03-03",
+    "dr code": "D000083",
+    "drug code": "P027",
+    "units": 57,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000190",
+    "rx date": "2026-06-10",
+    "dr code": "D000109",
+    "drug code": "P012",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001087",
+    "rx date": "2026-02-04",
+    "dr code": "D000158",
+    "drug code": "P029",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002877",
+    "rx date": "2026-05-22",
+    "dr code": "D000097",
+    "drug code": "P022",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000520",
+    "rx date": "2026-02-03",
+    "dr code": "D000240",
+    "drug code": "P021",
+    "units": 88,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002830",
+    "rx date": "2026-07-19",
+    "dr code": "D000022",
+    "drug code": "P024",
+    "units": 48,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004015",
+    "rx date": "2026-06-07",
+    "dr code": "D000013",
+    "drug code": "P014",
+    "units": 38,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000375",
+    "rx date": "2026-02-03",
+    "dr code": "D000106",
+    "drug code": "P010",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001615",
+    "rx date": "2026-01-23",
+    "dr code": "D000292",
+    "drug code": "P023",
+    "units": 53,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001354",
+    "rx date": "2026-03-20",
+    "dr code": "D000136",
+    "drug code": "P020",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001433",
+    "rx date": "2026-06-12",
+    "dr code": "D000218",
+    "drug code": "P005",
+    "units": 12,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002615",
+    "rx date": "2026-01-07",
+    "dr code": "D000118",
+    "drug code": "P020",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000260",
+    "rx date": "2026-04-03",
+    "dr code": "D000114",
+    "drug code": "P026",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002464",
+    "rx date": "2026-04-22",
+    "dr code": "D000088",
+    "drug code": "P002",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001304",
+    "rx date": "2026-03-17",
+    "dr code": "D000081",
+    "drug code": "P025",
+    "units": 21,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000038",
+    "rx date": "2026-01-04",
+    "dr code": "D000272",
+    "drug code": "P028",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003775",
+    "rx date": "2026-06-24",
+    "dr code": "D000249",
+    "drug code": "P006",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002566",
+    "rx date": "2026-07-13",
+    "dr code": "D000054",
+    "drug code": "P012",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001769",
+    "rx date": "2026-05-25",
+    "dr code": "D000232",
+    "drug code": "P008",
+    "units": 44,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003515",
+    "rx date": "2026-03-26",
+    "dr code": "D000044",
+    "drug code": "P009",
+    "units": 68,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001625",
+    "rx date": "2026-04-23",
+    "dr code": "D000232",
+    "drug code": "P023",
+    "units": 86,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0004212",
+    "rx date": "2026-04-06",
+    "dr code": "D000258",
+    "drug code": "P021",
+    "units": 49,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003120",
+    "rx date": "2026-03-13",
+    "dr code": "D000231",
+    "drug code": "P002",
+    "units": 23,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002084",
+    "rx date": "2026-07-19",
+    "dr code": "D000042",
+    "drug code": "P022",
+    "units": 64,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002490",
+    "rx date": "2026-04-07",
+    "dr code": "D000093",
+    "drug code": "P029",
+    "units": 37,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003117",
+    "rx date": "2026-02-10",
+    "dr code": "D000279",
+    "drug code": "P002",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0004293",
+    "rx date": "2026-03-22",
+    "dr code": "D000258",
+    "drug code": "P027",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002270",
+    "rx date": "2026-04-15",
+    "dr code": "D000251",
+    "drug code": "P020",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000204",
+    "rx date": "2026-04-02",
+    "dr code": "D000091",
+    "drug code": "P017",
+    "units": 54,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0002978",
+    "rx date": "2026-07-17",
+    "dr code": "D000112",
+    "drug code": "P016",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003470",
+    "rx date": "2026-05-13",
+    "dr code": "D000253",
+    "drug code": "P028",
+    "units": 16,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001115",
+    "rx date": "2026-07-12",
+    "dr code": "D000229",
+    "drug code": "P029",
+    "units": 25,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000112",
+    "rx date": "2026-07-25",
+    "dr code": "D000086",
+    "drug code": "P027",
+    "units": 28,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000129",
+    "rx date": "2026-06-19",
+    "dr code": "D000272",
+    "drug code": "P017",
+    "units": 45,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001549",
+    "rx date": "2026-04-27",
+    "dr code": "D000270",
+    "drug code": "P025",
+    "units": 33,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001223",
+    "rx date": "2026-03-08",
+    "dr code": "D000297",
+    "drug code": "P017",
+    "units": 19,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001401",
+    "rx date": "2026-02-21",
+    "dr code": "D000136",
+    "drug code": "P002",
+    "units": 26,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003207",
+    "rx date": "2026-04-26",
+    "dr code": "D000137",
+    "drug code": "P021",
+    "units": 29,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002785",
+    "rx date": "2026-01-20",
+    "dr code": "D000021",
+    "drug code": "P011",
+    "units": 81,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000148",
+    "rx date": "2026-04-24",
+    "dr code": "D000225",
+    "drug code": "P025",
+    "units": 15,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001909",
+    "rx date": "2026-05-24",
+    "dr code": "D000221",
+    "drug code": "P007",
+    "units": 25,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0004025",
+    "rx date": "2026-02-20",
+    "dr code": "D000025",
+    "drug code": "P030",
+    "units": 41,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002210",
+    "rx date": "2026-02-13",
+    "dr code": "D000064",
+    "drug code": "P013",
+    "units": 35,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000358",
+    "rx date": "2026-05-22",
+    "dr code": "D000114",
+    "drug code": "P001",
+    "units": 40,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003511",
+    "rx date": "2026-02-19",
+    "dr code": "D000180",
+    "drug code": "P009",
+    "units": 110,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000658",
+    "rx date": "2026-07-25",
+    "dr code": "D000031",
+    "drug code": "P026",
+    "units": 59,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003248",
+    "rx date": "2026-07-27",
+    "dr code": "D000058",
+    "drug code": "P001",
+    "units": 111,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001544",
+    "rx date": "2026-03-04",
+    "dr code": "D000161",
+    "drug code": "P025",
+    "units": 37,
+    "status": "Cancelled"
+  },
+  {
+    "rx id": "RX0000896",
+    "rx date": "2026-01-23",
+    "dr code": "D000248",
+    "drug code": "P020",
+    "units": 10,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0000594",
+    "rx date": "2026-06-09",
+    "dr code": "D000121",
+    "drug code": "P011",
+    "units": 36,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0003026",
+    "rx date": "2026-05-15",
+    "dr code": "D000231",
+    "drug code": "P017",
+    "units": 32,
+    "status": "Reversed"
+  },
+  {
+    "rx id": "RX0003115",
+    "rx date": "2026-02-05",
+    "dr code": "D000131",
+    "drug code": "P002",
+    "units": 14,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0001248",
+    "rx date": "2026-01-07",
+    "dr code": "D000139",
+    "drug code": "P026",
+    "units": 34,
+    "status": "Valid"
+  },
+  {
+    "rx id": "RX0002797",
+    "rx date": "2026-05-01",
+    "dr code": "D000227",
+    "drug code": "P011",
+    "units": 64,
+    "status": "Valid"
+  }
+]
