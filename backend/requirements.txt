@@ -58,3 +58,6 @@ pdfplumber
 pymupdf
 pillow
 pytesseract
+
+
+python-multipart
