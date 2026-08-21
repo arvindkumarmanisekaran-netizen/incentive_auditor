@@ -1,10 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
-
-import type { DocumentProcessingResult } from "../api/documentProcessing";
-
-type ConfirmAction = "insert" | "overwrite_duplicates" | "discard_duplicates" | "cancel";
 
 export default function DocumentProcessingCard() {
   const {
@@ -12,28 +8,23 @@ export default function DocumentProcessingCard() {
     selectFolder,
     processFiles,
     processing,
-
-    // Keep result for compatibility with the service.
     result,
-
-    // All uploaded documents.
     results,
-
     error,
     validationErrors,
     clearValidationErrors,
     handleConfirm,
     successMessage,
     clearSuccessMessage,
+    selectedActions,
+    setSelectedActions,
   } = useDocumentUpload();
 
   // ==================================================
   // LOCAL UI STATE
   // ==================================================
 
-  const [confirming, setConfirming] = useState(false);
-
-  const [duplicateResult, setDuplicateResult] = useState<DocumentProcessingResult | null>(null);
+  const [expandedDuplicates, setExpandedDuplicates] = useState<Record<string, boolean>>({});
 
   // ==================================================
   // ALL DOCUMENTS
@@ -58,6 +49,28 @@ export default function DocumentProcessingCard() {
     return [];
   }, [results, result]);
 
+  useEffect(() => {
+    setSelectedActions((current) => {
+      const updated = { ...current };
+
+      documents.forEach((document) => {
+        if (updated[document.filename]) {
+          return;
+        }
+
+        if (document.success === false) {
+          updated[document.filename] = "cancel";
+        } else if (document.has_duplicates) {
+          updated[document.filename] = "discard_duplicates";
+        } else {
+          updated[document.filename] = "insert";
+        }
+      });
+
+      return updated;
+    });
+  }, [documents, setSelectedActions]);
+
   const successfulDocuments = useMemo(
     () => documents.filter((item) => item.success !== false),
     [documents],
@@ -73,53 +86,23 @@ export default function DocumentProcessingCard() {
     [successfulDocuments],
   );
 
-  const documentsWithoutDuplicates = useMemo(
-    () => successfulDocuments.filter((item) => !item.has_duplicates),
-    [successfulDocuments],
-  );
-
   const hasDocuments = documents.length > 0;
-
-  const hasDuplicates = documentsWithDuplicates.length > 0;
 
   /*
    * Upload processing OR database confirmation.
    */
-  const busy = processing || confirming;
+  const busy = processing;
 
   // ==================================================
   // CONFIRM
   // ==================================================
 
-  async function confirmDocuments(action: ConfirmAction) {
-    /*
-     * Immediately close any open duplicate window.
-     */
-    setDuplicateResult(null);
-
-    /*
-     * Immediately hide document cards/popups and
-     * show only the animated processing component.
-     */
-    setConfirming(true);
-
+  async function confirmAllDocuments() {
     try {
-      await handleConfirm(action);
-    } finally {
-      setConfirming(false);
+      await handleConfirm();
+    } catch (error) {
+      console.error("Confirm failed:", error);
     }
-  }
-
-  // ==================================================
-  // DUPLICATE DETAILS
-  // ==================================================
-
-  function showDuplicates(document: DocumentProcessingResult) {
-    setDuplicateResult(document);
-  }
-
-  function closeDuplicates() {
-    setDuplicateResult(null);
   }
 
   // ==================================================
@@ -156,9 +139,7 @@ export default function DocumentProcessingCard() {
           <div className="investigation-loading">
             <span className="loading-spinner" />
 
-            <span>
-              {confirming ? "Processing database changes..." : "Analyzing uploaded documents..."}
-            </span>
+            <span>Processing documents...</span>
           </div>
         )}
 
@@ -221,6 +202,7 @@ export default function DocumentProcessingCard() {
 
             <div className="document-results-list">
               {documents.map((document, index) => {
+                const selectedAction = selectedActions[document.filename] ?? "cancel";
                 const hasDocumentDuplicates =
                   document.has_duplicates &&
                   (document.pending_data?.duplicate_records?.length ?? 0) > 0;
@@ -288,11 +270,82 @@ export default function DocumentProcessingCard() {
                           <button
                             type="button"
                             className="secondary-button"
-                            onClick={() => showDuplicates(document)}
+                            onClick={() =>
+                              setExpandedDuplicates((current) => ({
+                                ...current,
+                                [document.filename]: !current[document.filename],
+                              }))
+                            }
                           >
                             View Duplicates
                           </button>
                         )}
+                      </div>
+
+                      <div className="document-actions">
+                        {document.has_duplicates ? (
+                          <>
+                            <label>
+                              <input
+                                type="radio"
+                                name={`action-${document.filename}`}
+                                checked={selectedAction === "overwrite_duplicates"}
+                                onChange={() =>
+                                  setSelectedActions((current) => ({
+                                    ...current,
+                                    [document.filename]: "overwrite_duplicates",
+                                  }))
+                                }
+                              />
+                              Overwrite
+                            </label>
+
+                            <label>
+                              <input
+                                type="radio"
+                                name={`action-${document.filename}`}
+                                checked={selectedAction === "discard_duplicates"}
+                                onChange={() =>
+                                  setSelectedActions((current) => ({
+                                    ...current,
+                                    [document.filename]: "discard_duplicates",
+                                  }))
+                                }
+                              />
+                              Discard
+                            </label>
+                          </>
+                        ) : (
+                          <label>
+                            <input
+                              type="radio"
+                              name={`action-${document.filename}`}
+                              checked={selectedAction === "insert"}
+                              onChange={() =>
+                                setSelectedActions((current) => ({
+                                  ...current,
+                                  [document.filename]: "insert",
+                                }))
+                              }
+                            />
+                            Insert
+                          </label>
+                        )}
+
+                        <label>
+                          <input
+                            type="radio"
+                            name={`action-${document.filename}`}
+                            checked={selectedAction === "cancel"}
+                            onChange={() =>
+                              setSelectedActions((current) => ({
+                                ...current,
+                                [document.filename]: "cancel",
+                              }))
+                            }
+                          />
+                          Skip
+                        </label>
                       </div>
                     </div>
 
@@ -338,148 +391,44 @@ export default function DocumentProcessingCard() {
               })}
             </div>
 
-            {/* ==================================================
-                BATCH ACTIONS
-            ================================================== */}
-
-            {successfulDocuments.length > 0 && (
-              <div className="document-result-actions">
-                {/* -----------------------------------------
-                    NO DUPLICATES
-
-                    Everything can simply be inserted.
-                ----------------------------------------- */}
-
-                {!hasDuplicates && documentsWithoutDuplicates.length > 0 && (
-                  <button
-                    type="button"
-                    className="primary-button"
-                    onClick={() => void confirmDocuments("insert")}
-                  >
-                    Import All
-                  </button>
-                )}
-
-                {/* -----------------------------------------
-                    DUPLICATES EXIST
-
-                    Your service handles:
-                    - duplicate docs using selected action
-                    - non-duplicate docs using insert
-                ----------------------------------------- */}
-
-                {hasDuplicates && (
-                  <>
-                    <button
-                      type="button"
-                      className="primary-button"
-                      onClick={() => void confirmDocuments("overwrite_duplicates")}
-                    >
-                      Overwrite Duplicates
-                    </button>
-
-                    <button
-                      type="button"
-                      className="secondary-button"
-                      onClick={() => void confirmDocuments("discard_duplicates")}
-                    >
-                      Discard Duplicates
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
+            <button
+              type="button"
+              className="primary-button"
+              disabled={processing}
+              onClick={() => void confirmAllDocuments()}
+            >
+              Confirm Actions
+            </button>
           </div>
         )}
 
-        {/* ==================================================
-            DUPLICATE POPUP
-
-            Opens for whichever document the user selected.
-        ================================================== */}
-
         {!busy &&
-          duplicateResult?.pending_data?.duplicate_records &&
-          duplicateResult.pending_data.duplicate_records.length > 0 && (
-            <>
-              <div className="validation-overlay" onClick={closeDuplicates} />
+          documents.map((document) => {
+            if (!document.has_duplicates || !document.pending_data?.duplicate_records) {
+              return null;
+            }
 
-              <div className="validation-popup">
-                <h4>Duplicate Records Found</h4>
+            if (!expandedDuplicates[document.filename]) {
+              return null;
+            }
 
-                <p>This document contains records that already exist in the database.</p>
+            return (
+              <div key={document.filename} className="document-duplicate-inline">
+                <h4>
+                  Duplicates:
+                  {document.filename}
+                </h4>
 
-                {duplicateResult.filename && (
-                  <p>
-                    File: <strong>{duplicateResult.filename}</strong>
-                  </p>
-                )}
+                {document.pending_data.duplicate_records.slice(0, 50).map((item, index) => (
+                  <div key={index} className="validation-error-item">
+                    <strong>Row {item.row}</strong>
 
-                {duplicateResult.target_table && (
-                  <p>
-                    Table: <strong>{duplicateResult.target_table}</strong>
-                  </p>
-                )}
-
-                <p>
-                  Duplicate Records:{" "}
-                  <strong>{duplicateResult.pending_data.duplicate_records.length}</strong>
-                </p>
-
-                <div className="validation-error-list">
-                  {duplicateResult.pending_data.duplicate_records
-                    .slice(0, 50)
-                    .map((item, index) => (
-                      <div key={`${item.row}-${index}`} className="validation-error-item">
-                        <strong>Row {item.row}</strong>
-
-                        <div>
-                          <span>Incoming Record:</span>
-
-                          <pre>{JSON.stringify(item.incoming_record, null, 2)}</pre>
-                        </div>
-
-                        <div>
-                          <span>Existing Record:</span>
-
-                          <pre>{JSON.stringify(item.existing_record, null, 2)}</pre>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-
-                {duplicateResult.pending_data.duplicate_records.length > 50 && (
-                  <p>
-                    Showing first 50 duplicates out of{" "}
-                    {duplicateResult.pending_data.duplicate_records.length}
-                  </p>
-                )}
-
-                <div className="database-edit-actions">
-                  <button type="button" className="secondary-button" onClick={closeDuplicates}>
-                    Close
-                  </button>
-
-                  <button
-                    type="button"
-                    className="primary-button"
-                    onClick={() => void confirmDocuments("overwrite_duplicates")}
-                  >
-                    Overwrite All Duplicates
-                  </button>
-
-                  <button
-                    type="button"
-                    className="secondary-button"
-                    onClick={() => void confirmDocuments("discard_duplicates")}
-                  >
-                    Discard All Duplicates
-                  </button>
-                </div>
+                    <pre>{JSON.stringify(item.incoming_record, null, 2)}</pre>
+                  </div>
+                ))}
               </div>
-            </>
-          )}
-
+            );
+          })}
         {/* ==================================================
             VALIDATION ERROR POPUP
         ================================================== */}

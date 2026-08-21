@@ -16,10 +16,13 @@ interface ValidationError {
   message?: string;
 }
 
+export type ConfirmAction = "insert" | "overwrite_duplicates" | "discard_duplicates" | "cancel";
 export function useDocumentUpload() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [processing, setProcessing] = useState(false);
+
+  const [selectedActions, setSelectedActions] = useState<Record<string, ConfirmAction>>({});
 
   /*
    * All uploaded documents.
@@ -125,43 +128,25 @@ export function useDocumentUpload() {
   // ==================================================
   // CONFIRM ALL DOCUMENTS
   // ==================================================
-
-  async function handleConfirm(
-    requestedAction: "insert" | "overwrite_duplicates" | "discard_duplicates" | "cancel",
-  ) {
-    /*
-     * Important:
-     *
-     * Confirm ALL successfully uploaded documents,
-     * not just `result`.
-     */
+  async function handleConfirm() {
     const documentsToConfirm = results.filter(
       (item) =>
-        item.success !== false &&
-        item.action_required &&
-        item.document_type &&
-        item.target_table &&
-        item.pending_data,
+        item.success !== false && item.document_type && item.target_table && item.pending_data,
     );
 
     if (documentsToConfirm.length === 0) {
       setError("No documents are ready for import.");
-
       return;
     }
 
     setProcessing(true);
 
     setError(null);
-
     setValidationErrors([]);
-
     setSuccessMessage(null);
 
     let totalInserted = 0;
-
     let totalUpdated = 0;
-
     let totalDiscarded = 0;
 
     let successfulDocuments = 0;
@@ -170,160 +155,94 @@ export function useDocumentUpload() {
 
     const collectedValidationErrors: ValidationError[] = [];
 
-    /*
-     * Sequential confirmation is intentional.
-     *
-     * Master records uploaded earlier can therefore
-     * exist before later files are processed.
-     */
-    for (const documentResult of documentsToConfirm) {
-      try {
-        /*
-         * Pick the correct action for each document.
-         *
-         * Example:
-         *
-         * User chooses "Overwrite Duplicates"
-         *
-         * document with duplicates -> overwrite_duplicates
-         * document without duplicates -> insert
-         */
-        let action: "insert" | "overwrite_duplicates" | "discard_duplicates" | "cancel";
+    try {
+      for (const documentResult of documentsToConfirm) {
+        try {
+          /*
+          IMPORTANT:
+          Read the action selected for THIS document.
+          
+          Example:
+          sales.csv -> overwrite_duplicates
+          representatives.xlsx -> discard_duplicates
+          products.json -> insert
+        */
 
-        if (requestedAction === "cancel") {
-          action = "cancel";
-        } else if (documentResult.has_duplicates) {
-          if (requestedAction === "discard_duplicates") {
-            action = "discard_duplicates";
-          } else if (requestedAction === "overwrite_duplicates") {
-            action = "overwrite_duplicates";
-          } else {
-            /*
-             * An "insert" action cannot insert
-             * documents containing duplicates.
-             *
-             * Leave those documents pending instead
-             * of failing the whole batch.
-             */
-            console.log(`Skipping ${documentResult.filename}: duplicates require review`);
+          const action = selectedActions[documentResult.filename] ?? "cancel";
+
+          if (action === "cancel") {
+            console.log(`Skipping ${documentResult.filename}`);
 
             continue;
           }
-        } else {
-          /*
-           * No duplicates: always insert.
-           */
-          action = "insert";
-        }
 
-        console.log("Confirming:", documentResult.filename, action);
+          console.log("Confirming:", documentResult.filename, action);
 
-        const confirmation = await confirmDocument({
-          document_type: documentResult.document_type,
+          const confirmation = await confirmDocument({
+            document_type: documentResult.document_type,
 
-          target_table: documentResult.target_table,
+            target_table: documentResult.target_table,
 
-          action,
+            action,
 
-          pending_data: documentResult.pending_data,
-        });
+            pending_data: documentResult.pending_data,
+          });
 
-        totalInserted += confirmation.inserted;
+          totalInserted += confirmation.inserted ?? 0;
 
-        totalUpdated += confirmation.updated;
+          totalUpdated += confirmation.updated ?? 0;
 
-        totalDiscarded += confirmation.discarded;
+          totalDiscarded += confirmation.discarded ?? 0;
 
-        successfulDocuments += 1;
+          successfulDocuments++;
 
-        console.log("Confirmed:", documentResult.filename, confirmation);
-      } catch (err) {
-        console.error(`Confirmation failed for ${documentResult.filename}:`, err);
+          console.log("Confirmed:", documentResult.filename, confirmation);
+        } catch (err) {
+          console.error(`Confirmation failed for ${documentResult.filename}:`, err);
 
-        if (err && typeof err === "object") {
-          const apiError = err as {
-            type?: string;
-            message?: string;
-            errors?: ValidationError[];
-          };
+          if (err && typeof err === "object") {
+            const apiError = err as {
+              type?: string;
+              message?: string;
+              errors?: ValidationError[];
+            };
 
-          if (apiError.type === "VALIDATION_ERROR" && Array.isArray(apiError.errors)) {
-            collectedValidationErrors.push(
-              ...apiError.errors.map((validationError) => ({
-                ...validationError,
+            if (apiError.type === "VALIDATION_ERROR" && Array.isArray(apiError.errors)) {
+              collectedValidationErrors.push(
+                ...apiError.errors.map((validationError) => ({
+                  ...validationError,
 
-                file_name: validationError.file_name ?? documentResult.filename,
-              })),
+                  file_name: validationError.file_name ?? documentResult.filename,
+                })),
+              );
+            }
+
+            failedDocuments.push(
+              `${documentResult.filename}: ${apiError.message ?? "Confirmation failed"}`,
             );
+          } else {
+            failedDocuments.push(`${documentResult.filename}: Confirmation failed`);
           }
-
-          failedDocuments.push(
-            `${documentResult.filename}: ${apiError.message ?? "Confirmation failed"}`,
-          );
-        } else {
-          failedDocuments.push(`${documentResult.filename}: Confirmation failed`);
         }
       }
+
+      if (collectedValidationErrors.length > 0) {
+        setValidationErrors(collectedValidationErrors);
+      }
+
+      if (failedDocuments.length > 0) {
+        setError(failedDocuments.join("\n"));
+      } else {
+        setSuccessMessage(
+          `Processed ${successfulDocuments} documents. 
+Inserted: ${totalInserted},
+Updated: ${totalUpdated},
+Discarded: ${totalDiscarded}`,
+        );
+      }
+    } finally {
+      setProcessing(false);
     }
-
-    // ==================================================
-    // VALIDATION ERRORS
-    // ==================================================
-
-    if (collectedValidationErrors.length > 0) {
-      setValidationErrors(collectedValidationErrors);
-    }
-
-    // ==================================================
-    // FAILED DOCUMENTS
-    // ==================================================
-
-    if (failedDocuments.length > 0) {
-      setError(failedDocuments.join("\n"));
-    }
-
-    // ==================================================
-    // SUCCESS MESSAGE
-    // ==================================================
-
-    const summary: string[] = [];
-
-    if (successfulDocuments > 0) {
-      summary.push(
-        `${successfulDocuments} document${successfulDocuments === 1 ? "" : "s"} processed`,
-      );
-    }
-
-    if (totalInserted > 0) {
-      summary.push(`${totalInserted} records inserted`);
-    }
-
-    if (totalUpdated > 0) {
-      summary.push(`${totalUpdated} records updated`);
-    }
-
-    if (totalDiscarded > 0) {
-      summary.push(`${totalDiscarded} duplicate records discarded`);
-    }
-
-    if (summary.length > 0) {
-      setSuccessMessage(summary.join(", "));
-    }
-
-    /*
-     * Remove successfully processed documents from
-     * the pending list.
-     *
-     * For now, after a successful batch we clear all
-     * documents unless there were failures.
-     */
-    if (failedDocuments.length === 0 && collectedValidationErrors.length === 0) {
-      setResults([]);
-
-      setResult(null);
-    }
-
-    setProcessing(false);
   }
 
   // ==================================================
@@ -351,14 +270,8 @@ export function useDocumentUpload() {
 
     processing,
 
-    /*
-     * Single result for current existing UI.
-     */
     result,
 
-    /*
-     * All uploaded documents.
-     */
     results,
 
     error,
@@ -372,6 +285,9 @@ export function useDocumentUpload() {
     successMessage,
 
     clearSuccessMessage,
+
+    selectedActions,
+    setSelectedActions,
   };
 }
 
