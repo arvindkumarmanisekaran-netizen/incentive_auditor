@@ -11,164 +11,78 @@ import {
   YAxis,
 } from "recharts";
 
-import type {
-  InvestigationResult,
-} from "../types/investigation";
+import type { InvestigationResult } from "../types/investigation";
 
 import "../App.css";
-
 
 type Props = {
   result: InvestigationResult;
 };
 
-
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function severityClass(
-  severity?: string
-) {
-  return `severity-badge severity-${
-    (severity ?? "unknown").toLowerCase()
-  }`;
+function severityClass(severity?: string) {
+  return `severity-badge severity-${(severity ?? "unknown").toLowerCase()}`;
 }
 
-
-function formatMoney(
-  value: number
-) {
-  return new Intl.NumberFormat(
-    "en-IN",
-    {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }
-  ).format(value);
+function formatMoney(value: number) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(value);
 }
 
-
-function safeNumber(
-  value: unknown
-): number {
+function safeNumber(value: unknown): number {
   const number = Number(value);
 
-  return Number.isFinite(number)
-    ? number
-    : 0;
+  return Number.isFinite(number) ? number : 0;
 }
 
-
-function InvestigationInsights({
-  result,
-}: Props) {
-
- 
+function InvestigationInsights({ result }: Props) {
   /* =======================================================
      FINDINGS
   ======================================================= */
 
-  const findings =
-    result?.findings ?? [];
-   
-  const salesFinding =
-    findings.find(
-      (finding) =>
-        finding.type === "sales_deviation"
-    );
+  const findings = result?.findings ?? [];
 
+  const salesFinding = findings.find((finding) => finding.type === "sales_deviation");
 
-  const mismatchFinding =
-    findings.find(
-      (finding) =>
-        finding.type === "sales_prescription_mismatch"
-    );
+  const mismatchFinding = findings.find(
+    (finding) => finding.type === "sales_prescription_mismatch",
+  );
 
+  const doctorFinding = findings.find((finding) => finding.type === "doctor_concentration");
 
-  const doctorFinding =
-    findings.find(
-      (finding) =>
-        finding.type === "doctor_concentration"
-    );
+  const territoryFinding = findings.find(
+    (finding) => finding.type === "cross_territory_concentration",
+  );
 
+  const payoutFinding = findings.find((finding) => finding.type === "payout_discrepancy");
 
-  const territoryFinding =
-    findings.find(
-        (finding) =>
-          finding.type === "cross_territory_concentration"
-      );
+  const salesRxData = [
+    {
+      name: "Sales",
+      change: salesFinding ? safeNumber(salesFinding.evidence.deviation_percent) : 0,
+    },
 
-  const payoutFinding =
-    findings.find(
-      (finding) =>
-        finding.type === "payout_discrepancy"
-    );
-
-  /* =======================================================
-     SALES / RX
-  ======================================================= */
-
-  const salesChange =
-    safeNumber(
-      salesFinding?.evidence
-        ?.deviation_percent ??
-      salesFinding?.evidence
-        ?.percentage_deviation ??
-      mismatchFinding?.evidence
-        ?.sales_change_percent
-    );
-
-
-  const rxChange =
-    safeNumber(
-      mismatchFinding?.evidence
-        ?.prescription_change_percent ??
-      mismatchFinding?.evidence
-        ?.rx_change_percent
-    );
-
-
- const salesRxData =
-[
-  {
-    name:"Sales",
-    change:
-      salesFinding
-      ? safeNumber(
-          salesFinding.evidence.deviation_percent
-        )
-      : 0
-  },
-
-  {
-    name:"Prescriptions",
-    change:
-      mismatchFinding
-      ? safeNumber(
-          mismatchFinding.evidence.prescription_change_percent
-        )
-      : 0
-  }
-];
+    {
+      name: "Prescriptions",
+      change: mismatchFinding
+        ? safeNumber(mismatchFinding.evidence.prescription_change_percent)
+        : 0,
+    },
+  ];
 
   /* =======================================================
      DOCTOR / TERRITORY
   ======================================================= */
 
-   const doctorConcentration =
-  safeNumber(
-    doctorFinding?.evidence
-      ?.top_doctor_share_percent
-  );
+  const doctorConcentration = safeNumber(doctorFinding?.evidence?.top_doctor_share_percent);
 
- const crossTerritory =
-  safeNumber(
-    territoryFinding?.evidence
-      ?.cross_territory_share_percent
-  );
-
+  const crossTerritory = safeNumber(territoryFinding?.evidence?.cross_territory_share_percent);
 
   const concentrationData = [
     {
@@ -183,31 +97,15 @@ function InvestigationInsights({
     },
   ];
 
-
   /* =======================================================
      PAYOUT
   ======================================================= */
 
-  const expectedPayout =
-    safeNumber(
-      payoutFinding?.evidence
-        ?.expected_payout
-    );
+  const expectedPayout = safeNumber(payoutFinding?.evidence?.expected_payout);
 
+  const actualPayout = safeNumber(payoutFinding?.evidence?.actual_payout);
 
-  const actualPayout =
-    safeNumber(
-      payoutFinding?.evidence
-        ?.actual_payout
-    );
-
-
-  const payoutDifference =
-    safeNumber(
-      payoutFinding?.evidence
-        ?.payout_difference
-    );
-
+  const payoutDifference = safeNumber(payoutFinding?.evidence?.payout_difference);
 
   const payoutData = [
     {
@@ -222,22 +120,11 @@ function InvestigationInsights({
     },
   ];
 
-
   /* =======================================================
      RISK
   ======================================================= */
 
-  const riskScore =
-    Math.min(
-      Math.max(
-        safeNumber(
-          result.overall_risk_score
-        ),
-        0
-      ),
-      100
-    );
-
+  const riskScore = Math.min(Math.max(safeNumber(result.overall_risk_score), 0), 100);
 
   const riskData = [
     {
@@ -254,96 +141,55 @@ function InvestigationInsights({
     },
   ];
 
+  const riskFindingCount = findings.filter((finding) => {
+    const severity = finding.severity?.toUpperCase();
 
-  const riskFindingCount =
-  findings.filter(
-    (finding) => {
-      const severity =
-        finding.severity?.toUpperCase();
-
-      return (
-        severity !== "NORMAL" &&
-        severity !== "UNKNOWN"
-      );
-    }
-  ).length;
-
+    return severity !== "NORMAL" && severity !== "UNKNOWN";
+  }).length;
 
   /* =======================================================
      AI ANALYSIS
   ======================================================= */
 
-  const doctorAnalysis =
-    result?.doctor_territory_analysis ??
-    {};
+  const doctorAnalysis = result?.doctor_territory_analysis ?? {};
 
-  const salesAnalysis =
-    result?.sales_rx_analysis ?? {};
+  const salesAnalysis = result?.sales_rx_analysis ?? {};
 
-  const payoutAnalysis =
-    result?.payout_analysis ?? {};
+  const payoutAnalysis = result?.payout_analysis ?? {};
 
-  const finalReport =
-    result?.final_report ?? {};
-
+  const finalReport = result?.final_report ?? {};
 
   return (
     <section className="insights-section">
-
       <div className="section-heading">
-        <h2>
-          Investigation Insights
-        </h2>
+        <h2>Investigation Insights</h2>
 
-        <p>
-          Visual evidence with AI-assisted interpretation
-        </p>
+        <p>Visual evidence with AI-assisted interpretation</p>
       </div>
 
-
       <div className="insights-grid">
-
         {/* =================================================
             SALES / PRESCRIPTION
         ================================================= */}
 
         <article className="insight-card">
-
           <header className="insight-card-header">
-
             <div>
-              <span className="insight-eyebrow">
-                Performance
-              </span>
+              <span className="insight-eyebrow">Performance</span>
 
-              <h3>
-                Sales / Prescription
-              </h3>
+              <h3>Sales / Prescription</h3>
             </div>
 
-            <span
-              className={severityClass(
-                salesAnalysis?.severity
-              )}
-            >
-              {salesAnalysis?.severity ??
-                "UNKNOWN"}
+            <span className={severityClass(salesAnalysis?.severity)}>
+              {salesAnalysis?.severity ?? "UNKNOWN"}
             </span>
-
           </header>
 
-
           <div className="insight-body">
-
             {/* CHART */}
 
             <div className="insight-chart">
-
-              <ResponsiveContainer
-                width="100%"
-                height="100%"
-              >
-
+              <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={salesRxData}
                   margin={{
@@ -353,289 +199,139 @@ function InvestigationInsights({
                     bottom: 5,
                   }}
                 >
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
 
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    vertical={false}
-                    stroke="#e2e8f0"
-                  />
-
-                  <XAxis
-                    dataKey="name"
-                    tickLine={false}
-                    axisLine={false}
-                    fontSize={11}
-                  />
+                  <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
 
                   <YAxis
                     tickLine={false}
                     axisLine={false}
                     fontSize={10}
-                    tickFormatter={(
-                      value
-                    ) => `${value}%`}
+                    tickFormatter={(value) => `${value}%`}
                   />
 
-                  <Tooltip
-                    formatter={(
-                      value
-                    ) => [
-                      `${Number(
-                        value
-                      ).toFixed(1)}%`,
-                      "Change",
-                    ]}
-                  />
+                  <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, "Change"]} />
 
-                  <Bar
-                    dataKey="change"
-                    fill="#2563eb"
-                    radius={[
-                      6,
-                      6,
-                      0,
-                      0,
-                    ]}
-                  />
-
+                  <Bar dataKey="change" fill="#2563eb" radius={[6, 6, 0, 0]} />
                 </BarChart>
-
               </ResponsiveContainer>
-
             </div>
-
 
             {/* AI TEXT */}
 
             <div className="insight-text">
-
-              <span className="ai-label">
-                AI Interpretation
-              </span>
+              <span className="ai-label">AI Interpretation</span>
 
               <p className="insight-summary">
-                {salesAnalysis?.summary ??
-                  "No Sales/Rx analysis available."}
+                {salesAnalysis?.summary ?? "No Sales/Rx analysis available."}
               </p>
 
               <div className="compact-observations">
+                {salesAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
+                  <div className="compact-observation" key={index}>
+                    <span />
 
-                {salesAnalysis
-                  ?.key_observations
-                  ?.slice(0, 2)
-                  .map(
-                    (
-                      observation,
-                      index
-                    ) => (
-
-                      <div
-                        className="compact-observation"
-                        key={index}
-                      >
-                        <span />
-
-                        <p>
-                          {observation}
-                        </p>
-                      </div>
-
-                    )
-                  )}
-
+                    <p>{observation}</p>
+                  </div>
+                ))}
               </div>
-
             </div>
-
           </div>
-
         </article>
-
 
         {/* =================================================
             DOCTOR / TERRITORY
         ================================================= */}
 
         <article className="insight-card">
-
           <header className="insight-card-header">
-
             <div>
-              <span className="insight-eyebrow">
-                Concentration
-              </span>
+              <span className="insight-eyebrow">Concentration</span>
 
-              <h3>
-                Doctor / Territory
-              </h3>
+              <h3>Doctor / Territory</h3>
             </div>
 
-            <span
-              className={severityClass(
-                doctorAnalysis?.severity
-              )}
-            >
-              {doctorAnalysis?.severity ??
-                "UNKNOWN"}
+            <span className={severityClass(doctorAnalysis?.severity)}>
+              {doctorAnalysis?.severity ?? "UNKNOWN"}
             </span>
-
           </header>
 
-
           <div className="insight-body">
-
             {/* CHART */}
 
             <div className="insight-chart concentration-chart">
-
-              <ResponsiveContainer
-                width="100%"
-                height="100%"
-              >
-
+              <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
-  cx="50%"
-  cy="45%"
-  innerRadius="55%"
-  outerRadius="92%"
-  barSize={20}
-  data={concentrationData}
-  startAngle={90}
-  endAngle={-270}
->
+                  cx="50%"
+                  cy="45%"
+                  innerRadius="55%"
+                  outerRadius="92%"
+                  barSize={20}
+                  data={concentrationData}
+                  startAngle={90}
+                  endAngle={-270}
+                >
+                  <RadialBar dataKey="value" background cornerRadius={8} barSize={12} />
 
-                  <RadialBar
-                    dataKey="value"
-                    background
-                    cornerRadius={8}
-                    barSize={12}
-                  />
-
-                  <Legend
-                    iconSize={9}
-                    layout="horizontal"
-                    verticalAlign="bottom"
-                    align="center"
-                  />
+                  <Legend iconSize={9} layout="horizontal" verticalAlign="bottom" align="center" />
 
                   <Tooltip
-                    formatter={(
-                      value
-                    ) => [
-                      `${Number(
-                        value
-                      ).toFixed(1)}%`,
-                      "Concentration",
-                    ]}
+                    formatter={(value) => [`${Number(value).toFixed(1)}%`, "Concentration"]}
                   />
-
                 </RadialBarChart>
-
               </ResponsiveContainer>
 
+              <div className="chart-center-label concentration-center-label">
+                <strong>{doctorConcentration.toFixed(0)}%</strong>
 
-             <div className="chart-center-label concentration-center-label">
-            <strong>
-              {doctorConcentration.toFixed(0)}%
-            </strong>
-
-            <span>
-              Doctor
-            </span>
-
-          </div>
-
+                <span>Doctor</span>
+              </div>
             </div>
-
 
             {/* AI TEXT */}
 
             <div className="insight-text">
-
-              <span className="ai-label">
-                AI Interpretation
-              </span>
+              <span className="ai-label">AI Interpretation</span>
 
               <p className="insight-summary">
-                {doctorAnalysis?.summary ??
-                  "No doctor or territory analysis available."}
+                {doctorAnalysis?.summary ?? "No doctor or territory analysis available."}
               </p>
 
               <div className="compact-observations">
+                {doctorAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
+                  <div className="compact-observation" key={index}>
+                    <span />
 
-                {doctorAnalysis
-                  ?.key_observations
-                  ?.slice(0, 2)
-                  .map(
-                    (
-                      observation,
-                      index
-                    ) => (
-
-                      <div
-                        className="compact-observation"
-                        key={index}
-                      >
-                        <span />
-
-                        <p>
-                          {observation}
-                        </p>
-                      </div>
-
-                    )
-                  )}
-
+                    <p>{observation}</p>
+                  </div>
+                ))}
               </div>
-
             </div>
-
           </div>
-
         </article>
-
 
         {/* =================================================
             PAYOUT
         ================================================= */}
 
         <article className="insight-card">
-
           <header className="insight-card-header">
-
             <div>
-              <span className="insight-eyebrow">
-                Incentive
-              </span>
+              <span className="insight-eyebrow">Incentive</span>
 
-              <h3>
-                Payout Analysis
-              </h3>
+              <h3>Payout Analysis</h3>
             </div>
 
-            <span
-              className={severityClass(
-                payoutAnalysis?.severity
-              )}
-            >
-              {payoutAnalysis?.severity ??
-                "UNKNOWN"}
+            <span className={severityClass(payoutAnalysis?.severity)}>
+              {payoutAnalysis?.severity ?? "UNKNOWN"}
             </span>
-
           </header>
 
-
           <div className="insight-body">
-
             {/* CHART */}
 
             <div className="insight-chart payout-chart">
-
-              <ResponsiveContainer
-                width="100%"
-                height="80%"
-              >
-
+              <ResponsiveContainer width="100%" height="80%">
                 <BarChart
                   data={payoutData}
                   margin={{
@@ -645,167 +341,78 @@ function InvestigationInsights({
                     bottom: 0,
                   }}
                 >
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
 
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    vertical={false}
-                    stroke="#e2e8f0"
-                  />
-
-                  <XAxis
-                    dataKey="name"
-                    tickLine={false}
-                    axisLine={false}
-                    fontSize={11}
-                  />
+                  <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
 
                   <YAxis
                     tickLine={false}
                     axisLine={false}
                     fontSize={10}
-                    tickFormatter={(
-                      value
-                    ) =>
-                      `₹${Math.round(
-                        value / 1000
-                      )}k`
-                    }
+                    tickFormatter={(value) => `₹${Math.round(value / 1000)}k`}
                   />
 
-                  <Tooltip
-                    formatter={(
-                      value
-                    ) => [
-                      formatMoney(
-                        Number(value)
-                      ),
-                      "Payout",
-                    ]}
-                  />
+                  <Tooltip formatter={(value) => [formatMoney(Number(value)), "Payout"]} />
 
-                  <Bar
-                    dataKey="amount"
-                    radius={[
-                      6,
-                      6,
-                      0,
-                      0,
-                    ]}
-                  />
-
+                  <Bar dataKey="amount" radius={[6, 6, 0, 0]} />
                 </BarChart>
-
               </ResponsiveContainer>
 
-
               <div className="payout-chart-difference">
-
-                <span>
-                  Difference
-                </span>
+                <span>Difference</span>
 
                 <strong>
-                  {payoutDifference > 0
-                    ? "+"
-                    : ""}
+                  {payoutDifference > 0 ? "+" : ""}
 
-                  {formatMoney(
-                    payoutDifference
-                  )}
+                  {formatMoney(payoutDifference)}
                 </strong>
-
               </div>
-
             </div>
-
 
             {/* AI TEXT */}
 
             <div className="insight-text">
-
-              <span className="ai-label">
-                AI Interpretation
-              </span>
+              <span className="ai-label">AI Interpretation</span>
 
               <p className="insight-summary">
-                {payoutAnalysis?.summary ??
-                  "No payout analysis available."}
+                {payoutAnalysis?.summary ?? "No payout analysis available."}
               </p>
 
               <div className="compact-observations">
+                {payoutAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
+                  <div className="compact-observation" key={index}>
+                    <span />
 
-                {payoutAnalysis
-                  ?.key_observations
-                  ?.slice(0, 2)
-                  .map(
-                    (
-                      observation,
-                      index
-                    ) => (
-
-                      <div
-                        className="compact-observation"
-                        key={index}
-                      >
-                        <span />
-
-                        <p>
-                          {observation}
-                        </p>
-                      </div>
-
-                    )
-                  )}
-
+                    <p>{observation}</p>
+                  </div>
+                ))}
               </div>
-
             </div>
-
           </div>
-
         </article>
-
 
         {/* =================================================
             FINAL ASSESSMENT
         ================================================= */}
 
         <article className="insight-card">
-
           <header className="insight-card-header">
-
             <div>
-              <span className="insight-eyebrow">
-                Overall
-              </span>
+              <span className="insight-eyebrow">Overall</span>
 
-              <h3>
-                Final Assessment
-              </h3>
+              <h3>Final Assessment</h3>
             </div>
 
-            <span
-              className={severityClass(
-                result.overall_severity
-              )}
-            >
+            <span className={severityClass(result.overall_severity)}>
               {result.overall_severity}
             </span>
-
           </header>
 
-
           <div className="insight-body">
-
             {/* RISK CHART */}
 
             <div className="insight-chart risk-chart">
-
-              <ResponsiveContainer
-                width="100%"
-                height="100%"
-              >
-
+              <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
                   cx="50%"
                   cy="45%"
@@ -816,100 +423,47 @@ function InvestigationInsights({
                   startAngle={90}
                   endAngle={-270}
                 >
+                  <RadialBar dataKey="value" background cornerRadius={10} />
 
-                  <RadialBar
-                    dataKey="value"
-                    background
-                    cornerRadius={10}
-                  />
-
-                  <Tooltip
-                    formatter={(
-                      value
-                    ) => [
-                      `${value}/100`,
-                      "Risk Score",
-                    ]}
-                  />
-
+                  <Tooltip formatter={(value) => [`${value}/100`, "Risk Score"]} />
                 </RadialBarChart>
-
               </ResponsiveContainer>
 
-
               <div className="risk-chart-center">
+                <strong>{riskScore}</strong>
 
-                <strong>
-                  {riskScore}
-                </strong>
-
-                <span>
-                  /100
-                </span>
-
+                <span>/100</span>
               </div>
-
 
               <div className="risk-findings-label">
+                <strong>{riskFindingCount}</strong>
 
-                <strong>
-                  {riskFindingCount}
-                </strong>
-
-                <span>
-                  risk findings
-                </span>
-
+                <span>risk findings</span>
               </div>
-
             </div>
-
 
             {/* AI TEXT */}
 
             <div className="insight-text">
-
-              <span className="ai-label">
-                AI Assessment
-              </span>
+              <span className="ai-label">AI Assessment</span>
 
               <p className="insight-summary final-summary">
-                {finalReport
-                  ?.overall_assessment ??
-                  "No final assessment available."}
+                {finalReport?.overall_assessment ?? "No final assessment available."}
               </p>
 
-
-              {finalReport
-                ?.recommended_actions?.length && (
-
+              {finalReport?.recommended_actions?.length && (
                 <div className="recommended-action">
+                  <span>Recommended Action</span>
 
-                  <span>
-                    Recommended Action
-                  </span>
-
-                  <p>
-                  {
-                    finalReport.recommended_actions[0]
-                  }
-                  </p>
-
+                  <p>{finalReport.recommended_actions[0]}</p>
                 </div>
-
               )}
-
             </div>
-
           </div>
-
         </article>
-
       </div>
-
     </section>
   );
 }
-
 
 export default InvestigationInsights;
