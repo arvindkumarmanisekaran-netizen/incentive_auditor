@@ -7,7 +7,17 @@ export interface Finding {
 
   severity: string;
 
+  product_id?: string;
+
   evidence: FindingEvidence;
+}
+
+export interface InvestigationPlan {
+  focus_areas?: string[];
+
+  priority?: string;
+
+  reasoning?: string[];
 }
 
 export interface AIAnalysis {
@@ -56,6 +66,8 @@ export interface InvestigationResult {
   overall_risk_score: number;
 
   overall_severity: string;
+
+  investigation_plan?: InvestigationPlan;
 
   sales_rx_analysis?: AIAnalysis;
 

@@ -18,6 +18,13 @@ from ..analytics.doctor_concentration import (
 )
 
 
+def safe_float(value):
+    if value is None:
+        return 0.0
+
+    return float(value)
+
+
 async def investigate(
     db: AsyncSession,
     representative_id: str,
@@ -688,11 +695,11 @@ async def investigate(
 
     for payout in payout_rows:
 
-        difference = float(payout.payout_difference)
+        difference = safe_float(payout.payout_difference)
 
-        expected = float(payout.expected_payout)
+        expected = safe_float(payout.expected_payout)
 
-        actual = float(payout.actual_payout)
+        actual = safe_float(payout.actual_payout)
 
         if expected == 0 and actual > 0:
 
@@ -752,7 +759,11 @@ async def investigate(
             for finding in findings
         )
 
-    if overall_risk_score >= 75:
+    if not findings:
+
+        overall_severity = "UNKNOWN"
+
+    elif overall_risk_score >= 75:
 
         overall_severity = "HIGH"
 
@@ -769,13 +780,30 @@ async def investigate(
         overall_severity = "NORMAL"
 
     # ==================================================
-    # FINAL RESPONSE
+    # FINAL RESPONSE FOR LANGGRAPH
     # ==================================================
 
     return {
+        # ==========================
+        # Investigation Context
+        # ==========================
         "representative_id": representative_id,
         "start_date": start_date,
         "end_date": end_date,
+        # ==========================
+        # Investigation Plan
+        # ==========================
+        "investigation_plan": {
+            "modules": [
+                "sales_rx",
+                "doctor_territory",
+                "payout_validation",
+            ],
+            "description": "Deterministic anomaly analysis followed by specialist AI review.",
+        },
+        # ==========================
+        # Analytics Output
+        # ==========================
         "products_analyzed": products_analyzed,
         "findings": findings,
         "overall_risk_score": overall_risk_score,

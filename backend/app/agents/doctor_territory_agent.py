@@ -5,36 +5,73 @@ from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 
 SYSTEM_PROMPT = """
-You are the Doctor and Territory Analysis specialist
-in a pharmaceutical incentive investigation system.
+You are the Doctor and Territory Evidence Analysis Agent
+inside a pharmaceutical incentive investigation workflow.
+
+Your role is to interpret already calculated doctor and territory evidence.
+
+You DO NOT:
+- calculate concentration metrics
+- query databases
+- determine violations
+- determine fraud
+- accuse representatives
+
 
 Your responsibility is LIMITED to:
 
-1. Doctor concentration
-2. Cross-territory sales concentration
+1. Interpret doctor concentration evidence.
+2. Interpret cross-territory sales concentration evidence.
+3. Explain observations that may require human review.
+
 
 STRICT RULES:
 
-1. Use only supplied evidence.
-2. Never invent facts.
-3. Never alter or recalculate numeric values.
-4. Never conclude that fraud or misconduct occurred.
-5. Cross-territory sales are allowed in this business model.
-6. Do not describe cross-territory activity as a policy violation.
-7. Doctor ownership determines representative attribution.
-8. Do not analyze sales-prescription mismatch.
-9. Do not analyze sales deviation.
-10. Do not analyze payout calculations.
-11. If evidence is insufficient, say so.
+1. Use ONLY supplied evidence.
+2. Never invent missing information.
+3. Never alter numeric values.
+4. Never recalculate concentration percentages.
+5. Never conclude fraud or misconduct occurred.
+6. Cross-territory sales are allowed in this business model.
+7. Cross-territory activity is NOT automatically a violation.
+8. Doctor ownership determines representative attribution.
+9. Do not analyze sales-prescription mismatch.
+10. Do not analyze sales deviation.
+11. Do not analyze payout calculations.
+12. If evidence is insufficient, clearly state that.
 
-Return valid JSON only in this shape:
+
+Return valid JSON only:
 
 {
-  "severity": "NORMAL|LOW|MEDIUM|HIGH|UNKNOWN",
-  "summary": "string",
-  "key_observations": ["string"],
-  "investigation_priority": "string"
+    "severity": "NORMAL|LOW|MEDIUM|HIGH|UNKNOWN",
+
+    "anomaly_detected": true|false,
+
+    "summary": "Short explanation of doctor and territory evidence",
+
+    "evidence_summary": [
+        "Evidence point 1",
+        "Evidence point 2"
+    ],
+
+    "key_observations": [
+        "Observation 1",
+        "Observation 2"
+    ],
+
+    "limitations": [
+        "Missing information or unavailable evidence"
+    ],
+
+    "investigation_priority": "LOW|MEDIUM|HIGH"
 }
+
+
+Remember:
+
+You are an evidence interpretation agent,
+not a compliance enforcement system.
 """
 
 
@@ -47,65 +84,66 @@ async def doctor_territory_agent(
         "cross_territory_concentration",
     }
 
-    relevant_findings = [
-        finding
-        for finding in state.get(
-            "findings",
-            [],
-        )
-        if finding.get("type") in relevant_types
-    ]
+    findings = state.get(
+        "findings",
+        [],
+    )
+
+    relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
+
+    # No evidence available
 
     if not relevant_findings:
 
         return {
             "doctor_territory_analysis": {
                 "severity": "UNKNOWN",
-                "summary": ("No doctor or territory findings available."),
+                "anomaly_detected": False,
+                "summary": "No doctor or territory evidence is available for analysis.",
+                "evidence_summary": [],
                 "key_observations": [],
-                "investigation_priority": ("No review available"),
+                "limitations": [
+                    "No doctor concentration or territory concentration findings were provided."
+                ],
+                "investigation_priority": "LOW",
             }
         }
 
     evidence = {
         "representative_id": state.get("representative_id"),
-        "start_date": state.get("start_date"),
-        "end_date": state.get("end_date"),
+        "investigation_period": {
+            "start_date": state.get("start_date"),
+            "end_date": state.get("end_date"),
+        },
         "products_analyzed": state.get(
             "products_analyzed",
             [],
         ),
-        "findings": relevant_findings,
+        "doctor_territory_findings": relevant_findings,
     }
 
     prompt = f"""
-            {SYSTEM_PROMPT}
 
-            Analyze only the following doctor and territory evidence:
+{SYSTEM_PROMPT}
 
-            {json.dumps(
-                evidence,
-                indent=2,
-                default=str,
-            )}
 
-            Return JSON only.
-            """
+Analyze ONLY this doctor and territory evidence:
+
+
+    {json.dumps(
+        evidence,
+        indent=2,
+        default=str,
+    )}
+
+
+Return JSON only.
+
+"""
 
     response_text = await gemini_chat_with_fallback(prompt)
 
-    # Gemini sometimes returns ```json blocks
-    cleaned_response = (
-        response_text.replace(
-            "```json",
-            "",
-        )
-        .replace(
-            "```",
-            "",
-        )
-        .strip()
-    )
+    cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
 
@@ -115,9 +153,13 @@ async def doctor_territory_agent(
 
         parsed = {
             "severity": "UNKNOWN",
-            "summary": response_text,
+            "anomaly_detected": False,
+            "summary": "AI response parsing failed.",
+            "evidence_summary": [],
             "key_observations": [],
-            "investigation_priority": ("AI response could not be parsed as JSON."),
+            "limitations": ["AI response was not valid JSON."],
+            "investigation_priority": "LOW",
+            "raw_response": response_text,
         }
 
     return {"doctor_territory_analysis": parsed}

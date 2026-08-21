@@ -80,10 +80,24 @@ async def ai_investigation_summary(
         "representative_id": investigation_data.get("representative_id"),
         "start_date": investigation_data.get("start_date"),
         "end_date": investigation_data.get("end_date"),
-        "products_analyzed": investigation_data.get("products_analyzed", []),
-        "findings": investigation_data.get("findings", []),
-        "overall_risk_score": investigation_data.get("overall_risk_score", 0),
-        "overall_severity": investigation_data.get("overall_severity", "NORMAL"),  # noqa: E501
+        "products_analyzed": investigation_data.get(
+            "products_analyzed",
+            [],
+        ),
+        "findings": investigation_data.get(
+            "findings",
+            [],
+        ),
+        "overall_risk_score": investigation_data.get(
+            "overall_risk_score",
+            0,
+        ),
+        "overall_severity": investigation_data.get(
+            "overall_severity",
+            "NORMAL",
+        ),
+        # NEW
+        "investigation_plan": {},
         "sales_rx_analysis": {},
         "doctor_territory_analysis": {},
         "payout_analysis": {},
@@ -102,18 +116,49 @@ async def ai_investigation_summary(
     # Response
     # --------------------------------------------------
 
+    print("FINAL GRAPH STATE")
+
+    print(graph_result.get("investigation_plan"))
+
     return {
         "representative_id": investigation_data.get("representative_id"),
         "start_date": investigation_data.get("start_date"),
         "end_date": investigation_data.get("end_date"),
-        "products_analyzed": investigation_data.get("products_analyzed", []),
-        "findings": investigation_data.get("findings", []),
-        "overall_risk_score": investigation_data.get("overall_risk_score", 0),
-        "overall_severity": investigation_data.get("overall_severity", "NORMAL"),  # noqa: E501
-        "sales_rx_analysis": graph_result.get("sales_rx_analysis", {}),
+        "products_analyzed": investigation_data.get(
+            "products_analyzed",
+            [],
+        ),
+        "findings": investigation_data.get(
+            "findings",
+            [],
+        ),
+        "overall_risk_score": investigation_data.get(
+            "overall_risk_score",
+            0,
+        ),
+        "overall_severity": investigation_data.get(
+            "overall_severity",
+            "NORMAL",
+        ),
+        # NEW
+        "investigation_plan": graph_result.get(
+            "investigation_plan",
+            {},
+        ),
+        "sales_rx_analysis": graph_result.get(
+            "sales_rx_analysis",
+            {},
+        ),
         "doctor_territory_analysis": graph_result.get(
-            "doctor_territory_analysis", {}
-        ),  # noqa: E501
-        "payout_analysis": graph_result.get("payout_analysis", {}),
-        "final_report": graph_result.get("final_report", {}),
+            "doctor_territory_analysis",
+            {},
+        ),
+        "payout_analysis": graph_result.get(
+            "payout_analysis",
+            {},
+        ),
+        "final_report": graph_result.get(
+            "final_report",
+            {},
+        ),
     }

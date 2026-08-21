@@ -9,9 +9,7 @@ export async function runInvestigation(
 ): Promise<InvestigationResult> {
   const params = new URLSearchParams({
     representative_id: representativeId,
-
     start_date: startDate,
-
     end_date: endDate,
   });
 
@@ -38,7 +36,10 @@ export async function runInvestigation(
 
     overall_risk_score: investigation.overall_risk_score ?? 0,
 
-    overall_severity: investigation.overall_severity ?? "NORMAL",
+    overall_severity: investigation.overall_severity ?? "UNKNOWN",
+
+    // ADD THIS
+    investigation_plan: investigation.investigation_plan ?? {},
 
     sales_rx_analysis: investigation.sales_rx_analysis ?? {},
 

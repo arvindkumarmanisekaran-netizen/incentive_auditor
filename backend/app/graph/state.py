@@ -1,11 +1,7 @@
-from typing import Any, TypedDict
+from typing import TypedDict, Any
 
 
-class InvestigationState(TypedDict):
-
-    # ==================================================
-    # INVESTIGATION INPUT
-    # ==================================================
+class InvestigationState(TypedDict, total=False):
 
     representative_id: str
 
@@ -13,29 +9,19 @@ class InvestigationState(TypedDict):
 
     end_date: str
 
-    # ==================================================
-    # PRODUCTS ANALYZED
-    # ==================================================
+    # analytics context
 
     products_analyzed: list[str]
 
-    # ==================================================
-    # DETERMINISTIC FINDINGS
-    # ==================================================
-
     findings: list[dict[str, Any]]
 
-    # ==================================================
-    # RISK SUMMARY
-    # ==================================================
-
-    overall_risk_score: int
+    overall_risk_score: float
 
     overall_severity: str
 
-    # ==================================================
-    # SPECIALIST OUTPUTS
-    # ==================================================
+    # AI outputs
+
+    investigation_plan: dict[str, Any]
 
     sales_rx_analysis: dict[str, Any]
 
@@ -43,8 +29,6 @@ class InvestigationState(TypedDict):
 
     payout_analysis: dict[str, Any]
 
-    # ==================================================
-    # FINAL AI REPORT
-    # ==================================================
-
     final_report: dict[str, Any]
+
+    investigation_summary: dict[str, Any]

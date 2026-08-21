@@ -24,6 +24,8 @@ import DatabaseManagementCard from "./components/DatabaseManagementCard";
 
 import AIChatAssistant from "./components/AIChatAssistant";
 
+import InvestigationWorkflow from "./components/InvestigationWorkflow";
+
 import "./App.css";
 
 type DashboardTab = "analysis" | "database";
@@ -140,7 +142,9 @@ function App() {
 
         overall_risk_score: data.overall_risk_score ?? 0,
 
-        overall_severity: data.overall_severity ?? "NORMAL",
+        overall_severity: data.overall_severity ?? "UNKNOWN",
+
+        investigation_plan: data.investigation_plan,
 
         sales_rx_analysis: data.sales_rx_analysis,
 
@@ -307,7 +311,9 @@ function App() {
             <div className="investigation-loading">
               <span className="loading-spinner" />
 
-              <span>Analyzing sales, prescriptions and incentive data...</span>
+              <span>
+                Running investigation workflow: analytics → specialist agents → risk synthesis...
+              </span>
             </div>
           )}
 
@@ -326,11 +332,13 @@ function App() {
                 findingCount={riskFindingCount}
               />
 
+              <InvestigationWorkflow result={result} />
+
               <InvestigationCharts findings={findings} />
 
               <FindingsList findings={findings} />
 
-              {result && <InvestigationInsights result={result} />}
+              <InvestigationInsights result={result} />
             </>
           )}
         </section>
