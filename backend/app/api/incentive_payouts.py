@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, Query, HTTPException
 from sqlalchemy import bindparam, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,34 +15,46 @@ router = APIRouter(
 
 @router.get("")
 async def get_incentive_payouts(
+    limit: int = Query(
+        default=50,
+        ge=1,
+        le=500,
+    ),
+    offset: int = Query(
+        default=0,
+        ge=0,
+    ),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(text("""
-        SELECT
-            payout_id,
-            representative_id,
-            product_id,
-            payout_month,
-            sales_target,
-            actual_sales,
-            sales_achievement,
-            base_incentive,
-            achievement_multiplier,
-            calculated_payout,
-            maximum_payout,
-            expected_payout,
-            actual_payout,
-            payout_difference,
-            status,
-            created_at,
-            updated_at
-        FROM incentive_payouts
-        ORDER BY payout_month DESC,
-                 representative_id,
-                 product_id
-    """))
+    count_result = await db.execute(text("""
+            SELECT COUNT(*)
+            FROM incentive_payouts
+            """))
 
-    return [dict(row._mapping) for row in result.fetchall()]
+    total = count_result.scalar_one()
+
+    result = await db.execute(
+        text("""
+            SELECT *
+            FROM incentive_payouts
+            ORDER BY payout_id
+            LIMIT :limit
+            OFFSET :offset
+            """),
+        {
+            "limit": limit,
+            "offset": offset,
+        },
+    )
+
+    rows = [dict(row) for row in result.mappings().all()]
+
+    return {
+        "records": rows,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 @router.put("/{payout_id}")

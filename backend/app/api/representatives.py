@@ -1,6 +1,5 @@
 from typing import Any
-
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, Query, HTTPException
 from sqlalchemy import bindparam, text
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..services.document_processing.validator import validate_status
@@ -15,23 +14,59 @@ router = APIRouter(
 
 @router.get("")
 async def get_representatives(
+    limit: int = Query(
+        default=50,
+        ge=1,
+        le=500,
+    ),
+    offset: int = Query(
+        default=0,
+        ge=0,
+    ),
+    db: AsyncSession = Depends(get_db),
+):
+    count_result = await db.execute(text("""
+            SELECT COUNT(*)
+            FROM representatives
+            """))
+
+    total = count_result.scalar_one()
+
+    result = await db.execute(
+        text("""
+            SELECT *
+            FROM representatives
+            ORDER BY representative_id
+            LIMIT :limit
+            OFFSET :offset
+            """),
+        {
+            "limit": limit,
+            "offset": offset,
+        },
+    )
+
+    rows = [dict(row) for row in result.mappings().all()]
+
+    return {
+        "records": rows,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
+
+
+@router.get("/all")
+async def get_all_representatives(
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(text("""
-            SELECT
-                representative_id,
-                first_name,
-                last_name,
-                territory_id,
-                joining_date,
-                status,
-                created_at,
-                updated_at
+            SELECT *
             FROM representatives
-            ORDER BY representative_id
+            ORDER BY first_name, last_name
             """))
 
-    return [dict(row._mapping) for row in result.fetchall()]
+    return [dict(row) for row in result.mappings().all()]
 
 
 @router.put("/{representative_id}")

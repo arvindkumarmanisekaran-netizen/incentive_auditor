@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../config";
 
 import { Fragment, useEffect, useMemo, useState } from "react";
+
 import {
   getDatabaseRepresentatives,
   getDoctors,
@@ -46,6 +47,8 @@ interface SectionConfig {
   primaryKey: string;
   apiPath: string;
 }
+
+const PAGE_SIZE = 50;
 
 const SECTIONS: SectionConfig[] = [
   {
@@ -100,12 +103,19 @@ const SECTIONS: SectionConfig[] = [
 
 const STATUS_OPTIONS: Partial<Record<Section, string[]>> = {
   territories: ["Active", "Inactive"],
+
   representatives: ["Active", "Inactive"],
-  doctors: ["Active", "Inactive"],
+
   products: ["Active", "Inactive"],
+
+  doctors: ["Active", "Inactive"],
+
   assignments: ["Active", "Inactive", "Cancelled"],
-  sales: ["Valid", "Cancelled", "Returned", "Adjusted"],
+
   prescriptions: ["Valid", "Cancelled", "Reversed"],
+
+  sales: ["Valid", "Cancelled", "Returned", "Adjusted"],
+
   payouts: ["Pending", "Paid", "Adjusted"],
 };
 
@@ -117,7 +127,9 @@ export default function DatabaseManagementCard() {
   const [activeSection, setActiveSection] = useState<Section>("representatives");
 
   const [rows, setRows] = useState<RowData[]>([]);
+
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -128,16 +140,32 @@ export default function DatabaseManagementCard() {
 
   const [editValues, setEditValues] = useState<Record<string, unknown>>({});
 
+  const [offset, setOffset] = useState(0);
+
+  const [totalRecords, setTotalRecords] = useState(0);
+
   const activeConfig = useMemo(
     () => SECTIONS.find((section) => section.id === activeSection)!,
     [activeSection],
   );
 
+  // ---------------------------------------------
+  // Reset pagination ONLY when table changes.
+  // ---------------------------------------------
+
   useEffect(() => {
-    loadTable(activeSection);
+    setOffset(0);
   }, [activeSection]);
 
-  async function loadTable(section: Section) {
+  // ---------------------------------------------
+  // Load current page.
+  // ---------------------------------------------
+
+  useEffect(() => {
+    void loadTable(activeSection, offset);
+  }, [activeSection, offset]);
+
+  async function loadTable(section: Section, currentOffset: number) {
     setLoading(true);
     setError(null);
     setSelectedIds([]);
@@ -146,45 +174,89 @@ export default function DatabaseManagementCard() {
     setEditError(null);
 
     try {
-      let data: RowData[] = [];
+      let records: RowData[] = [];
+      let total = 0;
 
       switch (section) {
-        case "territories":
-          data = await getTerritories();
-          break;
+        case "territories": {
+          const response = await getTerritories(PAGE_SIZE, currentOffset);
 
-        case "representatives":
-          data = await getDatabaseRepresentatives();
+          records = response.records;
+          total = response.total;
           break;
+        }
 
-        case "products":
-          data = await getProducts();
-          break;
+        case "representatives": {
+          const response = await getDatabaseRepresentatives(PAGE_SIZE, currentOffset);
 
-        case "doctors":
-          data = await getDoctors();
+          records = response.records;
+          total = response.total;
           break;
+        }
 
-        case "assignments":
-          data = await getAssignments();
-          break;
+        case "products": {
+          const response = await getProducts(PAGE_SIZE, currentOffset);
 
-        case "prescriptions":
-          data = await getPrescriptions();
+          records = response.records;
+          total = response.total;
           break;
+        }
 
-        case "sales":
-          data = await getSales();
-          break;
+        case "doctors": {
+          const response = await getDoctors(PAGE_SIZE, currentOffset);
 
-        case "payouts":
-          data = await getPayouts();
+          records = response.records;
+          total = response.total;
           break;
+        }
+
+        case "assignments": {
+          const response = await getAssignments(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+          break;
+        }
+
+        case "prescriptions": {
+          const response = await getPrescriptions(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+          break;
+        }
+
+        case "sales": {
+          const response = await getSales(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+          break;
+        }
+
+        case "payouts": {
+          const response = await getPayouts(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+          break;
+        }
       }
 
-      setRows(data);
+      console.log("Database page loaded:", {
+        section,
+        offset: currentOffset,
+        records: records.length,
+        total,
+      });
+
+      setRows(records);
+      setTotalRecords(total);
     } catch (err) {
       console.error("Load table failed:", err);
+
+      setRows([]);
+      setTotalRecords(0);
 
       setError(err instanceof Error ? err.message : "Unable to load database records");
     } finally {
@@ -212,6 +284,7 @@ export default function DatabaseManagementCard() {
   function toggleSelectAll() {
     if (rows.length > 0 && selectedIds.length === rows.length) {
       setSelectedIds([]);
+
       return;
     }
 
@@ -251,7 +324,13 @@ export default function DatabaseManagementCard() {
         cancelEdit();
       }
 
-      await loadTable(activeSection);
+      // If last record on page was deleted,
+      // move to previous page.
+      if (rows.length === 1 && offset > 0) {
+        setOffset(Math.max(0, offset - PAGE_SIZE));
+      } else {
+        await loadTable(activeSection, offset);
+      }
     } catch (err) {
       console.error("Delete failed:", err);
 
@@ -275,9 +354,11 @@ export default function DatabaseManagementCard() {
 
       const response = await fetch(`${API_BASE_URL}${activeConfig.apiPath}/bulk-delete`, {
         method: "DELETE",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           ids: selectedIds,
         }),
@@ -289,9 +370,17 @@ export default function DatabaseManagementCard() {
         throw new Error(getErrorMessage(errorData, "Failed to delete selected records"));
       }
 
+      const deletedCount = selectedIds.length;
+
       setSelectedIds([]);
 
-      await loadTable(activeSection);
+      // Entire current page deleted:
+      // move to previous page.
+      if (deletedCount >= rows.length && offset > 0) {
+        setOffset(Math.max(0, offset - PAGE_SIZE));
+      } else {
+        await loadTable(activeSection, offset);
+      }
     } catch (err) {
       console.error("Bulk delete failed:", err);
 
@@ -301,6 +390,7 @@ export default function DatabaseManagementCard() {
 
   function startEdit(row: RowData) {
     setEditingRow(row);
+
     setEditError(null);
 
     const copy: Record<string, unknown> = {};
@@ -316,7 +406,9 @@ export default function DatabaseManagementCard() {
 
   function cancelEdit() {
     setEditingRow(null);
+
     setEditValues({});
+
     setEditError(null);
   }
 
@@ -329,6 +421,7 @@ export default function DatabaseManagementCard() {
 
     if (!id) {
       setEditError("Unable to determine record ID.");
+
       return;
     }
 
@@ -345,9 +438,11 @@ export default function DatabaseManagementCard() {
         `${API_BASE_URL}${activeConfig.apiPath}/${encodeURIComponent(id)}`,
         {
           method: "PUT",
+
           headers: {
             "Content-Type": "application/json",
           },
+
           body: JSON.stringify(payload),
         },
       );
@@ -360,13 +455,21 @@ export default function DatabaseManagementCard() {
 
       cancelEdit();
 
-      await loadTable(activeSection);
+      await loadTable(activeSection, offset);
     } catch (err) {
       console.error("Update failed:", err);
 
       setEditError(err instanceof Error ? err.message : "Update failed");
     }
   }
+
+  const currentPage = Math.floor(offset / PAGE_SIZE) + 1;
+
+  const totalPages = Math.max(1, Math.ceil(totalRecords / PAGE_SIZE));
+
+  const firstRecord = totalRecords === 0 ? 0 : offset + 1;
+
+  const lastRecord = totalRecords === 0 ? 0 : Math.min(offset + rows.length, totalRecords);
 
   return (
     <article className="admin-card database-card">
@@ -395,7 +498,9 @@ export default function DatabaseManagementCard() {
             <div>
               <h4>{activeConfig.title}</h4>
 
-              <span>{loading ? "Loading..." : `${rows.length} records`}</span>
+              <span>
+                {loading ? "Loading..." : `${firstRecord}-${lastRecord} of ${totalRecords} records`}
+              </span>
             </div>
 
             {selectedIds.length > 0 && (
@@ -497,11 +602,7 @@ export default function DatabaseManagementCard() {
 
                                       {column === "status" && STATUS_OPTIONS[activeSection] ? (
                                         <select
-                                          value={
-                                            value === null || value === undefined
-                                              ? ""
-                                              : String(value)
-                                          }
+                                          value={value == null ? "" : String(value)}
                                           disabled={column === activeConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
@@ -520,11 +621,7 @@ export default function DatabaseManagementCard() {
                                         <input
                                           type={getInputType(column)}
                                           step={getInputStep(column)}
-                                          value={
-                                            value === null || value === undefined
-                                              ? ""
-                                              : String(value)
-                                          }
+                                          value={value == null ? "" : String(value)}
                                           disabled={column === activeConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
@@ -568,6 +665,34 @@ export default function DatabaseManagementCard() {
                   })}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {/* PAGINATION */}
+
+          {!loading && !error && totalRecords > 0 && (
+            <div className="database-pagination">
+              <button
+                type="button"
+                className="secondary-button"
+                disabled={offset === 0}
+                onClick={() => setOffset((current) => Math.max(0, current - PAGE_SIZE))}
+              >
+                Previous
+              </button>
+
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                type="button"
+                className="secondary-button"
+                disabled={offset + PAGE_SIZE >= totalRecords}
+                onClick={() => setOffset((current) => current + PAGE_SIZE)}
+              >
+                Next
+              </button>
             </div>
           )}
         </div>

@@ -3039,3 +3039,23 @@ flex:1;
 padding:10px;
 
 }
+
+.database-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.database-pagination span {
+  font-size: 14px;
+  color: #64748b;
+  min-width: 120px;
+  text-align: center;
+}
+
+.database-pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

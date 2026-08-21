@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, Query, HTTPException
 from sqlalchemy import bindparam, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,21 +15,46 @@ router = APIRouter(
 
 @router.get("")
 async def get_products(
+    limit: int = Query(
+        default=50,
+        ge=1,
+        le=500,
+    ),
+    offset: int = Query(
+        default=0,
+        ge=0,
+    ),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(text("""
-            SELECT
-                product_id,
-                product_name,
-                product_category,
-                status,
-                created_at,
-                updated_at
+    count_result = await db.execute(text("""
+            SELECT COUNT(*)
             FROM products
-            ORDER BY product_id
             """))
 
-    return [dict(row._mapping) for row in result.fetchall()]
+    total = count_result.scalar_one()
+
+    result = await db.execute(
+        text("""
+            SELECT *
+            FROM products
+            ORDER BY product_id
+            LIMIT :limit
+            OFFSET :offset
+            """),
+        {
+            "limit": limit,
+            "offset": offset,
+        },
+    )
+
+    rows = [dict(row) for row in result.mappings().all()]
+
+    return {
+        "records": rows,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 @router.put("/{product_id}")

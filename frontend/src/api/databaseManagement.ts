@@ -1,15 +1,5 @@
 import { API_BASE_URL } from "../config";
 
-async function fetchTable<T>(path: string): Promise<T[]> {
-  const response = await fetch(`${API_BASE_URL}${path}`);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${path}`);
-  }
-
-  return response.json();
-}
-
 export interface TerritoryRow {
   territory_id: string;
   territory_name: string;
@@ -89,6 +79,7 @@ export interface IncentivePayoutRow {
   payout_id: string;
   representative_id: string;
   product_id: string;
+  program_id?: string | null;
   payout_month: string;
   sales_target: number;
   actual_sales: number;
@@ -105,34 +96,77 @@ export interface IncentivePayoutRow {
   updated_at?: string;
 }
 
-export async function getTerritories() {
-  return fetchTable<TerritoryRow>("/api/territories");
+export interface PaginatedResponse<T> {
+  records: T[];
+  total: number;
+  limit: number;
+  offset: number;
 }
 
-export async function getDatabaseRepresentatives() {
-  return fetchTable<RepresentativeRow>("/api/representatives");
+async function fetchPage<T>(path: string, limit = 50, offset = 0): Promise<PaginatedResponse<T>> {
+  const response = await fetch(`${API_BASE_URL}${path}?limit=${limit}&offset=${offset}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+
+    throw new Error(
+      typeof errorData?.detail === "string"
+        ? errorData.detail
+        : `Failed to load records (${response.status})`,
+    );
+  }
+
+  const data: unknown = await response.json();
+
+  if (
+    !data ||
+    typeof data !== "object" ||
+    !("records" in data) ||
+    !Array.isArray((data as PaginatedResponse<T>).records)
+  ) {
+    console.error("Invalid pagination response:", path, data);
+
+    throw new Error(`Invalid paginated response returned from ${path}`);
+  }
+
+  const page = data as PaginatedResponse<T>;
+
+  return {
+    records: page.records,
+    total: Number(page.total ?? 0),
+    limit: Number(page.limit ?? limit),
+    offset: Number(page.offset ?? offset),
+  };
 }
 
-export async function getProducts() {
-  return fetchTable<ProductRow>("/api/products");
+export function getDatabaseRepresentatives(limit = 50, offset = 0) {
+  return fetchPage<RepresentativeRow>("/api/representatives", limit, offset);
 }
 
-export async function getDoctors() {
-  return fetchTable<DoctorRow>("/api/doctors");
+export function getTerritories(limit = 50, offset = 0) {
+  return fetchPage<TerritoryRow>("/api/territories", limit, offset);
 }
 
-export async function getAssignments() {
-  return fetchTable<AssignmentRow>("/api/assignments");
+export function getProducts(limit = 50, offset = 0) {
+  return fetchPage<ProductRow>("/api/products", limit, offset);
 }
 
-export async function getPrescriptions() {
-  return fetchTable<PrescriptionRow>("/api/prescriptions");
+export function getDoctors(limit = 50, offset = 0) {
+  return fetchPage<DoctorRow>("/api/doctors", limit, offset);
 }
 
-export async function getSales() {
-  return fetchTable<SaleRow>("/api/sales");
+export function getAssignments(limit = 50, offset = 0) {
+  return fetchPage<AssignmentRow>("/api/assignments", limit, offset);
 }
 
-export async function getPayouts() {
-  return fetchTable<IncentivePayoutRow>("/api/incentive-payouts");
+export function getPrescriptions(limit = 50, offset = 0) {
+  return fetchPage<PrescriptionRow>("/api/prescriptions", limit, offset);
+}
+
+export function getSales(limit = 50, offset = 0) {
+  return fetchPage<SaleRow>("/api/sales", limit, offset);
+}
+
+export function getPayouts(limit = 50, offset = 0) {
+  return fetchPage<IncentivePayoutRow>("/api/incentive-payouts", limit, offset);
 }
