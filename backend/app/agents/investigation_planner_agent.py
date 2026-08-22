@@ -73,8 +73,6 @@ async def investigation_planner_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
-    print("====== PLANNER STARTED ======")
-
     evidence = {
         "representative_id": state.get("representative_id"),
         "start_date": state.get("start_date"),
@@ -116,7 +114,5 @@ Return JSON only.
             "priority": "UNKNOWN",
             "reasoning": ["Gemini response could not be parsed as JSON."],
         }
-
-    print(plan)
 
     return {"investigation_plan": plan}

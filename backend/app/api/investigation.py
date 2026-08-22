@@ -116,10 +116,6 @@ async def ai_investigation_summary(
     # Response
     # --------------------------------------------------
 
-    print("FINAL GRAPH STATE")
-
-    print(graph_result.get("investigation_plan"))
-
     return {
         "representative_id": investigation_data.get("representative_id"),
         "start_date": investigation_data.get("start_date"),
