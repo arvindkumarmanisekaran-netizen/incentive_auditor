@@ -214,6 +214,8 @@ export default function DatabaseManagementCard() {
         case "products": {
           const response = await getProducts(PAGE_SIZE, currentOffset);
 
+          console.log(response.records);
+
           records = response.records;
           total = response.total;
 

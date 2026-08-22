@@ -106,8 +106,6 @@ function getProductContext(finding?: Finding) {
 }
 
 function ProductLabel({ productId, productName }: { productId?: string; productName?: string }) {
-  console.log(productId, productName);
-
   if (!productId && !productName) {
     return null;
   }
@@ -476,7 +474,6 @@ function InvestigationCharts({ findings = [] }: Props) {
         },
       ]
     : [];
-
   return (
     <section className="charts-grid">
       {/* ==================================================
@@ -563,9 +560,7 @@ function InvestigationCharts({ findings = [] }: Props) {
         <div className="chart-heading">
           <div>
             <h3>Payout Comparison</h3>
-
             <ProductLabel productId={payoutProduct.id} productName={payoutProduct.name} />
-
             <p>Expected incentive vs actual payout</p>
           </div>
         </div>

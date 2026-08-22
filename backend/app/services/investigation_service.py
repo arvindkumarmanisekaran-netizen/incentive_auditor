@@ -42,42 +42,34 @@ async def investigate(
 
     products_query = text("""
         SELECT DISTINCT
-
-            s.product_id
+            s.product_id,
+            p.product_name
 
         FROM sales s
 
+        JOIN products p
+            ON p.product_id = s.product_id
 
         JOIN representative_doctor_assignments rda
-
             ON rda.doctor_id = s.doctor_id
-
             AND s.sale_date >= rda.effective_from
-
             AND (
                 rda.effective_to IS NULL
-
                 OR s.sale_date <= rda.effective_to
             )
 
-
         WHERE
-
-            rda.representative_id =
-                :representative_id
+            rda.representative_id = :representative_id
 
             AND s.sale_date BETWEEN
                 :start_date
-                AND
-                :end_date
+                AND :end_date
 
             AND s.status = 'Valid'
 
-
         ORDER BY
-
             s.product_id
-        """)
+    """)
 
     product_result = await db.execute(
         products_query,
@@ -90,7 +82,12 @@ async def investigate(
 
     products = product_result.fetchall()
 
+    # Keep the existing API shape:
+    # ["P002", "P003", "P007", ...]
     products_analyzed = [row.product_id for row in products]
+
+    # Separate lookup for product names
+    product_name_map = {row.product_id: row.product_name for row in products}
 
     # ==================================================
     # ANALYZE EACH PRODUCT
@@ -98,6 +95,7 @@ async def investigate(
 
     for product_id in products_analyzed:
 
+        product_name = product_name_map.get(product_id)
         # ==================================================
         # SALES DEVIATION
         # ==================================================
@@ -207,6 +205,7 @@ async def investigate(
                 {
                     "type": "sales_deviation",
                     "product_id": product_id,
+                    "product_name": product_name,
                     "severity": analysis["severity"],
                     "evidence": analysis,
                 }
@@ -410,6 +409,7 @@ async def investigate(
                 {
                     "type": "sales_prescription_mismatch",
                     "product_id": product_id,
+                    "product_name": product_name,
                     "severity": analysis["severity"],
                     "evidence": analysis,
                 }
@@ -644,31 +644,23 @@ async def investigate(
 
     payout_query = text("""
         SELECT
+        ip.payout_id,
+        ip.product_id,
+        p.product_name,
+        ip.expected_payout,
+        ip.actual_payout,
+        ip.payout_difference,
+        ip.status
 
-            payout_id,
+    FROM incentive_payouts ip
 
-            product_id,
-
-            expected_payout,
-
-            actual_payout,
-
-            payout_difference,
-
-            status
-
-
-        FROM incentive_payouts
-
+    LEFT JOIN products p
+        ON p.product_id = ip.product_id
 
         WHERE
+            ip.representative_id = :representative_id
 
-            representative_id =
-                :representative_id
-
-
-            AND payout_month BETWEEN
-
+            AND ip.payout_month BETWEEN
                 DATE_TRUNC(
                     'month',
                     CAST(:start_date AS DATE)
@@ -725,6 +717,7 @@ async def investigate(
             {
                 "type": "payout_discrepancy",
                 "product_id": payout.product_id,
+                "product_name": payout.product_name,
                 "severity": severity,
                 "evidence": {
                     "payout_id": payout.payout_id,
