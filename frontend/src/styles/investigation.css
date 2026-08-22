@@ -142,7 +142,9 @@
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 14px;
+  column-gap: 14px;
+  row-gap: 22px;
+  margin-top: 20px;
 
   margin-bottom: 18px;
 }
@@ -335,7 +337,7 @@
 ========================================================= */
 
 .insights-section {
-  margin: 20px 0;
+  margin: 20px 28px;
 }
 
 .insights-grid {
@@ -1096,4 +1098,182 @@
   .dynamic-pie-legend {
     gap: 6px 10px;
   }
+}
+/* =========================================================
+   FINAL INSIGHT CARD HEIGHT + TOOLTIP FIX
+   (PATCH - KEEP EXISTING DESIGN)
+========================================================= */
+
+/* allow cards to grow naturally */
+.insight-card {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* body expands with content */
+.insight-body {
+  min-height: 280px;
+  height: auto;
+  align-items: stretch;
+}
+
+/* keep chart area stable */
+.insight-chart {
+  min-height: 280px;
+  height: 280px;
+  overflow: visible;
+}
+
+/* text side can expand */
+.insight-text {
+  min-height: 280px;
+  height: auto;
+  overflow: visible;
+}
+
+/* remove clipping from text */
+.insight-summary,
+.final-summary {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
+  -webkit-line-clamp: unset;
+}
+
+/* observations expand */
+.compact-observation p {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
+  -webkit-line-clamp: unset;
+}
+
+/* recommendation box fits */
+.recommended-action {
+  margin-top: 14px;
+}
+
+.recommended-action p {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
+  -webkit-line-clamp: unset;
+}
+
+/* =========================================================
+   RECHART TOOLTIP LAYER
+========================================================= */
+
+.recharts-tooltip-wrapper {
+  z-index: 99999 !important;
+  pointer-events: none !important;
+}
+
+/* tooltip must sit above radial center */
+.concentration-chart .recharts-tooltip-wrapper,
+.risk-chart .recharts-tooltip-wrapper {
+  z-index: 99999 !important;
+}
+
+/* =========================================================
+   DOCTOR CENTER LABEL
+   keep label visible but below tooltip
+========================================================= */
+
+.concentration-center-label {
+  z-index: 10;
+}
+
+/* =========================================================
+   FINAL ASSESSMENT SCORE VISIBILITY
+========================================================= */
+
+.risk-chart-center {
+  z-index: 10;
+}
+
+.risk-chart-center strong {
+  color: #ffffff;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(255, 255, 255, 0.15);
+}
+
+.risk-chart-center span {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* =========================================================
+   RADIAL CHART CONTAINER
+========================================================= */
+
+.concentration-chart,
+.risk-chart {
+  overflow: visible;
+}
+
+/* =========================================================
+   MOBILE KEEP EXISTING BEHAVIOUR
+========================================================= */
+
+@media (max-width: 900px) {
+  .insight-body {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-chart {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.chart-product-context {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 4px;
+  margin-bottom: 3px;
+
+  min-width: 0;
+}
+
+.chart-product-id {
+  flex: 0 0 auto;
+
+  padding: 2px 6px;
+
+  color: #e9d5ff;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.05em;
+
+  background: rgba(124, 58, 237, 0.12);
+
+  border: 1px solid rgba(192, 132, 252, 0.18);
+  border-radius: 5px;
+}
+
+.chart-product-separator {
+  color: #6f5d7c;
+  font-size: 9px;
+}
+
+.chart-product-name {
+  min-width: 0;
+
+  color: #b8a8c4;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

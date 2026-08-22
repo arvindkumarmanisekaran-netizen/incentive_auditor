@@ -49,6 +49,26 @@ const TERRITORY_COLORS = ["#0891B2", "#F97316", "#4F46E5", "#65A30D", "#E11D48",
    HELPERS
 ========================================================= */
 
+function ChartTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const item = payload[0]?.payload;
+
+  if (!item) {
+    return null;
+  }
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <span>{item.name ?? item.doctor_name ?? item.territory_name ?? "Value"}</span>
+
+      <strong>{formatMoney(Number(item.amount ?? item.sales ?? 0))}</strong>
+    </div>
+  );
+}
+
 function formatMoney(value: number | string) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -59,6 +79,52 @@ function formatMoney(value: number | string) {
 
 function getFinding(findings: Finding[] = [], type: string) {
   return findings.find((finding) => finding.type === type);
+}
+
+function getProductContext(finding?: Finding) {
+  if (!finding) {
+    return {
+      id: "",
+      name: "",
+    };
+  }
+
+  const findingWithProduct = finding as Finding & {
+    product_name?: string;
+  };
+
+  return {
+    id: String(finding.product_id ?? ""),
+
+    name: String(
+      findingWithProduct.product_name ??
+        finding.evidence?.product_name ??
+        finding.evidence?.product ??
+        "",
+    ),
+  };
+}
+
+function ProductLabel({ productId, productName }: { productId?: string; productName?: string }) {
+  console.log(productId, productName);
+
+  if (!productId && !productName) {
+    return null;
+  }
+
+  return (
+    <div className="chart-product-context">
+      {productId && <span className="chart-product-id">{productId}</span>}
+
+      {productId && productName && <span className="chart-product-separator">•</span>}
+
+      {productName && (
+        <span className="chart-product-name" title={productName}>
+          {productName}
+        </span>
+      )}
+    </div>
+  );
 }
 
 /* =========================================================
@@ -87,9 +153,10 @@ function DynamicPieChart<T extends Record<string, unknown>>({
 
   const [legendHeight, setLegendHeight] = useState(0);
 
-  /*
-   * Measure actual chart area.
-   */
+  /* -------------------------------------------------------
+     Measure chart area
+  ------------------------------------------------------- */
+
   useEffect(() => {
     const element = chartAreaRef.current;
 
@@ -117,13 +184,10 @@ function DynamicPieChart<T extends Record<string, unknown>>({
     };
   }, []);
 
-  /*
-   * Measure actual legend height.
-   *
-   * If the legend wraps into more rows,
-   * ResizeObserver automatically updates
-   * the measured height.
-   */
+  /* -------------------------------------------------------
+     Measure legend height
+  ------------------------------------------------------- */
+
   useEffect(() => {
     const element = legendRef.current;
 
@@ -146,25 +210,14 @@ function DynamicPieChart<T extends Record<string, unknown>>({
     };
   }, [data]);
 
-  /*
-   * Calculate pie radius completely from the
-   * real available chart dimensions.
-   *
-   * No fixed pixel radius and no fixed
-   * percentage radius.
-   */
+  /* -------------------------------------------------------
+     Dynamic pie geometry
+  ------------------------------------------------------- */
+
   const availableDiameter = Math.min(chartDimensions.width, chartDimensions.height);
 
-  /*
-   * Keep a little breathing room around
-   * the outside edge.
-   */
   const outerRadius = availableDiameter > 0 ? availableDiameter / 2.25 : 0;
 
-  /*
-   * Donut thickness remains proportional
-   * regardless of screen size.
-   */
   const innerRadius = outerRadius * 0.62;
 
   const centerX = chartDimensions.width / 2;
@@ -176,20 +229,13 @@ function DynamicPieChart<T extends Record<string, unknown>>({
       className="dynamic-pie-wrapper"
       style={
         {
-          /*
-           * CSS handles the normal layout.
-           *
-           * Exposing the measured value as a variable
-           * makes it available if you want additional
-           * styling based on legend height.
-           */
           "--pie-legend-height": `${legendHeight}px`,
         } as React.CSSProperties
       }
     >
-      {/* ==============================
+      {/* ================================================
           PIE AREA
-      ============================== */}
+      ================================================ */}
 
       <div ref={chartAreaRef} className="dynamic-pie-chart-area">
         <ResponsiveContainer width="100%" height="100%">
@@ -225,9 +271,9 @@ function DynamicPieChart<T extends Record<string, unknown>>({
         </ResponsiveContainer>
       </div>
 
-      {/* ==============================
+      {/* ================================================
           DYNAMIC LEGEND
-      ============================== */}
+      ================================================ */}
 
       <div ref={legendRef} className="dynamic-pie-legend">
         {data.map((item, index) => {
@@ -329,9 +375,9 @@ function InvestigationCharts({ findings = [] }: Props) {
 
   const [activePayoutBar, setActivePayoutBar] = useState<number | null>(null);
 
-  /* --------------------------------------------------
+  /* -------------------------------------------------------
      Findings
-  -------------------------------------------------- */
+  ------------------------------------------------------- */
 
   const salesFinding = getFinding(findings, "sales_deviation");
 
@@ -341,9 +387,17 @@ function InvestigationCharts({ findings = [] }: Props) {
 
   const payoutFinding = getFinding(findings, "payout_discrepancy");
 
-  /* --------------------------------------------------
+  /* -------------------------------------------------------
+     Product context
+  ------------------------------------------------------- */
+
+  const salesProduct = getProductContext(salesFinding);
+
+  const payoutProduct = getProductContext(payoutFinding);
+
+  /* -------------------------------------------------------
      Sales
-  -------------------------------------------------- */
+  ------------------------------------------------------- */
 
   const salesData = salesFinding
     ? [
@@ -365,16 +419,14 @@ function InvestigationCharts({ findings = [] }: Props) {
       ]
     : [];
 
-  /* --------------------------------------------------
+  /* -------------------------------------------------------
      Doctor
-  -------------------------------------------------- */
+  ------------------------------------------------------- */
 
   const doctorBreakdown =
     (doctorFinding?.evidence.doctor_breakdown as Array<{
       doctor_id: string;
-
       doctor_name: string;
-
       sales: number;
     }>) ?? [];
 
@@ -384,16 +436,14 @@ function InvestigationCharts({ findings = [] }: Props) {
     fill: DOCTOR_COLORS[index % DOCTOR_COLORS.length],
   }));
 
-  /* --------------------------------------------------
+  /* -------------------------------------------------------
      Territory
-  -------------------------------------------------- */
+  ------------------------------------------------------- */
 
   const territoryBreakdown =
     (territoryFinding?.evidence.territory_breakdown as Array<{
       territory_id: string;
-
       territory_name: string;
-
       sales: number;
     }>) ?? [];
 
@@ -403,9 +453,9 @@ function InvestigationCharts({ findings = [] }: Props) {
     fill: TERRITORY_COLORS[index % TERRITORY_COLORS.length],
   }));
 
-  /* --------------------------------------------------
+  /* -------------------------------------------------------
      Payout
-  -------------------------------------------------- */
+  ------------------------------------------------------- */
 
   const payoutData = payoutFinding
     ? [
@@ -437,6 +487,8 @@ function InvestigationCharts({ findings = [] }: Props) {
         <div className="chart-heading">
           <div>
             <h3>Sales Performance</h3>
+
+            <ProductLabel productId={salesProduct.id} productName={salesProduct.name} />
 
             <p>Current sales vs historical baseline</p>
           </div>
@@ -477,31 +529,7 @@ function InvestigationCharts({ findings = [] }: Props) {
 
                       pointerEvents: "none",
                     }}
-                    content={({ active, payload }) => {
-                      if (!active || !payload?.length) {
-                        return null;
-                      }
-
-                      const item = payload[0]?.payload as
-                        | {
-                            name?: string;
-
-                            amount?: number;
-                          }
-                        | undefined;
-
-                      if (!item) {
-                        return null;
-                      }
-
-                      return (
-                        <div className="chart-custom-tooltip visible">
-                          <span>{item.name ?? "Sales"}</span>
-
-                          <strong>{formatMoney(Number(item.amount ?? 0))}</strong>
-                        </div>
-                      );
-                    }}
+                    content={<ChartTooltip />}
                   />
 
                   <Bar
@@ -535,6 +563,8 @@ function InvestigationCharts({ findings = [] }: Props) {
         <div className="chart-heading">
           <div>
             <h3>Payout Comparison</h3>
+
+            <ProductLabel productId={payoutProduct.id} productName={payoutProduct.name} />
 
             <p>Expected incentive vs actual payout</p>
           </div>
@@ -575,31 +605,7 @@ function InvestigationCharts({ findings = [] }: Props) {
 
                       pointerEvents: "none",
                     }}
-                    content={({ active, payload }) => {
-                      if (!active || !payload?.length) {
-                        return null;
-                      }
-
-                      const item = payload[0]?.payload as
-                        | {
-                            name?: string;
-
-                            amount?: number;
-                          }
-                        | undefined;
-
-                      if (!item) {
-                        return null;
-                      }
-
-                      return (
-                        <div className="chart-custom-tooltip visible">
-                          <span>{item.name ?? "Payout"}</span>
-
-                          <strong>{formatMoney(Number(item.amount ?? 0))}</strong>
-                        </div>
-                      );
-                    }}
+                    content={<ChartTooltip />}
                   />
 
                   <Bar
@@ -634,6 +640,10 @@ function InvestigationCharts({ findings = [] }: Props) {
           <div>
             <h3>Doctor Concentration</h3>
 
+            <div className="chart-product-context">
+              <span className="chart-product-id">ALL PRODUCTS</span>
+            </div>
+
             <p>Sales contribution by doctor</p>
           </div>
         </div>
@@ -657,6 +667,10 @@ function InvestigationCharts({ findings = [] }: Props) {
         <div className="chart-heading">
           <div>
             <h3>Territory Distribution</h3>
+
+            <div className="chart-product-context">
+              <span className="chart-product-id">ALL PRODUCTS</span>
+            </div>
 
             <p>Attributed sales by selling territory</p>
           </div>

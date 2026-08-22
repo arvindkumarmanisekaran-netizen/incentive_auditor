@@ -27,6 +27,34 @@ function severityClass(severity?: string) {
   return `severity-badge severity-${(severity ?? "unknown").toLowerCase()}`;
 }
 
+function ChartTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const item = payload[0]?.payload;
+
+  if (!item) {
+    return null;
+  }
+
+  const label = item.name ?? item.doctor_name ?? item.territory_name ?? "Value";
+
+  const value = item.value ?? item.amount ?? item.change ?? 0;
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <span>{label}</span>
+
+      <strong>
+        {typeof value === "number" && value < 100
+          ? `${value.toFixed(1)}%`
+          : formatMoney(Number(value))}
+      </strong>
+    </div>
+  );
+}
+
 function formatMoney(value: number) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -210,7 +238,18 @@ function InvestigationInsights({ result }: Props) {
                     tickFormatter={(value) => `${value}%`}
                   />
 
-                  <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, "Change"]} />
+                  <Tooltip
+                    cursor={{
+                      fill: "transparent",
+                    }}
+                    offset={14}
+                    isAnimationActive={false}
+                    wrapperStyle={{
+                      transition: "none",
+                      pointerEvents: "none",
+                    }}
+                    content={<ChartTooltip />}
+                  />
 
                   <Bar dataKey="change" fill="#2563eb" radius={[6, 6, 0, 0]} />
                 </BarChart>
@@ -274,9 +313,15 @@ function InvestigationInsights({ result }: Props) {
                   <RadialBar dataKey="value" background cornerRadius={8} barSize={12} />
 
                   <Legend iconSize={9} layout="horizontal" verticalAlign="bottom" align="center" />
-
                   <Tooltip
-                    formatter={(value) => [`${Number(value).toFixed(1)}%`, "Concentration"]}
+                    offset={20}
+                    isAnimationActive={false}
+                    wrapperStyle={{
+                      zIndex: 9999,
+                      pointerEvents: "none",
+                      transition: "opacity 160ms ease",
+                    }}
+                    content={<ChartTooltip />}
                   />
                 </RadialBarChart>
               </ResponsiveContainer>
@@ -352,7 +397,18 @@ function InvestigationInsights({ result }: Props) {
                     tickFormatter={(value) => `₹${Math.round(value / 1000)}k`}
                   />
 
-                  <Tooltip formatter={(value) => [formatMoney(Number(value)), "Payout"]} />
+                  <Tooltip
+                    cursor={{
+                      fill: "transparent",
+                    }}
+                    offset={14}
+                    isAnimationActive={false}
+                    wrapperStyle={{
+                      transition: "none",
+                      pointerEvents: "none",
+                    }}
+                    content={<ChartTooltip />}
+                  />
 
                   <Bar dataKey="amount" radius={[6, 6, 0, 0]} />
                 </BarChart>
@@ -425,7 +481,15 @@ function InvestigationInsights({ result }: Props) {
                 >
                   <RadialBar dataKey="value" background cornerRadius={10} />
 
-                  <Tooltip formatter={(value) => [`${value}/100`, "Risk Score"]} />
+                  <Tooltip
+                    offset={14}
+                    isAnimationActive={false}
+                    wrapperStyle={{
+                      transition: "none",
+                      pointerEvents: "none",
+                    }}
+                    content={<ChartTooltip />}
+                  />
                 </RadialBarChart>
               </ResponsiveContainer>
 
