@@ -2,6 +2,22 @@ import { useMemo, useEffect, useState } from "react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
 
+function formatFieldName(value: string) {
+  return value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function formatDuplicateValue(value: unknown) {
+  if (value === null || value === undefined || value === "") {
+    return "—";
+  }
+
+  if (typeof value === "object") {
+    return JSON.stringify(value);
+  }
+
+  return String(value);
+}
+
 export default function DocumentProcessingCard() {
   const {
     inputRef,
@@ -350,34 +366,71 @@ export default function DocumentProcessingCard() {
                     </div>
 
                     {/* -----------------------------------------
-                        DETAILS
-                    ----------------------------------------- */}
+    DUPLICATE DETAILS
+----------------------------------------- */}
 
-                    <div className="document-result-details">
-                      <div>
-                        <span>Document Type</span>
+                    {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
+                      <div className="document-duplicate-inline">
+                        <div className="duplicate-header">
+                          <h4>Duplicate Records - {document.filename}</h4>
 
-                        <strong>{formatDocumentType(document.document_type)}</strong>
+                          <button
+                            type="button"
+                            className="secondary-button"
+                            onClick={() =>
+                              setExpandedDuplicates((current) => ({
+                                ...current,
+                                [document.filename]: false,
+                              }))
+                            }
+                          >
+                            Close
+                          </button>
+                        </div>
+
+                        <div className="duplicate-table-wrapper">
+                          <table className="duplicate-table">
+                            <thead>
+                              <tr>
+                                {Object.keys(
+                                  document.pending_data?.duplicate_records?.[0]?.incoming_record ??
+                                    {},
+                                ).map((column) => (
+                                  <th key={column}>{formatFieldName(column)}</th>
+                                ))}
+
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              {document.pending_data?.duplicate_records
+                                ?.slice(0, 50)
+                                .map((item, index) => (
+                                  <tr key={index}>
+                                    {Object.values(item.incoming_record).map(
+                                      (value, valueIndex) => (
+                                        <td key={valueIndex}>{formatDuplicateValue(value)}</td>
+                                      ),
+                                    )}
+
+                                    <td>
+                                      <span className="duplicate-badge">Duplicate</span>
+                                    </td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {(document.pending_data?.duplicate_records?.length ?? 0) > 50 && (
+                          <p className="duplicate-count-message">
+                            Showing first 50 duplicates out of{" "}
+                            {document.pending_data?.duplicate_records?.length ?? 0}
+                          </p>
+                        )}
                       </div>
-
-                      <div>
-                        <span>Target Table</span>
-
-                        <strong>{formatDocumentType(document.target_table)}</strong>
-                      </div>
-
-                      <div>
-                        <span>Status</span>
-
-                        <strong>{formatDocumentType(document.status)}</strong>
-                      </div>
-
-                      <div>
-                        <span>Confidence</span>
-
-                        <strong>{formatConfidence(document.classification_confidence)}</strong>
-                      </div>
-                    </div>
+                    )}
 
                     {/* -----------------------------------------
                         DOCUMENT ERROR
@@ -402,33 +455,6 @@ export default function DocumentProcessingCard() {
           </div>
         )}
 
-        {!busy &&
-          documents.map((document) => {
-            if (!document.has_duplicates || !document.pending_data?.duplicate_records) {
-              return null;
-            }
-
-            if (!expandedDuplicates[document.filename]) {
-              return null;
-            }
-
-            return (
-              <div key={document.filename} className="document-duplicate-inline">
-                <h4>
-                  Duplicates:
-                  {document.filename}
-                </h4>
-
-                {document.pending_data.duplicate_records.slice(0, 50).map((item, index) => (
-                  <div key={index} className="validation-error-item">
-                    <strong>Row {item.row}</strong>
-
-                    <pre>{JSON.stringify(item.incoming_record, null, 2)}</pre>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
         {/* ==================================================
             VALIDATION ERROR POPUP
         ================================================== */}
