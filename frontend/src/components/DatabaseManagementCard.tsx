@@ -52,22 +52,10 @@ const PAGE_SIZE = 50;
 
 const SECTIONS: SectionConfig[] = [
   {
-    id: "territories",
-    title: "Territories",
-    primaryKey: "territory_id",
-    apiPath: "/api/territories",
-  },
-  {
     id: "representatives",
     title: "Representatives",
     primaryKey: "representative_id",
     apiPath: "/api/representatives",
-  },
-  {
-    id: "products",
-    title: "Products",
-    primaryKey: "product_id",
-    apiPath: "/api/products",
   },
   {
     id: "doctors",
@@ -81,6 +69,19 @@ const SECTIONS: SectionConfig[] = [
     primaryKey: "assignment_id",
     apiPath: "/api/assignments",
   },
+  {
+    id: "territories",
+    title: "Territories",
+    primaryKey: "territory_id",
+    apiPath: "/api/territories",
+  },
+  {
+    id: "products",
+    title: "Products",
+    primaryKey: "product_id",
+    apiPath: "/api/products",
+  },
+
   {
     id: "prescriptions",
     title: "Prescriptions",

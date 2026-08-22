@@ -23,13 +23,18 @@ export interface InvestigationPlan {
 export interface AIAnalysis {
   severity?: string;
 
+  anomaly_detected?: boolean;
+
   summary?: string;
+
+  evidence_summary?: string[];
 
   key_observations?: string[];
 
+  limitations?: string[];
+
   investigation_priority?: string;
 }
-
 export interface FinalReport {
   overall_assessment?: string;
 

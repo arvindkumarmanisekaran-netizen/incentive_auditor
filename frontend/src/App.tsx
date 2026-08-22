@@ -26,6 +26,8 @@ import AIChatAssistant from "./components/AIChatAssistant";
 
 import InvestigationWorkflow from "./components/InvestigationWorkflow";
 
+import InvestigationOverview from "./components/InvestigationOverview";
+
 import "./App.css";
 
 type DashboardTab = "analysis" | "database";
@@ -331,6 +333,8 @@ function App() {
                 payoutDifference={payoutDifference}
                 findingCount={riskFindingCount}
               />
+
+              <InvestigationOverview result={result} />
 
               <InvestigationWorkflow result={result} />
 
