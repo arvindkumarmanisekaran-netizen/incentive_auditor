@@ -656,14 +656,13 @@ export default function DatabaseManagementCard() {
                       <th key={`${column}-${index}`}>{formatColumnName(column)}</th>
                     ))}
 
-                    <th>Actions</th>
+                    <th className="database-actions-column">Actions</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {rows.map((row, rowIndex) => {
                     const id = getRowId(row);
-
                     /*
                      * Primary key is preferred.
                      *
@@ -703,7 +702,7 @@ export default function DatabaseManagementCard() {
 
                           {/* actions */}
 
-                          <td>
+                          <td className="database-actions-column">
                             <div className="database-row-actions">
                               <button
                                 type="button"

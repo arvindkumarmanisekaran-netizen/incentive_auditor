@@ -108,12 +108,14 @@
 
 .database-table-scroll {
   width: 100%;
-  max-width: 100%;
+
   overflow-x: auto;
 
-  background: rgba(11, 0, 17, 0.65);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  overflow-y: auto;
+
+  max-height: 650px;
+
+  position: relative;
 }
 
 .database-table {
@@ -147,8 +149,12 @@
   white-space: nowrap;
 }
 
-.database-table tbody tr:hover {
-  background: transparent;
+.database-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.database-table tbody tr:hover td.database-actions-column {
+  background: #f8fafc;
 }
 
 .database-empty {
@@ -505,4 +511,179 @@
   cursor: not-allowed;
 
   transform: none;
+}
+/* ==================================================
+   STICKY ACTIONS COLUMN - MATCH DARK TABLE STYLE
+================================================== */
+
+.database-table th.database-actions-column,
+.database-table td.database-actions-column {
+  position: sticky;
+
+  right: 0;
+
+  min-width: 150px;
+
+  width: 150px;
+
+  text-align: center;
+
+  z-index: 5;
+
+  /* match existing dark rows */
+  background: #180021;
+
+  border-left: 1px solid rgba(216, 180, 254, 0.08);
+
+  box-shadow: -10px 0 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Header */
+
+.database-table th.database-actions-column {
+  background: #250033;
+
+  color: #ad9abb;
+
+  z-index: 20;
+}
+
+/* Hover follows row */
+
+.database-table tbody tr:hover td.database-actions-column {
+  background: #281136;
+}
+
+/* ==================================================
+   ACTION BUTTON WRAPPER
+================================================== */
+
+.database-row-actions {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+/* ==================================================
+   EDIT BUTTON
+================================================== */
+
+.database-edit-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 30px;
+
+  padding: 0 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(232, 121, 249, 0.28);
+
+  background: rgba(192, 38, 211, 0.08);
+
+  color: #f0abfc;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.database-edit-button:hover {
+  background: rgba(192, 38, 211, 0.22);
+
+  border-color: rgba(232, 121, 249, 0.55);
+
+  transform: translateY(-1px);
+}
+
+/* ==================================================
+   DELETE BUTTON
+================================================== */
+
+.database-row-delete-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 30px;
+
+  padding: 0 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(251, 113, 133, 0.35);
+
+  background: rgba(127, 29, 29, 0.14);
+
+  color: #fda4af;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.database-row-delete-button:hover {
+  background: rgba(190, 24, 93, 0.25);
+
+  border-color: rgba(251, 113, 133, 0.65);
+
+  transform: translateY(-1px);
+}
+
+/* Disabled */
+
+.database-edit-button:disabled,
+.database-row-delete-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+/* ==================================================
+   LEFT EDGE SHADOW FOR STICKY COLUMN
+================================================== */
+
+.database-table td.database-actions-column::before,
+.database-table th.database-actions-column::before {
+  content: "";
+
+  position: absolute;
+
+  left: -12px;
+
+  top: 0;
+
+  bottom: 0;
+
+  width: 12px;
+
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.25));
+
+  pointer-events: none;
 }
