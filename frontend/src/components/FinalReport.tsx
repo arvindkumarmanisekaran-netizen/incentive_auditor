@@ -1,15 +1,11 @@
-import "../App.css";
+import "./styles/index.css";
 import type { FinalReport as FinalReportType } from "../types/investigation";
-
 
 type FinalReportProps = {
   report?: FinalReportType;
 };
 
-
-function FinalReport({
-  report,
-}: FinalReportProps) {
+function FinalReport({ report }: FinalReportProps) {
   if (!report) {
     return null;
   }
@@ -41,22 +37,17 @@ function FinalReport({
         </>
       )}
 
-      {report.top_risk_drivers &&
-        report.top_risk_drivers.length > 0 && (
-          <>
-            <h3>Top Risk Drivers</h3>
+      {report.top_risk_drivers && report.top_risk_drivers.length > 0 && (
+        <>
+          <h3>Top Risk Drivers</h3>
 
-            <ul>
-              {report.top_risk_drivers.map(
-                (item, index) => (
-                  <li key={index}>
-                    {item}
-                  </li>
-                )
-              )}
-            </ul>
-          </>
-        )}
+          <ul>
+            {report.top_risk_drivers.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {report.specialist_summary && (
         <>
@@ -65,65 +56,49 @@ function FinalReport({
           {report.specialist_summary.sales_rx && (
             <>
               <strong>Sales / Prescription</strong>
-              <p>
-                {report.specialist_summary.sales_rx}
-              </p>
+              <p>{report.specialist_summary.sales_rx}</p>
             </>
           )}
 
           {report.specialist_summary.doctor_territory && (
             <>
               <strong>Doctor / Territory</strong>
-              <p>
-                {report.specialist_summary.doctor_territory}
-              </p>
+              <p>{report.specialist_summary.doctor_territory}</p>
             </>
           )}
 
           {report.specialist_summary.payout && (
             <>
               <strong>Payout</strong>
-              <p>
-                {report.specialist_summary.payout}
-              </p>
+              <p>{report.specialist_summary.payout}</p>
             </>
           )}
         </>
       )}
 
-      {report.recommended_actions &&
-        report.recommended_actions.length > 0 && (
-          <>
-            <h3>Recommended Actions</h3>
+      {report.recommended_actions && report.recommended_actions.length > 0 && (
+        <>
+          <h3>Recommended Actions</h3>
 
-            <ol>
-              {report.recommended_actions.map(
-                (item, index) => (
-                  <li key={index}>
-                    {item}
-                  </li>
-                )
-              )}
-            </ol>
-          </>
-        )}
+          <ol>
+            {report.recommended_actions.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ol>
+        </>
+      )}
 
       {typeof report.human_review_required === "boolean" && (
         <>
           <h3>Human Review Required</h3>
 
           <p>
-            <strong>
-              {report.human_review_required
-                ? "Yes"
-                : "No"}
-            </strong>
+            <strong>{report.human_review_required ? "Yes" : "No"}</strong>
           </p>
         </>
       )}
     </section>
   );
 }
-
 
 export default FinalReport;

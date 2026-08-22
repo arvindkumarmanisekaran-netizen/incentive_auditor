@@ -7,12 +7,15 @@ interface Props {
 function StatusBadge({ status }: { status?: string }) {
   const value = status ?? "UNKNOWN";
 
-  return <span className={`severity-badge ${value.toLowerCase()}`}>{value}</span>;
+  return <span className={`severity-badge severity-${value.toLowerCase()}`}>{value}</span>;
 }
+
 export default function InvestigationOverview({ result }: Props) {
   const report = result.final_report;
 
   const riskDrivers = report?.top_risk_drivers ?? [];
+
+  const recommendedActions = report?.recommended_actions ?? [];
 
   return (
     <section className="investigation-overview">
@@ -20,8 +23,8 @@ export default function InvestigationOverview({ result }: Props) {
           HEADER
       ============================= */}
 
-      <div className="overview-header centered">
-        <div>
+      <div className="overview-header">
+        <div className="overview-header-copy">
           <h2>AI Investigation Summary</h2>
 
           <p>
@@ -36,21 +39,23 @@ export default function InvestigationOverview({ result }: Props) {
           KEY FINDINGS
       ============================= */}
 
-      <div className="overview-section">
+      <div className="overview-section key-findings-section">
         <h3>Key Findings</h3>
 
         {riskDrivers.length > 0 ? (
           <div className="risk-driver-list">
             {riskDrivers.map((item, index) => (
-              <div key={index} className="risk-driver">
-                <span>⚠</span>
+              <div key={`${index}-${item}`} className="risk-driver">
+                <span className="risk-driver-icon" aria-hidden="true">
+                  ⚠
+                </span>
 
                 <p>{item}</p>
               </div>
             ))}
           </div>
         ) : (
-          <p>No significant risk drivers identified.</p>
+          <p className="overview-empty-text">No significant risk drivers identified.</p>
         )}
       </div>
 
@@ -60,19 +65,19 @@ export default function InvestigationOverview({ result }: Props) {
 
       <div className="overview-grid">
         <div className="overview-card">
-          <h4>Sales & Prescription</h4>
+          <h4>Sales &amp; Prescription</h4>
 
           <StatusBadge status={result.sales_rx_analysis?.severity} />
 
-          <p>{result.sales_rx_analysis?.summary}</p>
+          <p>{result.sales_rx_analysis?.summary || "No analysis summary available."}</p>
         </div>
 
         <div className="overview-card">
-          <h4>Doctor & Territory</h4>
+          <h4>Doctor &amp; Territory</h4>
 
           <StatusBadge status={result.doctor_territory_analysis?.severity} />
 
-          <p>{result.doctor_territory_analysis?.summary}</p>
+          <p>{result.doctor_territory_analysis?.summary || "No analysis summary available."}</p>
         </div>
 
         <div className="overview-card">
@@ -80,7 +85,7 @@ export default function InvestigationOverview({ result }: Props) {
 
           <StatusBadge status={result.payout_analysis?.severity} />
 
-          <p>{result.payout_analysis?.summary}</p>
+          <p>{result.payout_analysis?.summary || "No analysis summary available."}</p>
         </div>
       </div>
 
@@ -91,15 +96,21 @@ export default function InvestigationOverview({ result }: Props) {
       <div className="overview-action">
         <h3>Recommended Action</h3>
 
-        <div className="action-list">
-          {report?.recommended_actions?.map((item, index) => (
-            <div key={index} className="action-item">
-              <span>✓</span>
+        {recommendedActions.length > 0 ? (
+          <div className="action-list">
+            {recommendedActions.map((item, index) => (
+              <div key={`${index}-${item}`} className="action-item">
+                <span className="action-item-icon" aria-hidden="true">
+                  ✓
+                </span>
 
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
+                <p>{item}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="overview-empty-text">No recommended actions available.</p>
+        )}
 
         {report?.human_review_required && (
           <div className="review-warning">Human review recommended</div>

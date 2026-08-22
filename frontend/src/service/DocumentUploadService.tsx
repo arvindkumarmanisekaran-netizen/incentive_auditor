@@ -28,7 +28,10 @@ export function useDocumentUpload() {
    * All uploaded documents.
    */
   const [results, setResults] = useState<DocumentProcessingResult[]>([]);
-
+  const clearProcessedDocuments = () => {
+    setResults([]);
+    setResult(null);
+  };
   /*
    * Kept for compatibility with your existing
    * DocumentProcessingCard.
@@ -128,7 +131,9 @@ export function useDocumentUpload() {
   // ==================================================
   // CONFIRM ALL DOCUMENTS
   // ==================================================
-  async function handleConfirm() {
+  async function handleConfirm(
+    duplicateActions: Record<string, Record<number, "keep" | "replace">>,
+  ): Promise<boolean> {
     const documentsToConfirm = results.filter(
       (item) =>
         item.success !== false && item.document_type && item.target_table && item.pending_data,
@@ -136,7 +141,7 @@ export function useDocumentUpload() {
 
     if (documentsToConfirm.length === 0) {
       setError("No documents are ready for import.");
-      return;
+      return false;
     }
 
     setProcessing(true);
@@ -158,25 +163,22 @@ export function useDocumentUpload() {
     try {
       for (const documentResult of documentsToConfirm) {
         try {
+          const duplicateRecords = documentResult.pending_data?.duplicate_records ?? [];
+
+          const hasDuplicates = duplicateRecords.length > 0;
+
           /*
-          IMPORTANT:
-          Read the action selected for THIS document.
-          
-          Example:
-          sales.csv -> overwrite_duplicates
-          representatives.xlsx -> discard_duplicates
-          products.json -> insert
+          New logic:
+
+          No duplicates:
+            -> insert
+
+          Has duplicates:
+            -> resolve_duplicates
+               (keep/replace decided from UI)
         */
 
-          const action = selectedActions[documentResult.filename] ?? "cancel";
-
-          if (action === "cancel") {
-            console.log(`Skipping ${documentResult.filename}`);
-
-            continue;
-          }
-
-          console.log("Confirming:", documentResult.filename, action);
+          const action = hasDuplicates ? "resolve_duplicates" : "insert";
 
           const confirmation = await confirmDocument({
             document_type: documentResult.document_type,
@@ -185,7 +187,11 @@ export function useDocumentUpload() {
 
             action,
 
-            pending_data: documentResult.pending_data,
+            pending_data: {
+              ...documentResult.pending_data,
+
+              duplicate_actions: duplicateActions[documentResult.filename] ?? {},
+            },
           });
 
           totalInserted += confirmation.inserted ?? 0;
@@ -195,8 +201,6 @@ export function useDocumentUpload() {
           totalDiscarded += confirmation.discarded ?? 0;
 
           successfulDocuments++;
-
-          console.log("Confirmed:", documentResult.filename, confirmation);
         } catch (err) {
           console.error(`Confirmation failed for ${documentResult.filename}:`, err);
 
@@ -232,14 +236,24 @@ export function useDocumentUpload() {
 
       if (failedDocuments.length > 0) {
         setError(failedDocuments.join("\n"));
-      } else {
-        setSuccessMessage(
-          `Processed ${successfulDocuments} documents. 
+
+        return false;
+      }
+
+      setSuccessMessage(
+        `Processed ${successfulDocuments} documents.
 Inserted: ${totalInserted},
 Updated: ${totalUpdated},
 Discarded: ${totalDiscarded}`,
-        );
-      }
+      );
+
+      return true;
+    } catch (error) {
+      console.error("Import failed:", error);
+
+      setError("Import failed unexpectedly.");
+
+      return false;
     } finally {
       setProcessing(false);
     }
@@ -288,6 +302,8 @@ Discarded: ${totalDiscarded}`,
 
     selectedActions,
     setSelectedActions,
+
+    clearProcessedDocuments,
   };
 }
 

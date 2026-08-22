@@ -1,0 +1,987 @@
+/* =========================================================
+   AI INVESTIGATION WORKFLOW
+========================================================= */
+
+.investigation-workflow {
+  margin-top: 24px;
+}
+
+/* HEADER */
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 18px;
+  margin-bottom: 14px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.workflow-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+  color: var(--text-primary);
+}
+
+/* TOGGLE BUTTON */
+
+.workflow-toggle {
+  height: 34px;
+  padding: 0 14px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(232, 121, 249, 0.24);
+
+  background: rgba(192, 38, 211, 0.08);
+  color: #f0abfc;
+
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.workflow-toggle:hover {
+  background: rgba(192, 38, 211, 0.16);
+  border-color: rgba(232, 121, 249, 0.42);
+}
+
+/* =========================================================
+   SUMMARY CARD
+========================================================= */
+
+.workflow-summary-card {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+.workflow-summary-card > div {
+  padding: 16px;
+
+  background: rgba(20, 3, 30, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.workflow-summary-card h3 {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.workflow-summary-card p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   INVESTIGATION PLAN
+========================================================= */
+
+.workflow-card {
+  background: rgba(20, 3, 30, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.workflow-card h3 {
+  margin: 0 0 10px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.workflow-card h4 {
+  margin: 14px 0 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.workflow-card p {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* TAGS */
+
+.tag-container {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.workflow-tag {
+  padding: 5px 10px;
+  border-radius: 999px;
+
+  background: rgba(192, 38, 211, 0.08);
+  border: 1px solid rgba(232, 121, 249, 0.16);
+  color: #d8c5e5;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   AGENT CARDS
+========================================================= */
+
+.workflow-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 14px;
+}
+
+.workflow-grid ul {
+  margin: 10px 0 0;
+
+  padding-left: 18px;
+}
+
+.workflow-grid li {
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   SEVERITY
+========================================================= */
+
+.severity-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+
+  font-weight: 750;
+
+  margin-bottom: 8px;
+}
+
+.severity-badge.low {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.severity-badge.normal {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.severity-badge.high {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+/* =========================================================
+   FINAL REPORT
+========================================================= */
+
+.final-ai-report {
+  margin-top: 16px;
+  padding: 18px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+}
+
+.final-ai-report h2 {
+  margin: 0 0 10px;
+
+  font-size: 16px;
+}
+
+.final-ai-report h3 {
+  margin: 16px 0 8px;
+
+  font-size: 13px;
+}
+
+.final-ai-report p,
+.final-ai-report li {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.final-ai-report ul {
+  padding-left: 18px;
+}
+
+/* HUMAN REVIEW */
+
+.review-warning {
+  margin-top: 16px;
+  padding: 10px 14px;
+
+  border-radius: 8px;
+  background: rgba(217, 119, 6, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.24);
+
+  color: #fde68a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.overview-status.low {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.overview-status.normal {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.overview-status.high {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+@media (max-width: 900px) {
+  .workflow-grid,
+  .workflow-summary-card,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+}
+
+/* ======================================
+   INVESTIGATION OVERVIEW
+====================================== */
+
+.investigation-overview {
+  margin-top: 18px;
+  padding: 18px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+/* HEADER */
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.overview-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.overview-header p {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.overview-status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+/* SECTIONS */
+
+.overview-section {
+  margin-bottom: 16px;
+}
+
+.overview-section h3,
+.overview-action h3 {
+  margin: 0 0 10px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: #0f172a;
+}
+
+/* RISK */
+
+.risk-driver-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.risk-driver {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  padding: 9px 10px;
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  border-radius: 9px;
+
+  background: rgba(217, 119, 6, 0.09);
+}
+
+.risk-driver span {
+  font-size: 13px;
+}
+
+.risk-driver p {
+  margin: 0;
+  color: #ead9b0;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* MODULE GRID */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.overview-card {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.overview-card h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.overview-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ACTION */
+
+.overview-action {
+  margin-top: 14px;
+  padding: 12px;
+
+  background: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.16);
+  border-radius: 10px;
+}
+
+.action-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.action-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  padding: 8px 9px;
+  border-radius: 8px;
+
+  background: rgba(13, 148, 136, 0.06);
+}
+
+.action-item span {
+  width: 18px;
+
+  height: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dcfce7;
+
+  color: #15803d;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.action-item p {
+  margin: 0;
+  color: #c8e9e4;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   FINAL ASSESSMENT
+========================================= */
+
+.final-assessment-card {
+  margin-top: 18px;
+  padding: 18px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.final-assessment-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.final-assessment-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.assessment-summary {
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.assessment-section {
+  margin-top: 14px;
+}
+
+.assessment-section h4 {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.assessment-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.assessment-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  padding: 9px 11px;
+
+  border-radius: 9px;
+}
+
+.assessment-item p {
+  margin: 0;
+
+  font-size: 11.5px;
+
+  line-height: 1.45;
+
+  color: #475569;
+}
+
+.assessment-item span {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+/* risk */
+
+.assessment-item.risk {
+  background: #fff7ed;
+
+  border: 1px solid #fed7aa;
+}
+
+.assessment-item.risk span {
+  background: #ffedd5;
+
+  color: #c2410c;
+}
+
+/* action */
+
+.assessment-item.action {
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+}
+
+.assessment-item.action span {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+/* =========================================================
+   INVESTIGATION OVERVIEW
+========================================================= */
+
+.investigation-overview {
+  width: 100%;
+
+  padding: 18px;
+
+  background: linear-gradient(145deg, rgba(27, 8, 38, 0.96), rgba(16, 0, 24, 0.96));
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  color: var(--text-primary);
+
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.overview-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 10px;
+
+  text-align: center;
+}
+
+.overview-header-copy {
+  width: 100%;
+}
+
+.overview-header h2 {
+  margin: 0 0 5px;
+
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.overview-header p {
+  margin: 0 0 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   SEVERITY BADGE
+========================================================= */
+
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+
+  margin: 0;
+
+  padding: 4px 9px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+}
+
+/* High */
+
+.severity-badge.severity-high {
+  background: rgba(244, 63, 94, 0.12);
+
+  border: 1px solid rgba(251, 113, 133, 0.32);
+
+  color: #fda4af;
+}
+
+/* Medium */
+
+.severity-badge.severity-medium {
+  background: rgba(245, 158, 11, 0.12);
+
+  border: 1px solid rgba(251, 191, 36, 0.3);
+
+  color: #fcd34d;
+}
+
+/* Low */
+
+.severity-badge.severity-low {
+  background: rgba(34, 211, 238, 0.1);
+
+  border: 1px solid rgba(34, 211, 238, 0.28);
+
+  color: #67e8f9;
+}
+
+/* Normal */
+
+.severity-badge.severity-normal {
+  background: rgba(45, 212, 191, 0.1);
+
+  border: 1px solid rgba(45, 212, 191, 0.28);
+
+  color: #5eead4;
+}
+
+/* Unknown */
+
+.severity-badge.severity-unknown {
+  background: rgba(148, 163, 184, 0.1);
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  color: #cbd5e1;
+}
+
+/* =========================================================
+   KEY FINDINGS
+========================================================= */
+
+.overview-section {
+  width: 100%;
+
+  margin-top: 0;
+}
+
+.key-findings-section {
+  margin-top: 6px;
+}
+
+.overview-section h3,
+.overview-action h3 {
+  margin: 0 0 8px;
+
+  color: #f8f4ff;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Main requested fix:
+   reduce space between severity badge and Key Findings */
+
+.overview-header + .key-findings-section {
+  margin-top: 4px;
+}
+
+/* =========================================================
+   RISK DRIVER LIST
+========================================================= */
+
+.risk-driver-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  width: 100%;
+}
+
+.risk-driver {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  width: 100%;
+
+  padding: 9px 10px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(216, 180, 254, 0.1);
+  border-radius: 8px;
+}
+
+.risk-driver-icon {
+  flex: 0 0 auto;
+
+  margin-top: 1px;
+
+  color: #fbbf24;
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Main requested fix:
+   ensure key finding text is visible */
+
+.risk-driver p {
+  margin: 0;
+
+  color: #d8cbe4 !important;
+
+  font-size: 12px;
+  line-height: 1.55;
+
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   MODULE GRID
+========================================================= */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin-top: 16px;
+}
+
+.overview-card {
+  min-width: 0;
+
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(216, 180, 254, 0.1);
+  border-radius: 9px;
+}
+
+.overview-card h4 {
+  margin: 0 0 7px;
+
+  color: #f5e9ff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.overview-card .severity-badge {
+  margin-bottom: 8px;
+}
+
+.overview-card p {
+  margin: 0;
+
+  color: #c3b4cf;
+
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RECOMMENDED ACTION
+========================================================= */
+
+.overview-action {
+  width: 100%;
+
+  margin-top: 16px;
+  padding-top: 14px;
+
+  border-top: 1px solid var(--border);
+}
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.action-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  padding: 8px 10px;
+
+  background: rgba(45, 212, 191, 0.045);
+
+  border: 1px solid rgba(45, 212, 191, 0.1);
+  border-radius: 8px;
+}
+
+.action-item-icon {
+  flex: 0 0 auto;
+
+  color: #5eead4;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.action-item p {
+  margin: 0;
+
+  color: #d8cbe4;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   HUMAN REVIEW
+========================================================= */
+
+.review-warning {
+  width: fit-content;
+
+  margin-top: 10px;
+  padding: 5px 9px;
+
+  background: rgba(251, 191, 36, 0.08);
+
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  border-radius: 6px;
+
+  color: #fde68a;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   EMPTY TEXT
+========================================================= */
+
+.overview-empty-text {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .investigation-overview {
+    padding: 14px;
+  }
+
+  .overview-header h2 {
+    font-size: 16px;
+  }
+}

@@ -9,12 +9,12 @@ from fastapi import (
     HTTPException,
     UploadFile,
 )
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db.session import get_db
 from ..services.document_processing.database_loader import (
-    discard_duplicates_and_insert_new,
     insert_all_records,
     overwrite_duplicates_and_insert_new,
 )
@@ -47,19 +47,24 @@ SUPPORTED_EXTENSIONS = {
 
 class PendingData(BaseModel):
     file_name: str | None = None
+
     duplicate_keys: list[str]
+
     new_records: list[dict[str, Any]]
+
     duplicate_records: list[dict[str, Any]]
+
+    duplicate_actions: dict[str, Literal["keep", "replace"]] = Field(default_factory=dict)
 
 
 class ConfirmDocumentRequest(BaseModel):
     document_type: str
+
     target_table: str
 
     action: Literal[
         "insert",
-        "overwrite_duplicates",
-        "discard_duplicates",
+        "resolve_duplicates",
         "cancel",
     ]
 
@@ -138,13 +143,10 @@ async def confirm_document(
     payload: ConfirmDocumentRequest,
     session: AsyncSession = Depends(get_db),
 ) -> dict[str, Any]:
-    """
-    Confirm database action after the upload
-    preview has been shown to the user.
 
-    The incoming data is validated and duplicate
-    status is checked again before committing.
-    """
+    # -------------------------------------------------
+    # CANCEL
+    # -------------------------------------------------
 
     if payload.action == "cancel":
 
@@ -154,7 +156,12 @@ async def confirm_document(
             "action": "cancel",
             "inserted": 0,
             "updated": 0,
+            "discarded": 0,
         }
+
+    # -------------------------------------------------
+    # LOAD DOCUMENT CONFIG
+    # -------------------------------------------------
 
     registry = load_document_registry()
 
@@ -164,7 +171,7 @@ async def confirm_document(
 
         raise HTTPException(
             status_code=400,
-            detail=("Unknown document type: " f"{payload.document_type}"),
+            detail=f"Unknown document type: {payload.document_type}",
         )
 
     configured_table = document_config.get("table")
@@ -173,7 +180,7 @@ async def confirm_document(
 
         raise HTTPException(
             status_code=400,
-            detail=("Target table does not match " "the configured document type."),  # noqa: E501
+            detail="Target table does not match configured document type.",
         )
 
     required_columns = document_config.get(
@@ -190,13 +197,14 @@ async def confirm_document(
 
         raise HTTPException(
             status_code=400,
-            detail=(
-                "Duplicate key configuration "
-                "does not match backend configuration."  # noqa: E501
-            ),  # noqa: E501
+            detail="Duplicate key configuration mismatch.",
         )
 
-    duplicate_incoming_records: list[dict[str, Any]] = []
+    # -------------------------------------------------
+    # BUILD RECORD LIST
+    # -------------------------------------------------
+
+    duplicate_incoming_records = []
 
     for item in payload.pending_data.duplicate_records:
 
@@ -214,6 +222,7 @@ async def confirm_document(
     ]
 
     file_name = payload.pending_data.file_name or "uploaded_document"
+
     if not all_records:
 
         raise HTTPException(
@@ -222,7 +231,7 @@ async def confirm_document(
         )
 
     # -------------------------------------------------
-    # Revalidate before database write
+    # VALIDATION
     # -------------------------------------------------
 
     validation = validate_records(
@@ -233,18 +242,21 @@ async def confirm_document(
     )
 
     if not validation["valid"]:
+
         raise HTTPException(
             status_code=400,
             detail={
                 "type": "VALIDATION_ERROR",
-                "message": "Some records cannot be inserted because referenced data "  # noqa: E501
-                "is missing.",  # noqa: E501
-                "errors": validation.get("errors", []),
+                "message": "Validation failed.",
+                "errors": validation.get(
+                    "errors",
+                    [],
+                ),
             },
         )
 
     # -------------------------------------------------
-    # Recheck duplicates using current DB state
+    # CHECK CURRENT DATABASE DUPLICATES
     # -------------------------------------------------
 
     try:
@@ -261,19 +273,18 @@ async def confirm_document(
 
         raise HTTPException(
             status_code=500,
-            detail=("Duplicate verification failed: " f"{exc}"),
+            detail=f"Duplicate verification failed: {exc}",
         ) from exc
 
-    current_new_records = [
-        item["incoming_record"] for item in duplicate_result["new_records"]
-    ]  # noqa: E501
+    current_new_records = [item["incoming_record"] for item in duplicate_result["new_records"]]
 
-    current_duplicate_records = [
-        item["incoming_record"] for item in duplicate_result["duplicate_records"]  # noqa: E501
-    ]
+    # IMPORTANT:
+    # keep complete objects with index/order
+
+    current_duplicate_records = duplicate_result["duplicate_records"]
 
     # -------------------------------------------------
-    # INSERT
+    # NORMAL INSERT
     # -------------------------------------------------
 
     if payload.action == "insert":
@@ -283,12 +294,8 @@ async def confirm_document(
             raise HTTPException(
                 status_code=409,
                 detail={
-                    "message": (
-                        "Duplicates now exist. "
-                        "Please review the document "
-                        "again before inserting."
-                    ),
-                    "duplicate_record_count": len(current_duplicate_records),
+                    "message": "Duplicates found. Resolve duplicates first.",
+                    "count": len(current_duplicate_records),
                 },
             )
 
@@ -300,36 +307,113 @@ async def confirm_document(
                 records=current_new_records,
             )
 
+            await session.commit()
+
+            return {
+                "success": True,
+                **result,
+            }
+
         except Exception as exc:
 
             await session.rollback()
 
             raise HTTPException(
                 status_code=500,
-                detail=("Database insert failed: " f"{exc}"),
+                detail=f"Insert failed: {exc}",
             ) from exc
 
-        return {
-            "success": True,
-            **result,
-        }
-
     # -------------------------------------------------
-    # DISCARD DUPLICATES
-    #
-    # Existing DB rows are kept.
-    # Incoming duplicate rows are ignored.
+    # INDIVIDUAL DUPLICATE RESOLUTION
     # -------------------------------------------------
 
-    if payload.action == "discard_duplicates":
+    if payload.action == "resolve_duplicates":
+
+        duplicate_actions = payload.pending_data.duplicate_actions or {}
+
+        records_to_replace = []
+
+        discarded_count = 0
+
+        for index, duplicate in enumerate(current_duplicate_records):
+
+            decision = duplicate_actions.get(
+                str(index),
+                "keep",
+            )
+
+            incoming_record = duplicate.get("incoming_record")
+
+            if not incoming_record:
+
+                continue
+
+            if decision == "replace":
+
+                records_to_replace.append(incoming_record)
+
+            else:
+
+                discarded_count += 1
+
+        inserted_count = 0
+
+        updated_count = 0
 
         try:
 
-            result = await discard_duplicates_and_insert_new(
-                session=session,
-                table_name=payload.target_table,
-                new_records=current_new_records,
-            )
+            # -----------------------------------------
+            # Replace selected duplicates
+            # -----------------------------------------
+
+            if records_to_replace:
+
+                overwrite_result = await overwrite_duplicates_and_insert_new(
+                    session=session,
+                    table_name=payload.target_table,
+                    new_records=current_new_records,
+                    duplicate_records=records_to_replace,
+                    duplicate_keys=configured_duplicate_keys,
+                )
+
+                inserted_count += overwrite_result.get(
+                    "inserted",
+                    0,
+                )
+
+                updated_count += overwrite_result.get(
+                    "updated",
+                    0,
+                )
+
+            # -----------------------------------------
+            # Only keep duplicates
+            # Insert new records only
+            # -----------------------------------------
+
+            else:
+
+                if current_new_records:
+
+                    insert_result = await insert_all_records(
+                        session=session,
+                        table_name=payload.target_table,
+                        records=current_new_records,
+                    )
+
+                    inserted_count += insert_result.get(
+                        "inserted",
+                        0,
+                    )
+
+            await session.commit()
+
+            return {
+                "success": True,
+                "inserted": inserted_count,
+                "updated": updated_count,
+                "discarded": discarded_count,
+            }
 
         except Exception as exc:
 
@@ -337,47 +421,8 @@ async def confirm_document(
 
             raise HTTPException(
                 status_code=500,
-                detail=("Database operation failed: " f"{exc}"),
+                detail=f"Duplicate resolution failed: {exc}",
             ) from exc
-
-        return {
-            "success": True,
-            "discarded": len(current_duplicate_records),
-            **result,
-        }
-
-    # -------------------------------------------------
-    # OVERWRITE DUPLICATES
-    #
-    # New rows are inserted.
-    # Existing duplicate rows are updated.
-    # -------------------------------------------------
-
-    if payload.action == "overwrite_duplicates":
-
-        try:
-
-            result = await overwrite_duplicates_and_insert_new(
-                session=session,
-                table_name=payload.target_table,
-                new_records=current_new_records,
-                duplicate_records=current_duplicate_records,
-                duplicate_keys=configured_duplicate_keys,
-            )
-
-        except Exception as exc:
-
-            await session.rollback()
-
-            raise HTTPException(
-                status_code=500,
-                detail=("Database overwrite failed: " f"{exc}"),
-            ) from exc
-
-        return {
-            "success": True,
-            **result,
-        }
 
     raise HTTPException(
         status_code=400,

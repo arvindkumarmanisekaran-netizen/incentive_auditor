@@ -1,0 +1,508 @@
+/* =========================================================
+   DATABASE MANAGEMENT PLACEHOLDERS
+========================================================= */
+
+.database-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.database-row-delete-button {
+  border: 1px solid rgba(251, 113, 133, 0.45);
+  border-radius: 7px;
+  background: rgba(127, 29, 29, 0.12);
+  color: #fda4af;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.database-row-delete-button:hover {
+  background: rgba(127, 29, 29, 0.24);
+  border-color: rgba(251, 113, 133, 0.65);
+}
+
+.database-inline-edit-row {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.database-inline-edit-cell {
+  padding: 0 !important;
+}
+
+.database-edit-form.inline {
+  margin: 0;
+  padding: 18px 20px;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: rgba(13, 0, 20, 0.7);
+}
+
+.database-inline-edit-row:hover {
+  background: rgba(255, 255, 255, 0.025) !important;
+}
+
+.database-card {
+  width: 100%;
+  max-width: 1300px;
+}
+
+.database-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+
+  margin: 18px 0 24px;
+}
+
+.database-section {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-secondary);
+
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.database-section:hover {
+  border-color: var(--border-strong);
+  background: rgba(192, 38, 211, 0.08);
+  color: #f5d0fe;
+}
+
+.database-section.active {
+  background: linear-gradient(135deg, rgba(192, 38, 211, 0.42), rgba(124, 58, 237, 0.34));
+  border-color: rgba(232, 121, 249, 0.34);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(192, 38, 211, 0.12);
+}
+
+.database-table-container {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.database-table-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.database-table-header span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.database-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+
+  background: rgba(11, 0, 17, 0.65);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.database-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text-secondary);
+}
+
+.database-table th {
+  background: #24102f;
+  padding: 10px 12px;
+
+  border-bottom: 1px solid var(--border);
+  color: #c5b2d3;
+
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.database-table td {
+  padding: 9px 12px;
+  background: rgba(20, 3, 30, 0.92);
+  border-bottom: 1px solid rgba(216, 180, 254, 0.06);
+
+  color: #d6c8df;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.database-table tbody tr:hover {
+  background: transparent;
+}
+
+.database-empty {
+  padding: 30px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.database-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.database-checkbox-column {
+  width: 42px;
+  text-align: center !important;
+}
+
+.database-checkbox-column input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.database-delete-button {
+  border: 1px solid rgba(251, 113, 133, 0.42);
+  border-radius: 8px;
+  padding: 8px 14px;
+
+  background: rgba(190, 24, 93, 0.18);
+  color: #fecdd3;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.database-delete-button:hover {
+  background: rgba(190, 24, 93, 0.3);
+}
+
+.database-edit-button {
+  border: 1px solid rgba(232, 121, 249, 0.28);
+  border-radius: 7px;
+
+  background: rgba(192, 38, 211, 0.08);
+  color: #f0abfc;
+
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.database-edit-button:hover {
+  background: rgba(192, 38, 211, 0.17);
+  border-color: rgba(232, 121, 249, 0.48);
+}
+
+.database-edit-form {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: rgba(13, 0, 20, 0.68);
+  color: var(--text-primary);
+}
+
+.database-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.database-edit-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.database-edit-close {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.database-edit-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.database-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.database-edit-field span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.database-edit-field input {
+  width: 100%;
+  padding: 8px 10px;
+
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 7px;
+
+  background: #160020;
+  color: #f8f4ff;
+  caret-color: #ffffff;
+  outline: none;
+}
+
+.database-edit-field input:disabled {
+  background: rgba(255, 255, 255, 0.045);
+  color: #9d8dab;
+  border-color: var(--border);
+}
+
+.database-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.database-edit-field select {
+  width: 100%;
+  padding: 8px 10px;
+
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 7px;
+
+  background: #160020;
+  color: #f8f4ff;
+  font-size: 13px;
+  outline: none;
+}
+
+.database-edit-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(251, 113, 133, 0.34);
+  border-radius: 8px;
+
+  background: rgba(127, 29, 29, 0.18);
+  color: #fecdd3;
+
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .database-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .database-edit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.database-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 650px;
+
+  padding-top: 10px;
+}
+
+.database-management-center {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 28px auto 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+.database-management-card {
+  width: 100%;
+  min-height: 120px;
+
+  padding: 32px;
+}
+
+.database-management-card .admin-card-content {
+  width: 100%;
+}
+
+.database-management-card .admin-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.database-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.database-pagination span {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.database-pagination button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.database-table-scroll,
+.duplicate-table-wrapper {
+  background: #15001f;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  overflow: auto;
+}
+
+.database-table,
+.duplicate-table {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  color: #d8cbe4;
+}
+
+.database-table th,
+.duplicate-table th {
+  background: #250033;
+
+  color: #ad9abb;
+
+  border-bottom: 1px solid rgba(216, 180, 254, 0.16);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.database-table td,
+.duplicate-table td {
+  background: #180021;
+
+  color: #cdbed8;
+
+  border-bottom: 1px solid rgba(216, 180, 254, 0.07);
+  border-right: 1px solid rgba(216, 180, 254, 0.05);
+}
+
+.database-table tbody tr:hover td,
+.duplicate-table tbody tr:hover td {
+  background: #281136;
+}
+
+.database-edit-field input::placeholder {
+  color: #796888;
+}
+
+.database-edit-field input:focus,
+.database-edit-field select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.12);
+}
+
+.database-edit-field select option {
+  background: #160020;
+  color: #f8f4ff;
+}
+
+.database-checkbox-column input {
+  accent-color: var(--primary);
+}
+
+.database-add-record-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  height: 36px;
+
+  padding: 0 14px;
+
+  border: 1px solid rgba(232, 121, 249, 0.28);
+  border-radius: 8px;
+
+  background: linear-gradient(135deg, rgba(162, 28, 175, 0.95), rgba(124, 58, 237, 0.95));
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 16px rgba(126, 34, 206, 0.2);
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+
+.database-add-record-button:hover {
+  background: linear-gradient(135deg, #c026d3, #8b5cf6);
+
+  border-color: rgba(232, 121, 249, 0.48);
+
+  box-shadow: 0 7px 22px rgba(192, 38, 211, 0.27);
+
+  transform: translateY(-1px);
+}
+
+.database-add-record-button:active {
+  transform: translateY(0);
+}
+
+.database-add-record-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}

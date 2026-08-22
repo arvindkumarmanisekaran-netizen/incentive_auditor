@@ -1,0 +1,224 @@
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .dashboard {
+    padding: 20px 22px 40px;
+  }
+
+  .investigation-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .kpi-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .charts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .database-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+  .dashboard {
+    padding: 18px 16px 32px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .investigation-form {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .findings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .dashboard {
+    padding: 14px 12px 28px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 12px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .dashboard-header p {
+    font-size: 12px;
+  }
+
+  .dashboard-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    margin-bottom: 18px;
+    padding: 4px;
+
+    background: rgba(8, 0, 14, 0.72);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    box-shadow: var(--shadow-card);
+  }
+
+  .dashboard-tab {
+    flex: 1;
+
+    min-width: 0;
+
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kpi-item {
+    padding: 10px 12px;
+  }
+
+  .kpi-item strong {
+    font-size: 17px;
+  }
+
+  .kpi-risk-value strong {
+    font-size: 20px;
+  }
+
+  .chart-card {
+    padding: 13px 12px 8px;
+  }
+
+  .chart-container {
+    height: 215px;
+  }
+
+  .finding-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-body {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-chart {
+    height: 220px;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .insight-text {
+    padding: 13px 14px;
+  }
+
+  .admin-card {
+    flex-direction: column;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .database-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .document-upload-zone {
+    min-height: 150px;
+
+    padding: 18px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .kpi-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-item {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kpi-item:last-child {
+    border-bottom: 0;
+  }
+
+  .insight-card-header {
+    align-items: flex-start;
+  }
+
+  .dashboard-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    margin-bottom: 18px;
+    padding: 4px;
+
+    background: rgba(8, 0, 14, 0.72);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    box-shadow: var(--shadow-card);
+  }
+  .dashboard-tab {
+    font-size: 11px;
+  }
+}

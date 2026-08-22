@@ -42,6 +42,20 @@ export interface DocumentProcessingResult {
   error?: string;
 }
 
+export interface ConfirmDocumentRequest {
+  document_type: string;
+
+  target_table: string;
+
+  action: string;
+
+  pending_data: {
+    duplicate_actions?: Record<number, "keep" | "replace">;
+
+    [key: string]: unknown;
+  };
+}
+
 export interface DuplicateRecord {
   row: number;
 

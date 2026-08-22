@@ -32,8 +32,8 @@ export default function DocumentProcessingCard() {
     handleConfirm,
     successMessage,
     clearSuccessMessage,
-    selectedActions,
     setSelectedActions,
+    clearProcessedDocuments,
   } = useDocumentUpload();
 
   // ==================================================
@@ -41,6 +41,12 @@ export default function DocumentProcessingCard() {
   // ==================================================
 
   const [expandedDuplicates, setExpandedDuplicates] = useState<Record<string, boolean>>({});
+
+  const [duplicatePage, setDuplicatePage] = useState<Record<string, number>>({});
+
+  const [duplicateActions, setDuplicateActions] = useState<
+    Record<string, Record<number, "keep" | "replace">>
+  >({});
 
   // ==================================================
   // ALL DOCUMENTS
@@ -114,13 +120,18 @@ export default function DocumentProcessingCard() {
   // ==================================================
 
   async function confirmAllDocuments() {
-    try {
-      await handleConfirm();
-    } catch (error) {
-      console.error("Confirm failed:", error);
-    }
-  }
+    const success = await handleConfirm(duplicateActions);
 
+    if (!success) {
+      return;
+    }
+
+    setExpandedDuplicates({});
+    setDuplicatePage({});
+    setDuplicateActions({});
+
+    clearProcessedDocuments();
+  }
   // ==================================================
   // UI
   // ==================================================
@@ -218,7 +229,6 @@ export default function DocumentProcessingCard() {
 
             <div className="document-results-list">
               {documents.map((document, index) => {
-                const selectedAction = selectedActions[document.filename] ?? "cancel";
                 const hasDocumentDuplicates =
                   document.has_duplicates &&
                   (document.pending_data?.duplicate_records?.length ?? 0) > 0;
@@ -237,16 +247,30 @@ export default function DocumentProcessingCard() {
                       ? "Duplicates"
                       : "Ready";
 
+                const duplicateRecords = document.pending_data?.duplicate_records ?? [];
+
+                const pageSize = 50;
+
+                const currentPage = duplicatePage[document.filename] ?? 0;
+
+                const totalPages = Math.max(1, Math.ceil(duplicateRecords.length / pageSize));
+
+                const visibleDuplicates = duplicateRecords.slice(
+                  currentPage * pageSize,
+                  currentPage * pageSize + pageSize,
+                );
+
+                const startRecord = duplicateRecords.length === 0 ? 0 : currentPage * pageSize + 1;
+
+                const endRecord = Math.min((currentPage + 1) * pageSize, duplicateRecords.length);
+
                 return (
                   <div
                     key={`${document.filename}-${index}`}
                     className={`document-result-row ${statusClass}`}
                   >
                     <div className="document-result-main">
-                      {/* -----------------------------------------
-                          FILE
-                      ----------------------------------------- */}
-
+                      {/* FILE */}
                       <div className="document-result-file">
                         <span className="document-file-icon">📄</span>
 
@@ -257,10 +281,7 @@ export default function DocumentProcessingCard() {
                         </div>
                       </div>
 
-                      {/* -----------------------------------------
-                          COUNTS
-                      ----------------------------------------- */}
-
+                      {/* COUNTS */}
                       <div className="document-result-stats">
                         <span>
                           Records <strong>{document.total_records ?? 0}</strong>
@@ -275,10 +296,7 @@ export default function DocumentProcessingCard() {
                         </span>
                       </div>
 
-                      {/* -----------------------------------------
-                          STATUS
-                      ----------------------------------------- */}
-
+                      {/* STATUS */}
                       <div className="document-result-status">
                         <span className={`status-badge ${statusClass}`}>{statusText}</span>
 
@@ -286,93 +304,39 @@ export default function DocumentProcessingCard() {
                           <button
                             type="button"
                             className="secondary-button"
-                            onClick={() =>
+                            onClick={() => {
+                              const isOpen = expandedDuplicates[document.filename] ?? false;
+
                               setExpandedDuplicates((current) => ({
                                 ...current,
-                                [document.filename]: !current[document.filename],
-                              }))
-                            }
+                                [document.filename]: !isOpen,
+                              }));
+
+                              if (!isOpen) {
+                                setDuplicatePage((current) => ({
+                                  ...current,
+                                  [document.filename]: 0,
+                                }));
+                              }
+                            }}
                           >
-                            View Duplicates
+                            {expandedDuplicates[document.filename]
+                              ? "Hide Duplicates"
+                              : "View Duplicates"}
                           </button>
                         )}
                       </div>
-
-                      <div className="document-actions">
-                        {document.has_duplicates ? (
-                          <>
-                            <label>
-                              <input
-                                type="radio"
-                                name={`action-${document.filename}`}
-                                checked={selectedAction === "overwrite_duplicates"}
-                                onChange={() =>
-                                  setSelectedActions((current) => ({
-                                    ...current,
-                                    [document.filename]: "overwrite_duplicates",
-                                  }))
-                                }
-                              />
-                              Overwrite
-                            </label>
-
-                            <label>
-                              <input
-                                type="radio"
-                                name={`action-${document.filename}`}
-                                checked={selectedAction === "discard_duplicates"}
-                                onChange={() =>
-                                  setSelectedActions((current) => ({
-                                    ...current,
-                                    [document.filename]: "discard_duplicates",
-                                  }))
-                                }
-                              />
-                              Discard
-                            </label>
-                          </>
-                        ) : (
-                          <label>
-                            <input
-                              type="radio"
-                              name={`action-${document.filename}`}
-                              checked={selectedAction === "insert"}
-                              onChange={() =>
-                                setSelectedActions((current) => ({
-                                  ...current,
-                                  [document.filename]: "insert",
-                                }))
-                              }
-                            />
-                            Insert
-                          </label>
-                        )}
-
-                        <label>
-                          <input
-                            type="radio"
-                            name={`action-${document.filename}`}
-                            checked={selectedAction === "cancel"}
-                            onChange={() =>
-                              setSelectedActions((current) => ({
-                                ...current,
-                                [document.filename]: "cancel",
-                              }))
-                            }
-                          />
-                          Skip
-                        </label>
-                      </div>
                     </div>
 
-                    {/* -----------------------------------------
-    DUPLICATE DETAILS
------------------------------------------ */}
-
+                    {/* DUPLICATE DETAILS */}
                     {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
                       <div className="document-duplicate-inline">
                         <div className="duplicate-header">
-                          <h4>Duplicate Records - {document.filename}</h4>
+                          <div>
+                            <h4>Duplicate Records</h4>
+
+                            <p>{duplicateRecords.length} records require review</p>
+                          </div>
 
                           <button
                             type="button"
@@ -388,54 +352,113 @@ export default function DocumentProcessingCard() {
                           </button>
                         </div>
 
+                        {/* TABLE */}
                         <div className="duplicate-table-wrapper">
-                          <table className="duplicate-table">
-                            <thead>
-                              <tr>
-                                {Object.keys(
-                                  document.pending_data?.duplicate_records?.[0]?.incoming_record ??
-                                    {},
-                                ).map((column) => (
-                                  <th key={column}>{formatFieldName(column)}</th>
-                                ))}
+                          {duplicateRecords.length > 0 ? (
+                            <table className="duplicate-table">
+                              <thead>
+                                <tr>
+                                  {Object.keys(duplicateRecords[0].incoming_record).map(
+                                    (column) => (
+                                      <th key={column}>{formatFieldName(column)}</th>
+                                    ),
+                                  )}
 
-                                <th>Status</th>
-                              </tr>
-                            </thead>
+                                  <th>Resolution</th>
+                                </tr>
+                              </thead>
 
-                            <tbody>
-                              {document.pending_data?.duplicate_records
-                                ?.slice(0, 50)
-                                .map((item, index) => (
-                                  <tr key={index}>
-                                    {Object.values(item.incoming_record).map(
-                                      (value, valueIndex) => (
-                                        <td key={valueIndex}>{formatDuplicateValue(value)}</td>
-                                      ),
-                                    )}
+                              <tbody>
+                                {visibleDuplicates.map((item, index) => {
+                                  const rowIndex = currentPage * pageSize + index;
 
-                                    <td>
-                                      <span className="duplicate-badge">Duplicate</span>
-                                    </td>
-                                  </tr>
-                                ))}
-                            </tbody>
-                          </table>
+                                  const resolution =
+                                    duplicateActions[document.filename]?.[rowIndex] ?? "keep";
+
+                                  return (
+                                    <tr key={`${document.filename}-${rowIndex}`}>
+                                      {Object.keys(item.incoming_record).map((column) => (
+                                        <td key={column}>
+                                          {formatDuplicateValue(item.incoming_record[column])}
+                                        </td>
+                                      ))}
+
+                                      <td>
+                                        <select
+                                          className={`duplicate-resolution ${
+                                            resolution === "replace" ? "replace" : "keep"
+                                          }`}
+                                          value={resolution}
+                                          onChange={(event) => {
+                                            const value = event.target.value as "keep" | "replace";
+
+                                            setDuplicateActions((current) => ({
+                                              ...current,
+
+                                              [document.filename]: {
+                                                ...(current[document.filename] ?? {}),
+
+                                                [rowIndex]: value,
+                                              },
+                                            }));
+                                          }}
+                                        >
+                                          <option value="keep">Keep Existing</option>
+
+                                          <option value="replace">Replace Existing</option>
+                                        </select>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          ) : (
+                            <div className="duplicate-empty">No duplicate records found.</div>
+                          )}
                         </div>
 
-                        {(document.pending_data?.duplicate_records?.length ?? 0) > 50 && (
-                          <p className="duplicate-count-message">
-                            Showing first 50 duplicates out of{" "}
-                            {document.pending_data?.duplicate_records?.length ?? 0}
-                          </p>
-                        )}
+                        {/* PAGINATION */}
+                        <div className="duplicate-pagination">
+                          <button
+                            type="button"
+                            className="secondary-button"
+                            disabled={currentPage === 0}
+                            onClick={() =>
+                              setDuplicatePage((current) => ({
+                                ...current,
+
+                                [document.filename]: Math.max(currentPage - 1, 0),
+                              }))
+                            }
+                          >
+                            Previous
+                          </button>
+
+                          <span>
+                            Showing {startRecord} - {endRecord} of {duplicateRecords.length}{" "}
+                            duplicates
+                          </span>
+
+                          <button
+                            type="button"
+                            className="secondary-button"
+                            disabled={currentPage >= totalPages - 1}
+                            onClick={() =>
+                              setDuplicatePage((current) => ({
+                                ...current,
+
+                                [document.filename]: Math.min(currentPage + 1, totalPages - 1),
+                              }))
+                            }
+                          >
+                            Next
+                          </button>
+                        </div>
                       </div>
                     )}
 
-                    {/* -----------------------------------------
-                        DOCUMENT ERROR
-                    ----------------------------------------- */}
-
+                    {/* DOCUMENT ERROR */}
                     {document.success === false && document.error && (
                       <div className="document-result-error">{document.error}</div>
                     )}
@@ -444,14 +467,16 @@ export default function DocumentProcessingCard() {
               })}
             </div>
 
-            <button
-              type="button"
-              className="primary-button"
-              disabled={processing}
-              onClick={() => void confirmAllDocuments()}
-            >
-              Confirm Actions
-            </button>
+            <div className="document-processing-actions">
+              <button
+                type="button"
+                className="primary-button"
+                disabled={processing}
+                onClick={() => void confirmAllDocuments()}
+              >
+                Confirm Actions
+              </button>
+            </div>
           </div>
         )}
 
@@ -535,19 +560,26 @@ export default function DocumentProcessingCard() {
         ================================================== */}
 
         {!busy && successMessage && (
-          <>
-            <div className="validation-overlay" onClick={clearSuccessMessage} />
+          <div className="import-success-row">
+            <div className="import-success-banner">
+              <div className="import-success-icon">✓</div>
 
-            <div className="validation-popup success-popup">
-              <h4>Import Successful</h4>
+              <div className="import-success-content">
+                <strong>Import Successful</strong>
+                <span>{successMessage}</span>
+              </div>
 
-              <p>{successMessage}</p>
-
-              <button type="button" className="secondary-button" onClick={clearSuccessMessage}>
-                Close
+              <button
+                type="button"
+                className="import-success-close"
+                onClick={clearSuccessMessage}
+                aria-label="Close success message"
+                title="Close"
+              >
+                ×
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </article>

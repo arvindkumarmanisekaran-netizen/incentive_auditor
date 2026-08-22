@@ -13,7 +13,7 @@ import {
 
 import type { InvestigationResult } from "../types/investigation";
 
-import "../App.css";
+import "../styles/index.css";
 
 type Props = {
   result: InvestigationResult;

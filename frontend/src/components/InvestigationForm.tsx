@@ -1,4 +1,4 @@
-import "../App.css";
+import "../styles/index.css";
 
 import type { Representative } from "../api/masterData";
 

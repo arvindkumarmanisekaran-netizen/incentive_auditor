@@ -1,7 +1,13 @@
 import { useState } from "react";
 
+import type { InvestigationResult } from "../types/investigation";
+
 interface Props {
-  onInvestigationRequest: (representativeId: string, startDate: string, endDate: string) => void;
+  onInvestigationRequest: (
+    representativeId: string,
+    startDate: string,
+    endDate: string,
+  ) => Promise<InvestigationResult>;
 }
 
 interface ConversationMessage {
@@ -42,10 +48,10 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
       },
     ]);
 
-    const updatedConversation = [
+    const updatedConversation: ConversationMessage[] = [
       ...conversation,
       {
-        role: "user" as const,
+        role: "user",
         content: userMessage,
       },
     ];
@@ -64,7 +70,6 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
 
         body: JSON.stringify({
           message: userMessage,
-
           conversation: updatedConversation,
         }),
       });
@@ -87,12 +92,6 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
         },
       ]);
 
-      /*
-        IMPORTANT:
-        Store structured assistant response.
-        Not only text.
-      */
-
       setConversation((current) => [
         ...current,
         {
@@ -102,23 +101,14 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
       ]);
 
       /*
-        Start investigation
-      */
-
+       * Start actual investigation
+       */
       if (
         data.action === "RUN_ANALYSIS" &&
         data.representative_id &&
         data.start_date &&
         data.end_date
       ) {
-        onInvestigationRequest(
-          data.representative_id,
-
-          data.start_date,
-
-          data.end_date,
-        );
-
         setChat((current) => [
           ...current,
           {
@@ -126,9 +116,49 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
             text: "Investigation started.",
           },
         ]);
+
+        try {
+          /*
+           * This MUST resolve only when the
+           * actual investigation result is returned.
+           */
+          const result = await onInvestigationRequest(
+            data.representative_id,
+            data.start_date,
+            data.end_date,
+          );
+
+          console.log("INVESTIGATION RESULT RECEIVED:", result);
+
+          /*
+           * Only print completed after a real
+           * InvestigationResult has been received.
+           */
+          if (result && result.representative_id && result.start_date && result.end_date) {
+            setChat((current) => [
+              ...current,
+              {
+                sender: "Agent",
+                text: "Investigation completed.",
+              },
+            ]);
+          } else {
+            throw new Error("Investigation returned no result");
+          }
+        } catch (investigationError) {
+          console.error("INVESTIGATION ERROR:", investigationError);
+
+          setChat((current) => [
+            ...current,
+            {
+              sender: "Agent",
+              text: "Investigation failed.",
+            },
+          ]);
+        }
       }
     } catch (error) {
-      console.error("CHAT ERROR", error);
+      console.error("CHAT ERROR:", error);
 
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
 
@@ -146,13 +176,17 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
-      sendMessage();
+      void sendMessage();
     }
   }
 
   return (
     <>
-      <button className="chatbot-floating-button" onClick={() => setOpen(!open)}>
+      <button
+        type="button"
+        className="chatbot-floating-button"
+        onClick={() => setOpen((current) => !current)}
+      >
         🤖
       </button>
 
@@ -175,7 +209,7 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
 
             {chat.map((item, index) => (
               <div
-                key={index}
+                key={`${item.sender}-${index}`}
                 className={item.sender === "You" ? "chat-user-message" : "chat-agent-message"}
               >
                 <strong>{item.sender}:</strong> {item.text}
@@ -194,7 +228,7 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
               disabled={loading}
             />
 
-            <button onClick={sendMessage} disabled={loading}>
+            <button type="button" onClick={() => void sendMessage()} disabled={loading}>
               Send
             </button>
           </div>

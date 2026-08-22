@@ -1,24 +1,24 @@
-import { API_BASE_URL } from "../config";
-
 import { Fragment, useEffect, useMemo, useState } from "react";
 
+import { API_BASE_URL } from "../config";
+
 import {
+  getAssignments,
   getDatabaseRepresentatives,
   getDoctors,
-  getProducts,
-  getTerritories,
-  getAssignments,
   getPayouts,
-  getSales,
   getPrescriptions,
-  type RepresentativeRow,
-  type DoctorRow,
-  type ProductRow,
-  type TerritoryRow,
+  getProducts,
+  getSales,
+  getTerritories,
   type AssignmentRow,
-  type SaleRow,
-  type PrescriptionRow,
+  type DoctorRow,
   type IncentivePayoutRow,
+  type PrescriptionRow,
+  type ProductRow,
+  type RepresentativeRow,
+  type SaleRow,
+  type TerritoryRow,
 } from "../api/databaseManagement";
 
 type Section =
@@ -81,7 +81,6 @@ const SECTIONS: SectionConfig[] = [
     primaryKey: "product_id",
     apiPath: "/api/products",
   },
-
   {
     id: "prescriptions",
     title: "Prescriptions",
@@ -104,19 +103,12 @@ const SECTIONS: SectionConfig[] = [
 
 const STATUS_OPTIONS: Partial<Record<Section, string[]>> = {
   territories: ["Active", "Inactive"],
-
   representatives: ["Active", "Inactive"],
-
   products: ["Active", "Inactive"],
-
   doctors: ["Active", "Inactive"],
-
   assignments: ["Active", "Inactive", "Cancelled"],
-
   prescriptions: ["Valid", "Cancelled", "Reversed"],
-
   sales: ["Valid", "Cancelled", "Returned", "Adjusted"],
-
   payouts: ["Pending", "Paid", "Adjusted"],
 };
 
@@ -128,21 +120,16 @@ export default function DatabaseManagementCard() {
   const [activeSection, setActiveSection] = useState<Section>("representatives");
 
   const [rows, setRows] = useState<RowData[]>([]);
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState<string | null>(null);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const [editingRow, setEditingRow] = useState<RowData | null>(null);
-
   const [editError, setEditError] = useState<string | null>(null);
-
   const [editValues, setEditValues] = useState<Record<string, unknown>>({});
 
   const [offset, setOffset] = useState(0);
-
   const [totalRecords, setTotalRecords] = useState(0);
 
   const activeConfig = useMemo(
@@ -150,26 +137,53 @@ export default function DatabaseManagementCard() {
     [activeSection],
   );
 
-  // ---------------------------------------------
-  // Reset pagination ONLY when table changes.
-  // ---------------------------------------------
-
-  useEffect(() => {
-    setOffset(0);
-  }, [activeSection]);
-
-  // ---------------------------------------------
-  // Load current page.
-  // ---------------------------------------------
+  // --------------------------------------------------
+  // Load page whenever section / offset changes.
+  // --------------------------------------------------
 
   useEffect(() => {
     void loadTable(activeSection, offset);
   }, [activeSection, offset]);
 
+  // --------------------------------------------------
+  // Safely switch table.
+  //
+  // Important:
+  // Clear the old table rows BEFORE changing the
+  // active section so React never tries to resolve
+  // doctor_id on representative rows, etc.
+  // --------------------------------------------------
+
+  function changeSection(section: Section) {
+    if (section === activeSection) {
+      return;
+    }
+
+    setRows([]);
+    setTotalRecords(0);
+
+    setSelectedIds([]);
+
+    setEditingRow(null);
+    setEditValues({});
+    setEditError(null);
+
+    setError(null);
+
+    setOffset(0);
+    setActiveSection(section);
+  }
+
+  // --------------------------------------------------
+  // Load table.
+  // --------------------------------------------------
+
   async function loadTable(section: Section, currentOffset: number) {
     setLoading(true);
     setError(null);
+
     setSelectedIds([]);
+
     setEditingRow(null);
     setEditValues({});
     setEditError(null);
@@ -184,6 +198,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -192,6 +207,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -200,6 +216,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -208,6 +225,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -216,6 +234,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -224,6 +243,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -232,6 +252,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
 
@@ -240,6 +261,7 @@ export default function DatabaseManagementCard() {
 
           records = response.records;
           total = response.total;
+
           break;
         }
       }
@@ -265,17 +287,52 @@ export default function DatabaseManagementCard() {
     }
   }
 
-  const columns =
-    rows.length > 0
-      ? Object.keys(rows[0]).filter((column) => column !== "created_at" && column !== "updated_at")
-      : [];
+  // --------------------------------------------------
+  // Columns.
+  //
+  // Also remove accidental blank field names.
+  // --------------------------------------------------
 
-  function getRowId(row: RowData) {
-    return String(getCellValue(row, activeConfig.primaryKey) ?? "");
+  const columns = useMemo(() => {
+    if (rows.length === 0) {
+      return [];
+    }
+
+    return Object.keys(rows[0]).filter(
+      (column) => column.trim() !== "" && column !== "created_at" && column !== "updated_at",
+    );
+  }, [rows]);
+
+  // --------------------------------------------------
+  // Primary key.
+  // --------------------------------------------------
+
+  function getRowId(row: RowData): string | null {
+    const value = getCellValue(row, activeConfig.primaryKey);
+
+    if (value === null || value === undefined || value === "") {
+      return null;
+    }
+
+    return String(value);
   }
+
+  // --------------------------------------------------
+  // Selection.
+  // --------------------------------------------------
 
   function toggleRow(row: RowData) {
     const id = getRowId(row);
+
+    if (!id) {
+      console.warn("Database row missing primary key:", {
+        section: activeSection,
+        primaryKey: activeConfig.primaryKey,
+        row,
+      });
+
+      return;
+    }
 
     setSelectedIds((current) =>
       current.includes(id) ? current.filter((item) => item !== id) : [...current, id],
@@ -283,19 +340,36 @@ export default function DatabaseManagementCard() {
   }
 
   function toggleSelectAll() {
-    if (rows.length > 0 && selectedIds.length === rows.length) {
+    const selectableIds = rows
+      .map((row) => getRowId(row))
+      .filter((id): id is string => id !== null);
+
+    const allSelected =
+      selectableIds.length > 0 && selectableIds.every((id) => selectedIds.includes(id));
+
+    if (allSelected) {
       setSelectedIds([]);
 
       return;
     }
 
-    setSelectedIds(rows.map((row) => getRowId(row)).filter((id) => id !== ""));
+    setSelectedIds(selectableIds);
   }
+
+  // --------------------------------------------------
+  // Delete one.
+  // --------------------------------------------------
 
   async function deleteSingle(row: RowData) {
     const id = getRowId(row);
 
     if (!id) {
+      console.warn("Unable to delete row without primary key:", {
+        section: activeSection,
+        primaryKey: activeConfig.primaryKey,
+        row,
+      });
+
       return;
     }
 
@@ -325,10 +399,8 @@ export default function DatabaseManagementCard() {
         cancelEdit();
       }
 
-      // If last record on page was deleted,
-      // move to previous page.
       if (rows.length === 1 && offset > 0) {
-        setOffset(Math.max(0, offset - PAGE_SIZE));
+        setOffset((current) => Math.max(0, current - PAGE_SIZE));
       } else {
         await loadTable(activeSection, offset);
       }
@@ -338,6 +410,10 @@ export default function DatabaseManagementCard() {
       setError(err instanceof Error ? err.message : "Delete failed");
     }
   }
+
+  // --------------------------------------------------
+  // Delete selected.
+  // --------------------------------------------------
 
   async function deleteSelected() {
     if (selectedIds.length === 0) {
@@ -375,10 +451,8 @@ export default function DatabaseManagementCard() {
 
       setSelectedIds([]);
 
-      // Entire current page deleted:
-      // move to previous page.
       if (deletedCount >= rows.length && offset > 0) {
-        setOffset(Math.max(0, offset - PAGE_SIZE));
+        setOffset((current) => Math.max(0, current - PAGE_SIZE));
       } else {
         await loadTable(activeSection, offset);
       }
@@ -389,15 +463,30 @@ export default function DatabaseManagementCard() {
     }
   }
 
-  function startEdit(row: RowData) {
-    setEditingRow(row);
+  // --------------------------------------------------
+  // Edit.
+  // --------------------------------------------------
 
+  function startEdit(row: RowData) {
+    const id = getRowId(row);
+
+    if (!id) {
+      console.warn("Unable to edit row without primary key:", {
+        section: activeSection,
+        primaryKey: activeConfig.primaryKey,
+        row,
+      });
+
+      return;
+    }
+
+    setEditingRow(row);
     setEditError(null);
 
     const copy: Record<string, unknown> = {};
 
     Object.entries(row as unknown as Record<string, unknown>).forEach(([key, value]) => {
-      if (key !== "created_at" && key !== "updated_at") {
+      if (key !== "created_at" && key !== "updated_at" && key.trim() !== "") {
         copy[key] = value;
       }
     });
@@ -407,11 +496,13 @@ export default function DatabaseManagementCard() {
 
   function cancelEdit() {
     setEditingRow(null);
-
     setEditValues({});
-
     setEditError(null);
   }
+
+  // --------------------------------------------------
+  // Save edit.
+  // --------------------------------------------------
 
   async function saveEdit() {
     if (!editingRow) {
@@ -464,6 +555,10 @@ export default function DatabaseManagementCard() {
     }
   }
 
+  // --------------------------------------------------
+  // Pagination.
+  // --------------------------------------------------
+
   const currentPage = Math.floor(offset / PAGE_SIZE) + 1;
 
   const totalPages = Math.max(1, Math.ceil(totalRecords / PAGE_SIZE));
@@ -472,12 +567,23 @@ export default function DatabaseManagementCard() {
 
   const lastRecord = totalRecords === 0 ? 0 : Math.min(offset + rows.length, totalRecords);
 
+  const selectableRowIds = rows
+    .map((row) => getRowId(row))
+    .filter((id): id is string => id !== null);
+
+  const allVisibleRowsSelected =
+    selectableRowIds.length > 0 && selectableRowIds.every((id) => selectedIds.includes(id));
+
   return (
     <article className="admin-card database-card">
       <div className="admin-card-icon">🗄️</div>
 
       <div className="admin-card-content">
         <h3>Database Management</h3>
+
+        {/* -----------------------------------------
+            TABLE SELECTOR
+        ----------------------------------------- */}
 
         <div className="database-sections">
           {SECTIONS.map((section) => (
@@ -487,7 +593,7 @@ export default function DatabaseManagementCard() {
               className={
                 activeSection === section.id ? "database-section active" : "database-section"
               }
-              onClick={() => setActiveSection(section.id)}
+              onClick={() => changeSection(section.id)}
             >
               {section.title}
             </button>
@@ -495,6 +601,10 @@ export default function DatabaseManagementCard() {
         </div>
 
         <div className="database-table-container">
+          {/* ---------------------------------------
+              TABLE HEADER
+          --------------------------------------- */}
+
           <div className="database-table-header">
             <div>
               <h4>{activeConfig.title}</h4>
@@ -511,11 +621,23 @@ export default function DatabaseManagementCard() {
             )}
           </div>
 
+          {/* ---------------------------------------
+              ERROR
+          --------------------------------------- */}
+
           {error && <div className="error-message">{error}</div>}
+
+          {/* ---------------------------------------
+              EMPTY
+          --------------------------------------- */}
 
           {!loading && !error && rows.length === 0 && (
             <div className="database-empty">No records found.</div>
           )}
+
+          {/* ---------------------------------------
+              TABLE
+          --------------------------------------- */}
 
           {!loading && !error && rows.length > 0 && (
             <div className="database-table-scroll">
@@ -525,13 +647,13 @@ export default function DatabaseManagementCard() {
                     <th className="database-checkbox-column">
                       <input
                         type="checkbox"
-                        checked={rows.length > 0 && selectedIds.length === rows.length}
+                        checked={allVisibleRowsSelected}
                         onChange={toggleSelectAll}
                       />
                     </th>
 
-                    {columns.map((column) => (
-                      <th key={column}>{formatColumnName(column)}</th>
+                    {columns.map((column, index) => (
+                      <th key={`${column}-${index}`}>{formatColumnName(column)}</th>
                     ))}
 
                     <th>Actions</th>
@@ -539,31 +661,54 @@ export default function DatabaseManagementCard() {
                 </thead>
 
                 <tbody>
-                  {rows.map((row) => {
+                  {rows.map((row, rowIndex) => {
                     const id = getRowId(row);
 
-                    const isEditing = editingRow !== null && getRowId(editingRow) === id;
+                    /*
+                     * Primary key is preferred.
+                     *
+                     * The fallback makes the
+                     * render safe even if malformed
+                     * data reaches the frontend.
+                     */
+                    const rowKey =
+                      id !== null
+                        ? `${activeSection}-${id}`
+                        : `${activeSection}-row-${offset + rowIndex}`;
+
+                    const isEditing =
+                      editingRow !== null && id !== null && getRowId(editingRow) === id;
 
                     return (
-                      <Fragment key={id}>
+                      <Fragment key={rowKey}>
                         <tr>
+                          {/* checkbox */}
+
                           <td className="database-checkbox-column">
                             <input
                               type="checkbox"
-                              checked={selectedIds.includes(id)}
+                              checked={id !== null && selectedIds.includes(id)}
+                              disabled={id === null}
                               onChange={() => toggleRow(row)}
                             />
                           </td>
 
-                          {columns.map((column) => (
-                            <td key={column}>{formatValue(getCellValue(row, column))}</td>
+                          {/* cells */}
+
+                          {columns.map((column, columnIndex) => (
+                            <td key={`${rowKey}-${column}-${columnIndex}`}>
+                              {formatValue(getCellValue(row, column))}
+                            </td>
                           ))}
+
+                          {/* actions */}
 
                           <td>
                             <div className="database-row-actions">
                               <button
                                 type="button"
                                 className="database-edit-button"
+                                disabled={id === null}
                                 onClick={() => startEdit(row)}
                               >
                                 Edit
@@ -572,13 +717,18 @@ export default function DatabaseManagementCard() {
                               <button
                                 type="button"
                                 className="database-row-delete-button"
-                                onClick={() => deleteSingle(row)}
+                                disabled={id === null}
+                                onClick={() => void deleteSingle(row)}
                               >
                                 Delete
                               </button>
                             </div>
                           </td>
                         </tr>
+
+                        {/* ------------------------
+                                INLINE EDIT FORM
+                            ------------------------ */}
 
                         {isEditing && (
                           <tr className="database-inline-edit-row">
@@ -591,14 +741,18 @@ export default function DatabaseManagementCard() {
                                     type="button"
                                     className="database-edit-close"
                                     onClick={cancelEdit}
+                                    aria-label="Close edit form"
                                   >
                                     ×
                                   </button>
                                 </div>
 
                                 <div className="database-edit-grid">
-                                  {Object.entries(editValues).map(([column, value]) => (
-                                    <label key={column} className="database-edit-field">
+                                  {Object.entries(editValues).map(([column, value], index) => (
+                                    <label
+                                      key={`${column}-${index}`}
+                                      className="database-edit-field"
+                                    >
                                       <span>{formatColumnName(column)}</span>
 
                                       {column === "status" && STATUS_OPTIONS[activeSection] ? (
@@ -608,12 +762,16 @@ export default function DatabaseManagementCard() {
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
+
                                               [column]: event.target.value,
                                             }))
                                           }
                                         >
                                           {STATUS_OPTIONS[activeSection]?.map((status) => (
-                                            <option key={status} value={status}>
+                                            <option
+                                              key={`${activeSection}-${status}`}
+                                              value={status}
+                                            >
                                               {status}
                                             </option>
                                           ))}
@@ -627,6 +785,7 @@ export default function DatabaseManagementCard() {
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
+
                                               [column]: event.target.value,
                                             }))
                                           }
@@ -652,7 +811,7 @@ export default function DatabaseManagementCard() {
                                   <button
                                     type="button"
                                     className="primary-button"
-                                    onClick={saveEdit}
+                                    onClick={() => void saveEdit()}
                                   >
                                     Save Changes
                                   </button>
@@ -669,7 +828,9 @@ export default function DatabaseManagementCard() {
             </div>
           )}
 
-          {/* PAGINATION */}
+          {/* ---------------------------------------
+              PAGINATION
+          --------------------------------------- */}
 
           {!loading && !error && totalRecords > 0 && (
             <div className="database-pagination">

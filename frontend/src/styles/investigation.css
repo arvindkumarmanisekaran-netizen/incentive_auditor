@@ -1,0 +1,859 @@
+/* =========================================================
+   INVESTIGATION FORM
+========================================================= */
+
+.investigation-form {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1.4fr) minmax(200px, 1.2fr) minmax(160px, 0.8fr) auto;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px;
+  margin-bottom: 14px;
+
+  background: rgba(20, 3, 30, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+.form-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+
+  background: #160020;
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 8px;
+
+  color: #f8f4ff;
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.form-input::placeholder {
+  color: #72627f;
+}
+
+.form-input:hover {
+  border-color: rgba(232, 121, 249, 0.38);
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.12);
+}
+
+.form-input[type="month"] {
+  color: #f8f4ff;
+  background-color: #160020;
+  color-scheme: dark;
+}
+
+.form-input[type="month"]::-webkit-calendar-picker-indicator {
+  opacity: 0.75;
+
+  cursor: pointer;
+}
+
+.form-input[type="month"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* =========================================================
+   KPI STRIP
+========================================================= */
+
+.kpi-strip {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(4, 1fr);
+  margin-bottom: 14px;
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: none;
+  gap: 10px;
+}
+
+.kpi-item {
+  min-width: 0;
+  padding: 14px 16px;
+  border-right: 1px solid #e2e8f0;
+  background: linear-gradient(145deg, #260034, #190023);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-item:last-child {
+  border-right: 0;
+}
+
+.kpi-label {
+  display: block;
+  margin-bottom: 3px;
+  color: #8d799c;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kpi-item strong {
+  display: block;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kpi-risk-value {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.kpi-risk-value strong {
+  font-size: 22px;
+}
+
+.kpi-positive {
+  color: #2dd4bf !important;
+}
+
+.kpi-negative {
+  color: #fb7185 !important;
+}
+
+/* =========================================================
+   MAIN CHART GRID
+========================================================= */
+
+.charts-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.chart-card {
+  min-width: 0;
+  min-height: 285px;
+
+  padding: 15px 16px 10px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.chart-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 6px;
+}
+
+.chart-heading h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chart-heading p {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 225px;
+}
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 210px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* =========================================================
+   RECHARTS
+========================================================= */
+
+.recharts-wrapper {
+  outline: none;
+}
+
+.recharts-responsive-container {
+  min-width: 0;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #8e7d9c;
+  font-size: 10px;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(216, 180, 254, 0.08);
+}
+
+.recharts-legend-item-text {
+  color: #aa97ba !important;
+  font-size: 10px;
+}
+
+.recharts-default-tooltip {
+  border: 1px solid rgba(232, 121, 249, 0.2) !important;
+  border-radius: 9px !important;
+  background: #21002f !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+/* =========================================================
+   FINDINGS
+========================================================= */
+
+.findings-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.finding-card {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.finding-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.finding-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.finding-metrics {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.finding-metrics > div {
+  min-width: 0;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(216, 180, 254, 0.06);
+  border-radius: 8px;
+}
+
+.finding-metrics span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.finding-metrics strong {
+  display: block;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breakdown-list {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 2px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.muted-text {
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   INVESTIGATION INSIGHTS
+========================================================= */
+
+.insights-section {
+  margin: 20px 0;
+}
+
+.insights-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+/* =========================================================
+   INSIGHT CARD
+========================================================= */
+
+.insight-card {
+  min-width: 0;
+  overflow: hidden;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.insight-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.insight-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  min-height: 58px;
+  padding: 11px 15px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.insight-card-header h3 {
+  margin: 1px 0 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.insight-eyebrow {
+  display: block;
+  color: var(--primary-bright);
+  font-size: 8px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   INSIGHT 50 / 50 BODY
+========================================================= */
+
+.insight-body {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  min-height: 260px;
+}
+
+/* =========================================================
+   RECHARTS VISUAL HALF
+========================================================= */
+
+.insight-chart {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  min-width: 0;
+
+  padding: 10px 8px;
+  overflow: hidden;
+
+  background: linear-gradient(145deg, rgba(37, 16, 50, 0.9), rgba(18, 2, 27, 0.9));
+  border-right: 1px solid var(--border);
+}
+
+.insight-chart .recharts-responsive-container {
+  min-width: 0 !important;
+}
+
+.insight-chart .recharts-cartesian-grid-horizontal line {
+  stroke: #e2e8f0;
+}
+
+.insight-chart .recharts-cartesian-axis-line {
+  stroke: #cbd5e1;
+}
+
+/* =========================================================
+   CONCENTRATION CHART
+========================================================= */
+
+.chart-center-label {
+  position: absolute;
+
+  top: 43%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.chart-center-label strong {
+  color: var(--text-primary);
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.chart-center-label span {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   PAYOUT CHART
+========================================================= */
+
+.payout-chart {
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 8px;
+}
+
+.payout-chart-difference {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin: -2px 8px 4px;
+
+  padding: 7px 9px;
+
+  background: #fff7ed;
+
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+}
+
+.payout-chart-difference span {
+  color: #9a3412;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.payout-chart-difference strong {
+  color: #c2410c;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* =========================================================
+   RISK CHART
+========================================================= */
+
+.risk-chart {
+  position: relative;
+}
+
+.risk-chart-center {
+  position: absolute;
+
+  top: 42%;
+  left: 50%;
+
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.risk-chart-center strong {
+  color: #0f172a;
+
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.risk-chart-center span {
+  margin-left: 3px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+.risk-findings-label {
+  position: absolute;
+
+  bottom: 20px;
+  left: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 10px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.risk-findings-label strong {
+  color: #dc2626;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.risk-findings-label span {
+  color: #64748b;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   INSIGHT TEXT HALF
+========================================================= */
+
+.insight-text {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 14px 15px;
+}
+
+.ai-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #2563eb;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.insight-summary {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0 0 10px;
+
+  color: var(--text-secondary);
+  font-size: 10.5px;
+  line-height: 1.55;
+  font-weight: 500;
+
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.final-summary {
+  -webkit-line-clamp: 6;
+}
+
+.compact-observations {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-top: 1px;
+}
+
+.compact-observation {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+}
+
+.compact-observation > span {
+  flex: 0 0 auto;
+
+  width: 5px;
+  height: 5px;
+
+  margin-top: 5px;
+
+  background: #2563eb;
+
+  border-radius: 50%;
+}
+
+.compact-observation p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+
+  color: var(--text-muted);
+  font-size: 9.5px;
+  line-height: 1.45;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* =========================================================
+   RECOMMENDED ACTION
+========================================================= */
+
+.recommended-action {
+  margin-top: auto;
+  padding: 8px 9px;
+
+  background: rgba(192, 38, 211, 0.08);
+  border: 1px solid rgba(232, 121, 249, 0.16);
+  border-radius: 8px;
+}
+
+.recommended-action span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--primary-bright);
+  font-size: 7.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.recommended-action p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 9.5px;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* =========================================================
+   OLD ANALYSIS CARD
+========================================================= */
+
+.analysis-card {
+  margin: 0 0 12px;
+  padding: 15px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.analysis-card h2 {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.analysis-card h3 {
+  margin: 10px 0 3px;
+  color: #d8c8e4;
+  font-size: 12px;
+}
+
+.analysis-card p {
+  margin: 3px 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.analysis-card ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.analysis-card li {
+  margin-bottom: 3px;
+}
+
+/* =========================================================
+   OLD FINAL REPORT
+========================================================= */
+
+.final-report {
+  margin: 16px 0 0;
+  padding: 16px 18px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.final-report h2 {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  font-size: 17px;
+}
+
+.final-report h3 {
+  margin: 10px 0 3px;
+  color: #d8c8e4;
+  font-size: 12px;
+}
+
+.final-report p {
+  margin: 4px 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   EVIDENCE BOX
+========================================================= */
+
+.evidence-box {
+  margin-top: 10px;
+  padding: 10px;
+  overflow-x: auto;
+
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.evidence-box pre {
+  margin: 0;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.concentration-chart {
+  position: relative;
+  height: 280px;
+}
+
+.concentration-center-label {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: rgba(18, 2, 27, 0.9);
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 14px;
+
+  pointer-events: none;
+}
+
+.concentration-center-label strong {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.concentration-center-label span {
+  font-size: 12px;
+  color: #64748b;
+}

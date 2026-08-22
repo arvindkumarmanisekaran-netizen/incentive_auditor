@@ -1,6 +1,4 @@
-import "../App.css";
-
-
+import "../styles/index.css";
 type RiskSummaryProps = {
   riskScore: number;
   severity: string;
@@ -12,47 +10,26 @@ type RiskSummaryProps = {
   findingCount: number;
 };
 
-
-function formatPercent(
-  value?: number | null
-) {
-  if (
-    value === null ||
-    value === undefined ||
-    Number.isNaN(value)
-  ) {
+function formatPercent(value?: number | null) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
     return "—";
   }
 
-  const prefix =
-    value > 0 ? "+" : "";
+  const prefix = value > 0 ? "+" : "";
 
   return `${prefix}${value.toFixed(1)}%`;
 }
 
-
-function formatMoney(
-  value?: number | null
-) {
-  if (
-    value === null ||
-    value === undefined ||
-    Number.isNaN(value)
-  ) {
+function formatMoney(value?: number | null) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
     return "—";
   }
 
-  const formatted =
-    new Intl.NumberFormat(
-      "en-IN",
-      {
-        style: "currency",
-        currency: "INR",
-        maximumFractionDigits: 0,
-      }
-    ).format(
-      Math.abs(value)
-    );
+  const formatted = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(Math.abs(value));
 
   if (value > 0) {
     return `+${formatted}`;
@@ -65,24 +42,13 @@ function formatMoney(
   return formatted;
 }
 
-
-function valueClass(
-  value?: number | null
-) {
-  if (
-    value === null ||
-    value === undefined ||
-    Number.isNaN(value) ||
-    value === 0
-  ) {
+function valueClass(value?: number | null) {
+  if (value === null || value === undefined || Number.isNaN(value) || value === 0) {
     return "";
   }
 
-  return value > 0
-    ? "kpi-positive"
-    : "kpi-negative";
+  return value > 0 ? "kpi-positive" : "kpi-negative";
 }
-
 
 function RiskSummary({
   riskScore,
@@ -94,98 +60,53 @@ function RiskSummary({
 }: RiskSummaryProps) {
   return (
     <section className="kpi-strip">
-
       {/* RISK */}
 
       <div className="kpi-item kpi-risk">
-        <span className="kpi-label">
-          Overall Risk
-        </span>
+        <span className="kpi-label">Overall Risk</span>
 
         <div className="kpi-risk-value">
-          <strong>
-            {riskScore}
-          </strong>
+          <strong>{riskScore}</strong>
 
-          <span
-            className={
-              `severity-badge severity-${(severity ?? "NORMAL").toLowerCase()}`
-            }
-          >
+          <span className={`severity-badge severity-${(severity ?? "NORMAL").toLowerCase()}`}>
             {severity}
           </span>
         </div>
       </div>
 
-
       {/* SALES CHANGE */}
 
       <div className="kpi-item">
-        <span className="kpi-label">
-          Sales Change
-        </span>
+        <span className="kpi-label">Sales Change</span>
 
-        <strong
-          className={
-            valueClass(salesChange)
-          }
-        >
-          {formatPercent(
-            salesChange
-          )}
-        </strong>
+        <strong className={valueClass(salesChange)}>{formatPercent(salesChange)}</strong>
       </div>
-
 
       {/* PRESCRIPTION CHANGE */}
 
       <div className="kpi-item">
-        <span className="kpi-label">
-          Rx Change
-        </span>
+        <span className="kpi-label">Rx Change</span>
 
-        <strong
-          className={
-            valueClass(rxChange)
-          }
-        >
-          {formatPercent(
-            rxChange
-          )}
-        </strong>
+        <strong className={valueClass(rxChange)}>{formatPercent(rxChange)}</strong>
       </div>
-
 
       {/* PAYOUT DIFFERENCE */}
 
       <div className="kpi-item">
-        <span className="kpi-label">
-          Payout Difference
-        </span>
+        <span className="kpi-label">Payout Difference</span>
 
-        <strong>
-          {formatMoney(
-            payoutDifference
-          )}
-        </strong>
+        <strong>{formatMoney(payoutDifference)}</strong>
       </div>
-
 
       {/* FINDINGS */}
 
       <div className="kpi-item">
-        <span className="kpi-label">
-          Risk Findings
-        </span>
+        <span className="kpi-label">Risk Findings</span>
 
-        <strong>
-          {findingCount}
-        </strong>
+        <strong>{findingCount}</strong>
       </div>
-
     </section>
   );
 }
-
 
 export default RiskSummary;

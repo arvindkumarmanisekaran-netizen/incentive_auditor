@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 
 import { runInvestigation } from "./api/investigation";
 
@@ -28,7 +28,7 @@ import InvestigationWorkflow from "./components/InvestigationWorkflow";
 
 import InvestigationOverview from "./components/InvestigationOverview";
 
-import "./App.css";
+import "./styles/index.css";
 
 type DashboardTab = "analysis" | "database";
 
@@ -71,6 +71,10 @@ function App() {
 
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
+  const chatInvestigationResolveRef = useRef<((result: InvestigationResult) => void) | null>(null);
+
+  const chatInvestigationRejectRef = useRef<((error: Error) => void) | null>(null);
+
   // ==================================================
   // LOAD MASTER DATA
   // ==================================================
@@ -108,30 +112,32 @@ function App() {
       loadRepresentatives();
     }
   }, [activeTab]);
-
   // ==================================================
   // RUN INVESTIGATION
   // ==================================================
 
-  const handleInvestigation = useCallback(async () => {
+  const handleInvestigation = useCallback(async (): Promise<InvestigationResult> => {
     if (!representativeId || !startDate || !endDate) {
-      setError("Please select representative and date range.");
+      const validationError = new Error("Please select representative and date range.");
 
-      return;
+      setError(validationError.message);
+
+      chatInvestigationRejectRef.current?.(validationError);
+
+      chatInvestigationResolveRef.current = null;
+      chatInvestigationRejectRef.current = null;
+
+      throw validationError;
     }
 
     setLoading(true);
-
     setError(null);
-
     setResult(null);
 
     try {
       const data = await runInvestigation(representativeId, startDate, endDate);
 
-      console.log("API RESPONSE", data);
-
-      setResult({
+      const investigationResult: InvestigationResult = {
         representative_id: data.representative_id,
 
         start_date: data.start_date,
@@ -155,24 +161,59 @@ function App() {
         payout_analysis: data.payout_analysis,
 
         final_report: data.final_report,
-      });
+      };
+
+      /*
+       * Update normal investigation UI.
+       */
+      setResult(investigationResult);
+
+      /*
+       * IMPORTANT:
+       * Resolve the chatbot promise only after the
+       * real investigation result has arrived.
+       */
+      chatInvestigationResolveRef.current?.(investigationResult);
+
+      chatInvestigationResolveRef.current = null;
+      chatInvestigationRejectRef.current = null;
+
+      return investigationResult;
     } catch (err) {
       console.error("Investigation failed:", err);
 
-      setError(err instanceof Error ? err.message : "Unable to run investigation");
+      const investigationError =
+        err instanceof Error ? err : new Error("Unable to run investigation");
+
+      setError(investigationError.message);
+
+      /*
+       * Tell the chatbot that the investigation failed.
+       */
+      chatInvestigationRejectRef.current?.(investigationError);
+
+      chatInvestigationResolveRef.current = null;
+      chatInvestigationRejectRef.current = null;
+
+      throw investigationError;
     } finally {
       setLoading(false);
     }
   }, [representativeId, startDate, endDate]);
 
+  // ==================================================
+  // RUN CHAT-TRIGGERED INVESTIGATION
+  // ==================================================
+
   useEffect(() => {
-    if (pendingChatRun && representativeId && startDate && endDate) {
-      setPendingChatRun(false);
-
-      handleInvestigation();
+    if (!pendingChatRun || !representativeId || !startDate || !endDate) {
+      return;
     }
-  }, [pendingChatRun, representativeId, startDate, endDate, handleInvestigation]);
 
+    setPendingChatRun(false);
+
+    void handleInvestigation();
+  }, [pendingChatRun, representativeId, startDate, endDate, handleInvestigation]);
   // ==================================================
   // FINDINGS SAFE ACCESS
   // ==================================================
@@ -359,15 +400,18 @@ function App() {
             className={`document-plus-button ${
               showDocumentProcessing ? "minus-state" : "plus-state"
             }`}
-            onClick={() => setShowDocumentProcessing(!showDocumentProcessing)}
-            title="Add Records"
+            onClick={() => setShowDocumentProcessing((current) => !current)}
+            title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
+            aria-expanded={showDocumentProcessing}
           >
-            <span className="folder-toggle-icon">
+            <span className="folder-toggle-icon" aria-hidden="true">
               📁
               <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
             </span>
 
-            <span className="folder-toggle-title">Add Records</span>
+            <span className="folder-toggle-title">
+              {showDocumentProcessing ? "Close Records" : "Add Records"}
+            </span>
           </button>
 
           {showDocumentProcessing && (
@@ -384,23 +428,24 @@ function App() {
 
       <AIChatAssistant
         onInvestigationRequest={(representativeId, startDate, endDate) => {
-          setResult(null);
+          return new Promise<InvestigationResult>((resolve, reject) => {
+            chatInvestigationResolveRef.current = resolve;
+            chatInvestigationRejectRef.current = reject;
 
-          setError(null);
+            setResult(null);
+            setError(null);
 
-          setRepresentativeId(representativeId);
+            setRepresentativeId(representativeId);
+            setStartDate(startDate);
+            setEndDate(endDate);
 
-          setStartDate(startDate);
+            setLoading(true);
+            setActiveTab("analysis");
 
-          setEndDate(endDate);
+            loadRepresentatives(representativeId);
 
-          setLoading(true);
-
-          setActiveTab("analysis");
-
-          loadRepresentatives(representativeId);
-
-          setPendingChatRun(true);
+            setPendingChatRun(true);
+          });
         }}
       />
     </main>
