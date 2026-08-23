@@ -51,12 +51,16 @@ function InvestigationForm({
         onChange={(e) => onRepresentativeChange(e.target.value)}
       >
         <option value="">Select Representative</option>
-
-        {representatives.map((rep) => (
-          <option key={rep.representative_id} value={rep.representative_id}>
-            {rep.representative_id}
-            {" - "}
-            {rep.first_name} {rep.last_name}
+        // ✅ SAFE FIX 1: Default to empty array with (representatives || [])
+        {(representatives || []).map((e) => (
+          <option key={e.representative_id} value={e.representative_id}>
+            {e.representative_id} - {e.first_name} {e.last_name}
+          </option>
+        ))}
+        // ✅ SAFE FIX 2: Strict Array Check (Prevents crash if representatives is an object {})
+        {(Array.isArray(representatives) ? representatives : []).map((e) => (
+          <option key={e.representative_id} value={e.representative_id}>
+            {e.representative_id} - {e.first_name} {e.last_name}
           </option>
         ))}
       </select>
