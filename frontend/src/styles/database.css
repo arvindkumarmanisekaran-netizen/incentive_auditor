@@ -1,75 +1,90 @@
 /* =========================================================
-   DATABASE MANAGEMENT PLACEHOLDERS
+   DATABASE MANAGEMENT
 ========================================================= */
 
-.database-row-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+/* =========================================================
+   PAGE / WIDTH
+========================================================= */
 
-.database-row-delete-button {
-  border: 1px solid rgba(251, 113, 133, 0.45);
-  border-radius: 7px;
-  background: rgba(127, 29, 29, 0.12);
-  color: #fda4af;
-  padding: 5px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
+.database-page {
+  position: relative;
 
-.database-row-delete-button:hover {
-  background: rgba(127, 29, 29, 0.24);
-  border-color: rgba(251, 113, 133, 0.65);
-}
-
-.database-inline-edit-row {
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.database-inline-edit-cell {
-  padding: 0 !important;
-}
-
-.database-edit-form.inline {
-  margin: 0;
-  padding: 18px 20px;
-  border: none;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  background: rgba(13, 0, 20, 0.7);
-}
-
-.database-inline-edit-row:hover {
-  background: rgba(255, 255, 255, 0.025) !important;
-}
-
-.database-card {
   width: 100%;
-  max-width: 1300px;
+  max-width: none;
+  min-width: 0;
+
+  min-height: 650px;
+
+  padding-top: 10px;
 }
+
+.database-management-center {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+
+  margin: 28px 0 0;
+
+  display: flex;
+  justify-content: stretch;
+}
+
+.database-card,
+.database-management-card {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.database-management-card {
+  min-height: 120px;
+
+  padding: 32px;
+}
+
+.database-management-card .admin-card-content {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.database-management-card .admin-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+/* =========================================================
+   DATABASE SECTION TABS
+========================================================= */
 
 .database-sections {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   gap: 8px;
 
   margin: 18px 0 24px;
 }
 
 .database-section {
+  padding: 8px 14px;
+
   border: 1px solid var(--border);
   border-radius: 8px;
 
   background: rgba(255, 255, 255, 0.025);
+
   color: var(--text-secondary);
 
-  padding: 8px 14px;
   font-size: 13px;
   font-weight: 600;
+
   cursor: pointer;
 
   transition:
@@ -80,329 +95,89 @@
 
 .database-section:hover {
   border-color: var(--border-strong);
+
   background: rgba(192, 38, 211, 0.08);
+
   color: #f5d0fe;
 }
 
 .database-section.active {
   background: linear-gradient(135deg, rgba(192, 38, 211, 0.42), rgba(124, 58, 237, 0.34));
+
   border-color: rgba(232, 121, 249, 0.34);
+
   color: #ffffff;
+
   box-shadow: 0 0 18px rgba(192, 38, 211, 0.12);
 }
 
-.database-table-container {
-  width: 100%;
-  margin-top: 8px;
-}
-
-.database-table-header h4 {
-  margin: 0;
-  color: var(--text-primary);
-}
-
-.database-table-header span {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.database-table-scroll {
-  width: 100%;
-
-  overflow-x: auto;
-
-  overflow-y: auto;
-
-  max-height: 650px;
-
-  position: relative;
-}
-
-.database-table {
-  width: 100%;
-  min-width: 900px;
-  border-collapse: separate;
-  border-spacing: 0;
-  color: var(--text-secondary);
-}
-
-.database-table th {
-  background: #24102f;
-  padding: 10px 12px;
-
-  border-bottom: 1px solid var(--border);
-  color: #c5b2d3;
-
-  text-align: left;
-  font-size: 11px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.database-table td {
-  padding: 9px 12px;
-  background: rgba(20, 3, 30, 0.92);
-  border-bottom: 1px solid rgba(216, 180, 254, 0.06);
-
-  color: #d6c8df;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.database-table tbody tr:hover td {
-  background: #f8fafc;
-}
-
-.database-table tbody tr:hover td.database-actions-column {
-  background: #f8fafc;
-}
-
-.database-empty {
-  padding: 30px;
-  text-align: center;
-  color: var(--text-muted);
-}
+/* =========================================================
+   TABLE HEADER
+========================================================= */
 
 .database-table-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+
   gap: 16px;
+
+  margin-bottom: 12px;
 }
 
-.database-checkbox-column {
-  width: 42px;
-  text-align: center !important;
-}
-
-.database-checkbox-column input {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.database-delete-button {
-  border: 1px solid rgba(251, 113, 133, 0.42);
-  border-radius: 8px;
-  padding: 8px 14px;
-
-  background: rgba(190, 24, 93, 0.18);
-  color: #fecdd3;
-
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.database-delete-button:hover {
-  background: rgba(190, 24, 93, 0.3);
-}
-
-.database-edit-button {
-  border: 1px solid rgba(232, 121, 249, 0.28);
-  border-radius: 7px;
-
-  background: rgba(192, 38, 211, 0.08);
-  color: #f0abfc;
-
-  padding: 5px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.database-edit-button:hover {
-  background: rgba(192, 38, 211, 0.17);
-  border-color: rgba(232, 121, 249, 0.48);
-}
-
-.database-edit-form {
-  width: 100%;
-  margin-top: 20px;
-  padding: 20px;
-
-  border: 1px solid var(--border);
-  border-radius: 12px;
-
-  background: rgba(13, 0, 20, 0.68);
-  color: var(--text-primary);
-}
-
-.database-edit-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 18px;
-}
-
-.database-edit-header h4 {
+.database-table-header h4 {
   margin: 0;
+
   color: var(--text-primary);
 }
 
-.database-edit-close {
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 24px;
-  cursor: pointer;
-}
+.database-table-header span {
+  color: var(--text-muted);
 
-.database-edit-grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 14px;
-}
-
-.database-edit-field {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.database-edit-field span {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
 }
 
-.database-edit-field input {
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.database-table-container {
   width: 100%;
-  padding: 8px 10px;
+  max-width: none;
+  min-width: 0;
 
-  border: 1px solid rgba(192, 132, 252, 0.22);
-  border-radius: 7px;
-
-  background: #160020;
-  color: #f8f4ff;
-  caret-color: #ffffff;
-  outline: none;
+  margin-top: 8px;
 }
 
-.database-edit-field input:disabled {
-  background: rgba(255, 255, 255, 0.045);
-  color: #9d8dab;
-  border-color: var(--border);
-}
-
-.database-edit-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-
-  margin-top: 18px;
-}
-
-.database-edit-field select {
-  width: 100%;
-  padding: 8px 10px;
-
-  border: 1px solid rgba(192, 132, 252, 0.22);
-  border-radius: 7px;
-
-  background: #160020;
-  color: #f8f4ff;
-  font-size: 13px;
-  outline: none;
-}
-
-.database-edit-error {
-  margin-top: 12px;
-  padding: 10px 12px;
-
-  border: 1px solid rgba(251, 113, 133, 0.34);
-  border-radius: 8px;
-
-  background: rgba(127, 29, 29, 0.18);
-  color: #fecdd3;
-
-  font-size: 13px;
-}
-
-@media (max-width: 900px) {
-  .database-edit-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .database-edit-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.database-page {
+.database-table-scroll,
+.duplicate-table-wrapper {
   position: relative;
 
   width: 100%;
-  min-height: 650px;
+  max-width: 100%;
+  min-width: 0;
 
-  padding-top: 10px;
-}
+  max-height: 650px;
 
-.database-management-center {
-  width: 100%;
-  max-width: 1200px;
+  overflow-x: auto;
+  overflow-y: auto;
 
-  margin: 28px auto 0;
-
-  display: flex;
-  justify-content: center;
-}
-
-.database-management-card {
-  width: 100%;
-  min-height: 120px;
-
-  padding: 32px;
-}
-
-.database-management-card .admin-card-content {
-  width: 100%;
-}
-
-.database-management-card .admin-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-
-  margin-top: 20px;
-  margin-bottom: 24px;
-}
-
-.database-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 18px;
-}
-
-.database-pagination span {
-  color: var(--text-secondary);
-  font-size: 12px;
-}
-
-.database-pagination button:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-}
-.database-table-scroll,
-.duplicate-table-wrapper {
   background: #15001f;
 
   border: 1px solid var(--border);
   border-radius: 10px;
-
-  overflow: auto;
 }
+
+/* =========================================================
+   TABLE
+========================================================= */
 
 .database-table,
 .duplicate-table {
+  width: 100%;
+
+  min-width: 900px;
+
   border-collapse: separate;
   border-spacing: 0;
 
@@ -411,27 +186,39 @@
 
 .database-table th,
 .duplicate-table th {
+  padding: 10px 12px;
+
   background: #250033;
+
+  border-bottom: 1px solid rgba(216, 180, 254, 0.16);
 
   color: #ad9abb;
 
-  border-bottom: 1px solid rgba(216, 180, 254, 0.16);
+  text-align: left;
 
   font-size: 10px;
   font-weight: 800;
 
   text-transform: uppercase;
   letter-spacing: 0.04em;
+
+  white-space: nowrap;
 }
 
 .database-table td,
 .duplicate-table td {
-  background: #180021;
+  padding: 9px 12px;
 
-  color: #cdbed8;
+  background: #180021;
 
   border-bottom: 1px solid rgba(216, 180, 254, 0.07);
   border-right: 1px solid rgba(216, 180, 254, 0.05);
+
+  color: #cdbed8;
+
+  font-size: 12px;
+
+  white-space: nowrap;
 }
 
 .database-table tbody tr:hover td,
@@ -439,28 +226,233 @@
   background: #281136;
 }
 
-.database-edit-field input::placeholder {
-  color: #796888;
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.database-empty {
+  padding: 30px;
+
+  text-align: center;
+
+  color: var(--text-muted);
 }
 
-.database-edit-field input:focus,
-.database-edit-field select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.12);
-}
+/* =========================================================
+   CHECKBOX COLUMN
+========================================================= */
 
-.database-edit-field select option {
-  background: #160020;
-  color: #f8f4ff;
+.database-checkbox-column {
+  width: 42px;
+
+  text-align: center !important;
 }
 
 .database-checkbox-column input {
+  width: 16px;
+  height: 16px;
+
+  cursor: pointer;
+
   accent-color: var(--primary);
 }
 
+/* =========================================================
+   STICKY ACTIONS COLUMN
+========================================================= */
+
+.database-table th.database-actions-column,
+.database-table td.database-actions-column {
+  position: sticky;
+
+  right: 0;
+
+  width: 150px;
+  min-width: 150px;
+
+  text-align: center;
+
+  background: #180021;
+
+  border-left: 1px solid rgba(216, 180, 254, 0.08);
+
+  box-shadow: -10px 0 18px rgba(0, 0, 0, 0.18);
+
+  z-index: 5;
+}
+
+.database-table th.database-actions-column {
+  background: #250033;
+
+  color: #ad9abb;
+
+  z-index: 20;
+}
+
+.database-table tbody tr:hover td.database-actions-column {
+  background: #281136;
+}
+
+/* =========================================================
+   LEFT EDGE SHADOW FOR STICKY COLUMN
+========================================================= */
+
+.database-table td.database-actions-column::before,
+.database-table th.database-actions-column::before {
+  content: "";
+
+  position: absolute;
+
+  left: -12px;
+  top: 0;
+  bottom: 0;
+
+  width: 12px;
+
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.25));
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   ROW ACTIONS
+========================================================= */
+
+.database-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+}
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+.database-edit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(232, 121, 249, 0.28);
+  border-radius: 8px;
+
+  background: rgba(192, 38, 211, 0.08);
+
+  color: #f0abfc;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.database-edit-button:hover:not(:disabled) {
+  background: rgba(192, 38, 211, 0.22);
+
+  border-color: rgba(232, 121, 249, 0.55);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   DELETE ROW BUTTON
+========================================================= */
+
+.database-row-delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  border-radius: 8px;
+
+  background: rgba(127, 29, 29, 0.14);
+
+  color: #fda4af;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.database-row-delete-button:hover:not(:disabled) {
+  background: rgba(190, 24, 93, 0.25);
+
+  border-color: rgba(251, 113, 133, 0.65);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   BUTTON DISABLED
+========================================================= */
+
+.database-edit-button:disabled,
+.database-row-delete-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+/* =========================================================
+   BULK DELETE BUTTON
+========================================================= */
+
+.database-delete-button {
+  padding: 8px 14px;
+
+  border: 1px solid rgba(251, 113, 133, 0.42);
+  border-radius: 8px;
+
+  background: rgba(190, 24, 93, 0.18);
+
+  color: #fecdd3;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.database-delete-button:hover:not(:disabled) {
+  background: rgba(190, 24, 93, 0.3);
+}
+
+.database-delete-button:disabled {
+  opacity: 0.42;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ADD RECORD BUTTON
+========================================================= */
+
 .database-add-record-button {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
@@ -491,7 +483,7 @@
     transform 0.16s ease;
 }
 
-.database-add-record-button:hover {
+.database-add-record-button:hover:not(:disabled) {
   background: linear-gradient(135deg, #c026d3, #8b5cf6);
 
   border-color: rgba(232, 121, 249, 0.48);
@@ -501,7 +493,7 @@
   transform: translateY(-1px);
 }
 
-.database-add-record-button:active {
+.database-add-record-button:active:not(:disabled) {
   transform: translateY(0);
 }
 
@@ -512,178 +504,272 @@
 
   transform: none;
 }
-/* ==================================================
-   STICKY ACTIONS COLUMN - MATCH DARK TABLE STYLE
-================================================== */
 
-.database-table th.database-actions-column,
-.database-table td.database-actions-column {
-  position: sticky;
+/* =========================================================
+   INLINE EDIT ROW
+========================================================= */
 
-  right: 0;
-
-  min-width: 150px;
-
-  width: 150px;
-
-  text-align: center;
-
-  z-index: 5;
-
-  /* match existing dark rows */
-  background: #180021;
-
-  border-left: 1px solid rgba(216, 180, 254, 0.08);
-
-  box-shadow: -10px 0 18px rgba(0, 0, 0, 0.18);
+.database-inline-edit-row {
+  background: rgba(255, 255, 255, 0.025);
 }
 
-/* Header */
-
-.database-table th.database-actions-column {
-  background: #250033;
-
-  color: #ad9abb;
-
-  z-index: 20;
+.database-inline-edit-row:hover {
+  background: rgba(255, 255, 255, 0.025) !important;
 }
 
-/* Hover follows row */
-
-.database-table tbody tr:hover td.database-actions-column {
-  background: #281136;
+.database-inline-edit-cell {
+  padding: 0 !important;
 }
 
-/* ==================================================
-   ACTION BUTTON WRAPPER
-================================================== */
+/* =========================================================
+   EDIT FORM
+========================================================= */
 
-.database-row-actions {
+.database-edit-form {
+  width: 100%;
+
+  margin-top: 20px;
+  padding: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: rgba(13, 0, 20, 0.68);
+
+  color: var(--text-primary);
+}
+
+.database-edit-form.inline {
+  margin: 0;
+
+  padding: 18px 20px;
+
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  border-radius: 0;
+
+  background: rgba(13, 0, 20, 0.7);
+}
+
+/* =========================================================
+   EDIT HEADER
+========================================================= */
+
+.database-edit-header {
   display: flex;
-
-  justify-content: center;
-
   align-items: center;
+  justify-content: space-between;
 
-  gap: 8px;
+  margin-bottom: 18px;
 }
 
-/* ==================================================
-   EDIT BUTTON
-================================================== */
+.database-edit-header h4 {
+  margin: 0;
 
-.database-edit-button {
-  display: inline-flex;
+  color: var(--text-primary);
+}
 
-  align-items: center;
+.database-edit-close {
+  border: none;
 
-  justify-content: center;
+  background: transparent;
 
-  height: 30px;
+  color: var(--text-secondary);
 
-  padding: 0 12px;
-
-  border-radius: 8px;
-
-  border: 1px solid rgba(232, 121, 249, 0.28);
-
-  background: rgba(192, 38, 211, 0.08);
-
-  color: #f0abfc;
-
-  font-size: 12px;
-
-  font-weight: 600;
+  font-size: 24px;
 
   cursor: pointer;
-
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.18s ease;
 }
 
-.database-edit-button:hover {
-  background: rgba(192, 38, 211, 0.22);
+/* =========================================================
+   EDIT GRID
+========================================================= */
 
-  border-color: rgba(232, 121, 249, 0.55);
+.database-edit-grid {
+  display: grid;
 
-  transform: translateY(-1px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
 }
 
-/* ==================================================
-   DELETE BUTTON
-================================================== */
+.database-edit-field {
+  display: flex;
+  flex-direction: column;
 
-.database-row-delete-button {
-  display: inline-flex;
+  gap: 5px;
+}
 
-  align-items: center;
-
-  justify-content: center;
-
-  height: 30px;
-
-  padding: 0 12px;
-
-  border-radius: 8px;
-
-  border: 1px solid rgba(251, 113, 133, 0.35);
-
-  background: rgba(127, 29, 29, 0.14);
-
-  color: #fda4af;
+.database-edit-field span {
+  color: var(--text-secondary);
 
   font-size: 12px;
-
   font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.18s ease;
 }
 
-.database-row-delete-button:hover {
-  background: rgba(190, 24, 93, 0.25);
+/* =========================================================
+   INPUTS
+========================================================= */
 
-  border-color: rgba(251, 113, 133, 0.65);
+.database-edit-field input,
+.database-edit-field select {
+  width: 100%;
 
-  transform: translateY(-1px);
+  padding: 8px 10px;
+
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 7px;
+
+  background: #160020;
+
+  color: #f8f4ff;
+
+  font-size: 13px;
+
+  outline: none;
 }
 
-/* Disabled */
+.database-edit-field input {
+  caret-color: #ffffff;
+}
 
-.database-edit-button:disabled,
-.database-row-delete-button:disabled {
-  opacity: 0.4;
+.database-edit-field input::placeholder {
+  color: #796888;
+}
+
+.database-edit-field input:focus,
+.database-edit-field select:focus {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.12);
+}
+
+.database-edit-field input:disabled {
+  background: rgba(255, 255, 255, 0.045);
+
+  border-color: var(--border);
+
+  color: #9d8dab;
+}
+
+.database-edit-field select option {
+  background: #160020;
+
+  color: #f8f4ff;
+}
+
+/* =========================================================
+   EDIT ACTIONS
+========================================================= */
+
+.database-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+/* =========================================================
+   EDIT ERROR
+========================================================= */
+
+.database-edit-error {
+  margin-top: 12px;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(251, 113, 133, 0.34);
+  border-radius: 8px;
+
+  background: rgba(127, 29, 29, 0.18);
+
+  color: #fecdd3;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.database-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+.database-pagination span {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+.database-pagination button:disabled {
+  opacity: 0.38;
 
   cursor: not-allowed;
-
-  transform: none;
 }
 
-/* ==================================================
-   LEFT EDGE SHADOW FOR STICKY COLUMN
-================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-.database-table td.database-actions-column::before,
-.database-table th.database-actions-column::before {
-  content: "";
+@media (max-width: 1200px) {
+  .database-management-card {
+    padding: 24px;
+  }
 
-  position: absolute;
+  .database-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
-  left: -12px;
+@media (max-width: 900px) {
+  .database-management-center {
+    margin-top: 20px;
+  }
 
-  top: 0;
+  .database-sections {
+    justify-content: flex-start;
+  }
 
-  bottom: 0;
+  .database-table {
+    min-width: 820px;
+  }
+}
 
-  width: 12px;
+@media (max-width: 600px) {
+  .database-management-card {
+    padding: 16px;
+  }
 
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.25));
+  .database-edit-grid {
+    grid-template-columns: 1fr;
+  }
 
-  pointer-events: none;
+  .database-table-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .database-row-actions {
+    gap: 5px;
+  }
+
+  .database-edit-button,
+  .database-row-delete-button {
+    height: 28px;
+
+    padding: 0 9px;
+
+    font-size: 11px;
+  }
 }
