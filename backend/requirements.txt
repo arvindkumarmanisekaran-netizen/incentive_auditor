@@ -62,3 +62,5 @@ pytesseract
 
 python-multipart
 python-docx
+
+openpyxl
