@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { runInvestigation } from "./api/investigation";
+import { runInvestigationStream, type WorkflowEvent } from "./api/investigation";
 
 import { getRepresentatives } from "./api/masterData";
 
@@ -27,10 +27,61 @@ import AIChatAssistant from "./components/AIChatAssistant";
 import InvestigationWorkflow from "./components/InvestigationWorkflow";
 
 import InvestigationOverview from "./components/InvestigationOverview";
+import type { WorkflowAgent } from "./types/workflow";
 
 import "./styles/index.css";
 
 type DashboardTab = "analysis" | "database";
+
+/**
+ * Creates a fresh workflow whenever a new
+ * investigation starts.
+ */
+function createInitialWorkflowAgents(): WorkflowAgent[] {
+  return [
+    {
+      id: "investigation_planner",
+      title: "Investigation Planner",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "sales_rx",
+      title: "Sales / Rx",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "doctor_territory",
+      title: "Doctor / Territory",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "payout",
+      title: "Payout",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "risk_synthesizer",
+      title: "Risk Synthesizer",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "investigation_summary",
+      title: "Investigation Summary",
+      status: "waiting",
+      commentary: [],
+    },
+  ];
+}
 
 function App() {
   // ==================================================
@@ -71,6 +122,22 @@ function App() {
 
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
+  // ==================================================
+  // LIVE WORKFLOW STATE
+  // ==================================================
+
+  const [workflowVisible, setWorkflowVisible] = useState(false);
+
+  const [workflowAgents, setWorkflowAgents] = useState<WorkflowAgent[]>(
+    createInitialWorkflowAgents,
+  );
+
+  const [workflowStatusMessage, setWorkflowStatusMessage] = useState("");
+
+  // ==================================================
+  // CHAT INVESTIGATION PROMISE
+  // ==================================================
+
   const chatInvestigationResolveRef = useRef<((result: InvestigationResult) => void) | null>(null);
 
   const chatInvestigationRejectRef = useRef<((error: Error) => void) | null>(null);
@@ -81,7 +148,9 @@ function App() {
 
   async function loadRepresentatives(preferredId?: string) {
     setMasterDataLoading(true);
+
     const currentId = preferredId ?? representativeId;
+
     setError(null);
 
     try {
@@ -109,9 +178,85 @@ function App() {
 
   useEffect(() => {
     if (activeTab === "analysis") {
-      loadRepresentatives();
+      void loadRepresentatives();
     }
   }, [activeTab]);
+
+  // ==================================================
+  // LIVE WORKFLOW EVENT HANDLER
+  // ==================================================
+
+  const handleWorkflowEvent = useCallback((event: WorkflowEvent) => {
+    // ------------------------------------------
+    // Overall investigation status
+    // ------------------------------------------
+
+    if (event.type === "investigation_status") {
+      setWorkflowStatusMessage(event.message ?? "");
+
+      return;
+    }
+
+    // Agent-specific events must contain
+    // an agent identifier.
+    if (!("agent" in event)) {
+      return;
+    }
+
+    setWorkflowAgents((currentAgents) =>
+      currentAgents.map((agent) => {
+        if (agent.id !== event.agent) {
+          return agent;
+        }
+
+        // ----------------------------------
+        // AGENT STATUS
+        // ----------------------------------
+
+        if (event.type === "agent_status") {
+          return {
+            ...agent,
+            status: event.status,
+          };
+        }
+
+        // ----------------------------------
+        // LIVE COMMENTARY
+        // ----------------------------------
+
+        if (event.type === "commentary") {
+          return {
+            ...agent,
+
+            commentary: [
+              ...agent.commentary,
+
+              {
+                message: event.message,
+
+                timestamp: event.timestamp,
+              },
+            ],
+          };
+        }
+
+        // ----------------------------------
+        // STRUCTURED AGENT RESULT
+        // ----------------------------------
+
+        if (event.type === "agent_result") {
+          return {
+            ...agent,
+
+            output: event.output,
+          };
+        }
+
+        return agent;
+      }),
+    );
+  }, []);
+
   // ==================================================
   // RUN INVESTIGATION
   // ==================================================
@@ -125,17 +270,47 @@ function App() {
       chatInvestigationRejectRef.current?.(validationError);
 
       chatInvestigationResolveRef.current = null;
+
       chatInvestigationRejectRef.current = null;
 
       throw validationError;
     }
 
+    // ------------------------------------------
+    // RESET INVESTIGATION
+    // ------------------------------------------
+
     setLoading(true);
+
     setError(null);
+
     setResult(null);
 
+    // ------------------------------------------
+    // RESET AND SHOW LIVE WORKFLOW
+    // ------------------------------------------
+
+    setWorkflowVisible(true);
+
+    setWorkflowAgents(createInitialWorkflowAgents());
+
+    setWorkflowStatusMessage("Starting investigation...");
+
     try {
-      const data = await runInvestigation(representativeId, startDate, endDate);
+      // ----------------------------------------
+      // STREAM INVESTIGATION
+      // ----------------------------------------
+
+      const data = await runInvestigationStream(
+        representativeId,
+        startDate,
+        endDate,
+        handleWorkflowEvent,
+      );
+
+      // ----------------------------------------
+      // BUILD FINAL RESULT
+      // ----------------------------------------
 
       const investigationResult: InvestigationResult = {
         representative_id: data.representative_id,
@@ -161,21 +336,26 @@ function App() {
         payout_analysis: data.payout_analysis,
 
         final_report: data.final_report,
+
+        investigation_summary: data.investigation_summary,
       };
 
-      /*
-       * Update normal investigation UI.
-       */
+      // ----------------------------------------
+      // SHOW FINAL DASHBOARD
+      // ----------------------------------------
+
       setResult(investigationResult);
 
-      /*
-       * IMPORTANT:
-       * Resolve the chatbot promise only after the
-       * real investigation result has arrived.
-       */
+      setWorkflowStatusMessage("Investigation completed.");
+
+      // ----------------------------------------
+      // RESOLVE CHATBOT REQUEST
+      // ----------------------------------------
+
       chatInvestigationResolveRef.current?.(investigationResult);
 
       chatInvestigationResolveRef.current = null;
+
       chatInvestigationRejectRef.current = null;
 
       return investigationResult;
@@ -187,19 +367,19 @@ function App() {
 
       setError(investigationError.message);
 
-      /*
-       * Tell the chatbot that the investigation failed.
-       */
+      setWorkflowStatusMessage("Investigation failed.");
+
       chatInvestigationRejectRef.current?.(investigationError);
 
       chatInvestigationResolveRef.current = null;
+
       chatInvestigationRejectRef.current = null;
 
       throw investigationError;
     } finally {
       setLoading(false);
     }
-  }, [representativeId, startDate, endDate]);
+  }, [representativeId, startDate, endDate, handleWorkflowEvent]);
 
   // ==================================================
   // RUN CHAT-TRIGGERED INVESTIGATION
@@ -214,6 +394,7 @@ function App() {
 
     void handleInvestigation();
   }, [pendingChatRun, representativeId, startDate, endDate, handleInvestigation]);
+
   // ==================================================
   // FINDINGS SAFE ACCESS
   // ==================================================
@@ -346,26 +527,32 @@ function App() {
 
           {error && <div className="error-message">{error}</div>}
 
-          {/* ----------------------------------------------
-              LOADING
-          ---------------------------------------------- */}
+          {/* ==================================================
+              LIVE INVESTIGATION WORKFLOW
 
-          {loading && (
-            <div className="investigation-loading">
-              <span className="loading-spinner" />
+              IMPORTANT:
+              This is intentionally OUTSIDE result &&
+              so it appears while the stream is running.
+          ================================================== */}
 
-              <span>
-                Running investigation workflow: analytics → specialist agents → risk synthesis...
-              </span>
-            </div>
+          {workflowVisible && (
+            <InvestigationWorkflow
+              agents={workflowAgents}
+              loading={loading}
+              statusMessage={workflowStatusMessage}
+            />
           )}
 
-          {/* ----------------------------------------------
-              RESULTS
-          ---------------------------------------------- */}
+          {/* ==================================================
+              FINAL INVESTIGATION RESULTS
+          ================================================== */}
 
           {result && (
             <>
+              {/* ------------------------------------------
+                  RISK SUMMARY
+              ------------------------------------------ */}
+
               <RiskSummary
                 riskScore={result.overall_risk_score ?? 0}
                 severity={result.overall_severity ?? "NORMAL"}
@@ -375,13 +562,27 @@ function App() {
                 findingCount={riskFindingCount}
               />
 
+              {/* ------------------------------------------
+                  INVESTIGATION OVERVIEW
+              ------------------------------------------ */}
+
               <InvestigationOverview result={result} />
 
-              <InvestigationWorkflow result={result} />
+              {/* ------------------------------------------
+                  CHARTS
+              ------------------------------------------ */}
 
               <InvestigationCharts findings={findings} />
 
+              {/* ------------------------------------------
+                  RISK SIGNALS
+              ------------------------------------------ */}
+
               <FindingsList findings={findings} />
+
+              {/* ------------------------------------------
+                  AI INSIGHTS
+              ------------------------------------------ */}
 
               <InvestigationInsights result={result} />
             </>
@@ -426,23 +627,32 @@ function App() {
         </section>
       )}
 
+      {/* ==================================================
+          AI CHAT ASSISTANT
+      ================================================== */}
+
       <AIChatAssistant
-        onInvestigationRequest={(representativeId, startDate, endDate) => {
+        onInvestigationRequest={(chatRepresentativeId, chatStartDate, chatEndDate) => {
           return new Promise<InvestigationResult>((resolve, reject) => {
             chatInvestigationResolveRef.current = resolve;
+
             chatInvestigationRejectRef.current = reject;
 
             setResult(null);
+
             setError(null);
 
-            setRepresentativeId(representativeId);
-            setStartDate(startDate);
-            setEndDate(endDate);
+            setWorkflowVisible(false);
 
-            setLoading(true);
+            setRepresentativeId(chatRepresentativeId);
+
+            setStartDate(chatStartDate);
+
+            setEndDate(chatEndDate);
+
             setActiveTab("analysis");
 
-            loadRepresentatives(representativeId);
+            void loadRepresentatives(chatRepresentativeId);
 
             setPendingChatRun(true);
           });

@@ -20,6 +20,10 @@ from ..agents.risk_synthesizer_agent import (
     risk_synthesizer_agent,
 )
 
+from ..agents.investigation_agent import (
+    investigation_agent,
+)
+
 
 def build_investigation_graph():
 
@@ -48,6 +52,11 @@ def build_investigation_graph():
     builder.add_node(
         "risk_synthesizer_agent",
         risk_synthesizer_agent,
+    )
+
+    builder.add_node(
+        "investigation_agent",
+        investigation_agent,
     )
 
     builder.add_edge(
@@ -87,6 +96,11 @@ def build_investigation_graph():
 
     builder.add_edge(
         "risk_synthesizer_agent",
+        "investigation_agent",
+    )
+
+    builder.add_edge(
+        "investigation_agent",
         END,
     )
 

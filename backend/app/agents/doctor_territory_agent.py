@@ -3,6 +3,7 @@ from typing import Any
 
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
+from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
 You are the Doctor and Territory Evidence Analysis Agent
@@ -79,34 +80,73 @@ async def doctor_territory_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
+    agent_id = "doctor_territory"
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="running",
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Starting doctor concentration and territory behaviour review.",
+    )
+
     relevant_types = {
         "doctor_concentration",
         "cross_territory_concentration",
     }
 
-    findings = state.get(
-        "findings",
-        [],
-    )
+    findings = state.get("findings", [])
 
     relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
 
-    # No evidence available
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Found {len(relevant_findings)} doctor and territory "
+            "findings available for interpretation."
+        ),
+    )
 
     if not relevant_findings:
 
+        parsed = {
+            "severity": "UNKNOWN",
+            "anomaly_detected": False,
+            "summary": "No doctor or territory evidence is available for analysis.",
+            "evidence_summary": [],
+            "key_observations": [],
+            "limitations": [
+                "No doctor concentration or territory concentration findings were provided."
+            ],
+            "investigation_priority": "LOW",
+        }
+
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="No doctor or territory evidence was available for specialist review.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_result",
+            agent=agent_id,
+            status="complete",
+            output=parsed,
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="complete",
+        )
+
         return {
-            "doctor_territory_analysis": {
-                "severity": "UNKNOWN",
-                "anomaly_detected": False,
-                "summary": "No doctor or territory evidence is available for analysis.",
-                "evidence_summary": [],
-                "key_observations": [],
-                "limitations": [
-                    "No doctor concentration or territory concentration findings were provided."
-                ],
-                "investigation_priority": "LOW",
-            }
+            "doctor_territory_analysis": parsed,
         }
 
     evidence = {
@@ -122,13 +162,35 @@ async def doctor_territory_agent(
         "doctor_territory_findings": relevant_findings,
     }
 
+    finding_types = {finding.get("type") for finding in relevant_findings}
+
+    if "doctor_concentration" in finding_types:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Reviewing concentration of sales across assigned doctors.",
+        )
+
+    if "cross_territory_concentration" in finding_types:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                "Reviewing cross-territory sales evidence while treating "
+                "cross-territory activity as permitted unless other evidence indicates concern."
+            ),
+        )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Requesting specialist interpretation of doctor and territory evidence.",
+    )
+
     prompt = f"""
+    {SYSTEM_PROMPT}
 
-{SYSTEM_PROMPT}
-
-
-Analyze ONLY this doctor and territory evidence:
-
+    Analyze ONLY this doctor and territory evidence:
 
     {json.dumps(
         evidence,
@@ -136,21 +198,33 @@ Analyze ONLY this doctor and territory evidence:
         default=str,
     )}
 
+    Return JSON only.
+    """
 
-Return JSON only.
+    try:
+        response_text = await gemini_chat_with_fallback(prompt)
 
-"""
+    except Exception:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Doctor and territory specialist analysis could not be completed.",
+        )
 
-    response_text = await gemini_chat_with_fallback(prompt)
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
+
+        raise
 
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
-
         parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
-
         parsed = {
             "severity": "UNKNOWN",
             "anomaly_detected": False,
@@ -162,4 +236,46 @@ Return JSON only.
             "raw_response": response_text,
         }
 
-    return {"doctor_territory_analysis": parsed}
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Specialist response was received but could not be parsed as structured JSON.",
+        )
+
+    severity = parsed.get("severity", "UNKNOWN")
+    priority = parsed.get("investigation_priority", "LOW")
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Doctor and territory review completed with "
+            f"{severity} severity and {priority} investigation priority."
+        ),
+    )
+
+    summary = parsed.get("summary")
+
+    if summary:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=str(summary),
+        )
+
+    emit_workflow_event(
+        event_type="agent_result",
+        agent=agent_id,
+        status="complete",
+        output=parsed,
+    )
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="complete",
+    )
+
+    return {
+        "doctor_territory_analysis": parsed,
+    }

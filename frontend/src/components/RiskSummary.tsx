@@ -1,4 +1,5 @@
 import "../styles/index.css";
+
 type RiskSummaryProps = {
   riskScore: number;
   severity: string;
@@ -59,51 +60,61 @@ function RiskSummary({
   findingCount,
 }: RiskSummaryProps) {
   return (
-    <section className="kpi-strip">
-      {/* RISK */}
+    <section className="risk-summary-section">
+      <div className="risk-summary-heading">
+        <h2>Risk Summary</h2>
 
-      <div className="kpi-item kpi-risk">
-        <span className="kpi-label">Overall Risk</span>
+        <span className="risk-summary-subtitle">
+          Investigation risk and key performance indicators
+        </span>
+      </div>
 
-        <div className="kpi-risk-value">
-          <strong>{riskScore}</strong>
+      <div className="kpi-strip">
+        {/* RISK */}
 
-          <span className={`severity-badge severity-${(severity ?? "NORMAL").toLowerCase()}`}>
-            {severity}
-          </span>
+        <div className="kpi-item kpi-risk">
+          <span className="kpi-label">Overall Risk</span>
+
+          <div className="kpi-risk-value">
+            <strong>{riskScore}</strong>
+
+            <span className={`severity-badge severity-${(severity ?? "NORMAL").toLowerCase()}`}>
+              {severity}
+            </span>
+          </div>
         </div>
-      </div>
 
-      {/* SALES CHANGE */}
+        {/* SALES CHANGE */}
 
-      <div className="kpi-item">
-        <span className="kpi-label">Sales Change</span>
+        <div className="kpi-item">
+          <span className="kpi-label">Sales Change</span>
 
-        <strong className={valueClass(salesChange)}>{formatPercent(salesChange)}</strong>
-      </div>
+          <strong className={valueClass(salesChange)}>{formatPercent(salesChange)}</strong>
+        </div>
 
-      {/* PRESCRIPTION CHANGE */}
+        {/* PRESCRIPTION CHANGE */}
 
-      <div className="kpi-item">
-        <span className="kpi-label">Rx Change</span>
+        <div className="kpi-item">
+          <span className="kpi-label">Rx Change</span>
 
-        <strong className={valueClass(rxChange)}>{formatPercent(rxChange)}</strong>
-      </div>
+          <strong className={valueClass(rxChange)}>{formatPercent(rxChange)}</strong>
+        </div>
 
-      {/* PAYOUT DIFFERENCE */}
+        {/* PAYOUT DIFFERENCE */}
 
-      <div className="kpi-item">
-        <span className="kpi-label">Payout Difference</span>
+        <div className="kpi-item">
+          <span className="kpi-label">Payout Difference</span>
 
-        <strong>{formatMoney(payoutDifference)}</strong>
-      </div>
+          <strong>{formatMoney(payoutDifference)}</strong>
+        </div>
 
-      {/* FINDINGS */}
+        {/* FINDINGS */}
 
-      <div className="kpi-item">
-        <span className="kpi-label">Risk Findings</span>
+        <div className="kpi-item">
+          <span className="kpi-label">Risk Findings</span>
 
-        <strong>{findingCount}</strong>
+          <strong>{findingCount}</strong>
+        </div>
       </div>
     </section>
   );

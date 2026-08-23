@@ -3,6 +3,7 @@ from typing import Any
 
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
+from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
 You are the Sales and Prescription Evidence Analysis Agent
@@ -86,35 +87,70 @@ async def sales_rx_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
+    agent_id = "sales_rx"
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="running",
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Starting sales and prescription evidence review.",
+    )
+
     relevant_types = {
         "sales_deviation",
         "sales_prescription_mismatch",
     }
 
-    findings = state.get(
-        "findings",
-        [],
-    )
+    findings = state.get("findings", [])
 
     relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
 
-    # No evidence available
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Found {len(relevant_findings)} sales and prescription "
+            "findings available for interpretation."
+        ),
+    )
 
     if not relevant_findings:
 
-        return {
-            "sales_rx_analysis": {
-                "severity": "UNKNOWN",
-                "anomaly_detected": False,
-                "summary": "No sales or prescription evidence available for analysis.",
-                "evidence_summary": [],
-                "key_observations": [],
-                "limitations": [
-                    "No sales deviation or prescription mismatch findings were provided."
-                ],
-                "investigation_priority": "LOW",
-            }
+        parsed = {
+            "severity": "UNKNOWN",
+            "anomaly_detected": False,
+            "summary": "No sales or prescription evidence available for analysis.",
+            "evidence_summary": [],
+            "key_observations": [],
+            "limitations": ["No sales deviation or prescription mismatch findings were provided."],
+            "investigation_priority": "LOW",
         }
+
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="No sales or prescription evidence was available for specialist review.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_result",
+            agent=agent_id,
+            status="complete",
+            output=parsed,
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="complete",
+        )
+
+        return {"sales_rx_analysis": parsed}
 
     evidence = {
         "representative_id": state.get("representative_id"),
@@ -129,13 +165,43 @@ async def sales_rx_agent(
         "sales_prescription_findings": relevant_findings,
     }
 
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            "Reviewing sales deviation evidence and comparing it with "
+            "the available prescription alignment findings."
+        ),
+    )
+
+    product_ids = sorted(
+        {
+            str(finding.get("product_id"))
+            for finding in relevant_findings
+            if finding.get("product_id") and finding.get("product_id") != "ALL"
+        }
+    )
+
+    if product_ids:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                f"Evidence covers {len(product_ids)} product"
+                f"{'s' if len(product_ids) != 1 else ''}: " + ", ".join(product_ids) + "."
+            ),
+        )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Requesting specialist interpretation of the supplied evidence.",
+    )
+
     prompt = f"""
+    {SYSTEM_PROMPT}
 
-{SYSTEM_PROMPT}
-
-
-Analyze ONLY this evidence:
-
+    Analyze ONLY this evidence:
 
     {json.dumps(
         evidence,
@@ -143,21 +209,33 @@ Analyze ONLY this evidence:
         default=str,
     )}
 
+    Return JSON only.
+    """
 
-Return JSON only.
+    try:
+        response_text = await gemini_chat_with_fallback(prompt)
 
-"""
+    except Exception:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Sales and prescription specialist analysis could not be completed.",
+        )
 
-    response_text = await gemini_chat_with_fallback(prompt)
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
+
+        raise
 
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
-
         parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
-
         parsed = {
             "severity": "UNKNOWN",
             "anomaly_detected": False,
@@ -169,4 +247,60 @@ Return JSON only.
             "raw_response": response_text,
         }
 
-    return {"sales_rx_analysis": parsed}
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Specialist response was received but could not be parsed as structured JSON.",
+        )
+
+    severity = parsed.get("severity", "UNKNOWN")
+    anomaly_detected = parsed.get("anomaly_detected", False)
+    priority = parsed.get("investigation_priority", "LOW")
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Sales and prescription review completed with "
+            f"{severity} severity and {priority} investigation priority."
+        ),
+    )
+
+    if anomaly_detected:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="The supplied evidence contains observations that may require human review.",
+        )
+    else:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="No material sales and prescription anomaly was identified by the specialist review.",  # noqa: E501
+        )
+
+    summary = parsed.get("summary")
+
+    if summary:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=str(summary),
+        )
+
+    emit_workflow_event(
+        event_type="agent_result",
+        agent=agent_id,
+        status="complete",
+        output=parsed,
+    )
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="complete",
+    )
+
+    return {
+        "sales_rx_analysis": parsed,
+    }

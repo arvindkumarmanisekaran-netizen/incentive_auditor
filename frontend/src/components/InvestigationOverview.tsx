@@ -30,9 +30,11 @@ export default function InvestigationOverview({ result }: Props) {
           <p>
             Representative {result.representative_id} | {result.start_date} to {result.end_date}
           </p>
-        </div>
 
-        <StatusBadge status={result.overall_severity} />
+          <div className="overview-header-status">
+            <StatusBadge status={result.overall_severity} />
+          </div>
+        </div>
       </div>
 
       {/* =============================

@@ -670,7 +670,6 @@ function InvestigationCharts({ findings = [] }: Props) {
             <p>Attributed sales by selling territory</p>
           </div>
         </div>
-
         {territoryChartData.length > 0 ? (
           <div className="chart-container pie-chart-container">
             <AnimateOnView>

@@ -133,6 +133,74 @@
   color: #fb7185 !important;
 }
 
+.risk-summary-section {
+  margin-top: 14px;
+}
+
+.risk-summary-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.risk-summary-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.risk-summary-subtitle {
+  display: block;
+  font-size: 0.74rem;
+  opacity: 0.55;
+  text-align: left;
+}
+
+/* Center KPI content */
+
+.kpi-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Overall Risk specifically */
+
+.kpi-risk {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.kpi-risk .kpi-label {
+  text-align: center;
+}
+
+.kpi-risk-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.kpi-risk-value strong {
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .risk-summary-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
 /* =========================================================
    MAIN CHART GRID
 ========================================================= */
@@ -160,29 +228,55 @@
   border-radius: 12px;
   box-shadow: var(--shadow-card);
 }
+/* =========================================================
+   CHART HEADER ALIGNMENT
+========================================================= */
+
+/* =========================================================
+   CHART HEADER ALIGNMENT + TYPOGRAPHY
+========================================================= */
 
 .chart-heading {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.chart-heading > div {
+  width: 100%;
   display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 12px;
-
-  margin-bottom: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
 }
 
 .chart-heading h3 {
   margin: 0;
-  color: var(--text-primary);
-  font-size: 14px;
+  font-size: 0.95rem;
   font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  margin: 0 0 4px;
+}
+
+.chart-heading .chart-product-context {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  line-height: 1.2;
 }
 
 .chart-heading p {
   margin: 2px 0 0;
-  color: var(--text-muted);
-  font-size: 11px;
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.35;
+  opacity: 0.58;
+  text-align: left;
 }
 
 .chart-container {
@@ -341,11 +435,21 @@
 }
 
 .insights-grid {
-  display: grid;
+  width: 100%;
+  max-width: none;
 
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 14px;
+  gap: 10px;
+
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================================================
@@ -354,42 +458,74 @@
 
 .insight-card {
   min-width: 0;
-  overflow: hidden;
 
-  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
+  padding: 12px 13px;
 
-  transition:
-    box-shadow 0.15s ease,
-    transform 0.15s ease,
-    border-color 0.15s ease;
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  border-radius: 10px;
+
+  background: linear-gradient(180deg, rgba(24, 18, 38, 0.88), rgba(14, 11, 24, 0.92));
+
+  text-align: left;
 }
 
-.insight-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-card), var(--shadow-glow);
-  transform: translateY(-1px);
+.insight-card h3,
+.insight-card h4 {
+  margin: 0 0 6px;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+
+  text-align: left;
 }
+
+.insight-card p {
+  margin: 0;
+
+  font-size: 0.74rem;
+  line-height: 1.45;
+
+  opacity: 0.72;
+
+  text-align: left;
+}
+
+/* =========================================================
+   CARD HEADER / STATUS
+========================================================= */
 
 .insight-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
 
-  min-height: 58px;
-  padding: 11px 15px;
+  gap: 10px;
 
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 7px;
 }
 
-.insight-card-header h3 {
-  margin: 1px 0 0;
-  color: var(--text-primary);
-  font-size: 14px;
-  font-weight: 700;
+.insight-card-header h3,
+.insight-card-header h4 {
+  margin: 0;
+}
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+.insight-card ul {
+  margin: 8px 0 0;
+  padding-left: 16px;
+}
+
+.insight-card li {
+  margin-bottom: 4px;
+
+  font-size: 0.72rem;
+  line-height: 1.4;
+
+  opacity: 0.72;
 }
 
 .insight-eyebrow {

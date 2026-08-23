@@ -3,6 +3,7 @@ from typing import Any
 
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
+from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
 You are the Investigation Summary Agent
@@ -71,6 +72,20 @@ async def investigation_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
+    agent_id = "investigation_summary"
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="running",
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Preparing the final human-readable investigation summary.",
+    )
+
     investigation_data = {
         "representative_id": state.get("representative_id"),
         "investigation_period": {
@@ -99,12 +114,25 @@ async def investigation_agent(
         ),
     }
 
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            "Consolidating deterministic findings, specialist interpretations "
+            "and the final risk assessment."
+        ),
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Preparing review priorities and evidence-based next actions.",
+    )
+
     prompt = f"""
-{SYSTEM_PROMPT}
+    {SYSTEM_PROMPT}
 
-
-Completed investigation evidence:
-
+    Completed investigation evidence:
 
     {json.dumps(
         investigation_data,
@@ -112,20 +140,33 @@ Completed investigation evidence:
         default=str,
     )}
 
+    Return JSON only.
+    """
 
-Return JSON only.
-"""
+    try:
+        response_text = await gemini_chat_with_fallback(prompt)
 
-    response_text = await gemini_chat_with_fallback(prompt)
+    except Exception:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="The final investigation summary could not be generated.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
+
+        raise
 
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
-
         parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
-
         parsed = {
             "executive_summary": response_text,
             "key_findings": [],
@@ -134,4 +175,67 @@ Return JSON only.
             "human_review_required": True,
         }
 
-    return {"investigation_summary": parsed}
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Summary response was received but could not be parsed as structured JSON.",
+        )
+
+    executive_summary = parsed.get(
+        "executive_summary",
+    )
+
+    if executive_summary:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=str(executive_summary),
+        )
+
+    priorities = parsed.get(
+        "investigation_priorities",
+        [],
+    )
+
+    if priorities:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                f"Prepared {len(priorities)} investigation "
+                f"priorit{'y' if len(priorities) == 1 else 'ies'} "
+                "for human review."
+            ),
+        )
+
+    actions = parsed.get(
+        "recommended_next_actions",
+        [],
+    )
+
+    if actions:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                f"Prepared {len(actions)} evidence-based recommended "
+                f"next action{'s' if len(actions) != 1 else ''}."
+            ),
+        )
+
+    emit_workflow_event(
+        event_type="agent_result",
+        agent=agent_id,
+        status="complete",
+        output=parsed,
+    )
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="complete",
+    )
+
+    return {
+        "investigation_summary": parsed,
+    }

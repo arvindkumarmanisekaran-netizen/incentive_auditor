@@ -3,6 +3,7 @@ from typing import Any
 
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
+from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
 
@@ -103,6 +104,20 @@ async def risk_synthesizer_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
+    agent_id = "risk_synthesizer"
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="running",
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Starting final risk synthesis across specialist evidence.",
+    )
+
     evidence = {
         "representative_id": state.get("representative_id"),
         "investigation_period": {
@@ -117,7 +132,10 @@ async def risk_synthesizer_agent(
             "findings",
             [],
         ),
-        "investigation_plan": state.get("investigation_plan", {}),
+        "investigation_plan": state.get(
+            "investigation_plan",
+            {},
+        ),
         "sales_rx_analysis": state.get(
             "sales_rx_analysis",
             {},
@@ -132,13 +150,50 @@ async def risk_synthesizer_agent(
         ),
     }
 
+    findings = evidence["detected_findings"]
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Combining {len(findings)} deterministic findings "
+            "with the completed specialist interpretations."
+        ),
+    )
+
+    available_specialists = []
+
+    if evidence["sales_rx_analysis"]:
+        available_specialists.append("Sales / Rx")
+
+    if evidence["doctor_territory_analysis"]:
+        available_specialists.append("Doctor / Territory")
+
+    if evidence["payout_analysis"]:
+        available_specialists.append("Payout")
+
+    if available_specialists:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                "Specialist evidence available from: " + ", ".join(available_specialists) + "."
+            ),
+        )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            "Assessing the combined evidence to determine overall "
+            "review priority and key risk drivers."
+        ),
+    )
+
     prompt = f"""
+    {SYSTEM_PROMPT}  
 
-{SYSTEM_PROMPT}
-
-
-Investigation evidence:
-
+    Investigation evidence:
 
     {json.dumps(
         evidence,
@@ -146,21 +201,33 @@ Investigation evidence:
         default=str,
     )}
 
+    Return JSON only.
+    """
 
-Return JSON only.
+    try:
+        response_text = await gemini_chat_with_fallback(prompt)
 
-"""
+    except Exception:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Final risk synthesis could not be completed.",
+        )
 
-    response_text = await gemini_chat_with_fallback(prompt)
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
+
+        raise
 
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
-
         parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
-
         parsed = {
             "overall_risk_score": 0,
             "overall_severity": "UNKNOWN",
@@ -175,8 +242,72 @@ Return JSON only.
             "human_review_required": True,
         }
 
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Risk synthesis response was received but could not be parsed as structured JSON.",  # noqa: E501
+        )
+
+    overall_severity = parsed.get(
+        "overall_severity",
+        "UNKNOWN",
+    )
+
+    overall_risk_score = parsed.get(
+        "overall_risk_score",
+        0,
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Overall investigation severity assessed as "
+            f"{overall_severity} with risk score {overall_risk_score}."
+        ),
+    )
+
+    risk_drivers = parsed.get(
+        "top_risk_drivers",
+        [],
+    )
+
+    if risk_drivers:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                f"{len(risk_drivers)} primary risk driver"
+                f"{'s were' if len(risk_drivers) != 1 else ' was'} "
+                "identified for human review."
+            ),
+        )
+
+    overall_assessment = parsed.get(
+        "overall_assessment",
+    )
+
+    if overall_assessment:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=str(overall_assessment),
+        )
+
+    emit_workflow_event(
+        event_type="agent_result",
+        agent=agent_id,
+        status="complete",
+        output=parsed,
+    )
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="complete",
+    )
+
     return {
-        # compatibility with frontend
         "overall_risk_score": parsed.get(
             "overall_risk_score",
             0,

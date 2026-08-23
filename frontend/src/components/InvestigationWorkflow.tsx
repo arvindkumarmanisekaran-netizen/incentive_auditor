@@ -1,139 +1,210 @@
-import type { InvestigationResult } from "../types/investigation";
 import { useState } from "react";
-import SeverityBadge from "./SeverityBadge";
-import FinalAssessment from "./FinalAssessment";
 
-interface Props {
-  result: InvestigationResult;
+import type { WorkflowAgent } from "../types/workflow";
+
+type Props = {
+  agents: WorkflowAgent[];
+  loading: boolean;
+  statusMessage: string;
+};
+
+function getStatusSymbol(status: WorkflowAgent["status"]) {
+  switch (status) {
+    case "running":
+      return "●";
+
+    case "complete":
+      return "✓";
+
+    case "error":
+      return "✕";
+
+    default:
+      return "○";
+  }
 }
 
-export default function InvestigationWorkflow({ result }: Props) {
-  const [expanded, setExpanded] = useState(false);
+function getStatusLabel(status: WorkflowAgent["status"]) {
+  switch (status) {
+    case "running":
+      return "Running";
 
-  const plan = result.investigation_plan;
+    case "complete":
+      return "Complete";
 
-  const sales = result.sales_rx_analysis;
+    case "error":
+      return "Error";
 
-  const doctor = result.doctor_territory_analysis;
+    default:
+      return "Waiting";
+  }
+}
 
-  const payout = result.payout_analysis;
+function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
+  const [expanded, setExpanded] = useState(true);
 
-  const report = result.final_report;
+  const planner = agents.find((agent) => agent.id === "investigation_planner");
+
+  const plannerOutput =
+    planner?.output && typeof planner.output === "object"
+      ? (planner.output as {
+          priority?: string;
+          focus_areas?: string[];
+          reasoning?: string[];
+        })
+      : undefined;
+
+  const completedCount = agents.filter((agent) => agent.status === "complete").length;
+
+  const hasError = agents.some((agent) => agent.status === "error");
+
+  const workflowComplete = agents.length > 0 && completedCount === agents.length;
 
   return (
-    <div className="investigation-workflow">
-      <div className="workflow-header">
-        <h2>Detailed AI Investigation</h2>
+    <section className="investigation-workflow">
+      <button
+        type="button"
+        className="investigation-workflow-header"
+        onClick={() => setExpanded((current) => !current)}
+        aria-expanded={expanded}
+      >
+        <div className="investigation-workflow-header-main">
+          <div className="investigation-workflow-title-row">
+            <h2>Investigation Workflow</h2>
 
-        <button type="button" className="workflow-toggle" onClick={() => setExpanded(!expanded)}>
-          {expanded ? "Hide Details ▲" : "View Detailed Analysis ▼"}
-        </button>
-      </div>
+            {loading && <span className="workflow-live-badge">LIVE</span>}
 
-      {expanded && (
-        <>
-          {/* ============================
-            EXECUTIVE SUMMARY
-        ============================ */}
+            {!loading && workflowComplete && (
+              <span className="workflow-complete-badge">Complete</span>
+            )}
+          </div>
 
-          <section className="workflow-summary-card">
-            <div>
-              <h3>Overall Risk</h3>
+          {statusMessage && <p className="investigation-workflow-status">{statusMessage}</p>}
+        </div>
 
-              <SeverityBadge severity={result.overall_severity} />
+        <span className="investigation-workflow-toggle">{expanded ? "▲" : "▼"}</span>
+      </button>
+
+      {/* ==================================================
+        PLANNER - ALWAYS VISIBLE
+    ================================================== */}
+
+      {planner && (
+        <article className={`workflow-agent planner ${planner.status}`}>
+          <div className="workflow-agent-header">
+            <div className="workflow-agent-name">
+              <span className={`workflow-status-icon ${planner.status}`} aria-hidden="true">
+                {getStatusSymbol(planner.status)}
+              </span>
+
+              <h3>Investigation Planner</h3>
             </div>
 
-            <div>
-              <h3>Representative</h3>
+            <span className={`workflow-step-status ${planner.status}`}>
+              {getStatusLabel(planner.status)}
+            </span>
+          </div>
 
-              <p>{result.representative_id}</p>
-            </div>
+          {plannerOutput?.reasoning && plannerOutput.reasoning.length > 0 ? (
+            <div className="workflow-commentary">
+              {plannerOutput.reasoning.map((reason, index) => (
+                <div key={`planner-reason-${index}`} className="workflow-commentary-line">
+                  <span className="workflow-commentary-marker">›</span>
 
-            <div>
-              <h3>Investigation Period</h3>
-
-              <p>
-                {result.start_date} to {result.end_date}
-              </p>
-            </div>
-          </section>
-
-          {/* ============================
-            INVESTIGATION PLAN
-        ============================ */}
-
-          <section className="workflow-card">
-            <h3>Investigation Areas Reviewed</h3>
-
-            <p>
-              Priority: <strong>{plan?.priority ?? "N/A"}</strong>
-            </p>
-
-            <div className="tag-container">
-              {plan?.focus_areas?.map((area) => (
-                <span key={area} className="workflow-tag">
-                  {area.replace("_", " ")}
-                </span>
+                  <span>{reason}</span>
+                </div>
               ))}
             </div>
-          </section>
+          ) : planner.commentary.length > 0 ? (
+            <div className="workflow-commentary">
+              {planner.commentary.slice(-3).map((commentary, index) => (
+                <div key={`${commentary.timestamp ?? index}`} className="workflow-commentary-line">
+                  <span className="workflow-commentary-marker">›</span>
 
-          {/* ============================
-            SPECIALIST REVIEWS
-        ============================ */}
-
-          <section className="workflow-grid">
-            <div className="workflow-card">
-              <h3>Sales & Prescription Review</h3>
-
-              <SeverityBadge severity={sales?.severity} />
-
-              <p>{sales?.summary}</p>
-
-              <h4>Key Observations</h4>
-
-              <ul>
-                {sales?.key_observations?.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
+                  <span>{commentary.message}</span>
+                </div>
+              ))}
             </div>
+          ) : null}
 
-            <div className="workflow-card">
-              <h3>Doctor & Territory Review</h3>
+          {plannerOutput && (
+            <div className="workflow-agent-result">
+              <div className="workflow-plan-meta">
+                <span>Priority</span>
 
-              <SeverityBadge severity={doctor?.severity} />
+                <strong>{plannerOutput.priority ?? "UNKNOWN"}</strong>
+              </div>
 
-              <p>{doctor?.summary}</p>
-
-              <ul>
-                {doctor?.key_observations?.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
+              {plannerOutput.focus_areas && plannerOutput.focus_areas.length > 0 && (
+                <div className="workflow-focus-areas">
+                  {plannerOutput.focus_areas.map((area) => (
+                    <span key={area} className="workflow-focus-pill">
+                      {area.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase())}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-
-            <div className="workflow-card">
-              <h3>Payout Validation</h3>
-
-              <SeverityBadge severity={payout?.severity} />
-
-              <p>{payout?.summary}</p>
-
-              <ul>
-                {payout?.key_observations?.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {/* ============================
-            FINAL ASSESSMENT
-        ============================ */}
-          <FinalAssessment result={result} />
-        </>
+          )}
+        </article>
       )}
-    </div>
+
+      {/* ==================================================
+        REST OF WORKFLOW - COLLAPSIBLE
+    ================================================== */}
+
+      {expanded && (
+        <div className="investigation-workflow-body">
+          {agents
+            .filter((agent) => agent.id !== "investigation_planner")
+            .map((agent) => {
+              const latestCommentary = agent.commentary.slice(-3);
+
+              return (
+                <article key={agent.id} className={`workflow-agent ${agent.status}`}>
+                  <div className="workflow-agent-header">
+                    <div className="workflow-agent-name">
+                      <span className={`workflow-status-icon ${agent.status}`} aria-hidden="true">
+                        {getStatusSymbol(agent.status)}
+                      </span>
+
+                      <h3>{agent.title}</h3>
+                    </div>
+
+                    <span className={`workflow-step-status ${agent.status}`}>
+                      {getStatusLabel(agent.status)}
+                    </span>
+                  </div>
+
+                  {latestCommentary.length > 0 ? (
+                    <div className="workflow-commentary">
+                      {latestCommentary.map((commentary, index) => (
+                        <div
+                          key={`${agent.id}-${index}-${commentary.timestamp ?? ""}`}
+                          className="workflow-commentary-line"
+                        >
+                          <span className="workflow-commentary-marker">›</span>
+
+                          <span>{commentary.message}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="workflow-waiting-text">
+                      {agent.status === "waiting"
+                        ? "Waiting for previous investigation stage."
+                        : agent.status === "running"
+                          ? "Processing..."
+                          : ""}
+                    </p>
+                  )}
+                </article>
+              );
+            })}
+        </div>
+      )}
+    </section>
   );
 }
+
+export default InvestigationWorkflow;

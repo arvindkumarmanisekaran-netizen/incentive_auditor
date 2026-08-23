@@ -56,7 +56,6 @@ export interface FinalReport {
 
   human_review_required?: boolean;
 }
-
 export interface InvestigationResult {
   representative_id: string;
 
@@ -81,4 +80,26 @@ export interface InvestigationResult {
   payout_analysis?: AIAnalysis;
 
   final_report?: FinalReport;
+
+  investigation_summary?: InvestigationSummary;
+}
+
+export interface InvestigationSummary {
+  executive_summary?: string;
+
+  key_findings?: string[];
+
+  investigation_priorities?: InvestigationPriority[];
+
+  recommended_next_actions?: string[];
+
+  human_review_required?: boolean;
+}
+
+export interface InvestigationPriority {
+  priority: number;
+
+  area: string;
+
+  reason: string;
 }

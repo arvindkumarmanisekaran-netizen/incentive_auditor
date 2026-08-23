@@ -1,11 +1,40 @@
 import type { InvestigationResult } from "../types/investigation";
 
-import { API_BASE_URL } from "../config";
+export type WorkflowAgentStatus = "waiting" | "running" | "complete" | "error";
 
-export async function runInvestigation(
+export type WorkflowEvent =
+  | {
+      type: "investigation_status";
+      status: string;
+      message?: string;
+    }
+  | {
+      type: "agent_status";
+      agent: string;
+      status: WorkflowAgentStatus;
+      timestamp?: string;
+    }
+  | {
+      type: "commentary";
+      agent: string;
+      message: string;
+      timestamp?: string;
+    }
+  | {
+      type: "agent_result";
+      agent: string;
+      status?: WorkflowAgentStatus;
+      output: unknown;
+      timestamp?: string;
+    };
+
+export type WorkflowEventHandler = (event: WorkflowEvent) => void;
+
+export async function runInvestigationStream(
   representativeId: string,
   startDate: string,
   endDate: string,
+  onWorkflowEvent: WorkflowEventHandler,
 ): Promise<InvestigationResult> {
   const params = new URLSearchParams({
     representative_id: representativeId,
@@ -13,40 +42,114 @@ export async function runInvestigation(
     end_date: endDate,
   });
 
-  const response = await fetch(`${API_BASE_URL}/api/investigation/ai-summary?${params}`);
+  const response = await fetch(`/api/investigation/ai-summary-stream?${params.toString()}`, {
+    method: "GET",
+    headers: {
+      Accept: "text/event-stream",
+    },
+  });
 
   if (!response.ok) {
-    throw new Error(`Investigation failed: ${response.status}`);
+    throw new Error(`Investigation failed with status ${response.status}`);
   }
 
-  const data = await response.json();
+  if (!response.body) {
+    throw new Error("Investigation stream returned no response body.");
+  }
 
-  const investigation = data.investigation ?? data;
+  const reader = response.body.getReader();
 
-  return {
-    representative_id: investigation.representative_id ?? representativeId,
+  const decoder = new TextDecoder("utf-8");
 
-    start_date: investigation.start_date ?? startDate,
+  let buffer = "";
 
-    end_date: investigation.end_date ?? endDate,
+  let finalResult: InvestigationResult | null = null;
 
-    products_analyzed: investigation.products_analyzed ?? [],
+  while (true) {
+    const { value, done } = await reader.read();
 
-    findings: investigation.findings ?? [],
+    if (done) {
+      break;
+    }
 
-    overall_risk_score: investigation.overall_risk_score ?? 0,
+    buffer += decoder.decode(value, {
+      stream: true,
+    });
 
-    overall_severity: investigation.overall_severity ?? "UNKNOWN",
+    /*
+     * SSE messages are separated by a blank line.
+     */
+    const blocks = buffer.split(/\r?\n\r?\n/);
 
-    // ADD THIS
-    investigation_plan: investigation.investigation_plan ?? {},
+    /*
+     * Keep the final incomplete block for the next chunk.
+     */
+    buffer = blocks.pop() ?? "";
 
-    sales_rx_analysis: investigation.sales_rx_analysis ?? {},
+    for (const block of blocks) {
+      if (!block.trim()) {
+        continue;
+      }
 
-    doctor_territory_analysis: investigation.doctor_territory_analysis ?? {},
+      let eventName = "message";
+      const dataLines: string[] = [];
 
-    payout_analysis: investigation.payout_analysis ?? {},
+      for (const line of block.split(/\r?\n/)) {
+        if (line.startsWith("event:")) {
+          eventName = line.slice("event:".length).trim();
+        } else if (line.startsWith("data:")) {
+          dataLines.push(line.slice("data:".length).trim());
+        }
+      }
 
-    final_report: investigation.final_report ?? {},
-  };
+      if (dataLines.length === 0) {
+        continue;
+      }
+
+      const rawData = dataLines.join("\n");
+
+      let parsed: any;
+
+      try {
+        parsed = JSON.parse(rawData);
+      } catch (error) {
+        console.error("Unable to parse investigation stream event:", rawData, error);
+
+        continue;
+      }
+
+      /*
+       * Live workflow events.
+       */
+      if (eventName === "workflow") {
+        onWorkflowEvent(parsed as WorkflowEvent);
+
+        continue;
+      }
+
+      /*
+       * Final investigation result.
+       */
+      if (eventName === "result") {
+        if (parsed?.type === "investigation_result" && parsed?.result) {
+          finalResult = parsed.result as InvestigationResult;
+        }
+
+        continue;
+      }
+
+      /*
+       * Backend-reported error.
+       */
+      if (eventName === "error") {
+        throw new Error(parsed?.message ?? "Investigation workflow failed.");
+      }
+    }
+  }
+
+  if (!finalResult) {
+    throw new Error("Investigation completed without returning a final result.");
+  }
+
+  return finalResult;
 }

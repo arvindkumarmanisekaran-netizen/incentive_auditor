@@ -192,61 +192,6 @@
   margin-bottom: 8px;
 }
 
-.severity-badge.low {
-  background: #dbeafe;
-
-  color: #1d4ed8;
-}
-
-.severity-badge.normal {
-  background: #dcfce7;
-
-  color: #15803d;
-}
-
-.severity-badge.high {
-  background: #fee2e2;
-
-  color: #b91c1c;
-}
-
-/* =========================================================
-   FINAL REPORT
-========================================================= */
-
-.final-ai-report {
-  margin-top: 16px;
-  padding: 18px;
-
-  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: 12px;
-}
-
-.final-ai-report h2 {
-  margin: 0 0 10px;
-
-  font-size: 16px;
-}
-
-.final-ai-report h3 {
-  margin: 16px 0 8px;
-
-  font-size: 13px;
-}
-
-.final-ai-report p,
-.final-ai-report li {
-  color: var(--text-secondary);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.final-ai-report ul {
-  padding-left: 18px;
-}
-
 /* HUMAN REVIEW */
 
 .review-warning {
@@ -260,44 +205,6 @@
   color: #fde68a;
   font-size: 12px;
   font-weight: 700;
-}
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-.overview-status.low {
-  background: #dbeafe;
-
-  color: #1d4ed8;
-}
-
-.overview-status.normal {
-  background: #dcfce7;
-
-  color: #15803d;
-}
-
-.overview-status.high {
-  background: #fee2e2;
-
-  color: #b91c1c;
-}
-
-@media (max-width: 900px) {
-  .workflow-grid,
-  .workflow-summary-card,
-  .overview-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .workflow-header {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 12px;
-  }
 }
 
 /* ======================================
@@ -336,13 +243,6 @@
   margin: 4px 0 0;
   color: var(--text-muted);
   font-size: 12px;
-}
-
-.overview-status {
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 750;
 }
 
 /* SECTIONS */
@@ -640,13 +540,13 @@
 .overview-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 
   width: 100%;
 
   margin-bottom: 10px;
 
-  text-align: center;
+  text-align: left;
 }
 
 .overview-header-copy {
@@ -671,14 +571,19 @@
   line-height: 1.45;
 }
 
+.overview-header-status {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
 /* =========================================================
    SEVERITY BADGE
 ========================================================= */
 
 .severity-badge {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
 
   width: fit-content;
 
@@ -753,12 +658,13 @@
 
 .overview-section {
   width: 100%;
-
   margin-top: 0;
+  text-align: left;
 }
 
 .key-findings-section {
   margin-top: 6px;
+  align-items: left;
 }
 
 .overview-section h3,
@@ -766,6 +672,7 @@
   margin: 0 0 8px;
 
   color: #f8f4ff;
+  align-items: left;
 
   font-size: 14px;
   font-weight: 700;
@@ -776,6 +683,7 @@
 
 .overview-header + .key-findings-section {
   margin-top: 4px;
+  align-items: left;
 }
 
 /* =========================================================
@@ -989,19 +897,52 @@
    ALIGN INVESTIGATION INSIGHTS WITH PAGE CONTENT
 ========================================================= */
 
+/* =========================================================
+   AI INSIGHTS SECTION
+========================================================= */
+
 .insights-section {
   width: 100%;
   max-width: none;
-
-  margin: 0 0 18px;
+  margin: 14px 0 18px;
+  text-align: left;
 }
+
+/* =========================================================
+   HEADING
+========================================================= */
 
 .insights-section .section-heading {
   width: 100%;
-  margin-left: 0;
-  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+
+  margin: 0 0 10px;
+
+  text-align: left;
 }
 
+.insights-section .section-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.insights-section .section-heading p {
+  margin: 0;
+
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  opacity: 0.55;
+
+  text-align: left;
+}
 .insights-grid {
   width: 100%;
   max-width: none;

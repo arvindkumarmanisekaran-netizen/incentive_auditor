@@ -3,6 +3,7 @@ from typing import Any
 
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
+from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
 You are the Payout Evidence Analysis Agent
@@ -80,33 +81,73 @@ async def payout_validator_agent(
     state: InvestigationState,
 ) -> dict[str, Any]:
 
+    agent_id = "payout"
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="running",
+    )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message="Starting incentive payout evidence review.",
+    )
+
     relevant_types = {
         "payout_discrepancy",
         "incentive_payout_discrepancy",
         "payout_variance",
     }
 
-    findings = state.get(
-        "findings",
-        [],
-    )
+    findings = state.get("findings", [])
 
     relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
 
-    # No payout evidence
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Found {len(relevant_findings)} payout finding"
+            f"{'s' if len(relevant_findings) != 1 else ''} "
+            "available for interpretation."
+        ),
+    )
 
     if not relevant_findings:
 
+        parsed = {
+            "severity": "UNKNOWN",
+            "anomaly_detected": False,
+            "summary": "No payout evidence is available for analysis.",
+            "evidence_summary": [],
+            "key_observations": [],
+            "limitations": ["No payout discrepancy findings were provided."],
+            "investigation_priority": "LOW",
+        }
+
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="No payout discrepancy evidence was available for specialist review.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_result",
+            agent=agent_id,
+            status="complete",
+            output=parsed,
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="complete",
+        )
+
         return {
-            "payout_analysis": {
-                "severity": "UNKNOWN",
-                "anomaly_detected": False,
-                "summary": "No payout evidence is available for analysis.",
-                "evidence_summary": [],
-                "key_observations": [],
-                "limitations": ["No payout discrepancy findings were provided."],
-                "investigation_priority": "LOW",
-            }
+            "payout_analysis": parsed,
         }
 
     evidence = {
@@ -122,13 +163,37 @@ async def payout_validator_agent(
         "payout_findings": relevant_findings,
     }
 
+    product_ids = sorted(
+        {
+            str(finding.get("product_id"))
+            for finding in relevant_findings
+            if finding.get("product_id") and finding.get("product_id") != "ALL"
+        }
+    )
+
+    if product_ids:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=(
+                f"Reviewing payout evidence across {len(product_ids)} product"
+                f"{'s' if len(product_ids) != 1 else ''}."
+            ),
+        )
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            "Comparing the supplied expected payout, actual payout "
+            "and payout discrepancy evidence."
+        ),
+    )
+
     prompt = f"""
+    {SYSTEM_PROMPT}
 
-{SYSTEM_PROMPT}
-
-
-Analyze ONLY this payout evidence:
-
+    Analyze ONLY this payout evidence:
 
     {json.dumps(
         evidence,
@@ -136,21 +201,33 @@ Analyze ONLY this payout evidence:
         default=str,
     )}
 
+    Return JSON only.
+    """
 
-Return JSON only.
+    try:
+        response_text = await gemini_chat_with_fallback(prompt)
 
-"""
+    except Exception:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Payout specialist analysis could not be completed.",
+        )
 
-    response_text = await gemini_chat_with_fallback(prompt)
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
+
+        raise
 
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
-
         parsed = json.loads(cleaned_response)
 
     except json.JSONDecodeError:
-
         parsed = {
             "severity": "UNKNOWN",
             "anomaly_detected": False,
@@ -162,4 +239,46 @@ Return JSON only.
             "raw_response": response_text,
         }
 
-    return {"payout_analysis": parsed}
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Specialist response was received but could not be parsed as structured JSON.",
+        )
+
+    severity = parsed.get("severity", "UNKNOWN")
+    priority = parsed.get("investigation_priority", "LOW")
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Payout review completed with {severity} severity "
+            f"and {priority} investigation priority."
+        ),
+    )
+
+    summary = parsed.get("summary")
+
+    if summary:
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message=str(summary),
+        )
+
+    emit_workflow_event(
+        event_type="agent_result",
+        agent=agent_id,
+        status="complete",
+        output=parsed,
+    )
+
+    emit_workflow_event(
+        event_type="agent_status",
+        agent=agent_id,
+        status="complete",
+    )
+
+    return {
+        "payout_analysis": parsed,
+    }

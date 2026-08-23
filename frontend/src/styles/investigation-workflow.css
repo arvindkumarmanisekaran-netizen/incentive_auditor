@@ -1,0 +1,243 @@
+.investigation-workflow {
+  margin-top: 14px;
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(24, 18, 38, 0.96), rgba(13, 10, 22, 0.96));
+  overflow: hidden;
+}
+
+.investigation-workflow-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.investigation-workflow-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.investigation-workflow-title-row h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.investigation-workflow-status {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+
+.workflow-live-badge,
+.workflow-complete-badge,
+.workflow-error-badge {
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workflow-live-badge {
+  background: rgba(34, 211, 238, 0.12);
+  color: #67e8f9;
+}
+
+.workflow-complete-badge {
+  background: rgba(45, 212, 191, 0.12);
+  color: #5eead4;
+}
+
+.workflow-error-badge {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fb7185;
+}
+
+.investigation-workflow-toggle {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  opacity: 0.75;
+}
+
+.investigation-workflow-body {
+  display: grid;
+  gap: 8px;
+  padding: 0 12px 12px;
+}
+
+.workflow-agent {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.workflow-agent.running {
+  border-color: rgba(34, 211, 238, 0.24);
+}
+
+.workflow-agent.complete {
+  border-color: rgba(45, 212, 191, 0.15);
+}
+
+.workflow-agent.error {
+  border-color: rgba(244, 63, 94, 0.28);
+}
+
+.workflow-agent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.workflow-agent-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workflow-agent-name h3 {
+  margin: 0;
+  font-size: 0.84rem;
+}
+
+.workflow-status-icon {
+  width: 18px;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+.workflow-status-icon.running {
+  color: #67e8f9;
+}
+
+.workflow-status-icon.complete {
+  color: #5eead4;
+}
+
+.workflow-status-icon.error {
+  color: #fb7185;
+}
+
+.workflow-status-icon.waiting {
+  opacity: 0.4;
+}
+
+.workflow-step-status {
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.72;
+}
+
+.workflow-step-status.running {
+  color: #67e8f9;
+}
+
+.workflow-step-status.complete {
+  color: #5eead4;
+}
+
+.workflow-step-status.error {
+  color: #fb7185;
+}
+
+.workflow-commentary {
+  display: grid;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.workflow-commentary-line {
+  display: flex;
+  gap: 7px;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  opacity: 0.82;
+}
+
+.workflow-commentary-marker {
+  color: #c084fc;
+}
+
+.workflow-waiting-text {
+  margin: 7px 0 0;
+  font-size: 0.74rem;
+  opacity: 0.45;
+}
+
+.workflow-agent-result {
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.workflow-plan-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+}
+
+.workflow-focus-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.workflow-focus-pill {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  font-size: 0.68rem;
+}
+
+.workflow-planner-preview {
+  padding: 0 14px 14px;
+}
+
+.workflow-planner-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.workflow-planner-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.76rem;
+}
+
+.workflow-planner-latest {
+  margin: 8px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  opacity: 0.8;
+}
+
+@media (max-width: 760px) {
+  .investigation-workflow-header {
+    align-items: flex-start;
+  }
+
+  .workflow-agent-header {
+    align-items: flex-start;
+  }
+}
