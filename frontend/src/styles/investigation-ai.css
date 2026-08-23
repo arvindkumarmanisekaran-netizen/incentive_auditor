@@ -4,6 +4,7 @@
 
 .investigation-workflow {
   margin-top: 24px;
+  scroll-margin-top: 16px;
 }
 
 /* HEADER */
@@ -1002,6 +1003,333 @@
 }
 
 /* =========================================================
+   DETAILED AI INVESTIGATION - HIGHLIGHTED
+========================================================= */
+
+.overview-detailed-investigation {
+  margin-top: 14px;
+  border: 1px solid rgba(192, 132, 252, 0.32);
+  border-radius: 12px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top left, rgba(168, 85, 247, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(28, 19, 46, 0.96), rgba(13, 10, 23, 0.98));
+
+  box-shadow:
+    0 10px 28px rgba(88, 28, 135, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+/* =========================================================
+   TOGGLE HEADER
+========================================================= */
+
+.overview-detailed-toggle {
+  width: 100%;
+  min-height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 13px 15px;
+
+  border: 0;
+  border-bottom: 1px solid transparent;
+
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.12),
+    rgba(99, 102, 241, 0.05),
+    transparent
+  );
+
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.overview-detailed-toggle:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.18),
+    rgba(99, 102, 241, 0.08),
+    transparent
+  );
+}
+
+.overview-detailed-toggle[aria-expanded="true"] {
+  border-bottom-color: rgba(168, 85, 247, 0.16);
+}
+
+.overview-detailed-toggle > div {
+  min-width: 0;
+}
+
+.overview-detailed-toggle h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.overview-detailed-toggle p {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(216, 180, 254, 0.66);
+}
+
+.overview-detailed-chevron {
+  width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 8px;
+
+  background: rgba(168, 85, 247, 0.1);
+
+  color: #d8b4fe;
+  font-size: 0.68rem;
+
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.overview-detailed-toggle:hover .overview-detailed-chevron {
+  background: rgba(168, 85, 247, 0.18);
+}
+
+/* =========================================================
+   EXPANDED CONTENT
+========================================================= */
+
+.overview-detailed-content {
+  display: grid;
+  gap: 10px;
+
+  padding: 12px;
+
+  background: rgba(7, 5, 14, 0.2);
+}
+
+/* =========================================================
+   EXECUTIVE SUMMARY STRIP
+========================================================= */
+
+.overview-detailed-content .workflow-summary-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+
+  padding: 11px;
+
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  border-radius: 9px;
+
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.07), rgba(168, 85, 247, 0.06));
+}
+
+.overview-detailed-content .workflow-summary-card > div {
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.overview-detailed-content .workflow-summary-card h3 {
+  margin: 0 0 5px;
+
+  font-size: 0.65rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  opacity: 0.58;
+}
+
+.overview-detailed-content .workflow-summary-card p {
+  margin: 0;
+
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+/* =========================================================
+   INVESTIGATION PLAN
+========================================================= */
+
+.overview-detailed-content > .workflow-card {
+  padding: 12px 13px;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 9px;
+
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.055), rgba(255, 255, 255, 0.02));
+}
+
+.overview-detailed-content > .workflow-card h3 {
+  margin: 0 0 6px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.overview-detailed-content > .workflow-card p {
+  margin: 0;
+
+  font-size: 0.74rem;
+  opacity: 0.72;
+}
+
+/* =========================================================
+   FOCUS AREA TAGS
+========================================================= */
+
+.overview-detailed-content .tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin-top: 9px;
+}
+
+.overview-detailed-content .workflow-tag {
+  padding: 4px 8px;
+
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 999px;
+
+  background: rgba(168, 85, 247, 0.1);
+
+  color: #d8b4fe;
+
+  font-size: 0.67rem;
+  font-weight: 650;
+}
+
+/* =========================================================
+   SPECIALIST REVIEW GRID
+========================================================= */
+
+.overview-detailed-content .workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card {
+  min-width: 0;
+
+  padding: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.018));
+
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card:hover {
+  border-color: rgba(168, 85, 247, 0.26);
+  background: rgba(168, 85, 247, 0.045);
+  transform: translateY(-1px);
+}
+
+.overview-detailed-content .workflow-grid .workflow-card h3 {
+  margin: 0 0 7px;
+
+  font-size: 0.79rem;
+  font-weight: 700;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card h4 {
+  margin: 10px 0 5px;
+
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  opacity: 0.6;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card p {
+  margin: 8px 0 0;
+
+  font-size: 0.72rem;
+  line-height: 1.45;
+
+  opacity: 0.74;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card li {
+  margin-bottom: 5px;
+
+  font-size: 0.7rem;
+  line-height: 1.42;
+
+  opacity: 0.72;
+}
+
+/* =========================================================
+   FINAL ASSESSMENT EMPHASIS
+========================================================= */
+
+.overview-detailed-content .final-assessment {
+  border: 1px solid rgba(45, 212, 191, 0.18);
+  border-radius: 9px;
+
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.055), rgba(168, 85, 247, 0.04));
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .overview-detailed-content .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .overview-detailed-content .workflow-summary-card {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-detailed-toggle {
+    padding: 12px;
+  }
+}
+
+/* =========================================================
    DETAILS CONTENT
 ========================================================= */
 
@@ -1078,4 +1406,63 @@
   .overview-details-content {
     grid-template-columns: 1fr;
   }
+}
+/* =========================================================
+   DETAILED AI INVESTIGATION - LEFT ALIGNMENT
+========================================================= */
+
+.overview-detailed-content {
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-card {
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-card h3,
+.overview-detailed-content .workflow-card h4,
+.overview-detailed-content .workflow-card p {
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid {
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card {
+  display: block;
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card h3 {
+  margin: 0 0 8px;
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card .severity-badge {
+  display: inline-flex;
+  margin: 0 0 8px;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card p {
+  margin: 8px 0 0;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card h4 {
+  margin: 12px 0 6px;
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card ul {
+  margin: 0;
+  padding-left: 18px;
+  text-align: left;
+}
+
+.overview-detailed-content .workflow-grid .workflow-card li {
+  margin: 0 0 6px;
+  text-align: left;
+  line-height: 1.5;
 }
