@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   Bar,
@@ -81,6 +81,12 @@ function getFinding(findings: Finding[] = [], type: string) {
   return findings.find((finding) => finding.type === type);
 }
 
+function getProductFinding(findings: Finding[] = [], type: string, productId: string) {
+  return findings.find(
+    (finding) => finding.type === type && String(finding.product_id ?? "") === productId,
+  );
+}
+
 function getProductContext(finding?: Finding) {
   if (!finding) {
     return {
@@ -105,25 +111,14 @@ function getProductContext(finding?: Finding) {
   };
 }
 
-function ProductLabel({ productId, productName }: { productId?: string; productName?: string }) {
-  if (!productId && !productName) {
-    return null;
-  }
+/* =========================================================
+   PRODUCT OPTION
+========================================================= */
 
-  return (
-    <div className="chart-product-context">
-      {productId && <span className="chart-product-id">{productId}</span>}
-
-      {productId && productName && <span className="chart-product-separator">•</span>}
-
-      {productName && (
-        <span className="chart-product-name" title={productName}>
-          {productName}
-        </span>
-      )}
-    </div>
-  );
-}
+type ProductOption = {
+  id: string;
+  name: string;
+};
 
 /* =========================================================
    DYNAMIC PIE CHART
@@ -373,29 +368,112 @@ function InvestigationCharts({ findings = [] }: Props) {
 
   const [activePayoutBar, setActivePayoutBar] = useState<number | null>(null);
 
-  /* -------------------------------------------------------
-     Findings
-  ------------------------------------------------------- */
+  const [selectedProductId, setSelectedProductId] = useState("");
 
-  const salesFinding = getFinding(findings, "sales_deviation");
+  /* =======================================================
+     AVAILABLE PRODUCTS
+  ======================================================= */
+
+  const productOptions = useMemo<ProductOption[]>(() => {
+    const products = new Map<string, ProductOption>();
+
+    findings.forEach((finding) => {
+      const context = getProductContext(finding);
+
+      if (!context.id || context.id.toUpperCase() === "ALL") {
+        return;
+      }
+
+      const existing = products.get(context.id);
+
+      /*
+       * First occurrence of
+       * the product.
+       */
+      if (!existing) {
+        products.set(context.id, {
+          id: context.id,
+          name: context.name,
+        });
+
+        return;
+      }
+
+      /*
+       * Another finding may
+       * contain the product
+       * name even when the
+       * first one did not.
+       */
+      if (!existing.name && context.name) {
+        products.set(context.id, {
+          ...existing,
+          name: context.name,
+        });
+      }
+    });
+
+    return Array.from(products.values()).sort((a, b) => a.id.localeCompare(b.id));
+  }, [findings]);
+
+  /* =======================================================
+     SELECT FIRST PRODUCT AUTOMATICALLY
+  ======================================================= */
+
+  useEffect(() => {
+    if (productOptions.length === 0) {
+      setSelectedProductId("");
+
+      return;
+    }
+
+    const selectionExists = productOptions.some((product) => product.id === selectedProductId);
+
+    if (!selectionExists) {
+      setSelectedProductId(productOptions[0].id);
+    }
+  }, [productOptions, selectedProductId]);
+
+  /*
+   * Reset hover state when
+   * switching products.
+   */
+  useEffect(() => {
+    setActiveSalesBar(null);
+    setActivePayoutBar(null);
+  }, [selectedProductId]);
+
+  const selectedProduct = productOptions.find((product) => product.id === selectedProductId);
+
+  /* =======================================================
+     PRODUCT-SPECIFIC FINDINGS
+  ======================================================= */
+
+  const salesFinding = getProductFinding(findings, "sales_deviation", selectedProductId);
+
+  const payoutFinding = getProductFinding(findings, "payout_discrepancy", selectedProductId);
+
+  /* =======================================================
+     OVERALL FINDINGS
+  ======================================================= */
 
   const doctorFinding = getFinding(findings, "doctor_concentration");
 
-  const territoryFinding = getFinding(findings, "cross_territory_concentration");
+  /*
+   * Keep support for your
+   * current finding type while
+   * also accepting territory
+   * variants if the backend
+   * naming changes.
+   */
+  const territoryFinding =
+    getFinding(findings, "cross_territory_concentration") ??
+    getFinding(findings, "territory_distribution") ??
+    getFinding(findings, "territory_concentration");
 
-  const payoutFinding = getFinding(findings, "payout_discrepancy");
-
-  /* -------------------------------------------------------
-     Product context
-  ------------------------------------------------------- */
-
-  const salesProduct = getProductContext(salesFinding);
-
-  const payoutProduct = getProductContext(payoutFinding);
-
-  /* -------------------------------------------------------
-     Sales
-  ------------------------------------------------------- */
+  /* =======================================================
+     SALES DATA
+  ======================================================= */
 
   const salesData = salesFinding
     ? [
@@ -417,43 +495,9 @@ function InvestigationCharts({ findings = [] }: Props) {
       ]
     : [];
 
-  /* -------------------------------------------------------
-     Doctor
-  ------------------------------------------------------- */
-
-  const doctorBreakdown =
-    (doctorFinding?.evidence.doctor_breakdown as Array<{
-      doctor_id: string;
-      doctor_name: string;
-      sales: number;
-    }>) ?? [];
-
-  const doctorChartData = doctorBreakdown.map((doctor, index) => ({
-    ...doctor,
-
-    fill: DOCTOR_COLORS[index % DOCTOR_COLORS.length],
-  }));
-
-  /* -------------------------------------------------------
-     Territory
-  ------------------------------------------------------- */
-
-  const territoryBreakdown =
-    (territoryFinding?.evidence.territory_breakdown as Array<{
-      territory_id: string;
-      territory_name: string;
-      sales: number;
-    }>) ?? [];
-
-  const territoryChartData = territoryBreakdown.map((territory, index) => ({
-    ...territory,
-
-    fill: TERRITORY_COLORS[index % TERRITORY_COLORS.length],
-  }));
-
-  /* -------------------------------------------------------
-     Payout
-  ------------------------------------------------------- */
+  /* =======================================================
+     PAYOUT DATA
+  ======================================================= */
 
   const payoutData = payoutFinding
     ? [
@@ -474,213 +518,312 @@ function InvestigationCharts({ findings = [] }: Props) {
         },
       ]
     : [];
+
+  /* =======================================================
+     DOCTOR DATA
+  ======================================================= */
+
+  const doctorBreakdown =
+    (doctorFinding?.evidence.doctor_breakdown as Array<{
+      doctor_id: string;
+      doctor_name: string;
+      sales: number;
+    }>) ?? [];
+
+  const doctorChartData = doctorBreakdown.map((doctor, index) => ({
+    ...doctor,
+
+    fill: DOCTOR_COLORS[index % DOCTOR_COLORS.length],
+  }));
+
+  /* =======================================================
+     TERRITORY DATA
+  ======================================================= */
+
+  const territoryBreakdown =
+    (territoryFinding?.evidence.territory_breakdown as Array<{
+      territory_id: string;
+      territory_name: string;
+      sales: number;
+    }>) ?? [];
+
+  const territoryChartData = territoryBreakdown.map((territory, index) => ({
+    ...territory,
+
+    fill: TERRITORY_COLORS[index % TERRITORY_COLORS.length],
+  }));
+
   return (
-    <section className="charts-grid">
+    <div className="investigation-analytics">
       {/* ==================================================
-          SALES PERFORMANCE
+          PRODUCT ANALYSIS
       ================================================== */}
 
-      <div className="chart-card">
-        <div className="chart-heading">
-          <div>
-            <h3>Sales Performance</h3>
+      <section className="product-analysis-section">
+        <div className="analysis-section-header">
+          <div className="analysis-section-heading">
+            <h2>Product Analysis</h2>
 
-            <ProductLabel productId={salesProduct.id} productName={salesProduct.name} />
+            <p>Sales and payout behaviour for the selected product</p>
+          </div>
 
-            <p>Current sales vs historical baseline</p>
+          <div className="product-analysis-selector">
+            <label htmlFor="product-analysis-product">Product</label>
+
+            <select
+              id="product-analysis-product"
+              value={selectedProductId}
+              onChange={(event) => setSelectedProductId(event.target.value)}
+              disabled={productOptions.length === 0}
+            >
+              {productOptions.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.name ? `${product.id} • ${product.name}` : product.id}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
-        {salesData.length > 0 ? (
-          <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={salesData}
-                  margin={{
-                    top: 15,
-                    right: 15,
-                    left: 10,
-                    bottom: 5,
-                  }}
-                  onMouseLeave={() => setActiveSalesBar(null)}
-                >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+        {/* -----------------------------------------------
+            SELECTED PRODUCT CONTEXT
+        ----------------------------------------------- */}
 
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
+        {selectedProduct && (
+          <div className="product-analysis-context">
+            <span className="product-analysis-id">{selectedProduct.id}</span>
 
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(value) => `₹${Number(value) / 1000}k`}
-                  />
+            {selectedProduct.name && (
+              <>
+                <span className="product-analysis-divider">•</span>
 
-                  <Tooltip
-                    cursor={{
-                      fill: "transparent",
-                    }}
-                    offset={14}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      transition: "none",
-
-                      pointerEvents: "none",
-                    }}
-                    content={<ChartTooltip />}
-                  />
-
-                  <Bar
-                    dataKey="amount"
-                    maxBarSize={80}
-                    isAnimationActive
-                    animationBegin={0}
-                    animationDuration={900}
-                    shape={(props) => (
-                      <HoverBarShape
-                        {...props}
-                        activeIndex={activeSalesBar}
-                        onHover={setActiveSalesBar}
-                      />
-                    )}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
+                <span className="product-analysis-name">{selectedProduct.name}</span>
+              </>
+            )}
           </div>
-        ) : (
-          <p className="chart-empty">No sales comparison available.</p>
         )}
-      </div>
 
-      {/* ==================================================
-          PAYOUT
-      ================================================== */}
+        <div className="product-analysis-grid">
+          {/* ==============================================
+              SALES PERFORMANCE
+          ============================================== */}
 
-      <div className="chart-card">
-        <div className="chart-heading">
-          <div>
-            <h3>Payout Comparison</h3>
-            <ProductLabel productId={payoutProduct.id} productName={payoutProduct.name} />
-            <p>Expected incentive vs actual payout</p>
-          </div>
-        </div>
+          <div className="chart-card">
+            <div className="chart-heading">
+              <div>
+                <h3>Sales Performance</h3>
 
-        {payoutData.length > 0 ? (
-          <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={payoutData}
-                  margin={{
-                    top: 15,
-                    right: 15,
-                    left: 10,
-                    bottom: 5,
-                  }}
-                  onMouseLeave={() => setActivePayoutBar(null)}
-                >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
-
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(value) => `₹${Number(value) / 1000}k`}
-                  />
-
-                  <Tooltip
-                    cursor={{
-                      fill: "transparent",
-                    }}
-                    offset={14}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      transition: "none",
-
-                      pointerEvents: "none",
-                    }}
-                    content={<ChartTooltip />}
-                  />
-
-                  <Bar
-                    dataKey="amount"
-                    maxBarSize={80}
-                    isAnimationActive
-                    animationBegin={0}
-                    animationDuration={900}
-                    shape={(props) => (
-                      <HoverBarShape
-                        {...props}
-                        activeIndex={activePayoutBar}
-                        onHover={setActivePayoutBar}
-                      />
-                    )}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
-          </div>
-        ) : (
-          <p className="chart-empty">No payout comparison available.</p>
-        )}
-      </div>
-
-      {/* ==================================================
-          DOCTOR CONCENTRATION
-      ================================================== */}
-
-      <div className="chart-card pie-chart-card">
-        <div className="chart-heading">
-          <div>
-            <h3>Doctor Concentration</h3>
-
-            <div className="chart-product-context">
-              <span className="chart-product-id">ALL PRODUCTS</span>
+                <p>Current sales vs historical baseline</p>
+              </div>
             </div>
 
-            <p>Sales contribution by doctor</p>
+            {salesData.length > 0 ? (
+              <div className="chart-container">
+                <AnimateOnView>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={salesData}
+                      margin={{
+                        top: 15,
+                        right: 15,
+                        left: 10,
+                        bottom: 5,
+                      }}
+                      onMouseLeave={() => setActiveSalesBar(null)}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+
+                      <XAxis dataKey="name" tickLine={false} axisLine={false} />
+
+                      <YAxis
+                        tickLine={false}
+                        axisLine={false}
+                        tickFormatter={(value) => `₹${Number(value) / 1000}k`}
+                      />
+
+                      <Tooltip
+                        cursor={{
+                          fill: "transparent",
+                        }}
+                        offset={14}
+                        isAnimationActive={false}
+                        wrapperStyle={{
+                          transition: "none",
+
+                          pointerEvents: "none",
+                        }}
+                        content={<ChartTooltip />}
+                      />
+
+                      <Bar
+                        dataKey="amount"
+                        maxBarSize={80}
+                        isAnimationActive
+                        animationBegin={0}
+                        animationDuration={900}
+                        shape={(props) => (
+                          <HoverBarShape
+                            {...props}
+                            activeIndex={activeSalesBar}
+                            onHover={setActiveSalesBar}
+                          />
+                        )}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </AnimateOnView>
+              </div>
+            ) : (
+              <p className="chart-empty">No sales comparison available for this product.</p>
+            )}
           </div>
-        </div>
 
-        {doctorChartData.length > 0 ? (
-          <div className="chart-container pie-chart-container">
-            <AnimateOnView>
-              <DynamicPieChart data={doctorChartData} dataKey="sales" nameKey="doctor_name" />
-            </AnimateOnView>
-          </div>
-        ) : (
-          <p className="chart-empty">No doctor concentration data.</p>
-        )}
-      </div>
+          {/* ==============================================
+              PAYOUT COMPARISON
+          ============================================== */}
 
-      {/* ==================================================
-          TERRITORY DISTRIBUTION
-      ================================================== */}
+          <div className="chart-card">
+            <div className="chart-heading">
+              <div>
+                <h3>Payout Comparison</h3>
 
-      <div className="chart-card pie-chart-card">
-        <div className="chart-heading">
-          <div>
-            <h3>Territory Distribution</h3>
-
-            <div className="chart-product-context">
-              <span className="chart-product-id">ALL PRODUCTS</span>
+                <p>Expected incentive vs actual payout</p>
+              </div>
             </div>
 
-            <p>Attributed sales by selling territory</p>
+            {payoutData.length > 0 ? (
+              <div className="chart-container">
+                <AnimateOnView>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={payoutData}
+                      margin={{
+                        top: 15,
+                        right: 15,
+                        left: 10,
+                        bottom: 5,
+                      }}
+                      onMouseLeave={() => setActivePayoutBar(null)}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+
+                      <XAxis dataKey="name" tickLine={false} axisLine={false} />
+
+                      <YAxis
+                        tickLine={false}
+                        axisLine={false}
+                        tickFormatter={(value) => `₹${Number(value) / 1000}k`}
+                      />
+
+                      <Tooltip
+                        cursor={{
+                          fill: "transparent",
+                        }}
+                        offset={14}
+                        isAnimationActive={false}
+                        wrapperStyle={{
+                          transition: "none",
+
+                          pointerEvents: "none",
+                        }}
+                        content={<ChartTooltip />}
+                      />
+
+                      <Bar
+                        dataKey="amount"
+                        maxBarSize={80}
+                        isAnimationActive
+                        animationBegin={0}
+                        animationDuration={900}
+                        shape={(props) => (
+                          <HoverBarShape
+                            {...props}
+                            activeIndex={activePayoutBar}
+                            onHover={setActivePayoutBar}
+                          />
+                        )}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </AnimateOnView>
+              </div>
+            ) : (
+              <p className="chart-empty">No payout comparison available for this product.</p>
+            )}
           </div>
         </div>
-        {territoryChartData.length > 0 ? (
-          <div className="chart-container pie-chart-container">
-            <AnimateOnView>
-              <DynamicPieChart data={territoryChartData} dataKey="sales" nameKey="territory_name" />
-            </AnimateOnView>
+      </section>
+
+      {/* ==================================================
+          OVERALL BEHAVIOUR
+      ================================================== */}
+
+      <section className="overall-behaviour-section">
+        <div className="analysis-section-header">
+          <div className="analysis-section-heading">
+            <h2>Overall Behaviour</h2>
+
+            <p>Cross-product doctor and territory behaviour for the investigation period</p>
           </div>
-        ) : (
-          <p className="chart-empty">No territory data available.</p>
-        )}
-      </div>
-    </section>
+
+          <span className="overall-scope-badge">ALL PRODUCTS</span>
+        </div>
+
+        <div className="overall-behaviour-grid">
+          {/* ==============================================
+              DOCTOR CONCENTRATION
+          ============================================== */}
+
+          <div className="chart-card pie-chart-card">
+            <div className="chart-heading">
+              <div>
+                <h3>Doctor Concentration</h3>
+
+                <p>Sales contribution by doctor</p>
+              </div>
+            </div>
+
+            {doctorChartData.length > 0 ? (
+              <div className="chart-container pie-chart-container">
+                <AnimateOnView>
+                  <DynamicPieChart data={doctorChartData} dataKey="sales" nameKey="doctor_name" />
+                </AnimateOnView>
+              </div>
+            ) : (
+              <p className="chart-empty">No doctor concentration data.</p>
+            )}
+          </div>
+
+          {/* ==============================================
+              TERRITORY DISTRIBUTION
+          ============================================== */}
+
+          <div className="chart-card pie-chart-card">
+            <div className="chart-heading">
+              <div>
+                <h3>Territory Distribution</h3>
+
+                <p>Attributed sales by selling territory</p>
+              </div>
+            </div>
+
+            {territoryChartData.length > 0 ? (
+              <div className="chart-container pie-chart-container">
+                <AnimateOnView>
+                  <DynamicPieChart
+                    data={territoryChartData}
+                    dataKey="sales"
+                    nameKey="territory_name"
+                  />
+                </AnimateOnView>
+              </div>
+            ) : (
+              <p className="chart-empty">No territory data available.</p>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

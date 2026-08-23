@@ -63,6 +63,304 @@
 }
 
 /* =========================================================
+   INVESTIGATION ANALYTICS
+========================================================= */
+
+.investigation-analytics {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin: 0;
+}
+
+/* =========================================================
+   PRODUCT ANALYSIS / OVERALL BEHAVIOUR
+========================================================= */
+
+.product-analysis-section,
+.overall-behaviour-section {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 12px;
+
+  background: linear-gradient(180deg, rgba(23, 17, 37, 0.94), rgba(13, 10, 23, 0.97));
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.analysis-section-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 10px;
+}
+
+.analysis-section-heading {
+  min-width: 0;
+
+  text-align: left;
+}
+
+.analysis-section-heading h2 {
+  margin: 0 0 4px;
+
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  text-align: left;
+}
+
+.analysis-section-heading p {
+  margin: 0;
+
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  opacity: 0.55;
+
+  text-align: left;
+}
+
+/* =========================================================
+   PRODUCT SELECTOR
+========================================================= */
+
+.product-analysis-selector {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.product-analysis-selector label {
+  font-size: 0.66rem;
+  font-weight: 650;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  opacity: 0.5;
+}
+
+.product-analysis-selector select {
+  min-width: 235px;
+  height: 35px;
+
+  padding: 0 34px 0 11px;
+
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  border-radius: 8px;
+
+  background: rgba(12, 9, 22, 0.95);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 0.72rem;
+  font-weight: 650;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.product-analysis-selector select:hover {
+  border-color: rgba(192, 132, 252, 0.5);
+}
+
+.product-analysis-selector select:focus {
+  border-color: rgba(192, 132, 252, 0.68);
+
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+/* =========================================================
+   CURRENT PRODUCT
+========================================================= */
+
+.product-analysis-context {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin: 0 0 10px;
+  padding: 4px 8px;
+
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  border-radius: 999px;
+
+  background: rgba(168, 85, 247, 0.065);
+
+  text-align: left;
+}
+
+.product-analysis-id {
+  font-size: 0.68rem;
+  font-weight: 750;
+
+  color: #d8b4fe;
+}
+
+.product-analysis-divider {
+  font-size: 0.65rem;
+
+  opacity: 0.35;
+}
+
+.product-analysis-name {
+  font-size: 0.68rem;
+  font-weight: 500;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* =========================================================
+   CHART GRIDS
+========================================================= */
+
+.product-analysis-grid,
+.overall-behaviour-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.product-analysis-grid .chart-card,
+.overall-behaviour-grid .chart-card {
+  min-width: 0;
+
+  margin: 0;
+}
+
+/* =========================================================
+   CHART HEADINGS
+========================================================= */
+
+.product-analysis-grid .chart-heading,
+.overall-behaviour-grid .chart-heading {
+  width: 100%;
+
+  margin-bottom: 8px;
+
+  text-align: left;
+}
+
+.product-analysis-grid .chart-heading > div,
+.overall-behaviour-grid .chart-heading > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 2px;
+
+  text-align: left;
+}
+
+.product-analysis-grid .chart-heading h3,
+.overall-behaviour-grid .chart-heading h3 {
+  margin: 0 0 3px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  text-align: left;
+}
+
+.product-analysis-grid .chart-heading p,
+.overall-behaviour-grid .chart-heading p {
+  margin: 0;
+
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  opacity: 0.55;
+
+  text-align: left;
+}
+
+/* =========================================================
+   OVERALL SCOPE BADGE
+========================================================= */
+
+.overall-scope-badge {
+  flex: 0 0 auto;
+
+  padding: 4px 8px;
+
+  border: 1px solid rgba(103, 232, 249, 0.16);
+  border-radius: 999px;
+
+  background: rgba(6, 182, 212, 0.06);
+
+  color: rgba(103, 232, 249, 0.78);
+
+  font-size: 0.63rem;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .product-analysis-grid,
+  .overall-behaviour-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .analysis-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-analysis-selector {
+    width: 100%;
+  }
+
+  .product-analysis-selector select {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =========================================================
    KPI STRIP
 ========================================================= */
 
