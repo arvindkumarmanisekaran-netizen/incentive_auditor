@@ -597,13 +597,3 @@ function formatDocumentType(value?: string) {
 
   return value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
 }
-
-function formatConfidence(value?: number) {
-  if (value === undefined || value === null) {
-    return "—";
-  }
-
-  const percentage = value <= 1 ? value * 100 : value;
-
-  return `${percentage.toFixed(1)}%`;
-}
