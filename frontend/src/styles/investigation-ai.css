@@ -952,3 +952,130 @@
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
+/* =========================================================
+   DETAILED AI ANALYSIS
+========================================================= */
+
+.overview-detailed-analysis {
+  margin-top: 10px;
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.overview-details-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 11px 13px;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  text-align: left;
+  cursor: pointer;
+}
+
+.overview-details-toggle h3 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.overview-details-toggle p {
+  margin: 3px 0 0;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  opacity: 0.5;
+}
+
+.overview-details-toggle > span {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  opacity: 0.65;
+}
+
+/* =========================================================
+   DETAILS CONTENT
+========================================================= */
+
+.overview-details-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+
+  padding: 0 10px 10px;
+}
+
+.overview-detail-card {
+  min-width: 0;
+
+  padding: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.overview-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  margin-bottom: 9px;
+}
+
+.overview-detail-header h4 {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   DETAIL BLOCK
+========================================================= */
+
+.overview-detail-block + .overview-detail-block {
+  margin-top: 10px;
+}
+
+.overview-detail-block h5 {
+  margin: 0 0 5px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  opacity: 0.7;
+}
+
+.overview-detail-block ul {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.overview-detail-block li {
+  margin-bottom: 4px;
+
+  font-size: 0.7rem;
+  line-height: 1.42;
+
+  opacity: 0.72;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .overview-details-content {
+    grid-template-columns: 1fr;
+  }
+}

@@ -6,6 +6,14 @@
   overflow: hidden;
 }
 
+.investigation-workflow-header[aria-disabled="true"] {
+  cursor: default;
+}
+
+.investigation-workflow-header[aria-disabled="true"] .investigation-workflow-toggle {
+  opacity: 0.35;
+}
+
 .investigation-workflow-header {
   width: 100%;
   display: flex;
@@ -82,7 +90,9 @@
   border-radius: 9px;
   background: rgba(255, 255, 255, 0.025);
 }
-
+.workflow-agent.planner {
+  margin-bottom: 8px;
+}
 .workflow-agent.running {
   border-color: rgba(34, 211, 238, 0.24);
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { WorkflowAgent } from "../types/workflow";
 
@@ -43,6 +43,13 @@ function getStatusLabel(status: WorkflowAgent["status"]) {
 function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
   const [expanded, setExpanded] = useState(true);
 
+  /*
+   * Keep refs for every workflow agent so we can
+   * automatically scroll the active step into view.
+   */
+  const agentRefs = useRef<Record<string, HTMLElement | null>>({});
+  const workflowSectionRef = useRef<HTMLElement | null>(null);
+
   const planner = agents.find((agent) => agent.id === "investigation_planner");
 
   const plannerOutput =
@@ -60,13 +67,111 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
 
   const workflowComplete = agents.length > 0 && completedCount === agents.length;
 
+  /*
+   * Find the first currently-running agent
+   * according to workflow display order.
+   *
+   * This behaves well with your parallel specialist
+   * stage because it avoids jumping repeatedly between
+   * Sales/Rx, Doctor/Territory and Payout.
+   */
+  const runningAgent = agents.find((agent) => agent.status === "running");
+
+  // ==================================================
+  // AUTO EXPAND WHILE INVESTIGATION IS RUNNING
+  // ==================================================
+
+  useEffect(() => {
+    if (loading) {
+      setExpanded(true);
+    }
+  }, [loading]);
+
+  // ==================================================
+  // AUTO COLLAPSE WHEN WORKFLOW COMPLETES
+  // ==================================================
+
+  useEffect(() => {
+    if (workflowComplete && !loading) {
+      setExpanded(false);
+
+      const timer = window.setTimeout(() => {
+        workflowSectionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }, 180);
+
+      return () => {
+        window.clearTimeout(timer);
+      };
+    }
+  }, [workflowComplete, loading]);
+
+  // ==================================================
+  // AUTO SCROLL TO CURRENT RUNNING AGENT
+  // ==================================================
+
+  useEffect(() => {
+    if (!loading || !expanded || !runningAgent) {
+      return;
+    }
+
+    const element = agentRefs.current[runningAgent.id];
+
+    if (!element) {
+      return;
+    }
+
+    /*
+     * Small delay allows React to finish rendering
+     * the status/commentary before scrolling.
+     */
+    const timer = window.setTimeout(() => {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest",
+      });
+    }, 120);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [runningAgent?.id, loading, expanded]);
+
+  // ==================================================
+  // TOGGLE
+  // ==================================================
+
+  function handleToggle() {
+    /*
+     * Workflow must remain expanded while
+     * investigation is actively running.
+     */
+    if (loading) {
+      return;
+    }
+
+    setExpanded((current) => !current);
+  }
+
   return (
-    <section className="investigation-workflow">
+    <section
+      ref={workflowSectionRef}
+      className="investigation-workflow"
+    >
+      {/* ==================================================
+          WORKFLOW HEADER
+      ================================================== */}
+
       <button
         type="button"
         className="investigation-workflow-header"
-        onClick={() => setExpanded((current) => !current)}
+        onClick={handleToggle}
         aria-expanded={expanded}
+        aria-disabled={loading}
       >
         <div className="investigation-workflow-header-main">
           <div className="investigation-workflow-title-row">
@@ -77,20 +182,29 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
             {!loading && workflowComplete && (
               <span className="workflow-complete-badge">Complete</span>
             )}
+
+            {hasError && <span className="workflow-error-badge">Error</span>}
           </div>
 
           {statusMessage && <p className="investigation-workflow-status">{statusMessage}</p>}
         </div>
 
-        <span className="investigation-workflow-toggle">{expanded ? "▲" : "▼"}</span>
+        <span className="investigation-workflow-toggle" aria-hidden="true">
+          {loading ? "▲" : expanded ? "▲" : "▼"}
+        </span>
       </button>
 
       {/* ==================================================
-        PLANNER - ALWAYS VISIBLE
-    ================================================== */}
+          PLANNER - ALWAYS VISIBLE
+      ================================================== */}
 
       {planner && (
-        <article className={`workflow-agent planner ${planner.status}`}>
+        <article
+          ref={(element) => {
+            agentRefs.current[planner.id] = element;
+          }}
+          className={`workflow-agent planner ${planner.status}`}
+        >
           <div className="workflow-agent-header">
             <div className="workflow-agent-name">
               <span className={`workflow-status-icon ${planner.status}`} aria-hidden="true">
@@ -105,6 +219,14 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
             </span>
           </div>
 
+          {/* ----------------------------------------------
+              PLANNER REASONING
+
+              Structured planner output takes priority.
+              While planner is still running, show live
+              commentary instead.
+          ---------------------------------------------- */}
+
           {plannerOutput?.reasoning && plannerOutput.reasoning.length > 0 ? (
             <div className="workflow-commentary">
               {plannerOutput.reasoning.map((reason, index) => (
@@ -118,14 +240,20 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
           ) : planner.commentary.length > 0 ? (
             <div className="workflow-commentary">
               {planner.commentary.slice(-3).map((commentary, index) => (
-                <div key={`${commentary.timestamp ?? index}`} className="workflow-commentary-line">
+                <div key={commentary.timestamp ?? index} className="workflow-commentary-line">
                   <span className="workflow-commentary-marker">›</span>
 
                   <span>{commentary.message}</span>
                 </div>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <p className="workflow-waiting-text">Waiting for investigation planner.</p>
+          )}
+
+          {/* ----------------------------------------------
+              PLANNER DECISION
+          ---------------------------------------------- */}
 
           {plannerOutput && (
             <div className="workflow-agent-result">
@@ -150,8 +278,8 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
       )}
 
       {/* ==================================================
-        REST OF WORKFLOW - COLLAPSIBLE
-    ================================================== */}
+          REST OF WORKFLOW - COLLAPSIBLE
+      ================================================== */}
 
       {expanded && (
         <div className="investigation-workflow-body">
@@ -161,7 +289,13 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
               const latestCommentary = agent.commentary.slice(-3);
 
               return (
-                <article key={agent.id} className={`workflow-agent ${agent.status}`}>
+                <article
+                  ref={(element) => {
+                    agentRefs.current[agent.id] = element;
+                  }}
+                  key={agent.id}
+                  className={`workflow-agent ${agent.status}`}
+                >
                   <div className="workflow-agent-header">
                     <div className="workflow-agent-name">
                       <span className={`workflow-status-icon ${agent.status}`} aria-hidden="true">
