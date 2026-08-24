@@ -315,6 +315,8 @@ function App() {
         handleWorkflowEvent,
       );
 
+      console.log(data.peer_analysis);
+
       // ----------------------------------------
       // BUILD FINAL RESULT
       // ----------------------------------------
@@ -341,6 +343,8 @@ function App() {
         doctor_territory_analysis: data.doctor_territory_analysis,
 
         payout_analysis: data.payout_analysis,
+
+        peer_analysis: data.peer_analysis,
 
         final_report: data.final_report,
 
@@ -579,7 +583,7 @@ function App() {
                   CHARTS
               ------------------------------------------ */}
 
-              <AnalysisWorkspace findings={findings} />
+              <AnalysisWorkspace findings={findings} peerAnalysis={result.peer_analysis} />
 
               {/* ------------------------------------------
                   RISK SIGNALS

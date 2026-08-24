@@ -8,7 +8,7 @@ from fastapi import (
 from fastapi.responses import StreamingResponse
 
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from sqlalchemy import text
 from ..db.session import get_db
 
 from ..services.investigation_service import (
@@ -113,127 +113,20 @@ async def investigation_summary(
 
 
 # ==================================================
-# AI INVESTIGATION - EXISTING NON-STREAMING VERSION
-# ==================================================
-
-
-@router.get("/ai-summary")
-async def ai_investigation_summary(
-    representative_id: str,
-    start_date: str,
-    end_date: str,
-    db: AsyncSession = Depends(get_db),
-):
-
-    investigation_data = await investigate(
-        db=db,
-        representative_id=representative_id,
-        start_date=start_date,
-        end_date=end_date,
-    )
-
-    if not investigation_data:
-        return {"error": "Investigation failed"}
-
-    peer_analysis_input = await prepare_peer_analysis_input(
-        db=db,
-        investigation_data=investigation_data,
-        representative_id=representative_id,
-        start_date=start_date,
-        end_date=end_date,
-    )
-
-    graph_input = {
-        "representative_id": investigation_data.get("representative_id"),
-        "start_date": investigation_data.get("start_date"),
-        "end_date": investigation_data.get("end_date"),
-        "products_analyzed": investigation_data.get(
-            "products_analyzed",
-            [],
-        ),
-        "peer_analysis_input": peer_analysis_input,
-        "findings": investigation_data.get(
-            "findings",
-            [],
-        ),
-        "overall_risk_score": investigation_data.get(
-            "overall_risk_score",
-            0,
-        ),
-        "overall_severity": investigation_data.get(
-            "overall_severity",
-            "NORMAL",
-        ),
-        "investigation_plan": {},
-        "sales_rx_analysis": {},
-        "doctor_territory_analysis": {},
-        "payout_analysis": {},
-        "final_report": {},
-        "investigation_summary": {},
-    }
-
-    graph_result = await investigation_graph.ainvoke(graph_input)
-
-    return {
-        "representative_id": investigation_data.get("representative_id"),
-        "start_date": investigation_data.get("start_date"),
-        "end_date": investigation_data.get("end_date"),
-        "products_analyzed": investigation_data.get(
-            "products_analyzed",
-            [],
-        ),
-        "peer_analysis": graph_result.get(
-            "peer_analysis",
-            {},
-        ),
-        "findings": investigation_data.get(
-            "findings",
-            [],
-        ),
-        "overall_risk_score": graph_result.get(
-            "overall_risk_score",
-            investigation_data.get(
-                "overall_risk_score",
-                0,
-            ),
-        ),
-        "overall_severity": graph_result.get(
-            "overall_severity",
-            investigation_data.get(
-                "overall_severity",
-                "NORMAL",
-            ),
-        ),
-        "investigation_plan": graph_result.get(
-            "investigation_plan",
-            {},
-        ),
-        "sales_rx_analysis": graph_result.get(
-            "sales_rx_analysis",
-            {},
-        ),
-        "doctor_territory_analysis": graph_result.get(
-            "doctor_territory_analysis",
-            {},
-        ),
-        "payout_analysis": graph_result.get(
-            "payout_analysis",
-            {},
-        ),
-        "final_report": graph_result.get(
-            "final_report",
-            {},
-        ),
-        "investigation_summary": graph_result.get(
-            "investigation_summary",
-            {},
-        ),
-    }
-
-
-# ==================================================
 # AI INVESTIGATION - LIVE STREAMING VERSION
 # ==================================================
+
+
+async def get_all_representatives(
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(text("""
+            SELECT *
+            FROM representatives
+            ORDER BY first_name, last_name
+            """))
+
+    return [dict(row) for row in result.mappings().all()]
 
 
 @router.get("/ai-summary-stream")
@@ -284,8 +177,11 @@ async def ai_investigation_summary_stream(
         end_date=end_date,
     )
 
+    representatives = await get_all_representatives(db)
+
     graph_input = {
         "representative_id": investigation_data.get("representative_id"),
+        "representatives": representatives,
         "start_date": investigation_data.get("start_date"),
         "end_date": investigation_data.get("end_date"),
         "products_analyzed": investigation_data.get(
@@ -369,6 +265,7 @@ async def ai_investigation_summary_stream(
 
             final_result = {
                 "representative_id": investigation_data.get("representative_id"),
+                "representatives": representatives,
                 "start_date": investigation_data.get("start_date"),
                 "end_date": investigation_data.get("end_date"),
                 "products_analyzed": investigation_data.get(

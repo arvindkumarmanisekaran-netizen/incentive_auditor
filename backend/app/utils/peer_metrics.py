@@ -4,20 +4,32 @@ from typing import Any
 def calculate_peer_comparison(
     current_metrics: dict[str, dict[str, float]],
     peer_metrics: list[dict[str, Any]],
+    product_names: dict[str, str] | None = None,
+    representative_names: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """
     Compare representative product metrics against peer representatives.
 
     Peer comparison is contextual benchmarking only.
     It must not create fraud/anomaly signals.
+
+    Returns:
+    - detailed product comparisons
+    - normalized chart data for frontend visualization
     """
+
+    product_names = product_names or {}
+
+    representative_names = representative_names or {}
 
     if not peer_metrics:
 
         return {
             "comparison_available": False,
             "peer_group_size": 0,
+            "product_count": 0,
             "products": {},
+            "chart_data": [],
             "observations": ["No comparable representatives were found."],
             "severity": "NORMAL",
             "anomaly_detected": False,
@@ -43,6 +55,8 @@ def calculate_peer_comparison(
 
     product_results = {}
 
+    chart_data = []
+
     all_observations = []
 
     # -------------------------------------------------
@@ -67,11 +81,29 @@ def calculate_peer_comparison(
             {},
         )
 
-        rep_sales = float(representative.get("sales", 0) or 0)
+        rep_sales = float(
+            representative.get(
+                "sales",
+                0,
+            )
+            or 0
+        )
 
-        rep_rx = float(representative.get("rx", 0) or 0)
+        rep_rx = float(
+            representative.get(
+                "rx",
+                0,
+            )
+            or 0
+        )
 
-        rep_payout = float(representative.get("payout", 0) or 0)
+        rep_payout = float(
+            representative.get(
+                "payout",
+                0,
+            )
+            or 0
+        )
 
         sales_diff = percentage_difference(
             rep_sales,
@@ -88,11 +120,12 @@ def calculate_peer_comparison(
             avg_payout,
         )
 
-        observations = []
+        product_name = product_names.get(
+            product_id,
+            product_id,
+        )
 
-        # ---------------------------------------------
-        # Context only observations
-        # ---------------------------------------------
+        observations = []
 
         if rep_sales > avg_sales:
 
@@ -110,8 +143,23 @@ def calculate_peer_comparison(
 
             observations.append("Representative payout is below peer average.")
 
+        # -------------------------------------------------
+        # Detailed product result
+        # -------------------------------------------------
+
+        current_rep_id = next(
+            iter(current_metrics.keys()),
+            None,
+        )
+
         product_results[product_id] = {
+            "product_id": product_id,
+            "product_name": product_name,
             "comparison_available": True,
+            "representative_name": representative_names.get(
+                current_rep_id,
+                "Unknown Representative",
+            ),
             "peer_group_size": peer_count,
             "representative": {
                 "sales": rep_sales,
@@ -124,13 +172,25 @@ def calculate_peer_comparison(
                 "payout": round(avg_payout, 2),
             },
             "difference_percentage": {
-                "sales": round(sales_diff, 2),
-                "rx": round(rx_diff, 2),
-                "payout": round(payout_diff, 2),
+                "sales": round(
+                    sales_diff,
+                    2,
+                ),
+                "rx": round(
+                    rx_diff,
+                    2,
+                ),
+                "payout": round(
+                    payout_diff,
+                    2,
+                ),
             },
             "sales_comparison": {
                 "representative": rep_sales,
-                "peer_average": round(avg_sales, 2),
+                "peer_average": round(
+                    avg_sales,
+                    2,
+                ),
                 "difference": round(
                     rep_sales - avg_sales,
                     2,
@@ -138,7 +198,10 @@ def calculate_peer_comparison(
             },
             "rx_comparison": {
                 "representative": rep_rx,
-                "peer_average": round(avg_rx, 2),
+                "peer_average": round(
+                    avg_rx,
+                    2,
+                ),
                 "difference": round(
                     rep_rx - avg_rx,
                     2,
@@ -146,7 +209,10 @@ def calculate_peer_comparison(
             },
             "payout_comparison": {
                 "representative": rep_payout,
-                "peer_average": round(avg_payout, 2),
+                "peer_average": round(
+                    avg_payout,
+                    2,
+                ),
                 "difference": round(
                     rep_payout - avg_payout,
                     2,
@@ -155,18 +221,65 @@ def calculate_peer_comparison(
             "peer_distribution": [
                 {
                     "representative_id": p.get("representative_id"),
-                    "sales": float(p.get("sales", 0) or 0),
-                    "rx": float(p.get("rx", 0) or 0),
-                    "payout": float(p.get("payout", 0) or 0),
+                    "representative_name": representative_names.get(
+                        p.get("representative_id"),
+                        "Unknown Peer",
+                    ),
+                    "sales": float(
+                        p.get(
+                            "sales",
+                            0,
+                        )
+                        or 0
+                    ),
+                    "rx": float(
+                        p.get(
+                            "rx",
+                            0,
+                        )
+                        or 0
+                    ),
+                    "payout": float(
+                        p.get(
+                            "payout",
+                            0,
+                        )
+                        or 0
+                    ),
                 }
                 for p in peers
             ],
             "observations": observations,
-            # IMPORTANT:
-            # Peer benchmark is not an anomaly signal
             "severity": "NORMAL",
             "anomaly_detected": False,
         }
+
+        # -------------------------------------------------
+        # Frontend chart payload
+        # -------------------------------------------------
+
+        chart_data.append(
+            {
+                "product_id": product_id,
+                "product_name": product_name,
+                "representative_sales": rep_sales,
+                "peer_average_sales": round(
+                    avg_sales,
+                    2,
+                ),
+                "representative_rx": rep_rx,
+                "peer_average_rx": round(
+                    avg_rx,
+                    2,
+                ),
+                "representative_payout": rep_payout,
+                "peer_average_payout": round(
+                    avg_payout,
+                    2,
+                ),
+                "peer_group_size": peer_count,
+            }
+        )
 
         all_observations.extend(observations)
 
@@ -175,10 +288,10 @@ def calculate_peer_comparison(
         "peer_group_size": len(
             {p.get("representative_id") for p in peer_metrics if p.get("representative_id")}
         ),
+        "product_count": len(product_results),
         "products": product_results,
+        "chart_data": chart_data,
         "observations": list(dict.fromkeys(all_observations)),
-        # IMPORTANT:
-        # Never elevate risk from peer comparison
         "severity": "NORMAL",
         "anomaly_detected": False,
     }

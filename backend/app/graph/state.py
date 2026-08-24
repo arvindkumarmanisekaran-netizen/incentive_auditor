@@ -5,6 +5,11 @@ class InvestigationState(TypedDict, total=False):
 
     representative_id: str
 
+    representative_name: str
+
+    # All representatives available in investigation context
+    representatives: list[dict[str, Any]]
+
     start_date: str
 
     end_date: str

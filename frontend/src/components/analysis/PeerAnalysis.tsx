@@ -1,43 +1,381 @@
-import type { Finding } from "../../types/investigation";
+import {
+  Label,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  ScatterChart,
+  Scatter,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  Legend,
+  ReferenceLine,
+} from "recharts";
+
+import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
 
 type Props = {
-  findings?: Finding[];
+  peerAnalysis?: PeerAnalysisType;
 };
 
-export default function PeerAnalysis({ findings = [] }: Props) {
+const CHART_THEME = {
+  representative: "#2563eb",
+
+  peer: "#f59e0b",
+
+  distribution: "#10b981",
+
+  grid: "#e5e7eb",
+
+  text: "#475569",
+};
+
+function normalize(value: number, average: number) {
+  if (!average) return 0;
+
+  // prevent radar explosion
+
+  return Math.min(Math.round((value / average) * 100), 200);
+}
+
+export default function PeerAnalysis({ peerAnalysis }: Props) {
+  const comparison = peerAnalysis?.product_peer_comparison;
+
+  if (!comparison?.products) {
+    return (
+      <section className="peer-analysis-section">
+        <div className="analysis-panel-header analysis-section-header">
+          <div>
+            <h3>Peer Analysis</h3>
+
+            <p>Explore representative performance against available peer population.</p>
+          </div>
+        </div>
+
+        <div className="chart-card">No peer comparison data available.</div>
+      </section>
+    );
+  }
+
+  const products = comparison.products;
+
+  const productEntries = Object.entries(products);
+
+  /*
+    Bar chart
+  */
+
+  const comparisonData = productEntries.map(([id, item]) => ({
+    product: `${item.product_name} (${id})`,
+
+    representative: item.representative.sales,
+
+    peer: item.peer_average.sales,
+  }));
+
+  /*
+    First product profile
+  */
+
+  const selected = productEntries[0]?.[1];
+
+  const radarData = selected
+    ? [
+        {
+          metric: "Sales",
+
+          Representative: normalize(selected.representative.sales, selected.peer_average.sales),
+
+          Peer: 100,
+        },
+
+        {
+          metric: "Prescription",
+
+          Representative: normalize(selected.representative.rx, selected.peer_average.rx),
+
+          Peer: 100,
+        },
+
+        {
+          metric: "Payout",
+
+          Representative: normalize(selected.representative.payout, selected.peer_average.payout),
+
+          Peer: 100,
+        },
+      ]
+    : [];
+
+  /*
+    Scatter distribution
+  */
+
+  const peerDistribution =
+    selected?.peer_distribution.map((peer) => ({
+      id: peer.representative_id,
+      name: peer.representivate_name,
+      sales: peer.sales,
+      payout: peer.payout,
+    })) ?? [];
+
+  const representativePoint = selected
+    ? [
+        {
+          id: "Current Representative",
+          sales: selected.representative.sales,
+          payout: selected.representative.payout,
+        },
+      ]
+    : [];
+
+  const peerAveragePoint = selected
+    ? [
+        {
+          id: "Peer Average",
+          sales: selected.peer_average.sales,
+          payout: selected.peer_average.payout,
+        },
+      ]
+    : [];
+
   return (
     <section className="peer-analysis-section">
-      <div className="analysis-section-header">
+      <div className="analysis-panel-header analysis-section-header">
         <div>
-          <h2>Peer Analysis</h2>
+          <h3>Peer Analysis</h3>
 
-          <p>Representative performance compared against peer population.</p>
+          <p>
+            Explore investigation evidence across products, history, peers and behaviour patterns.
+          </p>
         </div>
       </div>
 
       <div className="peer-analysis-grid">
-        <div className="chart-card">
-          <h3>Rep vs Peer Average</h3>
-
-          <p>Performance comparison against similar representatives.</p>
-
-          <div className="peer-metrics">...</div>
-        </div>
+        {/* ======================
+            SALES COMPARISON
+        ======================= */}
 
         <div className="chart-card">
-          <h3>Percentile Position</h3>
-          <p>Relative ranking within peer group.</p>
-          ...
+          <h3>Representative vs Peer Average</h3>
+
+          <ResponsiveContainer width="100%" height={360}>
+            <BarChart data={comparisonData}>
+              <CartesianGrid stroke={CHART_THEME.grid} />
+
+              <XAxis
+                dataKey="product"
+                interval={0}
+                angle={-35}
+                textAnchor="end"
+                height={90}
+                tick={{
+                  fill: CHART_THEME.text,
+                  fontSize: 11,
+                }}
+              >
+                <Label
+                  value="Products"
+                  position="insideBottom"
+                  offset={-5}
+                  style={{
+                    fill: CHART_THEME.text,
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                />
+              </XAxis>
+
+              <YAxis
+                tick={{
+                  fill: CHART_THEME.text,
+                }}
+              >
+                <Label
+                  value="Sales Value"
+                  angle={-90}
+                  position="insideLeft"
+                  style={{
+                    fill: CHART_THEME.text,
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                />
+              </YAxis>
+
+              <Tooltip />
+
+              <Bar
+                dataKey="representative"
+                name="Representative Sales"
+                fill={CHART_THEME.representative}
+                radius={[6, 6, 0, 0]}
+              />
+
+              <Bar
+                dataKey="peer"
+                name="Peer Average Sales"
+                fill={CHART_THEME.peer}
+                radius={[6, 6, 0, 0]}
+              />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
+
+        {/* ======================
+            RADAR
+        ======================= */}
+
+        <div className="chart-card">
+          <h3>Relative Position</h3>
+
+          <ResponsiveContainer width="100%" height={320}>
+            <RadarChart data={radarData}>
+              <PolarGrid />
+
+              <PolarAngleAxis dataKey="metric" />
+
+              <PolarRadiusAxis domain={[0, 200]} />
+
+              <Radar
+                name="Representative"
+                dataKey="Representative"
+                stroke={CHART_THEME.representative}
+                fill={CHART_THEME.representative}
+                fillOpacity={0.35}
+              />
+
+              <Radar
+                name="Peer Average"
+                dataKey="Peer"
+                stroke={CHART_THEME.peer}
+                fill={CHART_THEME.peer}
+                fillOpacity={0.25}
+              />
+
+              <Legend />
+
+              <Tooltip />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* ======================
+            DISTRIBUTION
+        ======================= */}
 
         <div className="chart-card">
           <h3>Peer Distribution</h3>
-          ...
+
+          <ResponsiveContainer width="100%" height={360}>
+            <ScatterChart>
+              <CartesianGrid stroke={CHART_THEME.grid} />
+
+              <XAxis dataKey="sales" name="Sales">
+                <Label value="Sales Amount" position="insideBottom" offset={-5} />
+              </XAxis>
+
+              <YAxis dataKey="payout" name="Payout">
+                <Label value="Payout Amount" angle={-90} position="insideLeft" />
+              </YAxis>
+
+              <Tooltip
+                content={({ payload }) => {
+                  if (!payload || !payload.length) {
+                    return null;
+                  }
+
+                  const data = payload[0].payload;
+
+                  return (
+                    <div className="chart-tooltip">
+                      <strong>{data.id}</strong>
+
+                      <div>Sales: {data.sales?.toLocaleString()}</div>
+
+                      <div>Payout: {data.payout?.toLocaleString()}</div>
+                    </div>
+                  );
+                }}
+              />
+
+              <ReferenceLine
+                x={selected.peer_average.sales}
+                stroke="#f59e0b"
+                strokeWidth={2}
+                strokeDasharray="6 6"
+              />
+
+              <ReferenceLine
+                y={selected.peer_average.payout}
+                stroke="#f59e0b"
+                strokeWidth={2}
+                strokeDasharray="6 6"
+              />
+              {/* Peer population */}
+
+              <Scatter name="Peer Representatives" data={peerDistribution} fill="#10b981" />
+
+              {/* Current representative */}
+
+              <Scatter
+                name="Current Representative"
+                data={representativePoint}
+                fill="#2563eb"
+                shape="star"
+              />
+
+              {/* Peer average */}
+
+              <Scatter name="Peer Average" data={peerAveragePoint} fill="#f59e0b" shape="diamond" />
+
+              <Legend />
+            </ScatterChart>
+          </ResponsiveContainer>
         </div>
 
-        <div className="chart-card">
-          <h3>Peer Anomaly Indicators</h3>
-          ...
+        {/* ======================
+            STATUS CARDS
+        ======================= */}
+
+        <div className="chart-card peer-indicator-card">
+          <h3>Peer Indicators</h3>
+
+          <div className="product-status-grid">
+            {productEntries.map(([id, item]) => (
+              <div
+                key={id}
+                data-tooltip={`${item.product_name} (${id})`}
+                className={
+                  item.anomaly_detected
+                    ? "product-status-card review-card"
+                    : "product-status-card normal-card"
+                }
+              >
+                <div className="product-title">
+                  {item.product_name} ({id})
+                </div>
+
+                <div className="status-wrapper">
+                  <span className="peer-count">{item.peer_group_size} peers</span>
+
+                  <span
+                    className={
+                      item.anomaly_detected ? "status-badge review" : "status-badge normal"
+                    }
+                  >
+                    {item.anomaly_detected ? "Review" : "Normal"}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

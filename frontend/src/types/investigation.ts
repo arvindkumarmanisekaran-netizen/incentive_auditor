@@ -20,6 +20,14 @@ export interface InvestigationPlan {
   reasoning?: string[];
 }
 
+export interface ProductMetric {
+  sales: number;
+
+  rx: number;
+
+  payout: number;
+}
+
 export interface AIAnalysis {
   severity?: string;
 
@@ -34,35 +42,100 @@ export interface AIAnalysis {
   limitations?: string[];
 
   investigation_priority?: string;
+
+  product_metrics?: Record<string, ProductMetric>;
 }
 
-export interface PeerAnalysis {
-  peer_group_size: number;
+export interface PeerChartData {
+  product_id: string;
 
-  peer_average_sales: number;
-
-  peer_average_rx: number;
-
-  peer_average_payout: number;
+  product_name: string;
 
   representative_sales: number;
 
+  peer_average_sales: number;
+
   representative_rx: number;
+
+  peer_average_rx: number;
 
   representative_payout: number;
 
-  sales_percentile: number;
+  peer_average_payout: number;
 
-  rx_percentile: number;
+  peer_group_size: number;
+}
 
-  payout_percentile: number;
+export interface PeerProductComparison {
+  product_id: string;
+
+  product_name: string;
+
+  comparison_available: boolean;
+
+  peer_group_size: number;
+
+  representative: {
+    sales: number;
+    rx: number;
+    payout: number;
+  };
+
+  peer_average: {
+    sales: number;
+    rx: number;
+    payout: number;
+  };
+
+  difference_percentage: {
+    sales: number;
+    rx: number;
+    payout: number;
+  };
 
   peer_distribution: {
-    bucket: string;
-    count: number;
+    representative_id: string;
+    representivate_name: string;
+    sales: number;
+    rx: number;
+    payout: number;
   }[];
 
-  anomaly_indicators: string[];
+  observations: string[];
+
+  severity: string;
+
+  anomaly_detected: boolean;
+}
+
+export interface PeerComparison {
+  comparison_available: boolean;
+
+  peer_group_size: number;
+
+  product_count: number;
+
+  products: Record<string, PeerProductComparison>;
+
+  chart_data: PeerChartData[];
+
+  observations: string[];
+
+  severity: string;
+
+  anomaly_detected: boolean;
+}
+
+export interface PeerAnalysis {
+  territory_peer_comparison: PeerComparison;
+
+  product_peer_comparison: PeerComparison;
+
+  peer_group_size: number;
+
+  severity: string;
+
+  anomaly_detected: boolean;
 }
 
 export interface FinalReport {
@@ -81,6 +154,8 @@ export interface FinalReport {
   };
 
   recommended_actions?: string[];
+
+  peer_analysis?: string;
 
   recommended_next_action?: string;
 

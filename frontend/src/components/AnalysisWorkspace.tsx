@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Finding } from "../types/investigation";
+import type { Finding, PeerAnalysis as PeerAnalysisType } from "../types/investigation";
 
 import ProductAnalysis from "./analysis/ProductAnalysis";
 import BehaviourAnalysis from "./analysis/BehaviourAnalysis";
@@ -10,6 +10,7 @@ import PeerAnalysis from "./analysis/PeerAnalysis";
 
 type Props = {
   findings: Finding[];
+  peerAnalysis?: PeerAnalysisType;
 };
 
 type AnalysisTab = "product" | "historical" | "peer" | "behaviour";
@@ -34,7 +35,7 @@ function AnalysisTabButton({
   );
 }
 
-export default function AnalysisWorkspace({ findings }: Props) {
+export default function AnalysisWorkspace({ findings, peerAnalysis }: Props) {
   const [activeTab, setActiveTab] = useState<AnalysisTab>("product");
 
   return (
@@ -92,7 +93,7 @@ export default function AnalysisWorkspace({ findings }: Props) {
 
         {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
 
-        {activeTab === "peer" && <PeerAnalysis findings={findings} />}
+        {activeTab === "peer" && <PeerAnalysis peerAnalysis={peerAnalysis} />}
       </div>
     </section>
   );
