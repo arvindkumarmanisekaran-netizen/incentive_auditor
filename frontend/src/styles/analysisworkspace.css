@@ -1,0 +1,514 @@
+/* =========================================================
+   ANALYSIS WORKSPACE
+   Uses existing dashboard visual language
+========================================================= */
+
+.analysis-workspace {
+  width: 100%;
+
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.analysis-workspace-header {
+  width: 100%;
+
+  margin-bottom: 12px;
+
+  text-align: left;
+}
+
+.analysis-workspace-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+}
+
+.analysis-workspace-header p {
+  margin: 0;
+
+  font-size: 0.74rem;
+
+  opacity: 0.55;
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+.analysis-tabs {
+  display: flex;
+
+  gap: 8px;
+
+  width: 100%;
+
+  margin-bottom: 14px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid rgba(216, 180, 254, 0.12);
+}
+
+.analysis-tab {
+  height: 34px;
+
+  padding: 0 16px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  background: rgba(20, 3, 30, 0.8);
+
+  color: #b8a8c4;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.analysis-tab:hover {
+  border-color: rgba(192, 132, 252, 0.45);
+
+  color: #ffffff;
+}
+
+.analysis-tab.active {
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.35), rgba(192, 38, 211, 0.22));
+
+  border-color: rgba(192, 132, 252, 0.5);
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   CONTENT CONTAINER
+========================================================= */
+
+.analysis-workspace-content {
+  width: 100%;
+}
+
+/* =========================================================
+   PRODUCT / BEHAVIOUR SECTIONS
+========================================================= */
+
+.analysis-panel {
+  width: 100%;
+
+  padding: 13px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  background: linear-gradient(180deg, rgba(23, 17, 37, 0.94), rgba(13, 10, 23, 0.97));
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PANEL HEADER
+========================================================= */
+
+.analysis-panel-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 12px;
+}
+
+.analysis-panel-header h3 {
+  margin: 0 0 4px;
+  text-align: left;
+  font-size: 0.95rem;
+
+  font-weight: 700;
+}
+
+.analysis-panel-header p {
+  margin: 0;
+
+  font-size: 0.72rem;
+
+  opacity: 0.55;
+}
+
+/* =========================================================
+   PRODUCT SELECTOR
+========================================================= */
+
+.analysis-product-selector {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.analysis-product-selector select {
+  height: 35px;
+
+  min-width: 220px;
+
+  padding: 0 12px;
+
+  background: #12091d;
+
+  border: 1px solid rgba(192, 132, 252, 0.3);
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 0.72rem;
+
+  font-weight: 650;
+}
+
+.analysis-product-selector select:focus {
+  outline: none;
+
+  border-color: #c084fc;
+}
+
+/* =========================================================
+   CHART GRID
+========================================================= */
+
+.analysis-chart-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.analysis-chart-grid .chart-card {
+  margin: 0;
+}
+
+/* =========================================================
+   EVIDENCE CARD
+========================================================= */
+
+.product-evidence-card {
+  margin-top: 12px;
+
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(216, 180, 254, 0.08);
+
+  border-radius: 10px;
+}
+
+.product-evidence-card h4 {
+  margin: 0 0 8px;
+
+  font-size: 0.8rem;
+}
+
+.product-evidence-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 6px 0;
+
+  border-bottom: 1px solid rgba(216, 180, 254, 0.05);
+
+  font-size: 0.72rem;
+}
+
+.product-evidence-item:last-child {
+  border-bottom: none;
+}
+
+/* =========================================================
+   PLACEHOLDER SECTIONS
+========================================================= */
+
+.analysis-placeholder {
+  padding: 16px;
+
+  border-radius: 12px;
+
+  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+
+  border: 1px solid var(--border);
+}
+
+.analysis-placeholder h3 {
+  margin: 0 0 8px;
+
+  font-size: 0.9rem;
+}
+
+.analysis-placeholder p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .analysis-chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .analysis-tabs {
+    overflow-x: auto;
+  }
+  .analysis-panel-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .analysis-product-selector {
+    width: 100%;
+  }
+
+  .analysis-product-selector select {
+    width: 100%;
+  }
+}
+/* =========================================================
+   HISTORICAL ANALYSIS
+   Matches Product / Behaviour workspace theme
+========================================================= */
+
+.historical-analysis-section {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 12px;
+
+  background: linear-gradient(180deg, rgba(23, 17, 37, 0.94), rgba(13, 10, 23, 0.97));
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.historical-analysis-section .analysis-section-header {
+  margin-bottom: 10px;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.historical-analysis-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+/* =========================================================
+   HISTORICAL METRIC BOX
+========================================================= */
+
+.historical-metrics {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.historical-metrics div {
+  padding: 10px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(216, 180, 254, 0.08);
+
+  border-radius: 8px;
+}
+
+.historical-metrics span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--text-muted);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+.historical-metrics strong {
+  display: block;
+
+  color: var(--text-primary);
+
+  font-size: 15px;
+
+  font-weight: 750;
+}
+
+/* =========================================================
+   TREND CARD
+========================================================= */
+
+.historical-position {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(216, 180, 254, 0.08);
+
+  border-radius: 10px;
+}
+
+.historical-position strong {
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.historical-position span {
+  color: #d8b4fe;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+/* =========================================================
+   POSITION BAR
+========================================================= */
+
+.position-indicator {
+  height: 8px;
+
+  margin-top: 16px;
+
+  overflow: hidden;
+
+  background: rgba(216, 180, 254, 0.12);
+
+  border-radius: 999px;
+}
+
+.position-fill {
+  height: 100%;
+
+  background: linear-gradient(90deg, #7c3aed, #c026d3);
+
+  border-radius: 999px;
+
+  transition: width 0.4s ease;
+}
+
+.position-label {
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   CARD TYPOGRAPHY
+========================================================= */
+
+.historical-analysis-grid .chart-card h3 {
+  margin: 0 0 4px;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.historical-analysis-grid .chart-card p {
+  margin: 0;
+
+  font-size: 0.72rem;
+
+  opacity: 0.55;
+
+  text-align: left;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .historical-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.historical-analysis-grid .chart-card {
+  min-height: 0;
+
+  height: auto;
+
+  padding: 13px 14px;
+
+  display: flex;
+
+  flex-direction: column;
+}

@@ -19,10 +19,76 @@ from ..graph.workflow import (
     investigation_graph,
 )
 
+from ..services.peer_service import PeerService
+
 router = APIRouter(
     prefix="/api/investigation",
     tags=["Investigation"],
 )
+
+
+async def prepare_peer_analysis_input(
+    db: AsyncSession,
+    investigation_data: dict,
+    representative_id: str,
+    start_date: str,
+    end_date: str,
+):
+
+    peer_service = PeerService(db)
+
+    product_ids = investigation_data.get(
+        "products_analyzed",
+        [],
+    )
+
+    # =======================================
+    # TERRITORY PEERS
+    # same territory_id
+    # =======================================
+
+    territory_peers = await peer_service.find_territory_peers(
+        representative_id,
+    )
+
+    territory_metrics = await peer_service.get_peer_metrics(
+        territory_peers,
+        product_ids,
+        start_date,
+        end_date,
+    )
+
+    # =======================================
+    # PRODUCT PEERS
+    # same products sold elsewhere
+    # =======================================
+
+    product_peer_pairs = await peer_service.find_product_peers(
+        representative_id,
+        product_ids,
+    )
+
+    product_metrics = await peer_service.get_product_peer_metrics(
+        product_peer_pairs,
+        start_date,
+        end_date,
+    )
+
+    product_peer_ids = list({peer["representative_id"] for peer in product_peer_pairs})
+
+    return {
+        "territory_peer_analysis": {
+            "peer_ids": territory_peers,
+            "peer_group_size": len(territory_peers),
+            "peer_metrics": territory_metrics,
+        },
+        "product_peer_analysis": {
+            "peer_ids": product_peer_ids,
+            "peer_products": product_peer_pairs,
+            "peer_group_size": len(product_peer_ids),
+            "peer_metrics": product_metrics,
+        },
+    }
 
 
 # ==================================================
@@ -69,6 +135,14 @@ async def ai_investigation_summary(
     if not investigation_data:
         return {"error": "Investigation failed"}
 
+    peer_analysis_input = await prepare_peer_analysis_input(
+        db=db,
+        investigation_data=investigation_data,
+        representative_id=representative_id,
+        start_date=start_date,
+        end_date=end_date,
+    )
+
     graph_input = {
         "representative_id": investigation_data.get("representative_id"),
         "start_date": investigation_data.get("start_date"),
@@ -77,6 +151,7 @@ async def ai_investigation_summary(
             "products_analyzed",
             [],
         ),
+        "peer_analysis_input": peer_analysis_input,
         "findings": investigation_data.get(
             "findings",
             [],
@@ -106,6 +181,10 @@ async def ai_investigation_summary(
         "products_analyzed": investigation_data.get(
             "products_analyzed",
             [],
+        ),
+        "peer_analysis": graph_result.get(
+            "peer_analysis",
+            {},
         ),
         "findings": investigation_data.get(
             "findings",
@@ -197,6 +276,14 @@ async def ai_investigation_summary_stream(
     # Prepare graph state
     # --------------------------------------------------
 
+    peer_analysis_input = await prepare_peer_analysis_input(
+        db=db,
+        investigation_data=investigation_data,
+        representative_id=representative_id,
+        start_date=start_date,
+        end_date=end_date,
+    )
+
     graph_input = {
         "representative_id": investigation_data.get("representative_id"),
         "start_date": investigation_data.get("start_date"),
@@ -205,6 +292,7 @@ async def ai_investigation_summary_stream(
             "products_analyzed",
             [],
         ),
+        "peer_analysis_input": peer_analysis_input,
         "findings": investigation_data.get(
             "findings",
             [],
@@ -292,6 +380,10 @@ async def ai_investigation_summary_stream(
                     [],
                 ),
                 # Use graph result where available
+                "peer_analysis": final_state.get(
+                    "peer_analysis",
+                    {},
+                ),
                 "overall_risk_score": final_state.get(
                     "overall_risk_score",
                     investigation_data.get(

@@ -2,7 +2,10 @@ import json
 from typing import Any
 
 from ..graph.state import InvestigationState
+
 from ..core.llm import gemini_chat_with_fallback
+from ..core.risk_validator import validate_risk_synthesis
+
 from ..services.investigation_stream import emit_workflow_event
 
 SYSTEM_PROMPT = """
@@ -19,45 +22,81 @@ You receive:
 2. Sales and prescription evidence analysis
 3. Doctor and territory evidence analysis
 4. Payout validation evidence
+5. Peer benchmark analysis
 
 
 Your role:
 
 - Combine independent evidence.
-- Identify the strongest risk drivers.
-- Explain why evidence requires review.
-- Prioritize investigation areas.
+- Identify strongest review areas.
+- Explain why evidence requires investigation.
+- Prioritize audit attention.
 
 
 STRICT RULES:
 
 1. Use ONLY supplied evidence.
+
 2. Never invent facts.
+
 3. Never modify numerical values.
+
 4. Never calculate new metrics.
+
 5. Never conclude fraud occurred.
+
 6. Never accuse any representative of misconduct.
+
 7. Risk means "requires review", not wrongdoing.
-8. Recommendations must directly follow from evidence.
+
+8. Recommendations must follow supplied evidence.
+
 9. Cross-territory selling is allowed unless evidence shows another issue.
+
 10. Prescription mismatch is supporting evidence only.
-11. Payout findings must only use supplied payout evidence.
-12. If evidence is insufficient, say so clearly.
+
+11. Payout conclusions must only use supplied payout evidence.
+
+12. Peer comparison is STRICTLY contextual benchmarking.
+
+13. Peer comparison MUST NOT be treated as a risk indicator.
+
+14. Peer comparison MUST NEVER appear in:
+    - top_risk_drivers
+    - investigation priorities
+    - recommended_actions
+    - risk scoring rationale
+
+15. Differences from peer averages including:
+    - higher sales
+    - lower sales
+    - higher payout
+    - lower payout
+    - Rx differences
+    - benchmark variance
+
+    are NOT anomalies.
+
+16. Peer analysis may only be discussed as:
+    - contextual benchmark information
+    - specialist_summary.peer_analysis
+
+17. If evidence is insufficient, state that clearly.
 
 
-Risk scoring guidance:
+Risk scoring:
 
 NORMAL:
 No meaningful anomalies.
 
 LOW:
-Minor deviation requiring monitoring.
+Minor deviations.
 
 MEDIUM:
 Multiple indicators requiring review.
 
 HIGH:
-Strong evidence requiring detailed audit.
+Strong indicators requiring detailed audit.
 
 UNKNOWN:
 Insufficient evidence.
@@ -87,6 +126,9 @@ Return JSON only:
     "string",
 
     "payout":
+    "string",
+
+    "peer_analysis":
     "string"
  },
 
@@ -98,6 +140,33 @@ Return JSON only:
 }
 
 """
+
+
+def remove_peer_risk_items(
+    items: list[str],
+) -> list[str]:
+
+    blocked_terms = [
+        "peer",
+        "benchmark",
+        "average",
+        "percentile",
+        "comparison",
+        "variance",
+    ]
+
+    cleaned = []
+
+    for item in items:
+
+        text = str(item).lower()
+
+        if any(term in text for term in blocked_terms):
+            continue
+
+        cleaned.append(item)
+
+    return cleaned
 
 
 async def risk_synthesizer_agent(
@@ -119,10 +188,16 @@ async def risk_synthesizer_agent(
     )
 
     evidence = {
-        "representative_id": state.get("representative_id"),
+        "representative_id": state.get(
+            "representative_id",
+        ),
         "investigation_period": {
-            "start_date": state.get("start_date"),
-            "end_date": state.get("end_date"),
+            "start_date": state.get(
+                "start_date",
+            ),
+            "end_date": state.get(
+                "end_date",
+            ),
         },
         "products_analyzed": state.get(
             "products_analyzed",
@@ -148,50 +223,16 @@ async def risk_synthesizer_agent(
             "payout_analysis",
             {},
         ),
+        "peer_analysis": state.get(
+            "peer_analysis",
+            {},
+        ),
     }
 
-    findings = evidence["detected_findings"]
-
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            f"Combining {len(findings)} deterministic findings "
-            "with the completed specialist interpretations."
-        ),
-    )
-
-    available_specialists = []
-
-    if evidence["sales_rx_analysis"]:
-        available_specialists.append("Sales / Rx")
-
-    if evidence["doctor_territory_analysis"]:
-        available_specialists.append("Doctor / Territory")
-
-    if evidence["payout_analysis"]:
-        available_specialists.append("Payout")
-
-    if available_specialists:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message=(
-                "Specialist evidence available from: " + ", ".join(available_specialists) + "."
-            ),
-        )
-
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            "Assessing the combined evidence to determine overall "
-            "review priority and key risk drivers."
-        ),
-    )
-
     prompt = f"""
-    {SYSTEM_PROMPT}  
+
+    {SYSTEM_PROMPT}
+
 
     Investigation evidence:
 
@@ -201,18 +242,16 @@ async def risk_synthesizer_agent(
         default=str,
     )}
 
+
     Return JSON only.
+
     """
 
     try:
+
         response_text = await gemini_chat_with_fallback(prompt)
 
     except Exception:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="Final risk synthesis could not be completed.",
-        )
 
         emit_workflow_event(
             event_type="agent_status",
@@ -225,9 +264,12 @@ async def risk_synthesizer_agent(
     cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
 
     try:
+
         parsed = json.loads(cleaned_response)
+        parsed = validate_risk_synthesis(parsed)
 
     except json.JSONDecodeError:
+
         parsed = {
             "overall_risk_score": 0,
             "overall_severity": "UNKNOWN",
@@ -237,62 +279,50 @@ async def risk_synthesizer_agent(
                 "sales_rx": "",
                 "doctor_territory": "",
                 "payout": "",
+                "peer_analysis": "",
             },
             "recommended_actions": [],
             "human_review_required": True,
         }
 
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="Risk synthesis response was received but could not be parsed as structured JSON.",  # noqa: E501
-        )
+    # -------------------------------------------------
+    # POST PROCESSING GUARDRAIL
+    # Peer benchmarking cannot become risk
+    # -------------------------------------------------
 
-    overall_severity = parsed.get(
+    parsed["top_risk_drivers"] = remove_peer_risk_items(
+        parsed.get(
+            "top_risk_drivers",
+            [],
+        )
+    )
+
+    parsed["recommended_actions"] = remove_peer_risk_items(
+        parsed.get(
+            "recommended_actions",
+            [],
+        )
+    )
+
+    severity = parsed.get(
         "overall_severity",
         "UNKNOWN",
     )
 
-    overall_risk_score = parsed.get(
-        "overall_risk_score",
+    severity_scores = {
+        "NORMAL": 0,
+        "LOW": 25,
+        "MEDIUM": 50,
+        "HIGH": 75,
+        "UNKNOWN": 0,
+    }
+
+    score = severity_scores.get(
+        severity,
         0,
     )
 
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            f"Overall investigation severity assessed as "
-            f"{overall_severity} with risk score {overall_risk_score}."
-        ),
-    )
-
-    risk_drivers = parsed.get(
-        "top_risk_drivers",
-        [],
-    )
-
-    if risk_drivers:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message=(
-                f"{len(risk_drivers)} primary risk driver"
-                f"{'s were' if len(risk_drivers) != 1 else ' was'} "
-                "identified for human review."
-            ),
-        )
-
-    overall_assessment = parsed.get(
-        "overall_assessment",
-    )
-
-    if overall_assessment:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message=str(overall_assessment),
-        )
+    parsed["overall_risk_score"] = score
 
     emit_workflow_event(
         event_type="agent_result",
@@ -308,14 +338,8 @@ async def risk_synthesizer_agent(
     )
 
     return {
-        "overall_risk_score": parsed.get(
-            "overall_risk_score",
-            0,
-        ),
-        "overall_severity": parsed.get(
-            "overall_severity",
-            "UNKNOWN",
-        ),
+        "overall_risk_score": score,
+        "overall_severity": severity,
         "findings": state.get(
             "findings",
             [],

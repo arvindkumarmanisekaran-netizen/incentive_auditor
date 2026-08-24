@@ -16,7 +16,7 @@ import FindingsList from "./components/FindingsList";
 
 import InvestigationInsights from "./components/InvestigationInsights";
 
-import InvestigationCharts from "./components/InvestigationCharts";
+import AnalysisWorkspace from "./components/AnalysisWorkspace";
 
 import DocumentProcessingCard from "./components/DocumentProcessingCard";
 
@@ -77,6 +77,13 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
     {
       id: "investigation_summary",
       title: "Investigation Summary",
+      status: "waiting",
+      commentary: [],
+    },
+
+    {
+      id: "peer_analysis",
+      title: "Peer Benchmark Analysis",
       status: "waiting",
       commentary: [],
     },
@@ -572,7 +579,7 @@ function App() {
                   CHARTS
               ------------------------------------------ */}
 
-              <InvestigationCharts findings={findings} />
+              <AnalysisWorkspace findings={findings} />
 
               {/* ------------------------------------------
                   RISK SIGNALS

@@ -15,72 +15,112 @@ You DO NOT calculate metrics.
 You DO NOT query databases.
 You DO NOT create new findings.
 
-Your responsibility is ONLY:
+You ONLY:
 
 1. Interpret sales deviation evidence.
 2. Interpret sales-prescription mismatch evidence.
-3. Explain why the evidence may require review.
-4. Provide observations for the risk synthesis agent.
-
-Scope limitations:
-
-You MUST NOT analyze:
-
-- payout calculations
-- incentive eligibility
-- doctor concentration
-- territory concentration
-- representative ranking
-- fraud determination
-
+3. Explain observations.
+4. Provide review context.
 
 STRICT RULES:
 
-1. Use ONLY the supplied evidence.
-2. Never invent missing information.
-3. Never assume intent or misconduct.
-4. Never say fraud occurred.
-5. Never modify numerical values.
-6. Never calculate new percentages.
-7. If evidence is incomplete, clearly state that.
-8. Prescription information is supporting anomaly evidence only.
-9. Prescription performance does not determine incentive payout.
-10. Separate observations from conclusions.
+- Use only supplied evidence.
+- Never invent information.
+- Never assume misconduct.
+- Never state fraud occurred.
+- Never modify numerical values.
+- Never calculate new percentages.
+- Prescription data is supporting evidence only.
+- Prescription does not determine incentive payout.
 
-Return valid JSON only.
+Return JSON only.
 
-Required format:
+Format:
 
 {
     "severity": "NORMAL|LOW|MEDIUM|HIGH|UNKNOWN",
-
     "anomaly_detected": true|false,
-
-    "summary": "Short explanation of what the evidence indicates",
-
-    "evidence_summary": [
-        "Evidence point 1",
-        "Evidence point 2"
-    ],
-
-    "key_observations": [
-        "Observation 1",
-        "Observation 2"
-    ],
-
-    "limitations": [
-        "Information missing or unavailable"
-    ],
-
+    "summary": "",
+    "evidence_summary": [],
+    "key_observations": [],
+    "limitations": [],
     "investigation_priority": "LOW|MEDIUM|HIGH"
 }
-
-
-Remember:
-
-You are an evidence interpretation agent,
-not a fraud detection system.
 """
+
+
+def extract_product_metrics(
+    findings: list[dict[str, Any]],
+) -> dict[str, dict[str, float]]:
+
+    metrics = {}
+
+    for finding in findings:
+
+        product_id = finding.get("product_id")
+
+        if not product_id or product_id == "ALL":
+            continue
+
+        evidence = finding.get(
+            "evidence",
+            {},
+        )
+
+        metrics.setdefault(
+            product_id,
+            {
+                "sales": 0.0,
+                "rx": 0.0,
+                "payout": 0.0,
+            },
+        )
+
+        finding_type = finding.get("type")
+
+        # -------------------------------
+        # SALES
+        # -------------------------------
+
+        if finding_type == "sales_deviation":
+
+            metrics[product_id]["sales"] = float(
+                evidence.get(
+                    "current_sales",
+                    0,
+                )
+                or 0
+            )
+
+        # -------------------------------
+        # RX
+        # -------------------------------
+
+        if finding_type == "sales_prescription_mismatch":
+
+            metrics[product_id]["rx"] = float(
+                evidence.get(
+                    "current_rx",
+                    0,
+                )
+                or 0
+            )
+
+        # -------------------------------
+        # PAYOUT
+        # -------------------------------
+
+        if finding_type == "payout_discrepancy":
+
+            metrics[product_id]["payout"] = float(
+                evidence.get(
+                    "actual_payout",
+                    0,
+                )
+                or 0
+            )
+
+    return metrics
 
 
 async def sales_rx_agent(
@@ -101,107 +141,49 @@ async def sales_rx_agent(
         message="Starting sales and prescription evidence review.",
     )
 
+    findings = state.get(
+        "findings",
+        [],
+    )
+
     relevant_types = {
         "sales_deviation",
         "sales_prescription_mismatch",
     }
 
-    findings = state.get("findings", [])
-
     relevant_findings = [finding for finding in findings if finding.get("type") in relevant_types]
 
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            f"Found {len(relevant_findings)} sales and prescription "
-            "findings available for interpretation."
-        ),
-    )
+    product_metrics = extract_product_metrics(relevant_findings)
 
     if not relevant_findings:
 
-        parsed = {
+        result = {
             "severity": "UNKNOWN",
             "anomaly_detected": False,
-            "summary": "No sales or prescription evidence available for analysis.",
+            "summary": "No sales or prescription evidence available.",
             "evidence_summary": [],
             "key_observations": [],
-            "limitations": ["No sales deviation or prescription mismatch findings were provided."],
+            "limitations": ["No sales findings were provided."],
             "investigation_priority": "LOW",
+            "product_metrics": {},
         }
 
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="No sales or prescription evidence was available for specialist review.",
-        )
-
-        emit_workflow_event(
-            event_type="agent_result",
-            agent=agent_id,
-            status="complete",
-            output=parsed,
-        )
-
-        emit_workflow_event(
-            event_type="agent_status",
-            agent=agent_id,
-            status="complete",
-        )
-
-        return {"sales_rx_analysis": parsed}
+        return {"sales_rx_analysis": result}
 
     evidence = {
         "representative_id": state.get("representative_id"),
-        "investigation_period": {
+        "period": {
             "start_date": state.get("start_date"),
             "end_date": state.get("end_date"),
         },
-        "products_analyzed": state.get(
-            "products_analyzed",
-            [],
-        ),
         "sales_prescription_findings": relevant_findings,
     }
-
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            "Reviewing sales deviation evidence and comparing it with "
-            "the available prescription alignment findings."
-        ),
-    )
-
-    product_ids = sorted(
-        {
-            str(finding.get("product_id"))
-            for finding in relevant_findings
-            if finding.get("product_id") and finding.get("product_id") != "ALL"
-        }
-    )
-
-    if product_ids:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message=(
-                f"Evidence covers {len(product_ids)} product"
-                f"{'s' if len(product_ids) != 1 else ''}: " + ", ".join(product_ids) + "."
-            ),
-        )
-
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message="Requesting specialist interpretation of the supplied evidence.",
-    )
 
     prompt = f"""
     {SYSTEM_PROMPT}
 
-    Analyze ONLY this evidence:
+
+    Analyze this evidence:
 
     {json.dumps(
         evidence,
@@ -209,84 +191,51 @@ async def sales_rx_agent(
         default=str,
     )}
 
+
     Return JSON only.
     """
 
     try:
-        response_text = await gemini_chat_with_fallback(prompt)
+
+        response = await gemini_chat_with_fallback(prompt)
 
     except Exception:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="Sales and prescription specialist analysis could not be completed.",
-        )
-
-        emit_workflow_event(
-            event_type="agent_status",
-            agent=agent_id,
-            status="error",
-        )
 
         raise
 
-    cleaned_response = response_text.replace("```json", "").replace("```", "").strip()
+    cleaned = (
+        response.replace(
+            "```json",
+            "",
+        )
+        .replace(
+            "```",
+            "",
+        )
+        .strip()
+    )
 
     try:
-        parsed = json.loads(cleaned_response)
+
+        parsed = json.loads(cleaned)
 
     except json.JSONDecodeError:
+
         parsed = {
             "severity": "UNKNOWN",
             "anomaly_detected": False,
-            "summary": "AI response parsing failed.",
+            "summary": "Unable to parse specialist response.",
             "evidence_summary": [],
             "key_observations": [],
-            "limitations": ["The AI response was not valid JSON."],
+            "limitations": ["AI response was not valid JSON."],
             "investigation_priority": "LOW",
-            "raw_response": response_text,
         }
 
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="Specialist response was received but could not be parsed as structured JSON.",
-        )
+    # IMPORTANT:
+    # Attach deterministic metrics
+    # for peer comparison
 
-    severity = parsed.get("severity", "UNKNOWN")
-    anomaly_detected = parsed.get("anomaly_detected", False)
-    priority = parsed.get("investigation_priority", "LOW")
-
-    emit_workflow_event(
-        event_type="commentary",
-        agent=agent_id,
-        message=(
-            f"Sales and prescription review completed with "
-            f"{severity} severity and {priority} investigation priority."
-        ),
-    )
-
-    if anomaly_detected:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="The supplied evidence contains observations that may require human review.",
-        )
-    else:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message="No material sales and prescription anomaly was identified by the specialist review.",  # noqa: E501
-        )
-
-    summary = parsed.get("summary")
-
-    if summary:
-        emit_workflow_event(
-            event_type="commentary",
-            agent=agent_id,
-            message=str(summary),
-        )
+    parsed["product_metrics"] = product_metrics
 
     emit_workflow_event(
         event_type="agent_result",
@@ -301,6 +250,4 @@ async def sales_rx_agent(
         status="complete",
     )
 
-    return {
-        "sales_rx_analysis": parsed,
-    }
+    return {"sales_rx_analysis": parsed}

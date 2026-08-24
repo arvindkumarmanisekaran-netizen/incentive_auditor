@@ -4,44 +4,58 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 from ..services.investigation_stream import emit_workflow_event
+from ..core.investigation_summary_validator import (
+    validate_investigation_summary,
+)
 
 SYSTEM_PROMPT = """
 You are the Investigation Summary Agent
 inside a pharmaceutical incentive audit workflow.
 
-Your role is to convert the completed investigation output
-into a concise audit summary for human reviewers.
+Your role is ONLY to format the completed investigation
+into a concise audit summary.
 
 You receive:
 
-1. Risk synthesis output
+1. Final risk synthesis output
 2. Specialist evidence interpretations
-3. Deterministic anomaly findings
-
-
-Your responsibility:
-
-- Explain what was observed.
-- Summarize important evidence.
-- Highlight review priorities.
-- Suggest evidence-based next actions.
+3. Deterministic findings
 
 
 STRICT RULES:
 
 1. Use ONLY supplied evidence.
+
 2. Never invent facts.
+
 3. Never create new findings.
-4. Never modify numeric values.
-5. Never recalculate metrics.
-6. Never state fraud occurred.
-7. Never accuse a representative.
-8. An anomaly only indicates that review may be required.
-9. Recommendations must directly follow from evidence.
-10. If evidence is insufficient, clearly state that.
+
+4. Never create new risk drivers.
+
+5. Never create new investigation priorities.
+
+6. Never calculate metrics.
+
+7. Never modify numbers.
+
+8. Never conclude fraud occurred.
+
+9. Never accuse a representative.
+
+10. Prescription mismatch is supporting evidence only.
+
+11. Peer comparison is contextual benchmarking only.
+
+12. Recommendations must come ONLY from supplied final risk assessment.
+
+13. Investigation priorities must be derived ONLY from:
+    final_risk_assessment.top_risk_drivers
+
+14. Recommended actions must be copied ONLY from:
+    final_risk_assessment.recommended_actions
 
 
-Return valid JSON only:
+Return JSON only:
 
 {
   "executive_summary": "string",
@@ -86,6 +100,28 @@ async def investigation_agent(
         message="Preparing the final human-readable investigation summary.",
     )
 
+    final_report = state.get(
+        "final_report",
+        {},
+    )
+
+    final_risk_summary = {
+        "overall_severity": final_report.get("overall_severity"),
+        "overall_assessment": final_report.get("overall_assessment"),
+        "top_risk_drivers": final_report.get(
+            "top_risk_drivers",
+            [],
+        ),
+        "recommended_actions": final_report.get(
+            "recommended_actions",
+            [],
+        ),
+        "human_review_required": final_report.get(
+            "human_review_required",
+            True,
+        ),
+    }
+
     investigation_data = {
         "representative_id": state.get("representative_id"),
         "investigation_period": {
@@ -108,10 +144,7 @@ async def investigation_agent(
             "payout_analysis",
             {},
         ),
-        "final_risk_assessment": state.get(
-            "final_report",
-            {},
-        ),
+        "final_risk_assessment": final_risk_summary,
     }
 
     emit_workflow_event(
@@ -165,6 +198,7 @@ async def investigation_agent(
 
     try:
         parsed = json.loads(cleaned_response)
+        parsed = validate_investigation_summary(parsed)
 
     except json.JSONDecodeError:
         parsed = {
@@ -235,6 +269,29 @@ async def investigation_agent(
         agent=agent_id,
         status="complete",
     )
+
+    # prevent summary agent from inventing risk areas
+
+    drivers = final_risk_summary.get(
+        "top_risk_drivers",
+        [],
+    )
+
+    actions = final_risk_summary.get(
+        "recommended_actions",
+        [],
+    )
+
+    parsed["investigation_priorities"] = [
+        {
+            "priority": index + 1,
+            "area": driver,
+            "reason": driver,
+        }
+        for index, driver in enumerate(drivers)
+    ]
+
+    parsed["recommended_next_actions"] = actions
 
     return {
         "investigation_summary": parsed,

@@ -6,7 +6,9 @@ from ..agents.investigation_planner_agent import (
     investigation_planner_agent,
 )
 
-from ..agents.sales_rx_agent import sales_rx_agent
+from ..agents.sales_rx_agent import (
+    sales_rx_agent,
+)
 
 from ..agents.doctor_territory_agent import (
     doctor_territory_agent,
@@ -14,6 +16,10 @@ from ..agents.doctor_territory_agent import (
 
 from ..agents.payout_validator_agent import (
     payout_validator_agent,
+)
+
+from ..agents.peer_analysis_agent import (
+    peer_analysis_agent,
 )
 
 from ..agents.risk_synthesizer_agent import (
@@ -25,9 +31,26 @@ from ..agents.investigation_agent import (
 )
 
 
+def evidence_join_node(
+    state: InvestigationState,
+) -> dict:
+    """
+    Synchronization node.
+
+    Ensures all specialist evidence is available
+    before risk synthesis starts.
+    """
+
+    return {}
+
+
 def build_investigation_graph():
 
     builder = StateGraph(InvestigationState)
+
+    # ============================
+    # AGENTS
+    # ============================
 
     builder.add_node(
         "investigation_planner_agent",
@@ -50,6 +73,16 @@ def build_investigation_graph():
     )
 
     builder.add_node(
+        "peer_analysis_agent",
+        peer_analysis_agent,
+    )
+
+    builder.add_node(
+        "evidence_join_node",
+        evidence_join_node,
+    )
+
+    builder.add_node(
         "risk_synthesizer_agent",
         risk_synthesizer_agent,
     )
@@ -59,11 +92,19 @@ def build_investigation_graph():
         investigation_agent,
     )
 
+    # ============================
+    # START
+    # ============================
+
     builder.add_edge(
         START,
         "investigation_planner_agent",
     )
 
+    # ============================
+    # SPECIALIST ANALYSIS
+    # ============================
+
     builder.add_edge(
         "investigation_planner_agent",
         "sales_rx_agent",
@@ -79,20 +120,48 @@ def build_investigation_graph():
         "payout_validator_agent",
     )
 
+    # ============================
+    # PEER ANALYSIS
+    # Peer requires payout completion
+    # ============================
+
+    builder.add_edge(
+        "payout_validator_agent",
+        "peer_analysis_agent",
+    )
+
+    # ============================
+    # EVIDENCE JOIN
+    # Wait for all specialist agents
+    # ============================
+
     builder.add_edge(
         "sales_rx_agent",
-        "risk_synthesizer_agent",
+        "evidence_join_node",
     )
 
     builder.add_edge(
         "doctor_territory_agent",
-        "risk_synthesizer_agent",
+        "evidence_join_node",
     )
 
     builder.add_edge(
-        "payout_validator_agent",
+        "peer_analysis_agent",
+        "evidence_join_node",
+    )
+
+    # ============================
+    # RISK SYNTHESIS
+    # ============================
+
+    builder.add_edge(
+        "evidence_join_node",
         "risk_synthesizer_agent",
     )
+
+    # ============================
+    # FINAL REPORT
+    # ============================
 
     builder.add_edge(
         "risk_synthesizer_agent",

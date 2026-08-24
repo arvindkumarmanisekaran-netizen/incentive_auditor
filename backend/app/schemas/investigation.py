@@ -17,3 +17,24 @@ class InvestigationResponse(BaseModel):
 
     overall_risk_score: int
     overall_severity: str
+
+
+class PeerAnalysisResult(BaseModel):
+    peer_group_size: int
+
+    representative_sales: float
+    peer_average_sales: float
+
+    representative_rx: float
+    peer_average_rx: float
+
+    representative_payout: float
+    peer_average_payout: float
+
+    sales_percentile: float
+    rx_percentile: float
+    payout_percentile: float
+
+    peer_distribution: list[dict]
+
+    anomaly_indicators: list[str]

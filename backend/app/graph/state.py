@@ -32,3 +32,7 @@ class InvestigationState(TypedDict, total=False):
     final_report: dict[str, Any]
 
     investigation_summary: dict[str, Any]
+
+    peer_analysis_input: dict[str, Any]
+
+    peer_analysis: dict | None

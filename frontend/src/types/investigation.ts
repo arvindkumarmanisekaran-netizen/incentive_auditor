@@ -35,6 +35,36 @@ export interface AIAnalysis {
 
   investigation_priority?: string;
 }
+
+export interface PeerAnalysis {
+  peer_group_size: number;
+
+  peer_average_sales: number;
+
+  peer_average_rx: number;
+
+  peer_average_payout: number;
+
+  representative_sales: number;
+
+  representative_rx: number;
+
+  representative_payout: number;
+
+  sales_percentile: number;
+
+  rx_percentile: number;
+
+  payout_percentile: number;
+
+  peer_distribution: {
+    bucket: string;
+    count: number;
+  }[];
+
+  anomaly_indicators: string[];
+}
+
 export interface FinalReport {
   overall_assessment?: string;
 
@@ -82,6 +112,8 @@ export interface InvestigationResult {
   final_report?: FinalReport;
 
   investigation_summary?: InvestigationSummary;
+
+  peer_analysis?: PeerAnalysis;
 }
 
 export interface InvestigationSummary {
