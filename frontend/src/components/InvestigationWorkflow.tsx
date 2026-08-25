@@ -158,10 +158,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
   }
 
   return (
-    <section
-      ref={workflowSectionRef}
-      className="investigation-workflow"
-    >
+    <section ref={workflowSectionRef} className="investigation-workflow">
       {/* ==================================================
           WORKFLOW HEADER
       ================================================== */}
@@ -284,7 +281,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
       {expanded && (
         <div className="investigation-workflow-body">
           {agents
-            .filter((agent) => agent.id !== "investigation_planner")
+            .filter((agent) => agent.id !== "investigation_planner" && agent.id !== "peer_analysis")
             .map((agent) => {
               const latestCommentary = agent.commentary.slice(-3);
 

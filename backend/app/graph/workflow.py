@@ -37,8 +37,9 @@ def evidence_join_node(
     """
     Synchronization node.
 
-    Ensures all specialist evidence is available
-    before risk synthesis starts.
+    Waits until all specialist evidence agents
+    have completed before peer benchmarking
+    and risk synthesis continue.
     """
 
     return {}
@@ -103,6 +104,7 @@ def build_investigation_graph():
 
     # ============================
     # SPECIALIST ANALYSIS
+    # These run in parallel
     # ============================
 
     builder.add_edge(
@@ -118,21 +120,12 @@ def build_investigation_graph():
     builder.add_edge(
         "investigation_planner_agent",
         "payout_validator_agent",
-    )
-
-    # ============================
-    # PEER ANALYSIS
-    # Peer requires payout completion
-    # ============================
-
-    builder.add_edge(
-        "payout_validator_agent",
-        "peer_analysis_agent",
     )
 
     # ============================
     # EVIDENCE JOIN
-    # Wait for all specialist agents
+    #
+    # Wait for ALL specialist agents
     # ============================
 
     builder.add_edge(
@@ -146,16 +139,30 @@ def build_investigation_graph():
     )
 
     builder.add_edge(
-        "peer_analysis_agent",
+        "payout_validator_agent",
         "evidence_join_node",
     )
 
     # ============================
-    # RISK SYNTHESIS
+    # PEER ANALYSIS
+    #
+    # Runs only after all evidence
+    # agents have completed
     # ============================
 
     builder.add_edge(
         "evidence_join_node",
+        "peer_analysis_agent",
+    )
+
+    # ============================
+    # RISK SYNTHESIS
+    #
+    # Requires peer context also
+    # ============================
+
+    builder.add_edge(
+        "peer_analysis_agent",
         "risk_synthesizer_agent",
     )
 
