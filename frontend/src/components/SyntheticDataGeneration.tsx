@@ -11,57 +11,121 @@ export default function SyntheticDataGeneration({
 }: Props) {
   const [isGeneratingSyntheticData, setIsGeneratingSyntheticData] = useState(false);
 
-  const [downloadStatus, setDownloadStatus] = useState<string | null>(null);
+  const [generationMessages, setGenerationMessages] = useState<string[]>([]);
 
   async function handleSyntheticDataGeneration() {
-    const filename = "synthetic_data.zip";
+    const filename = "synthetic_dataset.zip";
+
+    let eventSource: EventSource | null = null;
 
     try {
       setIsGeneratingSyntheticData(true);
 
-      setDownloadStatus(`Downloading ${filename}...`);
+      setGenerationMessages(["Starting synthetic data generation..."]);
 
-      const response = await fetch("/api/generate-synthetic", {
+      /*
+       * Start generation job
+       */
+
+      const startResponse = await fetch("/api/generate-synthetic/start", {
         method: "POST",
       });
 
-      if (!response.ok) {
-        throw new Error("Synthetic data generation failed");
+      if (!startResponse.ok) {
+        throw new Error("Could not start synthetic generation");
       }
 
-      const syntheticDataFile = await response.blob();
+      const { job_id } = await startResponse.json();
 
-      const downloadUrl = window.URL.createObjectURL(syntheticDataFile);
+      /*
+       * Connect SSE stream
+       */
 
-      const downloadLink = document.createElement("a");
+      eventSource = new EventSource(`/api/generate-synthetic/stream/${job_id}`);
 
-      downloadLink.href = downloadUrl;
+      eventSource.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
 
-      downloadLink.download = filename;
+          if (!data.message || data.message === "__COMPLETE__") {
+            return;
+          }
 
-      document.body.appendChild(downloadLink);
+          setGenerationMessages((current) => [...current, data.message]);
+        } catch {
+          console.warn("Invalid SSE message", event.data);
+        }
+      };
 
-      downloadLink.click();
+      /*
+       * Wait for completed zip
+       */
 
-      downloadLink.remove();
+      let attempts = 0;
 
-      window.URL.revokeObjectURL(downloadUrl);
+      while (attempts < 300) {
+        attempts += 1;
 
-      setDownloadStatus("✓ Download completed");
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setTimeout(() => {
-        setDownloadStatus(null);
-      }, 3000);
+        const statusResponse = await fetch(`/api/generate-synthetic/status/${job_id}`);
+
+        const status = await statusResponse.json();
+
+        if (!status.ready) {
+          continue;
+        }
+
+        const downloadResponse = await fetch(`/api/generate-synthetic/download/${job_id}`);
+
+        if (!downloadResponse.ok) {
+          throw new Error("Synthetic download failed");
+        }
+
+        const contentType = downloadResponse.headers.get("content-type");
+
+        if (!contentType || !contentType.includes("application/zip")) {
+          continue;
+        }
+
+        /*
+         * Download file
+         */
+
+        const blob = await downloadResponse.blob();
+
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+
+        link.download = filename;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        window.URL.revokeObjectURL(url);
+
+        setGenerationMessages((current) => [...current, "✓ Download completed"]);
+
+        break;
+      }
     } catch (error) {
-      console.error("Synthetic data generation failed:", error);
+      console.error("Synthetic generation failed:", error);
 
-      setDownloadStatus("✕ Synthetic data generation failed");
+      setGenerationMessages((current) => [...current, "✕ Synthetic data generation failed"]);
+    } finally {
+      eventSource?.close();
+
+      setIsGeneratingSyntheticData(false);
 
       setTimeout(() => {
-        setDownloadStatus(null);
-      }, 3000);
-    } finally {
-      setIsGeneratingSyntheticData(false);
+        setGenerationMessages([]);
+      }, 8000);
     }
   }
 
@@ -98,17 +162,19 @@ export default function SyntheticDataGeneration({
         </span>
 
         <span className="synthetic-data-title">
-          {isGeneratingSyntheticData ? "Generating..." : "Generate Synthetic Data"}
+          {isGeneratingSyntheticData ? "Generating Dataset..." : "Generate Synthetic Data"}
         </span>
       </button>
 
-      {downloadStatus && (
+      {generationMessages.length > 0 && (
         <div className="download-toast">
-          <span className="download-toast-icon">
-            {downloadStatus.startsWith("✓") ? "✓" : downloadStatus.startsWith("✕") ? "!" : "🧬"}
-          </span>
+          <div className="download-toast-title">🧬 Synthetic Data Generation</div>
 
-          <span>{downloadStatus.replace("✓ ", "").replace("✕ ", "")}</span>
+          {generationMessages.slice(-5).map((message, index) => (
+            <div key={index} className="download-toast-message">
+              › {message}
+            </div>
+          ))}
         </div>
       )}
     </div>

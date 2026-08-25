@@ -4,7 +4,7 @@ import csv
 import json
 import random
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from docx import Document
 from openpyxl import Workbook
@@ -22,7 +22,14 @@ FORMATS = [
 def export_structured_data(
     documents: dict[str, list[dict[str, Any]]],
     output_dir: Path,
+    progress_callback: Callable[[str], None] | None = None,
 ) -> None:
+
+    def emit(message: str):
+
+        if progress_callback:
+
+            progress_callback(message)
 
     output_dir.mkdir(
         parents=True,
@@ -31,10 +38,21 @@ def export_structured_data(
 
     rng = random.Random(SEED)
 
+    total_documents = len(documents)
+
+    current_document = 0
+
+    emit(f"Preparing export of {total_documents} datasets")
+
     for document_name, records in documents.items():
 
         if not records:
+
             continue
+
+        current_document += 1
+
+        emit(f"Processing {document_name} " f"({current_document}/{total_documents})")
 
         shuffled_records = [dict(record) for record in records]
 
@@ -53,37 +71,46 @@ def export_structured_data(
         ):
 
             if not rows:
+
                 continue
 
             filename = f"{base_name}.{file_format}"
 
             output_path = output_dir / filename
 
+            emit(f"Generating {filename}")
+
             if file_format == "csv":
+
                 export_csv(
                     rows,
                     output_path,
                 )
 
             elif file_format == "json":
+
                 export_json(
                     rows,
                     output_path,
                 )
 
             elif file_format == "xlsx":
+
                 export_xlsx(
                     rows,
                     output_path,
                 )
 
             elif file_format == "docx":
+
                 export_docx(
                     rows,
                     output_path,
                 )
 
-            print(f"  {filename:40} " f"{len(rows):,} records")
+            emit(f"Completed {filename} " f"({len(rows):,} records)")
+
+    emit("All structured files generated successfully")
 
 
 # ============================================================
@@ -98,8 +125,6 @@ def split_records(
 
     result: list[list[dict[str, Any]]] = [[] for _ in range(parts)]
 
-    # Round-robin distribution ensures different records
-    # go into each format while keeping sizes balanced.
     for index, record in enumerate(records):
 
         result[index % parts].append(record)
@@ -261,9 +286,7 @@ def export_docx(
 
         for index, column in enumerate(columns):
 
-            value = normalized.get(column)
-
-            row_cells[index].text = format_docx_value(value)
+            row_cells[index].text = format_docx_value(normalized.get(column))
 
     document.save(path)
 
