@@ -4,4 +4,4 @@ __pycache__/
 backend/.env
 frontend/.env.local
 backend/app/services/generated_synthetic/
-.zip
+*.zip
