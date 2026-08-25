@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 import {
   Label,
   BarChart,
@@ -15,8 +17,6 @@ import {
   PolarRadiusAxis,
   Radar,
   Legend,
-  ReferenceLine,
-  ReferenceDot,
 } from "recharts";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
@@ -28,35 +28,56 @@ type Props = {
 
 const CHART_THEME = {
   representative: "#2563eb",
-
   peer: "#f59e0b",
-
   distribution: "#10b981",
-
   grid: "#e5e7eb",
-
   text: "#475569",
 };
 
 function normalize(value: number, average: number) {
   if (!average) return 0;
 
-  // prevent radar explosion
-
   return Math.min(Math.round((value / average) * 100), 200);
+}
+
+function formatMoney(value?: number) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(Number(value ?? 0));
+}
+
+function formatNumber(value?: number) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 2,
+  }).format(Number(value ?? 0));
+}
+
+function formatPercent(value?: number) {
+  const numeric = Number(value ?? 0);
+
+  return `${numeric > 0 ? "+" : ""}${numeric.toFixed(2)}%`;
 }
 
 export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) {
   const comparison = peerAnalysis?.product_peer_comparison;
 
-  if (!comparison?.products) {
+  const productEntries = useMemo(
+    () => (comparison?.products ? Object.entries(comparison.products) : []),
+    [comparison?.products],
+  );
+
+  const [selectedProductId, setSelectedProductId] = useState(productEntries[0]?.[0] ?? "");
+
+  if (!comparison?.products || productEntries.length === 0) {
     return (
       <section className="peer-analysis-section">
         <div className="analysis-panel-header analysis-section-header">
           <div>
-            <h3>Peer Analysis</h3>
+            <h3>Peer Benchmark</h3>
 
-            <p>Explore representative performance against available peer population.</p>
+            <p>Compare representative performance against the available peer population.</p>
           </div>
         </div>
 
@@ -65,134 +86,162 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
     );
   }
 
-  const products = comparison.products;
+  const selectedEntry =
+    productEntries.find(([id]) => id === selectedProductId) ?? productEntries[0];
 
-  const productEntries = Object.entries(products);
-
-  /*
-    Bar chart
-  */
+  const [selectedId, selected] = selectedEntry;
 
   const comparisonData = productEntries.map(([id, item]) => ({
     product: `${item.product_name} (${id})`,
-
     representative: item.representative.sales,
-
     peer: item.peer_average.sales,
   }));
 
-  /*
-    First product profile
-  */
+  const radarData = [
+    {
+      metric: "Sales",
+      Representative: normalize(selected.representative.sales, selected.peer_average.sales),
+      Peer: 100,
+    },
+    {
+      metric: "Prescription",
+      Representative: normalize(selected.representative.rx, selected.peer_average.rx),
+      Peer: 100,
+    },
+    {
+      metric: "Payout",
+      Representative: normalize(selected.representative.payout, selected.peer_average.payout),
+      Peer: 100,
+    },
+  ];
 
-  const selected = productEntries[0]?.[1];
+  const peerDistribution = selected.peer_distribution.map((peer) => ({
+    id: peer.representative_id,
+    name: peer.representative_name,
+    displayName: `${peer.representative_name} (${peer.representative_id})`,
+    sales: peer.sales,
+    payout: peer.payout,
+    rx: peer.rx,
+    type: "Peer",
+  }));
 
-  const radarData = selected
-    ? [
-        {
-          metric: "Sales",
+  const representativePoint = [
+    {
+      id: representativeId ?? "Current Representative",
+      name: selected.representative_name,
+      displayName: `${selected.representative_name} (${representativeId ?? ""})`,
+      sales: selected.representative.sales,
+      payout: selected.representative.payout,
+      rx: selected.representative.rx,
+      type: "Current Representative",
+    },
+  ];
 
-          Representative: normalize(selected.representative.sales, selected.peer_average.sales),
+  const peerAveragePoint = [
+    {
+      id: "Peer Average",
+      name: "Peer Average",
+      displayName: "Peer Average",
+      sales: selected.peer_average.sales,
+      payout: selected.peer_average.payout,
+      rx: selected.peer_average.rx,
+      type: "Peer Average",
+    },
+  ];
 
-          Peer: 100,
-        },
+  const salesDifference = selected.difference_percentage?.sales ?? 0;
 
-        {
-          metric: "Prescription",
+  const rxDifference = selected.difference_percentage?.rx ?? 0;
 
-          Representative: normalize(selected.representative.rx, selected.peer_average.rx),
-
-          Peer: 100,
-        },
-
-        {
-          metric: "Payout",
-
-          Representative: normalize(selected.representative.payout, selected.peer_average.payout),
-
-          Peer: 100,
-        },
-      ]
-    : [];
-
-  /*
-    Scatter distribution
-  */
-
-  const peerDistribution =
-    selected?.peer_distribution.map((peer) => ({
-      id: peer.representative_id,
-
-      name: peer.representative_name,
-
-      displayName: `${peer.representative_name} (${peer.representative_id})`,
-
-      sales: peer.sales,
-
-      payout: peer.payout,
-
-      rx: peer.rx,
-
-      type: "Peer",
-    })) ?? [];
-
-  const representativePoint = selected
-    ? [
-        {
-          id: "Current Representative",
-
-          name: selected.representative_name,
-
-          displayName: `${selected.representative_name} (${representativeId})`,
-
-          sales: selected.representative.sales,
-
-          payout: selected.representative.payout,
-
-          rx: selected.representative.rx,
-
-          type: "Current Representative",
-        },
-      ]
-    : [];
-
-  const peerAveragePoint = selected
-    ? [
-        {
-          id: "Peer Average",
-
-          name: "Peer Average",
-
-          sales: selected.peer_average.sales,
-
-          payout: selected.peer_average.payout,
-
-          rx: selected.peer_average.rx,
-
-          type: "Peer Average",
-        },
-      ]
-    : [];
+  const payoutDifference = selected.difference_percentage?.payout ?? 0;
 
   return (
     <section className="peer-analysis-section">
+      {/* ==================================================
+          HEADER
+      ================================================== */}
+
       <div className="analysis-panel-header analysis-section-header">
         <div>
-          <h3>Peer Analysis</h3>
+          <h3>Peer Benchmark</h3>
 
-          <p>
-            Explore investigation evidence across products, history, peers and behaviour patterns.
-          </p>
+          <p>Compare the selected representative against peers for each product.</p>
+        </div>
+
+        <div className="analysis-product-selector">
+          <select value={selectedId} onChange={(event) => setSelectedProductId(event.target.value)}>
+            {productEntries.map(([id, item]) => (
+              <option key={id} value={id}>
+                {id} • {item.product_name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* ==================================================
+          PRODUCT CONTEXT
+      ================================================== */}
+
+      <div className="product-analysis-context">
+        <span className="product-analysis-id">{selectedId}</span>
+
+        <span className="product-analysis-divider">•</span>
+
+        <span className="product-analysis-name">{selected.product_name}</span>
+
+        <span className="peer-count">{selected.peer_group_size} peers</span>
+      </div>
+
+      {/* ==================================================
+          BENCHMARK KPI SUMMARY
+      ================================================== */}
+
+      <div className="peer-summary-grid">
+        <div className="peer-summary-card">
+          <span>Representative Sales</span>
+
+          <strong>{formatMoney(selected.representative.sales)}</strong>
+
+          <small>{formatPercent(salesDifference)} vs peer</small>
+        </div>
+
+        <div className="peer-summary-card">
+          <span>Peer Average Sales</span>
+
+          <strong>{formatMoney(selected.peer_average.sales)}</strong>
+
+          <small>{selected.peer_group_size} comparable reps</small>
+        </div>
+
+        <div className="peer-summary-card">
+          <span>Representative Rx</span>
+
+          <strong>{formatNumber(selected.representative.rx)}</strong>
+
+          <small>{formatPercent(rxDifference)} vs peer</small>
+        </div>
+
+        <div className="peer-summary-card">
+          <span>Representative Payout</span>
+
+          <strong>{formatMoney(selected.representative.payout)}</strong>
+
+          <small>{formatPercent(payoutDifference)} vs peer</small>
         </div>
       </div>
 
       <div className="peer-analysis-grid">
-        {/* ======================
+        {/* ==================================================
             SALES COMPARISON
-        ======================= */}
+        ================================================== */}
 
         <div className="chart-card">
-          <h3>Representative vs Peer Average</h3>
+          <div className="chart-heading">
+            <h3>Sales vs Peer Average</h3>
+
+            <p>Representative sales compared across all analyzed products.</p>
+          </div>
 
           <ResponsiveContainer width="100%" height={360}>
             <BarChart data={comparisonData}>
@@ -257,15 +306,19 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           </ResponsiveContainer>
         </div>
 
-        {/* ======================
-            RADAR
-        ======================= */}
+        {/* ==================================================
+            RELATIVE POSITION
+        ================================================== */}
 
         <div className="chart-card">
-          <h3>Relative Position</h3>
+          <div className="chart-heading">
+            <h3>Relative Position</h3>
+
+            <p>Selected representative indexed against peer average = 100.</p>
+          </div>
 
           <ResponsiveContainer width="100%" height={320}>
-            <RadarChart data={radarData}>
+            <RadarChart key={selectedId} data={radarData}>
               <PolarGrid />
 
               <PolarAngleAxis dataKey="metric" />
@@ -295,15 +348,23 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           </ResponsiveContainer>
         </div>
 
-        {/* ======================
-            DISTRIBUTION
-        ======================= */}
+        {/* ==================================================
+            PEER DISTRIBUTION
+        ================================================== */}
 
         <div className="chart-card">
-          <h3>Peer Distribution</h3>
+          <div className="chart-heading">
+            <h3>Peer Distribution</h3>
+
+            <p>
+              Sales and payout position among comparable representatives for {selected.product_name}
+              .
+            </p>
+          </div>
 
           <ResponsiveContainer width="100%" height={360}>
             <ScatterChart
+              key={selectedId}
               margin={{
                 top: 30,
                 right: 40,
@@ -349,17 +410,15 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
 
                       <div>Type: {data.type}</div>
 
-                      <div>Sales: {data.sales?.toLocaleString()}</div>
+                      <div>Sales: {formatMoney(data.sales)}</div>
 
-                      <div>Payout: {data.payout?.toLocaleString()}</div>
+                      <div>Payout: {formatMoney(data.payout)}</div>
 
-                      <div>RX: {data.rx?.toLocaleString()}</div>
+                      <div>Rx: {formatNumber(data.rx)}</div>
                     </div>
                   );
                 }}
               />
-
-              {/* Peer representatives */}
 
               <Scatter
                 name="Peer Representatives"
@@ -367,16 +426,12 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 fill={CHART_THEME.distribution}
               />
 
-              {/* Current Representative */}
-
               <Scatter
                 name="Current Representative"
                 data={representativePoint}
                 fill={CHART_THEME.representative}
                 shape="diamond"
               />
-
-              {/* Peer Average */}
 
               <Scatter
                 name="Peer Average"
@@ -390,12 +445,16 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           </ResponsiveContainer>
         </div>
 
-        {/* ======================
-            STATUS CARDS
-        ======================= */}
+        {/* ==================================================
+            PEER INDICATORS
+        ================================================== */}
 
         <div className="chart-card peer-indicator-card">
-          <h3>Peer Indicators</h3>
+          <div className="chart-heading">
+            <h3>Peer Indicators</h3>
+
+            <p>Contextual benchmark status across analyzed products.</p>
+          </div>
 
           <div className="product-status-grid">
             {productEntries.map(([id, item]) => (
@@ -403,10 +462,20 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 key={id}
                 data-tooltip={`${item.product_name} (${id})`}
                 className={
-                  item.anomaly_detected
-                    ? "product-status-card review-card"
-                    : "product-status-card normal-card"
+                  id === selectedId
+                    ? "product-status-card normal-card active"
+                    : item.anomaly_detected
+                      ? "product-status-card review-card"
+                      : "product-status-card normal-card"
                 }
+                onClick={() => setSelectedProductId(id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    setSelectedProductId(id);
+                  }
+                }}
               >
                 <div className="product-title">
                   {item.product_name} ({id})

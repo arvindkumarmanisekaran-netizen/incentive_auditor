@@ -78,6 +78,22 @@ function ChartTooltip({ active, payload }: any) {
   );
 }
 
+function PercentageTooltip({ active, payload }: any) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const item = payload[0].payload;
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <span>{item.name}</span>
+
+      <strong>{Number(item.amount).toFixed(2)}%</strong>
+    </div>
+  );
+}
+
 export default function ProductAnalysis({ findings = [] }: Props) {
   const [selectedProductId, setSelectedProductId] = useState("");
 
@@ -115,6 +131,12 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
   const salesFinding = getProductFinding(findings, "sales_deviation", selectedProductId);
 
+  const mismatchFinding = getProductFinding(
+    findings,
+    "sales_prescription_mismatch",
+    selectedProductId,
+  );
+
   const payoutFinding = getProductFinding(findings, "payout_discrepancy", selectedProductId);
 
   const salesData = salesFinding
@@ -128,6 +150,19 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           name: "Current Sales",
           amount: Number(salesFinding.evidence.current_sales),
           fill: CHART_COLORS.current,
+        },
+      ]
+    : [];
+
+  const mismatchData = mismatchFinding
+    ? [
+        {
+          name: "Sales Change",
+          amount: Number(mismatchFinding.evidence.sales_change_percent),
+        },
+        {
+          name: "Prescription Change",
+          amount: Number(mismatchFinding.evidence.prescription_change_percent),
         },
       ]
     : [];
@@ -151,9 +186,14 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
   return (
     <section className="analysis-panel product-analysis-section">
+      {/* ==================================================
+          HEADER
+      ================================================== */}
+
       <div className="analysis-panel-header analysis-section-header">
         <div>
           <h3>Product Analysis</h3>
+
           <p>Sales, prescription and payout behaviour for selected product</p>
         </div>
 
@@ -169,6 +209,10 @@ export default function ProductAnalysis({ findings = [] }: Props) {
         </div>
       </div>
 
+      {/* ==================================================
+          PRODUCT CONTEXT
+      ================================================== */}
+
       {selectedProduct && (
         <div className="product-analysis-context">
           <span className="product-analysis-id">{selectedProduct.id}</span>
@@ -176,16 +220,74 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           {selectedProduct.name && (
             <>
               <span className="product-analysis-divider">•</span>
+
               <span className="product-analysis-name">{selectedProduct.name}</span>
             </>
           )}
         </div>
       )}
 
+      {/* ==================================================
+          SALES / PRESCRIPTION MISMATCH SUMMARY
+      ================================================== */}
+
+      {mismatchFinding && (
+        <div className="product-mismatch-summary">
+          <div className="product-mismatch-header">
+            <div>
+              <h4>Sales &amp; Prescription Alignment</h4>
+
+              <p>Comparison of sales movement against prescription movement</p>
+            </div>
+
+            <span
+              className={`severity-badge severity-${String(
+                mismatchFinding.severity ?? "NORMAL",
+              ).toLowerCase()}`}
+            >
+              {mismatchFinding.severity ?? "NORMAL"}
+            </span>
+          </div>
+
+          <div className="product-mismatch-metrics">
+            <div className="product-mismatch-metric">
+              <span>Sales Change</span>
+
+              <strong>
+                {Number(mismatchFinding.evidence.sales_change_percent ?? 0).toFixed(2)}%
+              </strong>
+            </div>
+
+            <div className="product-mismatch-metric">
+              <span>Prescription Change</span>
+
+              <strong>
+                {Number(mismatchFinding.evidence.prescription_change_percent ?? 0).toFixed(2)}%
+              </strong>
+            </div>
+
+            <div className="product-mismatch-metric">
+              <span>Mismatch Score</span>
+
+              <strong>{Number(mismatchFinding.evidence.mismatch_score ?? 0).toFixed(2)}</strong>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ==================================================
+          CHARTS
+      ================================================== */}
+
       <div className="analysis-chart-grid product-analysis-grid">
+        {/* =============================
+            SALES PERFORMANCE
+        ============================= */}
+
         <div className="chart-card">
           <div className="chart-heading">
             <h3>Sales Performance</h3>
+
             <p>Current sales vs historical baseline</p>
           </div>
 
@@ -212,9 +314,44 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           </div>
         </div>
 
+        {/* =============================
+            SALES / PRESCRIPTION
+        ============================= */}
+
+        <div className="chart-card">
+          <div className="chart-heading">
+            <h3>Sales / Prescription Alignment</h3>
+
+            <p>Percentage movement during the investigation period</p>
+          </div>
+
+          <div className="chart-container">
+            <AnimateOnView>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={mismatchData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+
+                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
+
+                  <YAxis tickLine={false} axisLine={false} />
+
+                  <Tooltip content={<PercentageTooltip />} />
+
+                  <Bar dataKey="amount" radius={[8, 8, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </AnimateOnView>
+          </div>
+        </div>
+
+        {/* =============================
+            PAYOUT COMPARISON
+        ============================= */}
+
         <div className="chart-card">
           <div className="chart-heading">
             <h3>Payout Comparison</h3>
+
             <p>Expected incentive vs actual payout</p>
           </div>
 

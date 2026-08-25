@@ -2,6 +2,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   Legend,
   RadialBar,
   RadialBarChart,
@@ -20,39 +21,24 @@ type Props = {
 };
 
 /* =========================================================
+   COLORS
+========================================================= */
+
+const COLORS = {
+  sales: "#7c3aed",
+  prescription: "#2563eb",
+  expected: "#64748b",
+  actual: "#2563eb",
+  doctor: "#7c3aed",
+  territory: "#0891b2",
+};
+
+/* =========================================================
    HELPERS
 ========================================================= */
 
 function severityClass(severity?: string) {
   return `severity-badge severity-${(severity ?? "unknown").toLowerCase()}`;
-}
-
-function ChartTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0]?.payload;
-
-  if (!item) {
-    return null;
-  }
-
-  const label = item.name ?? item.doctor_name ?? item.territory_name ?? "Value";
-
-  const value = item.value ?? item.amount ?? item.change ?? 0;
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{label}</span>
-
-      <strong>
-        {typeof value === "number" && value < 100
-          ? `${value.toFixed(1)}%`
-          : formatMoney(Number(value))}
-      </strong>
-    </div>
-  );
 }
 
 function formatMoney(value: number) {
@@ -63,50 +49,166 @@ function formatMoney(value: number) {
   }).format(value);
 }
 
+function formatCompactMoney(value: number) {
+  return new Intl.NumberFormat("en-IN", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
 function safeNumber(value: unknown): number {
   const number = Number(value);
 
   return Number.isFinite(number) ? number : 0;
 }
 
+function getProductName(finding: any) {
+  return finding?.product_name ?? finding?.evidence?.product_name ?? finding?.product_id ?? "";
+}
+
+/* =========================================================
+   SALES / RX TOOLTIP
+========================================================= */
+
+function SalesRxTooltip({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: any[];
+  label?: string;
+}) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <strong>{label}</strong>
+
+      {payload.map((item) => (
+        <div key={item.dataKey}>
+          <span>{item.name}</span>
+
+          <strong>
+            {safeNumber(item.value) > 0 ? "+" : ""}
+            {safeNumber(item.value).toFixed(2)}%
+          </strong>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* =========================================================
+   MONEY TOOLTIP
+========================================================= */
+
+function MoneyTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const item = payload[0]?.payload;
+
+  if (!item) {
+    return null;
+  }
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <span>{item.name}</span>
+
+      <strong>{formatMoney(safeNumber(item.amount))}</strong>
+    </div>
+  );
+}
+
+/* =========================================================
+   PERCENT TOOLTIP
+========================================================= */
+
+function PercentTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const item = payload[0]?.payload;
+
+  if (!item) {
+    return null;
+  }
+
+  return (
+    <div className="chart-custom-tooltip visible">
+      <span>{item.name}</span>
+
+      <strong>{safeNumber(item.value).toFixed(2)}%</strong>
+    </div>
+  );
+}
+
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 function InvestigationInsights({ result }: Props) {
+  const findings = result.findings ?? [];
+
   /* =======================================================
-     FINDINGS
+     SALES / PRESCRIPTION
   ======================================================= */
 
-  const findings = result?.findings ?? [];
+  const salesFindings = findings.filter((finding) => finding.type === "sales_deviation");
 
-  const salesFinding = findings.find((finding) => finding.type === "sales_deviation");
-
-  const mismatchFinding = findings.find(
+  const mismatchFindings = findings.filter(
     (finding) => finding.type === "sales_prescription_mismatch",
   );
+
+  const salesRxData = mismatchFindings.map((mismatchFinding) => {
+    const productId = String(mismatchFinding.product_id ?? "");
+
+    const salesFinding = salesFindings.find(
+      (finding) => String(finding.product_id ?? "") === productId,
+    );
+
+    return {
+      product: productId,
+      productName: getProductName(mismatchFinding),
+
+      salesChange: safeNumber(
+        salesFinding?.evidence?.deviation_percent ?? mismatchFinding.evidence?.sales_change_percent,
+      ),
+
+      prescriptionChange: safeNumber(mismatchFinding.evidence?.prescription_change_percent),
+
+      mismatchScore: safeNumber(mismatchFinding.evidence?.mismatch_score),
+
+      severity: mismatchFinding.severity ?? "NORMAL",
+    };
+  });
+
+  const mismatchIssues = mismatchFindings.filter(
+    (finding) => String(finding.severity ?? "NORMAL").toUpperCase() !== "NORMAL",
+  );
+
+  const highestMismatch =
+    salesRxData.length > 0
+      ? salesRxData.reduce((highest, current) =>
+          current.mismatchScore > highest.mismatchScore ? current : highest,
+        )
+      : undefined;
+
+  /* =======================================================
+     DOCTOR / TERRITORY
+  ======================================================= */
 
   const doctorFinding = findings.find((finding) => finding.type === "doctor_concentration");
 
   const territoryFinding = findings.find(
     (finding) => finding.type === "cross_territory_concentration",
   );
-
-  const payoutFinding = findings.find((finding) => finding.type === "payout_discrepancy");
-
-  const salesRxData = [
-    {
-      name: "Sales",
-      change: salesFinding ? safeNumber(salesFinding.evidence.deviation_percent) : 0,
-    },
-
-    {
-      name: "Prescriptions",
-      change: mismatchFinding
-        ? safeNumber(mismatchFinding.evidence.prescription_change_percent)
-        : 0,
-    },
-  ];
-
-  /* =======================================================
-     DOCTOR / TERRITORY
-  ======================================================= */
 
   const doctorConcentration = safeNumber(doctorFinding?.evidence?.top_doctor_share_percent);
 
@@ -116,12 +218,12 @@ function InvestigationInsights({ result }: Props) {
     {
       name: "Top Doctor",
       value: doctorConcentration,
-      fill: "#7c3aed",
+      fill: COLORS.doctor,
     },
     {
       name: "Cross Territory",
       value: crossTerritory,
-      fill: "#0891b2",
+      fill: COLORS.territory,
     },
   ];
 
@@ -129,24 +231,36 @@ function InvestigationInsights({ result }: Props) {
      PAYOUT
   ======================================================= */
 
-  const expectedPayout = safeNumber(payoutFinding?.evidence?.expected_payout);
+  const payoutFindings = findings.filter((finding) => finding.type === "payout_discrepancy");
 
-  const actualPayout = safeNumber(payoutFinding?.evidence?.actual_payout);
+  const totalExpectedPayout = payoutFindings.reduce(
+    (total, finding) => total + safeNumber(finding.evidence?.expected_payout),
+    0,
+  );
 
-  const payoutDifference = safeNumber(payoutFinding?.evidence?.payout_difference);
+  const totalActualPayout = payoutFindings.reduce(
+    (total, finding) => total + safeNumber(finding.evidence?.actual_payout),
+    0,
+  );
+
+  const totalPayoutDifference = totalActualPayout - totalExpectedPayout;
 
   const payoutData = [
     {
       name: "Expected",
-      amount: expectedPayout,
-      fill: "#64748b",
+      amount: totalExpectedPayout,
+      fill: COLORS.expected,
     },
     {
-      name: "Actual",
-      amount: actualPayout,
-      fill: "#2563eb",
+      name: "Recorded",
+      amount: totalActualPayout,
+      fill: COLORS.actual,
     },
   ];
+
+  const payoutMismatchCount = payoutFindings.filter(
+    (finding) => Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
+  ).length;
 
   /* =======================================================
      RISK
@@ -179,20 +293,24 @@ function InvestigationInsights({ result }: Props) {
      AI ANALYSIS
   ======================================================= */
 
-  const doctorAnalysis = result?.doctor_territory_analysis ?? {};
+  const doctorAnalysis = result.doctor_territory_analysis;
 
-  const salesAnalysis = result?.sales_rx_analysis ?? {};
+  const salesAnalysis = result.sales_rx_analysis;
 
-  const payoutAnalysis = result?.payout_analysis ?? {};
+  const payoutAnalysis = result.payout_analysis;
 
-  const finalReport = result?.final_report ?? {};
+  const finalReport = result.final_report;
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
 
   return (
     <section className="insights-section">
       <div className="section-heading">
         <h2>Investigation Insights</h2>
 
-        <p>Visual evidence with AI-assisted interpretation</p>
+        <p>Cross-product visual summary of investigation evidence</p>
       </div>
 
       <div className="insights-grid">
@@ -214,8 +332,6 @@ function InvestigationInsights({ result }: Props) {
           </header>
 
           <div className="insight-body">
-            {/* CHART */}
-
             <div className="insight-chart">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
@@ -224,12 +340,12 @@ function InvestigationInsights({ result }: Props) {
                     top: 15,
                     right: 15,
                     left: -15,
-                    bottom: 5,
+                    bottom: 10,
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
 
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
+                  <XAxis dataKey="product" tickLine={false} axisLine={false} fontSize={10} />
 
                   <YAxis
                     tickLine={false}
@@ -242,38 +358,56 @@ function InvestigationInsights({ result }: Props) {
                     cursor={{
                       fill: "transparent",
                     }}
-                    offset={14}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      transition: "none",
-                      pointerEvents: "none",
-                    }}
-                    content={<ChartTooltip />}
+                    content={<SalesRxTooltip />}
                   />
 
-                  <Bar dataKey="change" fill="#2563eb" radius={[6, 6, 0, 0]} />
+                  <Legend />
+
+                  <Bar
+                    dataKey="salesChange"
+                    name="Sales Change"
+                    fill={COLORS.sales}
+                    radius={[4, 4, 0, 0]}
+                  />
+
+                  <Bar
+                    dataKey="prescriptionChange"
+                    name="Prescription Change"
+                    fill={COLORS.prescription}
+                    radius={[4, 4, 0, 0]}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
-            {/* AI TEXT */}
-
             <div className="insight-text">
-              <span className="ai-label">AI Interpretation</span>
+              <span className="ai-label">Investigation Summary</span>
 
-              <p className="insight-summary">
-                {salesAnalysis?.summary ?? "No Sales/Rx analysis available."}
-              </p>
+              <div className="insight-kpi-list">
+                <div>
+                  <span>Products reviewed</span>
 
-              <div className="compact-observations">
-                {salesAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
-                  <div className="compact-observation" key={index}>
-                    <span />
+                  <strong>{salesRxData.length}</strong>
+                </div>
 
-                    <p>{observation}</p>
+                <div>
+                  <span>Mismatch findings</span>
+
+                  <strong>{mismatchIssues.length}</strong>
+                </div>
+
+                {highestMismatch && (
+                  <div>
+                    <span>Highest mismatch</span>
+
+                    <strong>
+                      {highestMismatch.product} · {highestMismatch.mismatchScore.toFixed(2)}
+                    </strong>
                   </div>
-                ))}
+                )}
               </div>
+
+              {salesAnalysis?.summary && <p className="insight-summary">{salesAnalysis.summary}</p>}
             </div>
           </div>
         </article>
@@ -296,8 +430,6 @@ function InvestigationInsights({ result }: Props) {
           </header>
 
           <div className="insight-body">
-            {/* CHART */}
-
             <div className="insight-chart concentration-chart">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
@@ -305,7 +437,6 @@ function InvestigationInsights({ result }: Props) {
                   cy="45%"
                   innerRadius="55%"
                   outerRadius="92%"
-                  barSize={20}
                   data={concentrationData}
                   startAngle={90}
                   endAngle={-270}
@@ -313,44 +444,46 @@ function InvestigationInsights({ result }: Props) {
                   <RadialBar dataKey="value" background cornerRadius={8} barSize={12} />
 
                   <Legend iconSize={9} layout="horizontal" verticalAlign="bottom" align="center" />
-                  <Tooltip
-                    offset={20}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      zIndex: 9999,
-                      pointerEvents: "none",
-                      transition: "opacity 160ms ease",
-                    }}
-                    content={<ChartTooltip />}
-                  />
+
+                  <Tooltip content={<PercentTooltip />} />
                 </RadialBarChart>
               </ResponsiveContainer>
 
               <div className="chart-center-label concentration-center-label">
-                <strong>{doctorConcentration.toFixed(0)}%</strong>
+                <strong>{doctorConcentration.toFixed(1)}%</strong>
 
-                <span>Doctor</span>
+                <span>Top Doctor</span>
               </div>
             </div>
 
-            {/* AI TEXT */}
-
             <div className="insight-text">
-              <span className="ai-label">AI Interpretation</span>
+              <span className="ai-label">Evidence Summary</span>
 
-              <p className="insight-summary">
-                {doctorAnalysis?.summary ?? "No doctor or territory analysis available."}
-              </p>
+              <div className="insight-kpi-list">
+                <div>
+                  <span>Top doctor share</span>
 
-              <div className="compact-observations">
-                {doctorAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
-                  <div className="compact-observation" key={index}>
-                    <span />
+                  <strong>{doctorConcentration.toFixed(2)}%</strong>
+                </div>
 
-                    <p>{observation}</p>
-                  </div>
-                ))}
+                <div>
+                  <span>Top 3 doctor share</span>
+
+                  <strong>
+                    {safeNumber(doctorFinding?.evidence?.top_3_share_percent).toFixed(2)}%
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Cross-territory share</span>
+
+                  <strong>{crossTerritory.toFixed(2)}%</strong>
+                </div>
               </div>
+
+              {doctorAnalysis?.summary && (
+                <p className="insight-summary">{doctorAnalysis.summary}</p>
+              )}
             </div>
           </div>
         </article>
@@ -364,7 +497,7 @@ function InvestigationInsights({ result }: Props) {
             <div>
               <span className="insight-eyebrow">Incentive</span>
 
-              <h3>Payout Analysis</h3>
+              <h3>Payout Validation</h3>
             </div>
 
             <span className={severityClass(payoutAnalysis?.severity)}>
@@ -373,8 +506,6 @@ function InvestigationInsights({ result }: Props) {
           </header>
 
           <div className="insight-body">
-            {/* CHART */}
-
             <div className="insight-chart payout-chart">
               <ResponsiveContainer width="100%" height="80%">
                 <BarChart
@@ -394,61 +525,67 @@ function InvestigationInsights({ result }: Props) {
                     tickLine={false}
                     axisLine={false}
                     fontSize={10}
-                    tickFormatter={(value) => `₹${Math.round(value / 1000)}k`}
+                    tickFormatter={(value) => `₹${formatCompactMoney(value)}`}
                   />
 
                   <Tooltip
                     cursor={{
                       fill: "transparent",
                     }}
-                    offset={14}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      transition: "none",
-                      pointerEvents: "none",
-                    }}
-                    content={<ChartTooltip />}
+                    content={<MoneyTooltip />}
                   />
 
-                  <Bar dataKey="amount" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
+                    {payoutData.map((item) => (
+                      <Cell key={item.name} fill={item.fill} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
 
               <div className="payout-chart-difference">
-                <span>Difference</span>
+                <span>Total Difference</span>
 
                 <strong>
-                  {payoutDifference > 0 ? "+" : ""}
+                  {totalPayoutDifference > 0 ? "+" : ""}
 
-                  {formatMoney(payoutDifference)}
+                  {formatMoney(totalPayoutDifference)}
                 </strong>
               </div>
             </div>
 
-            {/* AI TEXT */}
-
             <div className="insight-text">
-              <span className="ai-label">AI Interpretation</span>
+              <span className="ai-label">Validation Summary</span>
 
-              <p className="insight-summary">
-                {payoutAnalysis?.summary ?? "No payout analysis available."}
-              </p>
+              <div className="insight-kpi-list">
+                <div>
+                  <span>Products checked</span>
 
-              <div className="compact-observations">
-                {payoutAnalysis?.key_observations?.slice(0, 2).map((observation, index) => (
-                  <div className="compact-observation" key={index}>
-                    <span />
+                  <strong>{payoutFindings.length}</strong>
+                </div>
 
-                    <p>{observation}</p>
-                  </div>
-                ))}
+                <div>
+                  <span>Payout discrepancies</span>
+
+                  <strong>{payoutMismatchCount}</strong>
+                </div>
+
+                <div>
+                  <span>Net difference</span>
+
+                  <strong>{formatMoney(totalPayoutDifference)}</strong>
+                </div>
               </div>
+
+              {payoutAnalysis?.summary && (
+                <p className="insight-summary">{payoutAnalysis.summary}</p>
+              )}
             </div>
           </div>
         </article>
 
         {/* =================================================
-            FINAL ASSESSMENT
+            OVERALL RISK
         ================================================= */}
 
         <article className="insight-card">
@@ -456,7 +593,7 @@ function InvestigationInsights({ result }: Props) {
             <div>
               <span className="insight-eyebrow">Overall</span>
 
-              <h3>Final Assessment</h3>
+              <h3>Investigation Risk</h3>
             </div>
 
             <span className={severityClass(result.overall_severity)}>
@@ -465,8 +602,6 @@ function InvestigationInsights({ result }: Props) {
           </header>
 
           <div className="insight-body">
-            {/* RISK CHART */}
-
             <div className="insight-chart risk-chart">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
@@ -474,22 +609,13 @@ function InvestigationInsights({ result }: Props) {
                   cy="45%"
                   innerRadius="68%"
                   outerRadius="92%"
-                  barSize={20}
                   data={riskData}
                   startAngle={90}
                   endAngle={-270}
                 >
                   <RadialBar dataKey="value" background cornerRadius={10} />
 
-                  <Tooltip
-                    offset={14}
-                    isAnimationActive={false}
-                    wrapperStyle={{
-                      transition: "none",
-                      pointerEvents: "none",
-                    }}
-                    content={<ChartTooltip />}
-                  />
+                  <Tooltip content={<PercentTooltip />} />
                 </RadialBarChart>
               </ResponsiveContainer>
 
@@ -506,21 +632,33 @@ function InvestigationInsights({ result }: Props) {
               </div>
             </div>
 
-            {/* AI TEXT */}
-
             <div className="insight-text">
-              <span className="ai-label">AI Assessment</span>
+              <span className="ai-label">Overall Assessment</span>
 
-              <p className="insight-summary final-summary">
-                {finalReport?.overall_assessment ?? "No final assessment available."}
-              </p>
+              <div className="insight-kpi-list">
+                <div>
+                  <span>Risk score</span>
 
-              {finalReport?.recommended_actions?.length && (
-                <div className="recommended-action">
-                  <span>Recommended Action</span>
-
-                  <p>{finalReport.recommended_actions[0]}</p>
+                  <strong>{riskScore} / 100</strong>
                 </div>
+
+                <div>
+                  <span>Risk findings</span>
+
+                  <strong>{riskFindingCount}</strong>
+                </div>
+
+                <div>
+                  <span>Review</span>
+
+                  <strong>
+                    {finalReport?.human_review_required ? "Required" : "Not Required"}
+                  </strong>
+                </div>
+              </div>
+
+              {finalReport?.overall_assessment && (
+                <p className="insight-summary final-summary">{finalReport.overall_assessment}</p>
               )}
             </div>
           </div>

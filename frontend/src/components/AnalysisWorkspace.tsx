@@ -1,12 +1,11 @@
 import { useState } from "react";
 
 import type { Finding, PeerAnalysis as PeerAnalysisType } from "../types/investigation";
+
 import ProductAnalysis from "./analysis/ProductAnalysis";
 import BehaviourAnalysis from "./analysis/BehaviourAnalysis";
 import HistoricalAnalysis from "./analysis/HistoricalAnalysis";
-
 import PeerAnalysis from "./analysis/PeerAnalysis";
-import { resume } from "react-dom/server";
 
 type Props = {
   findings: Finding[];
@@ -47,10 +46,11 @@ export default function AnalysisWorkspace({ representativeID, findings, peerAnal
 
       <div className="analysis-workspace-header section-heading">
         <div>
-          <h2>Analysis Workspace</h2>
+          <h2>Investigation Evidence</h2>
 
           <p>
-            Explore investigation evidence across products, history, peers and behaviour patterns.
+            Review supporting evidence across products, peer benchmarks, doctor and territory
+            behaviour, and historical trends.
           </p>
         </div>
       </div>
@@ -61,25 +61,25 @@ export default function AnalysisWorkspace({ representativeID, findings, peerAnal
 
       <nav className="analysis-tabs">
         <AnalysisTabButton active={activeTab === "product"} onClick={() => setActiveTab("product")}>
-          Product
-        </AnalysisTabButton>
-
-        <AnalysisTabButton
-          active={activeTab === "historical"}
-          onClick={() => setActiveTab("historical")}
-        >
-          Historical
+          Sales &amp; Products
         </AnalysisTabButton>
 
         <AnalysisTabButton active={activeTab === "peer"} onClick={() => setActiveTab("peer")}>
-          Peer
+          Peer Benchmark
         </AnalysisTabButton>
 
         <AnalysisTabButton
           active={activeTab === "behaviour"}
           onClick={() => setActiveTab("behaviour")}
         >
-          Behaviour
+          Doctor &amp; Territory
+        </AnalysisTabButton>
+
+        <AnalysisTabButton
+          active={activeTab === "historical"}
+          onClick={() => setActiveTab("historical")}
+        >
+          Trend History
         </AnalysisTabButton>
       </nav>
 
@@ -90,13 +90,13 @@ export default function AnalysisWorkspace({ representativeID, findings, peerAnal
       <div className="analysis-workspace-content">
         {activeTab === "product" && <ProductAnalysis findings={findings} />}
 
-        {activeTab === "behaviour" && <BehaviourAnalysis findings={findings} />}
-
-        {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
-
         {activeTab === "peer" && (
           <PeerAnalysis peerAnalysis={peerAnalysis} representativeId={representativeID} />
         )}
+
+        {activeTab === "behaviour" && <BehaviourAnalysis findings={findings} />}
+
+        {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
       </div>
     </section>
   );

@@ -1,12 +1,12 @@
-import { useState } from "react";
-
 import type { InvestigationResult } from "../types/investigation";
-
-import FinalAssessment from "./FinalAssessment";
 
 interface Props {
   result: InvestigationResult;
 }
+
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function StatusBadge({ status }: { status?: string }) {
   const value = status ?? "UNKNOWN";
@@ -14,14 +14,30 @@ function StatusBadge({ status }: { status?: string }) {
   return <span className={`severity-badge severity-${value.toLowerCase()}`}>{value}</span>;
 }
 
-export default function InvestigationOverview({ result }: Props) {
-  const [detailsExpanded, setDetailsExpanded] = useState(false);
+function FindingCard({ text }: { text: string }) {
+  return (
+    <div className="risk-driver-card">
+      <div className="risk-driver-header">
+        <span className="risk-driver-icon" aria-hidden="true">
+          ⚠
+        </span>
 
+        <span className="risk-driver-title">Attention Required</span>
+      </div>
+
+      <p>{text}</p>
+    </div>
+  );
+}
+
+/* =========================================================
+   COMPONENT
+========================================================= */
+
+export default function InvestigationOverview({ result }: Props) {
   const report = result.final_report;
 
   const riskDrivers = report?.top_risk_drivers ?? [];
-
-  const recommendedActions = report?.recommended_actions ?? [];
 
   const plan = result.investigation_plan;
 
@@ -34,140 +50,102 @@ export default function InvestigationOverview({ result }: Props) {
   return (
     <section className="investigation-overview">
       {/* ==================================================
-          HEADER
+          SINGLE OUTER CARD
       ================================================== */}
 
-      <div className="overview-header">
-        <div className="overview-header-copy">
-          <h2>AI Investigation Summary</h2>
+      <div className="investigation-overview-card">
+        {/* ==================================================
+            INVESTIGATION DECISION
+        ================================================== */}
 
-          <p>
-            Representative {result.representative_id} | {result.start_date} to {result.end_date}
-          </p>
+        <section className="investigation-decision-section">
+          <div className="decision-header">
+            <div>
+              <h2>Investigation Decision</h2>
 
-          <div className="overview-header-status">
-            <StatusBadge status={result.overall_severity} />
+              <p className="decision-subtitle">Consolidated outcome of the audit investigation</p>
+            </div>
+
+            {report?.human_review_required ? (
+              <div className="review-warning">Human Review Required</div>
+            ) : (
+              <div className="decision-approved">No Review Required</div>
+            )}
           </div>
-        </div>
-      </div>
 
-      {/* ==================================================
-          KEY FINDINGS
-      ================================================== */}
+          {/* ================================================
+              CURRENT ASSESSMENT
+          ================================================= */}
 
-      <div className="overview-section key-findings-section">
-        <h3>Key Findings</h3>
+          <div className="decision-status">
+            <h4>Current Assessment</h4>
 
-        {riskDrivers.length > 0 ? (
-          <div className="risk-driver-list">
-            {riskDrivers.map((item, index) => (
-              <div key={`${index}-${item}`} className="risk-driver">
-                <span className="risk-driver-icon" aria-hidden="true">
-                  ⚠
-                </span>
+            <div className="decision-status-row">
+              <StatusBadge status={result.overall_severity} />
 
-                <p>{item}</p>
+              <p>
+                Risk score: <strong>{result.overall_risk_score ?? 0}</strong>
+                {" / 100"}
+              </p>
+            </div>
+          </div>
+
+          {/* ================================================
+              ASSESSMENT
+          ================================================= */}
+
+          {report?.overall_assessment && (
+            <div className="decision-assessment">
+              <h4>Assessment</h4>
+
+              <p>{report.overall_assessment}</p>
+            </div>
+          )}
+
+          {/* ================================================
+              KEY FINDINGS
+          ================================================= */}
+
+          <div className="decision-findings">
+            <h4>Key Findings</h4>
+
+            {riskDrivers.length > 0 ? (
+              <div className="risk-driver-list">
+                {riskDrivers.map((item, index) => (
+                  <FindingCard key={`${index}-${item}`} text={item} />
+                ))}
               </div>
-            ))}
+            ) : (
+              <p className="overview-empty-text">No significant risk drivers identified.</p>
+            )}
           </div>
-        ) : (
-          <p className="overview-empty-text">No significant risk drivers identified.</p>
-        )}
-      </div>
+        </section>
 
-      {/* ==================================================
-          MODULE STATUS
-      ================================================== */}
+        {/* ==================================================
+            SECTION DIVIDER
+        ================================================== */}
 
-      <div className="overview-grid">
-        <div className="overview-card">
-          <h4>Sales &amp; Prescription</h4>
+        <div className="investigation-section-divider" />
 
-          <StatusBadge status={sales?.severity} />
+        {/* ==================================================
+            EVIDENCE & AI REASONING
+        ================================================== */}
 
-          <p>{sales?.summary || "No analysis summary available."}</p>
-        </div>
+        <section className="investigation-evidence-section">
+          <div className="overview-detailed-heading">
+            <div>
+              <h3>Evidence &amp; AI Reasoning</h3>
 
-        <div className="overview-card">
-          <h4>Doctor &amp; Territory</h4>
-
-          <StatusBadge status={doctor?.severity} />
-
-          <p>{doctor?.summary || "No analysis summary available."}</p>
-        </div>
-
-        <div className="overview-card">
-          <h4>Payout Validation</h4>
-
-          <StatusBadge status={payout?.severity} />
-
-          <p>{payout?.summary || "No analysis summary available."}</p>
-        </div>
-      </div>
-
-      {/* ==================================================
-          RECOMMENDED ACTION
-      ================================================== */}
-
-      <div className="overview-action">
-        <h3>Recommended Action</h3>
-
-        {recommendedActions.length > 0 ? (
-          <div className="action-list">
-            {recommendedActions.map((item, index) => (
-              <div key={`${index}-${item}`} className="action-item">
-                <span className="action-item-icon" aria-hidden="true">
-                  ✓
-                </span>
-
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="overview-empty-text">No recommended actions available.</p>
-        )}
-
-        {report?.human_review_required && (
-          <div className="review-warning">Human review recommended</div>
-        )}
-      </div>
-
-      {/* ==================================================
-          DETAILED AI INVESTIGATION
-      ================================================== */}
-
-      <div className="overview-detailed-investigation">
-        <button
-          type="button"
-          className="overview-detailed-toggle"
-          onClick={() => setDetailsExpanded((current) => !current)}
-          aria-expanded={detailsExpanded}
-        >
-          <div>
-            <h3>Detailed AI Investigation</h3>
-
-            <p>Investigation plan, specialist reviews and final assessment</p>
+              <p>Investigation methodology, evidence reviewed and specialist reasoning</p>
+            </div>
           </div>
 
-          <span aria-hidden="true" className="overview-detailed-chevron">
-            {detailsExpanded ? "▲" : "▼"}
-          </span>
-        </button>
-
-        {detailsExpanded && (
           <div className="overview-detailed-content">
             {/* ============================================
-                EXECUTIVE SUMMARY
+                INVESTIGATION SCOPE
             ============================================ */}
 
             <section className="workflow-summary-card">
-              <div>
-                <h3>Overall Risk</h3>
-
-                <StatusBadge status={result.overall_severity} />
-              </div>
-
               <div>
                 <h3>Representative</h3>
 
@@ -181,6 +159,18 @@ export default function InvestigationOverview({ result }: Props) {
                   {result.start_date} to {result.end_date}
                 </p>
               </div>
+
+              <div>
+                <h3>Products Reviewed</h3>
+
+                <p>{result.products_analyzed?.length ?? 0}</p>
+              </div>
+
+              <div>
+                <h3>Areas Reviewed</h3>
+
+                <p>{plan?.focus_areas?.length ?? 0} specialist areas</p>
+              </div>
             </section>
 
             {/* ============================================
@@ -188,11 +178,13 @@ export default function InvestigationOverview({ result }: Props) {
             ============================================ */}
 
             <section className="workflow-card">
-              <h3>Investigation Areas Reviewed</h3>
+              <div className="workflow-card-heading">
+                <h3>Investigation Areas Reviewed</h3>
 
-              <p>
-                Priority: <strong>{plan?.priority ?? "N/A"}</strong>
-              </p>
+                <span className="workflow-priority">
+                  Priority: <strong>{plan?.priority ?? "N/A"}</strong>
+                </span>
+              </div>
 
               <div className="tag-container">
                 {plan?.focus_areas?.map((area) => (
@@ -204,66 +196,90 @@ export default function InvestigationOverview({ result }: Props) {
             </section>
 
             {/* ============================================
-                SPECIALIST REVIEWS
+                SPECIALIST EVIDENCE
             ============================================ */}
 
             <section className="workflow-grid">
+              {/* SALES / PRESCRIPTION */}
+
               <div className="workflow-card">
-                <h3>Sales &amp; Prescription Review</h3>
+                <div className="workflow-card-heading">
+                  <h3>Sales &amp; Prescription Evidence</h3>
 
-                <StatusBadge status={sales?.severity} />
+                  <StatusBadge status={sales?.severity} />
+                </div>
 
-                <p>{sales?.summary}</p>
+                <p className="workflow-summary">
+                  {sales?.summary ?? "No sales and prescription evidence available."}
+                </p>
 
-                <h4>Key Observations</h4>
+                {sales?.key_observations && sales.key_observations.length > 0 && (
+                  <>
+                    <h4>Key Observations</h4>
 
-                <ul>
-                  {sales?.key_observations?.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
+                    <ul>
+                      {sales.key_observations.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
 
+              {/* DOCTOR / TERRITORY */}
+
               <div className="workflow-card">
-                <h3>Doctor &amp; Territory Review</h3>
+                <div className="workflow-card-heading">
+                  <h3>Doctor &amp; Territory Evidence</h3>
 
-                <StatusBadge status={doctor?.severity} />
+                  <StatusBadge status={doctor?.severity} />
+                </div>
 
-                <p>{doctor?.summary}</p>
+                <p className="workflow-summary">
+                  {doctor?.summary ?? "No doctor and territory evidence available."}
+                </p>
 
-                <h4>Key Observations</h4>
+                {doctor?.key_observations && doctor.key_observations.length > 0 && (
+                  <>
+                    <h4>Key Observations</h4>
 
-                <ul>
-                  {doctor?.key_observations?.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
+                    <ul>
+                      {doctor.key_observations.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
 
+              {/* PAYOUT */}
+
               <div className="workflow-card">
-                <h3>Payout Validation</h3>
+                <div className="workflow-card-heading">
+                  <h3>Payout Evidence</h3>
 
-                <StatusBadge status={payout?.severity} />
+                  <StatusBadge status={payout?.severity} />
+                </div>
 
-                <p>{payout?.summary}</p>
+                <p className="workflow-summary">
+                  {payout?.summary ?? "No payout evidence available."}
+                </p>
 
-                <h4>Key Observations</h4>
+                {payout?.key_observations && payout.key_observations.length > 0 && (
+                  <>
+                    <h4>Key Observations</h4>
 
-                <ul>
-                  {payout?.key_observations?.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
+                    <ul>
+                      {payout.key_observations.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             </section>
-
-            {/* ============================================
-                FINAL ASSESSMENT
-            ============================================ */}
-
-            <FinalAssessment result={result} />
           </div>
-        )}
+        </section>
       </div>
     </section>
   );
