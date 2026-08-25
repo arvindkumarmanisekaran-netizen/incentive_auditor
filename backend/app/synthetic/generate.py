@@ -2,15 +2,15 @@ from pathlib import Path
 import json
 import shutil
 
-from generators.canonical import (
+from backend.app.synthetic.generators.canonical import (
     generate_canonical_data,
 )
 
-from generators.alias_variator import (
+from backend.app.synthetic.generators.alias_variator import (
     generate_alias_documents,
 )
 
-from generators.structured_exports import (
+from backend.app.synthetic.generators.structured_exports import (
     export_structured_data,
 )
 

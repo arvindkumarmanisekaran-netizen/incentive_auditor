@@ -1,0 +1,93 @@
+[
+  {
+    "territory id": "T029",
+    "area name": "Gandhinagar Zone 29",
+    "region name": "South",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T025",
+    "area name": "Howrah Zone 25",
+    "region name": "South",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T018",
+    "area name": "Ahmedabad Zone 18",
+    "region name": "East",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T035",
+    "area name": "Bardhaman Zone 35",
+    "region name": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T031",
+    "area name": "Nizamabad Zone 31",
+    "region name": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T036",
+    "area name": "Srinagar Zone 36",
+    "region name": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T026",
+    "area name": "Khora  Zone 26",
+    "region name": "West",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T039",
+    "area name": "Allahabad Zone 39",
+    "region name": "West",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T034",
+    "area name": "Purnia Zone 34",
+    "region name": "East",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T013",
+    "area name": "Giridih Zone 13",
+    "region name": "West",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T007",
+    "area name": "Jalandhar Zone 7",
+    "region name": "Central",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T017",
+    "area name": "Bangalore Zone 17",
+    "region name": "North",
+    "country": "India",
+    "status": "Active"
+  },
+  {
+    "territory id": "T011",
+    "area name": "Rohtak Zone 11",
+    "region name": "South",
+    "country": "India",
+    "status": "Active"
+  }
+]

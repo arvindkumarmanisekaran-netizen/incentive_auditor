@@ -33,7 +33,7 @@ from ..services.document_processing.duplicate_checker import (
 
 router = APIRouter(
     prefix="/api/document-processing",
-    tags=["document-processing"],
+    tags=["Document-Processing"],
 )
 
 

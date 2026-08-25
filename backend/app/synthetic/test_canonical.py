@@ -1,7 +1,6 @@
-from generators.canonical import (
+from backend.app.synthetic.generators.canonical import (
     generate_canonical_data,
 )
-
 
 data = generate_canonical_data(
     num_territories=10,
@@ -12,17 +11,11 @@ data = generate_canonical_data(
 
 
 for key, value in data.items():
-    print(
-        f"{key:20} {len(value):,}"
-    )
+    print(f"{key:20} {len(value):,}")
 
 
 print()
-print(
-    "Example anomaly:"
-)
+print("Example anomaly:")
 
 if data["anomalies"]:
-    print(
-        data["anomalies"][0]
-    )
+    print(data["anomalies"][0])

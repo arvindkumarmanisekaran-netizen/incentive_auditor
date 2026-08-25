@@ -1,0 +1,9 @@
+drug id,medicine name,therapy area,product status
+P020,DeseruntCare 20,Pain Management,Active
+P015,ItaqueCare 15,Antibiotic,Active
+P025,DoloribusCare 25,Diabetes,Active
+P017,VitaeCare 17,Pain Management,Active
+P022,ErrorCare 22,Dermatology,Active
+P027,AtCare 27,Antibiotic,Active
+P004,CumCare 4,Antibiotic,Active
+P023,AperiamCare 23,Cardiology,Active

@@ -25,6 +25,9 @@ import AIChatAssistant from "./components/AIChatAssistant";
 import InvestigationWorkflow from "./components/InvestigationWorkflow";
 
 import InvestigationOverview from "./components/InvestigationOverview";
+
+import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
+
 import type { WorkflowAgent } from "./types/workflow";
 
 import "./styles/index.css";
@@ -124,6 +127,8 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   const [showDocumentProcessing, setShowDocumentProcessing] = useState(false);
+
+  const [generatingSynthetic, setGeneratingSynthetic] = useState(false);
 
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
@@ -505,6 +510,25 @@ function App() {
           Database Management
         </button>
       </nav>
+
+      {activeTab === "database" && (
+        <section className="dashboard-tab-content database-page">
+          <SyntheticDataGeneration
+            showDocumentProcessing={showDocumentProcessing}
+            onToggleDocumentProcessing={() => setShowDocumentProcessing((current) => !current)}
+          />
+
+          {showDocumentProcessing && (
+            <div className="document-processing-expand">
+              <DocumentProcessingCard />
+            </div>
+          )}
+
+          <div className="database-management-center">
+            <DatabaseManagementCard />
+          </div>
+        </section>
+      )}
 
       {/* ==================================================
           ANALYSIS TAB

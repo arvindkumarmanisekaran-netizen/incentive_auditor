@@ -1,0 +1,50 @@
+[
+  {
+    "drug id": "P007",
+    "medicine name": "SintCare 7",
+    "therapy area": "Diabetes",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P011",
+    "medicine name": "NobisCare 11",
+    "therapy area": "Neurology",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P019",
+    "medicine name": "QuisquamCare 19",
+    "therapy area": "Respiratory",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P026",
+    "medicine name": "IustoCare 26",
+    "therapy area": "Gastroenterology",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P021",
+    "medicine name": "IsteCare 21",
+    "therapy area": "Antibiotic",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P005",
+    "medicine name": "PraesentiumCare 5",
+    "therapy area": "Cardiology",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P001",
+    "medicine name": "RerumCare 1",
+    "therapy area": "Diabetes",
+    "product status": "Active"
+  },
+  {
+    "drug id": "P018",
+    "medicine name": "RepellatCare 18",
+    "therapy area": "Cardiology",
+    "product status": "Active"
+  }
+]

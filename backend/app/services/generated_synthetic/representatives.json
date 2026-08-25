@@ -1,0 +1,66 @@
+[
+  {
+    "rep id": "FR0004",
+    "firstname": "Amaira",
+    "surname": "Doshi",
+    "area code": "T031",
+    "join date": "2024-09-10",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0017",
+    "firstname": "Raksha",
+    "surname": "Gupta",
+    "area code": "T039",
+    "join date": "2022-04-03",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0024",
+    "firstname": "Tara",
+    "surname": "Yadav",
+    "area code": "T011",
+    "join date": "2022-04-17",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0012",
+    "firstname": "Harini",
+    "surname": "Buch",
+    "area code": "T016",
+    "join date": "2025-04-22",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0025",
+    "firstname": "Viraj",
+    "surname": "Bora",
+    "area code": "T005",
+    "join date": "2021-10-21",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0018",
+    "firstname": "Reyansh",
+    "surname": "Bakshi",
+    "area code": "T031",
+    "join date": "2024-10-11",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0015",
+    "firstname": "Chandani",
+    "surname": "Ramakrishnan",
+    "area code": "T020",
+    "join date": "2025-07-19",
+    "active status": "Active"
+  },
+  {
+    "rep id": "FR0013",
+    "firstname": "Bimala",
+    "surname": "Jain",
+    "area code": "T031",
+    "join date": "2022-05-31",
+    "active status": "Active"
+  }
+]
