@@ -1,16 +1,17 @@
 import { useState } from "react";
 
 import type { Finding, PeerAnalysis as PeerAnalysisType } from "../types/investigation";
-
 import ProductAnalysis from "./analysis/ProductAnalysis";
 import BehaviourAnalysis from "./analysis/BehaviourAnalysis";
 import HistoricalAnalysis from "./analysis/HistoricalAnalysis";
 
 import PeerAnalysis from "./analysis/PeerAnalysis";
+import { resume } from "react-dom/server";
 
 type Props = {
   findings: Finding[];
   peerAnalysis?: PeerAnalysisType;
+  representativeID?: string;
 };
 
 type AnalysisTab = "product" | "historical" | "peer" | "behaviour";
@@ -35,7 +36,7 @@ function AnalysisTabButton({
   );
 }
 
-export default function AnalysisWorkspace({ findings, peerAnalysis }: Props) {
+export default function AnalysisWorkspace({ representativeID, findings, peerAnalysis }: Props) {
   const [activeTab, setActiveTab] = useState<AnalysisTab>("product");
 
   return (
@@ -93,7 +94,9 @@ export default function AnalysisWorkspace({ findings, peerAnalysis }: Props) {
 
         {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
 
-        {activeTab === "peer" && <PeerAnalysis peerAnalysis={peerAnalysis} />}
+        {activeTab === "peer" && (
+          <PeerAnalysis peerAnalysis={peerAnalysis} representativeId={representativeID} />
+        )}
       </div>
     </section>
   );

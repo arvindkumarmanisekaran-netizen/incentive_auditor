@@ -205,6 +205,7 @@ async def peer_analysis_agent(
                 territory_metrics,
                 product_names,
                 representative_names,
+                current_rep_id,
             )
 
             emit_workflow_event(
@@ -241,6 +242,7 @@ async def peer_analysis_agent(
                 product_metrics,
                 product_names,
                 representative_names,
+                current_rep_id,
             )
 
             emit_workflow_event(
@@ -253,22 +255,45 @@ async def peer_analysis_agent(
                 ),
             )
 
-            for product_id, product in product_comparison.get(
+            # ==========================================
+            # FINAL COMMENTARY SUMMARY
+            # ==========================================
+
+            products = product_comparison.get(
                 "products",
                 {},
-            ).items():
+            )
+
+            emit_workflow_event(
+                event_type="commentary",
+                agent=agent_id,
+                message=(
+                    f"Peer benchmark completed. "
+                    f"{len(products)} products compared "
+                    f"against peer population."
+                ),
+            )
+
+            for product_id, product in products.items():
 
                 emit_workflow_event(
                     event_type="commentary",
                     agent=agent_id,
                     message=(
-                        f"Product {product_id} "
-                        f"name={product.get('product_name')} "
-                        f"peer_distribution="
-                        f"{len(product.get('peer_distribution', []))}"
+                        f"{product.get('product_name', product_id)} "
+                        f"({product_id}): "
+                        f"{product.get('peer_group_size', 0)} peers analyzed."
                     ),
                 )
 
+            emit_workflow_event(
+                event_type="commentary",
+                agent=agent_id,
+                message=(
+                    "Peer distribution analysis completed. "
+                    "Benchmark data prepared for visualization."
+                ),
+            )
         else:
 
             product_comparison = {

@@ -71,6 +71,8 @@ export interface PeerProductComparison {
 
   product_name: string;
 
+  representative_name?: string;
+
   comparison_available: boolean;
 
   peer_group_size: number;
@@ -95,7 +97,7 @@ export interface PeerProductComparison {
 
   peer_distribution: {
     representative_id: string;
-    representivate_name: string;
+    representative_name: string;
     sales: number;
     rx: number;
     payout: number;

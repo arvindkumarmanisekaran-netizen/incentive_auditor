@@ -583,7 +583,11 @@ function App() {
                   CHARTS
               ------------------------------------------ */}
 
-              <AnalysisWorkspace findings={findings} peerAnalysis={result.peer_analysis} />
+              <AnalysisWorkspace
+                findings={findings}
+                peerAnalysis={result.peer_analysis}
+                representativeID={result.representative_id}
+              />
 
               {/* ------------------------------------------
                   RISK SIGNALS

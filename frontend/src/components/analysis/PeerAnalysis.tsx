@@ -16,12 +16,14 @@ import {
   Radar,
   Legend,
   ReferenceLine,
+  ReferenceDot,
 } from "recharts";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
 
 type Props = {
   peerAnalysis?: PeerAnalysisType;
+  representativeId?: string;
 };
 
 const CHART_THEME = {
@@ -44,7 +46,7 @@ function normalize(value: number, average: number) {
   return Math.min(Math.round((value / average) * 100), 200);
 }
 
-export default function PeerAnalysis({ peerAnalysis }: Props) {
+export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) {
   const comparison = peerAnalysis?.product_peer_comparison;
 
   if (!comparison?.products) {
@@ -120,17 +122,36 @@ export default function PeerAnalysis({ peerAnalysis }: Props) {
   const peerDistribution =
     selected?.peer_distribution.map((peer) => ({
       id: peer.representative_id,
-      name: peer.representivate_name,
+
+      name: peer.representative_name,
+
+      displayName: `${peer.representative_name} (${peer.representative_id})`,
+
       sales: peer.sales,
+
       payout: peer.payout,
+
+      rx: peer.rx,
+
+      type: "Peer",
     })) ?? [];
 
   const representativePoint = selected
     ? [
         {
           id: "Current Representative",
+
+          name: selected.representative_name,
+
+          displayName: `${selected.representative_name} (${representativeId})`,
+
           sales: selected.representative.sales,
+
           payout: selected.representative.payout,
+
+          rx: selected.representative.rx,
+
+          type: "Current Representative",
         },
       ]
     : [];
@@ -139,8 +160,16 @@ export default function PeerAnalysis({ peerAnalysis }: Props) {
     ? [
         {
           id: "Peer Average",
+
+          name: "Peer Average",
+
           sales: selected.peer_average.sales,
+
           payout: selected.peer_average.payout,
+
+          rx: selected.peer_average.rx,
+
+          type: "Peer Average",
         },
       ]
     : [];
@@ -274,16 +303,37 @@ export default function PeerAnalysis({ peerAnalysis }: Props) {
           <h3>Peer Distribution</h3>
 
           <ResponsiveContainer width="100%" height={360}>
-            <ScatterChart>
+            <ScatterChart
+              margin={{
+                top: 30,
+                right: 40,
+                bottom: 40,
+                left: 50,
+              }}
+            >
               <CartesianGrid stroke={CHART_THEME.grid} />
 
-              <XAxis dataKey="sales" name="Sales">
-                <Label value="Sales Amount" position="insideBottom" offset={-5} />
-              </XAxis>
+              <XAxis
+                type="number"
+                dataKey="sales"
+                name="Sales"
+                label={{
+                  value: "Sales",
+                  position: "insideBottom",
+                  offset: -10,
+                }}
+              />
 
-              <YAxis dataKey="payout" name="Payout">
-                <Label value="Payout Amount" angle={-90} position="insideLeft" />
-              </YAxis>
+              <YAxis
+                type="number"
+                dataKey="payout"
+                name="Payout"
+                label={{
+                  value: "Payout",
+                  angle: -90,
+                  position: "insideLeft",
+                }}
+              />
 
               <Tooltip
                 content={({ payload }) => {
@@ -295,45 +345,45 @@ export default function PeerAnalysis({ peerAnalysis }: Props) {
 
                   return (
                     <div className="chart-tooltip">
-                      <strong>{data.id}</strong>
+                      <strong>{data.displayName}</strong>
+
+                      <div>Type: {data.type}</div>
 
                       <div>Sales: {data.sales?.toLocaleString()}</div>
 
                       <div>Payout: {data.payout?.toLocaleString()}</div>
+
+                      <div>RX: {data.rx?.toLocaleString()}</div>
                     </div>
                   );
                 }}
               />
 
-              <ReferenceLine
-                x={selected.peer_average.sales}
-                stroke="#f59e0b"
-                strokeWidth={2}
-                strokeDasharray="6 6"
+              {/* Peer representatives */}
+
+              <Scatter
+                name="Peer Representatives"
+                data={peerDistribution}
+                fill={CHART_THEME.distribution}
               />
 
-              <ReferenceLine
-                y={selected.peer_average.payout}
-                stroke="#f59e0b"
-                strokeWidth={2}
-                strokeDasharray="6 6"
-              />
-              {/* Peer population */}
-
-              <Scatter name="Peer Representatives" data={peerDistribution} fill="#10b981" />
-
-              {/* Current representative */}
+              {/* Current Representative */}
 
               <Scatter
                 name="Current Representative"
                 data={representativePoint}
-                fill="#2563eb"
-                shape="star"
+                fill={CHART_THEME.representative}
+                shape="diamond"
               />
 
-              {/* Peer average */}
+              {/* Peer Average */}
 
-              <Scatter name="Peer Average" data={peerAveragePoint} fill="#f59e0b" shape="diamond" />
+              <Scatter
+                name="Peer Average"
+                data={peerAveragePoint}
+                fill={CHART_THEME.peer}
+                shape="star"
+              />
 
               <Legend />
             </ScatterChart>

@@ -6,6 +6,7 @@ def calculate_peer_comparison(
     peer_metrics: list[dict[str, Any]],
     product_names: dict[str, str] | None = None,
     representative_names: dict[str, str] | None = None,
+    current_representative_id: str | None = None,
 ) -> dict[str, Any]:
     """
     Compare representative product metrics against peer representatives.
@@ -147,17 +148,12 @@ def calculate_peer_comparison(
         # Detailed product result
         # -------------------------------------------------
 
-        current_rep_id = next(
-            iter(current_metrics.keys()),
-            None,
-        )
-
         product_results[product_id] = {
             "product_id": product_id,
             "product_name": product_name,
             "comparison_available": True,
             "representative_name": representative_names.get(
-                current_rep_id,
+                current_representative_id,
                 "Unknown Representative",
             ),
             "peer_group_size": peer_count,
