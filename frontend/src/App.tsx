@@ -12,8 +12,6 @@ import InvestigationForm from "./components/InvestigationForm";
 
 import RiskSummary from "./components/RiskSummary";
 
-import FindingsList from "./components/FindingsList";
-
 import InvestigationInsights from "./components/InvestigationInsights";
 
 import AnalysisWorkspace from "./components/AnalysisWorkspace";
@@ -588,12 +586,6 @@ function App() {
                 peerAnalysis={result.peer_analysis}
                 representativeID={result.representative_id}
               />
-
-              {/* ------------------------------------------
-                  RISK SIGNALS
-              ------------------------------------------ */}
-
-              <FindingsList findings={findings} />
 
               {/* ------------------------------------------
                   AI INSIGHTS
