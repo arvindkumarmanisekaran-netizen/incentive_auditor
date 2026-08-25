@@ -78,14 +78,10 @@ export function useDocumentUpload() {
     setSuccessMessage(null);
 
     try {
-      console.log(`Uploading ${files.length} documents`);
-
       /*
        * One upload request is made for each file.
        */
       const uploadResults = await uploadDocuments(files);
-
-      console.log("All upload results:", uploadResults);
 
       setResults(uploadResults);
 

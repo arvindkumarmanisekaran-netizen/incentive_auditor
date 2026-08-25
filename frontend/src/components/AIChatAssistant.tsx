@@ -80,8 +80,6 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
 
       const data = await response.json();
 
-      console.log("CHAT RESPONSE:", data);
-
       const agentMessage = data.message ?? "Request processed";
 
       setChat((current) => [
@@ -127,8 +125,6 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
             data.start_date,
             data.end_date,
           );
-
-          console.log("INVESTIGATION RESULT RECEIVED:", result);
 
           /*
            * Only print completed after a real

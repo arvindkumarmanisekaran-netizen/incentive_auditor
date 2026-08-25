@@ -214,8 +214,6 @@ export default function DatabaseManagementCard() {
         case "products": {
           const response = await getProducts(PAGE_SIZE, currentOffset);
 
-          console.log(response.records);
-
           records = response.records;
           total = response.total;
 
@@ -267,13 +265,6 @@ export default function DatabaseManagementCard() {
           break;
         }
       }
-
-      console.log("Database page loaded:", {
-        section,
-        offset: currentOffset,
-        records: records.length,
-        total,
-      });
 
       setRows(records);
       setTotalRecords(total);

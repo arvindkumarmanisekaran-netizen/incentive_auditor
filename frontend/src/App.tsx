@@ -313,8 +313,6 @@ function App() {
         handleWorkflowEvent,
       );
 
-      console.log(data.peer_analysis);
-
       // ----------------------------------------
       // BUILD FINAL RESULT
       // ----------------------------------------
