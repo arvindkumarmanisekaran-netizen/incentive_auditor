@@ -1,18 +1,7 @@
 import { useMemo, useState } from "react";
 
-import {
-  Label,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-  ScatterChart,
-  Scatter,
-  Legend,
-} from "recharts";
+import type { EChartsCoreOption } from "echarts/core";
+import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
 
@@ -22,11 +11,9 @@ type Props = {
 };
 
 const CHART_THEME = {
-  representative: "#2563eb",
-  peer: "#f59e0b",
-  distribution: "#10b981",
-  grid: "#e5e7eb",
-  text: "#475569",
+  representative: SIGNAL_CHART.lime,
+  peer: SIGNAL_CHART.amber,
+  distribution: SIGNAL_CHART.mint,
 };
 
 function normalize(value: number, average: number) {
@@ -54,49 +41,63 @@ function formatPercent(value?: number) {
 
   return `${numeric > 0 ? "+" : ""}${numeric.toFixed(2)}%`;
 }
-type DumbbellShapeProps = {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  payload?: { peer?: number; representative?: number };
-};
 
-function DumbbellShape({ x = 0, y = 0, width = 0, height = 0, payload }: DumbbellShapeProps) {
-  if (!payload) {
-    return null;
-  }
+function peerSalesOption(data: Array<{ product: string; representative: number; peer: number }>): EChartsCoreOption {
+  return {
+    legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
+    grid: { top: 44, right: 18, bottom: 72, left: 58 },
+    xAxis: { type: "category", data: data.map((item) => item.product), axisLabel: { rotate: 32 } },
+    yAxis: { type: "value" },
+    series: [
+      { type: "bar", name: "Representative", data: data.map((item) => item.representative), itemStyle: { color: CHART_THEME.representative, borderRadius: [6, 6, 1, 1] } },
+      { type: "bar", name: "Peer average", data: data.map((item) => item.peer), itemStyle: { color: CHART_THEME.peer, borderRadius: [6, 6, 1, 1] } },
+    ],
+  };
+}
 
-  const peer = Number(payload.peer ?? 100);
-  const representative = Number(payload.representative ?? 0);
+function peerIndexOption(data: Array<{ metric: string; representative: number }>): EChartsCoreOption {
+  return {
+    grid: { top: 20, right: 28, bottom: 30, left: 92 },
+    xAxis: { type: "value", min: 0, max: 200 },
+    yAxis: { type: "category", data: data.map((item) => item.metric) },
+    series: [{
+      type: "bar",
+      barWidth: 8,
+      data: data.map((item) => item.representative),
+      itemStyle: { color: CHART_THEME.representative, borderRadius: 8 },
+      markLine: {
+        symbol: "none",
+        label: { formatter: "Peer 100", color: SIGNAL_CHART.amber, fontSize: 9 },
+        lineStyle: { color: SIGNAL_CHART.amber, type: "dashed" },
+        data: [{ xAxis: 100 }],
+      },
+    }],
+  };
+}
 
-  const min = 0;
-  const max = 200;
-
-  const scale = (value: number) => x + ((value - min) / (max - min)) * width;
-
-  const peerX = scale(peer);
-  const representativeX = scale(representative);
-
-  const centerY = y + height / 2;
-
-  return (
-    <g>
-      <line
-        x1={peerX}
-        x2={representativeX}
-        y1={centerY}
-        y2={centerY}
-        stroke="rgba(185, 255, 102, 0.35)"
-        strokeWidth={4}
-        strokeLinecap="round"
-      />
-
-      <circle cx={peerX} cy={centerY} r={7} fill="#F59E0B" />
-
-      <circle cx={representativeX} cy={centerY} r={8} fill="#8fc95a" />
-    </g>
-  );
+function peerScatterOption(
+  peers: Array<{ sales: number; payout: number; displayName: string }>,
+  representative: Array<{ sales: number; payout: number; displayName: string }>,
+  average: Array<{ sales: number; payout: number; displayName: string }>,
+): EChartsCoreOption {
+  const map = (items: Array<{ sales: number; payout: number; displayName: string }>) =>
+    items.map((item) => ({ name: item.displayName, value: [item.sales, item.payout] }));
+  return {
+    legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
+    grid: { top: 46, right: 20, bottom: 44, left: 62 },
+    xAxis: { type: "value", name: "Sales", nameLocation: "middle", nameGap: 28 },
+    yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 44 },
+    tooltip: {
+      trigger: "item",
+      formatter: (params: { name?: string; value?: number[] }) =>
+        `<strong>${params.name ?? ""}</strong><br/>Sales ${formatMoney(params.value?.[0])}<br/>Payout ${formatMoney(params.value?.[1])}`,
+    },
+    series: [
+      { type: "scatter", name: "Peers", data: map(peers), symbolSize: 9, itemStyle: { color: CHART_THEME.distribution } },
+      { type: "scatter", name: "Representative", data: map(representative), symbol: "diamond", symbolSize: 17, itemStyle: { color: CHART_THEME.representative } },
+      { type: "scatter", name: "Peer average", data: map(average), symbol: "triangle", symbolSize: 16, itemStyle: { color: CHART_THEME.peer } },
+    ],
+  };
 }
 export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) {
   const comparison = peerAnalysis?.product_peer_comparison;
@@ -281,67 +282,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             <p>Representative sales compared across all analyzed products.</p>
           </div>
 
-          <ResponsiveContainer width="100%" height={360}>
-            <BarChart data={comparisonData}>
-              <CartesianGrid stroke={CHART_THEME.grid} />
-
-              <XAxis
-                dataKey="product"
-                interval={0}
-                angle={-35}
-                textAnchor="end"
-                height={90}
-                tick={{
-                  fill: CHART_THEME.text,
-                  fontSize: 11,
-                }}
-              >
-                <Label
-                  value="Products"
-                  position="insideBottom"
-                  offset={-5}
-                  style={{
-                    fill: CHART_THEME.text,
-                    fontSize: 12,
-                    fontWeight: 600,
-                  }}
-                />
-              </XAxis>
-
-              <YAxis
-                tick={{
-                  fill: CHART_THEME.text,
-                }}
-              >
-                <Label
-                  value="Sales Value"
-                  angle={-90}
-                  position="insideLeft"
-                  style={{
-                    fill: CHART_THEME.text,
-                    fontSize: 12,
-                    fontWeight: 600,
-                  }}
-                />
-              </YAxis>
-
-              <Tooltip />
-
-              <Bar
-                dataKey="representative"
-                name="Representative Sales"
-                fill={CHART_THEME.representative}
-                radius={[6, 6, 0, 0]}
-              />
-
-              <Bar
-                dataKey="peer"
-                name="Peer Average Sales"
-                fill={CHART_THEME.peer}
-                radius={[6, 6, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+          <SignalChart option={peerSalesOption(comparisonData)} height={360} ariaLabel="Sales versus peer average" />
         </div>
 
         {/* ==================================================
@@ -356,74 +297,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           </div>
 
           <div className="chart-container peer-dumbbell-chart">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={dumbbellData}
-                layout="vertical"
-                margin={{
-                  top: 12,
-                  right: 28,
-                  left: 20,
-                  bottom: 8,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-
-                <XAxis
-                  type="number"
-                  domain={[0, 200]}
-                  tickLine={false}
-                  axisLine={false}
-                  ticks={[0, 50, 100, 150, 200]}
-                />
-
-                <YAxis
-                  type="category"
-                  dataKey="metric"
-                  tickLine={false}
-                  axisLine={false}
-                  width={95}
-                />
-
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (!active || !payload?.length) {
-                      return null;
-                    }
-
-                    const item = payload[0]?.payload;
-
-                    if (!item) {
-                      return null;
-                    }
-
-                    return (
-                      <div className="chart-custom-tooltip visible">
-                        <strong>{item.metric}</strong>
-
-                        <div>
-                          Representative: <strong>{Number(item.representative).toFixed(0)}</strong>
-                        </div>
-
-                        <div>
-                          Peer Average: <strong>100</strong>
-                        </div>
-
-                        <div>
-                          Difference:{" "}
-                          <strong>
-                            {Number(item.representative - 100) > 0 ? "+" : ""}
-                            {Number(item.representative - 100).toFixed(0)}%
-                          </strong>
-                        </div>
-                      </div>
-                    );
-                  }}
-                />
-
-                <Bar dataKey="representative" shape={<DumbbellShape />} isAnimationActive />
-              </BarChart>
-            </ResponsiveContainer>
+            <SignalChart option={peerIndexOption(dumbbellData)} ariaLabel="Representative peer index" />
           </div>
         </div>
 
@@ -441,99 +315,11 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             </p>
           </div>
 
-          <ResponsiveContainer width="100%" height={360}>
-            <ScatterChart
-              key={selectedId}
-              margin={{
-                top: 20,
-                right: 25,
-                bottom: 35,
-                left: 5,
-              }}
-            >
-              <CartesianGrid stroke={CHART_THEME.grid} />
-
-              <XAxis
-                type="number"
-                dataKey="sales"
-                name="Sales"
-                tickLine={false}
-                axisLine={false}
-                label={{
-                  value: "Sales",
-                  position: "insideBottom",
-                  offset: -28,
-                }}
-              />
-
-              <YAxis
-                type="number"
-                dataKey="payout"
-                name="Payout"
-                width={60}
-                tickLine={false}
-                axisLine={false}
-                label={{
-                  value: "Payout",
-                  angle: -90,
-                  position: "insideLeft",
-                  offset: 2,
-                }}
-              />
-
-              <Tooltip
-                content={({ payload }) => {
-                  if (!payload || !payload.length) {
-                    return null;
-                  }
-
-                  const data = payload[0].payload;
-
-                  return (
-                    <div className="chart-tooltip">
-                      <strong>{data.displayName}</strong>
-
-                      <div>Type: {data.type}</div>
-
-                      <div>Sales: {formatMoney(data.sales)}</div>
-
-                      <div>Payout: {formatMoney(data.payout)}</div>
-
-                      <div>Rx: {formatNumber(data.rx)}</div>
-                    </div>
-                  );
-                }}
-              />
-
-              <Scatter
-                name="Peer Representatives"
-                data={peerDistribution}
-                fill={CHART_THEME.distribution}
-              />
-
-              <Scatter
-                name="Current Representative"
-                data={representativePoint}
-                fill={CHART_THEME.representative}
-                shape="diamond"
-              />
-
-              <Scatter
-                name="Peer Average"
-                data={peerAveragePoint}
-                fill={CHART_THEME.peer}
-                shape="star"
-              />
-
-              <Legend
-                verticalAlign="top"
-                align="center"
-                wrapperStyle={{
-                  paddingBottom: "8px",
-                }}
-              />
-            </ScatterChart>
-          </ResponsiveContainer>
+          <SignalChart
+            option={peerScatterOption(peerDistribution, representativePoint, peerAveragePoint)}
+            height={360}
+            ariaLabel="Peer sales and payout distribution"
+          />
         </div>
 
         {/* ==================================================

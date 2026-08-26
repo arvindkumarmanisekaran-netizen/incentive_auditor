@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { EChartsCoreOption } from "echarts/core";
 
 import type { Finding } from "../../types/investigation";
 
-import { AnimateOnView } from "../AnimateOnView";
+import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
 
 type Props = {
   findings?: Finding[];
@@ -17,52 +17,31 @@ type ProductOption = {
 
 type BarChartType = "sales" | "sales_rx" | "payout" | "historical" | "peer";
 
-const CHART_HUES: Record<BarChartType, number[]> = {
-  sales: [270, 285, 300],
-  sales_rx: [270, 215],
-  payout: [160, 335],
-  historical: [215, 270],
-  peer: [215, 32],
+const CHART_PALETTES: Record<BarChartType, string[]> = {
+  sales: [SIGNAL_CHART.steel, SIGNAL_CHART.lime],
+  sales_rx: [SIGNAL_CHART.lime, SIGNAL_CHART.mint],
+  payout: [SIGNAL_CHART.mint, SIGNAL_CHART.amber],
+  historical: [SIGNAL_CHART.steel, SIGNAL_CHART.lime],
+  peer: [SIGNAL_CHART.lime, SIGNAL_CHART.amber],
 };
 
 function getDynamicBarColor(
   chartType: BarChartType,
   value: number,
   index: number,
-  values: number[],
 ) {
   const absoluteValue = Math.abs(Number(value) || 0);
-
-  const maxValue = Math.max(...values.map((item) => Math.abs(Number(item) || 0)), 1);
 
   if (absoluteValue === 0) {
     return "rgba(148, 163, 184, 0.42)";
   }
 
-  const intensity = absoluteValue / maxValue;
-
-  const hues = CHART_HUES[chartType];
-
-  const hue = hues[index % hues.length];
-
-  const saturation = 62 + intensity * 22;
-
-  const lightness = 68 - intensity * 22;
-
-  return `hsl(${hue} ${saturation}% ${lightness}%)`;
-}
-
-function signedDomain(values: number[]): [number, number] {
-  const minimum = Math.min(0, ...values);
-  const maximum = Math.max(0, ...values);
-  const span = Math.max(maximum - minimum, 1);
-  const padding = span * 0.1;
-
-  return [minimum < 0 ? minimum - padding : 0, maximum > 0 ? maximum + padding : 0];
+  const palette = CHART_PALETTES[chartType];
+  return palette[index % palette.length];
 }
 
 const CHART_COLORS = {
-  historical: "#2563EB",
+  historical: "#64d8b4",
   current: "#8fc95a",
   expected: "#16A34A",
   actual: "#DC2626",
@@ -100,35 +79,37 @@ function getProductFinding(findings: Finding[], type: string, productId: string)
   );
 }
 
-function ChartTooltip({ active, payload }: any) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0].payload;
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{item.name}</span>
-      <strong>{formatMoney(item.amount)}</strong>
-    </div>
-  );
-}
-
-function PercentageTooltip({ active, payload }: any) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0].payload;
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{item.name}</span>
-
-      <strong>{Number(item.amount).toFixed(2)}%</strong>
-    </div>
-  );
+function createBarOption(
+  data: Array<{ name: string; amount: number }>,
+  chartType: BarChartType,
+  formatter: "money" | "percent" = "money",
+): EChartsCoreOption {
+  return {
+    tooltip: {
+      valueFormatter: (value: unknown) =>
+        formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+    },
+    xAxis: { type: "category", data: data.map((item) => item.name) },
+    yAxis: {
+      type: "value",
+      axisLabel: formatter === "percent" ? { formatter: "{value}%" } : undefined,
+    },
+    series: [
+      {
+        type: "bar",
+        barMaxWidth: 86,
+        data: data.map((item, index) => ({
+          value: item.amount,
+          itemStyle: {
+            color: getDynamicBarColor(chartType, item.amount, index),
+            borderRadius: item.amount >= 0 ? [7, 7, 2, 2] : [2, 2, 7, 7],
+            shadowBlur: 18,
+            shadowColor: "rgba(185,255,102,.08)",
+          },
+        })),
+      },
+    ],
+  };
 }
 
 export default function ProductAnalysis({ findings = [] }: Props) {
@@ -220,9 +201,6 @@ export default function ProductAnalysis({ findings = [] }: Props) {
     : [];
 
   const selectedProduct = productOptions.find((p) => p.id === selectedProductId);
-  const salesValues = salesData.map((item) => Number(item.amount));
-  const mismatchValues = mismatchData.map((item) => Number(item.amount));
-  const payoutValues = payoutData.map((item) => Number(item.amount));
 
   return (
     <section className="analysis-panel product-analysis-section">
@@ -332,45 +310,7 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           </div>
 
           <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={salesData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
-
-                  <YAxis tickLine={false} axisLine={false} />
-
-                  <Tooltip content={<ChartTooltip />} />
-
-                  <Bar
-                    dataKey="amount"
-                    shape={(props: any) => {
-                      const index = Number(props.index ?? 0);
-
-                      const fill = getDynamicBarColor(
-                        "sales",
-                        Number(props.payload?.amount ?? 0),
-                        index,
-                        salesValues,
-                      );
-
-                      return (
-                        <rect
-                          x={Number(props.x ?? 0)}
-                          y={Number(props.y ?? 0)}
-                          width={Number(props.width ?? 0)}
-                          height={Number(props.height ?? 0)}
-                          rx={7}
-                          ry={7}
-                          fill={fill}
-                        />
-                      );
-                    }}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
+            <SignalChart option={createBarOption(salesData, "sales")} ariaLabel="Sales performance" />
           </div>
         </div>
 
@@ -386,55 +326,10 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           </div>
 
           <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={mismatchData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
-
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    domain={signedDomain(mismatchValues)}
-                    allowDecimals={false}
-                    width={48}
-                    tickFormatter={(value) => `${Math.round(Number(value))}%`}
-                  />
-
-                  <Tooltip content={<PercentageTooltip />} />
-
-                  <Bar
-                    dataKey="amount"
-                    shape={(props: any) => {
-                      const index = Number(props.index ?? 0);
-                      const value = Number(props.payload?.amount ?? 0);
-
-                      const rawY = Number(props.y ?? 0);
-                      const rawHeight = Number(props.height ?? 0);
-
-                      // SVG rect cannot render a negative height.
-                      const y = rawHeight < 0 ? rawY + rawHeight : rawY;
-                      const height = Math.abs(rawHeight);
-
-                      const fill = getDynamicBarColor("sales_rx", value, index, mismatchValues);
-
-                      return (
-                        <rect
-                          x={Number(props.x ?? 0)}
-                          y={y}
-                          width={Number(props.width ?? 0)}
-                          height={height}
-                          rx={7}
-                          ry={7}
-                          fill={fill}
-                        />
-                      );
-                    }}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
+            <SignalChart
+              option={createBarOption(mismatchData, "sales_rx", "percent")}
+              ariaLabel="Sales and prescription alignment"
+            />
           </div>
         </div>
 
@@ -450,45 +345,7 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           </div>
 
           <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={payoutData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
-
-                  <YAxis tickLine={false} axisLine={false} />
-
-                  <Tooltip content={<ChartTooltip />} />
-
-                  <Bar
-                    dataKey="amount"
-                    shape={(props: any) => {
-                      const index = Number(props.index ?? 0);
-
-                      const fill = getDynamicBarColor(
-                        "payout",
-                        Number(props.payload?.amount ?? 0),
-                        index,
-                        payoutValues,
-                      );
-
-                      return (
-                        <rect
-                          x={Number(props.x ?? 0)}
-                          y={Number(props.y ?? 0)}
-                          width={Number(props.width ?? 0)}
-                          height={Number(props.height ?? 0)}
-                          rx={7}
-                          ry={7}
-                          fill={fill}
-                        />
-                      );
-                    }}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
+            <SignalChart option={createBarOption(payoutData, "payout")} ariaLabel="Payout comparison" />
           </div>
         </div>
       </div>

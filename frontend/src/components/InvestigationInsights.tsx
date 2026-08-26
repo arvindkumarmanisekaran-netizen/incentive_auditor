@@ -1,17 +1,5 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  Legend,
-  RadialBar,
-  RadialBarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-  ReferenceLine,
-} from "recharts";
+import type { EChartsCoreOption } from "echarts/core";
+import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
 
@@ -26,12 +14,12 @@ type Props = {
 ========================================================= */
 
 const COLORS = {
-  sales: "#8fc95a",
-  prescription: "#2563eb",
-  expected: "#64748b",
-  actual: "#2563eb",
-  doctor: "#8fc95a",
-  territory: "#0891b2",
+  sales: SIGNAL_CHART.lime,
+  prescription: SIGNAL_CHART.mint,
+  expected: SIGNAL_CHART.steel,
+  actual: SIGNAL_CHART.lime,
+  doctor: SIGNAL_CHART.lime,
+  territory: SIGNAL_CHART.mint,
 };
 
 /* =========================================================
@@ -63,100 +51,59 @@ function safeNumber(value: unknown): number {
   return Number.isFinite(number) ? number : 0;
 }
 
-function signedDomain(values: number[]): [number, number] {
-  const minimum = Math.min(0, ...values);
-  const maximum = Math.max(0, ...values);
-  const span = Math.max(maximum - minimum, 1);
-  const padding = span * 0.1;
-
-  return [minimum < 0 ? minimum - padding : 0, maximum > 0 ? maximum + padding : 0];
+function getProductName(finding: unknown) {
+  const record = finding as {
+    product_name?: string;
+    product_id?: string;
+    evidence?: { product_name?: string };
+  };
+  return record?.product_name ?? record?.evidence?.product_name ?? record?.product_id ?? "";
 }
 
-function getProductName(finding: any) {
-  return finding?.product_name ?? finding?.evidence?.product_name ?? finding?.product_id ?? "";
+function insightBarOption(
+  categories: string[],
+  series: Array<{ name: string; values: number[]; color: string }>,
+  formatter: "percent" | "money",
+): EChartsCoreOption {
+  return {
+    legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
+    grid: { top: 38, right: 14, bottom: 36, left: 50 },
+    tooltip: {
+      valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+    },
+    xAxis: { type: "category", data: categories },
+    yAxis: { type: "value", axisLabel: formatter === "percent" ? { formatter: "{value}%" } : { formatter: (value: number) => `₹${formatCompactMoney(value)}` } },
+    series: series.map((item) => ({
+      type: "bar",
+      name: item.name,
+      data: item.values,
+      barMaxWidth: 38,
+      itemStyle: { color: item.color, borderRadius: [5, 5, 1, 1] },
+    })),
+  };
 }
 
-/* =========================================================
-   SALES / RX TOOLTIP
-========================================================= */
-
-function SalesRxTooltip({
-  active,
-  payload,
-  label,
-}: {
-  active?: boolean;
-  payload?: any[];
-  label?: string;
-}) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <strong>{label}</strong>
-
-      {payload.map((item) => (
-        <div key={item.dataKey}>
-          <span>{item.name}</span>
-
-          <strong>
-            {safeNumber(item.value) > 0 ? "+" : ""}
-            {safeNumber(item.value).toFixed(2)}%
-          </strong>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* =========================================================
-   MONEY TOOLTIP
-========================================================= */
-
-function MoneyTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0]?.payload;
-
-  if (!item) {
-    return null;
-  }
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{item.name}</span>
-
-      <strong>{formatMoney(safeNumber(item.amount))}</strong>
-    </div>
-  );
-}
-
-/* =========================================================
-   PERCENT TOOLTIP
-========================================================= */
-
-function PercentTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0]?.payload;
-
-  if (!item) {
-    return null;
-  }
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{item.name}</span>
-
-      <strong>{safeNumber(item.value).toFixed(2)}%</strong>
-    </div>
-  );
+function gaugeOption(value: number, color: string, label: string): EChartsCoreOption {
+  return {
+    series: [{
+      type: "gauge",
+      startAngle: 210,
+      endAngle: -30,
+      min: 0,
+      max: 100,
+      radius: "88%",
+      progress: { show: true, width: 10, roundCap: true, itemStyle: { color } },
+      axisLine: { lineStyle: { width: 10, color: [[1, "rgba(185,255,102,.08)"]] } },
+      pointer: { show: false },
+      axisTick: { show: false },
+      splitLine: { show: false },
+      axisLabel: { show: false },
+      anchor: { show: false },
+      title: { offsetCenter: [0, "34%"], color: SIGNAL_CHART.text, fontSize: 9 },
+      detail: { valueAnimation: true, formatter: "{value}%", color: SIGNAL_CHART.textStrong, fontSize: 24, fontWeight: 500, offsetCenter: [0, "-2%"] },
+      data: [{ value, name: label }],
+    }],
+  };
 }
 
 /* =========================================================
@@ -199,10 +146,6 @@ function InvestigationInsights({ result }: Props) {
     };
   });
 
-  const salesRxDomain = signedDomain(
-    salesRxData.flatMap((item) => [item.salesChange, item.prescriptionChange]),
-  );
-
   const mismatchIssues = mismatchFindings.filter(
     (finding) => String(finding.severity ?? "NORMAL").toUpperCase() !== "NORMAL",
   );
@@ -227,19 +170,6 @@ function InvestigationInsights({ result }: Props) {
   const doctorConcentration = safeNumber(doctorFinding?.evidence?.top_doctor_share_percent);
 
   const crossTerritory = safeNumber(territoryFinding?.evidence?.cross_territory_share_percent);
-
-  const concentrationData = [
-    {
-      name: "Top Doctor",
-      value: doctorConcentration,
-      fill: COLORS.doctor,
-    },
-    {
-      name: "Cross Territory",
-      value: crossTerritory,
-      fill: COLORS.territory,
-    },
-  ];
 
   /* =======================================================
      PAYOUT
@@ -282,20 +212,14 @@ function InvestigationInsights({ result }: Props) {
 
   const riskScore = Math.min(Math.max(safeNumber(result.overall_risk_score), 0), 100);
 
-  const riskData = [
-    {
-      name: "Risk",
-      value: riskScore,
-      fill:
-        riskScore >= 75
-          ? "#dc2626"
-          : riskScore >= 50
-            ? "#f59e0b"
-            : riskScore >= 25
-              ? "#2563eb"
-              : "#16a34a",
-    },
-  ];
+  const riskColor =
+    riskScore >= 75
+      ? SIGNAL_CHART.danger
+      : riskScore >= 50
+        ? SIGNAL_CHART.amber
+        : riskScore >= 25
+          ? SIGNAL_CHART.mint
+          : SIGNAL_CHART.lime;
 
   const riskFindingCount = findings.filter((finding) => {
     const severity = finding.severity?.toUpperCase();
@@ -347,54 +271,17 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={salesRxData}
-                  margin={{
-                    top: 15,
-                    right: 15,
-                    left: -15,
-                    bottom: 10,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-
-                  <XAxis dataKey="product" tickLine={false} axisLine={false} fontSize={10} />
-
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    fontSize={10}
-                    domain={salesRxDomain}
-                    tickFormatter={(value) => `${value}%`}
-                  />
-
-                  <ReferenceLine y={0} stroke="#94a3b8" strokeWidth={1.5} />
-
-                  <Tooltip
-                    cursor={{
-                      fill: "transparent",
-                    }}
-                    content={<SalesRxTooltip />}
-                  />
-
-                  <Legend />
-
-                  <Bar
-                    dataKey="salesChange"
-                    name="Sales Change"
-                    fill={COLORS.sales}
-                    radius={[4, 4, 0, 0]}
-                  />
-
-                  <Bar
-                    dataKey="prescriptionChange"
-                    name="Prescription Change"
-                    fill={COLORS.prescription}
-                    radius={[4, 4, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+              <SignalChart
+                option={insightBarOption(
+                  salesRxData.map((item) => item.product),
+                  [
+                    { name: "Sales change", values: salesRxData.map((item) => item.salesChange), color: COLORS.sales },
+                    { name: "Prescription change", values: salesRxData.map((item) => item.prescriptionChange), color: COLORS.prescription },
+                  ],
+                  "percent",
+                )}
+                ariaLabel="Sales and prescription changes"
+              />
             </div>
 
             <div className="insight-text">
@@ -448,29 +335,7 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart concentration-chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadialBarChart
-                  cx="50%"
-                  cy="45%"
-                  innerRadius="55%"
-                  outerRadius="92%"
-                  data={concentrationData}
-                  startAngle={90}
-                  endAngle={-270}
-                >
-                  <RadialBar dataKey="value" background cornerRadius={8} barSize={12} />
-
-                  <Legend iconSize={9} layout="horizontal" verticalAlign="bottom" align="center" />
-
-                  <Tooltip content={<PercentTooltip />} />
-                </RadialBarChart>
-              </ResponsiveContainer>
-
-              <div className="chart-center-label concentration-center-label">
-                <strong>{doctorConcentration.toFixed(1)}%</strong>
-
-                <span>Top Doctor</span>
-              </div>
+              <SignalChart option={gaugeOption(doctorConcentration, COLORS.doctor, "Top doctor")} ariaLabel="Doctor concentration" />
             </div>
 
             <div className="insight-text">
@@ -524,41 +389,15 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart payout-chart">
-              <ResponsiveContainer width="100%" height="80%">
-                <BarChart
-                  data={payoutData}
-                  margin={{
-                    top: 15,
-                    right: 10,
-                    left: 0,
-                    bottom: 0,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
-
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    fontSize={10}
-                    tickFormatter={(value) => `₹${formatCompactMoney(value)}`}
-                  />
-
-                  <Tooltip
-                    cursor={{
-                      fill: "transparent",
-                    }}
-                    content={<MoneyTooltip />}
-                  />
-
-                  <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
-                    {payoutData.map((item) => (
-                      <Cell key={item.name} fill={item.fill} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+              <SignalChart
+                option={insightBarOption(
+                  payoutData.map((item) => item.name),
+                  [{ name: "Payout", values: payoutData.map((item) => item.amount), color: COLORS.actual }],
+                  "money",
+                )}
+                height="80%"
+                ariaLabel="Payout validation"
+              />
 
               <div className="payout-chart-difference">
                 <span>Total Difference</span>
@@ -620,27 +459,7 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart risk-chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadialBarChart
-                  cx="50%"
-                  cy="45%"
-                  innerRadius="68%"
-                  outerRadius="92%"
-                  data={riskData}
-                  startAngle={90}
-                  endAngle={-270}
-                >
-                  <RadialBar dataKey="value" background cornerRadius={10} />
-
-                  <Tooltip content={<PercentTooltip />} />
-                </RadialBarChart>
-              </ResponsiveContainer>
-
-              <div className="risk-chart-center">
-                <strong>{riskScore}</strong>
-
-                <span>/100</span>
-              </div>
+              <SignalChart option={gaugeOption(riskScore, riskColor, "Risk score")} ariaLabel="Investigation risk score" />
 
               <div className="risk-findings-label">
                 <strong>{riskFindingCount}</strong>

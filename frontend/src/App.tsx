@@ -28,7 +28,7 @@ import InvestigationWorkflow from "./components/InvestigationWorkflow";
 import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
-import ControlGraph from "./components/ControlGraph";
+import SignalField3D from "./components/SignalField3D";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -546,7 +546,7 @@ function App() {
           <p>Investigate signals, validate evidence and control incentive risk.</p>
         </div>
 
-        <ControlGraph compact />
+        <SignalField3D />
 
         <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
           <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>
