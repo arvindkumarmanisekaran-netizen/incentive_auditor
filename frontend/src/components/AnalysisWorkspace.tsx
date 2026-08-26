@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import type { Finding, PeerAnalysis as PeerAnalysisType } from "../types/investigation";
 
@@ -88,15 +89,24 @@ export default function AnalysisWorkspace({ representativeID, findings, peerAnal
       ================================================== */}
 
       <div className="analysis-workspace-content">
-        {activeTab === "product" && <ProductAnalysis findings={findings} />}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -8 }}
+          >
+            {activeTab === "product" && <ProductAnalysis findings={findings} />}
 
-        {activeTab === "peer" && (
-          <PeerAnalysis peerAnalysis={peerAnalysis} representativeId={representativeID} />
-        )}
+            {activeTab === "peer" && (
+              <PeerAnalysis peerAnalysis={peerAnalysis} representativeId={representativeID} />
+            )}
 
-        {activeTab === "behaviour" && <BehaviourAnalysis findings={findings} />}
+            {activeTab === "behaviour" && <BehaviourAnalysis findings={findings} />}
 
-        {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
+            {activeTab === "historical" && <HistoricalAnalysis findings={findings} />}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

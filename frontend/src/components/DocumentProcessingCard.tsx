@@ -1,4 +1,5 @@
 import { useMemo, useEffect, useState, useRef } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
 
@@ -468,8 +469,15 @@ export default function DocumentProcessingCard({
                     </div>
 
                     {/* DUPLICATE DETAILS */}
-                    {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
-                      <div className="document-duplicate-inline">
+                    <AnimatePresence initial={false}>
+                      {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
+                        <motion.div
+                          className="document-duplicate-inline"
+                          initial={{ opacity: 0, height: 0, y: -8 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -8 }}
+                          style={{ overflow: "hidden" }}
+                        >
                         <div className="duplicate-header">
                           <div>
                             <h4>Duplicate Records</h4>
@@ -682,8 +690,9 @@ export default function DocumentProcessingCard({
                             Next
                           </button>
                         </div>
-                      </div>
-                    )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {/* DOCUMENT ERROR */}
                     {document.success === false && document.error && (
@@ -711,11 +720,23 @@ export default function DocumentProcessingCard({
             VALIDATION ERROR POPUP
         ================================================== */}
 
-        {!busy && validationErrors.length > 0 && (
-          <>
-            <div className="validation-overlay" onClick={clearValidationErrors} />
+        <AnimatePresence>
+          {!busy && validationErrors.length > 0 && (
+            <>
+              <motion.div
+                className="validation-overlay"
+                onClick={clearValidationErrors}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
 
-            <div className="validation-popup">
+              <motion.div
+                className="validation-popup"
+                initial={{ opacity: 0, scale: 0.96, y: 14 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97, y: 8 }}
+              >
               <h4>Import Blocked</h4>
 
               <p>Validation errors were found in the uploaded documents.</p>
@@ -770,9 +791,10 @@ export default function DocumentProcessingCard({
               <button type="button" className="secondary-button" onClick={clearValidationErrors}>
                 Close
               </button>
-            </div>
-          </>
-        )}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         {/* ==================================================
             NORMAL ERROR
@@ -786,8 +808,14 @@ export default function DocumentProcessingCard({
             SUCCESS POPUP
         ================================================== */}
 
-        {!busy && successMessage && (
-          <div className="import-success-row">
+        <AnimatePresence>
+          {!busy && successMessage && (
+            <motion.div
+              className="import-success-row"
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            >
             <div className="import-success-banner">
               <div className="import-success-icon">✓</div>
 
@@ -806,8 +834,9 @@ export default function DocumentProcessingCard({
                 ×
               </button>
             </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </article>
   );
