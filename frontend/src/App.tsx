@@ -533,10 +533,11 @@ function App() {
           {activeTab === "database" && <motion.span className="nav-active-rail" layoutId="nav-active" />}
         </motion.button>
 
+        </nav>
+
         <div className="sidebar-synthetic-action">
           <SyntheticDataGeneration />
         </div>
-        </nav>
 
         <div className="sidebar-system-status">
           <span className="system-pulse" />
