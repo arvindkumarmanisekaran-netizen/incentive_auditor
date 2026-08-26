@@ -124,7 +124,7 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
                 animationDuration={900}
               >
                 {data.map((item, index) => (
-                  <Cell key={`slice-${index}`} fill={String(item.fill ?? "#7C3AED")} />
+                  <Cell key={`slice-${index}`} fill={String(item.fill ?? "#8fc95a")} />
                 ))}
               </Pie>
             )}
@@ -146,7 +146,7 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
         {data.map((item, index) => {
           const name = String(item[nameKey] ?? "Unknown");
 
-          const fill = String(item.fill ?? "#7C3AED");
+          const fill = String(item.fill ?? "#8fc95a");
 
           return (
             <div key={`${name}-${index}`} className="dynamic-pie-legend-item" title={name}>

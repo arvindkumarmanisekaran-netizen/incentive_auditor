@@ -1,45 +1,20 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion } from "motion/react";
+import type { ReactNode } from "react";
 
 interface AnimateOnViewProps {
   children: ReactNode;
 }
 
 export function AnimateOnView({ children }: AnimateOnViewProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const [hasEnteredView, setHasEnteredView] = useState(false);
-
-  useEffect(() => {
-    const element = containerRef.current;
-
-    if (!element) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasEnteredView(true);
-
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.25,
-        rootMargin: "0px 0px -40px 0px",
-      },
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <div ref={containerRef} className="recharts-scroll-animation">
-      {hasEnteredView ? children : null}
-    </div>
+    <motion.div
+      className="recharts-scroll-animation"
+      initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2, margin: "0px 0px -36px 0px" }}
+      transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }

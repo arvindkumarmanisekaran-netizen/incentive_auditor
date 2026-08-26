@@ -63,7 +63,7 @@ function signedDomain(values: number[]): [number, number] {
 
 const CHART_COLORS = {
   historical: "#2563EB",
-  current: "#7C3AED",
+  current: "#8fc95a",
   expected: "#16A34A",
   actual: "#DC2626",
 };

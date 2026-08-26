@@ -26,7 +26,7 @@ type ProductOption = {
 
 const CHART_COLORS = {
   historical: "#2563EB",
-  current: "#7C3AED",
+  current: "#8fc95a",
 };
 
 function formatMoney(value?: number) {

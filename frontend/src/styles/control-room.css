@@ -13,7 +13,6 @@
   --primary: #b9ff66;
   --primary-hover: #caff86;
   --primary-bright: #dbffad;
-  --purple: #b9ff66;
   --cyan: #8fd6bb;
   --success: #9cf678;
   --warning: #ffd36a;
@@ -124,6 +123,8 @@ body::before {
 .control-graph.compact svg { width: 100%; }
 
 .dashboard-tab-content { display: grid; gap: 16px; }
+.investigation-result-stack { display: grid; gap: 16px; }
+.investigation-result-stack > div { min-width: 0; }
 .investigation-form, .risk-summary-section, .investigation-overview, .investigation-workflow,
 .analysis-workspace, .insights-section, .admin-card, .database-table-container, .chart-card,
 .analysis-card, .finding-card, .insight-card {
@@ -160,6 +161,8 @@ body::before {
 .analysis-tab.active, .database-section.active { color: #071000 !important; border-color: var(--primary) !important; background: var(--primary) !important; box-shadow: none !important; }
 .analysis-tab { position: relative; overflow: hidden; }
 .analysis-tab-signal { position: absolute; right: 8px; bottom: 4px; left: 8px; height: 1px; border-radius: 2px; background: rgba(7,16,0,.52); }
+.database-section { position: relative; overflow: hidden; }
+.database-tab-signal { position: absolute; right: 8px; bottom: 3px; left: 8px; height: 1px; border-radius: 2px; background: rgba(7,16,0,.5); }
 
 .admin-card, .chart-card, .finding-card, .insight-card, .kpi-item {
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease, box-shadow .25s ease;

@@ -90,6 +90,7 @@ export default function DocumentProcessingCard({
   }
 
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 650px)").matches);
+  const [duplicatePage, setDuplicatePage] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 650px)");
@@ -122,7 +123,7 @@ export default function DocumentProcessingCard({
     event.preventDefault();
   }
 
-  function stopDuplicateDragging(event: React.PointerEvent<HTMLDivElement>) {
+  function stopDuplicateDragging() {
     const state = duplicateDragStateRef.current;
     const container = state.container;
 
@@ -147,8 +148,6 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   const [expandedDuplicates, setExpandedDuplicates] = useState<Record<string, boolean>>({});
-
-  const [duplicatePage, setDuplicatePage] = useState<Record<string, number>>({});
 
   const [duplicateActions, setDuplicateActions] = useState<
     Record<string, Record<number, "keep" | "replace">>
@@ -405,9 +404,14 @@ export default function DocumentProcessingCard({
                 const endRecord = Math.min((currentPage + 1) * pageSize, duplicateRecords.length);
 
                 return (
-                  <div
+                  <motion.div
                     key={`${document.filename}-${index}`}
                     className={`document-result-row ${statusClass}`}
+                    layout
+                    initial={{ opacity: 0, x: -14 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ delay: Math.min(index * 0.045, 0.3) }}
                   >
                     <div className="document-result-main">
                       {/* FILE */}
@@ -698,7 +702,7 @@ export default function DocumentProcessingCard({
                     {document.success === false && document.error && (
                       <div className="document-result-error">{document.error}</div>
                     )}
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

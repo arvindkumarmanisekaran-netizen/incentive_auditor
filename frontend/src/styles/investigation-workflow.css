@@ -1,6 +1,6 @@
 .investigation-workflow {
   margin-top: 14px;
-  border: 1px solid rgba(168, 85, 247, 0.28);
+  border: 1px solid rgba(168, 230, 107, 0.28);
   border-radius: 12px;
   background: linear-gradient(180deg, rgba(24, 18, 38, 0.96), rgba(13, 10, 22, 0.96));
   overflow: hidden;
@@ -179,7 +179,7 @@
 }
 
 .workflow-commentary-marker {
-  color: #c084fc;
+  color: #b9ff66;
 }
 
 .workflow-waiting-text {
@@ -211,8 +211,8 @@
 .workflow-focus-pill {
   padding: 4px 7px;
   border-radius: 999px;
-  background: rgba(168, 85, 247, 0.1);
-  border: 1px solid rgba(168, 85, 247, 0.18);
+  background: rgba(168, 230, 107, 0.1);
+  border: 1px solid rgba(168, 230, 107, 0.18);
   font-size: 0.68rem;
 }
 
@@ -260,7 +260,7 @@
   margin-top: 14px;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(24, 18, 38, 0.96), rgba(13, 10, 22, 0.97));
-  border: 1px solid rgba(168, 85, 247, 0.24);
+  border: 1px solid rgba(168, 230, 107, 0.24);
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   text-align: left;
@@ -307,7 +307,7 @@
 
 .investigation-workflow-toggle {
   flex: 0 0 auto;
-  color: #c9b6d6;
+  color: #a8b2a7;
   font-size: 0.70rem;
 }
 
@@ -361,7 +361,7 @@
 .workflow-plan-meta,
 .workflow-planner-summary,
 .workflow-planner-latest {
-  color: #b8a7c3;
+  color: #959f95;
   font-size: 0.68rem;
   line-height: 1.45;
 }
@@ -374,10 +374,10 @@
 
 .workflow-focus-pill {
   padding: 3px 7px;
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.16);
+  background: rgba(168, 230, 107, 0.08);
+  border: 1px solid rgba(168, 230, 107, 0.16);
   border-radius: 999px;
-  color: #cdb9dc;
+  color: #adb7ac;
   font-size: 0.62rem;
 }
 
