@@ -1,6 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 import type { Finding } from "../../types/investigation";
 
@@ -50,6 +58,15 @@ function getDynamicBarColor(
   const lightness = 68 - intensity * 22;
 
   return `hsl(${hue} ${saturation}% ${lightness}%)`;
+}
+
+function signedDomain(values: number[]): [number, number] {
+  const minimum = Math.min(0, ...values);
+  const maximum = Math.max(0, ...values);
+  const span = Math.max(maximum - minimum, 1);
+  const padding = span * 0.1;
+
+  return [minimum < 0 ? minimum - padding : 0, maximum > 0 ? maximum + padding : 0];
 }
 
 const CHART_COLORS = {
@@ -384,7 +401,14 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
                   <XAxis dataKey="name" tickLine={false} axisLine={false} />
 
-                  <YAxis tickLine={false} axisLine={false} />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    domain={signedDomain(mismatchValues)}
+                    allowDecimals={false}
+                    width={48}
+                    tickFormatter={(value) => `${Math.round(Number(value))}%`}
+                  />
 
                   <Tooltip content={<PercentageTooltip />} />
 

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { runInvestigationStream, type WorkflowEvent } from "./api/investigation";
 
@@ -29,6 +30,8 @@ import InvestigationOverview from "./components/InvestigationOverview";
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 
 import type { WorkflowAgent } from "./types/workflow";
+import LoginModal from "./components/LoginModal";
+import { loginToWorkspace, setActiveWorkspace } from "./api/workspace";
 
 import "./styles/index.css";
 
@@ -92,6 +95,14 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
 }
 
 function App() {
+  const [workspaceUser, setWorkspaceUser] = useState("");
+
+  async function handleLogin(username: string) {
+    const result = await loginToWorkspace(username);
+    setActiveWorkspace(result.workspace);
+    setWorkspaceUser(result.username);
+  }
+
   // ==================================================
   // DASHBOARD TAB
   // ==================================================
@@ -185,10 +196,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (activeTab === "analysis") {
+    if (workspaceUser && activeTab === "analysis") {
       void loadRepresentatives();
     }
-  }, [activeTab]);
+  }, [activeTab, workspaceUser]);
 
   // ==================================================
   // LIVE WORKFLOW EVENT HANDLER
@@ -471,6 +482,10 @@ function App() {
   // UI
   // ==================================================
 
+  if (!workspaceUser) {
+    return <LoginModal onLogin={handleLogin} />;
+  }
+
   return (
     <main className="dashboard">
       {/* ==================================================
@@ -521,8 +536,15 @@ function App() {
           ANALYSIS TAB
       ================================================== */}
 
+      <AnimatePresence mode="wait" initial={false}>
       {activeTab === "analysis" && (
-        <section className="dashboard-tab-content">
+        <motion.section
+          key="analysis"
+          className="dashboard-tab-content"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+        >
           {masterDataLoading ? (
             <div className="loading-message">Loading representatives...</div>
           ) : (
@@ -603,7 +625,7 @@ function App() {
               <InvestigationInsights result={result} />
             </>
           )}
-        </section>
+        </motion.section>
       )}
 
       {/* ==================================================
@@ -644,18 +666,33 @@ function App() {
       )}
 
       {activeTab === "database" && (
-        <section className="dashboard-tab-content database-page">
+        <motion.section
+          key="database"
+          className="dashboard-tab-content database-page"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+        >
+          <AnimatePresence initial={false}>
           {showDocumentProcessing && (
-            <div className="document-processing-expand">
+            <motion.div
+              className="document-processing-expand"
+              initial={{ opacity: 0, height: 0, y: -8 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -8 }}
+              style={{ overflow: "hidden" }}
+            >
               <DocumentProcessingCard />
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
 
           <div className="database-management-center">
             <DatabaseManagementCard />
           </div>
-        </section>
+        </motion.section>
       )}
+      </AnimatePresence>
 
       {/* ==================================================
           AI CHAT ASSISTANT
