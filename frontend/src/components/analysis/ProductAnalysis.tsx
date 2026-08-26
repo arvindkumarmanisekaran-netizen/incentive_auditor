@@ -104,7 +104,7 @@ function createBarOption(
             color: getDynamicBarColor(chartType, item.amount, index),
             borderRadius: item.amount >= 0 ? [7, 7, 2, 2] : [2, 2, 7, 7],
             shadowBlur: 18,
-            shadowColor: "rgba(185,255,102,.08)",
+            shadowColor: "rgba(37,99,235,.10)",
           },
         })),
       },

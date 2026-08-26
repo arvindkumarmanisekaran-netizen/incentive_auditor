@@ -14,6 +14,7 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 import type { EChartsCoreOption } from "echarts/core";
+import type { EChartsType } from "echarts/core";
 
 echarts.use([
   BarChart,
@@ -42,18 +43,33 @@ type SignalChartProps = {
 // Shared with chart-option factories colocated in feature components.
 // eslint-disable-next-line react-refresh/only-export-components
 export const SIGNAL_CHART = {
-  lime: "#b9ff66",
-  limeSoft: "#82b94d",
-  mint: "#64d8b4",
-  amber: "#f5c96a",
-  danger: "#ff766e",
-  steel: "#7d8a78",
-  grid: "rgba(185,255,102,0.08)",
-  text: "#778178",
-  textStrong: "#dce4da",
+  lime: "#2563eb",
+  limeSoft: "#60a5fa",
+  mint: "#06b6d4",
+  amber: "#f59e0b",
+  danger: "#ef4444",
+  steel: "#64748b",
+  grid: "rgba(37,99,235,0.09)",
+  text: "#64748b",
+  textStrong: "#0f172a",
 };
 
 function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
+  const incoming = option as Record<string, unknown>;
+  const rawSeries = Array.isArray(incoming.series) ? incoming.series : [];
+  const series = rawSeries.map((entry, index) => {
+    const item = entry as Record<string, unknown>;
+    const type = item.type;
+    return {
+      animation: true,
+      animationDuration: type === "pie" ? 1100 : 900,
+      animationDelay: index * 90,
+      animationEasing: "cubicOut",
+      ...(type === "pie" ? { animationType: "scale", animationTypeUpdate: "transition" } : {}),
+      ...item,
+    };
+  });
+
   return {
     animation: true,
     animationDuration: 850,
@@ -80,17 +96,8 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       left: 52,
       containLabel: true,
     },
-    tooltip: {
-      trigger: "axis",
-      backgroundColor: "rgba(8,11,9,0.96)",
-      borderColor: "rgba(185,255,102,0.24)",
-      borderWidth: 1,
-      padding: [10, 12],
-      textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11 },
-      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(185,255,102,0.035)" } },
-    },
     xAxis: {
-      axisLine: { lineStyle: { color: "rgba(185,255,102,0.12)" } },
+      axisLine: { lineStyle: { color: "rgba(37,99,235,0.14)" } },
       axisTick: { show: false },
       axisLabel: { color: SIGNAL_CHART.text, fontSize: 9 },
       splitLine: { show: false },
@@ -102,6 +109,13 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       splitLine: { lineStyle: { color: SIGNAL_CHART.grid, type: "dashed" } },
     },
     ...option,
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+      backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
+      borderWidth: 1, borderRadius: 10, padding: [12, 14],
+      extraCssText: "min-width:140px;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:Manrope,Inter,sans-serif;line-height:1.55;",
+      textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 12, fontFamily: "Manrope Variable, Manrope, Inter, sans-serif" },
+    },
+    series,
   };
 }
 
@@ -113,6 +127,7 @@ export default function SignalChart({
 }: SignalChartProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const chartRef = useRef<EChartsType | null>(null);
   const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
@@ -120,15 +135,26 @@ export default function SignalChart({
     if (!element || !isFirstView) return;
 
     const chart = echarts.init(element, undefined, { renderer: "canvas" });
-    chart.setOption(withSignalTheme(option), { notMerge: true });
+    chartRef.current = chart;
+    let resizeFrame = 0;
 
-    const observer = new ResizeObserver(() => chart.resize());
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => chart.resize());
+    });
     observer.observe(element);
 
     return () => {
       observer.disconnect();
+      cancelAnimationFrame(resizeFrame);
       chart.dispose();
+      chartRef.current = null;
     };
+  }, [isFirstView]);
+
+  useEffect(() => {
+    if (!isFirstView || !chartRef.current) return;
+    chartRef.current.setOption(withSignalTheme(option), { notMerge: true });
   }, [isFirstView, option]);
 
   return (
@@ -136,8 +162,8 @@ export default function SignalChart({
       ref={viewportRef}
       className={`signal-chart ${className}`.trim()}
       style={{ height }}
-      initial={{ opacity: 0, scale: 0.985, filter: "blur(4px)" }}
-      animate={isFirstView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : undefined}
+      initial={{ opacity: 0, y: 10 }}
+      animate={isFirstView ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       role="img"

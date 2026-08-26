@@ -310,3 +310,173 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
 @media (prefers-reduced-motion: reduce) {
   .system-pulse { animation: none; }
 }
+
+/* =========================================================
+   WHITE / BLUE INTELLIGENCE SYSTEM
+   Final authority over legacy feature styles.
+========================================================= */
+:root {
+  --bg: #f4f7fb;
+  --bg-secondary: #eef4fb;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --surface-soft: #f7faff;
+  --border: rgba(37, 99, 235, 0.12);
+  --border-strong: rgba(37, 99, 235, 0.22);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #7c8aa0;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-bright: #60a5fa;
+  --cyan: #0891b2;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --shadow-card: 0 12px 34px rgba(30, 64, 175, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-glow: 0 10px 34px rgba(37, 99, 235, 0.10);
+  color-scheme: light;
+}
+
+html, body, #root, .dashboard, .login-screen {
+  color: var(--text-secondary);
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+  background-color: var(--bg) !important;
+}
+
+body {
+  background:
+    linear-gradient(rgba(37, 99, 235, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, .035) 1px, transparent 1px),
+    radial-gradient(circle at 75% 0%, rgba(96, 165, 250, .16), transparent 32%),
+    #f4f7fb !important;
+  background-size: 44px 44px, 44px 44px, auto, auto !important;
+}
+
+body::before { background: linear-gradient(115deg, transparent 0 48%, rgba(37,99,235,.018) 49%, transparent 50%); }
+::selection { color: white; background: var(--primary); }
+
+.dashboard-sidebar, .app-command-header, .investigation-form, .risk-summary-section,
+.investigation-overview, .investigation-overview-card, .investigation-workflow,
+.analysis-workspace, .insights-section, .admin-card, .database-table-container,
+.chart-card, .analysis-card, .finding-card, .insight-card, .analysis-panel,
+.product-analysis-section, .historical-analysis-section, .peer-analysis-section,
+.investigation-decision-section, .investigation-evidence-section,
+.overview-detailed-content, .decision-status, .decision-assessment, .decision-findings,
+.workflow-summary-card, .workflow-card, .insight-body, .finding-group, .risk-driver-card,
+.document-duplicate-inline, .database-edit-form, .validation-popup, .import-success-banner,
+.document-result-row, .document-results, .database-top-actions, .ai-chat-panel,
+.chatbot-window, .login-modal {
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+  background: rgba(255, 255, 255, .96) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.dashboard-sidebar { background: rgba(255,255,255,.92) !important; box-shadow: 0 20px 55px rgba(30,64,175,.10) !important; backdrop-filter: none; }
+.app-command-header { background: linear-gradient(115deg, #fff, #f7faff) !important; }
+.app-command-header::before, .investigation-overview-card::before { background: var(--primary); box-shadow: 0 0 14px rgba(37,99,235,.28); }
+.sidebar-brand-mark, .login-brand { color: #fff !important; border-color: #2563eb !important; background: #2563eb !important; box-shadow: 0 8px 24px rgba(37,99,235,.18); }
+.sidebar-brand-copy strong, .sidebar-system-status strong, .app-title-row h1,
+.workspace-identity strong, .section-heading h2, .risk-summary-heading h2,
+.chart-heading h3, .analysis-section-heading h2, .admin-card h3,
+.database-table-header h4, .decision-header h2, .overview-detailed-heading h3,
+.workflow-card h3, .workflow-summary-card p, .login-modal h1,
+h1, h2, h3, h4, strong { color: var(--text-primary) !important; }
+
+.command-eyebrow, .login-eyebrow, .kpi-label, .risk-summary-subtitle,
+.sidebar-brand-copy small, .workflow-priority, .workflow-tag, .live-chip,
+.status-badge, .severity-badge, .database-table th, .duplicate-table th {
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+p, li, td, label, button, input, select, textarea, .dashboard-tab,
+.analysis-tab, .database-section { font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important; }
+.command-eyebrow, .login-eyebrow, .dashboard-tab-icon, .app-icon { color: var(--primary) !important; }
+.app-title-copy p, .decision-subtitle, .overview-detailed-heading p,
+.workflow-summary, .overview-empty-text, .section-heading p, .chart-heading p,
+.analysis-section-heading p, .admin-card p, .login-description, .login-note { color: var(--text-muted) !important; }
+
+.dashboard-tab { color: #64748b !important; }
+.dashboard-tab:hover { color: var(--primary) !important; border-color: var(--border) !important; background: #f5f9ff !important; }
+.dashboard-tab.active { color: #1d4ed8 !important; border-color: rgba(37,99,235,.18) !important; background: linear-gradient(90deg, rgba(37,99,235,.10), rgba(37,99,235,.025)) !important; }
+.nav-active-rail, .system-pulse { background: var(--primary) !important; box-shadow: 0 0 12px rgba(37,99,235,.35); }
+.workspace-avatar, .live-chip { color: #1d4ed8 !important; border-color: rgba(37,99,235,.2) !important; background: rgba(37,99,235,.06) !important; }
+
+.form-input, .custom-date-input, select, input, textarea {
+  color: #0f172a !important;
+  border-color: rgba(37,99,235,.16) !important;
+  background: #fff !important;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,.025) !important;
+}
+.form-input:hover, .custom-date-input:hover, select:hover, input:hover { border-color: rgba(37,99,235,.36) !important; }
+.form-input:focus, .custom-date-input:focus, select:focus, input:focus, textarea:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,.1) !important; }
+.investigation-form::before { color: #64748b; background: #fff; }
+
+.primary-button, .investigation-form button[type="submit"], .login-modal button,
+.analysis-tab.active, .database-section.active, .ai-chat-button, .chatbot-floating-button {
+  color: #fff !important;
+  border-color: #2563eb !important;
+  background: #2563eb !important;
+  box-shadow: 0 8px 22px rgba(37,99,235,.16) !important;
+}
+.primary-button:hover:not(:disabled), .investigation-form button[type="submit"]:hover:not(:disabled), .login-modal button:hover:not(:disabled) { background: #1d4ed8 !important; box-shadow: 0 12px 28px rgba(37,99,235,.22) !important; }
+.secondary-button, .document-plus-button, .synthetic-generate-button, .synthetic-data-button {
+  color: #334155 !important; border-color: rgba(37,99,235,.18) !important; background: #fff !important;
+}
+.secondary-button:hover, .document-plus-button:hover, .synthetic-generate-button:hover { color: #1d4ed8 !important; border-color: rgba(37,99,235,.35) !important; background: #f4f8ff !important; }
+
+.kpi-strip, .analysis-tabs, .database-sections { border-color: var(--border) !important; background: #f8faff !important; }
+.kpi-item, .workflow-summary-card > div { border-color: rgba(37,99,235,.09) !important; background: #fff !important; }
+.kpi-item::after { background: rgba(37,99,235,.2); }
+.kpi-positive { color: #2563eb !important; }
+.kpi-negative { color: #dc2626 !important; }
+
+.database-table th, .duplicate-table th { color: #475569 !important; border-color: var(--border) !important; background: #eef4ff !important; }
+.database-table td, .duplicate-table td { color: #334155 !important; border-color: rgba(37,99,235,.08) !important; background: #fff !important; }
+.database-table tr:hover td, .duplicate-table tr:hover td { background: #f5f9ff !important; }
+.database-table-scroll, .duplicate-table-wrapper { scrollbar-color: rgba(37,99,235,.3) #eef4fb; }
+.database-table-scroll::-webkit-scrollbar-thumb, .duplicate-table-wrapper::-webkit-scrollbar-thumb { background: rgba(37,99,235,.28); }
+
+.signal-chart { background: linear-gradient(180deg, rgba(37,99,235,.025), transparent 52%); }
+.signal-chart-corner { border-color: rgba(37,99,235,.22); }
+.chart-card::after { border-color: rgba(37,99,235,.20); }
+.chart-custom-tooltip, .chart-tooltip { color: #0f172a !important; border-color: rgba(37,99,235,.16) !important; background: rgba(255,255,255,.98) !important; box-shadow: 0 14px 38px rgba(15,23,42,.14) !important; }
+
+.decision-approved, .severity-normal, .severity-low, .status-badge.success,
+.duplicate-resolution.keep { color: #047857 !important; border-color: rgba(5,150,105,.2) !important; background: rgba(5,150,105,.07) !important; }
+.workflow-tag { color: #1d4ed8 !important; border-color: rgba(37,99,235,.18) !important; background: rgba(37,99,235,.055) !important; }
+.admin-card-icon, .document-file-icon { color: #2563eb !important; border-color: rgba(37,99,235,.15) !important; background: rgba(37,99,235,.06) !important; }
+
+.chatbot-header { color: #fff !important; background: linear-gradient(135deg, #1d4ed8, #3b82f6) !important; }
+.chatbot-messages { background: #f7faff !important; }
+.chat-user-message { color: #fff !important; background: #2563eb !important; }
+.chat-agent-message { color: #334155 !important; border-color: rgba(37,99,235,.12) !important; background: #fff !important; }
+
+.login-screen { background: #f4f7fb !important; }
+.login-backdrop { background: radial-gradient(circle at 50% 45%, rgba(37,99,235,.14), transparent 38%) !important; }
+.login-grid-glow { background-image: linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px); }
+.login-modal { border-color: rgba(37,99,235,.16) !important; background: rgba(255,255,255,.94) !important; box-shadow: 0 30px 90px rgba(30,64,175,.16) !important; backdrop-filter: none; }
+.login-modal::before { background: #2563eb; box-shadow: 0 0 14px rgba(37,99,235,.28); }
+
+.ambient-signals { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: .48; }
+.ambient-signals.login { position: absolute; z-index: 0; opacity: .72; }
+.ambient-signals svg { width: 100%; height: 100%; }
+.ambient-track { fill: none; stroke: rgba(37,99,235,.075); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ambient-tracer { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(37,99,235,.3)); }
+.signal-field-3d::after { background: linear-gradient(90deg, transparent, rgba(37,99,235,.22), transparent); }
+
+/* Transform/opacity-only interaction effects keep scrolling smooth. */
+.admin-card, .chart-card, .finding-card, .insight-card, .kpi-item,
+.decision-status, .decision-assessment, .decision-findings, .workflow-card {
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease !important;
+}
+.admin-card:hover, .chart-card:hover, .finding-card:hover, .insight-card:hover {
+  border-color: rgba(37,99,235,.2) !important;
+  box-shadow: 0 16px 38px rgba(30,64,175,.10) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-signals { display: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

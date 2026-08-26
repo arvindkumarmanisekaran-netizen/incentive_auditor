@@ -51,7 +51,7 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
           label: { show: false },
           emphasis: {
             scaleSize: 8,
-            itemStyle: { shadowBlur: 28, shadowColor: "rgba(185,255,102,.2)" },
+            itemStyle: { shadowBlur: 18, shadowColor: "rgba(37,99,235,.16)" },
           },
           data: data.map((item) => ({
             name: String(item[nameKey] ?? "Unknown"),

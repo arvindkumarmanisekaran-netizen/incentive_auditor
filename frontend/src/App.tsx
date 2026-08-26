@@ -30,6 +30,7 @@ import InvestigationOverview from "./components/InvestigationOverview";
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 import SignalField3D from "./components/SignalField3D";
 import AppIcon from "./components/AppIcon";
+import AmbientSignals from "./components/AmbientSignals";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -40,8 +41,8 @@ import "./styles/index.css";
 type DashboardTab = "analysis" | "database";
 
 const panelReveal = {
-  hidden: { opacity: 0, y: 18, filter: "blur(5px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0 },
 };
 
 /**
@@ -499,6 +500,7 @@ function App() {
 
   return (
     <main className="dashboard">
+      <AmbientSignals />
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand" aria-label="Incentive Auditor">
           <span className="sidebar-brand-mark">IA</span>

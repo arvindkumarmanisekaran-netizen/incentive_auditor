@@ -31,7 +31,7 @@ function SignalNetwork({ animate }: { animate: boolean }) {
       <primitive
         object={new THREE.Line(
           lineGeometry,
-          new THREE.LineBasicMaterial({ color: "#8fca58", transparent: true, opacity: 0.52 }),
+          new THREE.LineBasicMaterial({ color: "#60a5fa", transparent: true, opacity: 0.58 }),
         )}
       />
 
@@ -39,8 +39,8 @@ function SignalNetwork({ animate }: { animate: boolean }) {
         <mesh key={index} position={point}>
           <sphereGeometry args={[index === 2 ? 0.14 : 0.09, 20, 20]} />
           <meshStandardMaterial
-            color="#b9ff66"
-            emissive="#83d63e"
+            color="#2563eb"
+            emissive="#60a5fa"
             emissiveIntensity={index === 2 ? 2.4 : 1.25}
             roughness={0.25}
           />
@@ -57,7 +57,7 @@ export default function SignalField3D() {
     <div className="signal-field-3d" aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 6.8], fov: 42 }} dpr={[1, 1.5]}>
         <ambientLight intensity={0.5} />
-        <pointLight position={[0, 2, 4]} color="#b9ff66" intensity={18} />
+        <pointLight position={[0, 2, 4]} color="#2563eb" intensity={18} />
         <SignalNetwork animate={!reduceMotion} />
       </Canvas>
     </div>

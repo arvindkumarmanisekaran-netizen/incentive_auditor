@@ -93,7 +93,7 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
       max: 100,
       radius: "88%",
       progress: { show: true, width: 10, roundCap: true, itemStyle: { color } },
-      axisLine: { lineStyle: { width: 10, color: [[1, "rgba(185,255,102,.08)"]] } },
+      axisLine: { lineStyle: { width: 10, color: [[1, "rgba(37,99,235,.08)"]] } },
       pointer: { show: false },
       axisTick: { show: false },
       splitLine: { show: false },
