@@ -534,6 +534,10 @@ function App() {
           <span>Data control</span>
           {activeTab === "database" && <motion.span className="nav-active-rail" layoutId="nav-active" />}
         </motion.button>
+
+        <div className="sidebar-synthetic-action">
+          <SyntheticDataGeneration />
+        </div>
         </nav>
 
         <div className="sidebar-system-status">
@@ -690,10 +694,6 @@ function App() {
 
       {activeTab === "database" && (
         <div className="database-top-actions">
-          <div className="database-top-action-left">
-            <SyntheticDataGeneration />
-          </div>
-
           <div className="database-top-action-right">
             <button
               type="button"
