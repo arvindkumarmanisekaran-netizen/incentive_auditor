@@ -1420,6 +1420,84 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   pointer-events: none;
 }
 
+/* White date controls across investigation and record-editing surfaces. */
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+.date-input,
+.custom-date-input,
+.database-edit-field input[type="date"],
+.database-edit-field input[type="datetime-local"] {
+  color: #0f172a !important;
+  color-scheme: light !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #fff !important;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,.025) !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  opacity: .72;
+  cursor: pointer;
+  filter: none !important;
+}
+
+.custom-calendar-popover {
+  color-scheme: light !important;
+  background: #fff !important;
+}
+
+/* Keep edit actions visible inside the table's scrolling viewport. */
+.database-edit-form.inline {
+  position: relative;
+  color: #334155 !important;
+  background: #f8faff !important;
+}
+
+.database-edit-actions {
+  position: sticky;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 24;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 10px;
+  margin: 18px -20px -18px !important;
+  padding: 12px 20px 14px !important;
+  border-top: 1px solid rgba(37,99,235,.10);
+  background: rgba(255,255,255,.97) !important;
+  box-shadow: 0 -8px 18px rgba(30,64,175,.06);
+}
+
+.database-edit-actions .secondary-button,
+.database-edit-actions .primary-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  min-height: 38px;
+  padding: 7px 16px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media (max-width: 650px) {
+  .database-edit-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    margin: 14px -10px -14px !important;
+    padding: 10px !important;
+  }
+
+  .database-edit-actions .secondary-button,
+  .database-edit-actions .primary-button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 .app-command-header::after {
   position: absolute;
   inset: 2px;
