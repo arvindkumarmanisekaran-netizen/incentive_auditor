@@ -1286,6 +1286,7 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 /* Rotating intelligence signal border for the primary command header. */
 .app-command-header {
   isolation: isolate;
+  overflow: visible !important;
   border-color: transparent !important;
   background: transparent !important;
   box-shadow:
@@ -1295,27 +1296,34 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 
 .app-command-header::before {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 180%;
-  aspect-ratio: 1;
+  inset: -3px;
+  width: auto;
+  height: auto;
   content: "";
   z-index: 0;
   pointer-events: none;
+  padding: 3px;
+  border-radius: 16px;
   background: conic-gradient(
-    from 0deg,
-    transparent 0deg 250deg,
-    rgba(96,165,250,.18) 276deg,
-    #2563eb 310deg,
-    rgba(96,165,250,.22) 338deg,
+    from var(--command-border-angle),
+    transparent 0deg 205deg,
+    rgba(96,165,250,.16) 228deg,
+    rgba(59,130,246,.72) 260deg,
+    #1d4ed8 292deg,
+    #93c5fd 314deg,
+    rgba(37,99,235,.64) 338deg,
     transparent 360deg
   );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   filter:
-    drop-shadow(0 0 5px rgba(37,99,235,.52))
-    drop-shadow(0 0 14px rgba(37,99,235,.30))
-    drop-shadow(0 0 24px rgba(96,165,250,.18));
-  transform: translate(-50%, -50%) rotate(0turn);
-  animation: command-border-rotate 5.5s linear infinite;
+    drop-shadow(0 0 7px rgba(37,99,235,.88))
+    drop-shadow(0 0 18px rgba(37,99,235,.58))
+    drop-shadow(0 0 34px rgba(96,165,250,.36));
+  animation: command-border-travel 4.8s linear infinite;
 }
 
 /* Contemporary segmented selector for database entities. */
@@ -1388,14 +1396,20 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   z-index: 2;
 }
 
-@keyframes command-border-rotate {
-  to { transform: translate(-50%, -50%) rotate(1turn); }
+@property --command-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes command-border-travel {
+  to { --command-border-angle: 360deg; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .app-command-header::before {
     animation: none !important;
-    transform: translate(-50%, -50%) rotate(.12turn);
+    --command-border-angle: 45deg;
   }
 }
 
