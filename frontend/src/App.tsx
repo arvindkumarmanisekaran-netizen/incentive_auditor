@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { runInvestigationStream, type WorkflowEvent } from "./api/investigation";
 
@@ -95,11 +96,7 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
 
 function App() {
   const [workspaceUser, setWorkspaceUser] = useState("");
-  const [databaseRefreshKey, setDatabaseRefreshKey] = useState(0);
 
-  const refreshDatabaseManagement = useCallback(() => {
-    setDatabaseRefreshKey((current) => current + 1);
-  }, []);
   async function handleLogin(username: string) {
     const result = await loginToWorkspace(username);
     setActiveWorkspace(result.workspace);
@@ -539,8 +536,15 @@ function App() {
           ANALYSIS TAB
       ================================================== */}
 
+      <AnimatePresence mode="wait" initial={false}>
       {activeTab === "analysis" && (
-        <section className="dashboard-tab-content">
+        <motion.section
+          key="analysis"
+          className="dashboard-tab-content"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+        >
           {masterDataLoading ? (
             <div className="loading-message">Loading representatives...</div>
           ) : (
@@ -621,7 +625,7 @@ function App() {
               <InvestigationInsights result={result} />
             </>
           )}
-        </section>
+        </motion.section>
       )}
 
       {/* ==================================================
@@ -662,18 +666,33 @@ function App() {
       )}
 
       {activeTab === "database" && (
-        <section className="dashboard-tab-content database-page">
+        <motion.section
+          key="database"
+          className="dashboard-tab-content database-page"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+        >
+          <AnimatePresence initial={false}>
           {showDocumentProcessing && (
-            <div className="document-processing-expand">
-              <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
-            </div>
+            <motion.div
+              className="document-processing-expand"
+              initial={{ opacity: 0, height: 0, y: -8 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -8 }}
+              style={{ overflow: "hidden" }}
+            >
+              <DocumentProcessingCard />
+            </motion.div>
           )}
+          </AnimatePresence>
 
           <div className="database-management-center">
-            <DatabaseManagementCard refreshKey={databaseRefreshKey} />
+            <DatabaseManagementCard />
           </div>
-        </section>
+        </motion.section>
       )}
+      </AnimatePresence>
 
       {/* ==================================================
           AI CHAT ASSISTANT

@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 interface LoginModalProps {
   onLogin: (username: string) => Promise<void>;
@@ -24,9 +25,22 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
   }
 
   return (
-    <div className="login-screen">
-      <div className="login-backdrop" aria-hidden="true" />
-      <section className="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <motion.div className="login-screen" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <motion.div
+        className="login-backdrop"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      />
+      <motion.section
+        className="login-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="login-title"
+        initial={{ opacity: 0, y: 18, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: "spring", stiffness: 320, damping: 28 }}
+      >
         <div className="login-brand" aria-hidden="true">🧪</div>
         <p className="login-eyebrow">INCENTIVE AUDITOR</p>
         <h1 id="login-title">Open your workspace</h1>
@@ -50,13 +64,25 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
             required
             disabled={loading}
           />
-          {error && <div className="login-error" role="alert">{error}</div>}
+          <AnimatePresence initial={false}>
+            {error && (
+              <motion.div
+                className="login-error"
+                role="alert"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
           <button type="submit" disabled={loading || username.trim().length < 3}>
             {loading ? "Preparing workspace…" : "Continue"}
           </button>
         </form>
         <p className="login-note">Your login ends when this page is refreshed.</p>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }

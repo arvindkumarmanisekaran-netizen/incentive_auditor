@@ -1,4 +1,5 @@
-import { useMemo, useEffect, useState, useRef } from "react";
+import { useMemo, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
 
@@ -18,12 +19,7 @@ function formatDuplicateValue(value: unknown) {
   return String(value);
 }
 
-interface DocumentProcessingCardProps {
-  onProcessingFinished?: () => void;
-}
-export default function DocumentProcessingCard({
-  onProcessingFinished,
-}: DocumentProcessingCardProps) {
+export default function DocumentProcessingCard() {
   const {
     inputRef,
     selectFolder,
@@ -41,106 +37,6 @@ export default function DocumentProcessingCard({
     clearProcessedDocuments,
   } = useDocumentUpload();
 
-  const duplicateDragStateRef = useRef<{
-    container: HTMLDivElement | null;
-    pointerId: number | null;
-    startX: number;
-    startY: number;
-    scrollLeft: number;
-    scrollTop: number;
-    dragging: boolean;
-  }>({
-    container: null,
-    pointerId: null,
-    startX: 0,
-    startY: 0,
-    scrollLeft: 0,
-    scrollTop: 0,
-    dragging: false,
-  });
-
-  function handleDuplicatePointerDown(event: React.PointerEvent<HTMLDivElement>) {
-    const target = event.target as HTMLElement;
-
-    // Keep selects, buttons and links clickable.
-    if (target.closest("button, input, select, textarea, a")) {
-      return;
-    }
-
-    // Only react to the primary mouse button.
-    if (event.pointerType === "mouse" && event.button !== 0) {
-      return;
-    }
-
-    const container = event.currentTarget;
-
-    duplicateDragStateRef.current = {
-      container,
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      startY: event.clientY,
-      scrollLeft: container.scrollLeft,
-      scrollTop: container.scrollTop,
-      dragging: true,
-    };
-
-    container.classList.add("is-dragging");
-    container.setPointerCapture(event.pointerId);
-  }
-
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 650px)").matches);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 650px)");
-
-    function handleChange(event: MediaQueryListEvent) {
-      setIsMobile(event.matches);
-      setDuplicatePage({});
-    }
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
-
-  function handleDuplicatePointerMove(event: React.PointerEvent<HTMLDivElement>) {
-    const state = duplicateDragStateRef.current;
-
-    if (!state.dragging || !state.container || state.pointerId !== event.pointerId) {
-      return;
-    }
-
-    const deltaX = event.clientX - state.startX;
-    const deltaY = event.clientY - state.startY;
-
-    state.container.scrollLeft = state.scrollLeft - deltaX;
-    state.container.scrollTop = state.scrollTop - deltaY;
-
-    event.preventDefault();
-  }
-
-  function stopDuplicateDragging(event: React.PointerEvent<HTMLDivElement>) {
-    const state = duplicateDragStateRef.current;
-    const container = state.container;
-
-    if (container && state.pointerId !== null && container.hasPointerCapture(state.pointerId)) {
-      container.releasePointerCapture(state.pointerId);
-    }
-
-    container?.classList.remove("is-dragging");
-
-    duplicateDragStateRef.current = {
-      container: null,
-      pointerId: null,
-      startX: 0,
-      startY: 0,
-      scrollLeft: 0,
-      scrollTop: 0,
-      dragging: false,
-    };
-  }
   // ==================================================
   // LOCAL UI STATE
   // ==================================================
@@ -237,22 +133,6 @@ export default function DocumentProcessingCard({
    * Upload processing OR database confirmation.
    */
   const busy = processing;
-
-  const previousProcessingRef = useRef(processing);
-
-  useEffect(() => {
-    const wasProcessing = previousProcessingRef.current;
-
-    /*
-     * Refresh Database Management whenever an upload/import
-     * operation finishes, whether it succeeds or fails.
-     */
-    if (wasProcessing && !processing) {
-      onProcessingFinished?.();
-    }
-
-    previousProcessingRef.current = processing;
-  }, [processing, onProcessingFinished]);
 
   // ==================================================
   // CONFIRM
@@ -388,7 +268,7 @@ export default function DocumentProcessingCard({
 
                 const duplicateRecords = document.pending_data?.duplicate_records ?? [];
 
-                const pageSize = isMobile ? 10 : 50;
+                const pageSize = 50;
 
                 const currentPage = duplicatePage[document.filename] ?? 0;
 
@@ -468,8 +348,15 @@ export default function DocumentProcessingCard({
                     </div>
 
                     {/* DUPLICATE DETAILS */}
+                    <AnimatePresence initial={false}>
                     {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
-                      <div className="document-duplicate-inline">
+                      <motion.div
+                        className="document-duplicate-inline"
+                        initial={{ opacity: 0, height: 0, y: -8 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -8 }}
+                        style={{ overflow: "hidden" }}
+                      >
                         <div className="duplicate-header">
                           <div>
                             <h4>Duplicate Records</h4>
@@ -515,71 +402,8 @@ export default function DocumentProcessingCard({
                           </div>
                         </div>
 
-                        <div className="duplicate-mobile-list">
-                          {visibleDuplicates.map((item, index) => {
-                            const rowIndex = currentPage * pageSize + index;
-
-                            const resolution =
-                              duplicateActions[document.filename]?.[rowIndex] ?? "keep";
-
-                            return (
-                              <article
-                                key={`${document.filename}-mobile-${rowIndex}`}
-                                className="duplicate-mobile-card"
-                              >
-                                <header className="duplicate-mobile-card-header">
-                                  <span>Duplicate Record</span>
-                                  <strong>#{rowIndex + 1}</strong>
-                                </header>
-
-                                <div className="duplicate-mobile-fields">
-                                  {Object.entries(item.incoming_record).map(([column, value]) => (
-                                    <div key={column} className="duplicate-mobile-field">
-                                      <span>{formatFieldName(column)}</span>
-
-                                      <strong>{formatDuplicateValue(value)}</strong>
-                                    </div>
-                                  ))}
-                                </div>
-
-                                <label className="duplicate-mobile-resolution">
-                                  <span>Resolution</span>
-
-                                  <select
-                                    className={`duplicate-resolution ${
-                                      resolution === "replace" ? "replace" : "keep"
-                                    }`}
-                                    value={resolution}
-                                    onChange={(event) => {
-                                      const value = event.target.value as "keep" | "replace";
-
-                                      setDuplicateActions((current) => ({
-                                        ...current,
-
-                                        [document.filename]: {
-                                          ...(current[document.filename] ?? {}),
-                                          [rowIndex]: value,
-                                        },
-                                      }));
-                                    }}
-                                  >
-                                    <option value="keep">Keep Existing</option>
-                                    <option value="replace">Replace Existing</option>
-                                  </select>
-                                </label>
-                              </article>
-                            );
-                          })}
-                        </div>
                         {/* TABLE */}
-                        <div
-                          className="duplicate-table-wrapper"
-                          onPointerDown={handleDuplicatePointerDown}
-                          onPointerMove={handleDuplicatePointerMove}
-                          onPointerUp={stopDuplicateDragging}
-                          onPointerCancel={stopDuplicateDragging}
-                          onLostPointerCapture={stopDuplicateDragging}
-                        >
+                        <div className="duplicate-table-wrapper">
                           {duplicateRecords.length > 0 ? (
                             <table className="duplicate-table">
                               <thead>
@@ -604,14 +428,12 @@ export default function DocumentProcessingCard({
                                   return (
                                     <tr key={`${document.filename}-${rowIndex}`}>
                                       {Object.keys(item.incoming_record).map((column) => (
-                                        <td key={column} data-label={formatFieldName(column)}>
-                                          <span className="duplicate-cell-value">
-                                            {formatDuplicateValue(item.incoming_record[column])}
-                                          </span>
+                                        <td key={column}>
+                                          {formatDuplicateValue(item.incoming_record[column])}
                                         </td>
                                       ))}
 
-                                      <td data-label="Resolution">
+                                      <td>
                                         <select
                                           className={`duplicate-resolution ${
                                             resolution === "replace" ? "replace" : "keep"
@@ -682,8 +504,9 @@ export default function DocumentProcessingCard({
                             Next
                           </button>
                         </div>
-                      </div>
+                      </motion.div>
                     )}
+                    </AnimatePresence>
 
                     {/* DOCUMENT ERROR */}
                     {document.success === false && document.error && (
@@ -711,11 +534,23 @@ export default function DocumentProcessingCard({
             VALIDATION ERROR POPUP
         ================================================== */}
 
+        <AnimatePresence>
         {!busy && validationErrors.length > 0 && (
           <>
-            <div className="validation-overlay" onClick={clearValidationErrors} />
+            <motion.div
+              className="validation-overlay"
+              onClick={clearValidationErrors}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
 
-            <div className="validation-popup">
+            <motion.div
+              className="validation-popup"
+              initial={{ opacity: 0, scale: 0.96, y: 14 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: 8 }}
+            >
               <h4>Import Blocked</h4>
 
               <p>Validation errors were found in the uploaded documents.</p>
@@ -770,9 +605,10 @@ export default function DocumentProcessingCard({
               <button type="button" className="secondary-button" onClick={clearValidationErrors}>
                 Close
               </button>
-            </div>
+            </motion.div>
           </>
         )}
+        </AnimatePresence>
 
         {/* ==================================================
             NORMAL ERROR
@@ -786,8 +622,14 @@ export default function DocumentProcessingCard({
             SUCCESS POPUP
         ================================================== */}
 
+        <AnimatePresence>
         {!busy && successMessage && (
-          <div className="import-success-row">
+          <motion.div
+            className="import-success-row"
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+          >
             <div className="import-success-banner">
               <div className="import-success-icon">✓</div>
 
@@ -806,8 +648,9 @@ export default function DocumentProcessingCard({
                 ×
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </article>
   );

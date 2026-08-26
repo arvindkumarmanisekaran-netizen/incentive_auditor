@@ -115,11 +115,7 @@ function getCellValue(row: RowData, column: string): unknown {
   return (row as unknown as Record<string, unknown>)[column];
 }
 
-interface DatabaseManagementCardProps {
-  refreshKey?: number;
-}
-
-export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManagementCardProps) {
+export default function DatabaseManagementCard() {
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
 
   const dragStateRef = useRef({
@@ -208,7 +204,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
   useEffect(() => {
     void loadTable(activeSection, offset);
-  }, [activeSection, offset, refreshKey]);
+  }, [activeSection, offset]);
 
   // --------------------------------------------------
   // Safely switch table.
