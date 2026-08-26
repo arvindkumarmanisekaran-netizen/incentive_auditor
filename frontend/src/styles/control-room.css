@@ -1000,7 +1000,7 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   }
 }
 
-/* Keep the document and database cards on one shared left edge. */
+/* Stable document/database page spacing. */
 .database-page {
   gap: 10px !important;
 }
@@ -1016,34 +1016,84 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 }
 
 .document-processing-expand > .admin-card > .admin-card-content {
-  align-items: flex-start !important;
-  text-align: left !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 .document-processing-expand .admin-card-content > h3,
 .document-processing-expand .admin-card-content > p {
-  margin-inline: 0 !important;
-  text-align: left !important;
+  margin-inline: auto !important;
+  text-align: center !important;
 }
 
 .document-processing-expand .admin-card-content > p {
-  max-width: none !important;
+  max-width: 650px !important;
 }
 
 .document-processing-expand .admin-card-meta {
-  justify-content: flex-start !important;
-  margin-inline: 0 !important;
+  justify-content: center !important;
+  margin-inline: auto !important;
 }
 
 .document-processing-expand .admin-card-content > .primary-button {
-  align-self: flex-start !important;
-  margin-inline: 0 !important;
+  align-self: center !important;
+  margin-inline: auto !important;
 }
 
 /* Transform/opacity-only duplicate reveal avoids height:auto reflow stutter. */
 .document-duplicate-inline {
   transform-origin: top center;
-  will-change: transform, opacity;
+  will-change: clip-path, transform, opacity;
+}
+
+/* Center the database controls and table within the card. */
+.database-card .database-sections,
+.database-card .database-table-container {
+  width: calc(100% - 32px) !important;
+  max-width: 1480px !important;
+  margin-inline: auto !important;
+}
+
+.database-card .database-sections {
+  justify-content: center !important;
+  margin-top: 26px !important;
+  margin-bottom: 16px !important;
+}
+
+.database-card .database-table-container {
+  margin-top: 0 !important;
+}
+
+/* Processing state remains readable on the light document card. */
+.document-processing-expand .investigation-loading {
+  justify-content: center;
+  margin: 14px auto 0;
+  color: #1e40af !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #eff6ff !important;
+}
+
+.document-processing-expand .investigation-loading span:last-child {
+  color: #1e40af !important;
+  opacity: 1 !important;
+}
+
+.document-processing-expand .loading-spinner {
+  border-color: rgba(37,99,235,.22) !important;
+  border-top-color: #2563eb !important;
+}
+
+/* Confirmation is centered with a more generous bottom inset. */
+.document-processing-actions {
+  justify-content: center !important;
+  padding: 18px 4px 14px !important;
+}
+
+@media (max-width: 650px) {
+  .database-card .database-sections,
+  .database-card .database-table-container {
+    width: 100% !important;
+  }
 }
 
 /* Synthetic generation now lives directly beneath Data control. */
