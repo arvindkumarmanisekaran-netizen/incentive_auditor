@@ -154,7 +154,7 @@ export default function SyntheticDataGeneration() {
         </span>
 
         <span className="synthetic-data-title">
-          {isGeneratingSyntheticData ? "Generating Dataset..." : "Generate Synthetic Data"}
+          {isGeneratingSyntheticData ? "Generating Test Data..." : "Generate Test Data"}
         </span>
       </button>
 
