@@ -347,6 +347,10 @@
 
   scrollbar-width: thin;
   scrollbar-color: #72517f #160020;
+
+  cursor: grab;
+  user-select: auto;
+  overscroll-behavior: contain;
 }
 
 /* =========================================================
@@ -366,7 +370,23 @@
 
   font-size: 10.5px;
 }
+.duplicate-table-wrapper.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
 
+.duplicate-table-wrapper.is-dragging * {
+  user-select: none;
+}
+
+/* Controls must retain their normal interaction cursor */
+.duplicate-table-wrapper button,
+.duplicate-table-wrapper input,
+.duplicate-table-wrapper select,
+.duplicate-table-wrapper textarea,
+.duplicate-table-wrapper a {
+  cursor: pointer;
+}
 /* =========================================================
    TABLE HEADER
 ========================================================= */
@@ -2505,5 +2525,327 @@
   .duplicate-bulk-resolution {
     width: 100%;
     min-width: 0;
+  }
+}
+/* =========================================================
+   DOCUMENT PROCESSING — TRUE DESKTOP CENTERING
+========================================================= */
+
+.document-processing-expand > .admin-card {
+  position: relative;
+  display: block;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/*
+ * Remove the folder icon from the flex layout.
+ * It remains visually positioned in the top-left corner.
+ */
+.document-processing-expand > .admin-card > .admin-card-icon {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+}
+
+/*
+ * Content now receives the entire width of the card.
+ */
+.document-processing-expand > .admin-card > .admin-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+
+  text-align: center;
+}
+
+/* Header text */
+.document-processing-expand .admin-card-content > h3,
+.document-processing-expand .admin-card-content > p {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.document-processing-expand .admin-card-content > p {
+  max-width: 650px;
+}
+
+/* CSV / JSON / XLSX / DOCX */
+.document-processing-expand .admin-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Select Document Folder */
+.document-processing-expand .admin-card-content > .primary-button {
+  align-self: center;
+  margin-inline: auto;
+}
+
+/* Main results section */
+.document-processing-expand .document-results {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 18px auto 0;
+}
+
+/* Four summary boxes */
+.document-processing-expand .document-results-summary {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Uploaded file rows */
+.document-processing-expand .document-results-list {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.document-processing-expand .document-result-row {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Duplicate review window */
+.document-processing-expand .document-duplicate-inline {
+  box-sizing: border-box;
+  width: min(900px, calc(100% - 28px));
+  margin: 14px auto;
+}
+/* Desktop */
+.duplicate-mobile-list {
+  display: none;
+}
+
+/* Mobile duplicate cards */
+@media (max-width: 650px) {
+  .duplicate-table-wrapper {
+    max-height: none;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  /* Hide desktop table */
+  .duplicate-table {
+    display: none;
+  }
+
+  .duplicate-mobile-list {
+    display: grid;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .duplicate-mobile-card {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+
+    background: linear-gradient(145deg, rgba(30, 7, 42, 0.98), rgba(15, 2, 23, 0.98));
+
+    border: 1px solid rgba(216, 180, 254, 0.16);
+    border-radius: 12px;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  }
+
+  .duplicate-mobile-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 11px 12px;
+
+    background: rgba(192, 38, 211, 0.09);
+    border-bottom: 1px solid rgba(216, 180, 254, 0.12);
+  }
+
+  .duplicate-mobile-card-header span {
+    color: #e9d5ff;
+    font-size: 11px;
+    font-weight: 750;
+  }
+
+  .duplicate-mobile-card-header strong {
+    color: #a78bfa;
+    font-size: 10px;
+  }
+
+  .duplicate-mobile-fields {
+    display: grid;
+    width: 100%;
+  }
+
+  .duplicate-mobile-field {
+    display: grid;
+    grid-template-columns: minmax(100px, 42%) minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+
+    min-height: 42px;
+    padding: 8px 12px;
+
+    border-bottom: 1px solid rgba(216, 180, 254, 0.07);
+  }
+
+  .duplicate-mobile-field > span {
+    color: #9f8cab;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .duplicate-mobile-field > strong {
+    min-width: 0;
+
+    color: #f3e8ff;
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.4;
+    text-align: right;
+
+    overflow-wrap: anywhere;
+  }
+
+  .duplicate-mobile-resolution {
+    display: grid;
+    gap: 7px;
+    padding: 12px;
+    background: rgba(8, 145, 178, 0.05);
+  }
+
+  .duplicate-mobile-resolution > span {
+    color: #a5f3fc;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .duplicate-mobile-resolution .duplicate-resolution {
+    box-sizing: border-box;
+    width: 100%;
+    height: 38px;
+  }
+}
+/* =========================================================
+   DUPLICATE PAGINATION — MOBILE FIX
+========================================================= */
+
+@media (max-width: 650px) {
+  .duplicate-pagination {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+
+    margin: 14px 0 0;
+    padding: 0;
+    gap: 8px;
+
+    overflow: visible;
+  }
+
+  /* Pagination description appears above the buttons */
+  .duplicate-pagination span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 2px 4px 4px;
+
+    text-align: center;
+    white-space: normal;
+  }
+
+  .duplicate-pagination button {
+    box-sizing: border-box;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 9px 8px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .duplicate-pagination button:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .duplicate-pagination button:last-of-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .document-duplicate-inline {
+    box-sizing: border-box;
+    overflow: visible;
+  }
+}
+/* =========================================================
+   DOCUMENT HEADER — FOLDER ICON COLLISION FIX
+========================================================= */
+
+/* Reserve equal space on both sides to keep text centered */
+.document-processing-expand .admin-card-content > h3,
+.document-processing-expand .admin-card-content > p {
+  box-sizing: border-box;
+  width: 100%;
+  padding-inline: 70px;
+}
+
+/* Keep the description readable */
+.document-processing-expand .admin-card-content > p {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+/* Mobile: place the icon above the heading */
+@media (max-width: 650px) {
+  .document-processing-expand > .admin-card > .admin-card-icon {
+    position: static;
+
+    width: 42px;
+    height: 42px;
+
+    margin: 0 auto 12px;
+  }
+
+  .document-processing-expand .admin-card-content > h3,
+  .document-processing-expand .admin-card-content > p {
+    padding-inline: 0;
+  }
+
+  .document-processing-expand .admin-card-content > p {
+    max-width: 320px;
   }
 }

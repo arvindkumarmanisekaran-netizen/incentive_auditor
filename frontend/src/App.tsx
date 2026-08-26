@@ -96,7 +96,11 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
 
 function App() {
   const [workspaceUser, setWorkspaceUser] = useState("");
+  const [databaseRefreshKey, setDatabaseRefreshKey] = useState(0);
 
+  const refreshDatabaseManagement = useCallback(() => {
+    setDatabaseRefreshKey((current) => current + 1);
+  }, []);
   async function handleLogin(username: string) {
     const result = await loginToWorkspace(username);
     setActiveWorkspace(result.workspace);
@@ -537,14 +541,14 @@ function App() {
       ================================================== */}
 
       <AnimatePresence mode="wait" initial={false}>
-      {activeTab === "analysis" && (
-        <motion.section
-          key="analysis"
-          className="dashboard-tab-content"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-        >
+        {activeTab === "analysis" && (
+          <motion.section
+            key="analysis"
+            className="dashboard-tab-content"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+          >
           {masterDataLoading ? (
             <div className="loading-message">Loading representatives...</div>
           ) : (
@@ -625,8 +629,9 @@ function App() {
               <InvestigationInsights result={result} />
             </>
           )}
-        </motion.section>
-      )}
+          </motion.section>
+        )}
+      </AnimatePresence>
 
       {/* ==================================================
           DOCUMENTS + DATABASE TAB
@@ -665,33 +670,34 @@ function App() {
         </div>
       )}
 
-      {activeTab === "database" && (
-        <motion.section
-          key="database"
-          className="dashboard-tab-content database-page"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-        >
+      <AnimatePresence mode="wait" initial={false}>
+        {activeTab === "database" && (
+          <motion.section
+            key="database"
+            className="dashboard-tab-content database-page"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+          >
           <AnimatePresence initial={false}>
-          {showDocumentProcessing && (
-            <motion.div
-              className="document-processing-expand"
-              initial={{ opacity: 0, height: 0, y: -8 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -8 }}
-              style={{ overflow: "hidden" }}
-            >
-              <DocumentProcessingCard />
-            </motion.div>
-          )}
+            {showDocumentProcessing && (
+              <motion.div
+                className="document-processing-expand"
+                initial={{ opacity: 0, height: 0, y: -8 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -8 }}
+                style={{ overflow: "hidden" }}
+              >
+                <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
+              </motion.div>
+            )}
           </AnimatePresence>
 
           <div className="database-management-center">
-            <DatabaseManagementCard />
+            <DatabaseManagementCard refreshKey={databaseRefreshKey} />
           </div>
-        </motion.section>
-      )}
+          </motion.section>
+        )}
       </AnimatePresence>
 
       {/* ==================================================

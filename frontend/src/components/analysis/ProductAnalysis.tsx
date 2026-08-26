@@ -1,14 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import type { Finding } from "../../types/investigation";
 
@@ -416,20 +408,23 @@ export default function ProductAnalysis({ findings = [] }: Props) {
                     dataKey="amount"
                     shape={(props: any) => {
                       const index = Number(props.index ?? 0);
+                      const value = Number(props.payload?.amount ?? 0);
 
-                      const fill = getDynamicBarColor(
-                        "sales_rx",
-                        Number(props.payload?.amount ?? 0),
-                        index,
-                        mismatchValues,
-                      );
+                      const rawY = Number(props.y ?? 0);
+                      const rawHeight = Number(props.height ?? 0);
+
+                      // SVG rect cannot render a negative height.
+                      const y = rawHeight < 0 ? rawY + rawHeight : rawY;
+                      const height = Math.abs(rawHeight);
+
+                      const fill = getDynamicBarColor("sales_rx", value, index, mismatchValues);
 
                       return (
                         <rect
                           x={Number(props.x ?? 0)}
-                          y={Number(props.y ?? 0)}
+                          y={y}
                           width={Number(props.width ?? 0)}
-                          height={Number(props.height ?? 0)}
+                          height={height}
                           rx={7}
                           ry={7}
                           fill={fill}
