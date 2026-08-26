@@ -1,11 +1,14 @@
+import asyncio
 import hashlib
 import re
+from datetime import date
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, field_validator
 from sqlalchemy import text
 
 from ..db.session import engine
+from ..synthetic.generators.canonical import generate_canonical_data
 
 
 router = APIRouter(prefix="/api/workspaces", tags=["Workspaces"])
@@ -93,37 +96,96 @@ CREATE TABLE IF NOT EXISTS {schema}.incentive_payouts (
 """
 
 
-SEED_SQL = """
-INSERT INTO {schema}.territories VALUES
-('T001','Central Metro','Central','India','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('T002','North Metro','North','India','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.representatives VALUES
-('REP001','Asha','Rao','T001','2024-01-15','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('REP002','Vikram','Shah','T002','2024-03-10','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.products VALUES
-('PRD001','CardioCare','Cardiology','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('PRD002','GlucoBalance','Diabetes','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.doctors VALUES
-('DOC001','Dr Meera Iyer','Cardiology','T001','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('DOC002','Dr Rohan Gupta','Diabetology','T002','Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.representative_doctor_assignments VALUES
-('ASG001','REP001','DOC001','2026-01-01',NULL,'Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('ASG002','REP002','DOC002','2026-01-01',NULL,'Active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.prescriptions VALUES
-('RX001','2026-07-08','DOC001','PRD001',120,'Valid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('RX002','2026-07-12','DOC002','PRD002',85,'Valid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.sales VALUES
-('SAL001','2026-07-10','DOC001','PRD001','T001',135,27000,'Valid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('SAL002','2026-07-15','DOC002','PRD002','T002',82,16400,'Valid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO {schema}.incentive_payouts VALUES
-('PAY001','REP001','PRD001','2026-07-01',25000,27000,108,2000,1.2,2400,3000,2400,2500,100,'Paid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-('PAY002','REP002','PRD002','2026-07-01',18000,16400,91.11,1800,1,1800,2500,1800,1800,0,'Paid',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
-"""
+SEED_TABLES = {
+    "territories": (
+        "territories",
+        ["territory_id", "territory_name", "region", "country", "status"],
+        set(),
+    ),
+    "representatives": (
+        "representatives",
+        ["representative_id", "first_name", "last_name", "territory_id", "joining_date", "status"],
+        {"joining_date"},
+    ),
+    "products": (
+        "products",
+        ["product_id", "product_name", "product_category", "status"],
+        set(),
+    ),
+    "doctors": (
+        "doctors",
+        ["doctor_id", "doctor_name", "specialization", "territory_id", "status"],
+        set(),
+    ),
+    "assignments": (
+        "representative_doctor_assignments",
+        ["assignment_id", "representative_id", "doctor_id", "effective_from", "effective_to", "status"],
+        {"effective_from", "effective_to"},
+    ),
+    "prescriptions": (
+        "prescriptions",
+        ["prescription_id", "prescription_date", "doctor_id", "product_id", "quantity", "status"],
+        {"prescription_date"},
+    ),
+    "sales": (
+        "sales",
+        ["sale_id", "sale_date", "doctor_id", "product_id", "selling_territory_id", "quantity", "sales_amount", "status"],
+        {"sale_date"},
+    ),
+    "payouts": (
+        "incentive_payouts",
+        [
+            "payout_id", "representative_id", "product_id", "payout_month",
+            "sales_target", "actual_sales", "sales_achievement", "base_incentive",
+            "achievement_multiplier", "calculated_payout", "maximum_payout",
+            "expected_payout", "actual_payout", "payout_difference", "status",
+        ],
+        {"payout_month"},
+    ),
+}
+
+
+async def seed_workspace(connection, schema: str) -> dict[str, int]:
+    data = await asyncio.to_thread(
+        generate_canonical_data,
+        num_territories=50,
+        num_representatives=30,
+        num_products=30,
+        num_doctors=300,
+    )
+
+    counts: dict[str, int] = {}
+
+    for dataset_name, (table_name, columns, date_columns) in SEED_TABLES.items():
+        records = data.get(dataset_name, [])
+        if not records:
+            counts[table_name] = 0
+            continue
+
+        prepared_records = []
+        for record in records:
+            prepared = {column: record.get(column) for column in columns}
+            for column in date_columns:
+                value = prepared.get(column)
+                if isinstance(value, str) and value:
+                    prepared[column] = date.fromisoformat(value)
+            prepared_records.append(prepared)
+
+        column_sql = ", ".join(columns)
+        value_sql = ", ".join(f":{column}" for column in columns)
+        await connection.execute(
+            text(f'INSERT INTO "{schema}".{table_name} ({column_sql}) VALUES ({value_sql})'),
+            prepared_records,
+        )
+        counts[table_name] = len(prepared_records)
+
+    return counts
 
 
 @router.post("/login")
 async def login(payload: WorkspaceLogin):
     schema = schema_for(payload.username)
+    seeded_records: dict[str, int] = {}
 
     try:
         async with engine.begin() as connection:
@@ -146,7 +208,7 @@ async def login(payload: WorkspaceLogin):
             if created:
                 await connection.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{schema}"'))
                 await execute_statements(connection, WORKSPACE_DDL.format(schema=f'"{schema}"'))
-                await execute_statements(connection, SEED_SQL.format(schema=f'"{schema}"'))
+                seeded_records = await seed_workspace(connection, schema)
                 await connection.execute(
                     text("""
                         INSERT INTO public.workspaces (username_key, display_name, schema_name)
@@ -163,4 +225,9 @@ async def login(payload: WorkspaceLogin):
     except Exception as exc:
         raise HTTPException(status_code=500, detail="Unable to prepare workspace") from exc
 
-    return {"username": payload.username, "workspace": schema, "created": created}
+    return {
+        "username": payload.username,
+        "workspace": schema,
+        "created": created,
+        "seeded_records": seeded_records,
+    }
