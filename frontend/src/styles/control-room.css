@@ -1483,6 +1483,24 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   visibility: visible !important;
 }
 
+.database-edit-field .custom-date-picker,
+.database-edit-field .custom-date-input {
+  width: 100%;
+}
+
+.database-edit-field .custom-date-input {
+  min-height: 38px;
+  padding: 0 8px 0 10px !important;
+  color: #0f172a !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #fff !important;
+}
+
+.database-edit-field .custom-calendar-popover {
+  left: 0;
+  z-index: 2000 !important;
+}
+
 @media (max-width: 650px) {
   .database-edit-actions {
     display: grid !important;
