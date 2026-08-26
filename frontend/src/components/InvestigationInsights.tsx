@@ -26,11 +26,11 @@ type Props = {
 ========================================================= */
 
 const COLORS = {
-  sales: "#7c3aed",
+  sales: "#8fc95a",
   prescription: "#2563eb",
   expected: "#64748b",
   actual: "#2563eb",
-  doctor: "#7c3aed",
+  doctor: "#8fc95a",
   territory: "#0891b2",
 };
 

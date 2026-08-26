@@ -13,13 +13,13 @@ const DOCTOR_COLORS = [
   "#DC2626",
   "#16A34A",
   "#F59E0B",
-  "#7C3AED",
+  "#8fc95a",
   "#0891B2",
   "#EA580C",
-  "#DB2777",
+  "#FF766E",
 ];
 
-const TERRITORY_COLORS = ["#0891B2", "#F97316", "#4F46E5", "#65A30D", "#E11D48", "#9333EA"];
+const TERRITORY_COLORS = ["#B9FF66", "#64D8B4", "#F5C96A", "#7AAE72", "#FF766E", "#A8CFA3"];
 
 function formatMoney(value?: number) {
   return new Intl.NumberFormat("en-IN", {

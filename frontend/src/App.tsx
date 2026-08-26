@@ -38,6 +38,11 @@ import "./styles/index.css";
 
 type DashboardTab = "analysis" | "database";
 
+const panelReveal = {
+  hidden: { opacity: 0, y: 18, filter: "blur(5px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
 /**
  * Creates a fresh workflow whenever a new
  * investigation starts.
@@ -582,7 +587,18 @@ function App() {
               ERROR
           ---------------------------------------------- */}
 
-          {error && <div className="error-message">{error}</div>}
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                className="error-message"
+                initial={{ opacity: 0, height: 0, y: -6 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -6 }}
+              >
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* ==================================================
               LIVE INVESTIGATION WORKFLOW
@@ -593,11 +609,13 @@ function App() {
           ================================================== */}
 
           {workflowVisible && (
-            <InvestigationWorkflow
-              agents={workflowAgents}
-              loading={loading}
-              statusMessage={workflowStatusMessage}
-            />
+            <motion.div variants={panelReveal} initial="hidden" animate="visible">
+              <InvestigationWorkflow
+                agents={workflowAgents}
+                loading={loading}
+                statusMessage={workflowStatusMessage}
+              />
+            </motion.div>
           )}
 
           {/* ==================================================
@@ -605,42 +623,54 @@ function App() {
           ================================================== */}
 
           {result && (
-            <>
+            <motion.div
+              className="investigation-result-stack"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.1, delayChildren: 0.04 } },
+              }}
+            >
               {/* ------------------------------------------
                   RISK SUMMARY
               ------------------------------------------ */}
 
-              <RiskSummary
-                riskScore={result.overall_risk_score ?? 0}
-                severity={result.overall_severity ?? "NORMAL"}
-                salesChange={salesChange}
-                rxChange={rxChange}
-                payoutDifference={payoutDifference}
-                findingCount={riskFindingCount}
-              />
+              <motion.div variants={panelReveal}>
+                <RiskSummary
+                  riskScore={result.overall_risk_score ?? 0}
+                  severity={result.overall_severity ?? "NORMAL"}
+                  salesChange={salesChange}
+                  rxChange={rxChange}
+                  payoutDifference={payoutDifference}
+                  findingCount={riskFindingCount}
+                />
+              </motion.div>
 
               {/* ------------------------------------------
                   INVESTIGATION OVERVIEW
               ------------------------------------------ */}
 
-              <InvestigationOverview result={result} />
+              <motion.div variants={panelReveal}><InvestigationOverview result={result} /></motion.div>
 
               {/* ------------------------------------------
                   CHARTS
               ------------------------------------------ */}
 
-              <AnalysisWorkspace
-                findings={findings}
-                peerAnalysis={result.peer_analysis}
-                representativeID={result.representative_id}
-              />
+              <motion.div variants={panelReveal}>
+                <AnalysisWorkspace
+                  findings={findings}
+                  peerAnalysis={result.peer_analysis}
+                  representativeID={result.representative_id}
+                />
+              </motion.div>
 
               {/* ------------------------------------------
                   AI INSIGHTS
               ------------------------------------------ */}
 
-              <InvestigationInsights result={result} />
-            </>
+              <motion.div variants={panelReveal}><InvestigationInsights result={result} /></motion.div>
+            </motion.div>
           )}
           </motion.section>
         )}

@@ -37,10 +37,10 @@
   padding: 0 14px;
 
   border-radius: 8px;
-  border: 1px solid rgba(232, 121, 249, 0.24);
+  border: 1px solid rgba(219, 255, 173, 0.24);
 
-  background: rgba(192, 38, 211, 0.08);
-  color: #f0abfc;
+  background: rgba(185, 255, 102, 0.08);
+  color: #c9f39e;
 
   font-size: 12px;
   font-weight: 700;
@@ -52,8 +52,8 @@
 }
 
 .workflow-toggle:hover {
-  background: rgba(192, 38, 211, 0.16);
-  border-color: rgba(232, 121, 249, 0.42);
+  background: rgba(185, 255, 102, 0.16);
+  border-color: rgba(219, 255, 173, 0.42);
 }
 
 /* =========================================================
@@ -138,9 +138,9 @@
   padding: 5px 10px;
   border-radius: 999px;
 
-  background: rgba(192, 38, 211, 0.08);
-  border: 1px solid rgba(232, 121, 249, 0.16);
-  color: #d8c5e5;
+  background: rgba(185, 255, 102, 0.08);
+  border: 1px solid rgba(219, 255, 173, 0.16);
+  color: #b4beb3;
 
   font-size: 11px;
   font-weight: 600;
@@ -672,7 +672,7 @@
 .overview-action h3 {
   margin: 0 0 8px;
 
-  color: #f8f4ff;
+  color: #eef3ed;
   align-items: left;
 
   font-size: 14px;
@@ -712,7 +712,7 @@
 
   background: rgba(255, 255, 255, 0.025);
 
-  border: 1px solid rgba(216, 180, 254, 0.1);
+  border: 1px solid rgba(190, 219, 174, 0.1);
   border-radius: 8px;
 }
 
@@ -733,7 +733,7 @@
 .risk-driver p {
   margin: 0;
 
-  color: #d8cbe4 !important;
+  color: #b7c0b6 !important;
 
   font-size: 12px;
   line-height: 1.55;
@@ -763,14 +763,14 @@
 
   background: rgba(255, 255, 255, 0.025);
 
-  border: 1px solid rgba(216, 180, 254, 0.1);
+  border: 1px solid rgba(190, 219, 174, 0.1);
   border-radius: 9px;
 }
 
 .overview-card h4 {
   margin: 0 0 7px;
 
-  color: #f5e9ff;
+  color: #edf3eb;
 
   font-size: 12px;
   font-weight: 700;
@@ -783,7 +783,7 @@
 .overview-card p {
   margin: 0;
 
-  color: #c3b4cf;
+  color: #a6aea5;
 
   font-size: 11px;
   line-height: 1.55;
@@ -835,7 +835,7 @@
 .action-item p {
   margin: 0;
 
-  color: #d8cbe4;
+  color: #b7c0b6;
 
   font-size: 11px;
   line-height: 1.5;
@@ -960,7 +960,7 @@
 
 .overview-detailed-analysis {
   margin-top: 10px;
-  border: 1px solid rgba(168, 85, 247, 0.16);
+  border: 1px solid rgba(168, 230, 107, 0.16);
   border-radius: 10px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.02);
@@ -1008,16 +1008,16 @@
 
 .overview-detailed-investigation {
   margin-top: 14px;
-  border: 1px solid rgba(192, 132, 252, 0.32);
+  border: 1px solid rgba(185, 255, 102, 0.32);
   border-radius: 12px;
   overflow: hidden;
 
   background:
-    radial-gradient(circle at top left, rgba(168, 85, 247, 0.14), transparent 34%),
+    radial-gradient(circle at top left, rgba(168, 230, 107, 0.14), transparent 34%),
     linear-gradient(180deg, rgba(28, 19, 46, 0.96), rgba(13, 10, 23, 0.98));
 
   box-shadow:
-    0 10px 28px rgba(88, 28, 135, 0.16),
+    0 10px 28px rgba(73, 99, 62, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
@@ -1041,8 +1041,8 @@
 
   background: linear-gradient(
     90deg,
-    rgba(168, 85, 247, 0.12),
-    rgba(99, 102, 241, 0.05),
+    rgba(168, 230, 107, 0.12),
+    rgba(143, 201, 90, 0.05),
     transparent
   );
 
@@ -1058,14 +1058,14 @@
 .overview-detailed-toggle:hover {
   background: linear-gradient(
     90deg,
-    rgba(168, 85, 247, 0.18),
-    rgba(99, 102, 241, 0.08),
+    rgba(168, 230, 107, 0.18),
+    rgba(143, 201, 90, 0.08),
     transparent
   );
 }
 
 .overview-detailed-toggle[aria-expanded="true"] {
-  border-bottom-color: rgba(168, 85, 247, 0.16);
+  border-bottom-color: rgba(168, 230, 107, 0.16);
 }
 
 .overview-detailed-toggle > div {
@@ -1086,7 +1086,7 @@
   margin: 4px 0 0;
   font-size: 0.72rem;
   line-height: 1.4;
-  color: rgba(216, 180, 254, 0.66);
+  color: rgba(190, 219, 174, 0.66);
 }
 
 .overview-detailed-chevron {
@@ -1099,12 +1099,12 @@
 
   flex: 0 0 auto;
 
-  border: 1px solid rgba(192, 132, 252, 0.22);
+  border: 1px solid rgba(185, 255, 102, 0.22);
   border-radius: 8px;
 
-  background: rgba(168, 85, 247, 0.1);
+  background: rgba(168, 230, 107, 0.1);
 
-  color: #d8b4fe;
+  color: #c9e9ae;
   font-size: 0.68rem;
 
   transition:
@@ -1113,7 +1113,7 @@
 }
 
 .overview-detailed-toggle:hover .overview-detailed-chevron {
-  background: rgba(168, 85, 247, 0.18);
+  background: rgba(168, 230, 107, 0.18);
 }
 
 /* =========================================================
@@ -1143,7 +1143,7 @@
   border: 1px solid rgba(103, 232, 249, 0.14);
   border-radius: 9px;
 
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.07), rgba(168, 85, 247, 0.06));
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.07), rgba(168, 230, 107, 0.06));
 }
 
 .overview-detailed-content .workflow-summary-card > div {
@@ -1179,10 +1179,10 @@
 .overview-detailed-content > .workflow-card {
   padding: 12px 13px;
 
-  border: 1px solid rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 230, 107, 0.18);
   border-radius: 9px;
 
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.055), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(180deg, rgba(168, 230, 107, 0.055), rgba(255, 255, 255, 0.02));
 }
 
 .overview-detailed-content > .workflow-card h3 {
@@ -1214,12 +1214,12 @@
 .overview-detailed-content .workflow-tag {
   padding: 4px 8px;
 
-  border: 1px solid rgba(192, 132, 252, 0.22);
+  border: 1px solid rgba(185, 255, 102, 0.22);
   border-radius: 999px;
 
-  background: rgba(168, 85, 247, 0.1);
+  background: rgba(168, 230, 107, 0.1);
 
-  color: #d8b4fe;
+  color: #c9e9ae;
 
   font-size: 0.67rem;
   font-weight: 650;
@@ -1252,8 +1252,8 @@
 }
 
 .overview-detailed-content .workflow-grid .workflow-card:hover {
-  border-color: rgba(168, 85, 247, 0.26);
-  background: rgba(168, 85, 247, 0.045);
+  border-color: rgba(168, 230, 107, 0.26);
+  background: rgba(168, 230, 107, 0.045);
   transform: translateY(-1px);
 }
 
@@ -1306,7 +1306,7 @@
   border: 1px solid rgba(45, 212, 191, 0.18);
   border-radius: 9px;
 
-  background: linear-gradient(135deg, rgba(45, 212, 191, 0.055), rgba(168, 85, 247, 0.04));
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.055), rgba(168, 230, 107, 0.04));
 }
 
 /* =========================================================
@@ -1486,9 +1486,9 @@
   width: 100%;
   overflow: hidden;
   background:
-    radial-gradient(circle at 8% 0%, rgba(126, 34, 206, 0.13), transparent 28%),
+    radial-gradient(circle at 8% 0%, rgba(126, 180, 82, 0.13), transparent 28%),
     linear-gradient(145deg, rgba(32, 9, 45, 0.97), rgba(16, 3, 25, 0.99));
-  border: 1px solid rgba(216, 180, 254, 0.15);
+  border: 1px solid rgba(190, 219, 174, 0.15);
   border-radius: 14px;
   box-shadow: var(--shadow-card);
 }
@@ -1553,7 +1553,7 @@
 .decision-findings {
   padding: 12px 13px;
   background: rgba(255, 255, 255, 0.022);
-  border: 1px solid rgba(216, 180, 254, 0.08);
+  border: 1px solid rgba(190, 219, 174, 0.08);
   border-radius: 10px;
 }
 
@@ -1566,7 +1566,7 @@
 .decision-assessment h4,
 .decision-findings h4 {
   margin: 0 0 8px;
-  color: #d8c8e3;
+  color: #b6c0b5;
   font-size: 0.70rem;
   font-weight: 800;
   letter-spacing: 0.045em;
@@ -1593,7 +1593,7 @@
 .decision-assessment p {
   margin: 0;
   max-width: 1200px;
-  color: #d0c2da;
+  color: #b4beb4;
   font-size: 0.76rem;
   line-height: 1.65;
 }
@@ -1649,8 +1649,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(216, 180, 254, 0.16) 10%,
-    rgba(216, 180, 254, 0.16) 90%,
+    rgba(190, 219, 174, 0.16) 10%,
+    rgba(190, 219, 174, 0.16) 90%,
     transparent
   );
 }
@@ -1689,7 +1689,7 @@
   min-width: 0;
   padding: 11px;
   background: rgba(255, 255, 255, 0.023);
-  border: 1px solid rgba(216, 180, 254, 0.08);
+  border: 1px solid rgba(190, 219, 174, 0.08);
   border-radius: 9px;
 }
 
@@ -1713,7 +1713,7 @@
 .investigation-overview .workflow-card {
   padding: 12px;
   background: rgba(255, 255, 255, 0.022);
-  border: 1px solid rgba(216, 180, 254, 0.08);
+  border: 1px solid rgba(190, 219, 174, 0.08);
   border-radius: 9px;
 }
 
@@ -1733,7 +1733,7 @@
 
 .investigation-overview .workflow-card h4 {
   margin: 12px 0 6px;
-  color: #baa8c6;
+  color: #97a197;
   font-size: 0.67rem;
   font-weight: 750;
 }
@@ -1745,7 +1745,7 @@
 }
 
 .workflow-priority strong {
-  color: #d8b4fe;
+  color: #c9e9ae;
 }
 
 .investigation-overview .tag-container {
@@ -1757,10 +1757,10 @@
 
 .investigation-overview .workflow-tag {
   padding: 4px 8px;
-  background: rgba(168, 85, 247, 0.075);
-  border: 1px solid rgba(192, 132, 252, 0.15);
+  background: rgba(168, 230, 107, 0.075);
+  border: 1px solid rgba(185, 255, 102, 0.15);
   border-radius: 999px;
-  color: #cdb9dc;
+  color: #adb7ac;
   font-size: 0.62rem;
   font-weight: 650;
 }
@@ -1786,7 +1786,7 @@
 
 .investigation-overview .workflow-grid li {
   margin-bottom: 5px;
-  color: #bba9c5;
+  color: #98a298;
   font-size: 0.68rem;
   line-height: 1.48;
 }

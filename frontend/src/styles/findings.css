@@ -62,7 +62,7 @@
 .finding-group-title-row strong {
   flex: 0 0 auto;
 
-  color: #f5e9ff;
+  color: #edf3eb;
 
   font-size: 11px;
   font-weight: 800;
@@ -71,7 +71,7 @@
 .finding-group-product-name {
   min-width: 0;
 
-  color: #aa96b7;
+  color: #899489;
 
   font-size: 10px;
   font-weight: 600;
@@ -84,7 +84,7 @@
 .finding-group-count {
   flex: 0 0 auto;
 
-  color: #75647f;
+  color: #5f695f;
 
   font-size: 8px;
   font-weight: 700;
@@ -102,7 +102,7 @@
 .finding-chevron {
   display: inline-flex;
 
-  color: #a78bba;
+  color: #879786;
 
   font-size: 12px;
 
@@ -130,7 +130,7 @@
 
   background: rgba(255, 255, 255, 0.025);
 
-  border: 1px solid rgba(216, 180, 254, 0.07);
+  border: 1px solid rgba(190, 219, 174, 0.07);
   border-radius: 8px;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .compact-finding-title {
-  color: #e9d5ff;
+  color: #dce8d7;
 
   font-size: 10px;
   font-weight: 750;
@@ -168,7 +168,7 @@
 
   background: rgba(255, 255, 255, 0.02);
 
-  border: 1px solid rgba(216, 180, 254, 0.06);
+  border: 1px solid rgba(190, 219, 174, 0.06);
   border-radius: 6px;
 }
 
@@ -177,7 +177,7 @@
 
   margin-bottom: 3px;
 
-  color: #8f789e;
+  color: #737e73;
 
   font-size: 7px;
   font-weight: 600;
@@ -186,7 +186,7 @@
 .compact-finding-metrics strong {
   display: block;
 
-  color: #f8efff;
+  color: #edf3eb;
 
   font-size: 10px;
   font-weight: 750;

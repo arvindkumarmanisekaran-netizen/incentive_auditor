@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState, useRef } from "react";
+import { motion } from "motion/react";
 
 import { API_BASE_URL } from "../config";
 
@@ -645,16 +646,20 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
         <div className="database-sections">
           {SECTIONS.map((section) => (
-            <button
+            <motion.button
               key={section.id}
               type="button"
               className={
                 activeSection === section.id ? "database-section active" : "database-section"
               }
               onClick={() => changeSection(section.id)}
+              whileTap={{ scale: 0.96 }}
             >
               {section.title}
-            </button>
+              {activeSection === section.id && (
+                <motion.span className="database-tab-signal" layoutId="database-tab-signal" />
+              )}
+            </motion.button>
           ))}
         </div>
 
@@ -706,7 +711,12 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               onPointerUp={handleTablePointerUp}
               onPointerCancel={handleTablePointerUp}
             >
-              <table className="database-table">
+              <motion.table
+                className="database-table"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
                 <thead>
                   <tr>
                     <th className="database-checkbox-column">
@@ -745,7 +755,11 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
                     return (
                       <Fragment key={rowKey}>
-                        <tr>
+                        <motion.tr
+                          initial={{ opacity: 0, y: 7 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: Math.min(rowIndex * 0.018, 0.22) }}
+                        >
                           {/* checkbox */}
 
                           <td className="database-checkbox-column">
@@ -788,7 +802,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                               </button>
                             </div>
                           </td>
-                        </tr>
+                        </motion.tr>
 
                         {/* ------------------------
                                 INLINE EDIT FORM
@@ -888,7 +902,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                     );
                   })}
                 </tbody>
-              </table>
+              </motion.table>
             </div>
           )}
 

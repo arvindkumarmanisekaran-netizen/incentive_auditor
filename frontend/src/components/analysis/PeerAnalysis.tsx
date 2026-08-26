@@ -11,13 +11,7 @@ import {
   CartesianGrid,
   ScatterChart,
   Scatter,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
   Legend,
-  ComposedChart,
 } from "recharts";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
@@ -60,7 +54,15 @@ function formatPercent(value?: number) {
 
   return `${numeric > 0 ? "+" : ""}${numeric.toFixed(2)}%`;
 }
-function DumbbellShape({ x, y, width, height, payload }: any) {
+type DumbbellShapeProps = {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  payload?: { peer?: number; representative?: number };
+};
+
+function DumbbellShape({ x = 0, y = 0, width = 0, height = 0, payload }: DumbbellShapeProps) {
   if (!payload) {
     return null;
   }
@@ -85,14 +87,14 @@ function DumbbellShape({ x, y, width, height, payload }: any) {
         x2={representativeX}
         y1={centerY}
         y2={centerY}
-        stroke="rgba(216, 180, 254, 0.35)"
+        stroke="rgba(185, 255, 102, 0.35)"
         strokeWidth={4}
         strokeLinecap="round"
       />
 
       <circle cx={peerX} cy={centerY} r={7} fill="#F59E0B" />
 
-      <circle cx={representativeX} cy={centerY} r={8} fill="#7C3AED" />
+      <circle cx={representativeX} cy={centerY} r={8} fill="#8fc95a" />
     </g>
   );
 }
@@ -101,7 +103,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
 
   const productEntries = useMemo(
     () => (comparison?.products ? Object.entries(comparison.products) : []),
-    [comparison?.products],
+    [comparison],
   );
 
   const [selectedProductId, setSelectedProductId] = useState(productEntries[0]?.[0] ?? "");
