@@ -311,6 +311,73 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
   .system-pulse { animation: none; }
 }
 
+/* Contrast normalization for every light-surface content region. */
+.dashboard-tab-content p, .dashboard-tab-content li,
+.investigation-overview p, .investigation-overview li,
+.analysis-workspace p, .analysis-workspace li,
+.insights-section p, .admin-card p, .chatbot-placeholder {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+.dashboard-tab-content small, .admin-card small,
+.document-result-file > div > span, .document-result-stats > span,
+.duplicate-header p, .duplicate-pagination > span,
+.database-table-header span, .database-pagination > span,
+.analysis-panel-header p, .chart-heading p,
+.product-analysis-context, .peer-count, .position-label,
+.workflow-waiting-text, .investigation-workflow-status {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+.workflow-commentary-line > span:last-child,
+.workflow-plan-meta > span, .workflow-agent-result p,
+.decision-status-row p, .decision-assessment p,
+.workflow-summary, .risk-driver-card p,
+.insight-summary, .final-summary {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+.workflow-commentary-marker, .workflow-status-icon.complete,
+.workflow-step-status.complete { color: #047857 !important; opacity: 1 !important; }
+.workflow-focus-pill { color: #1e40af !important; border-color: rgba(37,99,235,.18) !important; background: #eff6ff !important; opacity: 1 !important; }
+.workflow-complete-badge { color: #047857 !important; border-color: rgba(5,150,105,.22) !important; background: #ecfdf5 !important; }
+
+.behaviour-summary-card span, .peer-summary-card span,
+.historical-summary-card span, .product-mismatch-metric span,
+.product-status-card span, .insight-kpi-list span,
+.document-results-summary span, .document-result-stats span,
+.database-empty, .duplicate-empty {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+.behaviour-summary-card strong, .peer-summary-card strong,
+.historical-summary-card strong, .product-mismatch-metric strong,
+.product-status-card strong, .insight-kpi-list strong,
+.document-results-summary strong, .document-result-stats strong {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+.analysis-product-selector label, .database-edit-field > span,
+.duplicate-mobile-field > span:first-child, .duplicate-mobile-resolution > span,
+.validation-error-item span { color: #475569 !important; opacity: 1 !important; }
+.product-analysis-id { color: #1d4ed8 !important; background: #eff6ff !important; }
+.product-analysis-name { color: #334155 !important; }
+
+.admin-card-meta span { color: #1e40af !important; border-color: rgba(37,99,235,.18) !important; background: #eff6ff !important; opacity: 1 !important; }
+.document-result-file strong, .duplicate-header h4,
+.validation-popup h4, .import-success-content strong { color: #0f172a !important; }
+.document-result-error, .error-message, .login-error { color: #b91c1c !important; opacity: 1 !important; }
+.import-success-content span { color: #047857 !important; opacity: 1 !important; }
+
+input::placeholder, textarea::placeholder { color: #94a3b8 !important; opacity: 1 !important; }
+button:disabled { opacity: .72 !important; }
+.primary-button:disabled, .login-modal button:disabled,
+.investigation-form button[type="submit"]:disabled {
+  color: #1e3a8a !important; border-color: #bfdbfe !important; background: #dbeafe !important;
+}
+.secondary-button:disabled, .database-edit-button:disabled,
+.database-row-delete-button:disabled { color: #64748b !important; border-color: #cbd5e1 !important; background: #f1f5f9 !important; }
+
 /* =========================================================
    READABILITY + COMPONENT REPAIR PASS
 ========================================================= */
@@ -601,3 +668,15 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   .database-table-container::before, .document-results-summary > div::after,
   .chatbot-floating-button::before { animation: none !important; }
 }
+
+.workflow-agent, .behaviour-summary-card, .peer-summary-card,
+.historical-summary-card, .product-mismatch-summary, .product-status-card {
+  color: #334155 !important;
+  border-color: rgba(37,99,235,.10) !important;
+  background: #fbfdff !important;
+}
+.workflow-agent.complete { border-color: rgba(5,150,105,.18) !important; background: #fbfffd !important; }
+.workflow-commentary-line, .workflow-step-status, .investigation-workflow-toggle { opacity: 1 !important; }
+.workflow-agent-result { border-top-color: rgba(37,99,235,.10) !important; }
+.workflow-agent-name h3, .product-mismatch-header h3,
+.analysis-section-header h3 { color: #0f172a !important; }
