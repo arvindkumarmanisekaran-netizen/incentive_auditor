@@ -226,9 +226,6 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
       return;
     }
 
-    setRows([]);
-    setTotalRecords(0);
-
     setSelectedIds([]);
 
     setEditingRow(null);
@@ -641,6 +638,10 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
       <div className="admin-card-content">
         <h3>Database Management</h3>
 
+        <p className="database-management-subtitle">
+          Review, edit and maintain the operational records used by investigations.
+        </p>
+
         {/* -----------------------------------------
             TABLE SELECTOR
         ----------------------------------------- */}
@@ -657,9 +658,6 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               whileTap={{ scale: 0.96 }}
             >
               {section.title}
-              {activeSection === section.id && (
-                <motion.span className="database-tab-signal" layoutId="database-tab-signal" />
-              )}
             </motion.button>
           ))}
         </div>
@@ -679,8 +677,9 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
             </div>
 
             {selectedIds.length > 0 && (
-              <button type="button" className="database-delete-button" onClick={deleteSelected}>
-                Delete Selected ({selectedIds.length})
+              <button type="button" className="database-row-delete-button database-delete-selected" onClick={deleteSelected}>
+                <AppIcon name="trash" size={14} />
+                <span>Delete Selected ({selectedIds.length})</span>
               </button>
             )}
           </div>
@@ -703,7 +702,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               TABLE
           --------------------------------------- */}
 
-          {!loading && !error && rows.length > 0 && (
+          {!error && rows.length > 0 && (
             <div
               ref={tableScrollRef}
               className="database-table-scroll"
@@ -913,7 +912,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               PAGINATION
           --------------------------------------- */}
 
-          {!loading && !error && totalRecords > 0 && (
+          {!error && totalRecords > 0 && (
             <div className="database-pagination">
               <button
                 type="button"
