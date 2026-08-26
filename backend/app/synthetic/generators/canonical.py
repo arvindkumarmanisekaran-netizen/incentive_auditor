@@ -4,14 +4,9 @@ from datetime import date
 import random
 
 from faker import Faker
-
-SEED = 42
-
-random.seed(SEED)
+import secrets
 
 fake = Faker("en_IN")
-Faker.seed(SEED)
-
 
 # =====================================================
 # MAIN GENERATOR
@@ -25,6 +20,11 @@ def generate_canonical_data(
     num_doctors: int = 1000,
     months: list[str] | None = None,
 ) -> dict:
+
+    seed = secrets.randbits(64)
+
+    random.seed(seed)
+    fake.seed_instance(seed)
 
     if months is None:
         months = [
