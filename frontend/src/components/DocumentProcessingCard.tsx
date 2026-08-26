@@ -18,7 +18,12 @@ function formatDuplicateValue(value: unknown) {
   return String(value);
 }
 
-export default function DocumentProcessingCard() {
+interface DocumentProcessingCardProps {
+  onProcessingFinished?: () => void;
+}
+export default function DocumentProcessingCard({
+  onProcessingFinished,
+}: DocumentProcessingCardProps) {
   const {
     inputRef,
     selectFolder,
@@ -215,6 +220,22 @@ export default function DocumentProcessingCard() {
    * Upload processing OR database confirmation.
    */
   const busy = processing;
+
+  const previousProcessingRef = useRef(processing);
+
+  useEffect(() => {
+    const wasProcessing = previousProcessingRef.current;
+
+    /*
+     * Refresh Database Management whenever an upload/import
+     * operation finishes, whether it succeeds or fails.
+     */
+    if (wasProcessing && !processing) {
+      onProcessingFinished?.();
+    }
+
+    previousProcessingRef.current = processing;
+  }, [processing, onProcessingFinished]);
 
   // ==================================================
   // CONFIRM

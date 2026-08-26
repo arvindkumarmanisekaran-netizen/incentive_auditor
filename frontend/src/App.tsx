@@ -95,7 +95,11 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
 
 function App() {
   const [workspaceUser, setWorkspaceUser] = useState("");
+  const [databaseRefreshKey, setDatabaseRefreshKey] = useState(0);
 
+  const refreshDatabaseManagement = useCallback(() => {
+    setDatabaseRefreshKey((current) => current + 1);
+  }, []);
   async function handleLogin(username: string) {
     const result = await loginToWorkspace(username);
     setActiveWorkspace(result.workspace);
@@ -661,12 +665,12 @@ function App() {
         <section className="dashboard-tab-content database-page">
           {showDocumentProcessing && (
             <div className="document-processing-expand">
-              <DocumentProcessingCard />
+              <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
             </div>
           )}
 
           <div className="database-management-center">
-            <DatabaseManagementCard />
+            <DatabaseManagementCard refreshKey={databaseRefreshKey} />
           </div>
         </section>
       )}
