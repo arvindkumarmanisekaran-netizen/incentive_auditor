@@ -943,3 +943,208 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
     animation: none !important;
   }
 }
+
+/* =========================================================
+   DATABASE CONTROL SPACING
+========================================================= */
+.database-sections {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 14px 0 16px !important;
+  padding: 7px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  border: 1px solid rgba(37,99,235,.12) !important;
+  border-radius: 12px !important;
+  background: #f8faff !important;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,.025) !important;
+}
+
+.database-section {
+  min-height: 34px;
+  padding: 7px 13px !important;
+  border-radius: 8px !important;
+}
+
+.database-pagination {
+  width: 100%;
+  margin: 0 !important;
+  padding: 14px 16px 16px !important;
+  border-top: 1px solid rgba(37,99,235,.09);
+  box-sizing: border-box;
+}
+
+.database-pagination .secondary-button {
+  min-width: 92px;
+  min-height: 36px;
+  padding: 7px 16px !important;
+}
+
+.document-processing-actions {
+  padding: 18px 2px 4px !important;
+}
+
+.document-processing-actions .primary-button {
+  min-width: 156px;
+  min-height: 40px;
+  padding: 8px 20px !important;
+}
+
+@media (max-width: 650px) {
+  .database-pagination {
+    padding: 12px !important;
+  }
+
+  .database-pagination .secondary-button {
+    min-width: 0;
+  }
+}
+
+/* Keep the document and database cards on one shared left edge. */
+.database-page {
+  gap: 10px !important;
+}
+
+.document-processing-expand {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.document-processing-expand + .database-management-center,
+.database-management-center {
+  margin-top: 8px !important;
+}
+
+.document-processing-expand > .admin-card > .admin-card-content {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.document-processing-expand .admin-card-content > h3,
+.document-processing-expand .admin-card-content > p {
+  margin-inline: 0 !important;
+  text-align: left !important;
+}
+
+.document-processing-expand .admin-card-content > p {
+  max-width: none !important;
+}
+
+.document-processing-expand .admin-card-meta {
+  justify-content: flex-start !important;
+  margin-inline: 0 !important;
+}
+
+.document-processing-expand .admin-card-content > .primary-button {
+  align-self: flex-start !important;
+  margin-inline: 0 !important;
+}
+
+/* Transform/opacity-only duplicate reveal avoids height:auto reflow stutter. */
+.document-duplicate-inline {
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+/* Synthetic generation now lives directly beneath Data control. */
+.sidebar-synthetic-action,
+.sidebar-synthetic-action .database-actions {
+  width: 100%;
+  min-width: 0;
+}
+
+.sidebar-synthetic-action .synthetic-data-button {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 46px;
+  padding: 0 12px !important;
+  overflow: hidden;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  color: #64748b !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-align: left;
+}
+
+.sidebar-synthetic-action .synthetic-data-button:hover:not(:disabled) {
+  color: #1d4ed8 !important;
+  border-color: var(--border) !important;
+  background: #f5f9ff !important;
+  transform: none !important;
+}
+
+.sidebar-synthetic-action .synthetic-data-button:disabled {
+  color: #1d4ed8 !important;
+  border-color: rgba(37,99,235,.16) !important;
+  background: rgba(37,99,235,.06) !important;
+}
+
+.sidebar-synthetic-action .synthetic-data-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #2563eb !important;
+}
+
+.sidebar-synthetic-action .synthetic-data-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-synthetic-action .download-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  left: auto;
+  z-index: 1200;
+}
+
+.database-top-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .sidebar-synthetic-action .synthetic-data-button {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 0 !important;
+  }
+
+  .sidebar-synthetic-action .synthetic-data-title {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .dashboard-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .sidebar-synthetic-action .synthetic-data-button {
+    grid-template-columns: 22px auto;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 8px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .sidebar-synthetic-action .synthetic-data-title {
+    display: none;
+  }
+
+  .sidebar-synthetic-action .synthetic-data-button {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
