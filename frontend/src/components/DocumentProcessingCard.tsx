@@ -408,7 +408,6 @@ export default function DocumentProcessingCard({
                   <motion.div
                     key={`${document.filename}-${index}`}
                     className={`document-result-row ${statusClass}`}
-                    layout
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.15 }}
