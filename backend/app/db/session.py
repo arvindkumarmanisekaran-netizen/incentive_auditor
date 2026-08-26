@@ -3,6 +3,8 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     AsyncSession,
 )
+from fastapi import Header, HTTPException, Query
+from sqlalchemy import text
 
 from ..config import settings
 
@@ -38,11 +40,28 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
-async def get_db():
+async def get_db(
+    x_workspace: str | None = Header(default=None),
+    workspace: str | None = Query(default=None),
+):
+
+    workspace_schema = x_workspace or workspace
+
+    if not workspace_schema or not workspace_schema.startswith("ws_"):
+        raise HTTPException(status_code=401, detail="Workspace login required")
 
     async with AsyncSessionLocal() as session:
 
         try:
+            exists = await session.execute(
+                text("SELECT 1 FROM public.workspaces WHERE schema_name = :schema_name"),
+                {"schema_name": workspace_schema},
+            )
+
+            if exists.scalar_one_or_none() is None:
+                raise HTTPException(status_code=401, detail="Workspace not found")
+
+            await session.execute(text(f'SET LOCAL search_path TO "{workspace_schema}", public'))
             yield session
 
         finally:
