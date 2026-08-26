@@ -72,13 +72,29 @@ function insightBarOption(
       valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
     },
     xAxis: { type: "category", data: categories },
-    yAxis: { type: "value", axisLabel: formatter === "percent" ? { formatter: "{value}%" } : { formatter: (value: number) => `₹${formatCompactMoney(value)}` } },
+    yAxis: {
+      type: "value",
+      min: (range: { min: number }) => Math.min(0, range.min),
+      max: (range: { max: number }) => Math.max(0, range.max),
+      axisLine: {
+        show: true,
+        onZero: true,
+        lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
+      },
+      axisLabel: formatter === "percent" ? { formatter: "{value}%" } : { formatter: (value: number) => `₹${formatCompactMoney(value)}` },
+    },
     series: series.map((item) => ({
       type: "bar",
       name: item.name,
-      data: item.values,
+      data: item.values.map((value) => ({
+        value,
+        itemStyle: {
+          color: item.color,
+          borderRadius: value >= 0 ? [5, 5, 1, 1] : [1, 1, 5, 5],
+        },
+      })),
       barMaxWidth: 38,
-      itemStyle: { color: item.color, borderRadius: [5, 5, 1, 1] },
+      itemStyle: { color: item.color },
     })),
   };
 }
