@@ -1190,8 +1190,23 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   left: 50% !important;
   z-index: 1200;
   justify-content: center;
+  color: #334155 !important;
+  border: 1px solid rgba(37,99,235,.14) !important;
+  background: #fff !important;
+  box-shadow: 0 16px 42px rgba(15,23,42,.16) !important;
   text-align: center;
   transform: translateX(-50%) !important;
+}
+
+.sidebar-synthetic-action .download-toast-row,
+.sidebar-synthetic-action .download-toast-title,
+.sidebar-synthetic-action .download-toast-message {
+  color: #334155 !important;
+  background: transparent !important;
+}
+
+.sidebar-synthetic-action .download-toast-title .app-icon {
+  color: #2563eb !important;
 }
 
 .database-top-actions {
