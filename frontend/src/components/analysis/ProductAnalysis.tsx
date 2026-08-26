@@ -92,12 +92,21 @@ function createBarOption(
     xAxis: { type: "category", data: data.map((item) => item.name) },
     yAxis: {
       type: "value",
+      min: (range: { min: number }) => Math.min(0, range.min),
+      max: (range: { max: number }) => Math.max(0, range.max),
+      axisLine: {
+        show: true,
+        onZero: true,
+        lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
+      },
       axisLabel: formatter === "percent" ? { formatter: "{value}%" } : undefined,
     },
     series: [
       {
         type: "bar",
         barMaxWidth: 86,
+        animationDuration: 900,
+        animationEasing: "cubicOut",
         data: data.map((item, index) => ({
           value: item.amount,
           itemStyle: {
