@@ -478,10 +478,10 @@ export default function DocumentProcessingCard({
                       {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
                         <motion.div
                           className="document-duplicate-inline"
-                          initial={{ opacity: 0, height: 0, y: -8 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -8 }}
-                          style={{ overflow: "hidden" }}
+                          initial={{ opacity: 0, y: -6, scale: 0.995 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -4, scale: 0.995 }}
+                          transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         >
                         <div className="duplicate-header">
                           <div>
