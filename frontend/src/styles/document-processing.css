@@ -347,6 +347,10 @@
 
   scrollbar-width: thin;
   scrollbar-color: #72517f #160020;
+
+  cursor: grab;
+  user-select: auto;
+  overscroll-behavior: contain;
 }
 
 /* =========================================================
@@ -366,7 +370,23 @@
 
   font-size: 10.5px;
 }
+.duplicate-table-wrapper.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
 
+.duplicate-table-wrapper.is-dragging * {
+  user-select: none;
+}
+
+/* Controls must retain their normal interaction cursor */
+.duplicate-table-wrapper button,
+.duplicate-table-wrapper input,
+.duplicate-table-wrapper select,
+.duplicate-table-wrapper textarea,
+.duplicate-table-wrapper a {
+  cursor: pointer;
+}
 /* =========================================================
    TABLE HEADER
 ========================================================= */
@@ -2506,4 +2526,104 @@
     width: 100%;
     min-width: 0;
   }
+}
+/* =========================================================
+   DOCUMENT PROCESSING — TRUE DESKTOP CENTERING
+========================================================= */
+
+.document-processing-expand > .admin-card {
+  position: relative;
+  display: block;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/*
+ * Remove the folder icon from the flex layout.
+ * It remains visually positioned in the top-left corner.
+ */
+.document-processing-expand > .admin-card > .admin-card-icon {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+}
+
+/*
+ * Content now receives the entire width of the card.
+ */
+.document-processing-expand > .admin-card > .admin-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+
+  text-align: center;
+}
+
+/* Header text */
+.document-processing-expand .admin-card-content > h3,
+.document-processing-expand .admin-card-content > p {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.document-processing-expand .admin-card-content > p {
+  max-width: 650px;
+}
+
+/* CSV / JSON / XLSX / DOCX */
+.document-processing-expand .admin-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Select Document Folder */
+.document-processing-expand .admin-card-content > .primary-button {
+  align-self: center;
+  margin-inline: auto;
+}
+
+/* Main results section */
+.document-processing-expand .document-results {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 18px auto 0;
+}
+
+/* Four summary boxes */
+.document-processing-expand .document-results-summary {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Uploaded file rows */
+.document-processing-expand .document-results-list {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.document-processing-expand .document-result-row {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Duplicate review window */
+.document-processing-expand .document-duplicate-inline {
+  box-sizing: border-box;
+  width: min(900px, calc(100% - 28px));
+  margin: 14px auto;
 }

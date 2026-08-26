@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
 
@@ -36,6 +36,89 @@ export default function DocumentProcessingCard() {
     clearProcessedDocuments,
   } = useDocumentUpload();
 
+  const duplicateDragStateRef = useRef<{
+    container: HTMLDivElement | null;
+    pointerId: number | null;
+    startX: number;
+    startY: number;
+    scrollLeft: number;
+    scrollTop: number;
+    dragging: boolean;
+  }>({
+    container: null,
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+    dragging: false,
+  });
+
+  function handleDuplicatePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    const target = event.target as HTMLElement;
+
+    // Keep selects, buttons and links clickable.
+    if (target.closest("button, input, select, textarea, a")) {
+      return;
+    }
+
+    // Only react to the primary mouse button.
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    const container = event.currentTarget;
+
+    duplicateDragStateRef.current = {
+      container,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: container.scrollLeft,
+      scrollTop: container.scrollTop,
+      dragging: true,
+    };
+
+    container.classList.add("is-dragging");
+    container.setPointerCapture(event.pointerId);
+  }
+
+  function handleDuplicatePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const state = duplicateDragStateRef.current;
+
+    if (!state.dragging || !state.container || state.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const deltaX = event.clientX - state.startX;
+    const deltaY = event.clientY - state.startY;
+
+    state.container.scrollLeft = state.scrollLeft - deltaX;
+    state.container.scrollTop = state.scrollTop - deltaY;
+
+    event.preventDefault();
+  }
+
+  function stopDuplicateDragging(event: React.PointerEvent<HTMLDivElement>) {
+    const state = duplicateDragStateRef.current;
+    const container = state.container;
+
+    if (container && state.pointerId !== null && container.hasPointerCapture(state.pointerId)) {
+      container.releasePointerCapture(state.pointerId);
+    }
+
+    container?.classList.remove("is-dragging");
+
+    duplicateDragStateRef.current = {
+      container: null,
+      pointerId: null,
+      startX: 0,
+      startY: 0,
+      scrollLeft: 0,
+      scrollTop: 0,
+      dragging: false,
+    };
+  }
   // ==================================================
   // LOCAL UI STATE
   // ==================================================
@@ -395,7 +478,14 @@ export default function DocumentProcessingCard() {
                         </div>
 
                         {/* TABLE */}
-                        <div className="duplicate-table-wrapper">
+                        <div
+                          className="duplicate-table-wrapper"
+                          onPointerDown={handleDuplicatePointerDown}
+                          onPointerMove={handleDuplicatePointerMove}
+                          onPointerUp={stopDuplicateDragging}
+                          onPointerCancel={stopDuplicateDragging}
+                          onLostPointerCapture={stopDuplicateDragging}
+                        >
                           {duplicateRecords.length > 0 ? (
                             <table className="duplicate-table">
                               <thead>
@@ -420,12 +510,14 @@ export default function DocumentProcessingCard() {
                                   return (
                                     <tr key={`${document.filename}-${rowIndex}`}>
                                       {Object.keys(item.incoming_record).map((column) => (
-                                        <td key={column}>
-                                          {formatDuplicateValue(item.incoming_record[column])}
+                                        <td key={column} data-label={formatFieldName(column)}>
+                                          <span className="duplicate-cell-value">
+                                            {formatDuplicateValue(item.incoming_record[column])}
+                                          </span>
                                         </td>
                                       ))}
 
-                                      <td>
+                                      <td data-label="Resolution">
                                         <select
                                           className={`duplicate-resolution ${
                                             resolution === "replace" ? "replace" : "keep"
