@@ -48,6 +48,24 @@ export default function DocumentProcessingCard() {
     Record<string, Record<number, "keep" | "replace">>
   >({});
 
+  function setAllDuplicateActions(
+    filename: string,
+    duplicateCount: number,
+    action: "keep" | "replace",
+  ) {
+    setDuplicateActions((current) => {
+      const updatedForDocument: Record<number, "keep" | "replace"> = {};
+
+      for (let index = 0; index < duplicateCount; index++) {
+        updatedForDocument[index] = action;
+      }
+
+      return {
+        ...current,
+        [filename]: updatedForDocument,
+      };
+    });
+  }
   // ==================================================
   // ALL DOCUMENTS
   // ==================================================
@@ -338,18 +356,42 @@ export default function DocumentProcessingCard() {
                             <p>{duplicateRecords.length} records require review</p>
                           </div>
 
-                          <button
-                            type="button"
-                            className="secondary-button"
-                            onClick={() =>
-                              setExpandedDuplicates((current) => ({
-                                ...current,
-                                [document.filename]: false,
-                              }))
-                            }
-                          >
-                            Close
-                          </button>
+                          <div className="duplicate-header-actions">
+                            <select
+                              className="duplicate-bulk-resolution"
+                              value=""
+                              onChange={(event) => {
+                                const value = event.target.value as "" | "keep" | "replace";
+
+                                if (!value) {
+                                  return;
+                                }
+
+                                setAllDuplicateActions(
+                                  document.filename,
+                                  duplicateRecords.length,
+                                  value,
+                                );
+                              }}
+                            >
+                              <option value="">Apply to all...</option>
+                              <option value="keep">Keep All Existing</option>
+                              <option value="replace">Replace All Existing</option>
+                            </select>
+
+                            <button
+                              type="button"
+                              className="secondary-button"
+                              onClick={() =>
+                                setExpandedDuplicates((current) => ({
+                                  ...current,
+                                  [document.filename]: false,
+                                }))
+                              }
+                            >
+                              Close
+                            </button>
+                          </div>
                         </div>
 
                         {/* TABLE */}
@@ -404,7 +446,6 @@ export default function DocumentProcessingCard() {
                                           }}
                                         >
                                           <option value="keep">Keep Existing</option>
-
                                           <option value="replace">Replace Existing</option>
                                         </select>
                                       </td>
