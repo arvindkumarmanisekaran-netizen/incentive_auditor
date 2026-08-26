@@ -1114,7 +1114,8 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   position: static !important;
   inset: auto !important;
   display: grid !important;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 20px 1fr;
+  column-gap: 0 !important;
   align-items: center;
   width: 100% !important;
   min-width: 0 !important;
@@ -1158,12 +1159,39 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   white-space: nowrap;
 }
 
+.database-delete-selected {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 150px !important;
+  min-height: 32px;
+  padding: 6px 11px !important;
+  color: #be123c !important;
+  border-color: rgba(225,29,72,.22) !important;
+  background: #fff1f2 !important;
+  opacity: 1 !important;
+}
+
+.database-delete-selected:hover:not(:disabled) {
+  color: #fff !important;
+  border-color: #e11d48 !important;
+  background: #e11d48 !important;
+}
+
+.database-tab-signal {
+  display: none !important;
+}
+
 .sidebar-synthetic-action .download-toast {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
-  left: auto;
+  right: auto !important;
+  bottom: 24px !important;
+  left: 50% !important;
   z-index: 1200;
+  justify-content: center;
+  text-align: center;
+  transform: translateX(-50%) !important;
 }
 
 .database-top-actions {
@@ -1198,10 +1226,29 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   text-align: center !important;
 }
 
+.database-management-subtitle {
+  width: 100%;
+  max-width: 680px;
+  margin: 6px auto 0 !important;
+  color: #64748b !important;
+  font-size: .74rem;
+  line-height: 1.45;
+  text-align: center;
+  opacity: 1 !important;
+}
+
 .database-card .database-sections,
 .database-card .database-table-container {
-  width: calc(100% - 96px) !important;
   max-width: 1480px !important;
+}
+
+.database-card .database-sections {
+  width: fit-content !important;
+  max-width: calc(100% - 96px) !important;
+}
+
+.database-card .database-table-container {
+  width: calc(100% - 96px) !important;
 }
 
 .database-card .database-sections {
