@@ -64,3 +64,4 @@ python-multipart
 python-docx
 
 openpyxl
+Faker
