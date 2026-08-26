@@ -1283,6 +1283,67 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   letter-spacing: 0 !important;
 }
 
+/* Rotating intelligence signal border for the primary command header. */
+.app-command-header {
+  isolation: isolate;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow:
+    0 12px 34px rgba(30,64,175,.08),
+    0 0 24px rgba(37,99,235,.08) !important;
+}
+
+.app-command-header::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  aspect-ratio: 1;
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 250deg,
+    rgba(96,165,250,.18) 276deg,
+    #2563eb 310deg,
+    rgba(96,165,250,.22) 338deg,
+    transparent 360deg
+  );
+  filter: drop-shadow(0 0 9px rgba(37,99,235,.24));
+  transform: translate(-50%, -50%) rotate(0turn);
+  animation: command-border-rotate 5.5s linear infinite;
+}
+
+.app-command-header::after {
+  position: absolute;
+  inset: 2px;
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 11px;
+  background:
+    radial-gradient(circle at 72% 0%, rgba(96,165,250,.10), transparent 34%),
+    linear-gradient(115deg, #fff, #f7faff);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.82);
+}
+
+.app-command-header > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes command-border-rotate {
+  to { transform: translate(-50%, -50%) rotate(1turn); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-command-header::before {
+    animation: none !important;
+    transform: translate(-50%, -50%) rotate(.12turn);
+  }
+}
+
 @media (max-width: 1180px) and (min-width: 761px) {
   .sidebar-synthetic-action .synthetic-data-button {
     grid-template-columns: 1fr;
