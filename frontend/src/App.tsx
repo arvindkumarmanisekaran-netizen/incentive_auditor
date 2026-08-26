@@ -28,6 +28,7 @@ import InvestigationWorkflow from "./components/InvestigationWorkflow";
 import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
+import ControlGraph from "./components/ControlGraph";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -492,49 +493,61 @@ function App() {
 
   return (
     <main className="dashboard">
-      {/* ==================================================
-          HEADER
-      ================================================== */}
-
-      <div className="app-title-block">
-        <div className="app-title-icon" aria-hidden="true">
-          🧪
+      <aside className="dashboard-sidebar">
+        <div className="sidebar-brand" aria-label="Incentive Auditor">
+          <span className="sidebar-brand-mark">IA</span>
+          <span className="sidebar-brand-copy">
+            <strong>Incentive</strong>
+            <small>Audit Control</small>
+          </span>
         </div>
 
-        <div className="app-title-copy">
-          <div className="app-title-row">
-            <h1>Incentive Auditor</h1>
-          </div>
-
-          <p>
-            Review incentive anomalies, supporting evidence and AI-assisted investigation insights.
-          </p>
-        </div>
-      </div>
-
-      {/* ==================================================
-          TOP NAVIGATION
-      ================================================== */}
-
-      <nav className="dashboard-tabs">
-        <button
+        <nav className="dashboard-tabs" aria-label="Primary navigation">
+        <motion.button
           type="button"
           className={activeTab === "analysis" ? "dashboard-tab active" : "dashboard-tab"}
           onClick={() => {
             setActiveTab("analysis");
           }}
+          whileTap={{ scale: 0.97 }}
         >
-          Analysis
-        </button>
+          <span className="dashboard-tab-icon" aria-hidden="true">⌁</span>
+          <span>Analysis</span>
+          {activeTab === "analysis" && <motion.span className="nav-active-rail" layoutId="nav-active" />}
+        </motion.button>
 
-        <button
+        <motion.button
           type="button"
           className={activeTab === "database" ? "dashboard-tab active" : "dashboard-tab"}
           onClick={() => setActiveTab("database")}
+          whileTap={{ scale: 0.97 }}
         >
-          Database Management
-        </button>
-      </nav>
+          <span className="dashboard-tab-icon" aria-hidden="true">▦</span>
+          <span>Data control</span>
+          {activeTab === "database" && <motion.span className="nav-active-rail" layoutId="nav-active" />}
+        </motion.button>
+        </nav>
+
+        <div className="sidebar-system-status">
+          <span className="system-pulse" />
+          <div><strong>System online</strong><small>All agents ready</small></div>
+        </div>
+      </aside>
+
+      <header className="app-command-header">
+        <div className="app-title-copy">
+          <span className="command-eyebrow">AI GOVERNANCE / AUDIT WORKSPACE</span>
+          <div className="app-title-row"><h1>Incentive intelligence</h1><span className="live-chip">LIVE</span></div>
+          <p>Investigate signals, validate evidence and control incentive risk.</p>
+        </div>
+
+        <ControlGraph compact />
+
+        <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
+          <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>
+          <div><strong>{workspaceUser}</strong><small>Workspace owner</small></div>
+        </div>
+      </header>
 
       {/* ==================================================
           ANALYSIS TAB

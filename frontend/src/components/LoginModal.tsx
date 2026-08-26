@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import ControlGraph from "./ControlGraph";
 
 interface LoginModalProps {
   onLogin: (username: string) => Promise<void>;
@@ -31,7 +32,10 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
         aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-      />
+      >
+        <ControlGraph />
+        <div className="login-grid-glow" />
+      </motion.div>
       <motion.section
         className="login-modal"
         role="dialog"
@@ -41,7 +45,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
       >
-        <div className="login-brand" aria-hidden="true">🧪</div>
+        <div className="login-brand" aria-hidden="true"><span>IA</span></div>
         <p className="login-eyebrow">INCENTIVE AUDITOR</p>
         <h1 id="login-title">Open your workspace</h1>
         <p className="login-description">

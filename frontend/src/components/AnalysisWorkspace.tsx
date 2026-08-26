@@ -26,13 +26,15 @@ function AnalysisTabButton({
   onClick: () => void;
 }) {
   return (
-    <button
+    <motion.button
       type="button"
       className={active ? "analysis-tab active" : "analysis-tab"}
       onClick={onClick}
+      whileTap={{ scale: 0.97 }}
     >
       {children}
-    </button>
+      {active && <motion.span className="analysis-tab-signal" layoutId="analysis-tab-signal" />}
+    </motion.button>
   );
 }
 
