@@ -25,9 +25,10 @@ type CustomDatePickerProps = {
   value: string;
   onChange: (value: string) => void;
   ariaLabel: string;
+  disabled?: boolean;
 };
 
-function CustomDatePicker({ value, onChange, ariaLabel }: CustomDatePickerProps) {
+export function CustomDatePicker({ value, onChange, ariaLabel, disabled = false }: CustomDatePickerProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
@@ -99,6 +100,7 @@ function CustomDatePicker({ value, onChange, ariaLabel }: CustomDatePickerProps)
         onClick={() => setOpen((current) => !current)}
         aria-label={ariaLabel}
         aria-expanded={open}
+        disabled={disabled}
       >
         <span className={value ? "" : "custom-date-placeholder"}>{value || "Select date"}</span>
 
