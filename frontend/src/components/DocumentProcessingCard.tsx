@@ -26,6 +26,8 @@ interface DocumentProcessingCardProps {
 export default function DocumentProcessingCard({
   onProcessingFinished,
 }: DocumentProcessingCardProps) {
+  const [confirmingActions, setConfirmingActions] = useState(false);
+
   const {
     inputRef,
     selectFolder,
@@ -260,7 +262,11 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   async function confirmAllDocuments() {
-    const success = await handleConfirm(duplicateActions);
+    setConfirmingActions(true);
+
+    const success = await handleConfirm(duplicateActions).finally(() => {
+      setConfirmingActions(false);
+    });
 
     if (!success) {
       return;
@@ -306,7 +312,7 @@ export default function DocumentProcessingCard({
           <div className="investigation-loading">
             <span className="loading-spinner" />
 
-            <span>Processing documents...</span>
+            <span>{confirmingActions ? "Applying confirmed actions..." : "Processing documents..."}</span>
           </div>
         )}
 
