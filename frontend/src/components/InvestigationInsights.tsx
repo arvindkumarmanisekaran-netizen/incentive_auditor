@@ -10,6 +10,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  ReferenceLine,
 } from "recharts";
 
 import type { InvestigationResult } from "../types/investigation";
@@ -60,6 +61,15 @@ function safeNumber(value: unknown): number {
   const number = Number(value);
 
   return Number.isFinite(number) ? number : 0;
+}
+
+function signedDomain(values: number[]): [number, number] {
+  const minimum = Math.min(0, ...values);
+  const maximum = Math.max(0, ...values);
+  const span = Math.max(maximum - minimum, 1);
+  const padding = span * 0.1;
+
+  return [minimum < 0 ? minimum - padding : 0, maximum > 0 ? maximum + padding : 0];
 }
 
 function getProductName(finding: any) {
@@ -188,6 +198,10 @@ function InvestigationInsights({ result }: Props) {
       severity: mismatchFinding.severity ?? "NORMAL",
     };
   });
+
+  const salesRxDomain = signedDomain(
+    salesRxData.flatMap((item) => [item.salesChange, item.prescriptionChange]),
+  );
 
   const mismatchIssues = mismatchFindings.filter(
     (finding) => String(finding.severity ?? "NORMAL").toUpperCase() !== "NORMAL",
@@ -351,8 +365,11 @@ function InvestigationInsights({ result }: Props) {
                     tickLine={false}
                     axisLine={false}
                     fontSize={10}
+                    domain={salesRxDomain}
                     tickFormatter={(value) => `${value}%`}
                   />
+
+                  <ReferenceLine y={0} stroke="#94a3b8" strokeWidth={1.5} />
 
                   <Tooltip
                     cursor={{
