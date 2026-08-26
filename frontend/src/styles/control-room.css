@@ -1378,6 +1378,33 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   outline-offset: 2px;
 }
 
+/* Preserve one coherent table while the latest section request resolves. */
+.database-table-container.is-loading {
+  min-height: 420px;
+}
+
+.database-table-container.is-loading::after {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  content: "Loading table…";
+  color: #1d4ed8;
+  background: rgba(248,250,255,.62);
+  backdrop-filter: blur(1.5px);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  pointer-events: all;
+}
+
+.database-table-container.is-loading .database-table-scroll,
+.database-table-container.is-loading .database-pagination,
+.database-table-container.is-loading .database-delete-selected {
+  pointer-events: none;
+}
+
 .app-command-header::after {
   position: absolute;
   inset: 2px;
