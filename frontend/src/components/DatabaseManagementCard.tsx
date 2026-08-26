@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 
 import { API_BASE_URL } from "../config";
 import AppIcon from "./AppIcon";
+import { CustomDatePicker } from "./InvestigationForm";
 
 import {
   getAssignments,
@@ -876,6 +877,18 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                             </option>
                                           ))}
                                         </select>
+                                      ) : getInputType(column) === "date" ? (
+                                        <CustomDatePicker
+                                          value={value == null ? "" : String(value).slice(0, 10)}
+                                          disabled={column === displayedConfig.primaryKey}
+                                          ariaLabel={`Select ${formatColumnName(column)}`}
+                                          onChange={(nextValue) =>
+                                            setEditValues((current) => ({
+                                              ...current,
+                                              [column]: nextValue,
+                                            }))
+                                          }
+                                        />
                                       ) : (
                                         <input
                                           type={getInputType(column)}
