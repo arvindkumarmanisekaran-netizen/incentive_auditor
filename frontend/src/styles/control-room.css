@@ -1099,12 +1099,20 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 /* Synthetic generation now lives directly beneath Data control. */
 .sidebar-synthetic-action,
 .sidebar-synthetic-action .database-actions {
+  position: relative !important;
+  display: block;
   width: 100%;
   min-width: 0;
 }
 
+.sidebar-synthetic-action {
+  flex: 0 0 auto;
+  margin-top: 7px;
+}
+
 .sidebar-synthetic-action .synthetic-data-button {
-  position: relative;
+  position: static !important;
+  inset: auto !important;
   display: grid !important;
   grid-template-columns: 28px 1fr;
   align-items: center;
@@ -1163,6 +1171,43 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   justify-content: flex-end;
 }
 
+/* Center database content against the whole card, not the icon's flex column. */
+.database-card {
+  position: relative !important;
+  display: block !important;
+  padding-top: 32px !important;
+}
+
+.database-card > .admin-card-icon {
+  position: absolute !important;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
+}
+
+.database-card > .admin-card-content {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  width: 100% !important;
+}
+
+.database-card > .admin-card-content > h3 {
+  width: 100%;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.database-card .database-sections,
+.database-card .database-table-container {
+  width: calc(100% - 96px) !important;
+  max-width: 1480px !important;
+}
+
+.database-card .database-sections {
+  margin-top: 34px !important;
+}
+
 @media (max-width: 1180px) and (min-width: 761px) {
   .sidebar-synthetic-action .synthetic-data-button {
     grid-template-columns: 1fr;
@@ -1175,9 +1220,23 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   }
 }
 
+@media (max-width: 1050px) and (min-width: 761px) {
+  .sidebar-synthetic-action .synthetic-data-button {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
 @media (max-width: 760px) {
   .dashboard-tabs {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    flex: 1 1 auto;
+    width: auto !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sidebar-synthetic-action {
+    width: min(34%, 170px);
+    margin: 0 0 0 6px;
   }
 
   .sidebar-synthetic-action .synthetic-data-button {
@@ -1185,6 +1244,13 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
     justify-content: center;
     min-height: 44px;
     padding: 0 8px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .database-card .database-sections,
+  .database-card .database-table-container {
+    width: 100% !important;
   }
 }
 
