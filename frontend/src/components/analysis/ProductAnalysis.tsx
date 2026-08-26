@@ -1,15 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ReferenceLine,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import type { Finding } from "../../types/investigation";
 
@@ -402,9 +393,14 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
                   <XAxis dataKey="name" tickLine={false} axisLine={false} />
 
-                  <YAxis tickLine={false} axisLine={false} domain={signedDomain(mismatchValues)} />
-
-                  <ReferenceLine y={0} stroke="#94a3b8" strokeWidth={1.5} />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    domain={signedDomain(mismatchValues)}
+                    allowDecimals={false}
+                    width={48}
+                    tickFormatter={(value) => `${Math.round(Number(value))}%`}
+                  />
 
                   <Tooltip content={<PercentageTooltip />} />
 
