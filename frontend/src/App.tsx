@@ -29,6 +29,8 @@ import InvestigationOverview from "./components/InvestigationOverview";
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 
 import type { WorkflowAgent } from "./types/workflow";
+import LoginModal from "./components/LoginModal";
+import { loginToWorkspace, setActiveWorkspace } from "./api/workspace";
 
 import "./styles/index.css";
 
@@ -92,6 +94,14 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
 }
 
 function App() {
+  const [workspaceUser, setWorkspaceUser] = useState("");
+
+  async function handleLogin(username: string) {
+    const result = await loginToWorkspace(username);
+    setActiveWorkspace(result.workspace);
+    setWorkspaceUser(result.username);
+  }
+
   // ==================================================
   // DASHBOARD TAB
   // ==================================================
@@ -185,10 +195,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (activeTab === "analysis") {
+    if (workspaceUser && activeTab === "analysis") {
       void loadRepresentatives();
     }
-  }, [activeTab]);
+  }, [activeTab, workspaceUser]);
 
   // ==================================================
   // LIVE WORKFLOW EVENT HANDLER
@@ -470,6 +480,10 @@ function App() {
   // ==================================================
   // UI
   // ==================================================
+
+  if (!workspaceUser) {
+    return <LoginModal onLogin={handleLogin} />;
+  }
 
   return (
     <main className="dashboard">
