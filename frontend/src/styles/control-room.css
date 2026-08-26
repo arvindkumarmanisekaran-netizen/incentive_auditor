@@ -1501,32 +1501,18 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   z-index: 2000 !important;
 }
 
-/* Text-field caret feedback for the button-based custom date picker. */
-.custom-date-input > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-}
-
-.custom-date-input[aria-expanded="true"] > span:first-child::after {
-  width: 1px;
-  height: 1.05em;
-  margin-left: 3px;
-  content: "";
-  background: #2563eb;
-  animation: date-picker-caret 1s steps(1, end) infinite;
-}
-
-@keyframes date-picker-caret {
-  0%, 48% { opacity: 1; }
-  49%, 100% { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .custom-date-input[aria-expanded="true"] > span:first-child::after {
-    animation: none;
-    opacity: 1;
-  }
+/* Visible native caret for editable fields; custom date pickers remain caret-free. */
+.database-edit-field input:not([type="date"]):not([type="datetime-local"]):not([type="month"]),
+.database-edit-field textarea,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  caret-color: #2563eb !important;
 }
 
 @media (max-width: 650px) {
