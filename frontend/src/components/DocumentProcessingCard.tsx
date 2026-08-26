@@ -88,6 +88,23 @@ export default function DocumentProcessingCard({
     container.setPointerCapture(event.pointerId);
   }
 
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 650px)").matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 650px)");
+
+    function handleChange(event: MediaQueryListEvent) {
+      setIsMobile(event.matches);
+      setDuplicatePage({});
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
+
   function handleDuplicatePointerMove(event: React.PointerEvent<HTMLDivElement>) {
     const state = duplicateDragStateRef.current;
 
@@ -371,7 +388,7 @@ export default function DocumentProcessingCard({
 
                 const duplicateRecords = document.pending_data?.duplicate_records ?? [];
 
-                const pageSize = 50;
+                const pageSize = isMobile ? 10 : 50;
 
                 const currentPage = duplicatePage[document.filename] ?? 0;
 
@@ -498,6 +515,62 @@ export default function DocumentProcessingCard({
                           </div>
                         </div>
 
+                        <div className="duplicate-mobile-list">
+                          {visibleDuplicates.map((item, index) => {
+                            const rowIndex = currentPage * pageSize + index;
+
+                            const resolution =
+                              duplicateActions[document.filename]?.[rowIndex] ?? "keep";
+
+                            return (
+                              <article
+                                key={`${document.filename}-mobile-${rowIndex}`}
+                                className="duplicate-mobile-card"
+                              >
+                                <header className="duplicate-mobile-card-header">
+                                  <span>Duplicate Record</span>
+                                  <strong>#{rowIndex + 1}</strong>
+                                </header>
+
+                                <div className="duplicate-mobile-fields">
+                                  {Object.entries(item.incoming_record).map(([column, value]) => (
+                                    <div key={column} className="duplicate-mobile-field">
+                                      <span>{formatFieldName(column)}</span>
+
+                                      <strong>{formatDuplicateValue(value)}</strong>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                <label className="duplicate-mobile-resolution">
+                                  <span>Resolution</span>
+
+                                  <select
+                                    className={`duplicate-resolution ${
+                                      resolution === "replace" ? "replace" : "keep"
+                                    }`}
+                                    value={resolution}
+                                    onChange={(event) => {
+                                      const value = event.target.value as "keep" | "replace";
+
+                                      setDuplicateActions((current) => ({
+                                        ...current,
+
+                                        [document.filename]: {
+                                          ...(current[document.filename] ?? {}),
+                                          [rowIndex]: value,
+                                        },
+                                      }));
+                                    }}
+                                  >
+                                    <option value="keep">Keep Existing</option>
+                                    <option value="replace">Replace Existing</option>
+                                  </select>
+                                </label>
+                              </article>
+                            );
+                          })}
+                        </div>
                         {/* TABLE */}
                         <div
                           className="duplicate-table-wrapper"
