@@ -1310,9 +1310,64 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
     rgba(96,165,250,.22) 338deg,
     transparent 360deg
   );
-  filter: drop-shadow(0 0 9px rgba(37,99,235,.24));
+  filter:
+    drop-shadow(0 0 5px rgba(37,99,235,.52))
+    drop-shadow(0 0 14px rgba(37,99,235,.30))
+    drop-shadow(0 0 24px rgba(96,165,250,.18));
   transform: translate(-50%, -50%) rotate(0turn);
   animation: command-border-rotate 5.5s linear infinite;
+}
+
+/* Contemporary segmented selector for database entities. */
+.database-card .database-sections {
+  gap: 4px !important;
+  padding: 5px !important;
+  border: 1px solid rgba(37,99,235,.11) !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, #f8faff, #f1f6fd) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    0 7px 20px rgba(30,64,175,.055) !important;
+}
+
+.database-card .database-section {
+  min-height: 36px;
+  padding: 0 14px !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+  color: #5b687a !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: .72rem !important;
+  font-weight: 650 !important;
+  transition:
+    color .18s ease,
+    background-color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease !important;
+}
+
+.database-card .database-section:hover:not(.active) {
+  color: #1d4ed8 !important;
+  border-color: rgba(37,99,235,.10) !important;
+  background: rgba(255,255,255,.72) !important;
+  transform: translateY(-1px);
+}
+
+.database-card .database-section.active {
+  color: #fff !important;
+  border-color: rgba(29,78,216,.78) !important;
+  background: linear-gradient(145deg, #3b82f6, #2563eb) !important;
+  box-shadow:
+    0 6px 14px rgba(37,99,235,.22),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+  transform: none;
+}
+
+.database-card .database-section:focus-visible {
+  outline: 2px solid rgba(37,99,235,.38);
+  outline-offset: 2px;
 }
 
 .app-command-header::after {
