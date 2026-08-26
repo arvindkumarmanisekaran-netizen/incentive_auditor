@@ -790,7 +790,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                 disabled={id === null}
                                 onClick={() => startEdit(row)}
                               >
-                                Edit
+                                <AppIcon name="edit" size={14} />
+                                <span>Edit</span>
                               </button>
 
                               <button
@@ -799,7 +800,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                 disabled={id === null}
                                 onClick={() => void deleteSingle(row)}
                               >
-                                Delete
+                                <AppIcon name="trash" size={14} />
+                                <span>Delete</span>
                               </button>
                             </div>
                           </td>

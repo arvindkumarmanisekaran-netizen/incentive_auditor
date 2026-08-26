@@ -111,7 +111,7 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       splitLine: { lineStyle: { color: SIGNAL_CHART.grid, type: "dashed" } },
     },
     ...option,
-    tooltip: { trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+    tooltip: { show: true, trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
       borderWidth: 1, borderRadius: 10, padding: [12, 14],
       extraCssText: "min-width:140px;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:Manrope,Inter,sans-serif;line-height:1.55;",
@@ -161,8 +161,10 @@ export default function SignalChart({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<EChartsType | null>(null);
-  const introFrameRef = useRef<number>(0);
+  const introTimerRef = useRef<number>(0);
   const hasAnimatedRef = useRef(false);
+  const latestOptionRef = useRef(option);
+  latestOptionRef.current = option;
   const reducedMotion = useReducedMotion();
   const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
 
@@ -174,9 +176,21 @@ export default function SignalChart({
     chartRef.current = chart;
     let resizeFrame = 0;
 
+    const firstOption = latestOptionRef.current;
+    if (reducedMotion) {
+      chart.setOption(withSignalTheme(firstOption), { notMerge: true });
+      hasAnimatedRef.current = true;
+    } else {
+      chart.setOption(createIntroOption(firstOption), { notMerge: true, lazyUpdate: false });
+      introTimerRef.current = window.setTimeout(() => {
+        if (chart.isDisposed()) return;
+        chart.setOption(withSignalTheme(latestOptionRef.current), { notMerge: false, lazyUpdate: false });
+        hasAnimatedRef.current = true;
+      }, 120);
+    }
+
     const observer = new ResizeObserver(() => {
       cancelAnimationFrame(resizeFrame);
-      cancelAnimationFrame(introFrameRef.current);
       resizeFrame = requestAnimationFrame(() => chart.resize());
     });
     observer.observe(element);
@@ -184,31 +198,17 @@ export default function SignalChart({
     return () => {
       observer.disconnect();
       cancelAnimationFrame(resizeFrame);
+      clearTimeout(introTimerRef.current);
       chart.dispose();
       chartRef.current = null;
     };
-  }, [isFirstView]);
+  }, [isFirstView, reducedMotion]);
 
   useEffect(() => {
     if (!isFirstView || !chartRef.current) return;
     const chart = chartRef.current;
-    const finalOption = withSignalTheme(option);
-
-    if (reducedMotion || hasAnimatedRef.current) {
-      chart.setOption(finalOption, { notMerge: true });
-      return;
-    }
-
-    chart.setOption(createIntroOption(option), { notMerge: true, lazyUpdate: false });
-    introFrameRef.current = requestAnimationFrame(() => {
-      introFrameRef.current = requestAnimationFrame(() => {
-        chart.setOption(finalOption, { notMerge: false, lazyUpdate: false });
-        hasAnimatedRef.current = true;
-      });
-    });
-
-    return () => cancelAnimationFrame(introFrameRef.current);
-  }, [isFirstView, option, reducedMotion]);
+    if (hasAnimatedRef.current) chart.setOption(withSignalTheme(option), { notMerge: true });
+  }, [isFirstView, option]);
 
   return (
     <motion.div

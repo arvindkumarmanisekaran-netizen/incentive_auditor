@@ -184,13 +184,13 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
         className="chatbot-floating-button"
         onClick={() => setOpen((current) => !current)}
       >
-        <AppIcon name="bot" size={23} />
+        <AppIcon name="assistant" size={25} />
       </button>
 
       {open && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <AppIcon name="bot" size={20} />
+            <AppIcon name="assistant" size={20} />
             <span>AI Assistant</span>
           </div>
 
