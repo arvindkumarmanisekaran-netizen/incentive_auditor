@@ -749,7 +749,13 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                     </th>
 
                     {columns.map((column, index) => (
-                      <th key={`${column}-${index}`}>{formatColumnName(column)}</th>
+                      <th
+                        key={`${column}-${index}`}
+                        className={column === displayedConfig.primaryKey ? "database-primary-key-column" : undefined}
+                      >
+                        {formatColumnName(column)}
+                        {column === displayedConfig.primaryKey && <span className="database-primary-key-badge">ID</span>}
+                      </th>
                     ))}
 
                     <th className="database-actions-column">Actions</th>
@@ -795,7 +801,10 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                           {/* cells */}
 
                           {columns.map((column, columnIndex) => (
-                            <td key={`${rowKey}-${column}-${columnIndex}`}>
+                            <td
+                              key={`${rowKey}-${column}-${columnIndex}`}
+                              className={column === displayedConfig.primaryKey ? "database-primary-key-cell" : undefined}
+                            >
                               {formatValue(getCellValue(row, column))}
                             </td>
                           ))}
@@ -852,9 +861,18 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                   {Object.entries(editValues).map(([column, value], index) => (
                                     <label
                                       key={`${column}-${index}`}
-                                      className="database-edit-field"
+                                      className={
+                                        column === displayedConfig.primaryKey
+                                          ? "database-edit-field database-primary-key-field"
+                                          : "database-edit-field"
+                                      }
                                     >
-                                      <span>{formatColumnName(column)}</span>
+                                      <span>
+                                        {formatColumnName(column)}
+                                        {column === displayedConfig.primaryKey && (
+                                          <small className="database-locked-label">Primary key · locked</small>
+                                        )}
+                                      </span>
 
                                       {column === "status" && STATUS_OPTIONS[activeSection] ? (
                                         <select
