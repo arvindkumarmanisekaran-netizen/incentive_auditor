@@ -49,6 +49,9 @@ body::before {
 }
 
 ::selection { color: #071000; background: var(--primary); }
+.app-icon { display: inline-block; flex: 0 0 auto; overflow: visible; vertical-align: middle; }
+.admin-card-icon .app-icon, .document-file-icon .app-icon, .risk-driver-icon .app-icon { color: var(--primary); filter: drop-shadow(0 0 7px rgba(185,255,102,.2)); }
+.download-toast-title { display: inline-flex; align-items: center; gap: 7px; }
 
 .dashboard {
   width: 100%;

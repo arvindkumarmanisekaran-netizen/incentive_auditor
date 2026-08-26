@@ -1,5 +1,6 @@
 import type { InvestigationResult } from "../types/investigation";
 import { motion } from "motion/react";
+import AppIcon from "./AppIcon";
 
 interface Props {
   result: InvestigationResult;
@@ -25,7 +26,7 @@ function FindingCard({ text }: { text: string }) {
     >
       <div className="risk-driver-header">
         <span className="risk-driver-icon" aria-hidden="true">
-          ⚠
+          <AppIcon name="alert" size={17} />
         </span>
 
         <span className="risk-driver-title">Attention Required</span>

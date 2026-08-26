@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "motion/react";
 
 import { API_BASE_URL } from "../config";
+import AppIcon from "./AppIcon";
 
 import {
   getAssignments,
@@ -635,7 +636,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
   return (
     <article className="admin-card database-card">
-      <div className="admin-card-icon">🗄️</div>
+      <div className="admin-card-icon"><AppIcon name="database" size={23} /></div>
 
       <div className="admin-card-content">
         <h3>Database Management</h3>

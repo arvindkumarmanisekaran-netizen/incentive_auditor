@@ -29,6 +29,7 @@ import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 import SignalField3D from "./components/SignalField3D";
+import AppIcon from "./components/AppIcon";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -701,7 +702,7 @@ function App() {
               aria-expanded={showDocumentProcessing}
             >
               <span className="folder-toggle-icon" aria-hidden="true">
-                📁
+                <AppIcon name="folder" size={20} />
                 <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
               </span>
 

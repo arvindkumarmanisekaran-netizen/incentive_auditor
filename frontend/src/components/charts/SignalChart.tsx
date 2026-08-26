@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import * as echarts from "echarts/core";
 import { BarChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
 import {
@@ -112,10 +112,12 @@ export default function SignalChart({
   ariaLabel = "Interactive data chart",
 }: SignalChartProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element) return;
+    if (!element || !isFirstView) return;
 
     const chart = echarts.init(element, undefined, { renderer: "canvas" });
     chart.setOption(withSignalTheme(option), { notMerge: true });
@@ -127,14 +129,15 @@ export default function SignalChart({
       observer.disconnect();
       chart.dispose();
     };
-  }, [option]);
+  }, [isFirstView, option]);
 
   return (
     <motion.div
+      ref={viewportRef}
       className={`signal-chart ${className}`.trim()}
       style={{ height }}
       initial={{ opacity: 0, scale: 0.985, filter: "blur(4px)" }}
-      whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+      animate={isFirstView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : undefined}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       role="img"

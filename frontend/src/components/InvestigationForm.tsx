@@ -3,6 +3,7 @@ import "../styles/index.css";
 import type { Representative } from "../api/masterData";
 
 import { useEffect, useRef, useState } from "react";
+import AppIcon from "./AppIcon";
 
 function formatDate(date: Date) {
   const year = date.getFullYear();
@@ -102,7 +103,7 @@ function CustomDatePicker({ value, onChange, ariaLabel }: CustomDatePickerProps)
         <span className={value ? "" : "custom-date-placeholder"}>{value || "Select date"}</span>
 
         <span className="custom-date-icon" aria-hidden="true">
-          📅
+          <AppIcon name="calendar" size={17} />
         </span>
       </button>
 

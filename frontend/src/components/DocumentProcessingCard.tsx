@@ -2,6 +2,7 @@ import { useMemo, useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
+import AppIcon from "./AppIcon";
 
 function formatFieldName(value: string) {
   return value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
@@ -277,7 +278,7 @@ export default function DocumentProcessingCard({
 
   return (
     <article className="admin-card">
-      <div className="admin-card-icon">📁</div>
+      <div className="admin-card-icon"><AppIcon name="folder" size={23} /></div>
 
       <div className="admin-card-content">
         <h3>Document Processing</h3>
@@ -416,7 +417,7 @@ export default function DocumentProcessingCard({
                     <div className="document-result-main">
                       {/* FILE */}
                       <div className="document-result-file">
-                        <span className="document-file-icon">📄</span>
+                        <span className="document-file-icon"><AppIcon name="file" size={19} /></span>
 
                         <div>
                           <strong>{document.filename || "Unknown File"}</strong>
@@ -821,7 +822,7 @@ export default function DocumentProcessingCard({
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
             >
             <div className="import-success-banner">
-              <div className="import-success-icon">✓</div>
+              <div className="import-success-icon"><AppIcon name="check" size={18} /></div>
 
               <div className="import-success-content">
                 <strong>Import Successful</strong>

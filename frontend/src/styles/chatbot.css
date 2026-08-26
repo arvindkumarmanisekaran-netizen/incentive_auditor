@@ -79,11 +79,6 @@
   font-weight: 700;
 }
 
-.chatbot-header::before {
-  content: "🤖";
-  font-size: 21px;
-}
-
 .chatbot-messages {
   flex: 1;
 

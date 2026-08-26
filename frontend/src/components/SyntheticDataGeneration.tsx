@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AppIcon from "./AppIcon";
 
 export default function SyntheticDataGeneration() {
   const [isGeneratingSyntheticData, setIsGeneratingSyntheticData] = useState(false);
@@ -149,7 +150,7 @@ export default function SyntheticDataGeneration() {
         title="Generate downloadable synthetic database dataset"
       >
         <span className="synthetic-data-icon" aria-hidden="true">
-          🧬
+          <AppIcon name="dna" size={18} />
         </span>
 
         <span className="synthetic-data-title">
@@ -160,7 +161,7 @@ export default function SyntheticDataGeneration() {
       {generationMessages.length > 0 && (
         <div className="download-toast">
           <div className="download-toast-row">
-            <span className="download-toast-title">🧬 Synthetic Data Generation</span>
+            <span className="download-toast-title"><AppIcon name="dna" size={15} /> Synthetic Data Generation</span>
 
             {generationMessages.slice(isMobile ? -3 : -5).map((message, index) => (
               <span key={index} className="download-toast-message">
