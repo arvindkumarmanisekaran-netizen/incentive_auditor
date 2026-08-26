@@ -29,7 +29,6 @@ import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 import SignalField3D from "./components/SignalField3D";
-import AppIcon from "./components/AppIcon";
 import AmbientSignals from "./components/AmbientSignals";
 
 import type { WorkflowAgent } from "./types/workflow";
@@ -149,7 +148,6 @@ function App() {
 
   const [error, setError] = useState<string | null>(null);
 
-  const [showDocumentProcessing, setShowDocumentProcessing] = useState(false);
 
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
@@ -688,35 +686,6 @@ function App() {
           DOCUMENTS + DATABASE TAB
       ================================================== */}
 
-      {/* ==================================================
-    DATABASE QUICK ACTIONS
-================================================== */}
-
-      {activeTab === "database" && (
-        <div className="database-top-actions">
-          <div className="database-top-action-right">
-            <button
-              type="button"
-              className={`document-plus-button ${
-                showDocumentProcessing ? "minus-state" : "plus-state"
-              }`}
-              onClick={() => setShowDocumentProcessing((current) => !current)}
-              title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
-              aria-expanded={showDocumentProcessing}
-            >
-              <span className="folder-toggle-icon" aria-hidden="true">
-                <AppIcon name="folder" size={20} />
-                <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
-              </span>
-
-              <span className="folder-toggle-title">
-                {showDocumentProcessing ? "Close Records" : "Add Records"}
-              </span>
-            </button>
-          </div>
-        </div>
-      )}
-
       <AnimatePresence mode="wait" initial={false}>
         {activeTab === "database" && (
           <motion.section
@@ -727,19 +696,9 @@ function App() {
             exit={{ opacity: 0, y: -6 }}
           >
           <AmbientSignals section />
-          <AnimatePresence initial={false}>
-            {showDocumentProcessing && (
-              <motion.div
-                className="document-processing-expand"
-                initial={{ opacity: 0, height: 0, y: -8 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -8 }}
-                style={{ overflow: "hidden" }}
-              >
-                <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="document-processing-expand">
+            <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
+          </div>
 
           <div className="database-management-center">
             <DatabaseManagementCard refreshKey={databaseRefreshKey} />
