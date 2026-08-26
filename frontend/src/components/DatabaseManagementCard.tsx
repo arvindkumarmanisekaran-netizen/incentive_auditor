@@ -123,6 +123,7 @@ interface DatabaseManagementCardProps {
 
 export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManagementCardProps) {
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
+  const loadRequestRef = useRef(0);
 
   const dragStateRef = useRef({
     dragging: false,
@@ -185,6 +186,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
     }
   }
   const [activeSection, setActiveSection] = useState<Section>("representatives");
+  const [displayedSection, setDisplayedSection] = useState<Section>("representatives");
 
   const [rows, setRows] = useState<RowData[]>([]);
   const [loading, setLoading] = useState(false);
@@ -202,6 +204,11 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   const activeConfig = useMemo(
     () => SECTIONS.find((section) => section.id === activeSection)!,
     [activeSection],
+  );
+
+  const displayedConfig = useMemo(
+    () => SECTIONS.find((section) => section.id === displayedSection)!,
+    [displayedSection],
   );
 
   // --------------------------------------------------
@@ -243,6 +250,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   // --------------------------------------------------
 
   async function loadTable(section: Section, currentOffset: number) {
+    const requestId = ++loadRequestRef.current;
+
     setLoading(true);
     setError(null);
 
@@ -330,9 +339,18 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
         }
       }
 
+      if (requestId !== loadRequestRef.current) {
+        return;
+      }
+
       setRows(records);
       setTotalRecords(total);
+      setDisplayedSection(section);
     } catch (err) {
+      if (requestId !== loadRequestRef.current) {
+        return;
+      }
+
       console.error("Load table failed:", err);
 
       setRows([]);
@@ -340,7 +358,9 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
       setError(err instanceof Error ? err.message : "Unable to load database records");
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) {
+        setLoading(false);
+      }
     }
   }
 
@@ -365,7 +385,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   // --------------------------------------------------
 
   function getRowId(row: RowData): string | null {
-    const value = getCellValue(row, activeConfig.primaryKey);
+    const value = getCellValue(row, displayedConfig.primaryKey);
 
     if (value === null || value === undefined || value === "") {
       return null;
@@ -662,14 +682,14 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
           ))}
         </div>
 
-        <div className="database-table-container">
+        <div className={`database-table-container ${loading ? "is-loading" : ""}`}>
           {/* ---------------------------------------
               TABLE HEADER
           --------------------------------------- */}
 
           <div className="database-table-header">
             <div>
-              <h4>{activeConfig.title}</h4>
+              <h4>{displayedConfig.title}</h4>
 
               <span>
                 {loading ? "Loading..." : `${firstRecord}-${lastRecord} of ${totalRecords} records`}
@@ -838,7 +858,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                       {column === "status" && STATUS_OPTIONS[activeSection] ? (
                                         <select
                                           value={value == null ? "" : String(value)}
-                                          disabled={column === activeConfig.primaryKey}
+                                          disabled={column === displayedConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
@@ -861,7 +881,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                           type={getInputType(column)}
                                           step={getInputStep(column)}
                                           value={value == null ? "" : String(value)}
-                                          disabled={column === activeConfig.primaryKey}
+                                          disabled={column === displayedConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
