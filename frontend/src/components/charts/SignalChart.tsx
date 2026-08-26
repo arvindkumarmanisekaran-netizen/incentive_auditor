@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import * as echarts from "echarts/core";
 import { BarChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
 import {
@@ -63,7 +63,9 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     return {
       animation: true,
       animationDuration: type === "pie" ? 1100 : 900,
+      animationDurationUpdate: type === "pie" ? 1200 : 950,
       animationDelay: index * 90,
+      animationDelayUpdate: index * 90,
       animationEasing: "cubicOut",
       ...(type === "pie" ? { animationType: "scale", animationTypeUpdate: "transition" } : {}),
       ...item,
@@ -73,7 +75,7 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   return {
     animation: true,
     animationDuration: 850,
-    animationDurationUpdate: 480,
+    animationDurationUpdate: 1000,
     animationEasing: "cubicOut",
     animationEasingUpdate: "cubicInOut",
     backgroundColor: "transparent",
@@ -119,6 +121,37 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   };
 }
 
+function createIntroOption(option: EChartsCoreOption): EChartsCoreOption {
+  const themed = withSignalTheme(option) as Record<string, unknown>;
+  const series = Array.isArray(themed.series) ? themed.series : [];
+
+  return {
+    ...themed,
+    animation: false,
+    tooltip: { ...(themed.tooltip as object), show: false },
+    series: series.map((entry) => {
+      const item = entry as Record<string, unknown>;
+      const type = item.type;
+      const data = Array.isArray(item.data) ? item.data : [];
+
+      if (type === "scatter") {
+        return { ...item, animation: false, symbolSize: 0 };
+      }
+
+      const introData = data.map((datum) => {
+        if (typeof datum === "number") return 0;
+        if (Array.isArray(datum)) return datum.map((value, index) => index === 0 ? value : 0);
+        if (datum && typeof datum === "object") {
+          return { ...(datum as Record<string, unknown>), value: type === "pie" ? 0.0001 : 0 };
+        }
+        return datum;
+      });
+
+      return { ...item, animation: false, data: introData };
+    }),
+  };
+}
+
 export default function SignalChart({
   option,
   className = "",
@@ -128,6 +161,9 @@ export default function SignalChart({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<EChartsType | null>(null);
+  const introFrameRef = useRef<number>(0);
+  const hasAnimatedRef = useRef(false);
+  const reducedMotion = useReducedMotion();
   const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
@@ -140,6 +176,7 @@ export default function SignalChart({
 
     const observer = new ResizeObserver(() => {
       cancelAnimationFrame(resizeFrame);
+      cancelAnimationFrame(introFrameRef.current);
       resizeFrame = requestAnimationFrame(() => chart.resize());
     });
     observer.observe(element);
@@ -154,8 +191,24 @@ export default function SignalChart({
 
   useEffect(() => {
     if (!isFirstView || !chartRef.current) return;
-    chartRef.current.setOption(withSignalTheme(option), { notMerge: true });
-  }, [isFirstView, option]);
+    const chart = chartRef.current;
+    const finalOption = withSignalTheme(option);
+
+    if (reducedMotion || hasAnimatedRef.current) {
+      chart.setOption(finalOption, { notMerge: true });
+      return;
+    }
+
+    chart.setOption(createIntroOption(option), { notMerge: true, lazyUpdate: false });
+    introFrameRef.current = requestAnimationFrame(() => {
+      introFrameRef.current = requestAnimationFrame(() => {
+        chart.setOption(finalOption, { notMerge: false, lazyUpdate: false });
+        hasAnimatedRef.current = true;
+      });
+    });
+
+    return () => cancelAnimationFrame(introFrameRef.current);
+  }, [isFirstView, option, reducedMotion]);
 
   return (
     <motion.div

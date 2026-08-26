@@ -6,11 +6,11 @@ const tracks = [
   "M80 510 C250 420 470 570 690 468 S1010 405 1250 506 S1490 550 1700 450",
 ];
 
-export default function AmbientSignals({ login = false }: { login?: boolean }) {
+export default function AmbientSignals({ login = false, section = false }: { login?: boolean; section?: boolean }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className={`ambient-signals${login ? " login" : ""}`} aria-hidden="true">
+    <div className={`ambient-signals${login ? " login" : ""}${section ? " section" : ""}`} aria-hidden="true">
       <svg viewBox="0 0 1600 620" preserveAspectRatio="none">
         {tracks.map((path, index) => (
           <g key={path}>

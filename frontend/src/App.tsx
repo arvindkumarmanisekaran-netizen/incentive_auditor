@@ -570,6 +570,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
           >
+          <AmbientSignals section />
           {masterDataLoading ? (
             <div className="loading-message">Loading representatives...</div>
           ) : (
@@ -725,6 +726,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
           >
+          <AmbientSignals section />
           <AnimatePresence initial={false}>
             {showDocumentProcessing && (
               <motion.div
