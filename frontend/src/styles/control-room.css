@@ -1501,6 +1501,34 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   z-index: 2000 !important;
 }
 
+/* Text-field caret feedback for the button-based custom date picker. */
+.custom-date-input > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.custom-date-input[aria-expanded="true"] > span:first-child::after {
+  width: 1px;
+  height: 1.05em;
+  margin-left: 3px;
+  content: "";
+  background: #2563eb;
+  animation: date-picker-caret 1s steps(1, end) infinite;
+}
+
+@keyframes date-picker-caret {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-date-input[aria-expanded="true"] > span:first-child::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 @media (max-width: 650px) {
   .database-edit-actions {
     display: grid !important;
