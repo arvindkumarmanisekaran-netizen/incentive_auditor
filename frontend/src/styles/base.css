@@ -11,6 +11,22 @@
     "Segoe UI",
     sans-serif;
 
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+
+  text-align: center;
+
+  border-inline: 0;
+
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
   font-weight: 400;
   line-height: 1.5;
   font-synthesis: none;
@@ -419,4 +435,224 @@ textarea {
     padding-left: 14px;
     padding-right: 14px;
   }
+}
+/* =========================================================
+   CURRENT TSX ALIGNMENT — SHARED FOUNDATION
+========================================================= */
+
+:root {
+  --panel-bg: linear-gradient(180deg, rgba(28, 10, 40, 0.96), rgba(15, 3, 24, 0.98));
+  --panel-bg-soft: rgba(255, 255, 255, 0.025);
+  --panel-border: rgba(216, 180, 254, 0.14);
+  --panel-border-hover: rgba(232, 121, 249, 0.32);
+  --purple-soft: rgba(168, 85, 247, 0.12);
+  --purple-border: rgba(192, 132, 252, 0.24);
+  --cyan-soft: rgba(34, 211, 238, 0.1);
+  --success-soft: rgba(45, 212, 191, 0.1);
+  --warning-soft: rgba(251, 191, 36, 0.1);
+  --danger-soft: rgba(251, 113, 133, 0.1);
+}
+
+.section-heading {
+  width: 100%;
+  text-align: left;
+}
+
+.section-heading h2 {
+  margin: 0 0 4px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  margin: 0;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.severity-badge.severity-normal,
+.severity-badge.normal {
+  background: rgba(45, 212, 191, 0.1);
+  border-color: rgba(45, 212, 191, 0.22);
+  color: #99f6e4;
+}
+
+.severity-badge.severity-low,
+.severity-badge.low {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96, 165, 250, 0.24);
+  color: #bfdbfe;
+}
+
+.severity-badge.severity-medium,
+.severity-badge.medium {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.24);
+  color: #fde68a;
+}
+
+.severity-badge.severity-high,
+.severity-badge.high,
+.severity-badge.severity-critical,
+.severity-badge.critical {
+  background: rgba(251, 113, 133, 0.1);
+  border-color: rgba(251, 113, 133, 0.26);
+  color: #fecdd3;
+}
+
+.severity-badge.severity-unknown,
+.severity-badge.unknown {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.chart-custom-tooltip,
+.chart-tooltip {
+  min-width: 120px;
+  padding: 9px 11px;
+  background: rgba(16, 0, 24, 0.97);
+  border: 1px solid rgba(216, 180, 254, 0.2);
+  border-radius: 9px;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.chart-custom-tooltip strong,
+.chart-tooltip strong {
+  color: var(--text-primary);
+}
+
+.recharts-cartesian-grid line,
+.recharts-polar-grid-angle line,
+.recharts-polar-grid-concentric-polygon {
+  stroke: rgba(216, 180, 254, 0.1) !important;
+}
+
+.recharts-text,
+.recharts-cartesian-axis-tick-value,
+.recharts-polar-angle-axis-tick-value,
+.recharts-polar-radius-axis-tick-value,
+.recharts-legend-item-text {
+  fill: #9e8cad !important;
+  color: #9e8cad !important;
+}
+
+.recharts-tooltip-cursor {
+  fill: rgba(168, 85, 247, 0.05) !important;
+}
+
+@media (max-width: 640px) {
+  .section-heading h2 {
+    font-size: 0.94rem;
+  }
+}
+/* =========================================================
+   APP TITLE / HERO
+========================================================= */
+.app-title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin: 0 auto 18px;
+
+  text-align: center;
+}
+
+.app-title-icon {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid rgba(232, 121, 249, 0.24);
+  border-radius: 12px;
+
+  background: linear-gradient(145deg, rgba(192, 38, 211, 0.18), rgba(139, 92, 246, 0.12));
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.22),
+    inset 0 0 18px rgba(232, 121, 249, 0.04);
+
+  font-size: 23px;
+}
+
+.app-title-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.app-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+}
+
+.app-title-row h1 {
+  margin: 0;
+
+  color: #f8f4ff;
+
+  font-size: 1.65rem;
+  font-weight: 850;
+  line-height: 1.1;
+
+  letter-spacing: -0.025em;
+
+  text-align: center;
+}
+
+.app-title-copy p {
+  max-width: 720px;
+
+  margin: 5px auto -15px;
+
+  color: #9f8eaa;
+
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.45;
+
+  text-align: center;
 }

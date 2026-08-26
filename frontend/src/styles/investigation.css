@@ -2,20 +2,6 @@
    INVESTIGATION FORM
 ========================================================= */
 
-.investigation-form {
-  display: grid;
-  grid-template-columns: minmax(220px, 1.4fr) minmax(200px, 1.2fr) minmax(160px, 0.8fr) auto;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px;
-  margin-bottom: 14px;
-
-  background: rgba(20, 3, 30, 0.86);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-card);
-}
 .form-input {
   width: 100%;
   height: 42px;
@@ -50,16 +36,6 @@
   color: #f8f4ff;
   background-color: #160020;
   color-scheme: dark;
-}
-
-.form-input[type="month"]::-webkit-calendar-picker-indicator {
-  opacity: 0.75;
-
-  cursor: pointer;
-}
-
-.form-input[type="month"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
 }
 
 /* =========================================================
@@ -1264,7 +1240,6 @@
   position: relative;
   height: 280px;
 }
-
 .concentration-center-label {
   position: absolute;
   top: 45%;
@@ -1275,22 +1250,26 @@
   flex-direction: column;
   align-items: center;
 
-  background: rgba(18, 2, 27, 0.9);
-  border: 1px solid var(--border);
-  padding: 10px 18px;
-  border-radius: 14px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
 
   pointer-events: none;
 }
 
 .concentration-center-label strong {
+  color: #f8f4ff;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .concentration-center-label span {
-  font-size: 12px;
-  color: #64748b;
+  margin-top: 4px;
+  color: #9f8eaa;
+  font-size: 11px;
+  font-weight: 650;
 }
 
 .recharts-scroll-animation {
@@ -1625,22 +1604,34 @@
 /* =========================================================
    FINAL ASSESSMENT SCORE VISIBILITY
 ========================================================= */
-
 .risk-chart-center {
-  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+
+  pointer-events: none;
 }
 
 .risk-chart-center strong {
   color: #ffffff;
-  text-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.65),
-    0 0 18px rgba(255, 255, 255, 0.15);
+
+  font-size: 2.15rem;
+  font-weight: 850;
+  line-height: 1;
 }
 
 .risk-chart-center span {
-  color: rgba(255, 255, 255, 0.75);
-}
+  color: #b9a7c7;
 
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
 /* =========================================================
    RADIAL CHART CONTAINER
 ========================================================= */
@@ -1710,4 +1701,736 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/* =========================================================
+   CURRENT TSX ALIGNMENT — INVESTIGATION FORM / KPI / INSIGHTS
+========================================================= */
+
+.investigation-form {
+  display: grid;
+
+  grid-template-columns:
+    280px
+    145px
+    145px
+    auto;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  width: fit-content;
+  padding: 11px;
+  margin: 0 auto 14px;
+
+  background: rgba(20, 3, 30, 0.82);
+  border: 1px solid rgba(216, 180, 254, 0.12);
+  border-radius: 11px;
+  box-shadow: var(--shadow-card);
+}
+
+.form-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 11px;
+  background: #160020;
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 8px;
+  color: var(--text-primary);
+  color-scheme: dark;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.1);
+}
+
+.risk-summary-section {
+  width: 100%;
+  margin: 14px 0;
+  text-align: left;
+}
+
+.risk-summary-heading {
+  margin-bottom: 9px;
+}
+
+.risk-summary-heading h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.96rem;
+}
+
+.risk-summary-subtitle {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.kpi-strip {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.kpi-item {
+  min-width: 0;
+  padding: 11px 12px;
+  background: rgba(20, 3, 30, 0.82);
+  border: 1px solid rgba(216, 180, 254, 0.11);
+  border-radius: 9px;
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.kpi-item strong {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.kpi-risk-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kpi-positive {
+  color: #99f6e4 !important;
+}
+
+.kpi-negative {
+  color: #fecdd3 !important;
+}
+
+/* Investigation Insights */
+.insights-section {
+  width: 100%;
+  margin: 18px 0;
+  text-align: left;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 11px;
+}
+
+.insight-card {
+  min-width: 0;
+  padding: 13px;
+  background: var(--panel-bg);
+  border: 1px solid rgba(216, 180, 254, 0.12);
+  border-radius: 11px;
+  box-shadow: var(--shadow-card);
+}
+
+.insight-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.insight-eyebrow {
+  display: block;
+  margin-bottom: 2px;
+  color: #c084fc;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.insight-card-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.84rem;
+}
+
+.insight-body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.insight-chart {
+  position: relative;
+  min-height: 230px;
+}
+
+.insight-text {
+  min-width: 0;
+  padding: 10px 11px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(216, 180, 254, 0.07);
+  border-radius: 9px;
+}
+
+.ai-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #c084fc;
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.insight-summary {
+  margin: 0;
+  color: #cbbbd5;
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.insight-kpi-list {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+
+.insight-kpi-list > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px solid rgba(216, 180, 254, 0.065);
+  border-radius: 7px;
+}
+
+.insight-kpi-list span {
+  color: var(--text-muted);
+  font-size: 0.63rem;
+}
+
+.insight-kpi-list strong {
+  color: var(--text-primary);
+  font-size: 0.69rem;
+  text-align: right;
+}
+
+.payout-chart-difference,
+.risk-findings-label {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  white-space: nowrap;
+}
+
+.payout-chart-difference strong,
+.risk-findings-label strong {
+  color: var(--text-primary);
+}
+
+.chart-center-label {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  pointer-events: none;
+}
+
+.chart-center-label strong {
+  color: var(--text-primary);
+  font-size: 1.35rem;
+}
+
+.chart-center-label span {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+}
+
+@media (max-width: 1000px) {
+  .kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .investigation-form {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-body {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-strip {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   INSIGHT CHART LABEL CONTRAST FIX
+========================================================= */
+
+.payout-chart-difference,
+.risk-findings-label {
+  z-index: 5;
+
+  padding: 5px 9px;
+
+  background: rgba(16, 0, 24, 0.88);
+
+  border: 1px solid rgba(216, 180, 254, 0.12);
+  border-radius: 999px;
+
+  backdrop-filter: blur(4px);
+}
+
+.payout-chart-difference span,
+.risk-findings-label span {
+  color: #bca9c8;
+
+  font-size: 0.64rem;
+  font-weight: 650;
+}
+
+.payout-chart-difference strong,
+.risk-findings-label strong {
+  color: #ffffff !important;
+
+  font-size: 0.78rem;
+  font-weight: 850;
+
+  line-height: 1;
+
+  text-shadow: 0 0 8px rgba(232, 121, 249, 0.18);
+}
+
+/* Payout difference gets a subtle purple emphasis */
+
+.payout-chart-difference strong {
+  color: #e9d5ff !important;
+}
+
+/* Risk finding count gets stronger visibility */
+
+.risk-findings-label strong {
+  color: #f8f4ff !important;
+
+  font-size: 0.84rem;
+}
+
+.form-input.date-input[type="date"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  padding-right: 48px !important;
+  background-image: none !important;
+}
+
+.form-input.date-input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  opacity: 0 !important;
+
+  width: 0 !important;
+  height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  pointer-events: none !important;
+}
+/* =========================================================
+   DATE PICKER — FINAL
+========================================================= */
+
+.date-input-wrapper {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.form-input.date-input[type="date"] {
+  width: 100%;
+
+  padding-right: 46px !important;
+
+  color: #f8f4ff;
+  background: #160020;
+
+  color-scheme: dark;
+
+  cursor: pointer;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  background-image: none !important;
+}
+
+/* Hide Chrome / Edge / Safari native calendar button */
+.form-input.date-input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute !important;
+
+  width: 0 !important;
+  height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  opacity: 0 !important;
+
+  display: none !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  pointer-events: none !important;
+}
+
+/* Remove other native WebKit controls */
+.form-input.date-input[type="date"]::-webkit-inner-spin-button,
+.form-input.date-input[type="date"]::-webkit-clear-button {
+  display: none !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+/* Your custom calendar button */
+.date-picker-button {
+  position: absolute;
+
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 0 7px 7px 0;
+
+  /* IMPORTANT — covers native browser icon */
+  background: #160020;
+
+  color: #f8f4ff;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  z-index: 20;
+}
+
+.date-picker-button:hover {
+  background: rgba(192, 38, 211, 0.12);
+}
+
+.date-picker-button:active {
+  background: rgba(192, 38, 211, 0.2);
+}
+
+@media (max-width: 650px) {
+  .form-input.date-input[type="date"] {
+    min-height: 44px;
+
+    font-size: 16px;
+  }
+
+  .date-picker-button {
+    right: 5px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 18px;
+  }
+}
+/* =========================================================
+   CUSTOM DATE PICKER
+========================================================= */
+
+.custom-date-picker {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.custom-date-input {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px 0 11px;
+
+  background: #160020;
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  border-radius: 8px;
+
+  color: #f8f4ff;
+
+  font-family: inherit;
+  font-size: 0.82rem;
+
+  cursor: pointer;
+  outline: none;
+
+  text-align: left;
+}
+
+.custom-date-input:hover {
+  border-color: rgba(232, 121, 249, 0.38);
+}
+
+.custom-date-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.1);
+}
+
+.custom-date-placeholder {
+  color: #72627f;
+}
+
+.custom-date-icon {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  font-size: 16px;
+
+  pointer-events: none;
+}
+
+/* Calendar popover */
+
+.custom-calendar-popover {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  left: 0;
+
+  width: 280px;
+
+  padding: 12px;
+
+  background: #1b0826;
+
+  border: 1px solid rgba(232, 121, 249, 0.22);
+  border-radius: 12px;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(216, 180, 254, 0.03);
+
+  z-index: 1000;
+}
+
+.custom-calendar-header {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.custom-calendar-header strong {
+  color: #f8f4ff;
+
+  font-size: 0.82rem;
+  font-weight: 750;
+
+  text-align: center;
+}
+
+.custom-calendar-nav {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #d8b4fe;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.custom-calendar-nav:hover {
+  background: rgba(192, 38, 211, 0.12);
+}
+
+.custom-calendar-weekdays,
+.custom-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.custom-calendar-weekdays {
+  margin-bottom: 5px;
+}
+
+.custom-calendar-weekdays span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 26px;
+
+  color: #8d7b9b;
+
+  font-size: 0.63rem;
+  font-weight: 700;
+}
+
+.custom-calendar-day {
+  aspect-ratio: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #d9cde2;
+
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.custom-calendar-day:hover {
+  background: rgba(192, 38, 211, 0.12);
+
+  color: #ffffff;
+}
+
+.custom-calendar-day.selected {
+  background: linear-gradient(135deg, #c026d3, #8b5cf6);
+
+  color: #ffffff;
+
+  font-weight: 800;
+}
+
+.custom-calendar-empty {
+  aspect-ratio: 1;
+}
+
+@media (max-width: 650px) {
+  .custom-date-input {
+    min-height: 44px;
+
+    font-size: 16px;
+  }
+
+  .custom-calendar-popover {
+    width: min(300px, calc(100vw - 32px));
+
+    padding: 12px;
+  }
+
+  .custom-calendar-day {
+    min-height: 36px;
+
+    font-size: 0.78rem;
+  }
+}
+
+.investigation-form .form-input,
+.investigation-form .custom-date-input {
+  height: 36px;
+
+  font-size: 0.76rem;
+}
+
+.investigation-form .custom-date-input {
+  padding: 0 8px 0 10px;
+}
+
+.investigation-form .custom-date-icon {
+  width: 24px;
+  height: 24px;
+
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .investigation-form {
+    grid-template-columns: 1fr;
+  }
+
+  .investigation-form .form-input,
+  .investigation-form .custom-date-picker,
+  .investigation-form .custom-date-input {
+    width: 100%;
+  }
+
+  .investigation-form .form-input,
+  .investigation-form .custom-date-input {
+    min-height: 40px;
+  }
+}
+
+.investigation-form select.form-input {
+  min-width: 0;
+  padding: 0 9px;
+
+  font-size: 0.76rem;
 }

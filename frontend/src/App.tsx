@@ -128,8 +128,6 @@ function App() {
 
   const [showDocumentProcessing, setShowDocumentProcessing] = useState(false);
 
-  const [generatingSynthetic, setGeneratingSynthetic] = useState(false);
-
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
   // ==================================================
@@ -479,13 +477,21 @@ function App() {
           HEADER
       ================================================== */}
 
-      <header className="dashboard-header">
-        <h1>Incentive Auditor</h1>
+      <div className="app-title-block">
+        <div className="app-title-icon" aria-hidden="true">
+          🧪
+        </div>
 
-        <p>
-          Review incentive anomalies, supporting evidence and AI-assisted investigation insights.
-        </p>
-      </header>
+        <div className="app-title-copy">
+          <div className="app-title-row">
+            <h1>Incentive Auditor</h1>
+          </div>
+
+          <p>
+            Review incentive anomalies, supporting evidence and AI-assisted investigation insights.
+          </p>
+        </div>
+      </div>
 
       {/* ==================================================
           TOP NAVIGATION
@@ -510,25 +516,6 @@ function App() {
           Database Management
         </button>
       </nav>
-
-      {activeTab === "database" && (
-        <section className="dashboard-tab-content database-page">
-          <SyntheticDataGeneration
-            showDocumentProcessing={showDocumentProcessing}
-            onToggleDocumentProcessing={() => setShowDocumentProcessing((current) => !current)}
-          />
-
-          {showDocumentProcessing && (
-            <div className="document-processing-expand">
-              <DocumentProcessingCard />
-            </div>
-          )}
-
-          <div className="database-management-center">
-            <DatabaseManagementCard />
-          </div>
-        </section>
-      )}
 
       {/* ==================================================
           ANALYSIS TAB
@@ -623,27 +610,41 @@ function App() {
           DOCUMENTS + DATABASE TAB
       ================================================== */}
 
+      {/* ==================================================
+    DATABASE QUICK ACTIONS
+================================================== */}
+
+      {activeTab === "database" && (
+        <div className="database-top-actions">
+          <div className="database-top-action-left">
+            <SyntheticDataGeneration />
+          </div>
+
+          <div className="database-top-action-right">
+            <button
+              type="button"
+              className={`document-plus-button ${
+                showDocumentProcessing ? "minus-state" : "plus-state"
+              }`}
+              onClick={() => setShowDocumentProcessing((current) => !current)}
+              title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
+              aria-expanded={showDocumentProcessing}
+            >
+              <span className="folder-toggle-icon" aria-hidden="true">
+                📁
+                <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
+              </span>
+
+              <span className="folder-toggle-title">
+                {showDocumentProcessing ? "Close Records" : "Add Records"}
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+
       {activeTab === "database" && (
         <section className="dashboard-tab-content database-page">
-          <button
-            type="button"
-            className={`document-plus-button ${
-              showDocumentProcessing ? "minus-state" : "plus-state"
-            }`}
-            onClick={() => setShowDocumentProcessing((current) => !current)}
-            title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
-            aria-expanded={showDocumentProcessing}
-          >
-            <span className="folder-toggle-icon" aria-hidden="true">
-              📁
-              <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
-            </span>
-
-            <span className="folder-toggle-title">
-              {showDocumentProcessing ? "Close Records" : "Add Records"}
-            </span>
-          </button>
-
           {showDocumentProcessing && (
             <div className="document-processing-expand">
               <DocumentProcessingCard />

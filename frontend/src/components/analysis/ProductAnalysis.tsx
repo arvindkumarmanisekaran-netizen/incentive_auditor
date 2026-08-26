@@ -1,15 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import type { Finding } from "../../types/investigation";
 
@@ -23,6 +14,43 @@ type ProductOption = {
   id: string;
   name: string;
 };
+
+type BarChartType = "sales" | "sales_rx" | "payout" | "historical" | "peer";
+
+const CHART_HUES: Record<BarChartType, number[]> = {
+  sales: [270, 285, 300],
+  sales_rx: [270, 215],
+  payout: [160, 335],
+  historical: [215, 270],
+  peer: [215, 32],
+};
+
+function getDynamicBarColor(
+  chartType: BarChartType,
+  value: number,
+  index: number,
+  values: number[],
+) {
+  const absoluteValue = Math.abs(Number(value) || 0);
+
+  const maxValue = Math.max(...values.map((item) => Math.abs(Number(item) || 0)), 1);
+
+  if (absoluteValue === 0) {
+    return "rgba(148, 163, 184, 0.42)";
+  }
+
+  const intensity = absoluteValue / maxValue;
+
+  const hues = CHART_HUES[chartType];
+
+  const hue = hues[index % hues.length];
+
+  const saturation = 62 + intensity * 22;
+
+  const lightness = 68 - intensity * 22;
+
+  return `hsl(${hue} ${saturation}% ${lightness}%)`;
+}
 
 const CHART_COLORS = {
   historical: "#2563EB",
@@ -183,6 +211,9 @@ export default function ProductAnalysis({ findings = [] }: Props) {
     : [];
 
   const selectedProduct = productOptions.find((p) => p.id === selectedProductId);
+  const salesValues = salesData.map((item) => Number(item.amount));
+  const mismatchValues = mismatchData.map((item) => Number(item.amount));
+  const payoutValues = payoutData.map((item) => Number(item.amount));
 
   return (
     <section className="analysis-panel product-analysis-section">
@@ -303,11 +334,31 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
                   <Tooltip content={<ChartTooltip />} />
 
-                  <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
-                    {salesData.map((item) => (
-                      <Cell key={item.name} fill={item.fill} />
-                    ))}
-                  </Bar>
+                  <Bar
+                    dataKey="amount"
+                    shape={(props: any) => {
+                      const index = Number(props.index ?? 0);
+
+                      const fill = getDynamicBarColor(
+                        "sales",
+                        Number(props.payload?.amount ?? 0),
+                        index,
+                        salesValues,
+                      );
+
+                      return (
+                        <rect
+                          x={Number(props.x ?? 0)}
+                          y={Number(props.y ?? 0)}
+                          width={Number(props.width ?? 0)}
+                          height={Number(props.height ?? 0)}
+                          rx={7}
+                          ry={7}
+                          fill={fill}
+                        />
+                      );
+                    }}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </AnimateOnView>
@@ -337,7 +388,31 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
                   <Tooltip content={<PercentageTooltip />} />
 
-                  <Bar dataKey="amount" radius={[8, 8, 0, 0]} />
+                  <Bar
+                    dataKey="amount"
+                    shape={(props: any) => {
+                      const index = Number(props.index ?? 0);
+
+                      const fill = getDynamicBarColor(
+                        "sales_rx",
+                        Number(props.payload?.amount ?? 0),
+                        index,
+                        mismatchValues,
+                      );
+
+                      return (
+                        <rect
+                          x={Number(props.x ?? 0)}
+                          y={Number(props.y ?? 0)}
+                          width={Number(props.width ?? 0)}
+                          height={Number(props.height ?? 0)}
+                          rx={7}
+                          ry={7}
+                          fill={fill}
+                        />
+                      );
+                    }}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </AnimateOnView>
@@ -367,11 +442,31 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
                   <Tooltip content={<ChartTooltip />} />
 
-                  <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
-                    {payoutData.map((item) => (
-                      <Cell key={item.name} fill={item.fill} />
-                    ))}
-                  </Bar>
+                  <Bar
+                    dataKey="amount"
+                    shape={(props: any) => {
+                      const index = Number(props.index ?? 0);
+
+                      const fill = getDynamicBarColor(
+                        "payout",
+                        Number(props.payload?.amount ?? 0),
+                        index,
+                        payoutValues,
+                      );
+
+                      return (
+                        <rect
+                          x={Number(props.x ?? 0)}
+                          y={Number(props.y ?? 0)}
+                          width={Number(props.width ?? 0)}
+                          height={Number(props.height ?? 0)}
+                          rx={7}
+                          ry={7}
+                          fill={fill}
+                        />
+                      );
+                    }}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </AnimateOnView>

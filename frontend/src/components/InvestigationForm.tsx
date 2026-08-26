@@ -2,6 +2,172 @@ import "../styles/index.css";
 
 import type { Representative } from "../api/masterData";
 
+import { useEffect, useRef, useState } from "react";
+
+function formatDate(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function parseDate(value: string) {
+  if (!value) return new Date();
+
+  const [year, month, day] = value.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+}
+
+type CustomDatePickerProps = {
+  value: string;
+  onChange: (value: string) => void;
+  ariaLabel: string;
+};
+
+function CustomDatePicker({ value, onChange, ariaLabel }: CustomDatePickerProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [open, setOpen] = useState(false);
+  const [viewDate, setViewDate] = useState(() => parseDate(value));
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent | TouchEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (value) {
+      setViewDate(parseDate(value));
+    }
+  }, [value]);
+
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const days: Array<number | null> = [];
+
+  for (let i = 0; i < firstDay; i++) {
+    days.push(null);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    days.push(day);
+  }
+
+  function previousMonth() {
+    setViewDate(new Date(year, month - 1, 1));
+  }
+
+  function nextMonth() {
+    setViewDate(new Date(year, month + 1, 1));
+  }
+
+  function selectDay(day: number) {
+    const selectedDate = new Date(year, month, day);
+
+    onChange(formatDate(selectedDate));
+    setOpen(false);
+  }
+
+  const monthLabel = viewDate.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  return (
+    <div className="custom-date-picker" ref={wrapperRef}>
+      <button
+        type="button"
+        className="custom-date-input"
+        onClick={() => setOpen((current) => !current)}
+        aria-label={ariaLabel}
+        aria-expanded={open}
+      >
+        <span className={value ? "" : "custom-date-placeholder"}>{value || "Select date"}</span>
+
+        <span className="custom-date-icon" aria-hidden="true">
+          📅
+        </span>
+      </button>
+
+      {open && (
+        <div className="custom-calendar-popover">
+          <div className="custom-calendar-header">
+            <button
+              type="button"
+              className="custom-calendar-nav"
+              onClick={previousMonth}
+              aria-label="Previous month"
+            >
+              ‹
+            </button>
+
+            <strong>{monthLabel}</strong>
+
+            <button
+              type="button"
+              className="custom-calendar-nav"
+              onClick={nextMonth}
+              aria-label="Next month"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="custom-calendar-weekdays">
+            <span>Su</span>
+            <span>Mo</span>
+            <span>Tu</span>
+            <span>We</span>
+            <span>Th</span>
+            <span>Fr</span>
+            <span>Sa</span>
+          </div>
+
+          <div className="custom-calendar-grid">
+            {days.map((day, index) => {
+              if (!day) {
+                return <span key={`empty-${index}`} className="custom-calendar-empty" />;
+              }
+
+              const dateValue = formatDate(new Date(year, month, day));
+
+              const selected = dateValue === value;
+
+              return (
+                <button
+                  key={dateValue}
+                  type="button"
+                  className={`custom-calendar-day ${selected ? "selected" : ""}`}
+                  onClick={() => selectDay(day)}
+                >
+                  {day}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 type InvestigationFormProps = {
   representativeId: string;
 
@@ -61,24 +227,13 @@ function InvestigationForm({
         ))}
       </select>
 
-      {/* Start Date */}
-
-      <input
-        className="form-input"
-        type="date"
+      <CustomDatePicker
         value={startDate}
-        onChange={(e) => onStartDateChange(e.target.value)}
+        onChange={onStartDateChange}
+        ariaLabel="Select start date"
       />
 
-      {/* End Date */}
-
-      <input
-        className="form-input"
-        type="date"
-        value={endDate}
-        onChange={(e) => onEndDateChange(e.target.value)}
-      />
-
+      <CustomDatePicker value={endDate} onChange={onEndDateChange} ariaLabel="Select end date" />
       <button
         className="primary-button"
         onClick={onSubmit}

@@ -146,4 +146,285 @@
 .admin-card-header > div:nth-child(2) {
   flex: 1;
 }
+/* =========================================================
+   CURRENT TSX ALIGNMENT — DATABASE ACTIONS / SYNTHETIC DATA
+========================================================= */
 
+.database-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  width: 100%;
+}
+
+.document-plus-button,
+.synthetic-data-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 8px;
+  font-size: 0.71rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    opacity 160ms ease;
+}
+
+.synthetic-data-button {
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(192, 132, 252, 0.24);
+  color: #e9d5ff;
+}
+
+.synthetic-data-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(168, 85, 247, 0.14);
+  border-color: rgba(232, 121, 249, 0.4);
+}
+
+.synthetic-data-button:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+}
+
+.synthetic-data-icon,
+.folder-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+}
+
+.synthetic-data-title,
+.folder-toggle-title {
+  white-space: nowrap;
+}
+/* =========================================================
+   SYNTHETIC DATA TOAST
+========================================================= */
+.download-toast {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+  max-width: calc(100vw - 48px);
+
+  padding: 12px 16px;
+
+  background: rgba(23, 0, 33, 0.96);
+  border: 1px solid rgba(232, 121, 249, 0.24);
+  border-radius: 14px;
+
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+
+  z-index: 2000;
+
+  overflow-x: auto;
+}
+
+.download-toast-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  width: max-content;
+
+  white-space: nowrap;
+}
+
+.download-toast-title,
+.download-toast-message {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 22px;
+  line-height: 22px;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+}
+
+.download-toast-title {
+  color: #f8f4ff;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.download-toast-message {
+  color: #d9cde2;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  transform: translateY(1.2px);
+}
+
+@media (max-width: 650px) {
+  .download-toast {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    width: auto;
+    max-width: none;
+
+    padding: 12px 14px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+  }
+
+  .download-toast-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 6px;
+
+    width: 100%;
+
+    white-space: normal;
+  }
+
+  .download-toast-title {
+    width: 100%;
+
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    white-space: nowrap;
+  }
+
+  .download-toast-message {
+    width: 100%;
+
+    font-size: 0.74rem;
+    line-height: 1.35;
+
+    white-space: normal;
+
+    transform: none;
+  }
+}
+/* =========================================================
+   DATABASE TOP ACTIONS
+   Synthetic = left
+   Add Records = right
+========================================================= */
+
+.database-top-actions {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin: 8px 0 16px;
+  min-height: 48px;
+}
+
+.database-top-action-left,
+.database-top-action-right {
+  display: flex;
+  align-items: center;
+}
+
+.database-top-action-left {
+  justify-content: flex-start;
+}
+
+.database-top-action-right {
+  justify-content: flex-end;
+}
+
+/*
+ * Important:
+ * cancel the old absolute positioning
+ */
+
+.database-top-actions .document-plus-button,
+.database-top-actions .synthetic-data-button {
+  position: static !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .database-top-actions {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    margin-top: 4px;
+    margin-bottom: 14px;
+  }
+
+  .database-top-action-left {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .database-top-action-right {
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
+  .database-top-actions .synthetic-data-button,
+  .database-top-actions .document-plus-button {
+    width: auto !important;
+    max-width: 100%;
+
+    flex: none !important;
+
+    padding: 5px 7px;
+  }
+
+  .database-top-actions .folder-toggle-title,
+  .database-top-actions .synthetic-data-title {
+    font-size: 11px;
+
+    white-space: nowrap;
+  }
+
+  .database-top-actions .folder-toggle-icon,
+  .database-top-actions .synthetic-data-icon {
+    flex: 0 0 auto;
+  }
+}

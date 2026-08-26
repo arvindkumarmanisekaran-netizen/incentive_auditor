@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type Props = {
-  showDocumentProcessing: boolean;
-  onToggleDocumentProcessing: () => void;
-};
-
-export default function SyntheticDataGeneration({
-  showDocumentProcessing,
-  onToggleDocumentProcessing,
-}: Props) {
+export default function SyntheticDataGeneration() {
   const [isGeneratingSyntheticData, setIsGeneratingSyntheticData] = useState(false);
 
   const [generationMessages, setGenerationMessages] = useState<string[]>([]);
+
+  const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 650px)").matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 650px)");
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
 
   async function handleSyntheticDataGeneration() {
     const filename = "synthetic_dataset.zip";
@@ -131,23 +139,6 @@ export default function SyntheticDataGeneration({
 
   return (
     <div className="database-actions">
-      {/* Add Records */}
-
-      <button
-        type="button"
-        className={`document-plus-button ${showDocumentProcessing ? "minus-state" : "plus-state"}`}
-        onClick={onToggleDocumentProcessing}
-        title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
-      >
-        <span className="folder-toggle-icon" aria-hidden="true">
-          📁
-        </span>
-
-        <span className="folder-toggle-title">
-          {showDocumentProcessing ? "Close Records" : "Add Records"}
-        </span>
-      </button>
-
       {/* Synthetic Data Generation */}
 
       <button
@@ -168,13 +159,15 @@ export default function SyntheticDataGeneration({
 
       {generationMessages.length > 0 && (
         <div className="download-toast">
-          <div className="download-toast-title">🧬 Synthetic Data Generation</div>
+          <div className="download-toast-row">
+            <span className="download-toast-title">🧬 Synthetic Data Generation</span>
 
-          {generationMessages.slice(-5).map((message, index) => (
-            <div key={index} className="download-toast-message">
-              › {message}
-            </div>
-          ))}
+            {generationMessages.slice(isMobile ? -3 : -5).map((message, index) => (
+              <span key={index} className="download-toast-message">
+                › {message}
+              </span>
+            ))}
+          </div>
         </div>
       )}
     </div>

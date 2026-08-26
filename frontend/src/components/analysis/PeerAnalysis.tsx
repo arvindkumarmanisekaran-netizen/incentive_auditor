@@ -17,6 +17,7 @@ import {
   PolarRadiusAxis,
   Radar,
   Legend,
+  ComposedChart,
 } from "recharts";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
@@ -59,7 +60,42 @@ function formatPercent(value?: number) {
 
   return `${numeric > 0 ? "+" : ""}${numeric.toFixed(2)}%`;
 }
+function DumbbellShape({ x, y, width, height, payload }: any) {
+  if (!payload) {
+    return null;
+  }
 
+  const peer = Number(payload.peer ?? 100);
+  const representative = Number(payload.representative ?? 0);
+
+  const min = 0;
+  const max = 200;
+
+  const scale = (value: number) => x + ((value - min) / (max - min)) * width;
+
+  const peerX = scale(peer);
+  const representativeX = scale(representative);
+
+  const centerY = y + height / 2;
+
+  return (
+    <g>
+      <line
+        x1={peerX}
+        x2={representativeX}
+        y1={centerY}
+        y2={centerY}
+        stroke="rgba(216, 180, 254, 0.35)"
+        strokeWidth={4}
+        strokeLinecap="round"
+      />
+
+      <circle cx={peerX} cy={centerY} r={7} fill="#F59E0B" />
+
+      <circle cx={representativeX} cy={centerY} r={8} fill="#7C3AED" />
+    </g>
+  );
+}
 export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) {
   const comparison = peerAnalysis?.product_peer_comparison;
 
@@ -97,21 +133,21 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
     peer: item.peer_average.sales,
   }));
 
-  const radarData = [
+  const dumbbellData = [
     {
       metric: "Sales",
-      Representative: normalize(selected.representative.sales, selected.peer_average.sales),
-      Peer: 100,
+      representative: normalize(selected.representative.sales, selected.peer_average.sales),
+      peer: 100,
     },
     {
       metric: "Prescription",
-      Representative: normalize(selected.representative.rx, selected.peer_average.rx),
-      Peer: 100,
+      representative: normalize(selected.representative.rx, selected.peer_average.rx),
+      peer: 100,
     },
     {
       metric: "Payout",
-      Representative: normalize(selected.representative.payout, selected.peer_average.payout),
-      Peer: 100,
+      representative: normalize(selected.representative.payout, selected.peer_average.payout),
+      peer: 100,
     },
   ];
 
@@ -312,40 +348,81 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
 
         <div className="chart-card">
           <div className="chart-heading">
-            <h3>Relative Position</h3>
+            <h3>Representative vs Peer Index</h3>
 
-            <p>Selected representative indexed against peer average = 100.</p>
+            <p>Peer average = 100. Values above 100 are above peer average.</p>
           </div>
 
-          <ResponsiveContainer width="100%" height={320}>
-            <RadarChart key={selectedId} data={radarData}>
-              <PolarGrid />
+          <div className="chart-container peer-dumbbell-chart">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={dumbbellData}
+                layout="vertical"
+                margin={{
+                  top: 12,
+                  right: 28,
+                  left: 20,
+                  bottom: 8,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
 
-              <PolarAngleAxis dataKey="metric" />
+                <XAxis
+                  type="number"
+                  domain={[0, 200]}
+                  tickLine={false}
+                  axisLine={false}
+                  ticks={[0, 50, 100, 150, 200]}
+                />
 
-              <PolarRadiusAxis domain={[0, 200]} />
+                <YAxis
+                  type="category"
+                  dataKey="metric"
+                  tickLine={false}
+                  axisLine={false}
+                  width={95}
+                />
 
-              <Radar
-                name="Representative"
-                dataKey="Representative"
-                stroke={CHART_THEME.representative}
-                fill={CHART_THEME.representative}
-                fillOpacity={0.35}
-              />
+                <Tooltip
+                  content={({ active, payload }) => {
+                    if (!active || !payload?.length) {
+                      return null;
+                    }
 
-              <Radar
-                name="Peer Average"
-                dataKey="Peer"
-                stroke={CHART_THEME.peer}
-                fill={CHART_THEME.peer}
-                fillOpacity={0.25}
-              />
+                    const item = payload[0]?.payload;
 
-              <Legend />
+                    if (!item) {
+                      return null;
+                    }
 
-              <Tooltip />
-            </RadarChart>
-          </ResponsiveContainer>
+                    return (
+                      <div className="chart-custom-tooltip visible">
+                        <strong>{item.metric}</strong>
+
+                        <div>
+                          Representative: <strong>{Number(item.representative).toFixed(0)}</strong>
+                        </div>
+
+                        <div>
+                          Peer Average: <strong>100</strong>
+                        </div>
+
+                        <div>
+                          Difference:{" "}
+                          <strong>
+                            {Number(item.representative - 100) > 0 ? "+" : ""}
+                            {Number(item.representative - 100).toFixed(0)}%
+                          </strong>
+                        </div>
+                      </div>
+                    );
+                  }}
+                />
+
+                <Bar dataKey="representative" shape={<DumbbellShape />} isAnimationActive />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* ==================================================
@@ -366,10 +443,10 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             <ScatterChart
               key={selectedId}
               margin={{
-                top: 30,
-                right: 40,
-                bottom: 40,
-                left: 50,
+                top: 20,
+                right: 25,
+                bottom: 35,
+                left: 5,
               }}
             >
               <CartesianGrid stroke={CHART_THEME.grid} />
@@ -378,10 +455,12 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 type="number"
                 dataKey="sales"
                 name="Sales"
+                tickLine={false}
+                axisLine={false}
                 label={{
                   value: "Sales",
                   position: "insideBottom",
-                  offset: -10,
+                  offset: -28,
                 }}
               />
 
@@ -389,10 +468,14 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 type="number"
                 dataKey="payout"
                 name="Payout"
+                width={60}
+                tickLine={false}
+                axisLine={false}
                 label={{
                   value: "Payout",
                   angle: -90,
                   position: "insideLeft",
+                  offset: 2,
                 }}
               />
 
@@ -440,7 +523,13 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 shape="star"
               />
 
-              <Legend />
+              <Legend
+                verticalAlign="top"
+                align="center"
+                wrapperStyle={{
+                  paddingBottom: "8px",
+                }}
+              />
             </ScatterChart>
           </ResponsiveContainer>
         </div>

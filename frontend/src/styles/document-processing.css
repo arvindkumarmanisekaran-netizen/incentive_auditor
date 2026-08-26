@@ -2393,3 +2393,60 @@
     transform: translateX(0);
   }
 }
+/* =========================================================
+   CURRENT TSX ALIGNMENT — VALIDATION / RESULT STATES
+========================================================= */
+
+.document-result-error,
+.duplicate-empty {
+  padding: 12px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.document-result-error {
+  color: #fecdd3;
+}
+
+.validation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(5, 0, 8, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.validation-popup {
+  width: min(680px, 100%);
+  max-height: min(78vh, 720px);
+  overflow: auto;
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(35, 8, 49, 0.99), rgba(18, 3, 27, 0.99));
+  border: 1px solid rgba(251, 113, 133, 0.22);
+  border-radius: 13px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.52);
+  text-align: left;
+}
+
+.validation-error-list {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.validation-error-item {
+  padding: 9px 10px;
+  background: rgba(251, 113, 133, 0.055);
+  border: 1px solid rgba(251, 113, 133, 0.13);
+  border-radius: 8px;
+  color: #e9c5cb;
+  font-size: 0.70rem;
+  line-height: 1.45;
+}

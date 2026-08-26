@@ -251,3 +251,139 @@
     align-items: flex-start;
   }
 }
+/* =========================================================
+   CURRENT TSX ALIGNMENT — LIVE INVESTIGATION WORKFLOW
+========================================================= */
+
+.investigation-workflow {
+  width: 100%;
+  margin-top: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(24, 18, 38, 0.96), rgba(13, 10, 22, 0.97));
+  border: 1px solid rgba(168, 85, 247, 0.24);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  text-align: left;
+}
+
+.investigation-workflow-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 15px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.investigation-workflow-header-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.investigation-workflow-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.investigation-workflow-title-row h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 760;
+}
+
+.investigation-workflow-status {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.70rem;
+}
+
+.investigation-workflow-toggle {
+  flex: 0 0 auto;
+  color: #c9b6d6;
+  font-size: 0.70rem;
+}
+
+.investigation-workflow-body {
+  display: grid;
+  gap: 7px;
+  padding: 0 11px 11px;
+}
+
+.workflow-agent {
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.023);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 8px;
+}
+
+.workflow-agent.running {
+  border-color: rgba(34, 211, 238, 0.24);
+  background: rgba(34, 211, 238, 0.025);
+}
+
+.workflow-agent.complete {
+  border-color: rgba(45, 212, 191, 0.15);
+}
+
+.workflow-agent.error {
+  border-color: rgba(244, 63, 94, 0.26);
+}
+
+.workflow-agent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.workflow-agent-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.workflow-agent-name h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.76rem;
+}
+
+.workflow-commentary-line,
+.workflow-waiting-text,
+.workflow-plan-meta,
+.workflow-planner-summary,
+.workflow-planner-latest {
+  color: #b8a7c3;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.workflow-agent-result {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.workflow-focus-pill {
+  padding: 3px 7px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  border-radius: 999px;
+  color: #cdb9dc;
+  font-size: 0.62rem;
+}
+
+@media (max-width: 650px) {
+  .investigation-workflow-header,
+  .workflow-agent-header {
+    align-items: flex-start;
+  }
+}

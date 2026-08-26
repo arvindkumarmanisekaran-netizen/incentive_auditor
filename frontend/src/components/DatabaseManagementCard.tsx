@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState, useRef } from "react";
 
 import { API_BASE_URL } from "../config";
 
@@ -111,12 +111,73 @@ const STATUS_OPTIONS: Partial<Record<Section, string[]>> = {
   sales: ["Valid", "Cancelled", "Returned", "Adjusted"],
   payouts: ["Pending", "Paid", "Adjusted"],
 };
-
 function getCellValue(row: RowData, column: string): unknown {
   return (row as unknown as Record<string, unknown>)[column];
 }
 
 export default function DatabaseManagementCard() {
+  const tableScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const dragStateRef = useRef({
+    dragging: false,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+  });
+
+  function handleTablePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    const target = event.target as HTMLElement;
+
+    /*
+     * Don't start dragging when clicking controls.
+     */
+    if (target.closest("button, input, select, textarea, a")) {
+      return;
+    }
+
+    const container = tableScrollRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    dragStateRef.current = {
+      dragging: true,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: container.scrollLeft,
+      scrollTop: container.scrollTop,
+    };
+
+    container.setPointerCapture(event.pointerId);
+  }
+
+  function handleTablePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const container = tableScrollRef.current;
+    const state = dragStateRef.current;
+
+    if (!container || !state.dragging) {
+      return;
+    }
+
+    const deltaX = event.clientX - state.startX;
+    const deltaY = event.clientY - state.startY;
+
+    container.scrollLeft = state.scrollLeft - deltaX;
+
+    container.scrollTop = state.scrollTop - deltaY;
+  }
+
+  function handleTablePointerUp(event: React.PointerEvent<HTMLDivElement>) {
+    const container = tableScrollRef.current;
+
+    dragStateRef.current.dragging = false;
+
+    if (container?.hasPointerCapture(event.pointerId)) {
+      container.releasePointerCapture(event.pointerId);
+    }
+  }
   const [activeSection, setActiveSection] = useState<Section>("representatives");
 
   const [rows, setRows] = useState<RowData[]>([]);
@@ -633,7 +694,14 @@ export default function DatabaseManagementCard() {
           --------------------------------------- */}
 
           {!loading && !error && rows.length > 0 && (
-            <div className="database-table-scroll">
+            <div
+              ref={tableScrollRef}
+              className="database-table-scroll"
+              onPointerDown={handleTablePointerDown}
+              onPointerMove={handleTablePointerMove}
+              onPointerUp={handleTablePointerUp}
+              onPointerCancel={handleTablePointerUp}
+            >
               <table className="database-table">
                 <thead>
                   <tr>
