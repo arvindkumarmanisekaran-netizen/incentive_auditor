@@ -50,7 +50,7 @@
   border-radius: 8px;
 
   border: 1px solid rgba(190, 219, 174, 0.18) !important;
-  background: rgba(20, 3, 30, 0.8);
+  background: rgba(10, 13, 11, 0.8);
 
   color: #96a096;
 
@@ -99,7 +99,7 @@
 
   border: 1px solid rgba(168, 230, 107, 0.18);
 
-  background: linear-gradient(180deg, rgba(23, 17, 37, 0.94), rgba(13, 10, 23, 0.97));
+  background: linear-gradient(180deg, rgba(10, 13, 11, 0.94), rgba(13, 10, 23, 0.97));
 
   box-sizing: border-box;
 }
@@ -239,7 +239,7 @@
 
   border-radius: 12px;
 
-  background: linear-gradient(145deg, rgba(34, 9, 48, 0.96), rgba(20, 3, 30, 0.98));
+  background: linear-gradient(145deg, rgba(10, 13, 11, 0.96), rgba(10, 13, 11, 0.98));
 
   border: 1px solid var(--border);
 }
@@ -281,7 +281,7 @@
   border: 1px solid rgba(168, 230, 107, 0.18);
   border-radius: 12px;
 
-  background: linear-gradient(180deg, rgba(23, 17, 37, 0.94), rgba(13, 10, 23, 0.97));
+  background: linear-gradient(180deg, rgba(10, 13, 11, 0.94), rgba(13, 10, 23, 0.97));
 
   box-sizing: border-box;
 }
@@ -641,7 +641,7 @@
 .product-status-card:hover {
   transform: translateY(-3px);
   z-index: 9999;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 24px rgba(10, 13, 11, 0.12);
 }
 /* Dynamic background */
 
@@ -760,7 +760,7 @@
 
   transform: translateX(-50%) translateY(5px);
 
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(10, 13, 11, 0.95);
 
   color: white;
 
@@ -889,7 +889,7 @@
   margin-bottom: 12px;
   padding: 5px;
   overflow-x: auto;
-  background: rgba(20, 3, 30, 0.72);
+  background: rgba(10, 13, 11, 0.72);
   border: 1px solid rgba(190, 219, 174, 0.1);
   border-radius: 11px;
   scrollbar-width: thin;
@@ -1060,7 +1060,7 @@
   min-height: 220px;
 }
 
-.recharts-scroll-animation {
+.signal-scroll-animation {
   width: 100%;
   height: 100%;
 }
@@ -1483,7 +1483,7 @@
 /*
  * AnimateOnView must fill the remaining card space.
  */
-.product-analysis-grid .chart-container .recharts-scroll-animation {
+.product-analysis-grid .chart-container .signal-scroll-animation {
   width: 100%;
   height: 100%;
 }

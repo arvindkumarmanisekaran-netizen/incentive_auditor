@@ -8,7 +8,7 @@ interface AnimateOnViewProps {
 export function AnimateOnView({ children }: AnimateOnViewProps) {
   return (
     <motion.div
-      className="recharts-scroll-animation"
+      className="signal-scroll-animation"
       initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.2, margin: "0px 0px -36px 0px" }}

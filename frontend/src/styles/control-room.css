@@ -23,9 +23,12 @@
   --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.28), inset 0 1px rgba(255, 255, 255, 0.025);
   --shadow-glow: 0 0 34px rgba(185, 255, 102, 0.08);
   color-scheme: dark;
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
 }
 
 html, body, #root { min-height: 100%; }
+
+body, button, input, select, textarea { font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif; }
 
 body {
   background:
@@ -121,6 +124,8 @@ body::before {
 .control-graph svg { width: min(80vw, 760px); overflow: visible; }
 .control-graph.compact { position: relative; inset: auto; height: 76px; opacity: .72; }
 .control-graph.compact svg { width: 100%; }
+.signal-field-3d { position: relative; z-index: 1; width: 100%; height: 92px; opacity: .9; }
+.signal-field-3d::after { position: absolute; right: 4%; bottom: 13px; left: 4%; height: 1px; content: ""; background: linear-gradient(90deg, transparent, rgba(185,255,102,.22), transparent); }
 
 .dashboard-tab-content { display: grid; gap: 16px; }
 .investigation-result-stack { display: grid; gap: 16px; }
@@ -174,10 +179,77 @@ body::before {
 
 .chart-card { position: relative; overflow: hidden; }
 .chart-card::after { position: absolute; top: 0; right: 0; width: 44px; height: 44px; content: ""; border-top: 1px solid rgba(185,255,102,.18); border-right: 1px solid rgba(185,255,102,.18); clip-path: polygon(45% 0,100% 0,100% 100%); }
-.recharts-cartesian-grid line { stroke: rgba(190,219,174,.075) !important; }
-.recharts-text, .recharts-cartesian-axis-tick-value, .recharts-legend-item-text { fill: #737c73 !important; color: #737c73 !important; }
-.recharts-tooltip-cursor { fill: rgba(185,255,102,.035) !important; }
 .chart-custom-tooltip, .chart-tooltip { border-color: rgba(185,255,102,.22) !important; background: rgba(9,12,10,.96) !important; box-shadow: 0 18px 44px rgba(0,0,0,.42) !important; }
+.signal-chart { position: relative; width: 100%; min-width: 0; overflow: hidden; border-radius: 8px; background: linear-gradient(180deg, rgba(185,255,102,.018), transparent 48%); }
+.signal-chart-canvas { width: 100%; min-height: 280px; }
+.signal-chart-corner { position: absolute; top: 5px; right: 5px; width: 24px; height: 24px; pointer-events: none; border-top: 1px solid rgba(185,255,102,.24); border-right: 1px solid rgba(185,255,102,.24); }
+
+/* Complete surface normalization: legacy feature CSS is deliberately overruled here. */
+.investigation-overview-card,
+.investigation-decision-section,
+.investigation-evidence-section,
+.overview-detailed-content,
+.decision-status,
+.decision-assessment,
+.decision-findings,
+.workflow-summary-card,
+.workflow-card,
+.analysis-panel,
+.product-analysis-section,
+.historical-analysis-section,
+.peer-analysis-section,
+.insight-card,
+.insight-body,
+.finding-group,
+.risk-driver-card,
+.document-duplicate-inline,
+.database-edit-form,
+.validation-popup,
+.import-success-banner {
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+  background: linear-gradient(145deg, rgba(16,20,17,.98), rgba(9,12,10,.98)) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.investigation-overview-card { position: relative; overflow: hidden; border: 1px solid var(--border) !important; border-radius: 13px !important; }
+.investigation-overview-card::before { position: absolute; top: 0; left: 24px; z-index: 2; width: 72px; height: 1px; content: ""; background: var(--primary); box-shadow: 0 0 16px rgba(185,255,102,.7); }
+.investigation-decision-section, .investigation-evidence-section { padding: clamp(18px, 2.2vw, 28px) !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+.investigation-section-divider { height: 1px !important; margin: 0 28px !important; background: linear-gradient(90deg, transparent, rgba(185,255,102,.18), transparent) !important; }
+.decision-status, .decision-assessment, .decision-findings, .workflow-card, .risk-driver-card { border: 1px solid var(--border) !important; border-radius: 9px !important; }
+.decision-status:hover, .decision-assessment:hover, .decision-findings:hover, .workflow-card:hover { border-color: rgba(185,255,102,.2) !important; }
+.decision-header h2, .overview-detailed-heading h3, .workflow-card h3, .workflow-summary-card p { color: var(--text-primary) !important; font-weight: 600 !important; letter-spacing: -.025em; }
+.decision-subtitle, .overview-detailed-heading p, .workflow-summary, .overview-empty-text { color: var(--text-muted) !important; }
+.decision-status h4, .decision-assessment h4, .decision-findings h4, .workflow-card h4, .workflow-summary-card h3,
+.command-eyebrow, .kpi-label, .sidebar-brand-copy small, .workflow-priority, .workflow-tag {
+  color: #7d877c !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase;
+}
+.workflow-summary-card { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; padding: 10px !important; border: 1px solid var(--border) !important; border-radius: 10px !important; }
+.workflow-summary-card > div { padding: 13px !important; border: 1px solid rgba(214,230,214,.08) !important; border-radius: 7px !important; background: rgba(255,255,255,.018) !important; }
+.workflow-tag { border: 1px solid rgba(185,255,102,.18) !important; color: var(--primary) !important; background: rgba(185,255,102,.045) !important; }
+.decision-approved, .review-warning, .severity-badge, .status-badge { font-family: "IBM Plex Mono", ui-monospace, monospace !important; letter-spacing: .04em; }
+.decision-approved, .severity-normal, .severity-low { border-color: rgba(185,255,102,.24) !important; color: var(--primary) !important; background: rgba(185,255,102,.055) !important; }
+
+button, .primary-button, .secondary-button, .database-section, .analysis-tab {
+  border-radius: 7px !important;
+  font-weight: 650 !important;
+  letter-spacing: -.01em;
+}
+button { transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+button:hover:not(:disabled) { transform: translateY(-1px); }
+.database-table-container, .document-results, .document-result-row, .document-duplicate-inline { border-radius: 10px !important; }
+.database-table-scroll, .duplicate-table-wrapper { scrollbar-color: rgba(185,255,102,.38) #090c0a; }
+.database-table-scroll::-webkit-scrollbar-thumb, .duplicate-table-wrapper::-webkit-scrollbar-thumb { background: rgba(185,255,102,.3); border-radius: 10px; }
+
+@media (max-width: 760px) {
+  .workflow-summary-card { grid-template-columns: 1fr 1fr; }
+  .signal-field-3d { display: none; }
+}
 
 .database-top-actions { margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: rgba(13,16,14,.84); }
 .document-plus-button, .synthetic-generate-button { border-color: var(--border-strong) !important; color: #dce3da !important; background: #101410 !important; }

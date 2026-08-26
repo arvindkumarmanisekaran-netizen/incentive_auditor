@@ -9,7 +9,7 @@ type Props = {
 };
 
 const DOCTOR_COLORS = [
-  "#2563EB",
+  "#64d8b4",
   "#DC2626",
   "#16A34A",
   "#F59E0B",

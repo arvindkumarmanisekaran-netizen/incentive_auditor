@@ -1,19 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import type { EChartsCoreOption } from "echarts/core";
 
 import type { Finding } from "../../types/investigation";
 
-import { AnimateOnView } from "../AnimateOnView";
+import SignalChart from "../charts/SignalChart";
 
 type Props = {
   findings: Finding[];
@@ -25,7 +16,7 @@ type ProductOption = {
 };
 
 const CHART_COLORS = {
-  historical: "#2563EB",
+  historical: "#64d8b4",
   current: "#8fc95a",
 };
 
@@ -53,20 +44,20 @@ function getProductName(finding?: Finding) {
   return item.product_name ?? String(finding.evidence?.product_name ?? "");
 }
 
-function HistoricalTooltip({ active, payload }: any) {
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const item = payload[0].payload;
-
-  return (
-    <div className="chart-custom-tooltip visible">
-      <span>{item.name}</span>
-
-      <strong>{formatMoney(Number(item.amount))}</strong>
-    </div>
-  );
+function comparisonOption(data: Array<{ name: string; amount: number; fill: string }>): EChartsCoreOption {
+  return {
+    tooltip: { valueFormatter: (value: unknown) => formatMoney(Number(value)) },
+    xAxis: { type: "category", data: data.map((item) => item.name) },
+    yAxis: { type: "value" },
+    series: [{
+      type: "bar",
+      barMaxWidth: 88,
+      data: data.map((item) => ({
+        value: item.amount,
+        itemStyle: { color: item.fill, borderRadius: [8, 8, 2, 2] },
+      })),
+    }],
+  };
 }
 
 export default function HistoricalAnalysis({ findings }: Props) {
@@ -252,25 +243,7 @@ export default function HistoricalAnalysis({ findings }: Props) {
           </div>
 
           <div className="chart-container">
-            <AnimateOnView>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={comparisonData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
-                  <XAxis dataKey="name" tickLine={false} axisLine={false} />
-
-                  <YAxis tickLine={false} axisLine={false} />
-
-                  <Tooltip content={<HistoricalTooltip />} />
-
-                  <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
-                    {comparisonData.map((item) => (
-                      <Cell key={item.name} fill={item.fill} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </AnimateOnView>
+            <SignalChart option={comparisonOption(comparisonData)} ariaLabel="Historical sales comparison" />
           </div>
         </div>
 

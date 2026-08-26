@@ -1,10 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-
-/* =========================================================
-   DYNAMIC PIE CHART
-========================================================= */
+import { useMemo } from "react";
+import type { EChartsCoreOption } from "echarts/core";
+import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
 
 interface DynamicPieChartProps<T extends Record<string, unknown>> {
   data: T[];
@@ -25,144 +21,48 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
   dataKey,
   nameKey,
 }: DynamicPieChartProps<T>) {
-  const chartAreaRef = useRef<HTMLDivElement | null>(null);
-
-  const legendRef = useRef<HTMLDivElement | null>(null);
-
-  const [chartDimensions, setChartDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
-
-  const [legendHeight, setLegendHeight] = useState(0);
-
-  useEffect(() => {
-    const element = chartAreaRef.current;
-
-    if (!element) {
-      return;
-    }
-
-    const observer = new ResizeObserver(([entry]) => {
-      if (!entry) {
-        return;
-      }
-
-      const { width, height } = entry.contentRect;
-
-      setChartDimensions({
-        width,
-        height,
-      });
-    });
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const element = legendRef.current;
-
-    if (!element) {
-      return;
-    }
-
-    const observer = new ResizeObserver(([entry]) => {
-      if (!entry) {
-        return;
-      }
-
-      setLegendHeight(entry.contentRect.height);
-    });
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [data]);
-
-  const availableDiameter = Math.min(chartDimensions.width, chartDimensions.height);
-
-  const outerRadius = availableDiameter > 0 ? availableDiameter / 2.25 : 0;
-
-  const innerRadius = outerRadius * 0.62;
-
-  const centerX = chartDimensions.width / 2;
-
-  const centerY = chartDimensions.height / 2;
-
-  return (
-    <div
-      className="dynamic-pie-wrapper"
-      style={
+  const option = useMemo<EChartsCoreOption>(
+    () => ({
+      tooltip: {
+        trigger: "item",
+        formatter: (params: { name?: string; value?: number; percent?: number }) =>
+          `<strong>${params.name ?? "Unknown"}</strong><br/>${formatMoney(params.value ?? 0)} · ${params.percent ?? 0}%`,
+      },
+      legend: {
+        type: "scroll",
+        bottom: 0,
+        icon: "circle",
+        itemWidth: 7,
+        itemHeight: 7,
+        textStyle: { color: SIGNAL_CHART.text, fontSize: 9 },
+      },
+      series: [
         {
-          "--pie-legend-height": `${legendHeight}px`,
-        } as React.CSSProperties
-      }
-    >
-      <div ref={chartAreaRef} className="dynamic-pie-chart-area">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            {outerRadius > 0 && (
-              <Pie
-                data={data}
-                dataKey={dataKey}
-                nameKey={nameKey}
-                cx={centerX}
-                cy={centerY}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                paddingAngle={3}
-                stroke="#FFFFFF"
-                strokeWidth={2}
-                isAnimationActive
-                animationBegin={0}
-                animationDuration={900}
-              >
-                {data.map((item, index) => (
-                  <Cell key={`slice-${index}`} fill={String(item.fill ?? "#8fc95a")} />
-                ))}
-              </Pie>
-            )}
-
-            <Tooltip
-              offset={14}
-              isAnimationActive={false}
-              wrapperStyle={{
-                transition: "none",
-                pointerEvents: "none",
-              }}
-              formatter={(value) => formatMoney(Number(value))}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div ref={legendRef} className="dynamic-pie-legend">
-        {data.map((item, index) => {
-          const name = String(item[nameKey] ?? "Unknown");
-
-          const fill = String(item.fill ?? "#8fc95a");
-
-          return (
-            <div key={`${name}-${index}`} className="dynamic-pie-legend-item" title={name}>
-              <span
-                className="dynamic-pie-legend-dot"
-                style={{
-                  backgroundColor: fill,
-                }}
-                aria-hidden="true"
-              />
-
-              <span className="dynamic-pie-legend-label">{name}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+          type: "pie",
+          radius: ["48%", "74%"],
+          center: ["50%", "43%"],
+          padAngle: 3,
+          minAngle: 4,
+          itemStyle: {
+            borderColor: "#0a0d0b",
+            borderWidth: 3,
+            borderRadius: 5,
+          },
+          label: { show: false },
+          emphasis: {
+            scaleSize: 8,
+            itemStyle: { shadowBlur: 28, shadowColor: "rgba(185,255,102,.2)" },
+          },
+          data: data.map((item) => ({
+            name: String(item[nameKey] ?? "Unknown"),
+            value: Number(item[dataKey] ?? 0),
+            itemStyle: { color: String(item.fill ?? SIGNAL_CHART.lime) },
+          })),
+        },
+      ],
+    }),
+    [data, dataKey, nameKey],
   );
+
+  return <SignalChart option={option} className="dynamic-pie-wrapper" ariaLabel="Distribution chart" />;
 }

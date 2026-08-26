@@ -1,4 +1,5 @@
 import type { InvestigationResult } from "../types/investigation";
+import { motion } from "motion/react";
 
 interface Props {
   result: InvestigationResult;
@@ -16,7 +17,12 @@ function StatusBadge({ status }: { status?: string }) {
 
 function FindingCard({ text }: { text: string }) {
   return (
-    <div className="risk-driver-card">
+    <motion.div
+      className="risk-driver-card"
+      initial={{ opacity: 0, x: -12 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+    >
       <div className="risk-driver-header">
         <span className="risk-driver-icon" aria-hidden="true">
           ⚠
@@ -26,7 +32,7 @@ function FindingCard({ text }: { text: string }) {
       </div>
 
       <p>{text}</p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -48,12 +54,17 @@ export default function InvestigationOverview({ result }: Props) {
   const payout = result.payout_analysis;
 
   return (
-    <section className="investigation-overview">
+    <motion.section
+      className="investigation-overview"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
       {/* ==================================================
           SINGLE OUTER CARD
       ================================================== */}
 
-      <div className="investigation-overview-card">
+      <motion.div className="investigation-overview-card" layout>
         {/* ==================================================
             INVESTIGATION DECISION
         ================================================== */}
@@ -77,7 +88,7 @@ export default function InvestigationOverview({ result }: Props) {
               CURRENT ASSESSMENT
           ================================================= */}
 
-          <div className="decision-status">
+          <motion.div className="decision-status" whileHover={{ y: -2 }}>
             <h4>Current Assessment</h4>
 
             <div className="decision-status-row">
@@ -88,25 +99,25 @@ export default function InvestigationOverview({ result }: Props) {
                 {" / 100"}
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* ================================================
               ASSESSMENT
           ================================================= */}
 
           {report?.overall_assessment && (
-            <div className="decision-assessment">
+            <motion.div className="decision-assessment" whileHover={{ y: -2 }}>
               <h4>Assessment</h4>
 
               <p>{report.overall_assessment}</p>
-            </div>
+            </motion.div>
           )}
 
           {/* ================================================
               KEY FINDINGS
           ================================================= */}
 
-          <div className="decision-findings">
+          <motion.div className="decision-findings" whileHover={{ y: -2 }}>
             <h4>Key Findings</h4>
 
             {riskDrivers.length > 0 ? (
@@ -118,7 +129,7 @@ export default function InvestigationOverview({ result }: Props) {
             ) : (
               <p className="overview-empty-text">No significant risk drivers identified.</p>
             )}
-          </div>
+          </motion.div>
         </section>
 
         {/* ==================================================
@@ -145,7 +156,13 @@ export default function InvestigationOverview({ result }: Props) {
                 INVESTIGATION SCOPE
             ============================================ */}
 
-            <section className="workflow-summary-card">
+            <motion.section
+              className="workflow-summary-card"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
+            >
               <div>
                 <h3>Representative</h3>
 
@@ -171,7 +188,7 @@ export default function InvestigationOverview({ result }: Props) {
 
                 <p>{plan?.focus_areas?.length ?? 0} specialist areas</p>
               </div>
-            </section>
+            </motion.section>
 
             {/* ============================================
                 INVESTIGATION PLAN
@@ -280,7 +297,7 @@ export default function InvestigationOverview({ result }: Props) {
             </section>
           </div>
         </section>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }
