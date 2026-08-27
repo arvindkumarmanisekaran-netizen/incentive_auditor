@@ -1984,6 +1984,10 @@ textarea {
   scroll-margin-top: 12px;
 }
 
+.document-processing-card:focus {
+  outline: none;
+}
+
 /* Keep section telemetry inside the active tab and behind opaque result cards. */
 .ambient-signals.section {
   inset: 0 !important;
