@@ -1893,3 +1893,219 @@ textarea {
 .signal-chart-corner {
   display: none !important;
 }
+
+/* Keep section telemetry inside the active tab and behind opaque result cards. */
+.ambient-signals.section {
+  inset: 0 !important;
+  overflow: hidden !important;
+  border-radius: 12px;
+  opacity: .2 !important;
+}
+
+.risk-summary-section,
+.investigation-decision-section {
+  isolation: isolate;
+  background: #fff !important;
+}
+
+/* Priority uses the same visual language as the review decision pill. */
+.workflow-priority,
+.workflow-plan-meta {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 4px !important;
+  min-height: 32px;
+  padding: 6px 12px !important;
+  border: 1px solid rgba(100,116,139,.22) !important;
+  border-radius: 999px !important;
+  color: #475569 !important;
+  background: #f8fafc !important;
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+  font-size: .71rem !important;
+  font-weight: 650 !important;
+  line-height: 1.1 !important;
+  letter-spacing: .005em !important;
+  opacity: 1 !important;
+}
+
+.workflow-priority strong,
+.workflow-plan-meta strong {
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em !important;
+}
+
+.workflow-priority.priority-low,
+.workflow-plan-meta.priority-low {
+  color: #047857 !important;
+  border-color: rgba(5,150,105,.24) !important;
+  background: #ecfdf5 !important;
+}
+
+.workflow-priority.priority-medium,
+.workflow-plan-meta.priority-medium {
+  color: #92400e !important;
+  border-color: rgba(217,119,6,.26) !important;
+  background: #fffbeb !important;
+}
+
+.workflow-priority.priority-high,
+.workflow-plan-meta.priority-high,
+.workflow-priority.priority-critical,
+.workflow-plan-meta.priority-critical {
+  color: #be123c !important;
+  border-color: rgba(225,29,72,.24) !important;
+  background: #fff1f2 !important;
+}
+
+/* The planner is inset from the workflow walls and deliberately compact. */
+.investigation-workflow > .workflow-agent.planner {
+  width: auto !important;
+  margin: 0 11px 7px !important;
+  padding: 8px 10px !important;
+}
+
+.workflow-agent.planner .workflow-commentary {
+  gap: 3px !important;
+  margin-top: 6px !important;
+}
+
+.workflow-agent.planner .workflow-agent-result {
+  margin-top: 6px !important;
+  padding-top: 6px !important;
+}
+
+.workflow-agent.planner .workflow-focus-areas {
+  margin-top: 6px !important;
+}
+
+/* Risk title and subtitle should read as one heading group. */
+.risk-summary-heading {
+  gap: 1px !important;
+}
+
+.risk-summary-heading h2 {
+  margin-bottom: 1px !important;
+}
+
+.risk-summary-subtitle {
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Analysis tab signal starts on first render and remains inside its button. */
+.analysis-tab {
+  isolation: isolate;
+  overflow: hidden !important;
+}
+
+.analysis-tab-signal {
+  top: auto !important;
+  right: 9px !important;
+  bottom: 3px !important;
+  left: 9px !important;
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+.analysis-tab > :not(.analysis-tab-signal) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Appended ECharts tooltips escape every chart/card clipping context. */
+body > div[style*="z-index"] {
+  max-width: min(300px, calc(100vw - 20px));
+}
+
+/* White assistant surface with a clearly separated, top-aligned example row. */
+.chatbot-window,
+.chatbot-messages,
+.chatbot-input {
+  color: #334155 !important;
+  background: #fff !important;
+}
+
+.chatbot-window {
+  border-color: rgba(37,99,235,.16) !important;
+  box-shadow: 0 24px 60px rgba(30,64,175,.18) !important;
+}
+
+.chatbot-messages {
+  align-items: stretch;
+  padding: 12px !important;
+}
+
+.chatbot-placeholder {
+  display: flex !important;
+  align-items: center;
+  align-self: stretch;
+  gap: 8px;
+  width: 100%;
+  margin: 0 !important;
+  padding: 9px 10px !important;
+  overflow-x: auto;
+  color: #526176 !important;
+  border: 1px solid rgba(37,99,235,.12);
+  border-radius: 9px;
+  background: #f7faff;
+  font-size: .67rem !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+  white-space: nowrap;
+}
+
+.chatbot-placeholder strong {
+  flex: 0 0 auto;
+  padding-right: 8px;
+  color: #1e40af;
+  border-right: 1px solid rgba(37,99,235,.16);
+  font-weight: 800;
+}
+
+.chatbot-placeholder span {
+  flex: 0 0 auto;
+}
+
+.chatbot-input {
+  border-top-color: rgba(37,99,235,.12) !important;
+}
+
+.chatbot-input input {
+  color: #0f172a !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #fff !important;
+  caret-color: #2563eb !important;
+}
+
+/* Multi-point sparkle field around the assistant icon. */
+.chatbot-floating-button::after {
+  position: absolute;
+  inset: -12px;
+  content: "";
+  pointer-events: none;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 16% 22%, #fff 0 1.5px, transparent 2px),
+    radial-gradient(circle at 84% 16%, #bfdbfe 0 2px, transparent 2.5px),
+    radial-gradient(circle at 92% 74%, #fff 0 1.5px, transparent 2px),
+    radial-gradient(circle at 22% 88%, #93c5fd 0 2px, transparent 2.5px);
+  filter: drop-shadow(0 0 5px rgba(255,255,255,.95));
+  animation: assistant-glitter 1.8s ease-in-out infinite;
+}
+
+@keyframes assistant-glitter {
+  0%, 100% { opacity: .24; transform: rotate(0deg) scale(.94); }
+  45% { opacity: 1; transform: rotate(7deg) scale(1.06); }
+  70% { opacity: .5; transform: rotate(-3deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-floating-button::after,
+  .analysis-tab-signal::after,
+  .ambient-tracer {
+    animation: none !important;
+  }
+}
