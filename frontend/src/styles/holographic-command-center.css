@@ -434,7 +434,7 @@
     radial-gradient(ellipse at center, rgba(14,165,233,.24), transparent 68%) !important;
   background-size: 30px 17px, 30px 17px, auto !important;
   filter: drop-shadow(0 0 14px rgba(34,211,238,.24)) !important;
-  transform: perspective(620px) rotateX(62deg) translateY(24%) !important;
+  transform: perspective(520px) rotateX(70deg) translateY(18%) scaleX(.96) !important;
   transform-origin: 50% 100% !important;
 }
 .chart-card .signal-chart-canvas { position: relative; z-index: 1; }
