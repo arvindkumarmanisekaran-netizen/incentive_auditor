@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import * as echarts from "echarts/core";
 import { BarChart, CustomChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
@@ -404,12 +404,85 @@ function createIntroOption(option: EChartsCoreOption): EChartsCoreOption {
   };
 }
 
+function isVerticalBarOption(option: EChartsCoreOption) {
+  const incoming = option as Record<string, unknown>;
+  const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
+  const series = Array.isArray(incoming.series) ? incoming.series : [];
+  return xAxis.type === "category" && series.some((entry) => (entry as Record<string, unknown>).type === "bar");
+}
+
+function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartProps) {
+  const incoming = option as Record<string, unknown>;
+  const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
+  const categories = Array.isArray(xAxis.data) ? xAxis.data.map(String) : [];
+  const series = (Array.isArray(incoming.series) ? incoming.series : [])
+    .filter((entry) => (entry as Record<string, unknown>).type === "bar") as Array<Record<string, unknown>>;
+  const values = series.flatMap((item) => (Array.isArray(item.data) ? item.data : []).map((datum) => {
+    const record = datum && typeof datum === "object" ? datum as Record<string, unknown> : undefined;
+    return Math.abs(Number(record?.value ?? datum ?? 0));
+  }));
+  const maximum = Math.max(1, ...values);
+  const tooltip = (incoming.tooltip ?? {}) as Record<string, unknown>;
+  const valueFormatter = tooltip.valueFormatter;
+  const palette = [SIGNAL_CHART.lime, SIGNAL_CHART.amber, SIGNAL_CHART.mint, SIGNAL_CHART.limeSoft];
+
+  return (
+    <div className={`signal-chart skyscraper-chart ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+      <div className="skyscraper-horizon" aria-hidden="true" />
+      <div className="skyscraper-floor" aria-hidden="true" />
+      <div className="skyscraper-city">
+        {categories.map((category, categoryIndex) => (
+          <div className="skyscraper-block" key={`${category}-${categoryIndex}`} style={{ left: `${((categoryIndex + .5) / Math.max(1, categories.length)) * 100}%` }}>
+            <div className="skyscraper-cluster">
+              {series.map((item, seriesIndex) => {
+                const data = Array.isArray(item.data) ? item.data : [];
+                const datum = data[categoryIndex];
+                const record = datum && typeof datum === "object" ? datum as Record<string, unknown> : undefined;
+                const value = Number(record?.value ?? datum ?? 0);
+                const itemStyle = (record?.itemStyle ?? item.itemStyle ?? {}) as Record<string, unknown>;
+                const color = typeof itemStyle.color === "string" ? itemStyle.color : palette[seriesIndex % palette.length];
+                const formatted = typeof valueFormatter === "function"
+                  ? String((valueFormatter as (raw: unknown) => unknown)(value))
+                  : new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(value);
+                return (
+                  <div
+                    className={`skyscraper-tower${value < 0 ? " is-negative" : ""}`}
+                    key={`${String(item.name ?? seriesIndex)}-${categoryIndex}`}
+                    style={{
+                      "--tower-height": `${Math.max(22, Math.abs(value) / maximum * 148)}px`,
+                      "--tower-color": color,
+                      "--tower-depth-index": seriesIndex,
+                      "--tower-x": `${-17 + seriesIndex * 13}px`,
+                      "--tower-y": `${seriesIndex * -11}px`,
+                      "--tower-z": `${seriesIndex * -22}px`,
+                      zIndex: series.length - seriesIndex,
+                    } as CSSProperties}
+                    tabIndex={0}
+                  >
+                    <span className="tower-face tower-front" />
+                    <span className="tower-face tower-side" />
+                    <span className="tower-face tower-roof" />
+                    <span className="tower-windows" />
+                    <span className="tower-tooltip"><strong>{String(item.name ?? "Value")}</strong><span>{category}</span><b>{formatted}</b></span>
+                  </div>
+                );
+              })}
+            </div>
+            <span className="skyscraper-label">{category}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function SignalChart({
   option,
   className = "",
   height = "100%",
   ariaLabel = "Interactive data chart",
 }: SignalChartProps) {
+  const useSkyscraperRenderer = isVerticalBarOption(option);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<EChartsType | null>(null);
@@ -422,7 +495,7 @@ export default function SignalChart({
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element || !isFirstView) return;
+    if (!element || !isFirstView || useSkyscraperRenderer) return;
 
     const chart = echarts.init(element, undefined, { renderer: "canvas" });
     chartRef.current = chart;
@@ -454,13 +527,17 @@ export default function SignalChart({
       chart.dispose();
       chartRef.current = null;
     };
-  }, [isFirstView, reducedMotion]);
+  }, [isFirstView, reducedMotion, useSkyscraperRenderer]);
 
   useEffect(() => {
-    if (!isFirstView || !chartRef.current) return;
+    if (!isFirstView || !chartRef.current || useSkyscraperRenderer) return;
     const chart = chartRef.current;
     if (hasAnimatedRef.current) chart.setOption(withSignalTheme(option), { notMerge: true });
-  }, [isFirstView, option]);
+  }, [isFirstView, option, useSkyscraperRenderer]);
+
+  if (useSkyscraperRenderer) {
+    return <SkyscraperChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
+  }
 
   return (
     <motion.div
