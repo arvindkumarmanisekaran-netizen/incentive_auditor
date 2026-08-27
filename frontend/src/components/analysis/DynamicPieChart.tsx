@@ -30,11 +30,26 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
       },
       legend: {
         type: "scroll",
-        bottom: 0,
+        bottom: 4,
+        left: "center",
         icon: "circle",
-        itemWidth: 7,
-        itemHeight: 7,
-        textStyle: { color: SIGNAL_CHART.text, fontSize: 9 },
+        itemWidth: 9,
+        itemHeight: 9,
+        itemGap: 12,
+        pageIconSize: 11,
+        pageIconColor: SIGNAL_CHART.lime,
+        pageIconInactiveColor: "#cbd5e1",
+        pageTextStyle: {
+          color: SIGNAL_CHART.text,
+          fontFamily: '"Manrope Variable", Manrope, Inter, sans-serif',
+          fontSize: 10,
+        },
+        textStyle: {
+          color: SIGNAL_CHART.text,
+          fontFamily: '"Manrope Variable", Manrope, Inter, sans-serif',
+          fontSize: 10,
+          fontWeight: 600,
+        },
       },
       series: [
         {
@@ -44,9 +59,9 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
           padAngle: 3,
           minAngle: 4,
           itemStyle: {
-            borderColor: "#0a0d0b",
-            borderWidth: 3,
-            borderRadius: 5,
+            borderColor: "transparent",
+            borderWidth: 0,
+            borderRadius: 4,
           },
           label: { show: false },
           emphasis: {
