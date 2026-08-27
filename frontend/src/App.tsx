@@ -28,7 +28,6 @@ import InvestigationWorkflow from "./components/InvestigationWorkflow";
 import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
-import SignalField3D from "./components/SignalField3D";
 import AmbientSignals from "./components/AmbientSignals";
 
 import type { WorkflowAgent } from "./types/workflow";
@@ -36,6 +35,7 @@ import LoginModal from "./components/LoginModal";
 import { loginToWorkspace, setActiveWorkspace } from "./api/workspace";
 
 import "./styles/index.css";
+import "./styles/holographic-command-center.css";
 
 type DashboardTab = "analysis" | "database";
 
@@ -547,12 +547,6 @@ function App() {
           <div className="app-title-row"><h1>Incentive intelligence</h1><span className="live-chip">LIVE</span></div>
           <p>Investigate signals, validate evidence and control incentive risk.</p>
         </div>
-
-        <SignalField3D
-          active={loading}
-          complete={Boolean(result)}
-          riskScore={result?.overall_risk_score ?? 0}
-        />
 
         <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
           <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>
