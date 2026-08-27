@@ -685,3 +685,72 @@
   .tower-roof { width: 37px; clip-path: polygon(0 100%, 11px 0, 100% 0, 26px 100%); }
   .skyscraper-label { width: 84px; font-size: 8px; }
 }
+
+/* Keep every holographic console inside its analysis grid. The skyscraper
+   renderer is taller than the legacy canvas charts, so fixed card heights and
+   the old shared stage plane caused plots to escape into adjacent sections. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) {
+  grid-auto-rows: max-content !important;
+  align-items: start !important;
+  column-gap: 22px !important;
+  row-gap: 28px !important;
+  padding: 14px 18px 24px !important;
+  overflow: clip !important;
+  transform-style: flat !important;
+}
+
+/* Each chart already owns an isometric floor. Removing the grid-wide floor
+   prevents it from projecting over the following section. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after {
+  display: none !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card {
+  width: calc(100% - var(--console-depth)) !important;
+  max-width: calc(100% - var(--console-depth)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-right: var(--console-depth) !important;
+  margin-bottom: var(--console-depth) !important;
+  box-sizing: border-box;
+  align-self: start;
+}
+
+.product-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.product-analysis-grid .chart-container:has(.skyscraper-chart) {
+  height: 285px !important;
+  min-height: 285px !important;
+  flex: 0 0 285px;
+}
+
+.peer-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 458px !important;
+  padding-bottom: 14px !important;
+}
+
+.chart-card .signal-chart::after {
+  bottom: 0 !important;
+}
+
+.skyscraper-chart {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden !important;
+}
+
+@media (max-width: 900px) {
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) {
+    padding: 12px 14px 22px !important;
+    row-gap: 24px !important;
+  }
+}
