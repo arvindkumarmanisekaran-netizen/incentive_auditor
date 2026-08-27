@@ -18,7 +18,7 @@ type AppIconProps = {
 
 const paths: Record<AppIconName, React.ReactNode> = {
   alert: <><path d="M12 3 2.8 19a2 2 0 0 0 1.73 3h14.94a2 2 0 0 0 1.73-3L12 3Z"/><path d="M12 9v5"/><path d="M12 18h.01"/></>,
-  assistant: <><path d="M12 2.8 14 8l5.2 2-5.2 2-2 5.2-2-5.2-5.2-2L10 8z"/><path d="m18.2 15 .9 2.2 2.1.8-2.1.9-.9 2.1-.8-2.1-2.2-.9 2.2-.8z"/><circle cx="5.2" cy="17.5" r="1.4"/></>,
+  assistant: <><path d="M9.2 4.2A3.2 3.2 0 0 0 6 7.4v.5A3.4 3.4 0 0 0 4.2 11 3.3 3.3 0 0 0 6 14v.6a3.2 3.2 0 0 0 5.8 1.9V6.1a3.2 3.2 0 0 0-2.6-1.9Z"/><path d="M14.8 4.2A3.2 3.2 0 0 1 18 7.4v.5a3.4 3.4 0 0 1 1.8 3.1A3.3 3.3 0 0 1 18 14v.6a3.2 3.2 0 0 1-5.8 1.9V6.1a3.2 3.2 0 0 1 2.6-1.9ZM8 8.2h3.8M12.2 11.4H16M8.2 14.5h3.6"/><circle cx="5" cy="20" r="1"/><circle cx="12" cy="21" r="1"/><circle cx="19" cy="20" r="1"/><path d="m6 19.5 4.9-2.2M13.1 17.3l4.9 2.2M12 17.5V20"/></>,
   calendar: <><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></>,
   check: <><circle cx="12" cy="12" r="9"/><path d="m8 12 2.7 2.7L16.5 9"/></>,
   database: <><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></>,
