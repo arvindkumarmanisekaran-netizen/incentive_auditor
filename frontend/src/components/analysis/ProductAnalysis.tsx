@@ -93,6 +93,7 @@ function createBarOption(
   };
 
   return {
+    grid: { top: 18, right: 10, bottom: 22, left: 8 },
     tooltip: {
       valueFormatter: (value: unknown) =>
         formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
