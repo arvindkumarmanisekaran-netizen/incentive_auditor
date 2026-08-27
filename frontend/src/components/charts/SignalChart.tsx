@@ -54,6 +54,54 @@ export const SIGNAL_CHART = {
   textStrong: "#0f172a",
 };
 
+const SIGNAL_FONT = '"Manrope Variable", Manrope, Inter, system-ui, sans-serif';
+
+function mergeChartComponent(
+  defaults: Record<string, unknown>,
+  incoming: unknown,
+): unknown {
+  if (Array.isArray(incoming)) {
+    return incoming.map((item) => mergeChartComponent(defaults, item));
+  }
+
+  const item = incoming && typeof incoming === "object"
+    ? incoming as Record<string, unknown>
+    : {};
+
+  return {
+    ...defaults,
+    ...item,
+    textStyle: {
+      ...(defaults.textStyle as Record<string, unknown> | undefined),
+      ...(item.textStyle as Record<string, unknown> | undefined),
+      fontFamily: SIGNAL_FONT,
+    },
+    axisLine: {
+      ...(defaults.axisLine as Record<string, unknown> | undefined),
+      ...(item.axisLine as Record<string, unknown> | undefined),
+    },
+    axisLabel: {
+      ...(defaults.axisLabel as Record<string, unknown> | undefined),
+      ...(item.axisLabel as Record<string, unknown> | undefined),
+      fontFamily: SIGNAL_FONT,
+    },
+    nameTextStyle: {
+      color: SIGNAL_CHART.text,
+      fontFamily: SIGNAL_FONT,
+      fontSize: 10,
+      ...(item.nameTextStyle as Record<string, unknown> | undefined),
+    },
+  };
+}
+
+function escapeTooltipText(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
 function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   const incoming = option as Record<string, unknown>;
   const rawSeries = Array.isArray(incoming.series) ? incoming.series : [];
@@ -70,6 +118,29 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       ...(type === "pie" ? { animationType: "scale", animationTypeUpdate: "transition" } : {}),
       ...item,
     };
+  });
+  const incomingTooltip = (incoming.tooltip ?? {}) as Record<string, unknown>;
+  const valueFormatter = incomingTooltip.valueFormatter;
+  const compactTooltipFormatter = (params: unknown) => {
+    const items = (Array.isArray(params) ? params : [params]) as Array<Record<string, unknown>>;
+
+    if (items.length === 0) return "";
+
+    const heading = escapeTooltipText(items[0]?.axisValueLabel ?? items[0]?.name);
+    const rows = items.map((item) => {
+      const rawValue = Array.isArray(item.value) ? item.value.at(-1) : item.value;
+      const formattedValue = typeof valueFormatter === "function"
+        ? (valueFormatter as (value: unknown) => unknown)(rawValue)
+        : rawValue;
+
+      return `<div style="display:flex;align-items:center;gap:5px;white-space:nowrap;">${item.marker ?? ""}<span>${escapeTooltipText(item.seriesName)}</span><strong style="margin-left:3px;font-weight:750;">${escapeTooltipText(formattedValue)}</strong></div>`;
+    }).join("");
+
+    return `${heading ? `<strong style="display:block;margin-bottom:4px;">${heading}</strong>` : ""}${rows}`;
+  };
+  const isAxisChart = rawSeries.some((entry) => {
+    const type = (entry as Record<string, unknown>).type;
+    return type === "bar" || type === "line" || type === "scatter";
   });
 
   return {
@@ -88,34 +159,39 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     ],
     textStyle: {
       color: SIGNAL_CHART.text,
-      fontFamily: '"IBM Plex Mono", "SFMono-Regular", Consolas, monospace',
+      fontFamily: SIGNAL_FONT,
       fontSize: 10,
     },
+    ...option,
     grid: {
       top: 26,
       right: 18,
       bottom: 44,
       left: 52,
       containLabel: true,
+      ...(incoming.grid as Record<string, unknown> | undefined),
     },
-    xAxis: {
-      axisLine: { lineStyle: { color: "rgba(37,99,235,0.14)" } },
+    xAxis: mergeChartComponent({
+      axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,0.28)", width: 1 } },
       axisTick: { show: false },
-      axisLabel: { color: SIGNAL_CHART.text, fontSize: 9 },
+      axisLabel: { color: SIGNAL_CHART.text, fontSize: 10, hideOverlap: true },
       splitLine: { show: false },
-    },
-    yAxis: {
+    }, incoming.xAxis),
+    yAxis: mergeChartComponent({
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: SIGNAL_CHART.text, fontSize: 9 },
+      axisLabel: { color: SIGNAL_CHART.text, fontSize: 10, hideOverlap: true },
       splitLine: { lineStyle: { color: SIGNAL_CHART.grid, type: "dashed" } },
-    },
-    ...option,
-    tooltip: { show: true, trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+    }, incoming.yAxis),
+    legend: incoming.legend ? mergeChartComponent({
+      textStyle: { color: SIGNAL_CHART.text, fontSize: 10, fontFamily: SIGNAL_FONT },
+    }, incoming.legend) : incoming.legend,
+    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+      formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
-      borderWidth: 1, borderRadius: 10, padding: [12, 14],
-      extraCssText: "min-width:140px;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:Manrope,Inter,sans-serif;line-height:1.55;",
-      textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 12, fontFamily: "Manrope Variable, Manrope, Inter, sans-serif" },
+      borderWidth: 1, borderRadius: 10, padding: [9, 11],
+      extraCssText: `max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
+      textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11, fontFamily: SIGNAL_FONT },
     },
     series,
   };
