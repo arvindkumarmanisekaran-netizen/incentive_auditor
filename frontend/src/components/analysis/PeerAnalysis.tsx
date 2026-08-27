@@ -46,7 +46,7 @@ function formatPercent(value?: number) {
 function peerSalesOption(data: Array<{ product: string; representative: number; peer: number }>): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 44, right: 18, bottom: 48, left: 58 },
+    grid: { top: 55, right: 12, bottom: 8, left: 12 },
     xAxis: { type: "category", data: data.map((item) => item.product), axisLabel: { rotate: 24 } },
     yAxis: { type: "value" },
     series: [
@@ -58,7 +58,7 @@ function peerSalesOption(data: Array<{ product: string; representative: number; 
 
 function peerIndexOption(data: Array<{ metric: string; representative: number }>): EChartsCoreOption {
   return {
-    grid: { top: 20, right: 28, bottom: 30, left: 92 },
+    grid: { top: 18, right: 12, bottom: 12, left: 12 },
     xAxis: { type: "value", min: 0, max: 200 },
     yAxis: { type: "category", data: data.map((item) => item.metric) },
     series: [{
