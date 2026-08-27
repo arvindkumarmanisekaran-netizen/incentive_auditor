@@ -254,7 +254,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
 
           {plannerOutput && (
             <div className="workflow-agent-result">
-              <div className="workflow-plan-meta">
+              <div className={`workflow-plan-meta priority-${String(plannerOutput.priority ?? "unknown").toLowerCase()}`}>
                 <span>Priority</span>
 
                 <strong>{plannerOutput.priority ?? "UNKNOWN"}</strong>
