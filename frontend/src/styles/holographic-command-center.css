@@ -127,22 +127,23 @@
 
 /* Complete 3D chart consoles: raised glass top, side wall and illuminated pedestal. */
 .chart-card {
-  --console-depth: 13px;
+  --console-depth: 18px;
   margin-bottom: var(--console-depth) !important;
   overflow: visible !important;
-  transform: perspective(1500px) rotateX(1.2deg) rotateY(-.7deg) translateZ(0);
+  transform: perspective(1200px) rotateX(3.2deg) rotateY(-1.6deg) translateZ(0);
   transform-style: preserve-3d;
   transform-origin: 50% 100%;
-  border: 1px solid rgba(96,165,250,.38) !important;
+  border: 1px solid rgba(34,211,238,.62) !important;
   border-radius: 12px !important;
   background:
-    linear-gradient(145deg, rgba(255,255,255,.99), rgba(239,247,255,.965)) padding-box,
-    linear-gradient(120deg, #bfdbfe, #38bdf8 42%, #2563eb) border-box !important;
+    radial-gradient(circle at 76% 12%, rgba(29,78,216,.28), transparent 34%),
+    linear-gradient(145deg, rgba(8,25,58,.99), rgba(3,13,35,.985)) padding-box,
+    linear-gradient(120deg, #22d3ee, #3b82f6 52%, #a855f7) border-box !important;
   box-shadow:
-    0 22px 34px rgba(30,64,175,.14),
-    0 0 26px rgba(56,189,248,.10),
-    inset 0 1px 0 rgba(255,255,255,1),
-    inset 0 -1px 0 rgba(37,99,235,.12) !important;
+    0 28px 42px rgba(2,8,23,.32),
+    0 0 30px rgba(34,211,238,.16),
+    inset 0 1px 0 rgba(186,230,253,.28),
+    inset 0 -1px 0 rgba(34,211,238,.30) !important;
   transition: transform .38s cubic-bezier(.22,1,.36,1), box-shadow .38s ease !important;
 }
 
@@ -152,7 +153,7 @@
   right: calc(var(--console-depth) * -1) !important;
   bottom: calc(var(--console-depth) * -1) !important;
   left: auto !important;
-  z-index: -2 !important;
+  z-index: 0 !important;
   width: var(--console-depth) !important;
   height: auto !important;
   content: "" !important;
@@ -174,7 +175,7 @@
   right: calc(var(--console-depth) * -1) !important;
   bottom: calc(var(--console-depth) * -1) !important;
   left: 9px !important;
-  z-index: -1 !important;
+  z-index: 0 !important;
   width: auto !important;
   height: var(--console-depth) !important;
   content: "" !important;
@@ -194,28 +195,45 @@
 }
 
 .chart-card:hover {
-  transform: perspective(1500px) rotateX(.3deg) rotateY(0deg) translateY(-5px) translateZ(12px) !important;
+  transform: perspective(1200px) rotateX(1.4deg) rotateY(-.4deg) translateY(-7px) translateZ(18px) !important;
   box-shadow:
-    0 30px 46px rgba(30,64,175,.19),
-    0 0 34px rgba(56,189,248,.16),
-    inset 0 1px 0 #fff !important;
+    0 36px 54px rgba(2,8,23,.38),
+    0 0 42px rgba(34,211,238,.28),
+    inset 0 1px 0 rgba(224,242,254,.4) !important;
 }
 
 .chart-card:nth-child(even) {
-  transform: perspective(1500px) rotateX(1.2deg) rotateY(.7deg) translateZ(0);
+  transform: perspective(1200px) rotateX(3.2deg) rotateY(1.6deg) translateZ(0);
 }
 .chart-card:nth-child(even):hover {
-  transform: perspective(1500px) rotateX(.3deg) rotateY(0deg) translateY(-5px) translateZ(12px) !important;
+  transform: perspective(1200px) rotateX(1.4deg) rotateY(.4deg) translateY(-7px) translateZ(18px) !important;
 }
 
 .chart-card .chart-heading {
   margin: -1px -1px 10px !important;
   padding: 14px 16px 12px !important;
-  border-bottom: 1px solid rgba(37,99,235,.10);
+  border-bottom: 1px solid rgba(34,211,238,.18);
   border-radius: 11px 11px 0 0;
-  background: linear-gradient(100deg, rgba(239,246,255,.92), rgba(255,255,255,.55));
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,.8);
+  background: linear-gradient(100deg, rgba(15,40,82,.96), rgba(7,24,57,.72));
+  box-shadow: inset 0 -1px 0 rgba(125,211,252,.12);
 }
+
+.chart-card .chart-heading h3,
+.chart-card .chart-heading h4,
+.chart-card .chart-heading strong { color: #eaf6ff !important; text-shadow: 0 0 12px rgba(56,189,248,.22); }
+.chart-card .chart-heading p,
+.chart-card .chart-heading span { color: #9dbde8 !important; }
+.chart-card .signal-chart {
+  border: 1px solid rgba(34,211,238,.20) !important;
+  background:
+    linear-gradient(rgba(56,189,248,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.09) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 108%, rgba(14,165,233,.24), transparent 62%),
+    linear-gradient(180deg, rgba(5,20,49,.97), rgba(2,12,32,.99)) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow: inset 0 0 34px rgba(2,8,23,.46), 0 0 18px rgba(34,211,238,.08);
+}
+.chart-card > * { z-index: 2 !important; }
 
 .chart-card .signal-chart::after {
   position: absolute;
