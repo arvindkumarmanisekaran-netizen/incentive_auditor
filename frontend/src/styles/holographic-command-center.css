@@ -1,59 +1,102 @@
-/* Holographic command center — SVG/CSS depth without WebGL. */
-.holographic-command-center {
+/* Holographic projection language for analytical surfaces, never the title. */
+.app-command-header { grid-template-columns: minmax(320px, 1fr) auto !important; }
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card) {
   position: relative;
-  width: min(100%, 390px);
-  height: 136px;
-  margin: -8px auto;
-  opacity: 1;
-  perspective: 800px;
-  filter: saturate(1.08);
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(37, 99, 235, .16) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.985), rgba(244,249,255,.94)) padding-box,
+    linear-gradient(125deg, rgba(37,99,235,.48), rgba(125,211,252,.12) 42%, rgba(37,99,235,.28)) border-box !important;
+  box-shadow: 0 16px 38px rgba(30,64,175,.08), inset 0 1px rgba(255,255,255,.92) !important;
 }
-.holographic-command-center::after { display: none; }
-.holographic-command-center svg { position: relative; z-index: 2; width: 100%; height: 100%; overflow: visible; }
-.holographic-command-center text { fill: #1e40af; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 6.5px; font-weight: 700; letter-spacing: .12em; }
-.holo-status { position: absolute; top: 7px; right: 9px; z-index: 4; display: flex; align-items: center; gap: 5px; color: #2563eb; font: 700 6px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
-.holo-status span { width: 4px; height: 4px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 7px #2563eb; animation: holo-status-pulse 2s ease-in-out infinite; }
-.holo-panel { filter: drop-shadow(0 5px 8px rgba(37,99,235,.10)); }
-.holo-panel-surface { fill: url(#holoPanel); stroke: rgba(37,99,235,.38); stroke-width: .75; }
-.holo-panel-sales, .holo-panel-risk { transform-box: fill-box; transform-origin: center; animation: holo-panel-float 5.2s ease-in-out infinite; }
-.holo-panel-risk { animation-delay: -2.6s; }
-.holo-panel-payout, .holo-panel-peer { opacity: .88; }
-.holo-chart-grid { fill: none; stroke: rgba(37,99,235,.13); stroke-width: .6; }
-.holo-chart-line, .holo-payout-line, .holo-peer-line { fill: none; stroke: #0ea5e9; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 2px rgba(14,165,233,.72)); }
-.holo-chart-point { fill: #2563eb; filter: drop-shadow(0 0 3px #38bdf8); }
-.holo-risk-track { fill: none; stroke: rgba(37,99,235,.12); stroke-width: 3; }
-.holo-risk-value { fill: none; stroke: #2563eb; stroke-width: 3; stroke-linecap: round; }
-.holo-score { fill: #0f172a !important; font-size: 6px !important; letter-spacing: 0 !important; }
-.holo-mini-bars { fill: none; stroke: #38bdf8; stroke-width: 4; stroke-linecap: square; }
-.holo-back-grid path { fill: none; stroke: rgba(37,99,235,.07); stroke-width: .45; }
-.holo-platform-shadow { fill: rgba(30,64,175,.12); transform: translateY(5px); }
-.holo-platform-top { fill: url(#holoPlatform); stroke: rgba(37,99,235,.55); stroke-width: 1; }
-.holo-platform-side { fill: rgba(30,64,175,.26); stroke: rgba(37,99,235,.3); stroke-width: .7; }
-.holo-platform-core { fill: rgba(224,242,254,.42); stroke: rgba(56,189,248,.5); stroke-width: .7; }
-.holo-platform-orbit { fill: none; stroke: rgba(14,165,233,.88); stroke-width: 1; stroke-dasharray: 5 5; filter: drop-shadow(0 0 3px rgba(14,165,233,.7)); animation: holo-orbit-dash 7s linear infinite; }
-.holo-bar-front { fill: url(#holoBar); }
-.holo-bar-side { fill: #1d4ed8; opacity: .72; }
-.holo-bar-top { fill: #e0f2fe; stroke: rgba(14,165,233,.65); stroke-width: .45; }
-.holo-bars { filter: drop-shadow(0 0 4px rgba(14,165,233,.55)); }
-.holo-core ellipse { fill: none; stroke: #38bdf8; stroke-width: 1.2; filter: drop-shadow(0 0 4px #0ea5e9); transform-box: fill-box; transform-origin: center; }
-.holo-core circle, .holo-particle { fill: #e0f2fe; filter: drop-shadow(0 0 4px #2563eb); }
-.holo-floor-glow { position: absolute; right: 21%; bottom: 8px; left: 21%; z-index: 1; height: 18px; border-radius: 50%; background: rgba(14,165,233,.18); filter: blur(12px); animation: holo-floor-breathe 3.4s ease-in-out infinite; }
-.holographic-command-center.is-active .holo-platform-top { animation: holo-active-flash 1.2s ease-in-out infinite; }
-.holographic-command-center.is-active .holo-status span { background: #0ea5e9; animation-duration: .72s; }
-.holographic-command-center.is-complete .holo-status span { background: #10b981; box-shadow: 0 0 7px #10b981; }
 
-@keyframes holo-panel-float { 50% { transform: translateY(-2.5px); } }
-@keyframes holo-status-pulse { 50% { opacity: .35; transform: scale(.75); } }
-@keyframes holo-orbit-dash { to { stroke-dashoffset: -40; } }
-@keyframes holo-floor-breathe { 50% { opacity: .55; transform: scaleX(1.08); } }
-@keyframes holo-active-flash { 50% { fill: rgba(96,165,250,.5); } }
-
-@media (max-width: 1180px) and (min-width: 761px) {
-  .holographic-command-center { height: 112px; }
-  .holo-panel-sales, .holo-panel-risk { opacity: .78; }
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card)::before {
+  position: absolute;
+  right: -25px;
+  bottom: -24px;
+  z-index: -1;
+  width: 145px;
+  height: 92px;
+  content: "";
+  pointer-events: none;
+  opacity: .38;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.16) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.13) 1px, transparent 1px),
+    radial-gradient(ellipse at center, rgba(56,189,248,.18), transparent 66%);
+  background-size: 18px 10px, 18px 10px, auto;
+  transform: skewY(-9deg) rotate(-2deg);
+  animation: holo-surface-float 7s ease-in-out infinite;
 }
-@media (max-width: 760px) { .holographic-command-center { display: none; } }
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card)::after {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+  z-index: 0;
+  width: 28px;
+  height: 18px;
+  content: "";
+  pointer-events: none;
+  border-top: 1px solid rgba(37,99,235,.48);
+  border-right: 1px solid rgba(14,165,233,.38);
+  background: radial-gradient(circle at 100% 0, rgba(56,189,248,.32), transparent 58%);
+  filter: drop-shadow(0 0 4px rgba(37,99,235,.25));
+  animation: holo-corner-pulse 3.8s ease-in-out infinite;
+}
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.chart-card {
+  border: 1px solid transparent !important;
+  box-shadow: 0 18px 42px rgba(30,64,175,.09), 0 0 22px rgba(56,189,248,.045) !important;
+}
+.chart-card:hover, .insight-card:hover, .analysis-card:hover, .workflow-card:hover {
+  border-color: transparent !important;
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(30,64,175,.13), 0 0 28px rgba(56,189,248,.09) !important;
+}
+.chart-card .signal-chart {
+  background:
+    linear-gradient(rgba(37,99,235,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.045) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 105%, rgba(56,189,248,.10), transparent 58%) !important;
+  background-size: 30px 30px, 30px 30px, auto !important;
+}
+.chart-heading::after {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  margin-left: 9px;
+  content: "";
+  vertical-align: middle;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8, transparent);
+  box-shadow: 0 0 7px rgba(37,99,235,.3);
+}
+
+@keyframes holo-surface-float { 50% { opacity: .58; transform: skewY(-9deg) rotate(-2deg) translate(-4px, -3px); } }
+@keyframes holo-corner-pulse { 50% { opacity: .42; filter: drop-shadow(0 0 8px rgba(37,99,235,.38)); } }
+
+@media (max-width: 760px) { .app-command-header { grid-template-columns: 1fr auto !important; } }
 @media (prefers-reduced-motion: reduce) {
-  .holo-panel-sales, .holo-panel-risk, .holo-status span, .holo-platform-orbit,
-  .holo-floor-glow, .holographic-command-center.is-active .holo-platform-top { animation: none !important; }
+  :where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+    .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+    .decision-findings, .database-table-container, .admin-card)::before,
+  :where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+    .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+    .decision-findings, .database-table-container, .admin-card)::after { animation: none !important; }
 }
