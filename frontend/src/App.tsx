@@ -539,10 +539,6 @@ function App() {
           <SyntheticDataGeneration />
         </div>
 
-        <div className="sidebar-system-status">
-          <span className="system-pulse" />
-          <div><strong>System online</strong><small>All agents ready</small></div>
-        </div>
       </aside>
 
       <header className="app-command-header">
