@@ -53,7 +53,7 @@ export default function ControlGraph({ compact = false }: ControlGraphProps) {
               r="9"
               fill="#2563eb"
               opacity="0.08"
-              animate={{ r: [7, 12, 7], opacity: [0.04, 0.15, 0.04] }}
+              animate={{ scale: [0.78, 1.34, 0.78], opacity: [0.04, 0.15, 0.04] }}
               transition={{ duration: 2.8, delay: node.delay, repeat: Infinity }}
             />
             <motion.circle
