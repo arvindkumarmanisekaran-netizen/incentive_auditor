@@ -120,6 +120,10 @@ export default function AIChatAssistant({ representativeId, representativeName, 
     });
   }
 
+  function isEvidenceSelected(item?: EvidenceItem) {
+    return Boolean(item && selectedEvidence.some((entry) => entry.type === item.type && entry.product_id === item.product_id));
+  }
+
   function focusAnalysis() {
     const target = document.querySelector<HTMLElement>(".analysis-workspace");
     if (!target) return;
@@ -186,16 +190,16 @@ export default function AIChatAssistant({ representativeId, representativeName, 
       {response.checks && <div className="assistant-phase2-card"><b>Reviewer checks</b>{response.checks.map((check) => <div key={check.label}><span>{check.label}</span><strong className={`review-${check.status}`}>{check.status}</strong><small>{check.detail}</small></div>)}</div>}
       {response.review_questions && <div className="assistant-hypotheses"><b>Reviewer questions</b><ul>{response.review_questions.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {response.severity_counts && <div className="assistant-severity-summary">{Object.entries(response.severity_counts).map(([severity, count]) => <span key={severity}><b>{count}</b>{severity}</span>)}</div>}
-      {response.finding_items && <div className="assistant-phase2-card"><b>All findings</b>{response.finding_items.map((item, index) => <div key={`${item.type}-${item.product}-${index}`}><span>{item.type} · {item.product}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>{item.evidence_count} supporting metric(s)</small></div>)}</div>}
-      {response.peer_comparisons && <div className="assistant-phase2-card"><b>Peer comparisons</b>{response.peer_comparisons.map((item, index) => <div key={`${item.scope}-${item.product}-${index}`}><span>{item.product} · {item.scope}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>Sales {item.sales_difference ?? "—"}% · Rx {item.rx_difference ?? "—"}% · Payout {item.payout_difference ?? "—"}% · {item.peer_group_size} peers</small></div>)}</div>}
+      {response.finding_items && <details className="assistant-result-details"><summary>View all {response.finding_items.length} findings</summary><div className="assistant-phase2-card">{response.finding_items.map((item, index) => <div key={`${item.type}-${item.product}-${index}`}><span>{item.type} · {item.product}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>{item.evidence_count} supporting metric(s)</small></div>)}</div></details>}
+      {response.peer_comparisons && <details className="assistant-result-details"><summary>View {response.peer_comparisons.length} peer comparisons</summary><div className="assistant-phase2-card">{response.peer_comparisons.map((item, index) => <div key={`${item.scope}-${item.product}-${index}`}><span>{item.product} · {item.scope}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>Sales {item.sales_difference ?? "—"}% · Rx {item.rx_difference ?? "—"}% · Payout {item.payout_difference ?? "—"}% · {item.peer_group_size} peers</small></div>)}</div></details>}
       {response.focus && <button className="assistant-focus-button" type="button" onClick={focusAnalysis}>Focus chart · {humanLabel(response.focus.finding_type)}</button>}
-      {response.finding && <button className="assistant-evidence-button" type="button" onClick={() => addEvidence(response.finding)}>Add to evidence collection</button>}
+      {response.finding && <button className="assistant-evidence-button" type="button" disabled={isEvidenceSelected(response.finding)} onClick={() => addEvidence(response.finding)}>{isEvidenceSelected(response.finding) ? "Added to evidence collection" : "Add to evidence collection"}</button>}
       {response.details && <ul className="assistant-detail-list">{response.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
       {response.data && <div className="assistant-data-wrap"><div className="assistant-data-title"><b>{response.data.table.replaceAll("_", " ")}</b><span>{response.data.records.length} rows</span></div><div className="assistant-data-scroll"><table><thead><tr>{response.data.columns.map((column) => <th key={column}>{column.replaceAll("_", " ")}</th>)}</tr></thead><tbody>{response.data.records.map((record, rowIndex) => <tr key={rowIndex}>{response.data!.columns.map((column) => <td key={column}>{printableValue(record[column])}</td>)}</tr>)}</tbody></table></div></div>}
       {response.report && <button className="assistant-print-button" onClick={() => printReport(response.report!)}>Open printable summary</button>}
       {selectedEvidence.length > 0 && response.action === "PRINT_SUMMARY" && <div className="assistant-evidence-count">{selectedEvidence.length} selected evidence item(s) included</div>}
       {response.sources && <details className="assistant-sources"><summary>Evidence & sources ({response.sources.length})</summary>{response.sources.map((source, index) => <div key={`${source.source}-${index}`}><b>{source.source}</b><span>{source.filters}</span><small>{source.record_count} record(s) · {source.access}</small></div>)}</details>}
-      {response.suggestions && <div className="assistant-suggestions">{response.suggestions.map((suggestion) => <button key={suggestion} onClick={() => void sendMessage(suggestion)}>{suggestion}</button>)}</div>}
+      {response.suggestions && <div className="assistant-suggestions">{response.suggestions.map((suggestion) => <button key={suggestion} onClick={() => suggestion.toLowerCase() === "add this evidence" && response.finding ? addEvidence(response.finding) : void sendMessage(suggestion)}>{suggestion}</button>)}</div>}
     </>;
   }
 
