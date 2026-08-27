@@ -71,10 +71,10 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
   const categorySize = Array.isArray(rawCategorySize)
     ? Number(rawCategorySize[horizontal ? 1 : 0])
     : Number(rawCategorySize ?? 46);
-  const available = Math.min(categorySize * .68, horizontal ? 24 : 88);
-  const gap = Math.min(5, available * .08);
-  const width = Math.max(7, (available - gap * (barCount - 1)) / barCount);
-  const offset = (barIndex - (barCount - 1) / 2) * (width + gap);
+  const available = Math.min(categorySize * .68, horizontal ? 28 : 82);
+  const width = Math.max(9, available * (barCount > 1 ? .62 : .82));
+  const zOffsetX = (barCount - 1 - barIndex) * (horizontal ? 6 : 11);
+  const zOffsetY = (barCount - 1 - barIndex) * (horizontal ? -8 : -7);
   const fill = (api.visual("color") ?? SIGNAL_CHART.lime) as string;
   const light = "rgba(219,234,254,.96)";
   const dark = "rgba(30,64,175,.82)";
@@ -86,21 +86,21 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
     const endX = valuePoint[0];
     const left = Math.min(startX, endX);
     const right = Math.max(startX, endX);
-    const top = valuePoint[1] - width / 2 + offset;
+    const top = valuePoint[1] - width / 2 + zOffsetY;
     const bottom = top + width;
     const capX = value >= 0 ? right : left;
     const direction = value >= 0 ? 1 : -1;
     return {
       type: "group",
       children: [
-        { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, shadowBlur: 8, shadowColor: "rgba(30,64,175,.24)", shadowOffsetY: 5 } },
-        { type: "polygon", shape: { points: [[left, top], [right, top], [right + depthX * direction, top - depthY], [left + depthX * direction, top - depthY]] }, style: { fill: light, opacity: .9 } },
-        { type: "polygon", shape: { points: [[capX, top], [capX + depthX * direction, top - depthY], [capX + depthX * direction, bottom - depthY], [capX, bottom]] }, style: { fill: dark, opacity: .92 } },
+        { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, opacity: .58, stroke: "rgba(165,243,252,.78)", lineWidth: 1, shadowBlur: 10, shadowColor: "rgba(34,211,238,.3)", shadowOffsetY: 5 } },
+        { type: "polygon", shape: { points: [[left, top], [right, top], [right + depthX * direction, top - depthY], [left + depthX * direction, top - depthY]] }, style: { fill: light, opacity: .7, stroke: "rgba(224,242,254,.9)", lineWidth: 1 } },
+        { type: "polygon", shape: { points: [[capX, top], [capX + depthX * direction, top - depthY], [capX + depthX * direction, bottom - depthY], [capX, bottom]] }, style: { fill: dark, opacity: .5, stroke: "rgba(96,165,250,.8)", lineWidth: 1 } },
       ],
     };
   }
 
-  const centerX = valuePoint[0] + offset;
+  const centerX = valuePoint[0] + zOffsetX;
   const left = centerX - width / 2;
   const right = centerX + width / 2;
   const top = Math.min(valuePoint[1], zeroPoint[1]);
@@ -110,9 +110,10 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
   return {
     type: "group",
     children: [
-      { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, shadowBlur: 9, shadowColor: "rgba(30,64,175,.26)", shadowOffsetX: 5, shadowOffsetY: 7 } },
-      { type: "polygon", shape: { points: [[left, capY], [left + depthX, capY + depthY * direction], [right + depthX, capY + depthY * direction], [right, capY]] }, style: { fill: light, opacity: .94 } },
-      { type: "polygon", shape: { points: [[right, top], [right + depthX, top - depthY], [right + depthX, bottom - depthY], [right, bottom]] }, style: { fill: dark, opacity: .9 } },
+      { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, opacity: .58, stroke: "rgba(165,243,252,.8)", lineWidth: 1, shadowBlur: 12, shadowColor: "rgba(34,211,238,.34)", shadowOffsetX: 6, shadowOffsetY: 8 } },
+      { type: "polygon", shape: { points: [[left, capY], [left + depthX, capY + depthY * direction], [right + depthX, capY + depthY * direction], [right, capY]] }, style: { fill: light, opacity: .72, stroke: "rgba(224,242,254,.95)", lineWidth: 1 } },
+      { type: "polygon", shape: { points: [[right, top], [right + depthX, top - depthY], [right + depthX, bottom - depthY], [right, bottom]] }, style: { fill: dark, opacity: .48, stroke: "rgba(96,165,250,.82)", lineWidth: 1 } },
+      { type: "polygon", shape: { points: [[left - 3, zeroPoint[1] + 4], [right + depthX + 5, zeroPoint[1] + 4], [right + depthX + 11, zeroPoint[1] - 3], [left + 4, zeroPoint[1] - 3]] }, style: { fill, opacity: .16, stroke: "rgba(34,211,238,.55)", lineWidth: 1, shadowBlur: 9, shadowColor: "rgba(34,211,238,.42)" } },
     ],
   };
 };
