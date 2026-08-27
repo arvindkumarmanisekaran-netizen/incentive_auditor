@@ -1993,6 +1993,11 @@ textarea {
   will-change: height, opacity;
 }
 
+.pie-chart-container .signal-chart {
+  border: 0 !important;
+  background: transparent !important;
+}
+
 /* Keep section telemetry inside the active tab and behind opaque result cards. */
 .ambient-signals.section {
   inset: 0 !important;
