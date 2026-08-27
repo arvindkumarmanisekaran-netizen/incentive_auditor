@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import AppIcon from "./AppIcon";
+import { CustomDatePicker } from "./InvestigationForm";
 import type { InvestigationResult } from "../types/investigation";
 
 interface Props {
@@ -43,17 +44,32 @@ function escapeHtml(value: unknown) {
     .replaceAll("'", "&#039;");
 }
 
+function humanLabel(value: string) {
+  return value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function reportValue(value: unknown): string {
+  if (value === null || value === undefined || value === "") return "—";
+  if (Array.isArray(value)) return value.map(reportValue).join(", ");
+  if (typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>)
+      .map(([key, item]) => `${humanLabel(key)}: ${reportValue(item)}`)
+      .join("; ");
+  }
+  return String(value);
+}
+
 function printReport(report: ReportData) {
   const popup = window.open("", "_blank", "width=980,height=760");
   if (!popup) return;
   const findings = (report.findings ?? []).map((finding) => `
     <section><h3>${escapeHtml(finding.type.replaceAll("_", " "))}</h3>
     <p><b>Severity:</b> ${escapeHtml(finding.severity)} &nbsp; <b>Product:</b> ${escapeHtml(finding.product_id ?? "All products")}</p>
-    <pre>${escapeHtml(JSON.stringify(finding.evidence ?? {}, null, 2))}</pre></section>`).join("");
+    <div class="evidence">${Object.entries(finding.evidence ?? {}).map(([key, value]) => `<div><span>${escapeHtml(humanLabel(key))}</span><b>${escapeHtml(reportValue(value))}</b></div>`).join("") || "<p>No supporting metrics recorded.</p>"}</div></section>`).join("");
   popup.document.write(`<!doctype html><html><head><title>${report.title}</title><style>
     body{font-family:Arial,sans-serif;color:#172033;margin:36px;line-height:1.5}h1{color:#1d4ed8}h3{text-transform:capitalize}
     .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.meta div,section{border:1px solid #dbe5f5;border-radius:10px;padding:14px}
-    pre{white-space:pre-wrap;background:#f7faff;padding:10px;border-radius:8px}@media print{body{margin:18px}.no-print{display:none}}
+    .evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.evidence div{display:grid;gap:3px;background:#f7faff;border-radius:7px;padding:9px}.evidence span{color:#64748b;font-size:12px}.evidence b{overflow-wrap:anywhere;font-size:13px}@media print{body{margin:18px}.no-print{display:none}}
   </style></head><body><button class="no-print" onclick="window.print()">Print</button><h1>${report.title}</h1>
   <div class="meta"><div><b>Representative</b><br>${escapeHtml(report.representative ?? report.representative_id ?? "—")}</div><div><b>Period</b><br>${escapeHtml(report.period ?? "—")}</div><div><b>Risk</b><br>${escapeHtml(report.risk_score ?? "—")} · ${escapeHtml(report.severity ?? "—")}</div></div>
   ${report.executive_summary ? `<section><h2>Executive summary</h2><p>${escapeHtml(report.executive_summary)}</p></section>` : ""}
@@ -70,6 +86,8 @@ export default function AIChatAssistant({ representativeId, representativeName, 
   const [chat, setChat] = useState<ChatMessage[]>([]);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
   const [loading, setLoading] = useState(false);
+  const [requestedStartDate, setRequestedStartDate] = useState(startDate);
+  const [requestedEndDate, setRequestedEndDate] = useState(endDate);
   const messagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight, behavior: "smooth" }); }, [chat, loading]);
@@ -119,6 +137,12 @@ export default function AIChatAssistant({ representativeId, representativeName, 
         <span><b>{response.representative_name}</b><small>{response.representative_id}</small></span>
         <span><b>{response.start_date}</b><small>Start date</small></span><span><b>{response.end_date}</b><small>End date</small></span>
         <div className="assistant-card-actions"><button onClick={() => { if (response.representative_id && response.start_date && response.end_date) onApplyFilters(response.representative_id, response.start_date, response.end_date); }}>Apply to form</button><button className="primary" onClick={() => void applyAndRun(response)}>Apply & run</button></div>
+      </div>}
+      {response.action === "NEED_DATE" && <div className="assistant-date-request">
+        <label><span>Start date</span><CustomDatePicker value={requestedStartDate} onChange={setRequestedStartDate} ariaLabel="Select assistant investigation start date" /></label>
+        <label><span>End date</span><CustomDatePicker value={requestedEndDate} onChange={setRequestedEndDate} ariaLabel="Select assistant investigation end date" /></label>
+        <button type="button" disabled={!requestedStartDate || !requestedEndDate || requestedStartDate > requestedEndDate} onClick={() => void sendMessage(`${requestedStartDate} to ${requestedEndDate}`)}>Continue with dates</button>
+        {requestedStartDate && requestedEndDate && requestedStartDate > requestedEndDate && <small>End date must be on or after the start date.</small>}
       </div>}
       {response.details && <ul className="assistant-detail-list">{response.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
       {response.data && <div className="assistant-data-wrap"><div className="assistant-data-title"><b>{response.data.table.replaceAll("_", " ")}</b><span>{response.data.records.length} rows</span></div><div className="assistant-data-scroll"><table><thead><tr>{response.data.columns.map((column) => <th key={column}>{column.replaceAll("_", " ")}</th>)}</tr></thead><tbody>{response.data.records.map((record, rowIndex) => <tr key={rowIndex}>{response.data!.columns.map((column) => <td key={column}>{printableValue(record[column])}</td>)}</tr>)}</tbody></table></div></div>}
