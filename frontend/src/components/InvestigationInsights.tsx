@@ -101,6 +101,11 @@ function insightBarOption(
 
 function gaugeOption(value: number, color: string, label: string): EChartsCoreOption {
   return {
+    tooltip: {
+      trigger: "item",
+      formatter: (params: { value?: number }) =>
+        `<strong>${label}</strong><br/>${Number(params.value ?? 0).toFixed(1)}%`,
+    },
     series: [{
       type: "gauge",
       startAngle: 210,
