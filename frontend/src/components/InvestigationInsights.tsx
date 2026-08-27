@@ -71,7 +71,11 @@ function insightBarOption(
     tooltip: {
       valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
     },
-    xAxis: { type: "category", data: categories },
+    xAxis: {
+      type: "category",
+      data: categories,
+      axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,.42)", width: 1.25 } },
+    },
     yAxis: {
       type: "value",
       min: (range: { min: number }) => Math.min(0, range.min),
@@ -81,7 +85,9 @@ function insightBarOption(
         onZero: true,
         lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
       },
-      axisLabel: formatter === "percent" ? { formatter: "{value}%" } : { formatter: (value: number) => `₹${formatCompactMoney(value)}` },
+      axisLabel: formatter === "percent"
+        ? { formatter: "{value}%", inside: true, margin: 8 }
+        : { formatter: (value: number) => `₹${formatCompactMoney(value)}`, inside: true, margin: 8 },
     },
     series: series.map((item) => ({
       type: "bar",
