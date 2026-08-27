@@ -194,7 +194,14 @@ def root_cause_analysis(context: InvestigationContext | None) -> dict[str, Any]:
     for finding in ranked[:4]:
         evidence = finding.get("evidence") or {}
         numeric = [(key, value) for key, value in evidence.items() if isinstance(value, (int, float)) and key != "severity"]
-        strongest = max(numeric, key=lambda item: abs(float(item[1])), default=None)
+        preferred_keys = (
+            "mismatch_score", "deviation_percent", "payout_difference",
+            "sales_change_percent", "prescription_change_percent",
+            "top_doctor_share", "cross_territory_share",
+        )
+        strongest = next(((key, evidence[key]) for key in preferred_keys if isinstance(evidence.get(key), (int, float))), None)
+        if strongest is None:
+            strongest = max(numeric, key=lambda item: abs(float(item[1])), default=None)
         drivers.append({
             "finding": str(finding.get("type", "finding")).replace("_", " ").title(),
             "product": finding.get("product_id") or "All products",
@@ -235,7 +242,7 @@ def chart_insight(context: InvestigationContext | None, message: str) -> dict[st
         "focus": {"finding_type": finding_type, "product_id": product},
         "details": details,
         "finding": selected,
-        "suggestions": ["Add this evidence", "Run root cause analysis", "Explain this finding"],
+        "suggestions": ["Run root cause analysis", "Explain this finding"],
     }
 
 
@@ -276,10 +283,12 @@ def reviewer_assistance(context: InvestigationContext | None) -> dict[str, Any]:
     missing_evidence = [item for item in findings if not item.get("evidence")]
     elevated = [item for item in findings if SEVERITY_RANK.get(str(item.get("severity", "UNKNOWN")).upper(), 0) >= 2]
     review_required = bool((result.get("investigation_summary") or {}).get("human_review_required") or (result.get("final_report") or {}).get("human_review_required"))
+    selected_count = len(context.selected_evidence) if context else 0
     checks.append({"status": "pass" if findings else "warning", "label": "Findings available", "detail": f"{len(findings)} finding(s) recorded."})
     checks.append({"status": "pass" if not missing_evidence else "warning", "label": "Evidence completeness", "detail": f"{len(missing_evidence)} finding(s) have no structured evidence."})
     checks.append({"status": "review" if elevated else "pass", "label": "Elevated findings", "detail": f"{len(elevated)} medium-or-higher finding(s) require attention."})
     checks.append({"status": "review" if review_required else "pass", "label": "Human review", "detail": "Human review is required." if review_required else "No mandatory human review flag is set."})
+    checks.append({"status": "pass" if selected_count else "warning", "label": "Evidence collection", "detail": f"{selected_count} finding(s) selected for the reviewer package." if selected_count else "No findings have been added to the reviewer evidence collection."})
     return {
         "action": "REVIEW_ASSISTANCE",
         "message": "Reviewer checks are complete. Review warnings indicate gaps or escalation needs; they do not change the investigation decision.",
