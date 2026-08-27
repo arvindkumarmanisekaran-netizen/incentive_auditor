@@ -263,11 +263,21 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   async function confirmAllDocuments() {
-    const scrollToProcessingCard = () => processingCardRef.current?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    const scrollToProcessingCard = () => {
+      const card = processingCardRef.current;
+
+      if (!card) return;
+
+      card.focus({ preventScroll: true });
+
+      const top = card.getBoundingClientRect().top + window.scrollY - 12;
+
+      window.scrollTo({
+        top: Math.max(0, top),
+        left: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      });
+    };
 
     scrollToProcessingCard();
 
@@ -288,16 +298,19 @@ export default function DocumentProcessingCard({
     clearProcessedDocuments();
 
     /* Re-focus after the results collapse changes the page height. */
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(scrollToProcessingCard);
-    });
+    window.setTimeout(scrollToProcessingCard, 100);
   }
   // ==================================================
   // UI
   // ==================================================
 
   return (
-    <article ref={processingCardRef} className="admin-card document-processing-card">
+    <article
+      ref={processingCardRef}
+      className="admin-card document-processing-card"
+      tabIndex={-1}
+      aria-label="Document Processing"
+    >
       <div className="admin-card-icon"><AppIcon name="folder" size={23} /></div>
 
       <div className="admin-card-content">
