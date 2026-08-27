@@ -67,7 +67,7 @@ function insightBarOption(
 ): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 36, right: 8, bottom: 14, left: 8 },
+    grid: { top: 36, right: 8, bottom: 18, left: 16 },
     tooltip: {
       valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
     },
@@ -86,8 +86,8 @@ function insightBarOption(
         lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
       },
       axisLabel: formatter === "percent"
-        ? { formatter: "{value}%", inside: true, margin: 8 }
-        : { formatter: (value: number) => `₹${formatCompactMoney(value)}`, inside: true, margin: 8 },
+        ? { formatter: "{value}%", inside: false, margin: 7 }
+        : { formatter: (value: number) => `₹${formatCompactMoney(value)}`, inside: false, margin: 7 },
     },
     series: series.map((item) => ({
       type: "bar",
