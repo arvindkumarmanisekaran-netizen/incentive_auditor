@@ -199,7 +199,7 @@ export default function InvestigationOverview({ result }: Props) {
               <div className="workflow-card-heading">
                 <h3>Investigation Areas Reviewed</h3>
 
-                <span className="workflow-priority">
+                <span className={`workflow-priority priority-${String(plan?.priority ?? "unknown").toLowerCase()}`}>
                   Priority: <strong>{plan?.priority ?? "N/A"}</strong>
                 </span>
               </div>
