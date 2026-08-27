@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from decimal import Decimal
+import re
 from typing import Any
 
 from fastapi import APIRouter, Depends
@@ -32,7 +33,7 @@ class ChatRequest(BaseModel):
 
 
 TABLE_ALIASES = {
-    "representative": "representatives", "representatives": "representatives",
+    "rep": "representatives", "representative": "representatives", "representatives": "representatives",
     "doctor": "doctors", "doctors": "doctors",
     "product": "products", "products": "products",
     "territory": "territories", "territories": "territories",
@@ -40,6 +41,24 @@ TABLE_ALIASES = {
     "sale": "sales", "sales": "sales",
     "prescription": "prescriptions", "prescriptions": "prescriptions",
     "payout": "incentive_payouts", "payouts": "incentive_payouts",
+}
+
+SEARCH_COLUMNS = {
+    "representatives": ["representative_id", "first_name", "last_name"],
+    "doctors": ["doctor_id", "doctor_name"],
+    "products": ["product_id", "product_name", "product_category"],
+    "territories": ["territory_id", "territory_name", "region", "country"],
+    "representative_doctor_assignments": ["assignment_id", "representative_id", "doctor_id"],
+    "sales": ["sale_id", "doctor_id", "product_id", "selling_territory_id"],
+    "prescriptions": ["prescription_id", "doctor_id", "product_id"],
+    "incentive_payouts": ["payout_id", "representative_id", "product_id"],
+}
+
+QUERY_STOP_WORDS = {
+    "a", "all", "an", "and", "are", "can", "could", "data", "detail", "details",
+    "fetch", "find", "for", "from", "get", "give", "i", "in", "information", "list",
+    "me", "of", "please", "record", "records", "rep", "representative", "representatives",
+    "active", "inactive", "show", "table", "the", "this", "to", "want", "you",
 }
 
 DISPLAY_COLUMNS = {
@@ -68,9 +87,29 @@ def requested_table(message: str, entities: dict[str, Any]) -> str | None:
         return TABLE_ALIASES[supplied]
     lowered = message.lower()
     for alias in sorted(TABLE_ALIASES, key=len, reverse=True):
-        if alias in lowered:
+        if re.search(rf"\b{re.escape(alias)}\b", lowered):
             return TABLE_ALIASES[alias]
     return None
+
+
+def conversation_table(conversation: list[dict[str, str]]) -> str | None:
+    for item in reversed(conversation[-8:]):
+        table = requested_table(item.get("content", ""), {})
+        if table:
+            return table
+    return None
+
+
+def query_search_term(message: str, table: str) -> str | None:
+    aliases = {alias for alias, target in TABLE_ALIASES.items() if target == table}
+    words = re.findall(r"[A-Za-z0-9_.-]+", message)
+    candidates = [
+        word for word in words
+        if word.casefold() not in QUERY_STOP_WORDS
+        and word.casefold() not in aliases
+        and not word.isdigit()
+    ]
+    return candidates[-1] if candidates else None
 
 
 async def resolve_representative(db: AsyncSession, representative_name: str) -> dict[str, Any]:
@@ -101,7 +140,7 @@ async def resolve_representative(db: AsyncSession, representative_name: str) -> 
 
 
 async def run_read_only_query(db: AsyncSession, message: str, entities: dict[str, Any]) -> dict[str, Any]:
-    table = requested_table(message, entities)
+    table = entities.get("resolved_table") or requested_table(message, entities)
     if not table:
         return {
             "action": "NEED_QUERY_SCOPE",
@@ -121,10 +160,20 @@ async def run_read_only_query(db: AsyncSession, message: str, entities: dict[str
     if status and "status" in columns:
         where_clause = " WHERE LOWER(status) = LOWER(:status)"
         parameters["status"] = status
+    search = entities.get("search") or query_search_term(message, table)
+    if search:
+        search_clause = " OR ".join(f"CAST({column} AS TEXT) ILIKE :search" for column in SEARCH_COLUMNS[table])
+        where_clause += (" AND " if where_clause else " WHERE ") + f"({search_clause})"
+        parameters["search"] = f"%{search}%"
     query = text(f"SELECT {', '.join(columns)} FROM {table}{where_clause} ORDER BY {columns[0]} LIMIT :limit")
     rows = await db.execute(query, parameters)
     records = [{key: json_value(value) for key, value in dict(row).items()} for row in rows.mappings().all()]
-    filter_text = f"status = {status}" if status else "none"
+    filters = []
+    if status:
+        filters.append(f"status = {status}")
+    if search:
+        filters.append(f"record match = {search}")
+    filter_text = "; ".join(filters) if filters else "none"
     return {
         "action": "DATA_RESULT",
         "message": f"Found {len(records)} {table.replace('_', ' ')} record{'s' if len(records) != 1 else ''}.",
@@ -408,8 +457,12 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
     if any(word in lowered for word in ("finding", "evidence supports", "why was")) and request.context and request.context.result:
         return explain_finding(request.context, request.message)
     query_table = requested_table(request.message, {})
-    if query_table and any(word in lowered for word in ("show", "list", "table", "query", "find")):
-        return await run_read_only_query(db, request.message, {})
+    inherited_table = conversation_table(request.conversation)
+    query_words = ("show", "list", "table", "query", "find", "fetch", "get", "detail", "record", "want")
+    short_follow_up = len(re.findall(r"[A-Za-z0-9_.-]+", request.message)) <= 2
+    resolved_query_table = query_table or (inherited_table if any(word in lowered for word in query_words) or short_follow_up else None)
+    if resolved_query_table and (any(word in lowered for word in query_words) or short_follow_up):
+        return await run_read_only_query(db, request.message, {"resolved_table": resolved_query_table})
     intent = await investigation_chat_agent(message=request.message, conversation=request.conversation, context=request.context.model_dump() if request.context else {})
     intent_name = intent.get("intent")
     entities = intent.get("entities") or {}
