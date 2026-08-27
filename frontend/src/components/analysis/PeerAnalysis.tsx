@@ -58,7 +58,7 @@ function peerSalesOption(data: Array<{ product: string; representative: number; 
 
 function peerIndexOption(data: Array<{ metric: string; representative: number }>): EChartsCoreOption {
   return {
-    grid: { top: 18, right: 12, bottom: 12, left: 12 },
+    grid: { top: 18, right: 12, bottom: 22, left: 12 },
     xAxis: { type: "value", min: 0, max: 200 },
     yAxis: { type: "category", data: data.map((item) => item.metric) },
     series: [{
@@ -87,7 +87,7 @@ function peerScatterOption(
     items.map((item) => ({ name: item.displayName, value: [item.sales, item.payout] }));
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 46, right: 20, bottom: 44, left: 62 },
+    grid: { top: 46, right: 12, bottom: 22, left: 10 },
     xAxis: { type: "value", name: "Sales", nameLocation: "middle", nameGap: 28 },
     yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 44 },
     tooltip: {
