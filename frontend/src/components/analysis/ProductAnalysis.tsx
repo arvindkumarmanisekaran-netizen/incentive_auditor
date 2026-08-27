@@ -47,11 +47,18 @@ const CHART_COLORS = {
   actual: "#DC2626",
 };
 
-function formatMoney(value: number | string) {
+function formatExactMoney(value: number | string) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
+function formatExactNumber(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 20,
   }).format(Number(value));
 }
 
@@ -96,7 +103,7 @@ function createBarOption(
     grid: { top: 18, right: 10, bottom: 22, left: 8 },
     tooltip: {
       valueFormatter: (value: unknown) =>
-        formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+        formatter === "percent" ? `${formatExactNumber(value)}%` : formatExactMoney(Number(value)),
     },
     xAxis: { type: "category", data: data.map((item) => item.name) },
     yAxis: {
