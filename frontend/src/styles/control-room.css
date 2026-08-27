@@ -990,8 +990,8 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
   z-index: 0;
   content: "";
   pointer-events: none;
-  background: radial-gradient(circle at 12% 0%, rgba(96,165,250,.07), transparent 28%);
-  animation: panel-glow-drift 8s ease-in-out infinite alternate;
+  background: none;
+  animation: none;
 }
 
 .analysis-panel > * {
@@ -1007,10 +1007,6 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 
 @keyframes metric-breathe {
   50% { transform: scale(1.8); opacity: .42; }
-}
-
-@keyframes panel-glow-drift {
-  to { background-position: 42px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2119,33 +2115,38 @@ body > div[style*="z-index"] {
 
 .chatbot-placeholder {
   display: flex !important;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   align-self: stretch;
-  gap: 8px;
+  gap: 5px;
   width: 100%;
   margin: 0 !important;
   padding: 9px 10px !important;
-  overflow-x: auto;
+  overflow: visible;
   color: #526176 !important;
   border: 1px solid rgba(37,99,235,.12);
   border-radius: 9px;
   background: #f7faff;
   font-size: .67rem !important;
   line-height: 1.25 !important;
-  text-align: left !important;
-  white-space: nowrap;
+  text-align: center !important;
+  white-space: normal;
 }
 
 .chatbot-placeholder strong {
-  flex: 0 0 auto;
-  padding-right: 8px;
+  padding: 0;
   color: #1e40af;
-  border-right: 1px solid rgba(37,99,235,.16);
+  border: 0;
   font-weight: 800;
+  font-size: inherit;
 }
 
 .chatbot-placeholder span {
-  flex: 0 0 auto;
+  display: block;
+  width: 100%;
+  font-size: inherit;
+  text-align: center;
 }
 
 .chatbot-input {
