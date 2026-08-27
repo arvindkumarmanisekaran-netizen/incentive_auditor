@@ -58,6 +58,14 @@ Examples:
 
 "What does sales deviation mean?"
 
+5. FINDING_QUERY
+
+Examples: "Explain this finding", "Why is the payout discrepancy high?"
+
+6. PRINT_SUMMARY
+
+Examples: "Print the investigation", "Prepare a printable summary"
+
 
 
 Response format:
@@ -142,6 +150,8 @@ Rules:
 3. Never invent IDs.
 4. Never execute database actions.
 5. Return JSON only.
+6. For DATABASE_QUERY include table, status and limit when present.
+7. Use the supplied investigation context for follow-up questions.
 
 """
 
@@ -149,6 +159,7 @@ Rules:
 async def investigation_chat_agent(
     message: str,
     conversation: list[dict[str, str]],
+    context: dict | None = None,
 ):
 
     prompt = f"""
@@ -162,6 +173,10 @@ async def investigation_chat_agent(
         conversation,
         indent=2,
     )}
+
+    Current investigation context:
+
+    {json.dumps(context or {}, indent=2, default=str)}
 
 
 

@@ -709,6 +709,22 @@ function App() {
       ================================================== */}
 
       <AIChatAssistant
+        representativeId={representativeId}
+        representativeName={
+          representatives.find((representative) => representative.representative_id === representativeId)
+            ? `${representatives.find((representative) => representative.representative_id === representativeId)!.first_name} ${representatives.find((representative) => representative.representative_id === representativeId)!.last_name}`
+            : representativeId
+        }
+        startDate={startDate}
+        endDate={endDate}
+        result={result}
+        onApplyFilters={(chatRepresentativeId, chatStartDate, chatEndDate) => {
+          setRepresentativeId(chatRepresentativeId);
+          setStartDate(chatStartDate);
+          setEndDate(chatEndDate);
+          setActiveTab("analysis");
+          void loadRepresentatives(chatRepresentativeId);
+        }}
         onInvestigationRequest={(chatRepresentativeId, chatStartDate, chatEndDate) => {
           return new Promise<InvestigationResult>((resolve, reject) => {
             chatInvestigationResolveRef.current = resolve;
