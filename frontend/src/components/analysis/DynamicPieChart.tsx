@@ -8,11 +8,12 @@ interface DynamicPieChartProps<T extends Record<string, unknown>> {
   nameKey: string;
 }
 
-function formatMoney(value: number | string) {
+function formatExactMoney(value: number | string) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
   }).format(Number(value));
 }
 
@@ -26,7 +27,7 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
       tooltip: {
         trigger: "item",
         formatter: (params: { name?: string; value?: number; percent?: number }) =>
-          `<strong>${params.name ?? "Unknown"}</strong><br/>Share: ${Number(params.percent ?? 0).toFixed(1)}%<br/>Sales: ${formatMoney(params.value ?? 0)}`,
+          `<strong>${params.name ?? "Unknown"}</strong><br/>Share: ${String(params.percent ?? 0)}%<br/>Sales: ${formatExactMoney(params.value ?? 0)}`,
       },
       legend: {
         type: "scroll",
