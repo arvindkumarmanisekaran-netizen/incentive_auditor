@@ -66,7 +66,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
             autoFocus
             minLength={3}
             maxLength={50}
-            pattern="[A-Za-z0-9_.-]+"
+            pattern={"[A-Za-z0-9_.\\-]+"}
             required
             disabled={loading}
           />
