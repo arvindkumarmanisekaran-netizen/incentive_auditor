@@ -51,6 +51,7 @@ function comparisonOption(data: Array<{ name: string; amount: number; fill: stri
     yAxis: { type: "value" },
     series: [{
       type: "bar",
+      name: "Sales",
       barMaxWidth: 88,
       data: data.map((item) => ({
         value: item.amount,
