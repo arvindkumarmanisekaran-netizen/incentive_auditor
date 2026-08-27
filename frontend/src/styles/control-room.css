@@ -1969,6 +1969,21 @@ textarea {
   display: none !important;
 }
 
+/* Charts must size to their visible container so lower axes are never clipped. */
+.signal-chart-canvas {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.peer-dumbbell-chart {
+  height: 250px !important;
+  min-height: 250px !important;
+}
+
+.document-processing-card {
+  scroll-margin-top: 12px;
+}
+
 /* Keep section telemetry inside the active tab and behind opaque result cards. */
 .ambient-signals.section {
   inset: 0 !important;
