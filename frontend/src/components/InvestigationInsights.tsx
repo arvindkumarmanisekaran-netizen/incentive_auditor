@@ -45,6 +45,21 @@ function formatCompactMoney(value: number) {
   }).format(value);
 }
 
+function formatExactMoney(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
+function formatExactNumber(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
 function safeNumber(value: unknown): number {
   const number = Number(value);
 
@@ -69,7 +84,7 @@ function insightBarOption(
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
     grid: { top: 36, right: 8, bottom: 18, left: 16 },
     tooltip: {
-      valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+      valueFormatter: (value: unknown) => formatter === "percent" ? `${formatExactNumber(value)}%` : formatExactMoney(value),
     },
     xAxis: {
       type: "category",
@@ -110,7 +125,7 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
     tooltip: {
       trigger: "item",
       formatter: (params: { value?: number }) =>
-        `<strong>${label}</strong><br/>${Number(params.value ?? 0).toFixed(1)}%`,
+        `<strong>${label}</strong><br/>${formatExactNumber(params.value ?? 0)}%`,
     },
     series: [{
       type: "gauge",
