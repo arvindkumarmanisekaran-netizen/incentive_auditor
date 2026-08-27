@@ -108,6 +108,72 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   const series = rawSeries.map((entry, index) => {
     const item = entry as Record<string, unknown>;
     const type = item.type;
+    const itemStyle = (item.itemStyle ?? {}) as Record<string, unknown>;
+    const lineStyle = (item.lineStyle ?? {}) as Record<string, unknown>;
+    const sourceColor = typeof itemStyle.color === "string"
+      ? itemStyle.color
+      : [SIGNAL_CHART.lime, SIGNAL_CHART.mint, SIGNAL_CHART.amber, SIGNAL_CHART.danger][index % 4];
+    const dimensionalStyle = type === "bar" ? {
+      showBackground: item.showBackground ?? true,
+      backgroundStyle: {
+        color: "rgba(37,99,235,0.035)",
+        borderColor: "rgba(37,99,235,0.075)",
+        borderWidth: 1,
+        borderRadius: 5,
+        ...((item.backgroundStyle ?? {}) as Record<string, unknown>),
+      },
+      itemStyle: {
+        ...itemStyle,
+        color: typeof itemStyle.color === "function" ? itemStyle.color : new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+          { offset: 0, color: "#dbeafe" },
+          { offset: .18, color: sourceColor },
+          { offset: .72, color: sourceColor },
+          { offset: 1, color: "#1e3a8a" },
+        ]),
+        borderColor: "rgba(255,255,255,.78)",
+        borderWidth: 1,
+        borderRadius: itemStyle.borderRadius ?? [5, 5, 1, 1],
+        shadowBlur: 9,
+        shadowColor: "rgba(30,64,175,.25)",
+        shadowOffsetX: 4,
+        shadowOffsetY: 6,
+      },
+      emphasis: {
+        ...((item.emphasis ?? {}) as Record<string, unknown>),
+        itemStyle: { shadowBlur: 18, shadowColor: "rgba(14,165,233,.42)", shadowOffsetX: 5, shadowOffsetY: 8 },
+      },
+    } : type === "line" ? {
+      symbol: item.symbol ?? "circle",
+      symbolSize: item.symbolSize ?? 7,
+      lineStyle: {
+        ...lineStyle,
+        width: lineStyle.width ?? 3,
+        shadowBlur: 8,
+        shadowColor: "rgba(37,99,235,.3)",
+        shadowOffsetY: 5,
+      },
+      itemStyle: {
+        ...itemStyle,
+        borderColor: "#fff",
+        borderWidth: 2,
+        shadowBlur: 9,
+        shadowColor: "rgba(37,99,235,.38)",
+      },
+    } : type === "pie" ? {
+      padAngle: item.padAngle ?? 2,
+      itemStyle: {
+        ...itemStyle,
+        borderColor: "rgba(255,255,255,.9)",
+        borderWidth: 2,
+        shadowBlur: 12,
+        shadowColor: "rgba(30,64,175,.24)",
+        shadowOffsetX: 5,
+        shadowOffsetY: 8,
+      },
+    } : type === "gauge" ? {
+      progress: { ...((item.progress ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 10, shadowColor: "rgba(37,99,235,.3)" },
+      axisLine: { ...((item.axisLine ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 7, shadowColor: "rgba(37,99,235,.16)" },
+    } : {};
     return {
       animation: true,
       animationDuration: type === "pie" ? 1100 : 900,
@@ -117,6 +183,7 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       animationEasing: "cubicOut",
       ...(type === "pie" ? { animationType: "scale", animationTypeUpdate: "transition" } : {}),
       ...item,
+      ...dimensionalStyle,
     };
   });
   const incomingTooltip = (incoming.tooltip ?? {}) as Record<string, unknown>;
