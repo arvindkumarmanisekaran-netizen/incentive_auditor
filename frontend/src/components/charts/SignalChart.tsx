@@ -72,14 +72,16 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
     ? Number(rawCategorySize[horizontal ? 1 : 0])
     : Number(rawCategorySize ?? 46);
   const available = Math.min(categorySize * .68, horizontal ? 28 : 82);
-  const width = Math.max(9, available * (barCount > 1 ? .62 : .82));
-  const zOffsetX = (barCount - 1 - barIndex) * (horizontal ? 6 : 11);
-  const zOffsetY = (barCount - 1 - barIndex) * (horizontal ? -8 : -7);
+  const width = Math.max(9, available * (barCount > 1 ? .38 : .55));
+  const projectedDepthX = Math.max(8, Math.min(19, width * .48));
+  const projectedDepthY = Math.max(6, Math.min(13, width * .31));
+  const zOffsetX = (barCount - 1 - barIndex) * projectedDepthX * .92;
+  const zOffsetY = (barCount - 1 - barIndex) * -projectedDepthY * .92;
   const fill = (api.visual("color") ?? SIGNAL_CHART.lime) as string;
   const light = "rgba(219,234,254,.96)";
   const dark = "rgba(30,64,175,.82)";
-  const depthX = 8;
-  const depthY = 6;
+  const depthX = projectedDepthX;
+  const depthY = projectedDepthY;
 
   if (horizontal) {
     const startX = zeroPoint[0];
@@ -107,6 +109,14 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
   const bottom = Math.max(valuePoint[1], zeroPoint[1]);
   const capY = value >= 0 ? top : bottom;
   const direction = value >= 0 ? -1 : 1;
+  const facadeLines = Array.from({ length: 5 }, (_, lineIndex) => {
+    const y = top + ((bottom - top) * (lineIndex + 1)) / 6;
+    return {
+      type: "line" as const,
+      shape: { x1: left + 3, y1: y, x2: right - 2, y2: y },
+      style: { stroke: "rgba(207,250,254,.24)", lineWidth: .7 },
+    };
+  });
   return {
     type: "group",
     children: [
@@ -114,6 +124,8 @@ const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
       { type: "polygon", shape: { points: [[left, capY], [left + depthX, capY + depthY * direction], [right + depthX, capY + depthY * direction], [right, capY]] }, style: { fill: light, opacity: .72, stroke: "rgba(224,242,254,.95)", lineWidth: 1 } },
       { type: "polygon", shape: { points: [[right, top], [right + depthX, top - depthY], [right + depthX, bottom - depthY], [right, bottom]] }, style: { fill: dark, opacity: .48, stroke: "rgba(96,165,250,.82)", lineWidth: 1 } },
       { type: "polygon", shape: { points: [[left - 3, zeroPoint[1] + 4], [right + depthX + 5, zeroPoint[1] + 4], [right + depthX + 11, zeroPoint[1] - 3], [left + 4, zeroPoint[1] - 3]] }, style: { fill, opacity: .16, stroke: "rgba(34,211,238,.55)", lineWidth: 1, shadowBlur: 9, shadowColor: "rgba(34,211,238,.42)" } },
+      ...(value >= 0 ? [{ type: "polygon" as const, shape: { points: [[left + 4, top - 1], [left + depthX + 3, top - depthY + 2], [right + depthX - 3, top - depthY + 2], [right - 4, top - 1]] }, style: { fill: "rgba(255,255,255,.22)", stroke: "rgba(165,243,252,.72)", lineWidth: .8 } }] : []),
+      ...facadeLines,
     ],
   };
 };
