@@ -186,11 +186,11 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     legend: incoming.legend ? mergeChartComponent({
       textStyle: { color: SIGNAL_CHART.text, fontSize: 10, fontFamily: SIGNAL_FONT },
     }, incoming.legend) : incoming.legend,
-    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", appendToBody: true, confine: false, axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
       formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
       borderWidth: 1, borderRadius: 10, padding: [9, 11],
-      extraCssText: `max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
+      extraCssText: `z-index:10000;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
       textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11, fontFamily: SIGNAL_FONT },
     },
     series,
