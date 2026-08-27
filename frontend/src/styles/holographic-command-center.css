@@ -416,6 +416,117 @@
     .peer-analysis-grid, .insights-grid) > .chart-card { transform: none !important; }
 }
 
+/* Final light-theme holographic graph system: consistent with the application shell. */
+.chart-card,
+.chart-card:nth-child(even),
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(even),
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(3n),
+.chart-card:hover,
+.chart-card:nth-child(even):hover,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:hover {
+  transform: none !important;
+}
+
+.chart-card {
+  --console-depth: 10px;
+  border: 1px solid rgba(37,99,235,.18) !important;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(125,211,252,.16), transparent 30%),
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(239,247,255,.94)) !important;
+  box-shadow: 0 16px 36px rgba(30,64,175,.10), 0 0 18px rgba(56,189,248,.07), inset 0 1px #fff !important;
+  backdrop-filter: blur(10px);
+}
+.chart-card:hover {
+  box-shadow: 0 19px 40px rgba(30,64,175,.13), 0 0 23px rgba(56,189,248,.11), inset 0 1px #fff !important;
+}
+.chart-card::before {
+  background: linear-gradient(90deg, rgba(96,165,250,.52), rgba(14,165,233,.64)) !important;
+  box-shadow: 5px 6px 12px rgba(30,64,175,.12) !important;
+  animation: none !important;
+}
+.chart-card::after {
+  background: linear-gradient(180deg, #bae6fd, #60a5fa 58%, #2563eb) !important;
+  box-shadow: 0 6px 12px rgba(30,64,175,.18), 0 0 13px rgba(56,189,248,.18), inset 0 2px rgba(255,255,255,.72) !important;
+  animation: none !important;
+}
+.chart-card .chart-heading {
+  border-bottom-color: rgba(37,99,235,.10) !important;
+  background: linear-gradient(100deg, rgba(239,246,255,.94), rgba(255,255,255,.72)) !important;
+  transform: none !important;
+}
+.chart-card .chart-heading::before { display: none !important; }
+.chart-card .chart-heading h3,
+.chart-card .chart-heading h4,
+.chart-card .chart-heading strong { color: #0f172a !important; text-shadow: none !important; }
+.chart-card .chart-heading p,
+.chart-card .chart-heading span { color: #64748b !important; }
+.chart-card .signal-chart,
+.chart-card:hover .signal-chart {
+  border-color: rgba(37,99,235,.14) !important;
+  background:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 108%, rgba(56,189,248,.13), transparent 62%),
+    linear-gradient(180deg, rgba(250,253,255,.98), rgba(240,247,255,.98)) !important;
+  background-size: 30px 30px, 30px 30px, auto, auto !important;
+  box-shadow: inset 0 0 28px rgba(37,99,235,.035), 0 0 14px rgba(56,189,248,.05) !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before {
+  border-color: rgba(37,99,235,.18) !important;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.08) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.07) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(56,189,248,.14), transparent 70%) !important;
+  box-shadow: 0 0 28px rgba(56,189,248,.12), inset 0 0 22px rgba(37,99,235,.06) !important;
+}
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after { display: none !important; }
+
+.skyscraper-chart {
+  background: linear-gradient(180deg, rgba(255,255,255,.2), rgba(219,234,254,.32)) !important;
+}
+.skyscraper-floor {
+  border-color: rgba(37,99,235,.24) !important;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.11) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.10) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(56,189,248,.18), rgba(255,255,255,.18) 68%) !important;
+  box-shadow: 0 0 24px rgba(56,189,248,.14), inset 0 0 20px rgba(37,99,235,.06) !important;
+}
+.skyscraper-horizon { background: rgba(37,99,235,.42); box-shadow: 0 0 8px rgba(56,189,248,.25); }
+.tower-front {
+  border-color: rgba(37,99,235,.38);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tower-color) 28%, transparent), color-mix(in srgb, var(--tower-color) 55%, transparent));
+  box-shadow: inset 6px 0 12px rgba(255,255,255,.34), inset -5px 0 10px rgba(37,99,235,.12);
+}
+.tower-side { border-color: rgba(37,99,235,.36); background: color-mix(in srgb, var(--tower-color) 30%, rgba(96,165,250,.20)); }
+.tower-roof {
+  border-color: rgba(37,99,235,.34);
+  background: linear-gradient(90deg, rgba(255,255,255,.82), color-mix(in srgb, var(--tower-color) 34%, white));
+  box-shadow: 0 0 7px rgba(56,189,248,.22);
+}
+.tower-windows { opacity: .38; background: repeating-linear-gradient(180deg, transparent 0 9px, rgba(255,255,255,.72) 9px 10px); }
+.skyscraper-label { color: #475569; }
+.tower-tooltip {
+  color: #0f172a;
+  border-color: rgba(37,99,235,.18);
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 12px 28px rgba(15,23,42,.14), 0 0 12px rgba(56,189,248,.10);
+}
+.tower-tooltip span { color: #64748b !important; }
+.skyscraper-tower:hover, .skyscraper-tower:focus-visible {
+  filter: brightness(1.05) drop-shadow(8px 12px 9px rgba(30,64,175,.18)) drop-shadow(0 0 7px rgba(56,189,248,.22));
+}
+
 /* Isometric ground plane beneath translucent Z-stacked tower clusters. */
 .chart-card .signal-chart::before {
   position: absolute !important;
