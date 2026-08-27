@@ -171,18 +171,18 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       containLabel: true,
       ...(incoming.grid as Record<string, unknown> | undefined),
     },
-    xAxis: mergeChartComponent({
+    xAxis: isAxisChart || incoming.xAxis ? mergeChartComponent({
       axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,0.28)", width: 1 } },
       axisTick: { show: false },
       axisLabel: { color: SIGNAL_CHART.text, fontSize: 10, hideOverlap: true },
       splitLine: { show: false },
-    }, incoming.xAxis),
-    yAxis: mergeChartComponent({
+    }, incoming.xAxis) : undefined,
+    yAxis: isAxisChart || incoming.yAxis ? mergeChartComponent({
       axisLine: { show: false },
       axisTick: { show: false },
       axisLabel: { color: SIGNAL_CHART.text, fontSize: 10, hideOverlap: true },
       splitLine: { lineStyle: { color: SIGNAL_CHART.grid, type: "dashed" } },
-    }, incoming.yAxis),
+    }, incoming.yAxis) : undefined,
     legend: incoming.legend ? mergeChartComponent({
       textStyle: { color: SIGNAL_CHART.text, fontSize: 10, fontFamily: SIGNAL_FONT },
     }, incoming.legend) : incoming.legend,
