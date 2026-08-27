@@ -46,6 +46,7 @@ function getProductName(finding?: Finding) {
 
 function comparisonOption(data: Array<{ name: string; amount: number; fill: string }>): EChartsCoreOption {
   return {
+    grid: { top: 18, right: 10, bottom: 24, left: 8 },
     tooltip: { valueFormatter: (value: unknown) => formatMoney(Number(value)) },
     xAxis: { type: "category", data: data.map((item) => item.name) },
     yAxis: { type: "value" },
