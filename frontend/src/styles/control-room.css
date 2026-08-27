@@ -1988,6 +1988,11 @@ textarea {
   outline: none;
 }
 
+.investigation-workflow-reveal {
+  overflow: hidden;
+  will-change: height, opacity;
+}
+
 /* Keep section telemetry inside the active tab and behind opaque result cards. */
 .ambient-signals.section {
   inset: 0 !important;
