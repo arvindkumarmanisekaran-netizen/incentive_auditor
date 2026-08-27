@@ -87,9 +87,9 @@ function peerScatterOption(
     items.map((item) => ({ name: item.displayName, value: [item.sales, item.payout] }));
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 46, right: 12, bottom: 22, left: 10 },
+    grid: { top: 46, right: 12, bottom: 32, left: 22 },
     xAxis: { type: "value", name: "Sales", nameLocation: "middle", nameGap: 28 },
-    yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 44 },
+    yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 50 },
     tooltip: {
       trigger: "item",
       formatter: (params: { name?: string; value?: number[] }) =>
