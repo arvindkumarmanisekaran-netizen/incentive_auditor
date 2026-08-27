@@ -1,65 +1,26 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useReducedMotion } from "motion/react";
-import { useMemo, useRef } from "react";
-import * as THREE from "three";
+import { motion, useReducedMotion } from "motion/react";
 
-function SignalNetwork({ animate }: { animate: boolean }) {
-  const groupRef = useRef<THREE.Group>(null);
-
-  const points = useMemo(
-    () => [
-      new THREE.Vector3(-2.8, -0.25, 0.2),
-      new THREE.Vector3(-1.65, 0.55, -0.15),
-      new THREE.Vector3(-0.45, -0.2, 0.35),
-      new THREE.Vector3(0.7, 0.65, -0.25),
-      new THREE.Vector3(1.8, -0.15, 0.25),
-      new THREE.Vector3(2.7, 0.35, -0.1),
-    ],
-    [],
-  );
-
-  const lineGeometry = useMemo(() => new THREE.BufferGeometry().setFromPoints(points), [points]);
-
-  useFrame((state, delta) => {
-    if (!animate || !groupRef.current) return;
-    groupRef.current.rotation.y += delta * 0.075;
-    groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.35) * 0.025;
-  });
-
-  return (
-    <group ref={groupRef}>
-      <primitive
-        object={new THREE.Line(
-          lineGeometry,
-          new THREE.LineBasicMaterial({ color: "#8fca58", transparent: true, opacity: 0.52 }),
-        )}
-      />
-
-      {points.map((point, index) => (
-        <mesh key={index} position={point}>
-          <sphereGeometry args={[index === 2 ? 0.14 : 0.09, 20, 20]} />
-          <meshStandardMaterial
-            color="#b9ff66"
-            emissive="#83d63e"
-            emissiveIntensity={index === 2 ? 2.4 : 1.25}
-            roughness={0.25}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-}
+const nodes = [
+  { x: 18, y: 58, delay: 0 }, { x: 78, y: 24, delay: .35 },
+  { x: 145, y: 62, delay: .7 }, { x: 214, y: 30, delay: 1.05 },
+  { x: 278, y: 66, delay: 1.4 },
+];
 
 export default function SignalField3D() {
-  const reduceMotion = useReducedMotion();
+  const reducedMotion = useReducedMotion();
 
   return (
     <div className="signal-field-3d" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 6.8], fov: 42 }} dpr={[1, 1.5]}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[0, 2, 4]} color="#b9ff66" intensity={18} />
-        <SignalNetwork animate={!reduceMotion} />
-      </Canvas>
+      <svg viewBox="0 0 300 90" preserveAspectRatio="xMidYMid meet">
+        <path className="signal-network-guide" d="M18 58 78 24 145 62 214 30 278 66" />
+        <motion.path className="signal-network-path" d="M18 58 C42 43 56 29 78 24 S119 55 145 62 S188 39 214 30 S253 54 278 66" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }} />
+        {nodes.map((node) => (
+          <g key={node.x}>
+            <motion.circle className="signal-network-halo" cx={node.x} cy={node.y} r="7" animate={reducedMotion ? undefined : { scale: [.86, 1.55, .86], opacity: [.08, .2, .08] }} transition={{ duration: 3, delay: node.delay, repeat: Infinity }} />
+            <motion.circle className="signal-network-node" cx={node.x} cy={node.y} r="3" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: .15 + node.delay, stiffness: 260 }} />
+          </g>
+        ))}
+      </svg>
     </div>
   );
 }

@@ -47,11 +47,18 @@ const CHART_COLORS = {
   actual: "#DC2626",
 };
 
-function formatMoney(value: number | string) {
+function formatExactMoney(value: number | string) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
+function formatExactNumber(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 20,
   }).format(Number(value));
 }
 
@@ -84,27 +91,46 @@ function createBarOption(
   chartType: BarChartType,
   formatter: "money" | "percent" = "money",
 ): EChartsCoreOption {
+  const seriesName: Record<BarChartType, string> = {
+    sales: "Sales",
+    sales_rx: "Change",
+    payout: "Payout",
+    historical: "Historical comparison",
+    peer: "Peer comparison",
+  };
+
   return {
+    grid: { top: 18, right: 10, bottom: 22, left: 8 },
     tooltip: {
       valueFormatter: (value: unknown) =>
-        formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+        formatter === "percent" ? `${formatExactNumber(value)}%` : formatExactMoney(Number(value)),
     },
     xAxis: { type: "category", data: data.map((item) => item.name) },
     yAxis: {
       type: "value",
+      min: (range: { min: number }) => Math.min(0, range.min),
+      max: (range: { max: number }) => Math.max(0, range.max),
+      axisLine: {
+        show: true,
+        onZero: true,
+        lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
+      },
       axisLabel: formatter === "percent" ? { formatter: "{value}%" } : undefined,
     },
     series: [
       {
         type: "bar",
+        name: seriesName[chartType],
         barMaxWidth: 86,
+        animationDuration: 900,
+        animationEasing: "cubicOut",
         data: data.map((item, index) => ({
           value: item.amount,
           itemStyle: {
             color: getDynamicBarColor(chartType, item.amount, index),
             borderRadius: item.amount >= 0 ? [7, 7, 2, 2] : [2, 2, 7, 7],
             shadowBlur: 18,
-            shadowColor: "rgba(185,255,102,.08)",
+            shadowColor: "rgba(37,99,235,.10)",
           },
         })),
       },

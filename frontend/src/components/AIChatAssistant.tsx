@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AppIcon from "./AppIcon";
 
 import type { InvestigationResult } from "../types/investigation";
 
@@ -183,23 +184,22 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
         className="chatbot-floating-button"
         onClick={() => setOpen((current) => !current)}
       >
-        🤖
+        <AppIcon name="assistant" size={25} />
       </button>
 
       {open && (
         <div className="chatbot-window">
-          <div className="chatbot-header">AI Assistant</div>
+          <div className="chatbot-header">
+            <AppIcon name="assistant" size={20} />
+            <span>AI Assistant</span>
+          </div>
 
           <div className="chatbot-messages">
             {chat.length === 0 && (
               <div className="chatbot-placeholder">
-                Ask anything:
-                <br />
-                "Analyze Steve July 2026"
-                <br />
-                "Give Sharma analysis"
-                <br />
-                "Show active representatives"
+                <span><strong>Ask anything · Examples</strong> “Analyze Steve July 2026”</span>
+                <span>“Give Sharma analysis”</span>
+                <span>“Show active representatives”</span>
               </div>
             )}
 

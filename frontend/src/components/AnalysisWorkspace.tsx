@@ -33,7 +33,7 @@ function AnalysisTabButton({
       whileTap={{ scale: 0.97 }}
     >
       {children}
-      {active && <motion.span className="analysis-tab-signal" layoutId="analysis-tab-signal" />}
+      {active && <span className="analysis-tab-signal" aria-hidden="true" />}
     </motion.button>
   );
 }

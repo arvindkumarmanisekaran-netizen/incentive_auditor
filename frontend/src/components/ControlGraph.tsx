@@ -18,17 +18,10 @@ export default function ControlGraph({ compact = false }: ControlGraphProps) {
       <svg viewBox="0 0 390 130" role="presentation">
         <defs>
           <linearGradient id="control-line" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#b9ff66" stopOpacity="0.08" />
-            <stop offset="0.48" stopColor="#d7ff9b" stopOpacity="0.72" />
-            <stop offset="1" stopColor="#b9ff66" stopOpacity="0.08" />
+            <stop offset="0" stopColor="#2563eb" stopOpacity="0.08" />
+            <stop offset="0.48" stopColor="#3b82f6" stopOpacity="0.72" />
+            <stop offset="1" stopColor="#2563eb" stopOpacity="0.08" />
           </linearGradient>
-          <filter id="control-glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
 
         <motion.path
@@ -44,7 +37,7 @@ export default function ControlGraph({ compact = false }: ControlGraphProps) {
         <motion.path
           d="M46 72 L205 82 L344 92 M128 34 L278 42"
           fill="none"
-          stroke="#7d8a78"
+          stroke="#94a3b8"
           strokeWidth="0.55"
           strokeDasharray="3 6"
           initial={{ opacity: 0 }}
@@ -58,17 +51,16 @@ export default function ControlGraph({ compact = false }: ControlGraphProps) {
               cx={node.cx}
               cy={node.cy}
               r="9"
-              fill="#b9ff66"
+              fill="#2563eb"
               opacity="0.08"
-              animate={{ r: [7, 12, 7], opacity: [0.04, 0.15, 0.04] }}
+              animate={{ scale: [0.78, 1.34, 0.78], opacity: [0.04, 0.15, 0.04] }}
               transition={{ duration: 2.8, delay: node.delay, repeat: Infinity }}
             />
             <motion.circle
               cx={node.cx}
               cy={node.cy}
               r="2.6"
-              fill="#d8ff9d"
-              filter="url(#control-glow)"
+              fill="#2563eb"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", delay: 0.25 + node.delay, stiffness: 260 }}

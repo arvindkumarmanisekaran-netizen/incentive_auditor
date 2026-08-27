@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
@@ -30,6 +31,15 @@ function formatMoney(value?: number) {
   }).format(Number(value ?? 0));
 }
 
+function formatExactMoney(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
 function formatNumber(value?: number) {
   return new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 2,
@@ -45,8 +55,8 @@ function formatPercent(value?: number) {
 function peerSalesOption(data: Array<{ product: string; representative: number; peer: number }>): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 44, right: 18, bottom: 72, left: 58 },
-    xAxis: { type: "category", data: data.map((item) => item.product), axisLabel: { rotate: 32 } },
+    grid: { top: 55, right: 12, bottom: 8, left: 12 },
+    xAxis: { type: "category", data: data.map((item) => item.product), axisLabel: { rotate: 24 } },
     yAxis: { type: "value" },
     series: [
       { type: "bar", name: "Representative", data: data.map((item) => item.representative), itemStyle: { color: CHART_THEME.representative, borderRadius: [6, 6, 1, 1] } },
@@ -57,15 +67,17 @@ function peerSalesOption(data: Array<{ product: string; representative: number; 
 
 function peerIndexOption(data: Array<{ metric: string; representative: number }>): EChartsCoreOption {
   return {
-    grid: { top: 20, right: 28, bottom: 30, left: 92 },
+    grid: { top: 18, right: 12, bottom: 22, left: 12 },
     xAxis: { type: "value", min: 0, max: 200 },
     yAxis: { type: "category", data: data.map((item) => item.metric) },
     series: [{
       type: "bar",
+      name: "Representative index",
       barWidth: 8,
       data: data.map((item) => item.representative),
       itemStyle: { color: CHART_THEME.representative, borderRadius: 8 },
       markLine: {
+        animation: false,
         symbol: "none",
         label: { formatter: "Peer 100", color: SIGNAL_CHART.amber, fontSize: 9 },
         lineStyle: { color: SIGNAL_CHART.amber, type: "dashed" },
@@ -84,13 +96,13 @@ function peerScatterOption(
     items.map((item) => ({ name: item.displayName, value: [item.sales, item.payout] }));
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 46, right: 20, bottom: 44, left: 62 },
+    grid: { top: 46, right: 12, bottom: 32, left: 22 },
     xAxis: { type: "value", name: "Sales", nameLocation: "middle", nameGap: 28 },
-    yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 44 },
+    yAxis: { type: "value", name: "Payout", nameLocation: "middle", nameGap: 50 },
     tooltip: {
       trigger: "item",
       formatter: (params: { name?: string; value?: number[] }) =>
-        `<strong>${params.name ?? ""}</strong><br/>Sales ${formatMoney(params.value?.[0])}<br/>Payout ${formatMoney(params.value?.[1])}`,
+        `<strong>${params.name ?? ""}</strong><br/>Sales ${formatExactMoney(params.value?.[0])}<br/>Payout ${formatExactMoney(params.value?.[1])}`,
     },
     series: [
       { type: "scatter", name: "Peers", data: map(peers), symbolSize: 9, itemStyle: { color: CHART_THEME.distribution } },
@@ -297,7 +309,18 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           </div>
 
           <div className="chart-container peer-dumbbell-chart">
-            <SignalChart option={peerIndexOption(dumbbellData)} ariaLabel="Representative peer index" />
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={`peer-index-${selectedId}`}
+                className="peer-index-chart-transition"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: .2, ease: "easeOut" }}
+              >
+                <SignalChart option={peerIndexOption(dumbbellData)} ariaLabel="Representative peer index" />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 

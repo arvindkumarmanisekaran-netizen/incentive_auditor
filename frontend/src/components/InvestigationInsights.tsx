@@ -45,6 +45,21 @@ function formatCompactMoney(value: number) {
   }).format(value);
 }
 
+function formatExactMoney(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
+function formatExactNumber(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
 function safeNumber(value: unknown): number {
   const number = Number(value);
 
@@ -67,24 +82,51 @@ function insightBarOption(
 ): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 38, right: 14, bottom: 36, left: 50 },
+    grid: { top: 36, right: 8, bottom: 18, left: 16 },
     tooltip: {
-      valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
+      valueFormatter: (value: unknown) => formatter === "percent" ? `${formatExactNumber(value)}%` : formatExactMoney(value),
     },
-    xAxis: { type: "category", data: categories },
-    yAxis: { type: "value", axisLabel: formatter === "percent" ? { formatter: "{value}%" } : { formatter: (value: number) => `₹${formatCompactMoney(value)}` } },
+    xAxis: {
+      type: "category",
+      data: categories,
+      axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,.42)", width: 1.25 } },
+    },
+    yAxis: {
+      type: "value",
+      min: (range: { min: number }) => Math.min(0, range.min),
+      max: (range: { max: number }) => Math.max(0, range.max),
+      axisLine: {
+        show: true,
+        onZero: true,
+        lineStyle: { color: "rgba(37,99,235,0.24)", width: 1 },
+      },
+      axisLabel: formatter === "percent"
+        ? { formatter: "{value}%", inside: false, margin: 7 }
+        : { formatter: (value: number) => `₹${formatCompactMoney(value)}`, inside: false, margin: 7 },
+    },
     series: series.map((item) => ({
       type: "bar",
       name: item.name,
-      data: item.values,
+      data: item.values.map((value) => ({
+        value,
+        itemStyle: {
+          color: item.color,
+          borderRadius: value >= 0 ? [5, 5, 1, 1] : [1, 1, 5, 5],
+        },
+      })),
       barMaxWidth: 38,
-      itemStyle: { color: item.color, borderRadius: [5, 5, 1, 1] },
+      itemStyle: { color: item.color },
     })),
   };
 }
 
 function gaugeOption(value: number, color: string, label: string): EChartsCoreOption {
   return {
+    tooltip: {
+      trigger: "item",
+      formatter: (params: { value?: number }) =>
+        `<strong>${label}</strong><br/>${formatExactNumber(params.value ?? 0)}%`,
+    },
     series: [{
       type: "gauge",
       startAngle: 210,
@@ -93,7 +135,7 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
       max: 100,
       radius: "88%",
       progress: { show: true, width: 10, roundCap: true, itemStyle: { color } },
-      axisLine: { lineStyle: { width: 10, color: [[1, "rgba(185,255,102,.08)"]] } },
+      axisLine: { lineStyle: { width: 10, color: [[1, "rgba(37,99,235,.08)"]] } },
       pointer: { show: false },
       axisTick: { show: false },
       splitLine: { show: false },

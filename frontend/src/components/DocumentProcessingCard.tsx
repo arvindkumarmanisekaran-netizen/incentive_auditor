@@ -2,6 +2,7 @@ import { useMemo, useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useDocumentUpload } from "../service/DocumentUploadService";
+import AppIcon from "./AppIcon";
 
 function formatFieldName(value: string) {
   return value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
@@ -25,6 +26,9 @@ interface DocumentProcessingCardProps {
 export default function DocumentProcessingCard({
   onProcessingFinished,
 }: DocumentProcessingCardProps) {
+  const [confirmingActions, setConfirmingActions] = useState(false);
+  const processingCardRef = useRef<HTMLElement | null>(null);
+
   const {
     inputRef,
     selectFolder,
@@ -259,7 +263,30 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   async function confirmAllDocuments() {
-    const success = await handleConfirm(duplicateActions);
+    const scrollToProcessingCard = (behavior: ScrollBehavior) => {
+      const card = processingCardRef.current;
+
+      if (!card) return;
+
+      card.focus({ preventScroll: behavior !== "auto" });
+
+      const top = card.getBoundingClientRect().top + window.scrollY - 12;
+
+      window.scrollTo({
+        top: Math.max(0, top),
+        left: 0,
+        behavior,
+      });
+    };
+
+    /* Click-time focus must be synchronous and cannot be interrupted by confirmation state. */
+    scrollToProcessingCard("auto");
+
+    setConfirmingActions(true);
+
+    const success = await handleConfirm(duplicateActions).finally(() => {
+      setConfirmingActions(false);
+    });
 
     if (!success) {
       return;
@@ -270,14 +297,27 @@ export default function DocumentProcessingCard({
     setDuplicateActions({});
 
     clearProcessedDocuments();
+
+    /* Re-focus after the results collapse changes the page height. */
+    window.setTimeout(
+      () => scrollToProcessingCard(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      ),
+      100,
+    );
   }
   // ==================================================
   // UI
   // ==================================================
 
   return (
-    <article className="admin-card">
-      <div className="admin-card-icon">📁</div>
+    <article
+      ref={processingCardRef}
+      className="admin-card document-processing-card"
+      tabIndex={-1}
+      aria-label="Document Processing"
+    >
+      <div className="admin-card-icon"><AppIcon name="folder" size={23} /></div>
 
       <div className="admin-card-content">
         <h3>Document Processing</h3>
@@ -305,7 +345,7 @@ export default function DocumentProcessingCard({
           <div className="investigation-loading">
             <span className="loading-spinner" />
 
-            <span>Processing documents...</span>
+            <span>{confirmingActions ? "Applying confirmed actions..." : "Processing documents..."}</span>
           </div>
         )}
 
@@ -407,7 +447,6 @@ export default function DocumentProcessingCard({
                   <motion.div
                     key={`${document.filename}-${index}`}
                     className={`document-result-row ${statusClass}`}
-                    layout
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.15 }}
@@ -416,7 +455,7 @@ export default function DocumentProcessingCard({
                     <div className="document-result-main">
                       {/* FILE */}
                       <div className="document-result-file">
-                        <span className="document-file-icon">📄</span>
+                        <span className="document-file-icon"><AppIcon name="file" size={19} /></span>
 
                         <div>
                           <strong>{document.filename || "Unknown File"}</strong>
@@ -477,10 +516,10 @@ export default function DocumentProcessingCard({
                       {hasDocumentDuplicates && expandedDuplicates[document.filename] && (
                         <motion.div
                           className="document-duplicate-inline"
-                          initial={{ opacity: 0, height: 0, y: -8 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -8 }}
-                          style={{ overflow: "hidden" }}
+                          initial={{ opacity: 0, y: -4, clipPath: "inset(0 0 100% 0 round 10px)" }}
+                          animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0 round 10px)" }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                         >
                         <div className="duplicate-header">
                           <div>
@@ -821,7 +860,7 @@ export default function DocumentProcessingCard({
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
             >
             <div className="import-success-banner">
-              <div className="import-success-icon">✓</div>
+              <div className="import-success-icon"><AppIcon name="check" size={18} /></div>
 
               <div className="import-success-content">
                 <strong>Import Successful</strong>

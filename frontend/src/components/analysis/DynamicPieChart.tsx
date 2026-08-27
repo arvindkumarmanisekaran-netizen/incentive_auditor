@@ -8,11 +8,12 @@ interface DynamicPieChartProps<T extends Record<string, unknown>> {
   nameKey: string;
 }
 
-function formatMoney(value: number | string) {
+function formatExactMoney(value: number | string) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
   }).format(Number(value));
 }
 
@@ -26,15 +27,30 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
       tooltip: {
         trigger: "item",
         formatter: (params: { name?: string; value?: number; percent?: number }) =>
-          `<strong>${params.name ?? "Unknown"}</strong><br/>${formatMoney(params.value ?? 0)} · ${params.percent ?? 0}%`,
+          `<strong>${params.name ?? "Unknown"}</strong><br/>Share: ${String(params.percent ?? 0)}%<br/>Sales: ${formatExactMoney(params.value ?? 0)}`,
       },
       legend: {
         type: "scroll",
-        bottom: 0,
+        bottom: 4,
+        left: "center",
         icon: "circle",
-        itemWidth: 7,
-        itemHeight: 7,
-        textStyle: { color: SIGNAL_CHART.text, fontSize: 9 },
+        itemWidth: 9,
+        itemHeight: 9,
+        itemGap: 12,
+        pageIconSize: 11,
+        pageIconColor: SIGNAL_CHART.lime,
+        pageIconInactiveColor: "#cbd5e1",
+        pageTextStyle: {
+          color: SIGNAL_CHART.text,
+          fontFamily: '"Manrope Variable", Manrope, Inter, sans-serif',
+          fontSize: 10,
+        },
+        textStyle: {
+          color: SIGNAL_CHART.text,
+          fontFamily: '"Manrope Variable", Manrope, Inter, sans-serif',
+          fontSize: 10,
+          fontWeight: 600,
+        },
       },
       series: [
         {
@@ -44,14 +60,14 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
           padAngle: 3,
           minAngle: 4,
           itemStyle: {
-            borderColor: "#0a0d0b",
-            borderWidth: 3,
-            borderRadius: 5,
+            borderColor: "transparent",
+            borderWidth: 0,
+            borderRadius: 4,
           },
           label: { show: false },
           emphasis: {
             scaleSize: 8,
-            itemStyle: { shadowBlur: 28, shadowColor: "rgba(185,255,102,.2)" },
+            itemStyle: { shadowBlur: 18, shadowColor: "rgba(37,99,235,.16)" },
           },
           data: data.map((item) => ({
             name: String(item[nameKey] ?? "Unknown"),

@@ -29,6 +29,7 @@ import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 import SignalField3D from "./components/SignalField3D";
+import AmbientSignals from "./components/AmbientSignals";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -39,8 +40,8 @@ import "./styles/index.css";
 type DashboardTab = "analysis" | "database";
 
 const panelReveal = {
-  hidden: { opacity: 0, y: 18, filter: "blur(5px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0 },
 };
 
 /**
@@ -147,7 +148,6 @@ function App() {
 
   const [error, setError] = useState<string | null>(null);
 
-  const [showDocumentProcessing, setShowDocumentProcessing] = useState(false);
 
   const [pendingChatRun, setPendingChatRun] = useState(false);
 
@@ -498,6 +498,7 @@ function App() {
 
   return (
     <main className="dashboard">
+      <AmbientSignals />
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand" aria-label="Incentive Auditor">
           <span className="sidebar-brand-mark">IA</span>
@@ -531,12 +532,13 @@ function App() {
           <span>Data control</span>
           {activeTab === "database" && <motion.span className="nav-active-rail" layoutId="nav-active" />}
         </motion.button>
+
         </nav>
 
-        <div className="sidebar-system-status">
-          <span className="system-pulse" />
-          <div><strong>System online</strong><small>All agents ready</small></div>
+        <div className="sidebar-synthetic-action">
+          <SyntheticDataGeneration />
         </div>
+
       </aside>
 
       <header className="app-command-header">
@@ -567,6 +569,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
           >
+          <AmbientSignals section />
           {masterDataLoading ? (
             <div className="loading-message">Loading representatives...</div>
           ) : (
@@ -680,39 +683,6 @@ function App() {
           DOCUMENTS + DATABASE TAB
       ================================================== */}
 
-      {/* ==================================================
-    DATABASE QUICK ACTIONS
-================================================== */}
-
-      {activeTab === "database" && (
-        <div className="database-top-actions">
-          <div className="database-top-action-left">
-            <SyntheticDataGeneration />
-          </div>
-
-          <div className="database-top-action-right">
-            <button
-              type="button"
-              className={`document-plus-button ${
-                showDocumentProcessing ? "minus-state" : "plus-state"
-              }`}
-              onClick={() => setShowDocumentProcessing((current) => !current)}
-              title={showDocumentProcessing ? "Hide Add Records" : "Add Records"}
-              aria-expanded={showDocumentProcessing}
-            >
-              <span className="folder-toggle-icon" aria-hidden="true">
-                📁
-                <span className="folder-toggle-badge">{showDocumentProcessing ? "−" : "+"}</span>
-              </span>
-
-              <span className="folder-toggle-title">
-                {showDocumentProcessing ? "Close Records" : "Add Records"}
-              </span>
-            </button>
-          </div>
-        </div>
-      )}
-
       <AnimatePresence mode="wait" initial={false}>
         {activeTab === "database" && (
           <motion.section
@@ -722,19 +692,10 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
           >
-          <AnimatePresence initial={false}>
-            {showDocumentProcessing && (
-              <motion.div
-                className="document-processing-expand"
-                initial={{ opacity: 0, height: 0, y: -8 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -8 }}
-                style={{ overflow: "hidden" }}
-              >
-                <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <AmbientSignals section />
+          <div className="document-processing-expand">
+            <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
+          </div>
 
           <div className="database-management-center">
             <DatabaseManagementCard refreshKey={databaseRefreshKey} />

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import ControlGraph from "./ControlGraph";
+import AmbientSignals from "./AmbientSignals";
 
 interface LoginModalProps {
   onLogin: (username: string) => Promise<void>;
@@ -34,6 +35,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
         animate={{ opacity: 1 }}
       >
         <ControlGraph />
+        <AmbientSignals login />
         <div className="login-grid-glow" />
       </motion.div>
       <motion.section
@@ -64,7 +66,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
             autoFocus
             minLength={3}
             maxLength={50}
-            pattern="[A-Za-z0-9_.-]+"
+            pattern={"[A-Za-z0-9_.\\-]+"}
             required
             disabled={loading}
           />

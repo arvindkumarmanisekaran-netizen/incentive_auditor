@@ -2,6 +2,8 @@ import { Fragment, useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "motion/react";
 
 import { API_BASE_URL } from "../config";
+import AppIcon from "./AppIcon";
+import { CustomDatePicker } from "./InvestigationForm";
 
 import {
   getAssignments,
@@ -122,6 +124,7 @@ interface DatabaseManagementCardProps {
 
 export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManagementCardProps) {
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
+  const loadRequestRef = useRef(0);
 
   const dragStateRef = useRef({
     dragging: false,
@@ -184,6 +187,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
     }
   }
   const [activeSection, setActiveSection] = useState<Section>("representatives");
+  const [displayedSection, setDisplayedSection] = useState<Section>("representatives");
 
   const [rows, setRows] = useState<RowData[]>([]);
   const [loading, setLoading] = useState(false);
@@ -201,6 +205,11 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   const activeConfig = useMemo(
     () => SECTIONS.find((section) => section.id === activeSection)!,
     [activeSection],
+  );
+
+  const displayedConfig = useMemo(
+    () => SECTIONS.find((section) => section.id === displayedSection)!,
+    [displayedSection],
   );
 
   // --------------------------------------------------
@@ -225,9 +234,6 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
       return;
     }
 
-    setRows([]);
-    setTotalRecords(0);
-
     setSelectedIds([]);
 
     setEditingRow(null);
@@ -245,6 +251,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   // --------------------------------------------------
 
   async function loadTable(section: Section, currentOffset: number) {
+    const requestId = ++loadRequestRef.current;
+
     setLoading(true);
     setError(null);
 
@@ -332,9 +340,18 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
         }
       }
 
+      if (requestId !== loadRequestRef.current) {
+        return;
+      }
+
       setRows(records);
       setTotalRecords(total);
+      setDisplayedSection(section);
     } catch (err) {
+      if (requestId !== loadRequestRef.current) {
+        return;
+      }
+
       console.error("Load table failed:", err);
 
       setRows([]);
@@ -342,7 +359,9 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
       setError(err instanceof Error ? err.message : "Unable to load database records");
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) {
+        setLoading(false);
+      }
     }
   }
 
@@ -367,7 +386,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   // --------------------------------------------------
 
   function getRowId(row: RowData): string | null {
-    const value = getCellValue(row, activeConfig.primaryKey);
+    const value = getCellValue(row, displayedConfig.primaryKey);
 
     if (value === null || value === undefined || value === "") {
       return null;
@@ -635,10 +654,14 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
   return (
     <article className="admin-card database-card">
-      <div className="admin-card-icon">🗄️</div>
+      <div className="admin-card-icon"><AppIcon name="database" size={23} /></div>
 
       <div className="admin-card-content">
         <h3>Database Management</h3>
+
+        <p className="database-management-subtitle">
+          Review, edit and maintain the operational records used by investigations.
+        </p>
 
         {/* -----------------------------------------
             TABLE SELECTOR
@@ -656,21 +679,18 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               whileTap={{ scale: 0.96 }}
             >
               {section.title}
-              {activeSection === section.id && (
-                <motion.span className="database-tab-signal" layoutId="database-tab-signal" />
-              )}
             </motion.button>
           ))}
         </div>
 
-        <div className="database-table-container">
+        <div className={`database-table-container ${loading ? "is-loading" : ""}`}>
           {/* ---------------------------------------
               TABLE HEADER
           --------------------------------------- */}
 
           <div className="database-table-header">
             <div>
-              <h4>{activeConfig.title}</h4>
+              <h4>{displayedConfig.title}</h4>
 
               <span>
                 {loading ? "Loading..." : `${firstRecord}-${lastRecord} of ${totalRecords} records`}
@@ -678,8 +698,9 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
             </div>
 
             {selectedIds.length > 0 && (
-              <button type="button" className="database-delete-button" onClick={deleteSelected}>
-                Delete Selected ({selectedIds.length})
+              <button type="button" className="database-row-delete-button database-delete-selected" onClick={deleteSelected}>
+                <AppIcon name="trash" size={14} />
+                <span>Delete Selected ({selectedIds.length})</span>
               </button>
             )}
           </div>
@@ -702,7 +723,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               TABLE
           --------------------------------------- */}
 
-          {!loading && !error && rows.length > 0 && (
+          {!error && rows.length > 0 && (
             <div
               ref={tableScrollRef}
               className="database-table-scroll"
@@ -728,7 +749,13 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                     </th>
 
                     {columns.map((column, index) => (
-                      <th key={`${column}-${index}`}>{formatColumnName(column)}</th>
+                      <th
+                        key={`${column}-${index}`}
+                        className={column === displayedConfig.primaryKey ? "database-primary-key-column" : undefined}
+                      >
+                        {formatColumnName(column)}
+                        {column === displayedConfig.primaryKey && <span className="database-primary-key-badge">ID</span>}
+                      </th>
                     ))}
 
                     <th className="database-actions-column">Actions</th>
@@ -774,7 +801,10 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                           {/* cells */}
 
                           {columns.map((column, columnIndex) => (
-                            <td key={`${rowKey}-${column}-${columnIndex}`}>
+                            <td
+                              key={`${rowKey}-${column}-${columnIndex}`}
+                              className={column === displayedConfig.primaryKey ? "database-primary-key-cell" : undefined}
+                            >
                               {formatValue(getCellValue(row, column))}
                             </td>
                           ))}
@@ -789,7 +819,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                 disabled={id === null}
                                 onClick={() => startEdit(row)}
                               >
-                                Edit
+                                <AppIcon name="edit" size={14} />
+                                <span>Edit</span>
                               </button>
 
                               <button
@@ -798,7 +829,8 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                 disabled={id === null}
                                 onClick={() => void deleteSingle(row)}
                               >
-                                Delete
+                                <AppIcon name="trash" size={14} />
+                                <span>Delete</span>
                               </button>
                             </div>
                           </td>
@@ -829,14 +861,23 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                   {Object.entries(editValues).map(([column, value], index) => (
                                     <label
                                       key={`${column}-${index}`}
-                                      className="database-edit-field"
+                                      className={
+                                        column === displayedConfig.primaryKey
+                                          ? "database-edit-field database-primary-key-field"
+                                          : "database-edit-field"
+                                      }
                                     >
-                                      <span>{formatColumnName(column)}</span>
+                                      <span>
+                                        {formatColumnName(column)}
+                                        {column === displayedConfig.primaryKey && (
+                                          <small className="database-locked-label">Primary key · locked</small>
+                                        )}
+                                      </span>
 
                                       {column === "status" && STATUS_OPTIONS[activeSection] ? (
                                         <select
                                           value={value == null ? "" : String(value)}
-                                          disabled={column === activeConfig.primaryKey}
+                                          disabled={column === displayedConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
@@ -854,12 +895,24 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                                             </option>
                                           ))}
                                         </select>
+                                      ) : getInputType(column) === "date" ? (
+                                        <CustomDatePicker
+                                          value={value == null ? "" : String(value).slice(0, 10)}
+                                          disabled={column === displayedConfig.primaryKey}
+                                          ariaLabel={`Select ${formatColumnName(column)}`}
+                                          onChange={(nextValue) =>
+                                            setEditValues((current) => ({
+                                              ...current,
+                                              [column]: nextValue,
+                                            }))
+                                          }
+                                        />
                                       ) : (
                                         <input
                                           type={getInputType(column)}
                                           step={getInputStep(column)}
                                           value={value == null ? "" : String(value)}
-                                          disabled={column === activeConfig.primaryKey}
+                                          disabled={column === displayedConfig.primaryKey}
                                           onChange={(event) =>
                                             setEditValues((current) => ({
                                               ...current,
@@ -910,7 +963,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
               PAGINATION
           --------------------------------------- */}
 
-          {!loading && !error && totalRecords > 0 && (
+          {!error && totalRecords > 0 && (
             <div className="database-pagination">
               <button
                 type="button"
