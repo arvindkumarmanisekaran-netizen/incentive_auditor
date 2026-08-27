@@ -1701,3 +1701,195 @@ textarea {
     justify-items: center;
   }
 }
+
+/* =========================================================
+   FINAL READABILITY + CHART REFINEMENT
+========================================================= */
+
+/* Query Control is visual noise; keep the form and workflow tightly grouped. */
+.investigation-form::before {
+  display: none !important;
+  content: none !important;
+}
+
+.dashboard-tab-content {
+  gap: 7px !important;
+}
+
+.dashboard-tab-content > .investigation-form {
+  margin-bottom: 0 !important;
+}
+
+/* Remove the blue telemetry/overlay treatments from the requested result sections. */
+.risk-summary-section .kpi-item::before,
+.risk-summary-section .kpi-item::after,
+.investigation-decision-section::before,
+.investigation-decision-section::after,
+.investigation-overview-card::before {
+  display: none !important;
+  animation: none !important;
+  content: none !important;
+}
+
+/* Larger, calmer decision pills with compact type spacing. */
+.decision-header .review-warning,
+.decision-header .decision-approved {
+  min-height: 34px !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+  font-size: .72rem !important;
+  font-weight: 750 !important;
+  line-height: 1.15 !important;
+  letter-spacing: .005em !important;
+  text-transform: none !important;
+  opacity: 1 !important;
+}
+
+.decision-header .review-warning {
+  color: #92400e !important;
+  border-color: rgba(217,119,6,.28) !important;
+  background: #fffbeb !important;
+}
+
+.decision-header .decision-approved {
+  color: #047857 !important;
+  border-color: rgba(5,150,105,.24) !important;
+  background: #ecfdf5 !important;
+}
+
+/* Use the Incentive Intelligence family throughout analysis copy and controls. */
+.dashboard-tab-content,
+.dashboard-tab-content button,
+.dashboard-tab-content input,
+.dashboard-tab-content select,
+.dashboard-tab-content textarea,
+.section-heading,
+.risk-summary-heading,
+.decision-header,
+.chart-heading,
+.analysis-panel-header,
+.analysis-section-header,
+.kpi-label,
+.severity-badge,
+.status-badge,
+.overall-scope-badge,
+.position-label,
+.historical-position,
+.dynamic-pie-legend {
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+}
+
+.kpi-label,
+.risk-summary-subtitle {
+  letter-spacing: .015em !important;
+  text-transform: none !important;
+}
+
+.chart-heading {
+  overflow: visible !important;
+  padding: 1px 1px 3px !important;
+}
+
+.chart-heading h3 {
+  overflow: visible !important;
+  color: #0f172a !important;
+  font-size: .9rem !important;
+  font-weight: 750 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -.01em !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+
+.chart-heading p {
+  color: #526176 !important;
+  font-weight: 450 !important;
+  letter-spacing: 0 !important;
+}
+
+.overall-scope-badge {
+  min-height: 28px;
+  padding: 6px 10px !important;
+  color: #1e40af !important;
+  border-color: rgba(37,99,235,.22) !important;
+  background: #eff6ff !important;
+  font-size: .68rem !important;
+  letter-spacing: .02em !important;
+  opacity: 1 !important;
+}
+
+/* Tighten legacy Recharts tooltip marker/value layouts too. */
+.recharts-default-tooltip,
+.chart-custom-tooltip,
+.chart-tooltip {
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+}
+
+.recharts-tooltip-item-list {
+  display: grid !important;
+  gap: 3px !important;
+  padding: 0 !important;
+}
+
+.recharts-tooltip-item {
+  padding: 0 !important;
+}
+
+/* Historical Position should size to its content and expose its visual boundaries. */
+.historical-analysis-grid {
+  align-items: start !important;
+}
+
+.historical-position-card {
+  align-self: start !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding-bottom: 14px !important;
+}
+
+.historical-position {
+  margin: 10px 0 7px !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(37,99,235,.14) !important;
+  border-radius: 9px !important;
+  background: #f7faff !important;
+}
+
+.historical-position strong {
+  color: #334155 !important;
+  line-height: 1.3 !important;
+}
+
+.historical-position > span {
+  color: #1d4ed8 !important;
+}
+
+.historical-diverging-bar {
+  height: 14px !important;
+  margin: 7px 0 8px !important;
+  border: 1px solid rgba(37,99,235,.24) !important;
+  background: #e8eef8 !important;
+  box-shadow: inset 0 1px 2px rgba(15,23,42,.06) !important;
+}
+
+.historical-position-center {
+  background: #64748b !important;
+}
+
+.position-label {
+  margin-top: 6px !important;
+  color: #526176 !important;
+  font-size: .68rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Keep chart outlines and bottom reference axes visible on light surfaces. */
+.signal-chart {
+  border: 1px solid rgba(37,99,235,.10) !important;
+  background: linear-gradient(180deg, rgba(37,99,235,.025), transparent 58%) !important;
+}
+
+.signal-chart-corner {
+  display: none !important;
+}
