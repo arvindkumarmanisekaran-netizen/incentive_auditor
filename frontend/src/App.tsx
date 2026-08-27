@@ -548,7 +548,11 @@ function App() {
           <p>Investigate signals, validate evidence and control incentive risk.</p>
         </div>
 
-        <SignalField3D />
+        <SignalField3D
+          active={loading}
+          complete={Boolean(result)}
+          riskScore={result?.overall_risk_score ?? 0}
+        />
 
         <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
           <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>
