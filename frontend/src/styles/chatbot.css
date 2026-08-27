@@ -191,6 +191,9 @@
 .assistant-evidence-button { width: 100%; min-height: 31px; margin-top: 7px; padding: 6px 9px; border: 1px solid rgba(37,99,235,.2); border-radius: 7px; color: #1d4ed8; background: #eff6ff; font-size: 10px; font-weight: 750; cursor: pointer; }
 .assistant-evidence-button { color: #047857; border-color: rgba(5,150,105,.2); background: #ecfdf5; }
 .assistant-evidence-count { margin-top: 6px; color: #047857; font-size: 9px; font-weight: 700; }
+.assistant-severity-summary { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.assistant-severity-summary span { display: inline-flex; align-items: center; gap: 4px; padding: 4px 7px; border: 1px solid #dbe7fa; border-radius: 999px; color: #475569; background: #f8fafc; font-size: 8px; font-weight: 750; }
+.assistant-severity-summary b { color: #1d4ed8; font-size: 10px; }
 .analysis-workspace.assistant-chart-focus { animation: assistant-chart-focus 1.8s ease-out; }
 @keyframes assistant-chart-focus { 0%, 45% { box-shadow: 0 0 0 4px rgba(37,99,235,.26), 0 0 42px rgba(37,99,235,.2) !important; } 100% { box-shadow: var(--shadow-card) !important; } }
 .assistant-data-wrap { margin-top: 9px; overflow: hidden; border: 1px solid #dbe7fa; border-radius: 8px; }
