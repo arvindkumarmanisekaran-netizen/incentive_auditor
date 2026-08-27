@@ -32,6 +32,15 @@ function formatMoney(value?: number) {
   }).format(value);
 }
 
+function formatExactMoney(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
 function getProductName(finding?: Finding) {
   if (!finding) {
     return "";
@@ -47,7 +56,7 @@ function getProductName(finding?: Finding) {
 function comparisonOption(data: Array<{ name: string; amount: number; fill: string }>): EChartsCoreOption {
   return {
     grid: { top: 18, right: 10, bottom: 24, left: 8 },
-    tooltip: { valueFormatter: (value: unknown) => formatMoney(Number(value)) },
+    tooltip: { valueFormatter: (value: unknown) => formatExactMoney(value) },
     xAxis: { type: "category", data: data.map((item) => item.name) },
     yAxis: { type: "value" },
     series: [{
