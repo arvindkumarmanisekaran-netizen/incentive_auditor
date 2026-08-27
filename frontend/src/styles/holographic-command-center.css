@@ -283,3 +283,97 @@
   .chart-card::before, .chart-card::after { animation: none !important; }
   .chart-card, .chart-card:nth-child(even), .chart-card:hover, .chart-card:nth-child(even):hover { transform: none !important; }
 }
+
+/* Spatial chart stages: panels occupy visibly different planes around a lit base. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) {
+  position: relative;
+  isolation: isolate;
+  perspective: 1050px;
+  perspective-origin: 50% 42%;
+  column-gap: 38px !important;
+  row-gap: 48px !important;
+  padding: 22px 28px 48px !important;
+  overflow: visible !important;
+  transform-style: preserve-3d;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before {
+  position: absolute;
+  right: 6%;
+  bottom: -12px;
+  left: 6%;
+  z-index: 0;
+  height: 115px;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(34,211,238,.36);
+  border-radius: 18px;
+  background:
+    linear-gradient(30deg, rgba(34,211,238,.16) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(59,130,246,.14) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(14,165,233,.28), rgba(30,64,175,.08) 48%, transparent 72%);
+  background-size: 26px 15px, 26px 15px, auto;
+  box-shadow: 0 0 36px rgba(34,211,238,.22), inset 0 0 28px rgba(14,165,233,.14);
+  transform: rotateX(68deg) translateZ(-42px);
+  transform-origin: 50% 100%;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card {
+  position: relative;
+  z-index: 2;
+  --pointer-tilt-x: 4.5deg;
+  --pointer-tilt-y: 7deg;
+  transform: rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(24px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(even) {
+  --pointer-tilt-y: -7deg;
+  transform: rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(24px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(3n) {
+  --pointer-tilt-x: 6deg;
+  --pointer-tilt-y: 4deg;
+  transform: rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(8px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card.is-pointer-tilting,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:hover {
+  transform: rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateY(-8px) translateZ(42px) !important;
+}
+
+.chart-card .chart-heading { position: relative; overflow: visible; transform: translateZ(14px); transform-style: preserve-3d; }
+.chart-card .chart-heading::before {
+  position: absolute;
+  top: -15px;
+  right: -18px;
+  left: 11px;
+  z-index: -1;
+  height: 15px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(125,211,252,.82), rgba(30,64,175,.62));
+  clip-path: polygon(9px 0, calc(100% - 18px) 0, 100% 100%, 0 100%);
+  box-shadow: 0 -5px 14px rgba(34,211,238,.22), inset 0 1px rgba(224,242,254,.72);
+  transform: rotateX(52deg);
+  transform-origin: 50% 100%;
+}
+
+.chart-card .signal-chart { transform: translateZ(22px) !important; }
+.chart-card .signal-chart-canvas { transform: translateZ(12px); }
+
+@media (max-width: 760px) {
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) { padding: 12px !important; row-gap: 24px !important; }
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid)::before { display: none; }
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) > .chart-card { transform: none !important; }
+}
