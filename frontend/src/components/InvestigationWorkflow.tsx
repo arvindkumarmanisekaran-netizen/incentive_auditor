@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import type { WorkflowAgent } from "../types/workflow";
 
@@ -278,11 +279,22 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
           REST OF WORKFLOW - COLLAPSIBLE
       ================================================== */}
 
-      {expanded && (
-        <div className="investigation-workflow-body">
-          {agents
-            .filter((agent) => agent.id !== "investigation_planner" && agent.id !== "peer_analysis")
-            .map((agent) => {
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            className="investigation-workflow-reveal"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              height: { duration: .34, ease: [0.22, 1, 0.36, 1] },
+              opacity: { duration: .2, ease: "easeOut" },
+            }}
+          >
+            <div className="investigation-workflow-body">
+              {agents
+                .filter((agent) => agent.id !== "investigation_planner" && agent.id !== "peer_analysis")
+                .map((agent) => {
               const latestCommentary = agent.commentary.slice(-3);
 
               return (
@@ -331,9 +343,11 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
                   )}
                 </article>
               );
-            })}
-        </div>
-      )}
+                })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
