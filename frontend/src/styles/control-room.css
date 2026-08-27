@@ -311,6 +311,85 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
   .system-pulse { animation: none; }
 }
 
+/* First-paint ambient motion, restricted above result sections. */
+.ambient-tracer {
+  stroke-dashoffset: 1;
+  animation-name: ambient-tracer-travel;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.dashboard-tab-content > .ambient-signals.section {
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: 0 !important;
+  height: 96px !important;
+}
+
+@keyframes ambient-tracer-travel {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Reviewed-area tags use the product typography and clear pill spacing. */
+.investigation-overview .tag-container {
+  gap: 7px !important;
+}
+
+.investigation-overview .workflow-tag,
+.investigation-workflow .workflow-focus-pill {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px !important;
+  color: #1e40af !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #eff6ff !important;
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif !important;
+  font-size: .68rem !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: .005em !important;
+  text-transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Peer index swaps fade; its Peer 100 reference never redraws across the plot. */
+.peer-index-chart-transition,
+.peer-index-chart-transition .signal-chart {
+  width: 100%;
+  height: 100%;
+}
+
+/* Orbiting star glitter around the assistant mark. */
+.chatbot-floating-button::after {
+  inset: -15px !important;
+  background:
+    radial-gradient(circle at 50% 0%, #fff 0 1.7px, transparent 2.4px),
+    radial-gradient(circle at 100% 50%, #dbeafe 0 2px, transparent 2.7px),
+    radial-gradient(circle at 50% 100%, #fff 0 1.5px, transparent 2.2px),
+    radial-gradient(circle at 0% 50%, #93c5fd 0 2px, transparent 2.8px),
+    radial-gradient(circle at 84% 14%, #fff 0 1.2px, transparent 2px),
+    radial-gradient(circle at 16% 86%, #bfdbfe 0 1.4px, transparent 2.1px) !important;
+  animation: assistant-star-orbit 3.1s linear infinite !important;
+}
+
+@keyframes assistant-star-orbit {
+  0% { opacity: .45; transform: rotate(0deg); }
+  25% { opacity: 1; }
+  50% { opacity: .6; }
+  75% { opacity: 1; }
+  100% { opacity: .45; transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-tracer,
+  .chatbot-floating-button::after {
+    animation: none !important;
+  }
+}
+
 /* Contrast normalization for every light-surface content region. */
 .dashboard-tab-content p, .dashboard-tab-content li,
 .investigation-overview p, .investigation-overview li,
