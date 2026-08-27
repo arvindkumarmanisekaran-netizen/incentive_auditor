@@ -190,7 +190,12 @@
 .assistant-focus-button,
 .assistant-evidence-button { width: 100%; min-height: 31px; margin-top: 7px; padding: 6px 9px; border: 1px solid rgba(37,99,235,.2); border-radius: 7px; color: #1d4ed8; background: #eff6ff; font-size: 10px; font-weight: 750; cursor: pointer; }
 .assistant-evidence-button { color: #047857; border-color: rgba(5,150,105,.2); background: #ecfdf5; }
+.assistant-evidence-button:disabled { color: #64748b; border-color: #dbe3ed; background: #f1f5f9; cursor: default; }
 .assistant-evidence-count { margin-top: 6px; color: #047857; font-size: 9px; font-weight: 700; }
+.assistant-result-details { margin-top: 8px; }
+.assistant-result-details > summary { padding: 7px 9px; border: 1px solid #dbe7fa; border-radius: 7px; color: #1d4ed8; background: #f7faff; font-size: 9px; font-weight: 750; cursor: pointer; }
+.assistant-result-details[open] > summary { border-radius: 7px 7px 0 0; }
+.assistant-result-details .assistant-phase2-card { max-height: 230px; margin-top: 0; overflow-y: auto; border-radius: 0 0 7px 7px; }
 .assistant-severity-summary { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .assistant-severity-summary span { display: inline-flex; align-items: center; gap: 4px; padding: 4px 7px; border: 1px solid #dbe7fa; border-radius: 999px; color: #475569; background: #f8fafc; font-size: 8px; font-weight: 750; }
 .assistant-severity-summary b { color: #1d4ed8; font-size: 10px; }
