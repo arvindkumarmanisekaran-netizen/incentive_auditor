@@ -164,6 +164,15 @@
 .assistant-print-button { min-height: 30px; padding: 6px 9px; border: 1px solid rgba(37,99,235,.2); border-radius: 7px; color: #1d4ed8; background: #fff; font-size: 10px; font-weight: 750; cursor: pointer; }
 .assistant-card-actions button.primary { color: #fff; background: #2563eb; }
 .assistant-detail-list { display: grid; gap: 4px; margin: 9px 0 0; padding-left: 18px; color: #475569; font-size: 11px; }
+.assistant-date-request { position: relative; z-index: 4; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding: 9px; border: 1px solid #dbe7fa; border-radius: 9px; background: #f7faff; }
+.assistant-date-request label { display: grid; gap: 4px; color: #64748b; font-size: 9px; font-weight: 700; }
+.assistant-date-request .custom-date-picker,
+.assistant-date-request .custom-date-input { width: 100%; }
+.assistant-date-request .custom-date-input { min-height: 34px; padding: 0 7px !important; font-size: 10px; }
+.assistant-date-request .custom-calendar-popover { z-index: 1200 !important; width: 244px; }
+.assistant-date-request > button { grid-column: 1 / -1; min-height: 32px; padding: 6px 10px; border: 1px solid #2563eb; border-radius: 7px; color: #fff; background: #2563eb; font-size: 10px; font-weight: 750; cursor: pointer; }
+.assistant-date-request > button:disabled { opacity: .48; cursor: not-allowed; }
+.assistant-date-request > small { grid-column: 1 / -1; color: #be123c; font-size: 9px; }
 .assistant-data-wrap { margin-top: 9px; overflow: hidden; border: 1px solid #dbe7fa; border-radius: 8px; }
 .assistant-data-title { display: flex; justify-content: space-between; padding: 7px 8px; color: #1e3a8a; background: #eff6ff; font-size: 10px; text-transform: capitalize; }
 .assistant-data-title span { color: #64748b; }
