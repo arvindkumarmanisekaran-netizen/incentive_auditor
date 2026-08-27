@@ -197,8 +197,7 @@ export default function AIChatAssistant({ onInvestigationRequest }: Props) {
           <div className="chatbot-messages">
             {chat.length === 0 && (
               <div className="chatbot-placeholder">
-                <strong>Ask anything · Examples</strong>
-                <span>“Analyze Steve July 2026”</span>
+                <span><strong>Ask anything · Examples</strong> “Analyze Steve July 2026”</span>
                 <span>“Give Sharma analysis”</span>
                 <span>“Show active representatives”</span>
               </div>
