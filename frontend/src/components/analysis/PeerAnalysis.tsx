@@ -31,6 +31,15 @@ function formatMoney(value?: number) {
   }).format(Number(value ?? 0));
 }
 
+function formatExactMoney(value: unknown) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 20,
+  }).format(Number(value));
+}
+
 function formatNumber(value?: number) {
   return new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 2,
@@ -93,7 +102,7 @@ function peerScatterOption(
     tooltip: {
       trigger: "item",
       formatter: (params: { name?: string; value?: number[] }) =>
-        `<strong>${params.name ?? ""}</strong><br/>Sales ${formatMoney(params.value?.[0])}<br/>Payout ${formatMoney(params.value?.[1])}`,
+        `<strong>${params.name ?? ""}</strong><br/>Sales ${formatExactMoney(params.value?.[0])}<br/>Payout ${formatExactMoney(params.value?.[1])}`,
     },
     series: [
       { type: "scatter", name: "Peers", data: map(peers), symbolSize: 9, itemStyle: { color: CHART_THEME.distribution } },
