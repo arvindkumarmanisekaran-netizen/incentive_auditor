@@ -22,6 +22,7 @@ class InvestigationContext(BaseModel):
     end_date: str | None = None
     result: dict[str, Any] | None = None
     selected_evidence: list[dict[str, Any]] = Field(default_factory=list)
+    focused_finding: dict[str, Any] | None = None
 
 
 class ChatRequest(BaseModel):
@@ -139,7 +140,8 @@ def explain_finding(context: InvestigationContext | None, message: str) -> dict[
     if not findings:
         return {"action": "NO_FINDING", "message": "Run or select an investigation first so I can explain its findings and evidence."}
     lowered = message.lower()
-    selected = next((finding for finding in findings if str(finding.get("type", "")).replace("_", " ") in lowered or (finding.get("product_id") and str(finding["product_id"]).lower() in lowered)), findings[0])
+    explicit = next((finding for finding in findings if str(finding.get("type", "")).replace("_", " ") in lowered or (finding.get("product_id") and str(finding["product_id"]).lower() in lowered)), None)
+    selected = explicit or (context.focused_finding if context and context.focused_finding else None) or findings[0]
     finding_type = str(selected.get("type", "finding")).replace("_", " ").title()
     severity = str(selected.get("severity", "Unknown")).title()
     evidence = selected.get("evidence") or {}
@@ -299,6 +301,61 @@ def reviewer_assistance(context: InvestigationContext | None) -> dict[str, Any]:
     }
 
 
+PLAYBOOKS = {
+    "payout validation": ["Review expected versus actual payout", "Verify achievement multiplier", "Inspect payout caps", "Collect discrepant payout records"],
+    "sales prescription alignment": ["Compare sales and prescription direction", "Identify product-level mismatch", "Check historical baseline", "Verify supporting sales and prescription records"],
+    "doctor territory concentration": ["Review top-doctor share", "Check cross-territory activity", "Validate active assignments", "Collect concentration evidence"],
+}
+
+
+def playbook_response(context: InvestigationContext | None, message: str) -> dict[str, Any]:
+    lowered = message.lower()
+    selected_name = next((name for name in PLAYBOOKS if name in lowered), None)
+    if not selected_name:
+        return {"action": "PLAYBOOK_LIST", "message": "Choose a governed investigation playbook.", "playbooks": [{"name": name.title(), "steps": steps} for name, steps in PLAYBOOKS.items()]}
+    has_result = bool(context and context.result)
+    return {
+        "action": "PLAYBOOK_RESULT",
+        "message": f"{selected_name.title()} playbook is ready. It uses the current investigation context and does not modify records.",
+        "playbook": {"name": selected_name.title(), "steps": PLAYBOOKS[selected_name], "context_available": has_result},
+        "suggestions": ["Run root cause analysis", "Run reviewer checks"] if has_result else ["Investigate a representative"],
+    }
+
+
+def proactive_anomaly_scan(context: InvestigationContext | None) -> dict[str, Any]:
+    result = context.result if context and context.result else None
+    findings = result.get("findings", []) if result else []
+    if not findings:
+        return {"action": "NO_FINDING", "message": "Run an investigation first so I can scan for proactive signals."}
+    ranked = sorted(findings, key=lambda item: SEVERITY_RANK.get(str(item.get("severity", "UNKNOWN")).upper(), 0), reverse=True)
+    signals = []
+    for finding in ranked[:3]:
+        evidence = finding.get("evidence") or {}
+        signals.append({
+            "title": str(finding.get("type", "finding")).replace("_", " ").title(),
+            "product": finding.get("product_id") or "All products",
+            "severity": finding.get("severity", "UNKNOWN"),
+            "reason": next((f"{key.replace('_', ' ').title()}: {value}" for key, value in evidence.items() if isinstance(value, (int, float)) and ("percent" in key or "score" in key or "difference" in key)), "Structured evidence is available for review."),
+        })
+    return {"action": "PROACTIVE_SIGNALS", "message": f"I found {len(signals)} signals worth prioritizing. These are suggestions only.", "signals": signals, "suggestions": ["Focus the highest-severity chart", "Run root cause analysis", "Run reviewer checks"]}
+
+
+def controlled_action_proposal(context: InvestigationContext | None, message: str) -> dict[str, Any]:
+    if not context or not context.result:
+        return {"action": "NO_REPORT", "message": "Run an investigation before proposing a controlled review action."}
+    return {
+        "action": "CONFIRM_ACTION",
+        "message": "This action requires confirmation and will be recorded in the current copilot session.",
+        "proposed_action": {
+            "type": "MARK_FOR_HUMAN_REVIEW",
+            "label": "Mark investigation for human review",
+            "reason": message,
+            "representative_id": context.representative_id,
+            "period": f"{context.start_date} to {context.end_date}",
+        },
+    }
+
+
 def printable_summary(context: InvestigationContext | None) -> dict[str, Any]:
     result = context.result if context and context.result else None
     if not result:
@@ -332,8 +389,27 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
         return reviewer_assistance(request.context)
     if "compare with peer" in lowered or "peer comparison" in lowered or "compare to peer" in lowered:
         return peer_comparison(request.context)
+    if "peer" in lowered and any(word in lowered for word in ("table", "list", "show")):
+        response = peer_comparison(request.context)
+        response["display"] = "table"
+        return response
     if any(phrase in lowered for phrase in ("summary of the findings", "summarize the findings", "summarise the findings", "findings summary")):
         return findings_summary(request.context)
+    if "explain this finding" in lowered or "explain current finding" in lowered:
+        return explain_finding(request.context, request.message)
+    if "playbook" in lowered:
+        return playbook_response(request.context, request.message)
+    if any(phrase in lowered for phrase in ("proactive scan", "suggest anomalies", "prioritize anomalies", "what should i investigate next")):
+        return proactive_anomaly_scan(request.context)
+    if any(phrase in lowered for phrase in ("mark for human review", "escalate for review", "flag for review")):
+        return controlled_action_proposal(request.context, request.message)
+    if any(word in lowered for word in ("print", "printable", "export summary")):
+        return printable_summary(request.context)
+    if any(word in lowered for word in ("finding", "evidence supports", "why was")) and request.context and request.context.result:
+        return explain_finding(request.context, request.message)
+    query_table = requested_table(request.message, {})
+    if query_table and any(word in lowered for word in ("show", "list", "table", "query", "find")):
+        return await run_read_only_query(db, request.message, {})
     intent = await investigation_chat_agent(message=request.message, conversation=request.conversation, context=request.context.model_dump() if request.context else {})
     intent_name = intent.get("intent")
     entities = intent.get("entities") or {}
