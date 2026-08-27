@@ -67,7 +67,7 @@ function insightBarOption(
 ): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
-    grid: { top: 38, right: 14, bottom: 36, left: 50 },
+    grid: { top: 36, right: 8, bottom: 14, left: 8 },
     tooltip: {
       valueFormatter: (value: unknown) => formatter === "percent" ? `${Number(value).toFixed(2)}%` : formatMoney(Number(value)),
     },
