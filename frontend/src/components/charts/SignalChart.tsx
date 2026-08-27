@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import * as echarts from "echarts/core";
-import { BarChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
+import { BarChart, CustomChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
 import {
   DataZoomComponent,
   DatasetComponent,
@@ -15,9 +15,11 @@ import {
 import { CanvasRenderer } from "echarts/renderers";
 import type { EChartsCoreOption } from "echarts/core";
 import type { EChartsType } from "echarts/core";
+import type { CustomSeriesRenderItem } from "echarts";
 
 echarts.use([
   BarChart,
+  CustomChart,
   GaugeChart,
   LineChart,
   PieChart,
@@ -55,6 +57,65 @@ export const SIGNAL_CHART = {
 };
 
 const SIGNAL_FONT = '"Manrope Variable", Manrope, Inter, system-ui, sans-serif';
+
+const renderDimensionalBar: CustomSeriesRenderItem = (params, api) => {
+  const payload = params.itemPayload as { horizontal?: boolean; barCount?: number; barIndex?: number };
+  const horizontal = Boolean(payload.horizontal);
+  const barCount = Math.max(1, Number(payload.barCount ?? 1));
+  const barIndex = Number(payload.barIndex ?? 0);
+  const value = Number(api.value(1) ?? 0);
+  const category = Number(api.value(0) ?? params.dataIndex);
+  const valuePoint = api.coord(horizontal ? [value, category] : [category, value]);
+  const zeroPoint = api.coord(horizontal ? [0, category] : [category, 0]);
+  const rawCategorySize = api.size?.(horizontal ? [0, 1] : [1, 0]);
+  const categorySize = Array.isArray(rawCategorySize)
+    ? Number(rawCategorySize[horizontal ? 1 : 0])
+    : Number(rawCategorySize ?? 46);
+  const available = Math.min(categorySize * .68, horizontal ? 24 : 88);
+  const gap = Math.min(5, available * .08);
+  const width = Math.max(7, (available - gap * (barCount - 1)) / barCount);
+  const offset = (barIndex - (barCount - 1) / 2) * (width + gap);
+  const fill = (api.visual("color") ?? SIGNAL_CHART.lime) as string;
+  const light = "rgba(219,234,254,.96)";
+  const dark = "rgba(30,64,175,.82)";
+  const depthX = 8;
+  const depthY = 6;
+
+  if (horizontal) {
+    const startX = zeroPoint[0];
+    const endX = valuePoint[0];
+    const left = Math.min(startX, endX);
+    const right = Math.max(startX, endX);
+    const top = valuePoint[1] - width / 2 + offset;
+    const bottom = top + width;
+    const capX = value >= 0 ? right : left;
+    const direction = value >= 0 ? 1 : -1;
+    return {
+      type: "group",
+      children: [
+        { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, shadowBlur: 8, shadowColor: "rgba(30,64,175,.24)", shadowOffsetY: 5 } },
+        { type: "polygon", shape: { points: [[left, top], [right, top], [right + depthX * direction, top - depthY], [left + depthX * direction, top - depthY]] }, style: { fill: light, opacity: .9 } },
+        { type: "polygon", shape: { points: [[capX, top], [capX + depthX * direction, top - depthY], [capX + depthX * direction, bottom - depthY], [capX, bottom]] }, style: { fill: dark, opacity: .92 } },
+      ],
+    };
+  }
+
+  const centerX = valuePoint[0] + offset;
+  const left = centerX - width / 2;
+  const right = centerX + width / 2;
+  const top = Math.min(valuePoint[1], zeroPoint[1]);
+  const bottom = Math.max(valuePoint[1], zeroPoint[1]);
+  const capY = value >= 0 ? top : bottom;
+  const direction = value >= 0 ? -1 : 1;
+  return {
+    type: "group",
+    children: [
+      { type: "polygon", shape: { points: [[left, top], [right, top], [right, bottom], [left, bottom]] }, style: { fill, shadowBlur: 9, shadowColor: "rgba(30,64,175,.26)", shadowOffsetX: 5, shadowOffsetY: 7 } },
+      { type: "polygon", shape: { points: [[left, capY], [left + depthX, capY + depthY * direction], [right + depthX, capY + depthY * direction], [right, capY]] }, style: { fill: light, opacity: .94 } },
+      { type: "polygon", shape: { points: [[right, top], [right + depthX, top - depthY], [right + depthX, bottom - depthY], [right, bottom]] }, style: { fill: dark, opacity: .9 } },
+    ],
+  };
+};
 
 function mergeChartComponent(
   defaults: Record<string, unknown>,
@@ -105,6 +166,11 @@ function escapeTooltipText(value: unknown) {
 function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   const incoming = option as Record<string, unknown>;
   const rawSeries = Array.isArray(incoming.series) ? incoming.series : [];
+  const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
+  const yAxis = (Array.isArray(incoming.yAxis) ? incoming.yAxis[0] : incoming.yAxis ?? {}) as Record<string, unknown>;
+  const horizontalBars = xAxis.type === "value" && yAxis.type === "category";
+  const barSeries = rawSeries.filter((entry) => (entry as Record<string, unknown>).type === "bar");
+  let barIndex = 0;
   const series = rawSeries.map((entry, index) => {
     const item = entry as Record<string, unknown>;
     const type = item.type;
@@ -174,6 +240,26 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       progress: { ...((item.progress ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 10, shadowColor: "rgba(37,99,235,.3)" },
       axisLine: { ...((item.axisLine ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 7, shadowColor: "rgba(37,99,235,.16)" },
     } : {};
+    if (type === "bar") {
+      const currentBarIndex = barIndex++;
+      const data = Array.isArray(item.data) ? item.data : [];
+      return {
+        ...item,
+        type: "custom",
+        coordinateSystem: "cartesian2d",
+        renderItem: renderDimensionalBar,
+        clip: false,
+        encode: horizontalBars ? { x: 1, y: 0, tooltip: 1 } : { x: 0, y: 1, tooltip: 1 },
+        itemPayload: { isDimensionalBar: true, horizontal: horizontalBars, valueDimension: 1, barCount: barSeries.length, barIndex: currentBarIndex },
+        data: data.map((datum, dataIndex) => {
+          const record = datum && typeof datum === "object" && !Array.isArray(datum) ? datum as Record<string, unknown> : undefined;
+          const value = Number(record?.value ?? datum ?? 0);
+          return { ...record, value: [dataIndex, value] };
+        }),
+        animation: true,
+        animationDuration: 900,
+      };
+    }
     return {
       animation: true,
       animationDuration: type === "pie" ? 1100 : 900,
@@ -276,6 +362,16 @@ function createIntroOption(option: EChartsCoreOption): EChartsCoreOption {
       const item = entry as Record<string, unknown>;
       const type = item.type;
       const data = Array.isArray(item.data) ? item.data : [];
+
+      if (type === "custom" && (item.itemPayload as Record<string, unknown> | undefined)?.isDimensionalBar) {
+        const valueDimension = Number((item.itemPayload as Record<string, unknown>).valueDimension ?? 1);
+        return { ...item, animation: false, data: data.map((datum) => {
+          const record = datum as Record<string, unknown>;
+          const value = Array.isArray(record.value) ? [...record.value] : [0, 0];
+          value[valueDimension] = 0;
+          return { ...record, value };
+        }) };
+      }
 
       if (type === "scatter") {
         return { ...item, animation: false, symbolSize: 0 };
