@@ -36,8 +36,8 @@ export default function CardTiltController() {
         const rect = card.getBoundingClientRect();
         const px = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
         const py = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-        card.style.setProperty("--pointer-tilt-x", `${((.5 - py) * 11).toFixed(2)}deg`);
-        card.style.setProperty("--pointer-tilt-y", `${((px - .5) * 13).toFixed(2)}deg`);
+        card.style.setProperty("--pointer-tilt-x", `${((.5 - py) * 5).toFixed(2)}deg`);
+        card.style.setProperty("--pointer-tilt-y", `${((px - .5) * 7).toFixed(2)}deg`);
         card.style.setProperty("--pointer-glare-x", `${(px * 100).toFixed(1)}%`);
         card.style.setProperty("--pointer-glare-y", `${(py * 100).toFixed(1)}%`);
         card.classList.add("is-pointer-tilting");
