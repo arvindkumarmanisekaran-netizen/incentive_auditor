@@ -263,23 +263,24 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   async function confirmAllDocuments() {
-    const scrollToProcessingCard = () => {
+    const scrollToProcessingCard = (behavior: ScrollBehavior) => {
       const card = processingCardRef.current;
 
       if (!card) return;
 
-      card.focus({ preventScroll: true });
+      card.focus({ preventScroll: behavior !== "auto" });
 
       const top = card.getBoundingClientRect().top + window.scrollY - 12;
 
       window.scrollTo({
         top: Math.max(0, top),
         left: 0,
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        behavior,
       });
     };
 
-    scrollToProcessingCard();
+    /* Click-time focus must be synchronous and cannot be interrupted by confirmation state. */
+    scrollToProcessingCard("auto");
 
     setConfirmingActions(true);
 
@@ -298,7 +299,12 @@ export default function DocumentProcessingCard({
     clearProcessedDocuments();
 
     /* Re-focus after the results collapse changes the page height. */
-    window.setTimeout(scrollToProcessingCard, 100);
+    window.setTimeout(
+      () => scrollToProcessingCard(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      ),
+      100,
+    );
   }
   // ==================================================
   // UI
