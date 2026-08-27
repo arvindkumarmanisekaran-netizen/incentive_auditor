@@ -124,3 +124,122 @@
     .decision-findings, .database-table-container, .admin-card)::after { animation: none !important; }
   .chart-card .signal-chart, .chart-card:hover .signal-chart { transform: none !important; }
 }
+
+/* Complete 3D chart consoles: raised glass top, side wall and illuminated pedestal. */
+.chart-card {
+  --console-depth: 13px;
+  margin-bottom: var(--console-depth) !important;
+  overflow: visible !important;
+  transform: perspective(1500px) rotateX(1.2deg) rotateY(-.7deg) translateZ(0);
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  border: 1px solid rgba(96,165,250,.38) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.99), rgba(239,247,255,.965)) padding-box,
+    linear-gradient(120deg, #bfdbfe, #38bdf8 42%, #2563eb) border-box !important;
+  box-shadow:
+    0 22px 34px rgba(30,64,175,.14),
+    0 0 26px rgba(56,189,248,.10),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(37,99,235,.12) !important;
+  transition: transform .38s cubic-bezier(.22,1,.36,1), box-shadow .38s ease !important;
+}
+
+.chart-card::before {
+  position: absolute !important;
+  top: 9px !important;
+  right: calc(var(--console-depth) * -1) !important;
+  bottom: calc(var(--console-depth) * -1) !important;
+  left: auto !important;
+  z-index: -2 !important;
+  width: var(--console-depth) !important;
+  height: auto !important;
+  content: "" !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  border-radius: 0 8px 8px 0;
+  background:
+    linear-gradient(90deg, rgba(37,99,235,.70), rgba(14,165,233,.92)),
+    linear-gradient(155deg, rgba(255,255,255,.35), transparent 38%) !important;
+  clip-path: polygon(0 0, 100% 9px, 100% 100%, 0 calc(100% - var(--console-depth)));
+  box-shadow: 7px 8px 16px rgba(30,64,175,.18);
+  transform: none !important;
+  animation: console-side-energy 4.8s ease-in-out infinite !important;
+}
+
+.chart-card::after {
+  position: absolute !important;
+  top: auto !important;
+  right: calc(var(--console-depth) * -1) !important;
+  bottom: calc(var(--console-depth) * -1) !important;
+  left: 9px !important;
+  z-index: -1 !important;
+  width: auto !important;
+  height: var(--console-depth) !important;
+  content: "" !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  border: 0 !important;
+  border-radius: 0 0 9px 9px;
+  background:
+    linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 28%, #2563eb 72%, #1e3a8a 100%) !important;
+  clip-path: polygon(0 0, calc(100% - var(--console-depth)) 0, 100% 100%, var(--console-depth) 100%);
+  box-shadow:
+    0 8px 14px rgba(30,64,175,.27),
+    0 0 18px rgba(14,165,233,.38),
+    inset 0 2px 0 rgba(224,242,254,.75);
+  filter: none !important;
+  animation: console-pedestal-glow 3.6s ease-in-out infinite !important;
+}
+
+.chart-card:hover {
+  transform: perspective(1500px) rotateX(.3deg) rotateY(0deg) translateY(-5px) translateZ(12px) !important;
+  box-shadow:
+    0 30px 46px rgba(30,64,175,.19),
+    0 0 34px rgba(56,189,248,.16),
+    inset 0 1px 0 #fff !important;
+}
+
+.chart-card:nth-child(even) {
+  transform: perspective(1500px) rotateX(1.2deg) rotateY(.7deg) translateZ(0);
+}
+.chart-card:nth-child(even):hover {
+  transform: perspective(1500px) rotateX(.3deg) rotateY(0deg) translateY(-5px) translateZ(12px) !important;
+}
+
+.chart-card .chart-heading {
+  margin: -1px -1px 10px !important;
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid rgba(37,99,235,.10);
+  border-radius: 11px 11px 0 0;
+  background: linear-gradient(100deg, rgba(239,246,255,.92), rgba(255,255,255,.55));
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.8);
+}
+
+.chart-card .signal-chart::after {
+  position: absolute;
+  right: 8%;
+  bottom: -19px;
+  left: 8%;
+  z-index: -2;
+  height: 24px;
+  content: "";
+  pointer-events: none;
+  border-radius: 50%;
+  background: rgba(14,165,233,.19);
+  filter: blur(12px);
+  transform: rotateX(68deg);
+}
+
+@keyframes console-side-energy {
+  50% { filter: brightness(1.14) saturate(1.14); box-shadow: 8px 9px 20px rgba(14,165,233,.26); }
+}
+@keyframes console-pedestal-glow {
+  50% { filter: brightness(1.12); box-shadow: 0 9px 18px rgba(30,64,175,.3), 0 0 25px rgba(14,165,233,.52), inset 0 2px 0 rgba(240,249,255,.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-card::before, .chart-card::after { animation: none !important; }
+  .chart-card, .chart-card:nth-child(even), .chart-card:hover, .chart-card:nth-child(even):hover { transform: none !important; }
+}
