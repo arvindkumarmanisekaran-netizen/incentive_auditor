@@ -45,15 +45,15 @@ type SignalChartProps = {
 // Shared with chart-option factories colocated in feature components.
 // eslint-disable-next-line react-refresh/only-export-components
 export const SIGNAL_CHART = {
-  lime: "#2563eb",
+  lime: "#22d3ee",
   limeSoft: "#60a5fa",
-  mint: "#06b6d4",
-  amber: "#f59e0b",
-  danger: "#ef4444",
-  steel: "#64748b",
-  grid: "rgba(37,99,235,0.09)",
-  text: "#64748b",
-  textStrong: "#0f172a",
+  mint: "#2dd4bf",
+  amber: "#f472b6",
+  danger: "#fb7185",
+  steel: "#93c5fd",
+  grid: "rgba(56,189,248,0.16)",
+  text: "#a9c7f7",
+  textStrong: "#eaf6ff",
 };
 
 const SIGNAL_FONT = '"Manrope Variable", Manrope, Inter, system-ui, sans-serif';
@@ -325,7 +325,7 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       ...(incoming.grid as Record<string, unknown> | undefined),
     },
     xAxis: isAxisChart || incoming.xAxis ? mergeChartComponent({
-      axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,0.28)", width: 1 } },
+      axisLine: { show: true, lineStyle: { color: "rgba(56,189,248,0.48)", width: 1 } },
       axisTick: { show: false },
       axisLabel: { color: SIGNAL_CHART.text, fontSize: 10, hideOverlap: true },
       splitLine: { show: false },
@@ -341,9 +341,9 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     }, incoming.legend) : incoming.legend,
     tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", appendToBody: true, confine: false, axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
       formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
-      backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
+      backgroundColor: "rgba(5,18,43,0.97)", borderColor: "rgba(34,211,238,0.38)",
       borderWidth: 1, borderRadius: 10, padding: [9, 11],
-      extraCssText: `z-index:10000;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
+      extraCssText: `z-index:10000;max-width:260px;box-shadow:0 18px 46px rgba(2,8,23,.42),0 0 20px rgba(34,211,238,.15);font-family:${SIGNAL_FONT};line-height:1.4;`,
       textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11, fontFamily: SIGNAL_FONT },
     },
     series,
