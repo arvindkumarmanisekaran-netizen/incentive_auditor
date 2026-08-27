@@ -1535,7 +1535,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 24;
+  z-index: 2;
   display: flex !important;
   justify-content: flex-end !important;
   gap: 10px;
@@ -1563,9 +1563,10 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
 
-/* Keep the complete database date control beneath the sticky table title row. */
+/* Keep the database date control above the action footer but beneath the
+   sticky table title row (whose cells start at z-index: 12). */
 .database-edit-field .custom-date-picker {
-  z-index: 1 !important;
+  z-index: 3 !important;
 }
 
 .database-edit-field .custom-date-input {
