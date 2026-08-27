@@ -26,7 +26,7 @@ export function DynamicPieChart<T extends Record<string, unknown>>({
       tooltip: {
         trigger: "item",
         formatter: (params: { name?: string; value?: number; percent?: number }) =>
-          `<strong>${params.name ?? "Unknown"}</strong><br/>${formatMoney(params.value ?? 0)} · ${params.percent ?? 0}%`,
+          `<strong>${params.name ?? "Unknown"}</strong><br/>Share: ${Number(params.percent ?? 0).toFixed(1)}%<br/>Sales: ${formatMoney(params.value ?? 0)}`,
       },
       legend: {
         type: "scroll",
