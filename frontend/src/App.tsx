@@ -29,6 +29,7 @@ import InvestigationOverview from "./components/InvestigationOverview";
 
 import SyntheticDataGeneration from "./components/SyntheticDataGeneration";
 import AmbientSignals from "./components/AmbientSignals";
+import CardTiltController from "./components/CardTiltController";
 
 import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
@@ -498,6 +499,7 @@ function App() {
 
   return (
     <main className="dashboard">
+      <CardTiltController />
       <AmbientSignals />
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand" aria-label="Incentive Auditor">
