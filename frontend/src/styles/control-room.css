@@ -1532,7 +1532,7 @@ textarea {
 }
 
 /* Primary keys remain prominent in both table and edit views. */
-.database-primary-key-column {
+.database-table th.database-primary-key-column {
   color: #64748b !important;
   background: #e9eef5 !important;
   cursor: not-allowed;
@@ -1553,7 +1553,8 @@ textarea {
   letter-spacing: .04em;
 }
 
-.database-primary-key-cell {
+.database-table td.database-primary-key-cell,
+.database-table tbody tr:hover td.database-primary-key-cell {
   color: #64748b !important;
   background: #f1f5f9 !important;
   font-weight: 650 !important;
