@@ -62,6 +62,7 @@ function peerIndexOption(data: Array<{ metric: string; representative: number }>
     yAxis: { type: "category", data: data.map((item) => item.metric) },
     series: [{
       type: "bar",
+      name: "Representative index",
       barWidth: 8,
       data: data.map((item) => item.representative),
       itemStyle: { color: CHART_THEME.representative, borderRadius: 8 },
