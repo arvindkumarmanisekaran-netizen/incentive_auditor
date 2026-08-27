@@ -128,15 +128,19 @@
 /* Complete 3D chart consoles: raised glass top, side wall and illuminated pedestal. */
 .chart-card {
   --console-depth: 18px;
+  --pointer-tilt-x: 3.2deg;
+  --pointer-tilt-y: -1.6deg;
+  --pointer-glare-x: 76%;
+  --pointer-glare-y: 12%;
   margin-bottom: var(--console-depth) !important;
   overflow: visible !important;
-  transform: perspective(1200px) rotateX(3.2deg) rotateY(-1.6deg) translateZ(0);
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(0);
   transform-style: preserve-3d;
   transform-origin: 50% 100%;
   border: 1px solid rgba(34,211,238,.62) !important;
   border-radius: 12px !important;
   background:
-    radial-gradient(circle at 76% 12%, rgba(29,78,216,.28), transparent 34%),
+    radial-gradient(circle at var(--pointer-glare-x) var(--pointer-glare-y), rgba(125,211,252,.32), transparent 28%),
     linear-gradient(145deg, rgba(8,25,58,.99), rgba(3,13,35,.985)) padding-box,
     linear-gradient(120deg, #22d3ee, #3b82f6 52%, #a855f7) border-box !important;
   box-shadow:
@@ -195,7 +199,7 @@
 }
 
 .chart-card:hover {
-  transform: perspective(1200px) rotateX(1.4deg) rotateY(-.4deg) translateY(-7px) translateZ(18px) !important;
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateY(-7px) translateZ(22px) !important;
   box-shadow:
     0 36px 54px rgba(2,8,23,.38),
     0 0 42px rgba(34,211,238,.28),
@@ -203,10 +207,28 @@
 }
 
 .chart-card:nth-child(even) {
-  transform: perspective(1200px) rotateX(3.2deg) rotateY(1.6deg) translateZ(0);
+  --pointer-tilt-y: 1.6deg;
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(0);
 }
 .chart-card:nth-child(even):hover {
-  transform: perspective(1200px) rotateX(1.4deg) rotateY(.4deg) translateY(-7px) translateZ(18px) !important;
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateY(-7px) translateZ(22px) !important;
+}
+
+.chart-card.is-pointer-tilting {
+  transition: transform 80ms linear, box-shadow .24s ease !important;
+  will-change: transform;
+}
+
+:where(.insight-card, .analysis-card, .workflow-card, .kpi-item, .finding-card,
+  .risk-driver-card, .decision-status, .decision-assessment, .decision-findings,
+  .database-table-container, .admin-card).is-pointer-tilting {
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(10px) !important;
+  transform-style: preserve-3d;
+  transition: transform 90ms linear, box-shadow .22s ease !important;
+  will-change: transform;
+  background:
+    radial-gradient(circle at var(--pointer-glare-x) var(--pointer-glare-y), rgba(125,211,252,.18), transparent 30%),
+    linear-gradient(145deg, rgba(255,255,255,.985), rgba(239,247,255,.95)) !important;
 }
 
 .chart-card .chart-heading {
