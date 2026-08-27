@@ -84,6 +84,14 @@ function createBarOption(
   chartType: BarChartType,
   formatter: "money" | "percent" = "money",
 ): EChartsCoreOption {
+  const seriesName: Record<BarChartType, string> = {
+    sales: "Sales",
+    sales_rx: "Change",
+    payout: "Payout",
+    historical: "Historical comparison",
+    peer: "Peer comparison",
+  };
+
   return {
     tooltip: {
       valueFormatter: (value: unknown) =>
@@ -104,6 +112,7 @@ function createBarOption(
     series: [
       {
         type: "bar",
+        name: seriesName[chartType],
         barMaxWidth: 86,
         animationDuration: 900,
         animationEasing: "cubicOut",
