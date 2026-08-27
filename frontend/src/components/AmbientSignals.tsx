@@ -20,8 +20,9 @@ export default function AmbientSignals({ login = false, section = false }: { log
               d={path}
               pathLength={1}
               strokeDasharray="0.025 0.975"
+              initial={reducedMotion ? undefined : { strokeDashoffset: 1 }}
               animate={reducedMotion ? undefined : { strokeDashoffset: [1, 0] }}
-              transition={{ duration: 8 + index * 2, delay: index * 0.7, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 8 + index * 2, delay: index * 0.7, repeat: Infinity, repeatType: "loop", ease: "linear" }}
             />
           </g>
         ))}
