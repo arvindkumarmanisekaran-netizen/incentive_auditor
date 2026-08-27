@@ -26,6 +26,8 @@ interface ReportData {
 interface EvidenceItem { type: string; severity: string; product_id?: string; evidence?: Record<string, unknown>; }
 interface RootCauseDriver { finding: string; product: string; severity: string; strongest_metric: string; }
 interface ReviewerCheck { status: string; label: string; detail: string; }
+interface FindingSummaryItem { type: string; product: string; severity: string; evidence_count: number; }
+interface PeerComparisonItem { scope: string; product: string; peer_group_size: number; sales_difference?: number; rx_difference?: number; payout_difference?: number; severity: string; }
 interface AssistantResponse {
   action?: string; message?: string; representative_id?: string; representative_name?: string;
   start_date?: string; end_date?: string; details?: string[]; data?: DataResult;
@@ -33,6 +35,8 @@ interface AssistantResponse {
   finding?: EvidenceItem; drivers?: RootCauseDriver[]; hypotheses?: string[]; next_steps?: string[];
   checks?: ReviewerCheck[]; review_questions?: string[];
   focus?: { finding_type: string; product_id: string };
+  severity_counts?: Record<string, number>; finding_items?: FindingSummaryItem[];
+  peer_comparisons?: PeerComparisonItem[];
 }
 interface ChatMessage { sender: "You" | "Copilot"; text: string; response?: AssistantResponse; }
 
@@ -181,11 +185,14 @@ export default function AIChatAssistant({ representativeId, representativeName, 
       {response.hypotheses && <div className="assistant-hypotheses"><b>Hypotheses to verify</b><ul>{response.hypotheses.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {response.checks && <div className="assistant-phase2-card"><b>Reviewer checks</b>{response.checks.map((check) => <div key={check.label}><span>{check.label}</span><strong className={`review-${check.status}`}>{check.status}</strong><small>{check.detail}</small></div>)}</div>}
       {response.review_questions && <div className="assistant-hypotheses"><b>Reviewer questions</b><ul>{response.review_questions.map((item) => <li key={item}>{item}</li>)}</ul></div>}
+      {response.severity_counts && <div className="assistant-severity-summary">{Object.entries(response.severity_counts).map(([severity, count]) => <span key={severity}><b>{count}</b>{severity}</span>)}</div>}
+      {response.finding_items && <div className="assistant-phase2-card"><b>All findings</b>{response.finding_items.map((item, index) => <div key={`${item.type}-${item.product}-${index}`}><span>{item.type} · {item.product}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>{item.evidence_count} supporting metric(s)</small></div>)}</div>}
+      {response.peer_comparisons && <div className="assistant-phase2-card"><b>Peer comparisons</b>{response.peer_comparisons.map((item, index) => <div key={`${item.scope}-${item.product}-${index}`}><span>{item.product} · {item.scope}</span><strong className={`severity-${item.severity.toLowerCase()}`}>{item.severity}</strong><small>Sales {item.sales_difference ?? "—"}% · Rx {item.rx_difference ?? "—"}% · Payout {item.payout_difference ?? "—"}% · {item.peer_group_size} peers</small></div>)}</div>}
       {response.focus && <button className="assistant-focus-button" type="button" onClick={focusAnalysis}>Focus chart · {humanLabel(response.focus.finding_type)}</button>}
       {response.finding && <button className="assistant-evidence-button" type="button" onClick={() => addEvidence(response.finding)}>Add to evidence collection</button>}
       {response.details && <ul className="assistant-detail-list">{response.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
       {response.data && <div className="assistant-data-wrap"><div className="assistant-data-title"><b>{response.data.table.replaceAll("_", " ")}</b><span>{response.data.records.length} rows</span></div><div className="assistant-data-scroll"><table><thead><tr>{response.data.columns.map((column) => <th key={column}>{column.replaceAll("_", " ")}</th>)}</tr></thead><tbody>{response.data.records.map((record, rowIndex) => <tr key={rowIndex}>{response.data!.columns.map((column) => <td key={column}>{printableValue(record[column])}</td>)}</tr>)}</tbody></table></div></div>}
-      {response.report && <button className="assistant-print-button" onClick={() => printReport(response.report!)}><AppIcon name="file" size={16} /> Open printable summary</button>}
+      {response.report && <button className="assistant-print-button" onClick={() => printReport(response.report!)}>Open printable summary</button>}
       {selectedEvidence.length > 0 && response.action === "PRINT_SUMMARY" && <div className="assistant-evidence-count">{selectedEvidence.length} selected evidence item(s) included</div>}
       {response.sources && <details className="assistant-sources"><summary>Evidence & sources ({response.sources.length})</summary>{response.sources.map((source, index) => <div key={`${source.source}-${index}`}><b>{source.source}</b><span>{source.filters}</span><small>{source.record_count} record(s) · {source.access}</small></div>)}</details>}
       {response.suggestions && <div className="assistant-suggestions">{response.suggestions.map((suggestion) => <button key={suggestion} onClick={() => void sendMessage(suggestion)}>{suggestion}</button>)}</div>}
