@@ -27,7 +27,6 @@ export default function DocumentProcessingCard({
   onProcessingFinished,
 }: DocumentProcessingCardProps) {
   const [confirmingActions, setConfirmingActions] = useState(false);
-  const processingCardRef = useRef<HTMLElement | null>(null);
 
   const {
     inputRef,
@@ -263,9 +262,10 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   async function confirmAllDocuments() {
-    processingCardRef.current?.scrollIntoView({
+    window.scrollTo({
+      top: 0,
+      left: 0,
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-      block: "start",
     });
 
     setConfirmingActions(true);
@@ -289,7 +289,7 @@ export default function DocumentProcessingCard({
   // ==================================================
 
   return (
-    <article ref={processingCardRef} className="admin-card document-processing-card">
+    <article className="admin-card document-processing-card">
       <div className="admin-card-icon"><AppIcon name="folder" size={23} /></div>
 
       <div className="admin-card-content">
