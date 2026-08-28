@@ -3,7 +3,6 @@ import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
 
-import "../styles/index.css";
 
 type Props = {
   result: InvestigationResult;
