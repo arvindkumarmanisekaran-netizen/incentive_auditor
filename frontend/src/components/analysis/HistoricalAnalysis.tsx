@@ -290,7 +290,7 @@ export default function HistoricalAnalysis({ findings }: Props) {
                 style={{
                   width: `${Math.min(Math.abs(deviation) * 1.5, 50)}%`,
                 }}
-              />
+              ><span className="historical-bar-windows" /></div>
             )}
           </div>
 

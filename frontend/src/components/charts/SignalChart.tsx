@@ -560,9 +560,10 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
     };
   });
   const total = Math.max(1, data.reduce((sum, item) => sum + item.value, 0));
-  let cursor = -90;
+  const arcSweep = 240;
+  let cursor = -210;
   const segments = data.map((item) => {
-    const sweep = (item.value / total) * 360;
+    const sweep = (item.value / total) * arcSweep;
     const padding = Math.min(2.4, sweep * .12);
     const start = cursor + padding / 2;
     const end = cursor + sweep - padding / 2;
@@ -570,6 +571,10 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
     return { ...item, path: donutSegmentPath(start, Math.max(start + .1, end)), percent: item.value / total * 100 };
   });
   const [tooltip, setTooltip] = useState<FloatingTooltip | null>(null);
+  const [legendPage, setLegendPage] = useState(0);
+  const legendPageSize = 4;
+  const legendPageCount = Math.max(1, Math.ceil(segments.length / legendPageSize));
+  const visibleLegend = segments.slice(legendPage * legendPageSize, (legendPage + 1) * legendPageSize);
 
   return (
     <div className={`signal-chart holographic-pie-chart radial-hologram-chart ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
@@ -611,8 +616,12 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
         <ellipse className="holographic-pie-inner-glow" cx="120" cy="96" rx="39" ry="18" />
       </svg>
       <span className="holographic-pie-beam" aria-hidden="true" />
-      <div className="holographic-pie-legend">
-        {segments.map((segment) => <span key={`legend-${segment.name}`}><i style={{ background: segment.color }} />{segment.name}</span>)}
+      <div className="holographic-pie-legend-shell">
+        {legendPageCount > 1 && <button type="button" className="pie-legend-nav" aria-label="Previous legend items" disabled={legendPage === 0} onClick={() => setLegendPage((page) => Math.max(0, page - 1))}>‹</button>}
+        <div className="holographic-pie-legend" key={legendPage}>
+          {visibleLegend.map((segment) => <span key={`legend-${segment.name}`} title={segment.name}><i style={{ background: segment.color }} />{segment.name}</span>)}
+        </div>
+        {legendPageCount > 1 && <button type="button" className="pie-legend-nav" aria-label="Next legend items" disabled={legendPage === legendPageCount - 1} onClick={() => setLegendPage((page) => Math.min(legendPageCount - 1, page + 1))}>›</button>}
       </div>
       <ChartTooltipPortal tooltip={tooltip} />
     </div>
@@ -781,7 +790,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                     className={`skyscraper-tower${value < 0 ? " is-negative" : ""}`}
                     key={`${String(item.name ?? seriesIndex)}-${categoryIndex}-${value}`}
                     style={{
-                      "--tower-height": `${Math.max(22, Math.abs(value) / maximum * 148)}px`,
+                      "--tower-height": `${Math.max(28, Math.abs(value) / maximum * 178)}px`,
                       "--tower-color": color,
                       "--tower-depth-index": seriesIndex,
                       "--tower-x": `${(seriesIndex - (series.length - 1) / 2) * towerSpacing - towerWidth / 2}px`,
