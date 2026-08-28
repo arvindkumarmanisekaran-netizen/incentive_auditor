@@ -5,6 +5,7 @@ import type { EChartsCoreOption } from "echarts/core";
 import type { Finding } from "../../types/investigation";
 
 import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
+import { formatProductLabel } from "../../utils/displayLabels";
 
 type Props = {
   findings?: Finding[];
@@ -245,8 +246,7 @@ export default function ProductAnalysis({ findings = [] }: Props) {
           <select value={selectedProductId} onChange={(e) => setSelectedProductId(e.target.value)}>
             {productOptions.map((product) => (
               <option key={product.id} value={product.id}>
-                {product.id}
-                {product.name && ` • ${product.name}`}
+                {formatProductLabel(product.name, product.id)}
               </option>
             ))}
           </select>
@@ -259,15 +259,9 @@ export default function ProductAnalysis({ findings = [] }: Props) {
 
       {selectedProduct && (
         <div className="product-analysis-context">
-          <span className="product-analysis-id">{selectedProduct.id}</span>
-
-          {selectedProduct.name && (
-            <>
-              <span className="product-analysis-divider">•</span>
-
-              <span className="product-analysis-name">{selectedProduct.name}</span>
-            </>
-          )}
+          <span className="product-analysis-name">
+            {formatProductLabel(selectedProduct.name, selectedProduct.id)}
+          </span>
         </div>
       )}
 

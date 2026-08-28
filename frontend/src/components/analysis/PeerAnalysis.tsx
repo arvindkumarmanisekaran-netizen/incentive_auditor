@@ -5,6 +5,7 @@ import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
+import { formatProductLabel } from "../../utils/displayLabels";
 
 type Props = {
   peerAnalysis?: PeerAnalysisType;
@@ -143,7 +144,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
   const [selectedId, selected] = selectedEntry;
 
   const comparisonData = productEntries.map(([id, item]) => ({
-    product: `${item.product_name} (${id})`,
+    product: formatProductLabel(item.product_name, id),
     representative: item.representative.sales,
     peer: item.peer_average.sales,
   }));
@@ -223,7 +224,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
           <select value={selectedId} onChange={(event) => setSelectedProductId(event.target.value)}>
             {productEntries.map(([id, item]) => (
               <option key={id} value={id}>
-                {id} • {item.product_name}
+                {formatProductLabel(item.product_name, id)}
               </option>
             ))}
           </select>
@@ -235,11 +236,9 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
       ================================================== */}
 
       <div className="product-analysis-context">
-        <span className="product-analysis-id">{selectedId}</span>
-
-        <span className="product-analysis-divider">•</span>
-
-        <span className="product-analysis-name">{selected.product_name}</span>
+        <span className="product-analysis-name">
+          {formatProductLabel(selected.product_name, selectedId)}
+        </span>
 
         <span className="peer-count">{selected.peer_group_size} peers</span>
       </div>
@@ -333,8 +332,8 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             <h3>Peer Distribution</h3>
 
             <p>
-              Sales and payout position among comparable representatives for {selected.product_name}
-              .
+              Sales and payout position among comparable representatives for{" "}
+              {formatProductLabel(selected.product_name, selectedId)}.
             </p>
           </div>
 
@@ -360,7 +359,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             {productEntries.map(([id, item]) => (
               <div
                 key={id}
-                data-tooltip={`${item.product_name} (${id})`}
+                data-tooltip={formatProductLabel(item.product_name, id)}
                 className={
                   id === selectedId
                     ? "product-status-card normal-card active"
@@ -378,7 +377,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
                 }}
               >
                 <div className="product-title">
-                  {item.product_name} ({id})
+                  {formatProductLabel(item.product_name, id)}
                 </div>
 
                 <div className="status-wrapper">

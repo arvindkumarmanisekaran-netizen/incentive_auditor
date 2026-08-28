@@ -2,6 +2,7 @@ import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
+import { formatProductLabel, productLabelFromFinding, replaceProductIds } from "../utils/displayLabels";
 
 import "../styles/index.css";
 
@@ -64,15 +65,6 @@ function safeNumber(value: unknown): number {
   const number = Number(value);
 
   return Number.isFinite(number) ? number : 0;
-}
-
-function getProductName(finding: unknown) {
-  const record = finding as {
-    product_name?: string;
-    product_id?: string;
-    evidence?: { product_name?: string };
-  };
-  return record?.product_name ?? record?.evidence?.product_name ?? record?.product_id ?? "";
 }
 
 function insightBarOption(
@@ -154,6 +146,7 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
 
 function InvestigationInsights({ result }: Props) {
   const findings = result.findings ?? [];
+  const displayText = (value: string) => replaceProductIds(value, findings);
 
   /* =======================================================
      SALES / PRESCRIPTION
@@ -173,8 +166,11 @@ function InvestigationInsights({ result }: Props) {
     );
 
     return {
-      product: productId,
-      productName: getProductName(mismatchFinding),
+      productId,
+      product: productLabelFromFinding(mismatchFinding),
+      productName: String(
+        mismatchFinding.product_name ?? mismatchFinding.evidence?.product_name ?? "",
+      ),
 
       salesChange: safeNumber(
         salesFinding?.evidence?.deviation_percent ?? mismatchFinding.evidence?.sales_change_percent,
@@ -210,6 +206,13 @@ function InvestigationInsights({ result }: Props) {
   );
 
   const doctorConcentration = safeNumber(doctorFinding?.evidence?.top_doctor_share_percent);
+
+  const topDoctorName = String(
+    doctorFinding?.evidence?.top_doctor_name ??
+      (doctorFinding?.evidence?.doctor_breakdown as Array<{ doctor_name?: string }> | undefined)?.[0]
+        ?.doctor_name ??
+      "Top Doctor",
+  );
 
   const crossTerritory = safeNumber(territoryFinding?.evidence?.cross_territory_share_percent);
 
@@ -315,7 +318,7 @@ function InvestigationInsights({ result }: Props) {
             <div className="insight-chart">
               <SignalChart
                 option={insightBarOption(
-                  salesRxData.map((item) => item.product),
+                  salesRxData.map((item) => formatProductLabel(item.productName, item.productId)),
                   [
                     { name: "Sales change", values: salesRxData.map((item) => item.salesChange), color: COLORS.sales },
                     { name: "Prescription change", values: salesRxData.map((item) => item.prescriptionChange), color: COLORS.prescription },
@@ -353,7 +356,7 @@ function InvestigationInsights({ result }: Props) {
                 )}
               </div>
 
-              {salesAnalysis?.summary && <p className="insight-summary">{salesAnalysis.summary}</p>}
+              {salesAnalysis?.summary && <p className="insight-summary">{displayText(salesAnalysis.summary)}</p>}
             </div>
           </div>
         </article>
@@ -377,7 +380,7 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart concentration-chart">
-              <SignalChart option={gaugeOption(doctorConcentration, COLORS.doctor, "Top doctor")} ariaLabel="Doctor concentration" />
+              <SignalChart option={gaugeOption(doctorConcentration, COLORS.doctor, topDoctorName)} ariaLabel="Doctor concentration" />
             </div>
 
             <div className="insight-text">
@@ -385,7 +388,7 @@ function InvestigationInsights({ result }: Props) {
 
               <div className="insight-kpi-list">
                 <div>
-                  <span>Top doctor share</span>
+                  <span>Top doctor share · {topDoctorName}</span>
 
                   <strong>{doctorConcentration.toFixed(2)}%</strong>
                 </div>
@@ -406,7 +409,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {doctorAnalysis?.summary && (
-                <p className="insight-summary">{doctorAnalysis.summary}</p>
+                <p className="insight-summary">{displayText(doctorAnalysis.summary)}</p>
               )}
             </div>
           </div>
@@ -476,7 +479,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {payoutAnalysis?.summary && (
-                <p className="insight-summary">{payoutAnalysis.summary}</p>
+                <p className="insight-summary">{displayText(payoutAnalysis.summary)}</p>
               )}
             </div>
           </div>
@@ -536,7 +539,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {finalReport?.overall_assessment && (
-                <p className="insight-summary final-summary">{finalReport.overall_assessment}</p>
+                <p className="insight-summary final-summary">{displayText(finalReport.overall_assessment)}</p>
               )}
             </div>
           </div>

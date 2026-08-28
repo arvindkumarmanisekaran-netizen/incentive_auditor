@@ -9,6 +9,8 @@ export interface Finding {
 
   product_id?: string;
 
+  product_name?: string;
+
   evidence: FindingEvidence;
 }
 

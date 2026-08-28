@@ -64,6 +64,20 @@ def json_value(value: Any) -> Any:
     return value
 
 
+def product_label(item: dict[str, Any] | None) -> str:
+    item = item or {}
+    evidence = item.get("evidence") or {}
+    product_id = str(item.get("product_id") or "").strip()
+    product_name = str(item.get("product_name") or evidence.get("product_name") or "").strip()
+    if not product_id or product_id.upper() == "ALL":
+        return product_name or "All Products"
+    if not product_name:
+        return product_id
+    if f"({product_id.lower()})" in product_name.lower():
+        return product_name
+    return f"{product_name} ({product_id})"
+
+
 def requested_table(message: str, entities: dict[str, Any]) -> str | None:
     supplied = str(entities.get("table") or entities.get("entity") or "").lower()
     if supplied in TABLE_ALIASES:
@@ -211,7 +225,7 @@ def explain_finding(context: InvestigationContext | None, message: str) -> dict[
     severity = str(selected.get("severity", "Unknown")).title()
     evidence = selected.get("evidence") or {}
     details = [f"{key.replace('_', ' ').title()}: {value}" for key, value in list(evidence.items())[:8]]
-    product = selected.get("product_id") or "All products"
+    product = product_label(selected)
     return {
         "action": "FINDING_EXPLANATION",
         "message": f"{finding_type} is rated {severity} for {product}. The rating is supported by the recorded metrics below; it is an analytical finding, not a final compliance decision.",
@@ -234,7 +248,7 @@ def findings_summary(context: InvestigationContext | None) -> dict[str, Any]:
         counts[severity] = counts.get(severity, 0) + 1
         items.append({
             "type": str(finding.get("type", "finding")).replace("_", " ").title(),
-            "product": finding.get("product_id") or "All products",
+            "product": product_label(finding),
             "severity": severity,
             "evidence_count": len(finding.get("evidence") or {}),
         })
@@ -271,7 +285,7 @@ def root_cause_analysis(context: InvestigationContext | None) -> dict[str, Any]:
             strongest = max(numeric, key=lambda item: abs(float(item[1])), default=None)
         drivers.append({
             "finding": str(finding.get("type", "finding")).replace("_", " ").title(),
-            "product": finding.get("product_id") or "All products",
+            "product": product_label(finding),
             "severity": finding.get("severity", "UNKNOWN"),
             "strongest_metric": f"{strongest[0].replace('_', ' ').title()}: {strongest[1]}" if strongest else "No numeric driver recorded",
         })
@@ -301,12 +315,16 @@ def chart_insight(context: InvestigationContext | None, message: str) -> dict[st
     if selected is None:
         selected = max(findings, key=lambda item: SEVERITY_RANK.get(str(item.get("severity", "UNKNOWN")).upper(), 0))
     finding_type = str(selected.get("type", "finding"))
-    product = selected.get("product_id") or "ALL"
+    product = product_label(selected)
     details = [f"{key.replace('_', ' ').title()}: {value}" for key, value in list((selected.get("evidence") or {}).items())[:6]]
     return {
         "action": "CHART_INSIGHT",
         "message": f"I linked this request to the {finding_type.replace('_', ' ')} visualization for {product}. Use Focus chart to move to the analytical evidence.",
-        "focus": {"finding_type": finding_type, "product_id": product},
+        "focus": {
+            "finding_type": finding_type,
+            "product_id": selected.get("product_id") or "ALL",
+            "product_name": selected.get("product_name") or (selected.get("evidence") or {}).get("product_name"),
+        },
         "details": details,
         "finding": selected,
         "suggestions": ["Run root cause analysis", "Explain this finding"],
@@ -325,7 +343,10 @@ def peer_comparison(context: InvestigationContext | None) -> dict[str, Any]:
             differences = product.get("difference_percentage") or {}
             comparisons.append({
                 "scope": scope_name.replace("_peer_comparison", "").title(),
-                "product": product.get("product_name") or product_id,
+                "product": product_label({
+                    "product_id": product_id,
+                    "product_name": product.get("product_name"),
+                }),
                 "peer_group_size": product.get("peer_group_size", 0),
                 "sales_difference": differences.get("sales"),
                 "rx_difference": differences.get("rx"),
@@ -398,7 +419,7 @@ def proactive_anomaly_scan(context: InvestigationContext | None) -> dict[str, An
         evidence = finding.get("evidence") or {}
         signals.append({
             "title": str(finding.get("type", "finding")).replace("_", " ").title(),
-            "product": finding.get("product_id") or "All products",
+            "product": product_label(finding),
             "severity": finding.get("severity", "UNKNOWN"),
             "reason": next((f"{key.replace('_', ' ').title()}: {value}" for key, value in evidence.items() if isinstance(value, (int, float)) and ("percent" in key or "score" in key or "difference" in key)), "Structured evidence is available for review."),
         })
