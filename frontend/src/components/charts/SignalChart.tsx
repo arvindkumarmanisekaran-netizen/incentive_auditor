@@ -184,7 +184,7 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
   const horizontalBars = xAxis.type === "value" && yAxis.type === "category";
   const barSeries = rawSeries.filter((entry) => (entry as Record<string, unknown>).type === "bar");
   let barIndex = 0;
-  const series = rawSeries.map((entry, index) => {
+  const themedSeries = rawSeries.map((entry, index) => {
     const item = entry as Record<string, unknown>;
     const type = item.type;
     const itemStyle = (item.itemStyle ?? {}) as Record<string, unknown>;
@@ -291,6 +291,44 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
       ...item,
       ...dimensionalStyle,
     };
+  });
+  const series = themedSeries.flatMap((entry) => {
+    const item = entry as Record<string, unknown>;
+    if (item.type !== "pie") return [item];
+
+    const center = Array.isArray(item.center) ? item.center : ["50%", "50%"];
+    const verticalCenter = center[1] ?? "50%";
+    const extrusionCenter = [
+      center[0] ?? "50%",
+      typeof verticalCenter === "number"
+        ? verticalCenter + 8
+        : `${Number.parseFloat(String(verticalCenter)) + 3}%`,
+    ];
+
+    const extrusion = {
+      ...item,
+      name: `${String(item.name ?? "Radial chart")} depth`,
+      center: extrusionCenter,
+      z: 0,
+      zlevel: 0,
+      silent: true,
+      tooltip: { show: false },
+      label: { show: false },
+      labelLine: { show: false },
+      animation: false,
+      itemStyle: {
+        ...((item.itemStyle ?? {}) as Record<string, unknown>),
+        opacity: .28,
+        borderWidth: 0,
+        shadowBlur: 18,
+        shadowColor: "rgba(30,64,175,.32)",
+        shadowOffsetX: 7,
+        shadowOffsetY: 12,
+      },
+      emphasis: { disabled: true },
+    };
+
+    return [extrusion, { ...item, z: 3, zlevel: 1 }];
   });
   const incomingTooltip = (incoming.tooltip ?? {}) as Record<string, unknown>;
   const valueFormatter = incomingTooltip.valueFormatter;
@@ -466,7 +504,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                 return (
                   <div
                     className={`skyscraper-tower${value < 0 ? " is-negative" : ""}`}
-                    key={`${String(item.name ?? seriesIndex)}-${categoryIndex}`}
+                    key={`${String(item.name ?? seriesIndex)}-${categoryIndex}-${value}`}
                     style={{
                       "--tower-height": `${Math.max(22, Math.abs(value) / maximum * 148)}px`,
                       "--tower-color": color,
@@ -474,6 +512,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                       "--tower-x": `${(seriesIndex - (series.length - 1) / 2) * towerSpacing - towerWidth / 2}px`,
                       "--tower-y": "0px",
                       "--tower-z": "0px",
+                      "--tower-enter-delay": `${categoryIndex * 70 + seriesIndex * 55}ms`,
                       zIndex: 3,
                     } as CSSProperties}
                     tabIndex={0}
