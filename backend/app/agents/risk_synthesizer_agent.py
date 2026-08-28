@@ -325,6 +325,15 @@ async def risk_synthesizer_agent(
     parsed["overall_risk_score"] = score
 
     emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            f"Risk synthesis completed with {severity} severity "
+            f"and an overall risk score of {score} / 100."
+        ),
+    )
+
+    emit_workflow_event(
         event_type="agent_result",
         agent=agent_id,
         status="complete",

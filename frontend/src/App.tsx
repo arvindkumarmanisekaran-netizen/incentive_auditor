@@ -101,6 +101,32 @@ function createInitialWorkflowAgents(): WorkflowAgent[] {
   ];
 }
 
+const workflowCompletionMessages: Record<string, string> = {
+  investigation_planner: "Investigation planning completed.",
+  sales_rx: "Sales and prescription evidence review completed.",
+  doctor_territory: "Doctor and territory evidence review completed.",
+  payout: "Payout evidence review completed.",
+  risk_synthesizer: "Final risk synthesis completed.",
+  investigation_summary: "Investigation summary completed.",
+  peer_analysis: "Peer benchmark analysis completed.",
+};
+
+function withCompletionCommentary(agent: WorkflowAgent): WorkflowAgent {
+  const completionMessage = workflowCompletionMessages[agent.id];
+
+  if (
+    !completionMessage ||
+    agent.commentary.some(({ message }) => /\b(completed|complete|prepared|finished|ready)\b/i.test(message))
+  ) {
+    return agent;
+  }
+
+  return {
+    ...agent,
+    commentary: [...agent.commentary, { message: completionMessage }],
+  };
+}
+
 function App() {
   const [workspaceUser, setWorkspaceUser] = useState("");
   const [databaseRefreshKey, setDatabaseRefreshKey] = useState(0);
@@ -243,10 +269,14 @@ function App() {
         // ----------------------------------
 
         if (event.type === "agent_status") {
-          return {
+          const updatedAgent = {
             ...agent,
             status: event.status,
           };
+
+          return event.status === "complete"
+            ? withCompletionCommentary(updatedAgent)
+            : updatedAgent;
         }
 
         // ----------------------------------
@@ -274,11 +304,15 @@ function App() {
         // ----------------------------------
 
         if (event.type === "agent_result") {
-          return {
+          const updatedAgent: WorkflowAgent = {
             ...agent,
-
+            status: event.status ?? agent.status,
             output: event.output,
           };
+
+          return event.status === "complete"
+            ? withCompletionCommentary(updatedAgent)
+            : updatedAgent;
         }
 
         return agent;
@@ -388,6 +422,17 @@ function App() {
 
       setWorkflowStatusMessage("Investigation completed.");
 
+      // A successful final result is authoritative. Reconcile any agent whose
+      // terminal stream event was missed so the completed workflow cannot
+      // leave stale "Starting..." or running states in the UI.
+      setWorkflowAgents((currentAgents) =>
+        currentAgents.map((agent) =>
+          agent.status === "error"
+            ? agent
+            : withCompletionCommentary({ ...agent, status: "complete" }),
+        ),
+      );
+
       // ----------------------------------------
       // RESOLVE CHATBOT REQUEST
       // ----------------------------------------
@@ -408,6 +453,12 @@ function App() {
       setError(investigationError.message);
 
       setWorkflowStatusMessage("Investigation failed.");
+
+      setWorkflowAgents((currentAgents) =>
+        currentAgents.map((agent) =>
+          agent.status === "running" ? { ...agent, status: "error" } : agent,
+        ),
+      );
 
       chatInvestigationRejectRef.current?.(investigationError);
 
