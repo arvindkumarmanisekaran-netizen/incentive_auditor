@@ -603,6 +603,8 @@
   transform: translate3d(var(--tower-x), var(--tower-y), var(--tower-z));
   transition: filter .2s ease, transform .25s ease;
   filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38));
+  transform-origin: 50% 100%;
+  animation: skyscraper-rise .78s cubic-bezier(.22,1,.36,1) var(--tower-enter-delay, 0ms) both;
 }
 .skyscraper-tower:hover, .skyscraper-tower:focus-visible {
   z-index: 20 !important;
@@ -674,6 +676,20 @@
 .tower-tooltip span { margin: 2px 0; color: #8fb8e8 !important; }
 .skyscraper-tower:hover .tower-tooltip, .skyscraper-tower:focus-visible .tower-tooltip { display: block; }
 .skyscraper-tower.is-negative .tower-front { background: linear-gradient(90deg, rgba(244,63,94,.38), rgba(251,113,133,.72)); }
+
+@keyframes skyscraper-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--tower-x), 22px, 0) scaleY(.06);
+    filter: blur(3px) drop-shadow(0 0 0 transparent);
+  }
+  55% { opacity: 1; }
+  100% {
+    opacity: 1;
+    transform: translate3d(var(--tower-x), var(--tower-y), 0) scaleY(1);
+    filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38));
+  }
+}
 
 .chart-card:has(.skyscraper-chart) { --base-tilt-x: 0deg; --base-tilt-y: 0deg; transform: none !important; }
 .chart-card:has(.skyscraper-chart) .signal-chart { transform: none !important; }
@@ -824,10 +840,10 @@
   background:
     linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
-    radial-gradient(circle at 50% 43%, rgba(125,211,252,.18), transparent 34%),
+    radial-gradient(circle at 50% 43%, rgba(34,211,238,.25), transparent 35%),
     linear-gradient(180deg, rgba(250,253,255,.98), rgba(239,247,255,.98)) !important;
   background-size: 28px 28px, 28px 28px, auto, auto !important;
-  box-shadow: inset 0 0 30px rgba(37,99,235,.04), 0 0 14px rgba(56,189,248,.06) !important;
+  box-shadow: inset 0 0 34px rgba(37,99,235,.07), 0 0 18px rgba(56,189,248,.10) !important;
 }
 
 .radial-hologram-chart::before {
@@ -858,15 +874,36 @@
   height: 18%;
   pointer-events: none;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255,255,255,.82), rgba(56,189,248,.18) 48%, transparent 72%);
-  box-shadow: 0 8px 22px rgba(37,99,235,.12), 0 0 18px rgba(14,165,233,.13);
+  border: 1px solid rgba(14,165,233,.35);
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.12) 0 1px, transparent 1px 10px),
+    radial-gradient(ellipse, rgba(255,255,255,.88), rgba(34,211,238,.28) 45%, rgba(37,99,235,.08) 66%, transparent 74%);
+  box-shadow: 0 10px 26px rgba(37,99,235,.18), 0 0 24px rgba(14,165,233,.22);
   transform: perspective(480px) rotateX(66deg);
+  animation: radial-platform-arrive .85s cubic-bezier(.22,1,.36,1) both;
 }
 
 .radial-hologram-chart .signal-chart-canvas {
   position: relative;
   z-index: 2;
-  filter: drop-shadow(7px 10px 8px rgba(30,64,175,.14)) drop-shadow(0 0 6px rgba(14,165,233,.10));
+  filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .08s both;
+}
+
+@keyframes radial-chart-arrive {
+  from { opacity: 0; transform: translateY(18px) scale(.82); filter: blur(4px) drop-shadow(0 0 0 transparent); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18)); }
+}
+
+@keyframes radial-platform-arrive {
+  from { opacity: 0; transform: perspective(480px) rotateX(66deg) scale(.58); }
+  to { opacity: 1; transform: perspective(480px) rotateX(66deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-tower,
+  .radial-hologram-platform,
+  .radial-hologram-chart .signal-chart-canvas { animation: none !important; }
 }
 
 @media (max-width: 900px) {
