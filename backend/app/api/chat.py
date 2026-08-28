@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from decimal import Decimal
+import re
 from typing import Any
 
 from fastapi import APIRouter, Depends
@@ -32,6 +33,7 @@ class ChatRequest(BaseModel):
 
 
 TABLE_ALIASES = {
+    "rep": "representatives", "reps": "representatives",
     "representative": "representatives", "representatives": "representatives",
     "doctor": "doctors", "doctors": "doctors",
     "product": "products", "products": "products",
@@ -41,6 +43,10 @@ TABLE_ALIASES = {
     "prescription": "prescriptions", "prescriptions": "prescriptions",
     "payout": "incentive_payouts", "payouts": "incentive_payouts",
 }
+
+REPRESENTATIVE_QUERY_PHRASES = (
+    "rep details", "representative details", "rep record", "representative record",
+)
 
 DISPLAY_COLUMNS = {
     "representatives": ["representative_id", "first_name", "last_name", "territory_id", "status"],
@@ -68,8 +74,35 @@ def requested_table(message: str, entities: dict[str, Any]) -> str | None:
         return TABLE_ALIASES[supplied]
     lowered = message.lower()
     for alias in sorted(TABLE_ALIASES, key=len, reverse=True):
-        if alias in lowered:
+        if re.search(rf"\b{re.escape(alias)}\b", lowered):
             return TABLE_ALIASES[alias]
+    return None
+
+
+def conversation_table(conversation: list[dict[str, str]]) -> str | None:
+    """Recover the active read-only table for terse follow-up questions."""
+    for item in reversed(conversation[-8:]):
+        table = requested_table(str(item.get("content") or ""), {})
+        if table:
+            return table
+    return None
+
+
+def representative_filter(message: str, entities: dict[str, Any]) -> str | None:
+    supplied = entities.get("representative_name") or entities.get("representative_id") or entities.get("name")
+    if supplied:
+        return str(supplied).strip()
+    patterns = (
+        r"(?:fetch|get|find|show|give me|details? (?:for|of))\s+(?:me\s+)?(?:the\s+)?(?:rep(?:resentative)?\s+)?(?:details?\s+(?:for|of)\s+)?([A-Za-z][A-Za-z' -]{1,60})",
+        r"(?:i want|only|just)\s+([A-Za-z][A-Za-z' -]{1,60})",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, message, flags=re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            value = re.sub(r"\s+(?:rep(?:resentative)?\s+)?(?:details?|records?|information)$", "", value, flags=re.IGNORECASE)
+            if value and not re.fullmatch(r"(?:(?:all|active|inactive)\s+)?(?:reps?|representatives?)", value, flags=re.IGNORECASE):
+                return value
     return None
 
 
@@ -112,19 +145,25 @@ async def run_read_only_query(db: AsyncSession, message: str, entities: dict[str
     status = entities.get("status")
     if not status:
         status = "Active" if "active" in lowered and "inactive" not in lowered else "Inactive" if "inactive" in lowered else None
-    where_clause = ""
+    predicates: list[str] = []
     try:
         limit = int(entities.get("limit") or 20)
     except (TypeError, ValueError):
         limit = 20
     parameters: dict[str, Any] = {"limit": min(max(limit, 1), 50)}
     if status and "status" in columns:
-        where_clause = " WHERE LOWER(status) = LOWER(:status)"
+        predicates.append("LOWER(status) = LOWER(:status)")
         parameters["status"] = status
+    name_filter = representative_filter(message, entities) if table == "representatives" else None
+    if name_filter:
+        predicates.append("(LOWER(first_name) LIKE LOWER(:record_name) OR LOWER(last_name) LIKE LOWER(:record_name) OR LOWER(first_name || ' ' || last_name) LIKE LOWER(:record_name) OR LOWER(representative_id) = LOWER(:record_id))")
+        parameters.update(record_name=f"%{name_filter}%", record_id=name_filter)
+    where_clause = f" WHERE {' AND '.join(predicates)}" if predicates else ""
     query = text(f"SELECT {', '.join(columns)} FROM {table}{where_clause} ORDER BY {columns[0]} LIMIT :limit")
     rows = await db.execute(query, parameters)
     records = [{key: json_value(value) for key, value in dict(row).items()} for row in rows.mappings().all()]
-    filter_text = f"status = {status}" if status else "none"
+    applied_filters = ([f"status = {status}"] if status else []) + ([f"name or ID = {name_filter}"] if name_filter else [])
+    filter_text = "; ".join(applied_filters) or "none"
     return {
         "action": "DATA_RESULT",
         "message": f"Found {len(records)} {table.replace('_', ' ')} record{'s' if len(records) != 1 else ''}.",
@@ -408,12 +447,17 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
     if any(word in lowered for word in ("finding", "evidence supports", "why was")) and request.context and request.context.result:
         return explain_finding(request.context, request.message)
     query_table = requested_table(request.message, {})
-    if query_table and any(word in lowered for word in ("show", "list", "table", "query", "find")):
-        return await run_read_only_query(db, request.message, {})
+    is_rep_detail_request = any(phrase in lowered for phrase in REPRESENTATIVE_QUERY_PHRASES)
+    if (query_table and any(word in lowered for word in ("show", "list", "table", "query", "find", "fetch", "get"))) or is_rep_detail_request:
+        return await run_read_only_query(db, request.message, {"table": query_table or "representatives"})
     intent = await investigation_chat_agent(message=request.message, conversation=request.conversation, context=request.context.model_dump() if request.context else {})
     intent_name = intent.get("intent")
     entities = intent.get("entities") or {}
     if intent_name == "DATABASE_QUERY":
+        if not requested_table(request.message, entities):
+            prior_table = conversation_table(request.conversation)
+            if prior_table:
+                entities = {**entities, "table": prior_table}
         return await run_read_only_query(db, request.message, entities)
     if intent_name == "FINDING_QUERY" or any(word in lowered for word in ("finding", "explain this", "why was")):
         return explain_finding(request.context, request.message)
