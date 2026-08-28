@@ -34,8 +34,6 @@ import type { WorkflowAgent } from "./types/workflow";
 import LoginModal from "./components/LoginModal";
 import { loginToWorkspace, setActiveWorkspace } from "./api/workspace";
 
-import "./styles/index.css";
-import "./styles/holographic-command-center.css";
 
 type DashboardTab = "analysis" | "database";
 
