@@ -1,0 +1,349 @@
+/* Isometric ground plane beneath translucent Z-stacked tower clusters. */
+.chart-card .signal-chart::before {
+  position: absolute !important;
+  right: 5% !important;
+  bottom: 0 !important;
+  left: 5% !important;
+  z-index: 0 !important;
+  height: 52% !important;
+  content: "" !important;
+  pointer-events: none;
+  border: 1px solid rgba(34,211,238,.36) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(28deg, rgba(34,211,238,.23) 1px, transparent 1px),
+    linear-gradient(152deg, rgba(59,130,246,.21) 1px, transparent 1px),
+    radial-gradient(ellipse at center, rgba(14,165,233,.24), transparent 68%) !important;
+  background-size: 30px 17px, 30px 17px, auto !important;
+  filter: drop-shadow(0 0 14px rgba(34,211,238,.24)) !important;
+  transform: perspective(520px) rotateX(70deg) translateY(18%) scaleX(.96) !important;
+  transform-origin: 50% 100% !important;
+}
+.chart-card .signal-chart-canvas { position: relative; z-index: 1; }
+.chart-card canvas { filter: drop-shadow(7px 10px 7px rgba(2,8,23,.32)) drop-shadow(0 0 5px rgba(34,211,238,.10)); }
+
+/* Independent ground and tower coordinate systems for vertical bar charts. */
+.skyscraper-chart {
+  position: relative;
+  min-height: 285px;
+  overflow: visible !important;
+  border: 0 !important;
+  background: linear-gradient(180deg, rgba(3,13,35,.08), rgba(2,8,23,.48)) !important;
+  transform: none !important;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+.skyscraper-chart::before { display: none !important; }
+.skyscraper-horizon {
+  position: absolute;
+  right: 3%;
+  bottom: 45px;
+  left: 3%;
+  height: 1px;
+  background: #22d3ee;
+  box-shadow: 0 0 12px rgba(34,211,238,.75);
+}
+.skyscraper-floor {
+  position: absolute;
+  right: 3%;
+  bottom: 16px;
+  left: 3%;
+  height: 176px;
+  border: 1px solid rgba(34,211,238,.48);
+  background:
+    linear-gradient(30deg, rgba(34,211,238,.24) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(59,130,246,.22) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(14,165,233,.24), rgba(2,8,23,.18) 68%);
+  background-size: 34px 20px, 34px 20px, auto;
+  box-shadow: 0 0 28px rgba(34,211,238,.22), inset 0 0 24px rgba(14,165,233,.16);
+  transform: rotateX(64deg);
+  transform-origin: 50% 100%;
+}
+.skyscraper-city { position: absolute; inset: 18px 4% 38px; z-index: 3; }
+.skyscraper-block { position: absolute; bottom: 8px; width: 1px; height: 190px; transform-style: preserve-3d; }
+.skyscraper-cluster { position: absolute; bottom: 18px; left: 0; width: 1px; height: 160px; transform-style: preserve-3d; }
+.skyscraper-tower {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 34px;
+  height: var(--tower-height);
+  cursor: default;
+  outline: none;
+  transform-style: preserve-3d;
+  transform: translate3d(var(--tower-x), var(--tower-y), var(--tower-z));
+  transition: filter .2s ease, transform .25s ease;
+  filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38));
+  transform-origin: 50% 100%;
+  opacity: 0;
+  animation: none;
+}
+
+.skyscraper-tower:hover, .skyscraper-tower:focus-visible {
+  z-index: 20 !important;
+  filter: brightness(1.18) drop-shadow(10px 16px 12px rgba(2,8,23,.5)) drop-shadow(0 0 9px rgba(34,211,238,.5));
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 5px), calc(var(--tower-z) + 18px));
+}
+.tower-face { position: absolute; display: block; pointer-events: none; }
+.tower-front {
+  inset: 0;
+  border: 1px solid rgba(207,250,254,.74);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tower-color) 52%, transparent), color-mix(in srgb, var(--tower-color) 78%, transparent));
+  box-shadow: inset 6px 0 12px rgba(224,242,254,.12), inset -5px 0 10px rgba(30,64,175,.22);
+}
+.tower-side {
+  top: -10px;
+  right: -15px;
+  width: 15px;
+  height: calc(100% + 10px);
+  border: 1px solid rgba(96,165,250,.66);
+  background: color-mix(in srgb, var(--tower-color) 42%, rgba(30,64,175,.58));
+  clip-path: polygon(0 10px, 100% 0, 100% calc(100% - 10px), 0 100%);
+}
+.tower-roof {
+  top: -10px;
+  left: 0;
+  width: 49px;
+  height: 11px;
+  border: 1px solid rgba(224,242,254,.92);
+  background: linear-gradient(90deg, rgba(224,242,254,.76), color-mix(in srgb, var(--tower-color) 58%, white));
+  clip-path: polygon(0 100%, 15px 0, 100% 0, 34px 100%);
+  box-shadow: 0 0 8px rgba(34,211,238,.4);
+}
+.tower-windows {
+  position: absolute;
+  inset: 5px 4px;
+  pointer-events: none;
+  opacity: .5;
+  background: repeating-linear-gradient(180deg, transparent 0 9px, rgba(207,250,254,.4) 9px 10px);
+}
+.skyscraper-label {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  width: 120px;
+  color: #a9c7f7;
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.tower-tooltip {
+  position: absolute;
+  bottom: calc(100% + 24px);
+  left: 50%;
+  z-index: 40;
+  display: none;
+  width: max-content;
+  max-width: 180px;
+  padding: 8px 10px;
+  border: 1px solid rgba(34,211,238,.4);
+  border-radius: 8px;
+  color: #dff7ff;
+  background: rgba(3,13,35,.96);
+  box-shadow: 0 12px 28px rgba(2,8,23,.46), 0 0 16px rgba(34,211,238,.18);
+  font-size: 10px;
+  transform: translateX(-50%);
+}
+.tower-tooltip strong, .tower-tooltip span, .tower-tooltip b { display: block; color: inherit !important; }
+.tower-tooltip span { margin: 2px 0; color: #8fb8e8 !important; }
+.skyscraper-tower:hover .tower-tooltip, .skyscraper-tower:focus-visible .tower-tooltip { display: block; }
+.skyscraper-tower.is-negative .tower-front { background: linear-gradient(90deg, rgba(244,63,94,.38), rgba(251,113,133,.72)); }
+
+
+.chart-card:has(.skyscraper-chart) { --base-tilt-x: 0deg; --base-tilt-y: 0deg; transform: none !important; }
+.chart-card:has(.skyscraper-chart) .signal-chart { transform: none !important; }
+
+@media (max-width: 760px) {
+  .skyscraper-chart { min-height: 260px; }
+  .skyscraper-tower { width: 26px; transform: translate3d(var(--tower-x), var(--tower-y), 0); }
+  .tower-side { right: -11px; width: 11px; }
+  .tower-roof { width: 37px; clip-path: polygon(0 100%, 11px 0, 100% 0, 26px 100%); }
+  .skyscraper-label { width: 84px; font-size: 8px; }
+}
+
+/* Keep every holographic console inside its analysis grid. The skyscraper
+   renderer is taller than the legacy canvas charts, so fixed card heights and
+   the old shared stage plane caused plots to escape into adjacent sections. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) {
+  grid-auto-rows: max-content !important;
+  align-items: start !important;
+  column-gap: 22px !important;
+  row-gap: 28px !important;
+  padding: 14px 18px 24px !important;
+  overflow: clip !important;
+  transform-style: flat !important;
+}
+
+/* Each chart already owns an isometric floor. Removing the grid-wide floor
+   prevents it from projecting over the following section. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after {
+  display: none !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card {
+  width: calc(100% - var(--console-depth)) !important;
+  max-width: calc(100% - var(--console-depth)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-right: var(--console-depth) !important;
+  margin-bottom: var(--console-depth) !important;
+  box-sizing: border-box;
+  align-self: start;
+}
+
+.product-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.product-analysis-grid .chart-container:has(.skyscraper-chart) {
+  height: 285px !important;
+  min-height: 285px !important;
+  flex: 0 0 285px;
+}
+
+.historical-analysis-grid > .historical-comparison-chart:has(.skyscraper-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.historical-analysis-grid .historical-comparison-chart .chart-container:has(.skyscraper-chart) {
+  height: 285px !important;
+  min-height: 285px !important;
+  flex: 0 0 285px;
+}
+
+.peer-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 458px !important;
+  padding-bottom: 14px !important;
+}
+
+.chart-card .signal-chart::after {
+  bottom: 0 !important;
+}
+
+.skyscraper-chart {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden !important;
+}
+
+/* Insight cards use a compact split layout. Give their holographic plot a
+   deliberate viewport instead of allowing the renderer's minimum height to
+   escape through the card body. */
+.insight-card:has(.skyscraper-chart) {
+  overflow: hidden !important;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-body {
+  align-items: stretch;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-chart {
+  height: 285px !important;
+  min-height: 285px !important;
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.insight-card:has(.skyscraper-chart) .skyscraper-chart {
+  width: 100%;
+  height: 285px !important;
+  min-height: 285px !important;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-text {
+  min-height: 285px;
+  box-sizing: border-box;
+}
+
+/* Compact grouped insight charts: keep every series in its own horizontal
+   slot. Reduced tower depth preserves a visible gap even with five products. */
+.skyscraper-chart.is-compact-grouped .skyscraper-tower {
+  width: 20px;
+}
+
+.skyscraper-chart.is-compact-grouped .tower-side {
+  top: -7px;
+  right: -8px;
+  width: 8px;
+  height: calc(100% + 7px);
+  clip-path: polygon(0 7px, 100% 0, 100% calc(100% - 7px), 0 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .tower-roof {
+  top: -7px;
+  width: 28px;
+  height: 8px;
+  clip-path: polygon(0 100%, 8px 0, 100% 0, 20px 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:hover,
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:focus-visible {
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 4px), 0) !important;
+}
+
+/* Selection is explicit and additive: clicking a category toggles every series
+   bar for that product. Hover remains available only for the tooltip. */
+.skyscraper-chart.has-selected-categories .skyscraper-block:not(.is-selected-category) .skyscraper-tower {
+  opacity: .30 !important;
+  filter: grayscale(.22) drop-shadow(3px 6px 4px rgba(30,64,175,.10));
+}
+
+.skyscraper-chart .skyscraper-block.is-selected-category .skyscraper-tower {
+  z-index: 12 !important;
+  opacity: 1 !important;
+  filter: brightness(1.10) saturate(1.16) drop-shadow(9px 14px 10px rgba(30,64,175,.27)) drop-shadow(0 0 9px rgba(56,189,248,.30));
+}
+
+/* Keep the tower hit target at full height while its visible faces rise. This
+   allows tooltips to respond from the first animation frame. */
+.skyscraper-tower,
+.skyscraper-chart.is-entered .skyscraper-tower {
+  opacity: 1;
+  animation: none !important;
+}
+
+.skyscraper-chart:not(.is-entered) .tower-front,
+.skyscraper-chart:not(.is-entered) .tower-side,
+.skyscraper-chart:not(.is-entered) .tower-windows {
+  opacity: 0;
+  transform: scaleY(.04);
+  transform-origin: 50% 100%;
+}
+
+.skyscraper-chart.is-entered .tower-front,
+.skyscraper-chart.is-entered .tower-side,
+.skyscraper-chart.is-entered .tower-windows {
+  animation: tower-face-rise .86s cubic-bezier(.22,1,.36,1) var(--tower-enter-delay, 0ms) both;
+  transform-origin: 50% 100%;
+}
+
+.skyscraper-chart.is-entered .tower-roof {
+  animation: tower-roof-arrive .62s cubic-bezier(.22,1,.36,1) calc(var(--tower-enter-delay, 0ms) + 180ms) both;
+}
+
+@keyframes tower-face-rise {
+  from { opacity: 0; transform: scaleY(.04); filter: blur(2px); }
+  to { opacity: 1; transform: scaleY(1); filter: none; }
+}
+
+@keyframes tower-roof-arrive {
+  from { opacity: 0; transform: translateY(14px) scale(.78); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Hover only opens the tooltip; persistent emphasis is reserved for explicit
+   multi-selection so interaction states are not ambiguous. */
+.skyscraper-block:not(.is-selected-category) .skyscraper-tower:hover,
+.skyscraper-block:not(.is-selected-category) .skyscraper-tower:focus-visible {
+  z-index: 3 !important;
+  filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38)) !important;
+  transform: translate3d(var(--tower-x), var(--tower-y), 0) !important;
+}
