@@ -168,6 +168,8 @@ export interface FinalReport {
 export interface InvestigationResult {
   representative_id: string;
 
+  representative_name?: string;
+
   start_date: string;
 
   end_date: string;

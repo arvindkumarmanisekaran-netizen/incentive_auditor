@@ -78,6 +78,25 @@ def product_label(item: dict[str, Any] | None) -> str:
     return f"{product_name} ({product_id})"
 
 
+def representative_label(name: Any, representative_id: Any) -> str:
+    display_name = str(name or "").strip()
+    identifier = str(representative_id or "").strip()
+    if not identifier:
+        return display_name or "Representative"
+    if not display_name:
+        return f"Representative ({identifier})"
+    if f"({identifier.lower()})" in display_name.lower():
+        return display_name
+    return f"{display_name} ({identifier})"
+
+
+def context_representative_label(context: InvestigationContext | None) -> str:
+    return representative_label(
+        context.representative_name if context else None,
+        context.representative_id if context else None,
+    )
+
+
 def requested_table(message: str, entities: dict[str, Any]) -> str | None:
     supplied = str(entities.get("table") or entities.get("entity") or "").lower()
     if supplied in TABLE_ALIASES:
@@ -231,7 +250,7 @@ def explain_finding(context: InvestigationContext | None, message: str) -> dict[
         "message": f"{finding_type} is rated {severity} for {product}. The rating is supported by the recorded metrics below; it is an analytical finding, not a final compliance decision.",
         "details": details,
         "finding": selected,
-        "sources": [{"source": "current investigation findings", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}; product={product}", "record_count": 1, "access": "investigation context"}],
+        "sources": [{"source": "current investigation findings", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}; product={product}", "record_count": 1, "access": "investigation context"}],
         "suggestions": ["Show supporting database records", "Compare with peers", "Print investigation summary"],
     }
 
@@ -257,7 +276,7 @@ def findings_summary(context: InvestigationContext | None) -> dict[str, Any]:
         "message": f"The investigation contains {len(findings)} findings across {len(set(item['product'] for item in items))} product scope(s).",
         "severity_counts": counts,
         "finding_items": items,
-        "sources": [{"source": "current investigation findings", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "investigation context"}],
+        "sources": [{"source": "current investigation findings", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "investigation context"}],
         "suggestions": ["Run root cause analysis", "Compare with peers", "Run reviewer checks"],
     }
 
@@ -300,7 +319,7 @@ def root_cause_analysis(context: InvestigationContext | None) -> dict[str, Any]:
         "drivers": drivers,
         "hypotheses": hypotheses,
         "next_steps": ["Focus the highest-severity chart", "Add the leading finding to evidence", "Run reviewer checks"],
-        "sources": [{"source": "current investigation findings", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "investigation context"}],
+        "sources": [{"source": "current investigation findings", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "investigation context"}],
         "suggestions": ["Focus the highest-severity chart", "Run reviewer checks", "Print investigation summary"],
     }
 
@@ -357,7 +376,7 @@ def peer_comparison(context: InvestigationContext | None) -> dict[str, Any]:
         "action": "PEER_COMPARISON",
         "message": f"I found {len(comparisons)} peer comparison result(s) in the current investigation.",
         "peer_comparisons": comparisons[:12],
-        "sources": [{"source": "current peer analysis", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}", "record_count": len(comparisons), "access": "investigation context"}],
+        "sources": [{"source": "current peer analysis", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}", "record_count": len(comparisons), "access": "investigation context"}],
         "suggestions": ["Focus the highest-severity chart", "Run root cause analysis"],
     }
 
@@ -382,7 +401,7 @@ def reviewer_assistance(context: InvestigationContext | None) -> dict[str, Any]:
         "message": "Reviewer checks are complete. Review warnings indicate gaps or escalation needs; they do not change the investigation decision.",
         "checks": checks,
         "review_questions": ["Are the highest-risk findings supported by source records?", "Could data quality or territory reassignment explain the anomaly?", "Does the recommended action match the recorded severity?"],
-        "sources": [{"source": "current investigation result", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "review context"}],
+        "sources": [{"source": "current investigation result", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}", "record_count": len(findings), "access": "review context"}],
         "suggestions": ["Run root cause analysis", "Print investigation summary"],
     }
 
@@ -449,7 +468,7 @@ def printable_summary(context: InvestigationContext | None) -> dict[str, Any]:
     return {
         "action": "PRINT_SUMMARY", "message": "Your evidence-backed investigation summary is ready to print.",
         "report": {
-            "title": "Investigation Summary", "representative": context.representative_name or context.representative_id,
+            "title": "Investigation Summary", "representative": context_representative_label(context),
             "representative_id": context.representative_id, "period": f"{context.start_date} to {context.end_date}",
             "risk_score": result.get("overall_risk_score"), "severity": result.get("overall_severity"),
             "products": result.get("products_analyzed", []), "findings": result.get("findings", []),
@@ -457,7 +476,7 @@ def printable_summary(context: InvestigationContext | None) -> dict[str, Any]:
             "recommended_actions": (result.get("final_report") or {}).get("recommended_actions", []),
             "selected_evidence": context.selected_evidence,
         },
-        "sources": [{"source": "current investigation result", "filters": f"representative={context.representative_id}; period={context.start_date} to {context.end_date}", "record_count": len(result.get("findings", [])), "access": "investigation context"}],
+        "sources": [{"source": "current investigation result", "filters": f"representative={context_representative_label(context)}; period={context.start_date} to {context.end_date}", "record_count": len(result.get("findings", [])), "access": "investigation context"}],
     }
 
 

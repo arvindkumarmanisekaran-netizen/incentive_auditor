@@ -5,7 +5,7 @@ import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "../charts/SignalChart";
 
 import type { PeerAnalysis as PeerAnalysisType } from "../../types/investigation";
-import { formatProductLabel } from "../../utils/displayLabels";
+import { formatProductLabel, formatRepresentativeLabel } from "../../utils/displayLabels";
 
 type Props = {
   peerAnalysis?: PeerAnalysisType;
@@ -170,7 +170,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
   const peerDistribution = selected.peer_distribution.map((peer) => ({
     id: peer.representative_id,
     name: peer.representative_name,
-    displayName: `${peer.representative_name} (${peer.representative_id})`,
+    displayName: formatRepresentativeLabel(peer.representative_name, peer.representative_id),
     sales: peer.sales,
     payout: peer.payout,
     rx: peer.rx,
@@ -181,7 +181,7 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
     {
       id: representativeId ?? "Current Representative",
       name: selected.representative_name,
-      displayName: `${selected.representative_name} (${representativeId ?? ""})`,
+      displayName: formatRepresentativeLabel(selected.representative_name, representativeId),
       sales: selected.representative.sales,
       payout: selected.representative.payout,
       rx: selected.representative.rx,

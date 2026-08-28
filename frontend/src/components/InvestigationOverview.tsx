@@ -1,5 +1,9 @@
 import type { InvestigationResult } from "../types/investigation";
-import { replaceProductIds } from "../utils/displayLabels";
+import {
+  formatRepresentativeLabel,
+  replaceProductIds,
+  replaceRepresentativeId,
+} from "../utils/displayLabels";
 import { motion } from "motion/react";
 import AppIcon from "./AppIcon";
 
@@ -43,7 +47,11 @@ function FindingCard({ text }: { text: string }) {
 ========================================================= */
 
 export default function InvestigationOverview({ result }: Props) {
-  const displayText = (value: string) => replaceProductIds(value, result.findings ?? []);
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, result.findings ?? []),
+    result.representative_name,
+    result.representative_id,
+  );
   const report = result.final_report;
 
   const riskDrivers = report?.top_risk_drivers ?? [];
@@ -169,7 +177,7 @@ export default function InvestigationOverview({ result }: Props) {
               <div>
                 <h3>Representative</h3>
 
-                <p>{result.representative_id}</p>
+                <p>{formatRepresentativeLabel(result.representative_name, result.representative_id)}</p>
               </div>
 
               <div>

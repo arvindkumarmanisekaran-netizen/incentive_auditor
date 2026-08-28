@@ -2,7 +2,12 @@ import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
-import { formatProductLabel, productLabelFromFinding, replaceProductIds } from "../utils/displayLabels";
+import {
+  formatProductLabel,
+  productLabelFromFinding,
+  replaceProductIds,
+  replaceRepresentativeId,
+} from "../utils/displayLabels";
 
 import "../styles/index.css";
 
@@ -71,6 +76,7 @@ function insightBarOption(
   categories: string[],
   series: Array<{ name: string; values: number[]; color: string }>,
   formatter: "percent" | "money",
+  hideCategoryLabels = false,
 ): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
@@ -81,6 +87,7 @@ function insightBarOption(
     xAxis: {
       type: "category",
       data: categories,
+      axisLabel: { show: !hideCategoryLabels },
       axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,.42)", width: 1.25 } },
     },
     yAxis: {
@@ -146,7 +153,11 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
 
 function InvestigationInsights({ result }: Props) {
   const findings = result.findings ?? [];
-  const displayText = (value: string) => replaceProductIds(value, findings);
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, findings),
+    result.representative_name,
+    result.representative_id,
+  );
 
   /* =======================================================
      SALES / PRESCRIPTION
@@ -324,6 +335,7 @@ function InvestigationInsights({ result }: Props) {
                     { name: "Prescription change", values: salesRxData.map((item) => item.prescriptionChange), color: COLORS.prescription },
                   ],
                   "percent",
+                  true,
                 )}
                 ariaLabel="Sales and prescription changes"
               />

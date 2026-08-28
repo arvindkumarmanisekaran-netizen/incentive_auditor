@@ -344,6 +344,15 @@ function App() {
       const investigationResult: InvestigationResult = {
         representative_id: data.representative_id,
 
+        representative_name: (() => {
+          const representative = representatives.find(
+            (item) => item.representative_id === data.representative_id,
+          );
+          return representative
+            ? `${representative.first_name} ${representative.last_name}`
+            : undefined;
+        })(),
+
         start_date: data.start_date,
 
         end_date: data.end_date,
