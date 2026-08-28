@@ -565,9 +565,11 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
     <div className={`signal-chart holographic-pie-chart radial-hologram-chart ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <span className="radial-hologram-platform" aria-hidden="true" />
       <svg className="holographic-pie-svg" viewBox="0 0 240 190" aria-hidden="true">
-        <g className="holographic-pie-depth" transform="translate(0 10)">
-          {segments.map((segment) => <path key={`depth-${segment.name}`} d={segment.path} fill={segment.color} />)}
-        </g>
+        {[16, 12, 8, 4].map((depth, layerIndex) => (
+          <g className="holographic-pie-depth" data-layer={layerIndex} transform={`translate(0 ${depth})`} key={`depth-layer-${depth}`}>
+            {segments.map((segment) => <path key={`depth-${depth}-${segment.name}`} d={segment.path} fill={segment.color} />)}
+          </g>
+        ))}
         <g className="holographic-pie-surface">
           {segments.map((segment, index) => (
             <path
@@ -575,8 +577,17 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
               key={segment.name}
               d={segment.path}
               fill={segment.color}
-              tabIndex={0}
               style={{ "--pie-enter-delay": `${index * 75}ms` } as CSSProperties}
+            />
+          ))}
+        </g>
+        <g className="holographic-pie-hit-targets">
+          {segments.map((segment) => (
+            <path
+              key={`hit-${segment.name}`}
+              d={segment.path}
+              tabIndex={0}
+              aria-label={`${segment.name}: ${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(segment.value)}, ${segment.percent.toFixed(2)}%`}
               onMouseMove={(event) => setTooltip({ ...safeTooltipPosition(event.clientX, event.clientY), title: segment.name, context: `${segment.percent.toFixed(2)}%`, value: new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(segment.value), color: segment.color })}
               onMouseLeave={() => setTooltip(null)}
               onFocus={(event) => {
@@ -589,6 +600,7 @@ function HolographicPieChart({ option, height, ariaLabel, className }: SignalCha
         </g>
         <ellipse className="holographic-pie-inner-glow" cx="120" cy="96" rx="39" ry="18" />
       </svg>
+      <span className="holographic-pie-beam" aria-hidden="true" />
       <div className="holographic-pie-legend">
         {segments.map((segment) => <span key={`legend-${segment.name}`}><i style={{ background: segment.color }} />{segment.name}</span>)}
       </div>
@@ -673,24 +685,34 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const towerWidth = compactGroupedBars ? 20 : 34;
   const towerSpacing = compactGroupedBars ? 30 : 52;
   const [tooltipPortal, setTooltipPortal] = useState<FloatingTooltip | null>(null);
-  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<Set<number>>(() => new Set());
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useInView(viewportRef, { once: true, amount: .18 });
 
   return (
-    <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${hoveredCategory !== null ? " has-active-category" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+    <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${selectedCategories.size > 0 ? " has-selected-categories" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <div className="skyscraper-horizon" aria-hidden="true" />
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
         {categories.map((category, categoryIndex) => (
           <div
-            className={`skyscraper-block${hoveredCategory === categoryIndex ? " is-active-category" : ""}`}
+            className={`skyscraper-block${selectedCategories.has(categoryIndex) ? " is-selected-category" : ""}`}
             key={`${category}-${categoryIndex}`}
             style={{ left: `${((categoryIndex + .5) / Math.max(1, categories.length)) * 100}%` }}
-            onMouseEnter={() => setHoveredCategory(categoryIndex)}
-            onMouseLeave={() => setHoveredCategory(null)}
-            onFocusCapture={() => setHoveredCategory(categoryIndex)}
-            onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHoveredCategory(null); }}
+            role="button"
+            tabIndex={0}
+            aria-pressed={selectedCategories.has(categoryIndex)}
+            aria-label={`${selectedCategories.has(categoryIndex) ? "Deselect" : "Select"} all bars for ${category}`}
+            onClick={() => setSelectedCategories((current) => {
+              const next = new Set(current);
+              if (next.has(categoryIndex)) next.delete(categoryIndex); else next.add(categoryIndex);
+              return next;
+            })}
+            onKeyDown={(event) => {
+              if (event.key !== "Enter" && event.key !== " ") return;
+              event.preventDefault();
+              event.currentTarget.click();
+            }}
           >
             <div className="skyscraper-cluster">
               {series.map((item, seriesIndex) => {
@@ -782,7 +804,7 @@ export default function SignalChart({
         if (chart.isDisposed()) return;
         chart.setOption(withSignalTheme(latestOptionRef.current), { notMerge: false, lazyUpdate: false });
         hasAnimatedRef.current = true;
-      }, 120);
+      }, 16);
     }
 
     const observer = new ResizeObserver(() => {
