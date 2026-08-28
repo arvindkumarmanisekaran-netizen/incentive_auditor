@@ -9,7 +9,11 @@
 @import "./investigation-workflow.css";
 @import "./findings.css";
 @import "./login.css";
-@import "./control-room.css";
+@import "./control-room-shell.css";
+@import "./control-room-surfaces.css";
+@import "./control-room-analysis.css";
+@import "./control-room-data.css";
+@import "./control-room-assistant.css";
 @import "./holographic-core.css";
 @import "./holographic-bars.css";
 @import "./holographic-radial.css";
