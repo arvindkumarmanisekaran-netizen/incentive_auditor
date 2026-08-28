@@ -14,8 +14,8 @@ type Props = {
 ========================================================= */
 
 const COLORS = {
-  sales: SIGNAL_CHART.lime,
-  prescription: SIGNAL_CHART.mint,
+  sales: SIGNAL_CHART.danger,
+  prescription: SIGNAL_CHART.lime,
   expected: SIGNAL_CHART.steel,
   actual: SIGNAL_CHART.lime,
   doctor: SIGNAL_CHART.lime,
@@ -315,7 +315,7 @@ function InvestigationInsights({ result }: Props) {
             <div className="insight-chart">
               <SignalChart
                 option={insightBarOption(
-                  salesRxData.map((item) => item.product),
+                  salesRxData.map((item) => `${item.productName || "Product"} (${item.product})`),
                   [
                     { name: "Sales change", values: salesRxData.map((item) => item.salesChange), color: COLORS.sales },
                     { name: "Prescription change", values: salesRxData.map((item) => item.prescriptionChange), color: COLORS.prescription },
