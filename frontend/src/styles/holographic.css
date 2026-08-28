@@ -589,7 +589,36 @@
   transform-origin: 50% 100%;
 }
 .skyscraper-city { position: absolute; inset: 18px 4% 38px; z-index: 3; }
-.skyscraper-block { position: absolute; bottom: 8px; width: 1px; height: 190px; transform-style: preserve-3d; }
+.skyscraper-block { position: absolute; bottom: 18px; width: 1px; height: 190px; cursor: pointer; transform-style: preserve-3d; }
+.skyscraper-block::before {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  z-index: -1;
+  width: clamp(64px, 10vw, 132px);
+  height: 172px;
+  content: "";
+  pointer-events: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  transform: translateX(-50%);
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.skyscraper-block::after {
+  position: absolute;
+  inset: 0 auto -22px 50%;
+  width: clamp(70px, 11vw, 142px);
+  content: "";
+  transform: translateX(-50%);
+}
+.skyscraper-block:hover::before,
+.skyscraper-block:focus-visible::before,
+.skyscraper-block.is-selected-category::before {
+  border-color: rgba(56,189,248,.38);
+  background: linear-gradient(180deg, rgba(219,234,254,.24), rgba(56,189,248,.10));
+  box-shadow: inset 0 0 24px rgba(56,189,248,.11), 0 0 16px rgba(37,99,235,.12);
+}
 .skyscraper-cluster { position: absolute; bottom: 18px; left: 0; width: 1px; height: 160px; transform-style: preserve-3d; }
 .skyscraper-tower {
   position: absolute;
@@ -606,6 +635,7 @@
   transform-origin: 50% 100%;
   opacity: 0;
   animation: none;
+  pointer-events: none;
 }
 
 .skyscraper-tower:hover, .skyscraper-tower:focus-visible {
@@ -648,14 +678,30 @@
 }
 .skyscraper-label {
   position: absolute;
-  top: 180px;
+  top: 188px;
   left: 50%;
   width: 120px;
-  color: #a9c7f7;
-  font-size: 9px;
+  color: #334155;
+  font-size: 9.5px;
+  font-weight: 650;
   line-height: 1.2;
   text-align: center;
   transform: translateX(-50%);
+}
+.skyscraper-reference-label {
+  position: absolute;
+  right: 4%;
+  bottom: 30px;
+  z-index: 5;
+  padding: 2px 7px;
+  border: 1px solid rgba(6,182,212,.22);
+  border-radius: 999px;
+  color: #334155;
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 2px 8px rgba(37,99,235,.10);
+  font-size: 8.5px;
+  font-weight: 720;
+  letter-spacing: .01em;
 }
 .tower-tooltip {
   position: absolute;
@@ -829,6 +875,13 @@
   z-index: 12 !important;
   opacity: 1 !important;
   filter: brightness(1.10) saturate(1.16) drop-shadow(9px 14px 10px rgba(30,64,175,.27)) drop-shadow(0 0 9px rgba(56,189,248,.30));
+}
+
+.skyscraper-block:hover .skyscraper-tower,
+.skyscraper-block:focus-visible .skyscraper-tower,
+.skyscraper-block.is-selected-category .skyscraper-tower {
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 6px), 0) !important;
+  filter: brightness(1.12) saturate(1.12) drop-shadow(9px 14px 10px rgba(30,64,175,.25)) drop-shadow(0 0 9px rgba(56,189,248,.28)) !important;
 }
 
 /* Keep the tower hit target at full height while its visible faces rise. This

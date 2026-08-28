@@ -346,7 +346,7 @@ function InvestigationInsights({ result }: Props) {
                     <span>Highest mismatch</span>
 
                     <strong>
-                      {highestMismatch.product} · {highestMismatch.mismatchScore.toFixed(2)}
+                      {highestMismatch.productName || "Product"} ({highestMismatch.product}) · {highestMismatch.mismatchScore.toFixed(2)}
                     </strong>
                   </div>
                 )}

@@ -50,6 +50,7 @@ type FloatingTooltip = {
   context?: string;
   value: string;
   color?: string;
+  rows?: Array<{ label: string; value: string; color: string }>;
 };
 
 function safeTooltipPosition(x: number, y: number) {
@@ -66,7 +67,9 @@ function ChartTooltipPortal({ tooltip }: { tooltip: FloatingTooltip | null }) {
     <div className="chart-tooltip-portal" style={{ left: tooltip.x, top: tooltip.y }} role="tooltip">
       <strong>{tooltip.title}</strong>
       {tooltip.context && <span>{tooltip.context}</span>}
-      <b><i style={{ background: tooltip.color }} />{tooltip.value}</b>
+      {tooltip.rows?.length
+        ? tooltip.rows.map((row) => <b key={row.label}><i style={{ background: row.color }} />{row.label}: {row.value}</b>)
+        : <b><i style={{ background: tooltip.color }} />{tooltip.value}</b>}
     </div>,
     document.body,
   );
@@ -689,9 +692,23 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useInView(viewportRef, { once: true, amount: .18 });
 
+  const categoryRows = (categoryIndex: number) => series.map((item, seriesIndex) => {
+    const data = Array.isArray(item.data) ? item.data : [];
+    const datum = data[categoryIndex];
+    const record = datum && typeof datum === "object" ? datum as Record<string, unknown> : undefined;
+    const value = Number(record?.value ?? datum ?? 0);
+    const itemStyle = (record?.itemStyle ?? item.itemStyle ?? {}) as Record<string, unknown>;
+    const color = typeof itemStyle.color === "string" ? itemStyle.color : palette[seriesIndex % palette.length];
+    const formatted = typeof valueFormatter === "function"
+      ? String((valueFormatter as (raw: unknown) => unknown)(value))
+      : new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(value);
+    return { label: String(item.name ?? "Value"), value: formatted, color };
+  });
+
   return (
     <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${selectedCategories.size > 0 ? " has-selected-categories" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <div className="skyscraper-horizon" aria-hidden="true" />
+      <span className="skyscraper-reference-label" aria-hidden="true">0 · Reference baseline</span>
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
         {categories.map((category, categoryIndex) => (
@@ -703,6 +720,19 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
             tabIndex={0}
             aria-pressed={selectedCategories.has(categoryIndex)}
             aria-label={`${selectedCategories.has(categoryIndex) ? "Deselect" : "Select"} all bars for ${category}`}
+            onMouseMove={(event) => setTooltipPortal({
+              ...safeTooltipPosition(event.clientX, event.clientY),
+              title: category,
+              context: series.length > 1 ? "Paired comparison" : String(series[0]?.name ?? "Value"),
+              value: "",
+              rows: categoryRows(categoryIndex),
+            })}
+            onMouseLeave={() => setTooltipPortal(null)}
+            onFocus={(event) => {
+              const rect = event.currentTarget.getBoundingClientRect();
+              setTooltipPortal({ ...safeTooltipPosition(rect.left + rect.width / 2, rect.top), title: category, context: series.length > 1 ? "Paired comparison" : String(series[0]?.name ?? "Value"), value: "", rows: categoryRows(categoryIndex) });
+            }}
+            onBlur={() => setTooltipPortal(null)}
             onClick={() => setSelectedCategories((current) => {
               const next = new Set(current);
               if (next.has(categoryIndex)) next.delete(categoryIndex); else next.add(categoryIndex);
@@ -739,15 +769,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                       "--tower-enter-delay": `${categoryIndex * 70 + seriesIndex * 55}ms`,
                       zIndex: 3,
                     } as CSSProperties}
-                    tabIndex={0}
                     aria-label={`${String(item.name ?? "Value")}, ${category}: ${formatted}`}
-                    onMouseMove={(event) => setTooltipPortal({ ...safeTooltipPosition(event.clientX, event.clientY), title: String(item.name ?? "Value"), context: category, value: formatted, color })}
-                    onMouseLeave={() => setTooltipPortal(null)}
-                    onFocus={(event) => {
-                      const rect = event.currentTarget.getBoundingClientRect();
-                      setTooltipPortal({ ...safeTooltipPosition(rect.left + rect.width / 2, rect.top), title: String(item.name ?? "Value"), context: category, value: formatted, color });
-                    }}
-                    onBlur={() => setTooltipPortal(null)}
                   >
                     <span className="tower-face tower-front" />
                     <span className="tower-face tower-side" />
