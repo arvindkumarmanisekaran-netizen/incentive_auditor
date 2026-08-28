@@ -1,0 +1,1335 @@
+/* Holographic projection language for analytical surfaces, never the title. */
+.app-command-header { grid-template-columns: minmax(320px, 1fr) auto !important; }
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(37, 99, 235, .16) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.985), rgba(244,249,255,.94)) padding-box,
+    linear-gradient(125deg, rgba(37,99,235,.48), rgba(125,211,252,.12) 42%, rgba(37,99,235,.28)) border-box !important;
+  box-shadow: 0 16px 38px rgba(30,64,175,.08), inset 0 1px rgba(255,255,255,.92) !important;
+}
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card)::before {
+  position: absolute;
+  right: -25px;
+  bottom: -24px;
+  z-index: -1;
+  width: 145px;
+  height: 92px;
+  content: "";
+  pointer-events: none;
+  opacity: .38;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.16) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.13) 1px, transparent 1px),
+    radial-gradient(ellipse at center, rgba(56,189,248,.18), transparent 66%);
+  background-size: 18px 10px, 18px 10px, auto;
+  transform: skewY(-9deg) rotate(-2deg);
+  animation: holo-surface-float 7s ease-in-out infinite;
+}
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card)::after {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+  z-index: 0;
+  width: 28px;
+  height: 18px;
+  content: "";
+  pointer-events: none;
+  border-top: 1px solid rgba(37,99,235,.48);
+  border-right: 1px solid rgba(14,165,233,.38);
+  background: radial-gradient(circle at 100% 0, rgba(56,189,248,.32), transparent 58%);
+  filter: drop-shadow(0 0 4px rgba(37,99,235,.25));
+  animation: holo-corner-pulse 3.8s ease-in-out infinite;
+}
+
+:where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+  .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+  .decision-findings, .database-table-container, .admin-card) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.chart-card {
+  border: 1px solid transparent !important;
+  box-shadow: 0 18px 42px rgba(30,64,175,.09), 0 0 22px rgba(56,189,248,.045) !important;
+}
+.chart-card:hover, .insight-card:hover, .analysis-card:hover, .workflow-card:hover {
+  border-color: transparent !important;
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(30,64,175,.13), 0 0 28px rgba(56,189,248,.09) !important;
+}
+.chart-card .signal-chart {
+  overflow: visible;
+  transform: perspective(1100px) rotateX(3.5deg) translateY(-2px);
+  transform-origin: 50% 100%;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), filter .35s ease;
+  background:
+    linear-gradient(rgba(37,99,235,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.045) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 105%, rgba(56,189,248,.10), transparent 58%) !important;
+  background-size: 30px 30px, 30px 30px, auto !important;
+  filter: drop-shadow(0 12px 12px rgba(30,64,175,.08));
+}
+.chart-card:hover .signal-chart { transform: perspective(1100px) rotateX(1.5deg) translateY(-5px) translateZ(9px); filter: drop-shadow(0 18px 16px rgba(30,64,175,.13)); }
+.chart-card .signal-chart::before {
+  position: absolute;
+  right: 2%;
+  bottom: -13px;
+  left: 2%;
+  z-index: -1;
+  height: 31px;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(37,99,235,.16);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(56,189,248,.16), rgba(37,99,235,.035) 52%, transparent 72%);
+  filter: blur(3px);
+  transform: rotateX(66deg);
+}
+.chart-card .signal-chart-canvas { position: relative; z-index: 1; }
+.chart-card canvas { filter: drop-shadow(4px 7px 5px rgba(30,64,175,.11)); }
+.chart-heading::after {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  margin-left: 9px;
+  content: "";
+  vertical-align: middle;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8, transparent);
+  box-shadow: 0 0 7px rgba(37,99,235,.3);
+}
+
+@keyframes holo-surface-float { 50% { opacity: .58; transform: skewY(-9deg) rotate(-2deg) translate(-4px, -3px); } }
+@keyframes holo-corner-pulse { 50% { opacity: .42; filter: drop-shadow(0 0 8px rgba(37,99,235,.38)); } }
+
+@media (max-width: 760px) { .app-command-header { grid-template-columns: 1fr auto !important; } }
+@media (prefers-reduced-motion: reduce) {
+  :where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+    .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+    .decision-findings, .database-table-container, .admin-card)::before,
+  :where(.chart-card, .insight-card, .analysis-card, .workflow-card, .kpi-item,
+    .finding-card, .risk-driver-card, .decision-status, .decision-assessment,
+    .decision-findings, .database-table-container, .admin-card)::after { animation: none !important; }
+  .chart-card .signal-chart, .chart-card:hover .signal-chart { transform: none !important; }
+}
+
+/* Complete 3D chart consoles: raised glass top, side wall and illuminated pedestal. */
+.chart-card {
+  --console-depth: 18px;
+  --base-tilt-x: 5deg;
+  --base-tilt-y: 9deg;
+  --pointer-tilt-x: 0deg;
+  --pointer-tilt-y: 0deg;
+  --pointer-glare-x: 76%;
+  --pointer-glare-y: 12%;
+  margin-bottom: var(--console-depth) !important;
+  overflow: visible !important;
+  transform: perspective(900px) rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateZ(0);
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  border: 1px solid rgba(34,211,238,.62) !important;
+  border-radius: 12px !important;
+  background:
+    radial-gradient(circle at var(--pointer-glare-x) var(--pointer-glare-y), rgba(125,211,252,.32), transparent 28%),
+    linear-gradient(145deg, rgba(8,25,58,.92), rgba(3,13,35,.94)) padding-box,
+    linear-gradient(120deg, #22d3ee, #3b82f6 52%, #a855f7) border-box !important;
+  box-shadow:
+    0 28px 42px rgba(2,8,23,.32),
+    0 0 30px rgba(34,211,238,.16),
+    inset 0 1px 0 rgba(186,230,253,.28),
+    inset 0 -1px 0 rgba(34,211,238,.30) !important;
+  transition: transform .38s cubic-bezier(.22,1,.36,1), box-shadow .38s ease !important;
+  backdrop-filter: blur(12px) saturate(1.25);
+}
+
+.chart-card::before {
+  position: absolute !important;
+  top: 9px !important;
+  right: calc(var(--console-depth) * -1) !important;
+  bottom: calc(var(--console-depth) * -1) !important;
+  left: auto !important;
+  z-index: 0 !important;
+  width: var(--console-depth) !important;
+  height: auto !important;
+  content: "" !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  border-radius: 0 8px 8px 0;
+  background:
+    linear-gradient(90deg, rgba(37,99,235,.70), rgba(14,165,233,.92)),
+    linear-gradient(155deg, rgba(255,255,255,.35), transparent 38%) !important;
+  clip-path: polygon(0 0, 100% 9px, 100% 100%, 0 calc(100% - var(--console-depth)));
+  box-shadow: 7px 8px 16px rgba(30,64,175,.18);
+  transform: none !important;
+  animation: console-side-energy 4.8s ease-in-out infinite !important;
+}
+
+.chart-card::after {
+  position: absolute !important;
+  top: auto !important;
+  right: calc(var(--console-depth) * -1) !important;
+  bottom: calc(var(--console-depth) * -1) !important;
+  left: 9px !important;
+  z-index: 0 !important;
+  width: auto !important;
+  height: var(--console-depth) !important;
+  content: "" !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  border: 0 !important;
+  border-radius: 0 0 9px 9px;
+  background:
+    linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 28%, #2563eb 72%, #1e3a8a 100%) !important;
+  clip-path: polygon(0 0, calc(100% - var(--console-depth)) 0, 100% 100%, var(--console-depth) 100%);
+  box-shadow:
+    0 8px 14px rgba(30,64,175,.27),
+    0 0 18px rgba(14,165,233,.38),
+    inset 0 2px 0 rgba(224,242,254,.75);
+  filter: none !important;
+  animation: console-pedestal-glow 3.6s ease-in-out infinite !important;
+}
+
+.chart-card:hover {
+  transform: perspective(900px) rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateY(-7px) translateZ(30px) !important;
+  box-shadow:
+    0 36px 54px rgba(2,8,23,.38),
+    0 0 42px rgba(34,211,238,.28),
+    inset 0 1px 0 rgba(224,242,254,.4) !important;
+}
+
+.chart-card:nth-child(even) {
+  --base-tilt-y: -9deg;
+  transform: perspective(900px) rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateZ(0);
+}
+.chart-card:nth-child(even):hover {
+  transform: perspective(900px) rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateY(-7px) translateZ(30px) !important;
+}
+
+.chart-card.is-pointer-tilting {
+  transition: transform 80ms linear, box-shadow .24s ease !important;
+  will-change: transform;
+}
+
+:where(.insight-card, .analysis-card, .workflow-card, .kpi-item, .finding-card,
+  .risk-driver-card, .decision-status, .decision-assessment, .decision-findings,
+  .database-table-container, .admin-card).is-pointer-tilting {
+  transform: perspective(1050px) rotateX(var(--pointer-tilt-x)) rotateY(var(--pointer-tilt-y)) translateZ(10px) !important;
+  transform-style: preserve-3d;
+  transition: transform 90ms linear, box-shadow .22s ease !important;
+  will-change: transform;
+  background:
+    radial-gradient(circle at var(--pointer-glare-x) var(--pointer-glare-y), rgba(125,211,252,.18), transparent 30%),
+    linear-gradient(145deg, rgba(255,255,255,.985), rgba(239,247,255,.95)) !important;
+}
+
+.chart-card .chart-heading {
+  margin: -1px -1px 10px !important;
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid rgba(34,211,238,.18);
+  border-radius: 11px 11px 0 0;
+  background: linear-gradient(100deg, rgba(15,40,82,.96), rgba(7,24,57,.72));
+  box-shadow: inset 0 -1px 0 rgba(125,211,252,.12);
+}
+
+.chart-card .chart-heading h3,
+.chart-card .chart-heading h4,
+.chart-card .chart-heading strong { color: #eaf6ff !important; text-shadow: 0 0 12px rgba(56,189,248,.22); }
+.chart-card .chart-heading p,
+.chart-card .chart-heading span { color: #9dbde8 !important; }
+.chart-card .signal-chart {
+  border: 1px solid rgba(34,211,238,.20) !important;
+  background:
+    linear-gradient(rgba(56,189,248,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.09) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 108%, rgba(14,165,233,.24), transparent 62%),
+    linear-gradient(180deg, rgba(5,20,49,.97), rgba(2,12,32,.99)) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow: inset 0 0 34px rgba(2,8,23,.46), 0 0 18px rgba(34,211,238,.08);
+}
+.chart-card > * { z-index: 2 !important; }
+
+.chart-card .signal-chart::after {
+  position: absolute;
+  right: 8%;
+  bottom: -19px;
+  left: 8%;
+  z-index: -2;
+  height: 24px;
+  content: "";
+  pointer-events: none;
+  border-radius: 50%;
+  background: rgba(14,165,233,.19);
+  filter: blur(12px);
+  transform: rotateX(68deg);
+}
+
+@keyframes console-side-energy {
+  50% { filter: brightness(1.14) saturate(1.14); box-shadow: 8px 9px 20px rgba(14,165,233,.26); }
+}
+@keyframes console-pedestal-glow {
+  50% { filter: brightness(1.12); box-shadow: 0 9px 18px rgba(30,64,175,.3), 0 0 25px rgba(14,165,233,.52), inset 0 2px 0 rgba(240,249,255,.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-card::before, .chart-card::after { animation: none !important; }
+  .chart-card, .chart-card:nth-child(even), .chart-card:hover, .chart-card:nth-child(even):hover { transform: none !important; }
+}
+
+/* Spatial chart stages: panels occupy visibly different planes around a lit base. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) {
+  position: relative;
+  isolation: isolate;
+  perspective: 1050px;
+  perspective-origin: 50% 42%;
+  column-gap: 38px !important;
+  row-gap: 48px !important;
+  padding: 22px 28px 48px !important;
+  overflow: visible !important;
+  transform-style: preserve-3d;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before {
+  position: absolute;
+  right: 6%;
+  bottom: -12px;
+  left: 6%;
+  z-index: 1;
+  height: 115px;
+  content: "";
+  pointer-events: none;
+  border: 2px solid rgba(34,211,238,.72);
+  border-radius: 18px;
+  background:
+    linear-gradient(30deg, rgba(34,211,238,.32) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(59,130,246,.28) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(6,182,212,.52), rgba(30,64,175,.22) 48%, rgba(2,8,23,.08) 72%);
+  background-size: 26px 15px, 26px 15px, auto;
+  box-shadow: 0 0 52px rgba(34,211,238,.5), 0 18px 34px rgba(2,8,23,.26), inset 0 0 36px rgba(14,165,233,.32);
+  transform: rotateX(68deg) translateZ(-42px);
+  transform-origin: 50% 100%;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after {
+  position: absolute;
+  right: 10%;
+  bottom: -32px;
+  left: 10%;
+  z-index: 0;
+  height: 68px;
+  content: "";
+  pointer-events: none;
+  border-radius: 12px 12px 28px 28px;
+  background: linear-gradient(180deg, #22d3ee 0%, #0284c7 22%, #1d4ed8 58%, #020617 100%);
+  clip-path: polygon(4% 0, 96% 0, 100% 42%, 92% 100%, 8% 100%, 0 42%);
+  box-shadow: 0 20px 38px rgba(2,8,23,.42), 0 0 42px rgba(34,211,238,.5), inset 0 4px rgba(224,242,254,.65);
+  transform: rotateX(58deg) translateZ(-58px);
+  transform-origin: 50% 0;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card {
+  position: relative;
+  z-index: 2;
+  --pointer-tilt-x: 4.5deg;
+  --base-tilt-x: 6deg;
+  --base-tilt-y: 10deg;
+  --pointer-tilt-x: 0deg;
+  --pointer-tilt-y: 0deg;
+  transform: rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateZ(42px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(even) {
+  --base-tilt-y: -10deg;
+  transform: rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateZ(42px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(3n) {
+  --base-tilt-x: 8deg;
+  --base-tilt-y: 6deg;
+  transform: rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateZ(18px) !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card.is-pointer-tilting,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:hover {
+  transform: rotateX(calc(var(--base-tilt-x) + var(--pointer-tilt-x))) rotateY(calc(var(--base-tilt-y) + var(--pointer-tilt-y))) translateY(-9px) translateZ(62px) !important;
+}
+
+.chart-card .chart-heading { position: relative; overflow: visible; transform: translateZ(14px); transform-style: preserve-3d; }
+.chart-card .chart-heading::before {
+  position: absolute;
+  top: -15px;
+  right: -18px;
+  left: 11px;
+  z-index: -1;
+  height: 15px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(125,211,252,.82), rgba(30,64,175,.62));
+  clip-path: polygon(9px 0, calc(100% - 18px) 0, 100% 100%, 0 100%);
+  box-shadow: 0 -5px 14px rgba(34,211,238,.22), inset 0 1px rgba(224,242,254,.72);
+  transform: rotateX(52deg);
+  transform-origin: 50% 100%;
+}
+
+.chart-card .signal-chart { transform: translateZ(22px) !important; }
+.chart-card .signal-chart-canvas { transform: translateZ(12px); }
+.chart-card .signal-chart-corner::after {
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  width: 1px;
+  height: 86px;
+  content: "";
+  background: linear-gradient(#67e8f9, rgba(34,211,238,.08), transparent);
+  box-shadow: 0 0 8px #22d3ee;
+  animation: projection-beam 2.8s ease-in-out infinite;
+}
+@keyframes projection-beam { 50% { opacity: .35; transform: scaleY(.72); } }
+
+@media (max-width: 760px) {
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) { padding: 12px !important; row-gap: 24px !important; }
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid)::before,
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid)::after { display: none; }
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) > .chart-card { transform: none !important; }
+}
+
+/* Final light-theme holographic graph system: consistent with the application shell. */
+.chart-card,
+.chart-card:nth-child(even),
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(even),
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:nth-child(3n),
+.chart-card:hover,
+.chart-card:nth-child(even):hover,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card:hover {
+  transform: none !important;
+}
+
+.chart-card {
+  --console-depth: 10px;
+  border: 1px solid rgba(37,99,235,.18) !important;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(125,211,252,.16), transparent 30%),
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(239,247,255,.94)) !important;
+  box-shadow: 0 16px 36px rgba(30,64,175,.10), 0 0 18px rgba(56,189,248,.07), inset 0 1px #fff !important;
+  backdrop-filter: blur(10px);
+}
+.chart-card:hover {
+  box-shadow: 0 19px 40px rgba(30,64,175,.13), 0 0 23px rgba(56,189,248,.11), inset 0 1px #fff !important;
+}
+.chart-card::before {
+  background: linear-gradient(90deg, rgba(96,165,250,.52), rgba(14,165,233,.64)) !important;
+  box-shadow: 5px 6px 12px rgba(30,64,175,.12) !important;
+  animation: none !important;
+}
+.chart-card::after {
+  background: linear-gradient(180deg, #bae6fd, #60a5fa 58%, #2563eb) !important;
+  box-shadow: 0 6px 12px rgba(30,64,175,.18), 0 0 13px rgba(56,189,248,.18), inset 0 2px rgba(255,255,255,.72) !important;
+  animation: none !important;
+}
+.chart-card .chart-heading {
+  border-bottom-color: rgba(37,99,235,.10) !important;
+  background: linear-gradient(100deg, rgba(239,246,255,.94), rgba(255,255,255,.72)) !important;
+  transform: none !important;
+}
+.chart-card .chart-heading::before { display: none !important; }
+.chart-card .chart-heading h3,
+.chart-card .chart-heading h4,
+.chart-card .chart-heading strong { color: #0f172a !important; text-shadow: none !important; }
+.chart-card .chart-heading p,
+.chart-card .chart-heading span { color: #64748b !important; }
+.chart-card .signal-chart,
+.chart-card:hover .signal-chart {
+  border-color: rgba(37,99,235,.14) !important;
+  background:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 108%, rgba(56,189,248,.13), transparent 62%),
+    linear-gradient(180deg, rgba(250,253,255,.98), rgba(240,247,255,.98)) !important;
+  background-size: 30px 30px, 30px 30px, auto, auto !important;
+  box-shadow: inset 0 0 28px rgba(37,99,235,.035), 0 0 14px rgba(56,189,248,.05) !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before {
+  border-color: rgba(37,99,235,.18) !important;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.08) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.07) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(56,189,248,.14), transparent 70%) !important;
+  box-shadow: 0 0 28px rgba(56,189,248,.12), inset 0 0 22px rgba(37,99,235,.06) !important;
+}
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after { display: none !important; }
+
+.skyscraper-chart {
+  background: linear-gradient(180deg, rgba(255,255,255,.2), rgba(219,234,254,.32)) !important;
+}
+.skyscraper-floor {
+  border-color: rgba(37,99,235,.24) !important;
+  background:
+    linear-gradient(30deg, rgba(37,99,235,.11) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(14,165,233,.10) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(56,189,248,.18), rgba(255,255,255,.18) 68%) !important;
+  box-shadow: 0 0 24px rgba(56,189,248,.14), inset 0 0 20px rgba(37,99,235,.06) !important;
+}
+.skyscraper-horizon { background: rgba(37,99,235,.42); box-shadow: 0 0 8px rgba(56,189,248,.25); }
+.tower-front {
+  border-color: rgba(37,99,235,.38);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tower-color) 28%, transparent), color-mix(in srgb, var(--tower-color) 55%, transparent));
+  box-shadow: inset 6px 0 12px rgba(255,255,255,.34), inset -5px 0 10px rgba(37,99,235,.12);
+}
+.tower-side { border-color: rgba(37,99,235,.36); background: color-mix(in srgb, var(--tower-color) 30%, rgba(96,165,250,.20)); }
+.tower-roof {
+  border-color: rgba(37,99,235,.34);
+  background: linear-gradient(90deg, rgba(255,255,255,.82), color-mix(in srgb, var(--tower-color) 34%, white));
+  box-shadow: 0 0 7px rgba(56,189,248,.22);
+}
+.tower-windows { opacity: .38; background: repeating-linear-gradient(180deg, transparent 0 9px, rgba(255,255,255,.72) 9px 10px); }
+.skyscraper-label { color: #475569; }
+.tower-tooltip {
+  color: #0f172a;
+  border-color: rgba(37,99,235,.18);
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 12px 28px rgba(15,23,42,.14), 0 0 12px rgba(56,189,248,.10);
+}
+.tower-tooltip span { color: #64748b !important; }
+.skyscraper-tower:hover, .skyscraper-tower:focus-visible {
+  filter: brightness(1.05) drop-shadow(8px 12px 9px rgba(30,64,175,.18)) drop-shadow(0 0 7px rgba(56,189,248,.22));
+}
+
+/* Isometric ground plane beneath translucent Z-stacked tower clusters. */
+.chart-card .signal-chart::before {
+  position: absolute !important;
+  right: 5% !important;
+  bottom: 0 !important;
+  left: 5% !important;
+  z-index: 0 !important;
+  height: 52% !important;
+  content: "" !important;
+  pointer-events: none;
+  border: 1px solid rgba(34,211,238,.36) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(28deg, rgba(34,211,238,.23) 1px, transparent 1px),
+    linear-gradient(152deg, rgba(59,130,246,.21) 1px, transparent 1px),
+    radial-gradient(ellipse at center, rgba(14,165,233,.24), transparent 68%) !important;
+  background-size: 30px 17px, 30px 17px, auto !important;
+  filter: drop-shadow(0 0 14px rgba(34,211,238,.24)) !important;
+  transform: perspective(520px) rotateX(70deg) translateY(18%) scaleX(.96) !important;
+  transform-origin: 50% 100% !important;
+}
+.chart-card .signal-chart-canvas { position: relative; z-index: 1; }
+.chart-card canvas { filter: drop-shadow(7px 10px 7px rgba(2,8,23,.32)) drop-shadow(0 0 5px rgba(34,211,238,.10)); }
+
+/* Independent ground and tower coordinate systems for vertical bar charts. */
+.skyscraper-chart {
+  position: relative;
+  min-height: 285px;
+  overflow: visible !important;
+  border: 0 !important;
+  background: linear-gradient(180deg, rgba(3,13,35,.08), rgba(2,8,23,.48)) !important;
+  transform: none !important;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+.skyscraper-chart::before { display: none !important; }
+.skyscraper-horizon {
+  position: absolute;
+  right: 3%;
+  bottom: 45px;
+  left: 3%;
+  height: 1px;
+  background: #22d3ee;
+  box-shadow: 0 0 12px rgba(34,211,238,.75);
+}
+.skyscraper-floor {
+  position: absolute;
+  right: 3%;
+  bottom: 16px;
+  left: 3%;
+  height: 176px;
+  border: 1px solid rgba(34,211,238,.48);
+  background:
+    linear-gradient(30deg, rgba(34,211,238,.24) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(59,130,246,.22) 1px, transparent 1px),
+    radial-gradient(ellipse, rgba(14,165,233,.24), rgba(2,8,23,.18) 68%);
+  background-size: 34px 20px, 34px 20px, auto;
+  box-shadow: 0 0 28px rgba(34,211,238,.22), inset 0 0 24px rgba(14,165,233,.16);
+  transform: rotateX(64deg);
+  transform-origin: 50% 100%;
+}
+.skyscraper-city { position: absolute; inset: 18px 4% 38px; z-index: 3; }
+.skyscraper-block { position: absolute; bottom: 8px; width: 1px; height: 190px; transform-style: preserve-3d; }
+.skyscraper-cluster { position: absolute; bottom: 18px; left: 0; width: 1px; height: 160px; transform-style: preserve-3d; }
+.skyscraper-tower {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 34px;
+  height: var(--tower-height);
+  cursor: default;
+  outline: none;
+  transform-style: preserve-3d;
+  transform: translate3d(var(--tower-x), var(--tower-y), var(--tower-z));
+  transition: filter .2s ease, transform .25s ease;
+  filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38));
+  transform-origin: 50% 100%;
+  opacity: 0;
+  animation: none;
+}
+
+.skyscraper-tower:hover, .skyscraper-tower:focus-visible {
+  z-index: 20 !important;
+  filter: brightness(1.18) drop-shadow(10px 16px 12px rgba(2,8,23,.5)) drop-shadow(0 0 9px rgba(34,211,238,.5));
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 5px), calc(var(--tower-z) + 18px));
+}
+.tower-face { position: absolute; display: block; pointer-events: none; }
+.tower-front {
+  inset: 0;
+  border: 1px solid rgba(207,250,254,.74);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tower-color) 52%, transparent), color-mix(in srgb, var(--tower-color) 78%, transparent));
+  box-shadow: inset 6px 0 12px rgba(224,242,254,.12), inset -5px 0 10px rgba(30,64,175,.22);
+}
+.tower-side {
+  top: -10px;
+  right: -15px;
+  width: 15px;
+  height: calc(100% + 10px);
+  border: 1px solid rgba(96,165,250,.66);
+  background: color-mix(in srgb, var(--tower-color) 42%, rgba(30,64,175,.58));
+  clip-path: polygon(0 10px, 100% 0, 100% calc(100% - 10px), 0 100%);
+}
+.tower-roof {
+  top: -10px;
+  left: 0;
+  width: 49px;
+  height: 11px;
+  border: 1px solid rgba(224,242,254,.92);
+  background: linear-gradient(90deg, rgba(224,242,254,.76), color-mix(in srgb, var(--tower-color) 58%, white));
+  clip-path: polygon(0 100%, 15px 0, 100% 0, 34px 100%);
+  box-shadow: 0 0 8px rgba(34,211,238,.4);
+}
+.tower-windows {
+  position: absolute;
+  inset: 5px 4px;
+  pointer-events: none;
+  opacity: .5;
+  background: repeating-linear-gradient(180deg, transparent 0 9px, rgba(207,250,254,.4) 9px 10px);
+}
+.skyscraper-label {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  width: 120px;
+  color: #a9c7f7;
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.tower-tooltip {
+  position: absolute;
+  bottom: calc(100% + 24px);
+  left: 50%;
+  z-index: 40;
+  display: none;
+  width: max-content;
+  max-width: 180px;
+  padding: 8px 10px;
+  border: 1px solid rgba(34,211,238,.4);
+  border-radius: 8px;
+  color: #dff7ff;
+  background: rgba(3,13,35,.96);
+  box-shadow: 0 12px 28px rgba(2,8,23,.46), 0 0 16px rgba(34,211,238,.18);
+  font-size: 10px;
+  transform: translateX(-50%);
+}
+.tower-tooltip strong, .tower-tooltip span, .tower-tooltip b { display: block; color: inherit !important; }
+.tower-tooltip span { margin: 2px 0; color: #8fb8e8 !important; }
+.skyscraper-tower:hover .tower-tooltip, .skyscraper-tower:focus-visible .tower-tooltip { display: block; }
+.skyscraper-tower.is-negative .tower-front { background: linear-gradient(90deg, rgba(244,63,94,.38), rgba(251,113,133,.72)); }
+
+
+.chart-card:has(.skyscraper-chart) { --base-tilt-x: 0deg; --base-tilt-y: 0deg; transform: none !important; }
+.chart-card:has(.skyscraper-chart) .signal-chart { transform: none !important; }
+
+@media (max-width: 760px) {
+  .skyscraper-chart { min-height: 260px; }
+  .skyscraper-tower { width: 26px; transform: translate3d(var(--tower-x), var(--tower-y), 0); }
+  .tower-side { right: -11px; width: 11px; }
+  .tower-roof { width: 37px; clip-path: polygon(0 100%, 11px 0, 100% 0, 26px 100%); }
+  .skyscraper-label { width: 84px; font-size: 8px; }
+}
+
+/* Keep every holographic console inside its analysis grid. The skyscraper
+   renderer is taller than the legacy canvas charts, so fixed card heights and
+   the old shared stage plane caused plots to escape into adjacent sections. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) {
+  grid-auto-rows: max-content !important;
+  align-items: start !important;
+  column-gap: 22px !important;
+  row-gap: 28px !important;
+  padding: 14px 18px 24px !important;
+  overflow: clip !important;
+  transform-style: flat !important;
+}
+
+/* Each chart already owns an isometric floor. Removing the grid-wide floor
+   prevents it from projecting over the following section. */
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::before,
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid)::after {
+  display: none !important;
+}
+
+:where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+  .peer-analysis-grid, .insights-grid) > .chart-card {
+  width: calc(100% - var(--console-depth)) !important;
+  max-width: calc(100% - var(--console-depth)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-right: var(--console-depth) !important;
+  margin-bottom: var(--console-depth) !important;
+  box-sizing: border-box;
+  align-self: start;
+}
+
+.product-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.product-analysis-grid .chart-container:has(.skyscraper-chart) {
+  height: 285px !important;
+  min-height: 285px !important;
+  flex: 0 0 285px;
+}
+
+.historical-analysis-grid > .historical-comparison-chart:has(.skyscraper-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.historical-analysis-grid .historical-comparison-chart .chart-container:has(.skyscraper-chart) {
+  height: 285px !important;
+  min-height: 285px !important;
+  flex: 0 0 285px;
+}
+
+.peer-analysis-grid > .chart-card:has(.skyscraper-chart) {
+  min-height: 458px !important;
+  padding-bottom: 14px !important;
+}
+
+.chart-card .signal-chart::after {
+  bottom: 0 !important;
+}
+
+.skyscraper-chart {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden !important;
+}
+
+/* Insight cards use a compact split layout. Give their holographic plot a
+   deliberate viewport instead of allowing the renderer's minimum height to
+   escape through the card body. */
+.insight-card:has(.skyscraper-chart) {
+  overflow: hidden !important;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-body {
+  align-items: stretch;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-chart {
+  height: 285px !important;
+  min-height: 285px !important;
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.insight-card:has(.skyscraper-chart) .skyscraper-chart {
+  width: 100%;
+  height: 285px !important;
+  min-height: 285px !important;
+}
+
+.insight-card:has(.skyscraper-chart) .insight-text {
+  min-height: 285px;
+  box-sizing: border-box;
+}
+
+/* Compact grouped insight charts: keep every series in its own horizontal
+   slot. Reduced tower depth preserves a visible gap even with five products. */
+.skyscraper-chart.is-compact-grouped .skyscraper-tower {
+  width: 20px;
+}
+
+.skyscraper-chart.is-compact-grouped .tower-side {
+  top: -7px;
+  right: -8px;
+  width: 8px;
+  height: calc(100% + 7px);
+  clip-path: polygon(0 7px, 100% 0, 100% calc(100% - 7px), 0 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .tower-roof {
+  top: -7px;
+  width: 28px;
+  height: 8px;
+  clip-path: polygon(0 100%, 8px 0, 100% 0, 20px 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:hover,
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:focus-visible {
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 4px), 0) !important;
+}
+
+/* Selection is explicit and additive: clicking a category toggles every series
+   bar for that product. Hover remains available only for the tooltip. */
+.skyscraper-chart.has-selected-categories .skyscraper-block:not(.is-selected-category) .skyscraper-tower {
+  opacity: .30 !important;
+  filter: grayscale(.22) drop-shadow(3px 6px 4px rgba(30,64,175,.10));
+}
+
+.skyscraper-chart .skyscraper-block.is-selected-category .skyscraper-tower {
+  z-index: 12 !important;
+  opacity: 1 !important;
+  filter: brightness(1.10) saturate(1.16) drop-shadow(9px 14px 10px rgba(30,64,175,.27)) drop-shadow(0 0 9px rgba(56,189,248,.30));
+}
+
+/* Keep the tower hit target at full height while its visible faces rise. This
+   allows tooltips to respond from the first animation frame. */
+.skyscraper-tower,
+.skyscraper-chart.is-entered .skyscraper-tower {
+  opacity: 1;
+  animation: none !important;
+}
+
+.skyscraper-chart:not(.is-entered) .tower-front,
+.skyscraper-chart:not(.is-entered) .tower-side,
+.skyscraper-chart:not(.is-entered) .tower-windows {
+  opacity: 0;
+  transform: scaleY(.04);
+  transform-origin: 50% 100%;
+}
+
+.skyscraper-chart.is-entered .tower-front,
+.skyscraper-chart.is-entered .tower-side,
+.skyscraper-chart.is-entered .tower-windows {
+  animation: tower-face-rise .86s cubic-bezier(.22,1,.36,1) var(--tower-enter-delay, 0ms) both;
+  transform-origin: 50% 100%;
+}
+
+.skyscraper-chart.is-entered .tower-roof {
+  animation: tower-roof-arrive .62s cubic-bezier(.22,1,.36,1) calc(var(--tower-enter-delay, 0ms) + 180ms) both;
+}
+
+@keyframes tower-face-rise {
+  from { opacity: 0; transform: scaleY(.04); filter: blur(2px); }
+  to { opacity: 1; transform: scaleY(1); filter: none; }
+}
+
+@keyframes tower-roof-arrive {
+  from { opacity: 0; transform: translateY(14px) scale(.78); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Hover only opens the tooltip; persistent emphasis is reserved for explicit
+   multi-selection so interaction states are not ambiguous. */
+.skyscraper-block:not(.is-selected-category) .skyscraper-tower:hover,
+.skyscraper-block:not(.is-selected-category) .skyscraper-tower:focus-visible {
+  z-index: 3 !important;
+  filter: drop-shadow(8px 12px 8px rgba(2,8,23,.38)) !important;
+  transform: translate3d(var(--tower-x), var(--tower-y), 0) !important;
+}
+/* Pie, donut and gauge charts use the same projected glass-stage language as
+   the skyscraper charts without tilting their containing cards. */
+.radial-hologram-chart {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden !important;
+  border: 1px solid rgba(37,99,235,.14) !important;
+  border-radius: 9px;
+  background:
+    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
+    radial-gradient(circle at 50% 43%, rgba(34,211,238,.25), transparent 35%),
+    linear-gradient(180deg, rgba(250,253,255,.98), rgba(239,247,255,.98)) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow: inset 0 0 34px rgba(37,99,235,.07), 0 0 18px rgba(56,189,248,.10) !important;
+}
+
+.radial-hologram-chart::before {
+  position: absolute !important;
+  right: 13% !important;
+  bottom: 8% !important;
+  left: 13% !important;
+  z-index: 0 !important;
+  height: 34% !important;
+  content: "" !important;
+  pointer-events: none;
+  border: 1px solid rgba(14,165,233,.28) !important;
+  border-radius: 50% !important;
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.09) 0 1px, transparent 1px 13px),
+    radial-gradient(ellipse, rgba(56,189,248,.20), rgba(219,234,254,.10) 62%, transparent 73%) !important;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,.16)) !important;
+  transform: perspective(480px) rotateX(66deg) !important;
+  transform-origin: 50% 100% !important;
+}
+
+.radial-hologram-platform {
+  position: absolute;
+  right: 22%;
+  bottom: 15%;
+  left: 22%;
+  z-index: 0;
+  height: 18%;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid rgba(14,165,233,.35);
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.12) 0 1px, transparent 1px 10px),
+    radial-gradient(ellipse, rgba(255,255,255,.88), rgba(34,211,238,.28) 45%, rgba(37,99,235,.08) 66%, transparent 74%);
+  box-shadow: 0 10px 26px rgba(37,99,235,.18), 0 0 24px rgba(14,165,233,.22);
+  transform: perspective(480px) rotateX(66deg);
+  animation: radial-platform-arrive .85s cubic-bezier(.22,1,.36,1) both;
+}
+
+.radial-hologram-chart .signal-chart-canvas {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .08s both;
+}
+
+@keyframes radial-chart-arrive {
+  from { opacity: 0; transform: translateY(18px) scale(.82); filter: blur(4px) drop-shadow(0 0 0 transparent); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18)); }
+}
+
+@keyframes radial-platform-arrive {
+  from { opacity: 0; transform: perspective(480px) rotateX(66deg) scale(.58); }
+  to { opacity: 1; transform: perspective(480px) rotateX(66deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-tower,
+  .radial-hologram-platform,
+  .radial-hologram-chart .signal-chart-canvas { animation: none !important; }
+}
+
+/* Dedicated holographic gauge: layered glass arc, lowered depth shell and a
+   projected floor. This is intentionally DOM/SVG based so it has the same
+   dimensional character as the skyscraper renderer. */
+.holographic-gauge-chart {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden !important;
+  perspective: 760px;
+}
+
+.holographic-gauge-svg {
+  position: absolute;
+  inset: 4% 7% 11%;
+  z-index: 2;
+  width: 86%;
+  height: 85%;
+  overflow: visible;
+  filter: drop-shadow(8px 13px 9px rgba(30,64,175,.20));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .06s both;
+}
+
+.holographic-gauge-svg circle {
+  fill: none;
+  stroke-linecap: round;
+  transform: rotate(150deg);
+  transform-origin: 100px 100px;
+}
+
+.gauge-depth {
+  stroke: rgba(30,64,175,.25);
+  stroke-width: 17;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 8px 5px rgba(30,64,175,.25));
+}
+
+.gauge-track {
+  stroke: rgba(191,219,254,.52);
+  stroke-width: 14;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 0 7px rgba(56,189,248,.18));
+}
+
+.gauge-progress-glow,
+.gauge-progress {
+  stroke-width: 14;
+  stroke-dasharray: var(--gauge-progress) 100;
+}
+
+.gauge-progress-glow {
+  stroke: rgba(34,211,238,.32);
+  stroke-width: 22;
+  filter: blur(5px);
+}
+
+.gauge-progress {
+  animation: holographic-gauge-draw 1s cubic-bezier(.22,1,.36,1) .18s both;
+}
+
+.holographic-gauge-value {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  z-index: 4;
+  display: grid;
+  gap: 7px;
+  color: #0f172a;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  animation: gauge-value-arrive .55s ease-out .45s both;
+}
+
+.holographic-gauge-value strong {
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 680;
+  letter-spacing: -.035em;
+  text-shadow: 0 2px 0 #fff, 0 0 13px rgba(56,189,248,.24);
+}
+
+.holographic-gauge-value span {
+  color: #475569;
+  font-size: .62rem;
+  font-weight: 650;
+}
+
+@keyframes holographic-gauge-draw {
+  from { stroke-dasharray: 0 100; opacity: 0; }
+  to { stroke-dasharray: var(--gauge-progress) 100; opacity: 1; }
+}
+
+@keyframes gauge-value-arrive {
+  from { opacity: 0; transform: translate(-50%, -38%) scale(.86); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Page-level tooltips are never constrained by chart/card overflow. */
+.chart-tooltip-portal {
+  position: fixed;
+  z-index: 2147483647;
+  display: grid;
+  gap: 3px;
+  width: max-content;
+  max-width: 260px;
+  padding: 9px 11px;
+  pointer-events: none;
+  color: #0f172a;
+  border: 1px solid rgba(37,99,235,.20);
+  border-radius: 9px;
+  background: rgba(255,255,255,.985);
+  box-shadow: 0 14px 38px rgba(15,23,42,.16), 0 0 16px rgba(56,189,248,.12);
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  transform: translate(-50%, calc(-100% - 14px));
+}
+
+.chart-tooltip-portal span { color: #475569; }
+.chart-tooltip-portal b { display: inline-flex; align-items: center; gap: 6px; font-weight: 780; }
+.chart-tooltip-portal i { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 7px currentColor; }
+
+/* Readable axes and category labels across both ECharts and DOM charts. */
+.skyscraper-label {
+  color: #334155 !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  line-height: 1.25;
+  text-shadow: 0 1px 0 #fff, 0 0 4px rgba(255,255,255,.95);
+  opacity: 1 !important;
+}
+
+.signal-chart canvas {
+  image-rendering: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holographic-gauge-svg,
+  .gauge-progress,
+  .holographic-gauge-value { animation: none !important; }
+}
+
+/* Native SVG holographic donut renderer. */
+.holographic-pie-chart {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(210px, 1fr) auto;
+  overflow: hidden !important;
+  min-height: 285px;
+  padding: 4px 8px 8px;
+  box-sizing: border-box;
+}
+
+.holographic-pie-svg {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  min-height: 210px;
+  overflow: visible;
+  filter: drop-shadow(10px 16px 10px rgba(30,64,175,.24)) drop-shadow(0 0 10px rgba(34,211,238,.18));
+  transform: perspective(700px) rotateX(10deg) translateY(-3px);
+  transform-origin: 50% 72%;
+  animation: radial-chart-arrive .88s cubic-bezier(.22,1,.36,1) both;
+}
+
+.holographic-pie-depth path {
+  opacity: .48;
+  stroke: rgba(30,64,175,.42);
+  stroke-width: 2.5;
+}
+
+.holographic-pie-segment {
+  cursor: default;
+  opacity: 0;
+  stroke: rgba(255,255,255,.92);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(34,211,238,.20));
+  transform-origin: 120px 88px;
+  animation: holographic-pie-arrive .72s cubic-bezier(.22,1,.36,1) var(--pie-enter-delay, 0ms) both;
+  transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+}
+
+.holographic-pie-segment:hover,
+.holographic-pie-segment:focus-visible {
+  opacity: 1;
+  outline: none;
+  filter: brightness(1.1) saturate(1.12) drop-shadow(0 0 9px rgba(34,211,238,.42));
+  transform: scale(1.035);
+}
+
+.holographic-pie-hit-targets path {
+  fill: rgba(255,255,255,.001);
+  stroke: transparent;
+  stroke-width: 5;
+  cursor: default;
+  pointer-events: all;
+  outline: none;
+}
+
+.holographic-pie-surface:has(+ .holographic-pie-hit-targets path:hover) .holographic-pie-segment {
+  filter: brightness(1.04) saturate(1.08) drop-shadow(0 0 7px rgba(34,211,238,.30));
+}
+
+.holographic-pie-inner-glow {
+  fill: rgba(255,255,255,.20);
+  stroke: rgba(34,211,238,.30);
+  stroke-width: 1;
+  filter: blur(1px) drop-shadow(0 0 8px rgba(34,211,238,.24));
+}
+
+.holographic-pie-legend {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  gap: 7px 12px;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 3px 2px 1px;
+  scrollbar-width: thin;
+}
+
+.holographic-pie-legend span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  flex: 0 0 auto;
+  color: #334155;
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.holographic-pie-legend i { width: 7px; height: 7px; border-radius: 50%; box-shadow: 0 0 6px currentColor; }
+
+@keyframes holographic-pie-arrive {
+  from { opacity: 0; transform: translateY(15px) scale(.82); filter: blur(3px); }
+  to { opacity: .86; transform: translateY(0) scale(1); filter: drop-shadow(0 0 5px rgba(34,211,238,.20)); }
+}
+
+/* Stronger holographic donut depth and projector beam. */
+.holographic-pie-depth[data-layer="0"] { opacity: .34; filter: brightness(.58) saturate(1.2); }
+.holographic-pie-depth[data-layer="1"] { opacity: .42; filter: brightness(.68) saturate(1.18); }
+.holographic-pie-depth[data-layer="2"] { opacity: .50; filter: brightness(.78) saturate(1.14); }
+.holographic-pie-depth[data-layer="3"] { opacity: .58; filter: brightness(.88) saturate(1.10); }
+
+.holographic-pie-beam {
+  position: absolute;
+  top: 17%;
+  bottom: 22%;
+  left: 50%;
+  z-index: 1;
+  width: 42%;
+  pointer-events: none;
+  opacity: .38;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,.16), rgba(255,255,255,.24), rgba(34,211,238,.16), transparent);
+  clip-path: polygon(39% 0, 61% 0, 100% 100%, 0 100%);
+  filter: blur(4px) drop-shadow(0 0 12px rgba(34,211,238,.24));
+  transform: translateX(-50%);
+  animation: pie-beam-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes pie-beam-breathe { 50% { opacity: .62; filter: blur(3px) drop-shadow(0 0 18px rgba(34,211,238,.34)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-chart .tower-front,
+  .skyscraper-chart .tower-side,
+  .skyscraper-chart .tower-roof,
+  .skyscraper-chart .tower-windows { animation: none !important; opacity: 1; transform: none; }
+  .holographic-pie-beam { animation: none !important; }
+}
+/* Final chart-layout refinements. */
+.skyscraper-city {
+  inset: 30px 4% 30px !important;
+}
+
+.skyscraper-label {
+  top: 164px !important;
+}
+
+.skyscraper-chart.is-compact-grouped .skyscraper-label {
+  top: 166px !important;
+  width: 112px;
+  font-size: 8px !important;
+  line-height: 1.15;
+}
+
+.insight-chart .skyscraper-chart.is-compact-grouped .skyscraper-label {
+  top: 154px !important;
+  width: 56px;
+  font-size: 7.5px !important;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+/* The horizontal peer-index canvas and its projection remain within the card. */
+.peer-analysis-grid > .chart-card:has(.peer-dumbbell-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.peer-dumbbell-chart,
+.peer-dumbbell-chart .peer-index-chart-transition,
+.peer-dumbbell-chart .signal-chart {
+  height: 275px !important;
+  min-height: 275px !important;
+  max-height: 275px !important;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+/* Keep callout pills clear of chart horizons and projection lines. */
+.payout-chart-difference,
+.risk-findings-label {
+  top: 10px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 8 !important;
+  transform: none !important;
+  color: #334155 !important;
+  border: 1px solid rgba(37,99,235,.16) !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow: 0 8px 20px rgba(30,64,175,.10), 0 0 10px rgba(56,189,248,.08);
+}
+
+.payout-chart-difference span,
+.risk-findings-label span { color: #475569 !important; }
+.payout-chart-difference strong,
+.risk-findings-label strong { color: #0f172a !important; text-shadow: none !important; }
+
+/* Historical Position uses a projected luminous rail rather than a flat bar. */
+.historical-position-card .historical-diverging-bar {
+  position: relative;
+  height: 16px !important;
+  overflow: visible !important;
+  border-color: rgba(37,99,235,.28) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(219,234,254,.72)) !important;
+  box-shadow: inset 0 2px 4px rgba(30,64,175,.08), 0 7px 15px rgba(30,64,175,.12), 0 0 12px rgba(56,189,248,.10) !important;
+  transform: perspective(520px) rotateX(5deg);
+}
+
+.historical-position-card .historical-diverging-bar::after {
+  position: absolute;
+  right: 4%;
+  bottom: -13px;
+  left: 4%;
+  height: 13px;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(14,165,233,.20);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(56,189,248,.18), transparent 70%);
+  filter: blur(2px);
+  transform: rotateX(66deg);
+}
+
+.historical-position-card .position-fill {
+  box-shadow: inset 0 1px rgba(255,255,255,.55), 0 0 12px currentColor;
+  animation: historical-hologram-grow .72s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+@keyframes historical-hologram-grow {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-chart .skyscraper-tower,
+  .holographic-pie-svg,
+  .holographic-pie-segment,
+  .historical-position-card .position-fill { animation: none !important; opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) {
+    padding: 12px 14px 22px !important;
+    row-gap: 24px !important;
+  }
+}
