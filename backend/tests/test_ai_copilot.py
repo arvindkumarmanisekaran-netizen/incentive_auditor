@@ -183,3 +183,204 @@ async def test_general_question_returns_bounded_answer(monkeypatch):
 
     assert response["action"] == "ANSWER"
     assert response["message"] == "I am the investigation copilot."
+
+
+REPRESENTATIVE_DETAIL_UTTERANCES = [
+    "Fetch me Anika details",
+    "Fetch Anika details",
+    "Get me Anika details",
+    "Get Anika's details",
+    "Find Anika details",
+    "Show me Anika details",
+    "Give me Anika details",
+    "Can you fetch Anika details?",
+    "Please get Anika details",
+    "Fetch details for Anika",
+    "Fetch details of Anika",
+    "Get representative details for Anika",
+    "Show representative information for Anika",
+    "Give me the rep profile for Anika",
+    "Look up Anika details",
+    "Lookup Anika information",
+    "Retrieve Anika profile",
+    "Display Anika record",
+    "Tell me about Anika representative details",
+    "Information about Anika",
+    "Profile of Anika",
+    "Details for Anika",
+    "Anika details",
+    "Anika representative information",
+    "Fetch me Anika rep details",
+]
+
+
+@pytest.mark.parametrize("utterance", REPRESENTATIVE_DETAIL_UTTERANCES)
+@pytest.mark.asyncio
+async def test_representative_detail_phrasings_route_to_filtered_query(monkeypatch, utterance):
+    db = FakeDatabase([])
+
+    async def agent_must_not_run(**_):
+        pytest.fail("Representative detail phrasing must bypass investigation classification")
+
+    monkeypatch.setattr(chat, "investigation_chat_agent", agent_must_not_run)
+    response = await chat.investigation_chat(chat.ChatRequest(message=utterance), db)
+
+    assert response["action"] == "DATA_RESULT"
+    assert response["data"]["table"] == "representatives"
+    assert db.calls[0][1]["record_name"] == "%Anika%"
+
+
+GENERIC_REPRESENTATIVE_QUERIES = [
+    ("Show representatives", None),
+    ("Show all representatives", None),
+    ("List representatives", None),
+    ("List all reps", None),
+    ("Fetch representatives", None),
+    ("Fetch all reps", None),
+    ("Get representatives", None),
+    ("Find representatives", None),
+    ("Show active representatives", "Active"),
+    ("List active reps", "Active"),
+    ("Fetch active representatives", "Active"),
+    ("Find active reps", "Active"),
+    ("Show inactive representatives", "Inactive"),
+    ("List inactive reps", "Inactive"),
+    ("Fetch inactive representatives", "Inactive"),
+]
+
+
+@pytest.mark.parametrize(("utterance", "expected_status"), GENERIC_REPRESENTATIVE_QUERIES)
+@pytest.mark.asyncio
+async def test_generic_representative_queries_never_invent_a_person(monkeypatch, utterance, expected_status):
+    db = FakeDatabase([])
+
+    async def agent_must_not_run(**_):
+        pytest.fail("Explicit representative table query must bypass the LLM")
+
+    monkeypatch.setattr(chat, "investigation_chat_agent", agent_must_not_run)
+    response = await chat.investigation_chat(chat.ChatRequest(message=utterance), db)
+
+    assert response["action"] == "DATA_RESULT"
+    assert "record_name" not in db.calls[0][1]
+    assert db.calls[0][1].get("status") == expected_status
+
+
+TABLE_ALIAS_CASES = [
+    ("representative", "representatives"),
+    ("reps", "representatives"),
+    ("doctor", "doctors"),
+    ("doctors", "doctors"),
+    ("product", "products"),
+    ("products", "products"),
+    ("territory", "territories"),
+    ("territories", "territories"),
+    ("assignment", "representative_doctor_assignments"),
+    ("sales", "sales"),
+    ("prescriptions", "prescriptions"),
+    ("payouts", "incentive_payouts"),
+]
+
+
+@pytest.mark.parametrize(("alias", "table"), TABLE_ALIAS_CASES)
+def test_governed_table_aliases_are_resolved(alias, table):
+    assert chat.requested_table(f"Show {alias}", {}) == table
+
+
+DETERMINISTIC_COMMAND_CASES = [
+    ("Run root cause analysis", "ROOT_CAUSE_ANALYSIS"),
+    ("Drill down into the causes", "ROOT_CAUSE_ANALYSIS"),
+    ("Investigate further", "ROOT_CAUSE_ANALYSIS"),
+    ("Focus the highest-severity chart", "CHART_INSIGHT"),
+    ("Explain chart", "CHART_INSIGHT"),
+    ("Which bar is highest?", "CHART_INSIGHT"),
+    ("Run reviewer checks", "REVIEW_ASSISTANCE"),
+    ("Check for missing evidence", "REVIEW_ASSISTANCE"),
+    ("Review the investigation evidence", "REVIEW_ASSISTANCE"),
+    ("Compare with peers", "PEER_COMPARISON"),
+    ("Peer comparison", "PEER_COMPARISON"),
+    ("Give me a summary of the findings", "FINDINGS_SUMMARY"),
+    ("Summarize the findings", "FINDINGS_SUMMARY"),
+    ("Print investigation summary", "PRINT_SUMMARY"),
+    ("Export summary", "PRINT_SUMMARY"),
+]
+
+
+@pytest.mark.parametrize(("utterance", "expected_action"), DETERMINISTIC_COMMAND_CASES)
+@pytest.mark.asyncio
+async def test_context_commands_bypass_llm_and_keep_investigation(monkeypatch, utterance, expected_action):
+    async def agent_must_not_run(**_):
+        pytest.fail("Governed context command must not be reclassified by the LLM")
+
+    monkeypatch.setattr(chat, "investigation_chat_agent", agent_must_not_run)
+    response = await chat.investigation_chat(
+        chat.ChatRequest(message=utterance, context=investigation_context()), FakeDatabase()
+    )
+
+    assert response["action"] == expected_action
+
+
+FOCUSED_FINDING_CASES = [
+    "Explain this finding",
+    "Explain current finding",
+    "Why was P022 flagged?",
+    "Explain P022",
+    "Explain sales prescription mismatch",
+    "Tell me about this finding",
+    "What evidence supports this finding?",
+    "Why was this finding created?",
+    "Explain the P022 finding",
+    "Finding details for P022",
+]
+
+
+@pytest.mark.parametrize("utterance", FOCUSED_FINDING_CASES)
+def test_finding_selection_remains_on_focused_p022(utterance):
+    response = chat.explain_finding(investigation_context(), utterance)
+
+    assert response["action"] == "FINDING_EXPLANATION"
+    assert response["finding"]["product_id"] == "P022"
+    assert response["finding"]["type"] == "sales_prescription_mismatch"
+
+
+PEER_TABLE_UTTERANCES = [
+    "Show me a table of the peers",
+    "Show peer table",
+    "List peers in a table",
+    "Table of peer comparisons",
+    "Show the peer comparison table",
+    "List peer results",
+    "Show peers",
+    "Peer table please",
+]
+
+
+@pytest.mark.parametrize("utterance", PEER_TABLE_UTTERANCES)
+@pytest.mark.asyncio
+async def test_peer_table_phrasings_return_table_display(monkeypatch, utterance):
+    async def agent_must_not_run(**_):
+        pytest.fail("Peer table phrasing must not restart an investigation")
+
+    monkeypatch.setattr(chat, "investigation_chat_agent", agent_must_not_run)
+    response = await chat.investigation_chat(
+        chat.ChatRequest(message=utterance, context=investigation_context()), FakeDatabase()
+    )
+
+    assert response["action"] == "PEER_COMPARISON"
+    assert response["display"] == "table"
+
+
+REPRESENTATIVE_FILTER_CASES = [
+    ("I want Anika", "Anika"),
+    ("Only Anika", "Anika"),
+    ("Just Anika", "Anika"),
+    ("Get Anika Tailor details", "Anika Tailor"),
+    ("Fetch FR0027 representative details", "FR0027"),
+    ("Details for Anika Tailor", "Anika Tailor"),
+    ("Show active representatives", None),
+    ("Fetch all reps", None),
+]
+
+
+@pytest.mark.parametrize(("utterance", "expected_filter"), REPRESENTATIVE_FILTER_CASES)
+def test_representative_name_and_id_extraction(utterance, expected_filter):
+    assert chat.representative_filter(utterance, {}) == expected_filter

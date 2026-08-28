@@ -44,10 +44,6 @@ TABLE_ALIASES = {
     "payout": "incentive_payouts", "payouts": "incentive_payouts",
 }
 
-REPRESENTATIVE_QUERY_PHRASES = (
-    "rep details", "representative details", "rep record", "representative record",
-)
-
 DISPLAY_COLUMNS = {
     "representatives": ["representative_id", "first_name", "last_name", "territory_id", "status"],
     "doctors": ["doctor_id", "doctor_name", "specialization", "territory_id", "status"],
@@ -92,18 +88,28 @@ def representative_filter(message: str, entities: dict[str, Any]) -> str | None:
     supplied = entities.get("representative_name") or entities.get("representative_id") or entities.get("name")
     if supplied:
         return str(supplied).strip()
+    cleaned_message = re.sub(r"([A-Za-z])['’]s\b", r"\1", message)
+    name_token = r"([A-Za-z0-9][A-Za-z0-9' -]{1,60})"
     patterns = (
-        r"(?:fetch|get|find|show|give me|details? (?:for|of))\s+(?:me\s+)?(?:the\s+)?(?:rep(?:resentative)?\s+)?(?:details?\s+(?:for|of)\s+)?([A-Za-z][A-Za-z' -]{1,60})",
-        r"(?:i want|only|just)\s+([A-Za-z][A-Za-z' -]{1,60})",
+        rf"(?:fetch|get|find|show|give me|tell me about|look up|lookup|retrieve|display|details? (?:for|of)|information (?:for|on|about)|profile (?:for|of))\s+(?:me\s+)?(?:the\s+)?(?:rep(?:resentative)?\s+)?(?:(?:details?|information|profile|records?)\s+(?:for|of|on|about)\s+)?{name_token}",
+        rf"(?:i want|only|just)\s+{name_token}",
+        rf"^\s*{name_token}\s+(?:rep(?:resentative)?\s+)?(?:details?|information|profile|record)\s*[?.!]*\s*$",
     )
     for pattern in patterns:
-        match = re.search(pattern, message, flags=re.IGNORECASE)
+        match = re.search(pattern, cleaned_message, flags=re.IGNORECASE)
         if match:
             value = match.group(1).strip()
-            value = re.sub(r"\s+(?:rep(?:resentative)?\s+)?(?:details?|records?|information)$", "", value, flags=re.IGNORECASE)
+            value = re.sub(r"\s+(?:rep(?:resentative)?\s+)?(?:details?|records?|information|profile)$", "", value, flags=re.IGNORECASE)
+            value = re.sub(r"\s+(?:rep|representative)$", "", value, flags=re.IGNORECASE)
             if value and not re.fullmatch(r"(?:(?:all|active|inactive)\s+)?(?:reps?|representatives?)", value, flags=re.IGNORECASE):
                 return value
     return None
+
+
+def is_representative_detail_request(message: str, entities: dict[str, Any] | None = None) -> bool:
+    lowered = message.lower()
+    asks_for_detail = any(word in lowered for word in ("detail", "information", "profile", "record"))
+    return asks_for_detail and representative_filter(message, entities or {}) is not None
 
 
 async def resolve_representative(db: AsyncSession, representative_name: str) -> dict[str, Any]:
@@ -426,12 +432,12 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
         return chart_insight(request.context, request.message)
     if ("review" in lowered and "evidence" in lowered) or any(phrase in lowered for phrase in ("reviewer", "review checks", "unsupported conclusion", "missing evidence")):
         return reviewer_assistance(request.context)
-    if "compare with peer" in lowered or "peer comparison" in lowered or "compare to peer" in lowered:
-        return peer_comparison(request.context)
     if "peer" in lowered and any(word in lowered for word in ("table", "list", "show")):
         response = peer_comparison(request.context)
         response["display"] = "table"
         return response
+    if "compare with peer" in lowered or "peer comparison" in lowered or "compare to peer" in lowered:
+        return peer_comparison(request.context)
     if any(phrase in lowered for phrase in ("summary of the findings", "summarize the findings", "summarise the findings", "findings summary")):
         return findings_summary(request.context)
     if "explain this finding" in lowered or "explain current finding" in lowered:
@@ -447,7 +453,7 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
     if any(word in lowered for word in ("finding", "evidence supports", "why was")) and request.context and request.context.result:
         return explain_finding(request.context, request.message)
     query_table = requested_table(request.message, {})
-    is_rep_detail_request = any(phrase in lowered for phrase in REPRESENTATIVE_QUERY_PHRASES)
+    is_rep_detail_request = is_representative_detail_request(request.message)
     if (query_table and any(word in lowered for word in ("show", "list", "table", "query", "find", "fetch", "get"))) or is_rep_detail_request:
         return await run_read_only_query(db, request.message, {"table": query_table or "representatives"})
     intent = await investigation_chat_agent(message=request.message, conversation=request.conversation, context=request.context.model_dump() if request.context else {})
