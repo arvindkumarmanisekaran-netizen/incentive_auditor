@@ -506,6 +506,97 @@ function isGaugeOption(option: EChartsCoreOption) {
   return series.some((entry) => (entry as Record<string, unknown>).type === "gauge");
 }
 
+function isPieOption(option: EChartsCoreOption) {
+  const incoming = option as Record<string, unknown>;
+  const series = Array.isArray(incoming.series) ? incoming.series : [];
+  return series.some((entry) => (entry as Record<string, unknown>).type === "pie");
+}
+
+function polarPoint(cx: number, cy: number, radius: number, angle: number) {
+  const radians = (angle * Math.PI) / 180;
+  return { x: cx + radius * Math.cos(radians), y: cy + radius * Math.sin(radians) };
+}
+
+function donutSegmentPath(startAngle: number, endAngle: number, outerRadius = 68, innerRadius = 42) {
+  const cx = 120;
+  const cy = 88;
+  const outerStart = polarPoint(cx, cy, outerRadius, startAngle);
+  const outerEnd = polarPoint(cx, cy, outerRadius, endAngle);
+  const innerEnd = polarPoint(cx, cy, innerRadius, endAngle);
+  const innerStart = polarPoint(cx, cy, innerRadius, startAngle);
+  const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+  return [
+    `M ${outerStart.x} ${outerStart.y}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerEnd.x} ${outerEnd.y}`,
+    `L ${innerEnd.x} ${innerEnd.y}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerStart.x} ${innerStart.y}`,
+    "Z",
+  ].join(" ");
+}
+
+function HolographicPieChart({ option, height, ariaLabel, className }: SignalChartProps) {
+  const incoming = option as Record<string, unknown>;
+  const pie = ((Array.isArray(incoming.series) ? incoming.series : [])
+    .find((entry) => (entry as Record<string, unknown>).type === "pie") ?? {}) as Record<string, unknown>;
+  const data = (Array.isArray(pie.data) ? pie.data : []).map((datum, index) => {
+    const record = datum && typeof datum === "object" ? datum as Record<string, unknown> : {};
+    const style = (record.itemStyle ?? {}) as Record<string, unknown>;
+    return {
+      name: String(record.name ?? `Segment ${index + 1}`),
+      value: Math.max(0, Number(record.value ?? 0)),
+      color: typeof style.color === "string"
+        ? style.color
+        : [SIGNAL_CHART.lime, SIGNAL_CHART.mint, SIGNAL_CHART.amber, SIGNAL_CHART.danger][index % 4],
+    };
+  });
+  const total = Math.max(1, data.reduce((sum, item) => sum + item.value, 0));
+  let cursor = -90;
+  const segments = data.map((item) => {
+    const sweep = (item.value / total) * 360;
+    const padding = Math.min(2.4, sweep * .12);
+    const start = cursor + padding / 2;
+    const end = cursor + sweep - padding / 2;
+    cursor += sweep;
+    return { ...item, path: donutSegmentPath(start, Math.max(start + .1, end)), percent: item.value / total * 100 };
+  });
+  const [tooltip, setTooltip] = useState<FloatingTooltip | null>(null);
+
+  return (
+    <div className={`signal-chart holographic-pie-chart radial-hologram-chart ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+      <span className="radial-hologram-platform" aria-hidden="true" />
+      <svg className="holographic-pie-svg" viewBox="0 0 240 190" aria-hidden="true">
+        <g className="holographic-pie-depth" transform="translate(0 10)">
+          {segments.map((segment) => <path key={`depth-${segment.name}`} d={segment.path} fill={segment.color} />)}
+        </g>
+        <g className="holographic-pie-surface">
+          {segments.map((segment, index) => (
+            <path
+              className="holographic-pie-segment"
+              key={segment.name}
+              d={segment.path}
+              fill={segment.color}
+              tabIndex={0}
+              style={{ "--pie-enter-delay": `${index * 75}ms` } as CSSProperties}
+              onMouseMove={(event) => setTooltip({ ...safeTooltipPosition(event.clientX, event.clientY), title: segment.name, context: `${segment.percent.toFixed(2)}%`, value: new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(segment.value), color: segment.color })}
+              onMouseLeave={() => setTooltip(null)}
+              onFocus={(event) => {
+                const rect = event.currentTarget.getBoundingClientRect();
+                setTooltip({ ...safeTooltipPosition(rect.left + rect.width / 2, rect.top), title: segment.name, context: `${segment.percent.toFixed(2)}%`, value: new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(segment.value), color: segment.color });
+              }}
+              onBlur={() => setTooltip(null)}
+            />
+          ))}
+        </g>
+        <ellipse className="holographic-pie-inner-glow" cx="120" cy="96" rx="39" ry="18" />
+      </svg>
+      <div className="holographic-pie-legend">
+        {segments.map((segment) => <span key={`legend-${segment.name}`}><i style={{ background: segment.color }} />{segment.name}</span>)}
+      </div>
+      <ChartTooltipPortal tooltip={tooltip} />
+    </div>
+  );
+}
+
 function HolographicGaugeChart({ option, height, ariaLabel, className }: SignalChartProps) {
   const incoming = option as Record<string, unknown>;
   const gauge = ((Array.isArray(incoming.series) ? incoming.series : [])
@@ -582,14 +673,25 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const towerWidth = compactGroupedBars ? 20 : 34;
   const towerSpacing = compactGroupedBars ? 30 : 52;
   const [tooltipPortal, setTooltipPortal] = useState<FloatingTooltip | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const isVisible = useInView(viewportRef, { once: true, amount: .18 });
 
   return (
-    <div className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+    <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${hoveredCategory !== null ? " has-active-category" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <div className="skyscraper-horizon" aria-hidden="true" />
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
         {categories.map((category, categoryIndex) => (
-          <div className="skyscraper-block" key={`${category}-${categoryIndex}`} style={{ left: `${((categoryIndex + .5) / Math.max(1, categories.length)) * 100}%` }}>
+          <div
+            className={`skyscraper-block${hoveredCategory === categoryIndex ? " is-active-category" : ""}`}
+            key={`${category}-${categoryIndex}`}
+            style={{ left: `${((categoryIndex + .5) / Math.max(1, categories.length)) * 100}%` }}
+            onMouseEnter={() => setHoveredCategory(categoryIndex)}
+            onMouseLeave={() => setHoveredCategory(null)}
+            onFocusCapture={() => setHoveredCategory(categoryIndex)}
+            onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHoveredCategory(null); }}
+          >
             <div className="skyscraper-cluster">
               {series.map((item, seriesIndex) => {
                 const data = Array.isArray(item.data) ? item.data : [];
@@ -650,6 +752,7 @@ export default function SignalChart({
 }: SignalChartProps) {
   const useSkyscraperRenderer = isVerticalBarOption(option);
   const useGaugeRenderer = isGaugeOption(option);
+  const usePieRenderer = isPieOption(option);
   const useRadialPresentation = isRadialOption(option);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -709,6 +812,10 @@ export default function SignalChart({
 
   if (useGaugeRenderer) {
     return <HolographicGaugeChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
+  }
+
+  if (usePieRenderer) {
+    return <HolographicPieChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
   }
 
   return (
