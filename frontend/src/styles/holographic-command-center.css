@@ -906,6 +906,146 @@
   .radial-hologram-chart .signal-chart-canvas { animation: none !important; }
 }
 
+/* Dedicated holographic gauge: layered glass arc, lowered depth shell and a
+   projected floor. This is intentionally DOM/SVG based so it has the same
+   dimensional character as the skyscraper renderer. */
+.holographic-gauge-chart {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden !important;
+  perspective: 760px;
+}
+
+.holographic-gauge-svg {
+  position: absolute;
+  inset: 4% 7% 11%;
+  z-index: 2;
+  width: 86%;
+  height: 85%;
+  overflow: visible;
+  filter: drop-shadow(8px 13px 9px rgba(30,64,175,.20));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .06s both;
+}
+
+.holographic-gauge-svg circle {
+  fill: none;
+  stroke-linecap: round;
+  transform: rotate(150deg);
+  transform-origin: 100px 100px;
+}
+
+.gauge-depth {
+  stroke: rgba(30,64,175,.25);
+  stroke-width: 17;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 8px 5px rgba(30,64,175,.25));
+}
+
+.gauge-track {
+  stroke: rgba(191,219,254,.52);
+  stroke-width: 14;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 0 7px rgba(56,189,248,.18));
+}
+
+.gauge-progress-glow,
+.gauge-progress {
+  stroke-width: 14;
+  stroke-dasharray: var(--gauge-progress) 100;
+}
+
+.gauge-progress-glow {
+  stroke: rgba(34,211,238,.32);
+  stroke-width: 22;
+  filter: blur(5px);
+}
+
+.gauge-progress {
+  animation: holographic-gauge-draw 1s cubic-bezier(.22,1,.36,1) .18s both;
+}
+
+.holographic-gauge-value {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  z-index: 4;
+  display: grid;
+  gap: 7px;
+  color: #0f172a;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  animation: gauge-value-arrive .55s ease-out .45s both;
+}
+
+.holographic-gauge-value strong {
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 680;
+  letter-spacing: -.035em;
+  text-shadow: 0 2px 0 #fff, 0 0 13px rgba(56,189,248,.24);
+}
+
+.holographic-gauge-value span {
+  color: #475569;
+  font-size: .62rem;
+  font-weight: 650;
+}
+
+@keyframes holographic-gauge-draw {
+  from { stroke-dasharray: 0 100; opacity: 0; }
+  to { stroke-dasharray: var(--gauge-progress) 100; opacity: 1; }
+}
+
+@keyframes gauge-value-arrive {
+  from { opacity: 0; transform: translate(-50%, -38%) scale(.86); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Page-level tooltips are never constrained by chart/card overflow. */
+.chart-tooltip-portal {
+  position: fixed;
+  z-index: 2147483647;
+  display: grid;
+  gap: 3px;
+  width: max-content;
+  max-width: 260px;
+  padding: 9px 11px;
+  pointer-events: none;
+  color: #0f172a;
+  border: 1px solid rgba(37,99,235,.20);
+  border-radius: 9px;
+  background: rgba(255,255,255,.985);
+  box-shadow: 0 14px 38px rgba(15,23,42,.16), 0 0 16px rgba(56,189,248,.12);
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  transform: translate(-50%, calc(-100% - 14px));
+}
+
+.chart-tooltip-portal span { color: #475569; }
+.chart-tooltip-portal b { display: inline-flex; align-items: center; gap: 6px; font-weight: 780; }
+.chart-tooltip-portal i { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 7px currentColor; }
+
+/* Readable axes and category labels across both ECharts and DOM charts. */
+.skyscraper-label {
+  color: #334155 !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  line-height: 1.25;
+  text-shadow: 0 1px 0 #fff, 0 0 4px rgba(255,255,255,.95);
+  opacity: 1 !important;
+}
+
+.signal-chart canvas {
+  image-rendering: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holographic-gauge-svg,
+  .gauge-progress,
+  .holographic-gauge-value { animation: none !important; }
+}
+
 @media (max-width: 900px) {
   :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
     .peer-analysis-grid, .insights-grid) {
