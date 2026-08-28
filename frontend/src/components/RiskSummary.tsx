@@ -1,4 +1,3 @@
-import "../styles/index.css";
 
 type RiskSummaryProps = {
   riskScore: number;
