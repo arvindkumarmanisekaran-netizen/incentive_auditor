@@ -494,6 +494,13 @@ function isVerticalBarOption(option: EChartsCoreOption) {
   return xAxis.type === "category" && series.some((entry) => (entry as Record<string, unknown>).type === "bar");
 }
 
+function isHorizontalBarOption(option: EChartsCoreOption) {
+  const incoming = option as Record<string, unknown>;
+  const yAxis = (Array.isArray(incoming.yAxis) ? incoming.yAxis[0] : incoming.yAxis ?? {}) as Record<string, unknown>;
+  const series = Array.isArray(incoming.series) ? incoming.series : [];
+  return yAxis.type === "category" && series.some((entry) => (entry as Record<string, unknown>).type === "bar");
+}
+
 function isRadialOption(option: EChartsCoreOption) {
   const incoming = option as Record<string, unknown>;
   const series = Array.isArray(incoming.series) ? incoming.series : [];
@@ -717,11 +724,9 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
 
   return (
     <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${selectedCategories.size > 0 ? " has-selected-categories" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
-      <div className="skyscraper-horizon" aria-hidden="true" />
       <div className="skyscraper-value-axis" aria-hidden="true">
         {axisTicks.map((tick) => <span key={tick.ratio} style={{ top: `${(1 - tick.ratio) * 100}%` }}>{tick.label}</span>)}
       </div>
-      <span className="skyscraper-reference-label" aria-hidden="true">{formatAxisValue(0)} · Reference</span>
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
         {categories.map((category, categoryIndex) => (
@@ -804,6 +809,55 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   );
 }
 
+function HolographicHorizontalBarChart({ option, height, ariaLabel, className }: SignalChartProps) {
+  const incoming = option as Record<string, unknown>;
+  const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
+  const yAxis = (Array.isArray(incoming.yAxis) ? incoming.yAxis[0] : incoming.yAxis ?? {}) as Record<string, unknown>;
+  const categories = Array.isArray(yAxis.data) ? yAxis.data.map(String) : [];
+  const series = ((Array.isArray(incoming.series) ? incoming.series : [])
+    .find((entry) => (entry as Record<string, unknown>).type === "bar") ?? {}) as Record<string, unknown>;
+  const data = Array.isArray(series.data) ? series.data : [];
+  const values = data.map((datum) => Number(datum && typeof datum === "object" ? (datum as Record<string, unknown>).value : datum) || 0);
+  const maximum = Math.max(Number(xAxis.max ?? 0), 1, ...values);
+  const markLine = (series.markLine ?? {}) as Record<string, unknown>;
+  const markData = Array.isArray(markLine.data) ? markLine.data : [];
+  const peerValue = Number((markData[0] as Record<string, unknown> | undefined)?.xAxis ?? 100);
+  const itemStyle = (series.itemStyle ?? {}) as Record<string, unknown>;
+  const color = typeof itemStyle.color === "string" ? itemStyle.color : SIGNAL_CHART.lime;
+  const [tooltip, setTooltip] = useState<FloatingTooltip | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const isVisible = useInView(viewportRef, { once: true, amount: .18 });
+
+  return (
+    <div ref={viewportRef} className={`signal-chart holographic-horizontal-chart${isVisible ? " is-entered" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+      <div className="horizontal-chart-grid" aria-hidden="true" />
+      <span className="horizontal-peer-marker" style={{ left: `${Math.min(100, peerValue / maximum * 100)}%` }}>Peer 100</span>
+      <div className="horizontal-chart-rows">
+        {categories.map((category, index) => {
+          const value = values[index] ?? 0;
+          const formatted = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(value);
+          return (
+            <div className="horizontal-chart-row" key={category}>
+              <span className="horizontal-chart-label">{category}</span>
+              <div
+                className="horizontal-tower-track"
+                tabIndex={0}
+                onMouseMove={(event) => setTooltip({ ...safeTooltipPosition(event.clientX, event.clientY), title: category, context: String(series.name ?? "Representative index"), value: formatted, color })}
+                onMouseLeave={() => setTooltip(null)}
+                onFocus={(event) => { const rect = event.currentTarget.getBoundingClientRect(); setTooltip({ ...safeTooltipPosition(rect.left + rect.width / 2, rect.top), title: category, context: String(series.name ?? "Representative index"), value: formatted, color }); }}
+                onBlur={() => setTooltip(null)}
+              >
+                <span className="horizontal-tower" style={{ "--horizontal-width": `${Math.min(100, value / maximum * 100)}%`, "--horizontal-color": color, "--horizontal-delay": `${index * 100}ms` } as CSSProperties}><i /></span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <ChartTooltipPortal tooltip={tooltip} />
+    </div>
+  );
+}
+
 export default function SignalChart({
   option,
   className = "",
@@ -811,6 +865,8 @@ export default function SignalChart({
   ariaLabel = "Interactive data chart",
 }: SignalChartProps) {
   const useSkyscraperRenderer = isVerticalBarOption(option);
+  const useHorizontalBarRenderer = isHorizontalBarOption(option);
+  const useCustomBarRenderer = useSkyscraperRenderer || useHorizontalBarRenderer;
   const useGaugeRenderer = isGaugeOption(option);
   const usePieRenderer = isPieOption(option);
   const useRadialPresentation = isRadialOption(option);
@@ -826,7 +882,7 @@ export default function SignalChart({
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element || !isFirstView || useSkyscraperRenderer) return;
+    if (!element || !isFirstView || useCustomBarRenderer) return;
 
     const chart = echarts.init(element, undefined, { renderer: "canvas" });
     chartRef.current = chart;
@@ -858,16 +914,20 @@ export default function SignalChart({
       chart.dispose();
       chartRef.current = null;
     };
-  }, [isFirstView, reducedMotion, useSkyscraperRenderer]);
+  }, [isFirstView, reducedMotion, useCustomBarRenderer]);
 
   useEffect(() => {
-    if (!isFirstView || !chartRef.current || useSkyscraperRenderer) return;
+    if (!isFirstView || !chartRef.current || useCustomBarRenderer) return;
     const chart = chartRef.current;
     if (hasAnimatedRef.current) chart.setOption(withSignalTheme(option), { notMerge: true });
-  }, [isFirstView, option, useSkyscraperRenderer]);
+  }, [isFirstView, option, useCustomBarRenderer]);
 
   if (useSkyscraperRenderer) {
     return <SkyscraperChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
+  }
+
+  if (useHorizontalBarRenderer) {
+    return <HolographicHorizontalBarChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
   }
 
   if (useGaugeRenderer) {

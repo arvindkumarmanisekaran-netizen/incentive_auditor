@@ -76,7 +76,7 @@ function getProductName(finding: unknown) {
 
 function insightBarOption(
   categories: string[],
-  series: Array<{ name: string; values: number[]; color: string }>,
+  series: Array<{ name: string; values: number[]; color: string; colors?: string[] }>,
   formatter: "percent" | "money",
 ): EChartsCoreOption {
   return {
@@ -106,10 +106,10 @@ function insightBarOption(
     series: series.map((item) => ({
       type: "bar",
       name: item.name,
-      data: item.values.map((value) => ({
+      data: item.values.map((value, valueIndex) => ({
         value,
         itemStyle: {
-          color: item.color,
+          color: item.colors?.[valueIndex] ?? item.color,
           borderRadius: value >= 0 ? [5, 5, 1, 1] : [1, 1, 5, 5],
         },
       })),
@@ -433,7 +433,7 @@ function InvestigationInsights({ result }: Props) {
               <SignalChart
                 option={insightBarOption(
                   payoutData.map((item) => item.name),
-                  [{ name: "Payout", values: payoutData.map((item) => item.amount), color: COLORS.actual }],
+                  [{ name: "Payout", values: payoutData.map((item) => item.amount), color: COLORS.actual, colors: payoutData.map((item) => item.fill) }],
                   "money",
                 )}
                 height="80%"

@@ -689,21 +689,6 @@
   text-align: center;
   transform: translateX(-50%);
 }
-.skyscraper-reference-label {
-  position: absolute;
-  left: 10%;
-  bottom: 34px;
-  z-index: 5;
-  padding: 2px 7px;
-  border: 1px solid rgba(6,182,212,.22);
-  border-radius: 999px;
-  color: #334155;
-  background: rgba(255,255,255,.90);
-  box-shadow: 0 2px 8px rgba(37,99,235,.10);
-  font-size: 8.5px;
-  font-weight: 720;
-  letter-spacing: .01em;
-}
 .skyscraper-value-axis {
   position: absolute;
   top: 30px;
@@ -714,6 +699,79 @@
   pointer-events: none;
   border-right: 1px solid rgba(37,99,235,.20);
 }
+
+/* Horizontal peer index uses the same projected glass/tower system as the
+   vertical charts, with a width-growth entrance instead of a flat canvas. */
+.holographic-horizontal-chart {
+  position: relative;
+  min-height: 270px;
+  overflow: hidden;
+  padding: 42px 22px 22px 18px;
+  border: 1px solid rgba(37,99,235,.16);
+  border-radius: 9px;
+  background:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px),
+    radial-gradient(ellipse at 58% 82%, rgba(56,189,248,.20), transparent 46%),
+    linear-gradient(180deg, rgba(250,253,255,.99), rgba(239,247,255,.98));
+  background-size: 30px 30px, 30px 30px, auto, auto;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 32px rgba(37,99,235,.07), 0 0 18px rgba(56,189,248,.10);
+}
+.horizontal-chart-grid { position: absolute; inset: 22px 20px 20px 110px; border-bottom: 1px solid rgba(6,182,212,.48); pointer-events: none; }
+.horizontal-chart-rows { position: relative; z-index: 3; display: grid; gap: 27px; }
+.horizontal-chart-row { display: grid; grid-template-columns: 86px minmax(0,1fr); align-items: center; gap: 12px; min-width: 0; }
+.horizontal-chart-label { color: #334155; font-size: 10px; font-weight: 720; text-align: right; }
+.horizontal-tower-track { position: relative; height: 30px; outline: none; }
+.horizontal-tower {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: var(--horizontal-width);
+  height: 21px;
+  border: 1px solid color-mix(in srgb, var(--horizontal-color) 55%, white);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--horizontal-color) 50%, white), var(--horizontal-color));
+  box-shadow: 7px 9px 10px rgba(30,64,175,.20), 0 0 10px color-mix(in srgb, var(--horizontal-color) 25%, transparent);
+  transform-origin: 0 50%;
+  transition: filter .18s ease, transform .18s ease;
+}
+.horizontal-tower::before { position:absolute; top:-7px; right:-10px; left:5px; height:7px; content:""; background:color-mix(in srgb,var(--horizontal-color) 42%,white); clip-path:polygon(0 100%,10px 0,100% 0,calc(100% - 10px) 100%); }
+.horizontal-tower::after { position:absolute; top:-7px; right:-10px; width:10px; height:28px; content:""; background:color-mix(in srgb,var(--horizontal-color) 70%,#0f172a); clip-path:polygon(0 7px,100% 0,100% 21px,0 100%); }
+.horizontal-tower i { position:absolute; inset:4px 8px; background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(255,255,255,.32) 18px 19px); }
+.holographic-horizontal-chart:not(.is-entered) .horizontal-tower { transform: scaleX(.02); opacity:0; }
+.holographic-horizontal-chart.is-entered .horizontal-tower { animation: horizontal-tower-grow .85s cubic-bezier(.22,1,.36,1) var(--horizontal-delay) both; }
+.horizontal-tower-track:hover .horizontal-tower, .horizontal-tower-track:focus-visible .horizontal-tower { filter:brightness(1.12) saturate(1.1); transform:translateY(-3px); }
+.horizontal-peer-marker { position:absolute; top:16px; bottom:18px; z-index:4; margin-left:110px; padding-left:5px; color:#a21caf; border-left:1px dashed #d946ef; font-size:9px; font-weight:750; pointer-events:none; }
+@keyframes horizontal-tower-grow { from { opacity:0; transform:scaleX(.02); } to { opacity:1; transform:scaleX(1); } }
+
+/* Remaining analytical surfaces share the chart console styling instead of
+   falling back to the older flat white cards. */
+.peer-indicator-card .product-status-grid { gap: 10px !important; padding: 8px !important; }
+.peer-indicator-card .product-status-card {
+  overflow: hidden;
+  padding: 12px 13px !important;
+  border: 1px solid rgba(37,99,235,.16) !important;
+  border-radius: 9px !important;
+  color: #334155 !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(239,247,255,.96)) !important;
+  box-shadow: 6px 8px 12px rgba(30,64,175,.10), inset 0 0 18px rgba(56,189,248,.05);
+}
+.peer-indicator-card .product-status-card::after { position:absolute; right:0; bottom:0; left:0; height:2px; content:""; background:linear-gradient(90deg,transparent,#38bdf8,transparent); opacity:.55; }
+.peer-indicator-card .product-status-card.active { border-color:rgba(37,99,235,.42) !important; background:linear-gradient(145deg,#eff6ff,#dbeafe) !important; box-shadow:0 0 18px rgba(56,189,248,.18), 7px 10px 13px rgba(30,64,175,.12); }
+.peer-indicator-card .product-title { color:#0f172a !important; font-weight:760 !important; }
+.peer-indicator-card .peer-count { color:#475569 !important; }
+.peer-indicator-card .status-badge.normal { color:#047857 !important; border:1px solid #a7f3d0; background:#ecfdf5 !important; }
+.peer-indicator-card .status-badge.review { color:#b45309 !important; border:1px solid #fde68a; background:#fffbeb !important; }
+
+.historical-position-card { overflow:hidden; background:linear-gradient(180deg,#fbfdff,#eef7ff) !important; }
+.historical-position-card::after { position:absolute; right:8%; bottom:15px; left:8%; height:48%; content:""; pointer-events:none; border:1px solid rgba(14,165,233,.20); background:repeating-linear-gradient(90deg,rgba(37,99,235,.06) 0 1px,transparent 1px 28px),radial-gradient(ellipse,rgba(56,189,248,.13),transparent 68%); transform:perspective(500px) rotateX(62deg); transform-origin:50% 100%; }
+.historical-position-card > * { position:relative; z-index:2; }
+.historical-diverging-bar { height:18px !important; overflow:visible !important; border-color:rgba(37,99,235,.18) !important; background:linear-gradient(180deg,#eaf2ff,#f8fbff) !important; box-shadow:inset 0 0 10px rgba(37,99,235,.10),0 7px 12px rgba(30,64,175,.10); }
+.historical-diverging-bar .position-fill { box-shadow:0 0 13px currentColor; }
+.historical-position-center { background:#2563eb !important; box-shadow:0 0 9px rgba(37,99,235,.45); }
+
+.overall-behaviour-grid .holographic-pie-chart { border-color:rgba(37,99,235,.18) !important; background:linear-gradient(rgba(37,99,235,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.055) 1px,transparent 1px),radial-gradient(ellipse at 50% 76%,rgba(56,189,248,.22),transparent 43%),linear-gradient(180deg,#fbfdff,#eef7ff) !important; background-size:30px 30px,30px 30px,auto,auto !important; box-shadow:inset 0 0 32px rgba(37,99,235,.07),8px 12px 16px rgba(30,64,175,.11) !important; }
+.overall-behaviour-grid .holographic-pie-svg { transform:perspective(680px) rotateX(15deg) translateY(-4px) !important; filter:drop-shadow(9px 15px 9px rgba(30,64,175,.24)) drop-shadow(0 0 12px rgba(34,211,238,.24)) !important; }
 .skyscraper-value-axis span {
   position: absolute;
   right: 7px;
