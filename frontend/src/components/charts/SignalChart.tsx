@@ -244,14 +244,21 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
         ...itemStyle,
         borderColor: "rgba(255,255,255,.9)",
         borderWidth: 2,
-        shadowBlur: 12,
-        shadowColor: "rgba(30,64,175,.24)",
-        shadowOffsetX: 5,
-        shadowOffsetY: 8,
+        opacity: itemStyle.opacity ?? .84,
+        shadowBlur: 16,
+        shadowColor: "rgba(14,165,233,.34)",
+        shadowOffsetX: 6,
+        shadowOffsetY: 10,
+      },
+      emphasis: {
+        ...((item.emphasis ?? {}) as Record<string, unknown>),
+        scale: true,
+        scaleSize: 5,
+        itemStyle: { opacity: .96, shadowBlur: 24, shadowColor: "rgba(37,99,235,.42)" },
       },
     } : type === "gauge" ? {
-      progress: { ...((item.progress ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 10, shadowColor: "rgba(37,99,235,.3)" },
-      axisLine: { ...((item.axisLine ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 7, shadowColor: "rgba(37,99,235,.16)" },
+      progress: { ...((item.progress ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 16, shadowColor: "rgba(14,165,233,.38)" },
+      axisLine: { ...((item.axisLine ?? {}) as Record<string, unknown>), roundCap: true, shadowBlur: 10, shadowColor: "rgba(37,99,235,.20)" },
     } : {};
     if (type === "bar") {
       const currentBarIndex = barIndex++;
@@ -411,6 +418,15 @@ function isVerticalBarOption(option: EChartsCoreOption) {
   return xAxis.type === "category" && series.some((entry) => (entry as Record<string, unknown>).type === "bar");
 }
 
+function isRadialOption(option: EChartsCoreOption) {
+  const incoming = option as Record<string, unknown>;
+  const series = Array.isArray(incoming.series) ? incoming.series : [];
+  return series.some((entry) => {
+    const type = (entry as Record<string, unknown>).type;
+    return type === "pie" || type === "gauge";
+  });
+}
+
 function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartProps) {
   const incoming = option as Record<string, unknown>;
   const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
@@ -425,9 +441,12 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const tooltip = (incoming.tooltip ?? {}) as Record<string, unknown>;
   const valueFormatter = tooltip.valueFormatter;
   const palette = [SIGNAL_CHART.lime, SIGNAL_CHART.amber, SIGNAL_CHART.mint, SIGNAL_CHART.limeSoft];
+  const compactGroupedBars = categories.length >= 4 && series.length > 1;
+  const towerWidth = compactGroupedBars ? 20 : 34;
+  const towerSpacing = compactGroupedBars ? 30 : 52;
 
   return (
-    <div className={`signal-chart skyscraper-chart ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
+    <div className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <div className="skyscraper-horizon" aria-hidden="true" />
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
@@ -452,10 +471,10 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                       "--tower-height": `${Math.max(22, Math.abs(value) / maximum * 148)}px`,
                       "--tower-color": color,
                       "--tower-depth-index": seriesIndex,
-                      "--tower-x": `${(seriesIndex - (series.length - 1) / 2) * 44 - 17}px`,
+                      "--tower-x": `${(seriesIndex - (series.length - 1) / 2) * towerSpacing - towerWidth / 2}px`,
                       "--tower-y": "0px",
                       "--tower-z": "0px",
-                      zIndex: series.length - seriesIndex,
+                      zIndex: 3,
                     } as CSSProperties}
                     tabIndex={0}
                   >
@@ -483,6 +502,7 @@ export default function SignalChart({
   ariaLabel = "Interactive data chart",
 }: SignalChartProps) {
   const useSkyscraperRenderer = isVerticalBarOption(option);
+  const useRadialPresentation = isRadialOption(option);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<EChartsType | null>(null);
@@ -542,7 +562,7 @@ export default function SignalChart({
   return (
     <motion.div
       ref={viewportRef}
-      className={`signal-chart ${className}`.trim()}
+      className={`signal-chart${useRadialPresentation ? " radial-hologram-chart" : ""} ${className}`.trim()}
       style={{ height }}
       initial={{ opacity: 0, y: 10 }}
       animate={isFirstView ? { opacity: 1, y: 0 } : undefined}
@@ -552,6 +572,7 @@ export default function SignalChart({
       aria-label={ariaLabel}
     >
       <div ref={containerRef} className="signal-chart-canvas" />
+      {useRadialPresentation && <span className="radial-hologram-platform" aria-hidden="true" />}
       <span className="signal-chart-corner" aria-hidden="true" />
     </motion.div>
   );
