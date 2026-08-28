@@ -96,6 +96,23 @@ def _normalize_reasoning_labels(
     representative_id: Any,
 ) -> str:
     text_value = str(value)
+
+    # Planner focus-area identifiers are part of the agent's structured
+    # contract, but they must never leak into human-readable commentary.
+    focus_area_labels = {
+        "sales_trend": "sales trend",
+        "prescription_alignment": "prescription alignment",
+        "territory_behavior": "territory behaviour",
+        "payout_validation": "payout validation",
+    }
+    for focus_area, readable_label in focus_area_labels.items():
+        text_value = re.sub(
+            rf"\b{re.escape(focus_area)}\b",
+            readable_label,
+            text_value,
+            flags=re.IGNORECASE,
+        )
+
     for finding in findings:
         product_id = str(finding.get("product_id") or "").strip()
         if not product_id or product_id.upper() == "ALL":
