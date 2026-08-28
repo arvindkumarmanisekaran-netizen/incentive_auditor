@@ -1,4 +1,5 @@
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import * as echarts from "echarts/core";
 import { BarChart, CustomChart, GaugeChart, LineChart, PieChart, ScatterChart } from "echarts/charts";
@@ -41,6 +42,35 @@ type SignalChartProps = {
   height?: number | string;
   ariaLabel?: string;
 };
+
+type FloatingTooltip = {
+  x: number;
+  y: number;
+  title: string;
+  context?: string;
+  value: string;
+  color?: string;
+};
+
+function safeTooltipPosition(x: number, y: number) {
+  if (typeof window === "undefined") return { x, y };
+  return {
+    x: Math.max(150, Math.min(window.innerWidth - 150, x)),
+    y: Math.max(96, Math.min(window.innerHeight - 18, y)),
+  };
+}
+
+function ChartTooltipPortal({ tooltip }: { tooltip: FloatingTooltip | null }) {
+  if (!tooltip || typeof document === "undefined") return null;
+  return createPortal(
+    <div className="chart-tooltip-portal" style={{ left: tooltip.x, top: tooltip.y }} role="tooltip">
+      <strong>{tooltip.title}</strong>
+      {tooltip.context && <span>{tooltip.context}</span>}
+      <b><i style={{ background: tooltip.color }} />{tooltip.value}</b>
+    </div>,
+    document.body,
+  );
+}
 
 // Shared with chart-option factories colocated in feature components.
 // eslint-disable-next-line react-refresh/only-export-components
@@ -148,6 +178,7 @@ function mergeChartComponent(
     textStyle: {
       ...(defaults.textStyle as Record<string, unknown> | undefined),
       ...(item.textStyle as Record<string, unknown> | undefined),
+      color: "#334155",
       fontFamily: SIGNAL_FONT,
     },
     axisLine: {
@@ -157,13 +188,17 @@ function mergeChartComponent(
     axisLabel: {
       ...(defaults.axisLabel as Record<string, unknown> | undefined),
       ...(item.axisLabel as Record<string, unknown> | undefined),
+      color: "#334155",
       fontFamily: SIGNAL_FONT,
+      fontSize: 11,
+      fontWeight: 600,
     },
     nameTextStyle: {
-      color: SIGNAL_CHART.text,
-      fontFamily: SIGNAL_FONT,
-      fontSize: 10,
       ...(item.nameTextStyle as Record<string, unknown> | undefined),
+      color: "#334155",
+      fontFamily: SIGNAL_FONT,
+      fontSize: 11,
+      fontWeight: 650,
     },
   };
 }
@@ -465,6 +500,70 @@ function isRadialOption(option: EChartsCoreOption) {
   });
 }
 
+function isGaugeOption(option: EChartsCoreOption) {
+  const incoming = option as Record<string, unknown>;
+  const series = Array.isArray(incoming.series) ? incoming.series : [];
+  return series.some((entry) => (entry as Record<string, unknown>).type === "gauge");
+}
+
+function HolographicGaugeChart({ option, height, ariaLabel, className }: SignalChartProps) {
+  const incoming = option as Record<string, unknown>;
+  const gauge = ((Array.isArray(incoming.series) ? incoming.series : [])
+    .find((entry) => (entry as Record<string, unknown>).type === "gauge") ?? {}) as Record<string, unknown>;
+  const datum = (Array.isArray(gauge.data) ? gauge.data[0] : {}) as Record<string, unknown>;
+  const value = Math.max(0, Math.min(100, Number(datum?.value ?? 0)));
+  const label = String(datum?.name ?? ariaLabel ?? "Value");
+  const progress = (gauge.progress ?? {}) as Record<string, unknown>;
+  const progressStyle = (progress.itemStyle ?? {}) as Record<string, unknown>;
+  const color = typeof progressStyle.color === "string" ? progressStyle.color : SIGNAL_CHART.lime;
+  const gaugeId = useId().replaceAll(":", "");
+  const [tooltip, setTooltip] = useState<FloatingTooltip | null>(null);
+  const showTooltip = (x: number, y: number) => setTooltip({
+    ...safeTooltipPosition(x, y),
+    title: label,
+    value: `${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 20 }).format(value)}%`,
+    color,
+  });
+
+  return (
+    <div
+      className={`signal-chart holographic-gauge-chart radial-hologram-chart ${className ?? ""}`.trim()}
+      style={{ height }}
+      role="img"
+      aria-label={`${ariaLabel}: ${value}%`}
+      tabIndex={0}
+      onMouseMove={(event) => showTooltip(event.clientX, event.clientY)}
+      onMouseLeave={() => setTooltip(null)}
+      onFocus={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        showTooltip(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }}
+      onBlur={() => setTooltip(null)}
+    >
+      <span className="radial-hologram-platform" aria-hidden="true" />
+      <svg className="holographic-gauge-svg" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <filter id={`gauge-glow-${gaugeId}`} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+          <linearGradient id={`gauge-shine-${gaugeId}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#e0f2fe" stopOpacity=".95" />
+            <stop offset=".28" stopColor={color} stopOpacity=".86" />
+            <stop offset="1" stopColor="#2563eb" stopOpacity=".72" />
+          </linearGradient>
+        </defs>
+        <circle className="gauge-depth" cx="100" cy="106" r="70" pathLength="100" />
+        <circle className="gauge-track" cx="100" cy="100" r="70" pathLength="100" />
+        <circle className="gauge-progress-glow" cx="100" cy="100" r="70" pathLength="100" style={{ "--gauge-progress": `${value * .6667}` } as CSSProperties} />
+        <circle className="gauge-progress" cx="100" cy="100" r="70" pathLength="100" style={{ "--gauge-progress": `${value * .6667}`, stroke: `url(#gauge-shine-${gaugeId})`, filter: `url(#gauge-glow-${gaugeId})` } as CSSProperties} />
+      </svg>
+      <div className="holographic-gauge-value"><strong>{value.toFixed(value % 1 === 0 ? 0 : 2)}%</strong><span>{label}</span></div>
+      <ChartTooltipPortal tooltip={tooltip} />
+    </div>
+  );
+}
+
 function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartProps) {
   const incoming = option as Record<string, unknown>;
   const xAxis = (Array.isArray(incoming.xAxis) ? incoming.xAxis[0] : incoming.xAxis ?? {}) as Record<string, unknown>;
@@ -482,6 +581,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const compactGroupedBars = categories.length >= 4 && series.length > 1;
   const towerWidth = compactGroupedBars ? 20 : 34;
   const towerSpacing = compactGroupedBars ? 30 : 52;
+  const [tooltipPortal, setTooltipPortal] = useState<FloatingTooltip | null>(null);
 
   return (
     <div className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
@@ -516,12 +616,19 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
                       zIndex: 3,
                     } as CSSProperties}
                     tabIndex={0}
+                    aria-label={`${String(item.name ?? "Value")}, ${category}: ${formatted}`}
+                    onMouseMove={(event) => setTooltipPortal({ ...safeTooltipPosition(event.clientX, event.clientY), title: String(item.name ?? "Value"), context: category, value: formatted, color })}
+                    onMouseLeave={() => setTooltipPortal(null)}
+                    onFocus={(event) => {
+                      const rect = event.currentTarget.getBoundingClientRect();
+                      setTooltipPortal({ ...safeTooltipPosition(rect.left + rect.width / 2, rect.top), title: String(item.name ?? "Value"), context: category, value: formatted, color });
+                    }}
+                    onBlur={() => setTooltipPortal(null)}
                   >
                     <span className="tower-face tower-front" />
                     <span className="tower-face tower-side" />
                     <span className="tower-face tower-roof" />
                     <span className="tower-windows" />
-                    <span className="tower-tooltip"><strong>{String(item.name ?? "Value")}</strong><span>{category}</span><b>{formatted}</b></span>
                   </div>
                 );
               })}
@@ -530,6 +637,7 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
           </div>
         ))}
       </div>
+      <ChartTooltipPortal tooltip={tooltipPortal} />
     </div>
   );
 }
@@ -541,6 +649,7 @@ export default function SignalChart({
   ariaLabel = "Interactive data chart",
 }: SignalChartProps) {
   const useSkyscraperRenderer = isVerticalBarOption(option);
+  const useGaugeRenderer = isGaugeOption(option);
   const useRadialPresentation = isRadialOption(option);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -596,6 +705,10 @@ export default function SignalChart({
 
   if (useSkyscraperRenderer) {
     return <SkyscraperChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
+  }
+
+  if (useGaugeRenderer) {
+    return <HolographicGaugeChart option={option} className={className} height={height} ariaLabel={ariaLabel} />;
   }
 
   return (
