@@ -1,0 +1,347 @@
+/* Pie, donut and gauge charts use the same projected glass-stage language as
+   the skyscraper charts without tilting their containing cards. */
+.radial-hologram-chart {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden !important;
+  border: 1px solid rgba(37,99,235,.14) !important;
+  border-radius: 9px;
+  background:
+    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
+    radial-gradient(circle at 50% 43%, rgba(34,211,238,.25), transparent 35%),
+    linear-gradient(180deg, rgba(250,253,255,.98), rgba(239,247,255,.98)) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow: inset 0 0 34px rgba(37,99,235,.07), 0 0 18px rgba(56,189,248,.10) !important;
+}
+
+.radial-hologram-chart::before {
+  position: absolute !important;
+  right: 13% !important;
+  bottom: 8% !important;
+  left: 13% !important;
+  z-index: 0 !important;
+  height: 34% !important;
+  content: "" !important;
+  pointer-events: none;
+  border: 1px solid rgba(14,165,233,.28) !important;
+  border-radius: 50% !important;
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.09) 0 1px, transparent 1px 13px),
+    radial-gradient(ellipse, rgba(56,189,248,.20), rgba(219,234,254,.10) 62%, transparent 73%) !important;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,.16)) !important;
+  transform: perspective(480px) rotateX(66deg) !important;
+  transform-origin: 50% 100% !important;
+}
+
+.radial-hologram-platform {
+  position: absolute;
+  right: 22%;
+  bottom: 15%;
+  left: 22%;
+  z-index: 0;
+  height: 18%;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid rgba(14,165,233,.35);
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.12) 0 1px, transparent 1px 10px),
+    radial-gradient(ellipse, rgba(255,255,255,.88), rgba(34,211,238,.28) 45%, rgba(37,99,235,.08) 66%, transparent 74%);
+  box-shadow: 0 10px 26px rgba(37,99,235,.18), 0 0 24px rgba(14,165,233,.22);
+  transform: perspective(480px) rotateX(66deg);
+  animation: radial-platform-arrive .85s cubic-bezier(.22,1,.36,1) both;
+}
+
+.radial-hologram-chart .signal-chart-canvas {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .08s both;
+}
+
+@keyframes radial-chart-arrive {
+  from { opacity: 0; transform: translateY(18px) scale(.82); filter: blur(4px) drop-shadow(0 0 0 transparent); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(9px 13px 9px rgba(30,64,175,.20)) drop-shadow(0 0 9px rgba(14,165,233,.18)); }
+}
+
+@keyframes radial-platform-arrive {
+  from { opacity: 0; transform: perspective(480px) rotateX(66deg) scale(.58); }
+  to { opacity: 1; transform: perspective(480px) rotateX(66deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-tower,
+  .radial-hologram-platform,
+  .radial-hologram-chart .signal-chart-canvas { animation: none !important; }
+}
+
+/* Dedicated holographic gauge: layered glass arc, lowered depth shell and a
+   projected floor. This is intentionally DOM/SVG based so it has the same
+   dimensional character as the skyscraper renderer. */
+.holographic-gauge-chart {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden !important;
+  perspective: 760px;
+}
+
+.holographic-gauge-svg {
+  position: absolute;
+  inset: 4% 7% 11%;
+  z-index: 2;
+  width: 86%;
+  height: 85%;
+  overflow: visible;
+  filter: drop-shadow(8px 13px 9px rgba(30,64,175,.20));
+  animation: radial-chart-arrive .82s cubic-bezier(.22,1,.36,1) .06s both;
+}
+
+.holographic-gauge-svg circle {
+  fill: none;
+  stroke-linecap: round;
+  transform: rotate(150deg);
+  transform-origin: 100px 100px;
+}
+
+.gauge-depth {
+  stroke: rgba(30,64,175,.25);
+  stroke-width: 17;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 8px 5px rgba(30,64,175,.25));
+}
+
+.gauge-track {
+  stroke: rgba(191,219,254,.52);
+  stroke-width: 14;
+  stroke-dasharray: 66.67 100;
+  filter: drop-shadow(0 0 7px rgba(56,189,248,.18));
+}
+
+.gauge-progress-glow,
+.gauge-progress {
+  stroke-width: 14;
+  stroke-dasharray: var(--gauge-progress) 100;
+}
+
+.gauge-progress-glow {
+  stroke: rgba(34,211,238,.32);
+  stroke-width: 22;
+  filter: blur(5px);
+}
+
+.gauge-progress {
+  animation: holographic-gauge-draw 1s cubic-bezier(.22,1,.36,1) .18s both;
+}
+
+.holographic-gauge-value {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  z-index: 4;
+  display: grid;
+  gap: 7px;
+  color: #0f172a;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  animation: gauge-value-arrive .55s ease-out .45s both;
+}
+
+.holographic-gauge-value strong {
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 680;
+  letter-spacing: -.035em;
+  text-shadow: 0 2px 0 #fff, 0 0 13px rgba(56,189,248,.24);
+}
+
+.holographic-gauge-value span {
+  color: #475569;
+  font-size: .62rem;
+  font-weight: 650;
+}
+
+@keyframes holographic-gauge-draw {
+  from { stroke-dasharray: 0 100; opacity: 0; }
+  to { stroke-dasharray: var(--gauge-progress) 100; opacity: 1; }
+}
+
+@keyframes gauge-value-arrive {
+  from { opacity: 0; transform: translate(-50%, -38%) scale(.86); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Page-level tooltips are never constrained by chart/card overflow. */
+.chart-tooltip-portal {
+  position: fixed;
+  z-index: 2147483647;
+  display: grid;
+  gap: 3px;
+  width: max-content;
+  max-width: 260px;
+  padding: 9px 11px;
+  pointer-events: none;
+  color: #0f172a;
+  border: 1px solid rgba(37,99,235,.20);
+  border-radius: 9px;
+  background: rgba(255,255,255,.985);
+  box-shadow: 0 14px 38px rgba(15,23,42,.16), 0 0 16px rgba(56,189,248,.12);
+  font-family: "Manrope Variable", Manrope, Inter, system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  transform: translate(-50%, calc(-100% - 14px));
+}
+
+.chart-tooltip-portal span { color: #475569; }
+.chart-tooltip-portal b { display: inline-flex; align-items: center; gap: 6px; font-weight: 780; }
+.chart-tooltip-portal i { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; box-shadow: 0 0 7px currentColor; }
+
+/* Readable axes and category labels across both ECharts and DOM charts. */
+.skyscraper-label {
+  color: #334155 !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  line-height: 1.25;
+  text-shadow: 0 1px 0 #fff, 0 0 4px rgba(255,255,255,.95);
+  opacity: 1 !important;
+}
+
+.signal-chart canvas {
+  image-rendering: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holographic-gauge-svg,
+  .gauge-progress,
+  .holographic-gauge-value { animation: none !important; }
+}
+
+/* Native SVG holographic donut renderer. */
+.holographic-pie-chart {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(210px, 1fr) auto;
+  overflow: hidden !important;
+  min-height: 285px;
+  padding: 4px 8px 8px;
+  box-sizing: border-box;
+}
+
+.holographic-pie-svg {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  min-height: 210px;
+  overflow: visible;
+  filter: drop-shadow(10px 16px 10px rgba(30,64,175,.24)) drop-shadow(0 0 10px rgba(34,211,238,.18));
+  transform: perspective(700px) rotateX(10deg) translateY(-3px);
+  transform-origin: 50% 72%;
+  animation: radial-chart-arrive .88s cubic-bezier(.22,1,.36,1) both;
+}
+
+.holographic-pie-depth path {
+  opacity: .48;
+  stroke: rgba(30,64,175,.42);
+  stroke-width: 2.5;
+}
+
+.holographic-pie-segment {
+  cursor: default;
+  opacity: 0;
+  stroke: rgba(255,255,255,.92);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(34,211,238,.20));
+  transform-origin: 120px 88px;
+  animation: holographic-pie-arrive .72s cubic-bezier(.22,1,.36,1) var(--pie-enter-delay, 0ms) both;
+  transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+}
+
+.holographic-pie-segment:hover,
+.holographic-pie-segment:focus-visible {
+  opacity: 1;
+  outline: none;
+  filter: brightness(1.1) saturate(1.12) drop-shadow(0 0 9px rgba(34,211,238,.42));
+  transform: scale(1.035);
+}
+
+.holographic-pie-hit-targets path {
+  fill: rgba(255,255,255,.001);
+  stroke: transparent;
+  stroke-width: 5;
+  cursor: default;
+  pointer-events: all;
+  outline: none;
+}
+
+.holographic-pie-surface:has(+ .holographic-pie-hit-targets path:hover) .holographic-pie-segment {
+  filter: brightness(1.04) saturate(1.08) drop-shadow(0 0 7px rgba(34,211,238,.30));
+}
+
+.holographic-pie-inner-glow {
+  fill: rgba(255,255,255,.20);
+  stroke: rgba(34,211,238,.30);
+  stroke-width: 1;
+  filter: blur(1px) drop-shadow(0 0 8px rgba(34,211,238,.24));
+}
+
+.holographic-pie-legend {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  gap: 7px 12px;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 3px 2px 1px;
+  scrollbar-width: thin;
+}
+
+.holographic-pie-legend span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  flex: 0 0 auto;
+  color: #334155;
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.holographic-pie-legend i { width: 7px; height: 7px; border-radius: 50%; box-shadow: 0 0 6px currentColor; }
+
+@keyframes holographic-pie-arrive {
+  from { opacity: 0; transform: translateY(15px) scale(.82); filter: blur(3px); }
+  to { opacity: .86; transform: translateY(0) scale(1); filter: drop-shadow(0 0 5px rgba(34,211,238,.20)); }
+}
+
+/* Stronger holographic donut depth and projector beam. */
+.holographic-pie-depth[data-layer="0"] { opacity: .34; filter: brightness(.58) saturate(1.2); }
+.holographic-pie-depth[data-layer="1"] { opacity: .42; filter: brightness(.68) saturate(1.18); }
+.holographic-pie-depth[data-layer="2"] { opacity: .50; filter: brightness(.78) saturate(1.14); }
+.holographic-pie-depth[data-layer="3"] { opacity: .58; filter: brightness(.88) saturate(1.10); }
+
+.holographic-pie-beam {
+  position: absolute;
+  top: 17%;
+  bottom: 22%;
+  left: 50%;
+  z-index: 1;
+  width: 42%;
+  pointer-events: none;
+  opacity: .38;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,.16), rgba(255,255,255,.24), rgba(34,211,238,.16), transparent);
+  clip-path: polygon(39% 0, 61% 0, 100% 100%, 0 100%);
+  filter: blur(4px) drop-shadow(0 0 12px rgba(34,211,238,.24));
+  transform: translateX(-50%);
+  animation: pie-beam-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes pie-beam-breathe { 50% { opacity: .62; filter: blur(3px) drop-shadow(0 0 18px rgba(34,211,238,.34)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-chart .tower-front,
+  .skyscraper-chart .tower-side,
+  .skyscraper-chart .tower-roof,
+  .skyscraper-chart .tower-windows { animation: none !important; opacity: 1; transform: none; }
+  .holographic-pie-beam { animation: none !important; }
+}
