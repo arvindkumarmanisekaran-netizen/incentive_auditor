@@ -787,6 +787,88 @@
   box-sizing: border-box;
 }
 
+/* Compact grouped insight charts: keep every series in its own horizontal
+   slot. Reduced tower depth preserves a visible gap even with five products. */
+.skyscraper-chart.is-compact-grouped .skyscraper-tower {
+  width: 20px;
+}
+
+.skyscraper-chart.is-compact-grouped .tower-side {
+  top: -7px;
+  right: -8px;
+  width: 8px;
+  height: calc(100% + 7px);
+  clip-path: polygon(0 7px, 100% 0, 100% calc(100% - 7px), 0 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .tower-roof {
+  top: -7px;
+  width: 28px;
+  height: 8px;
+  clip-path: polygon(0 100%, 8px 0, 100% 0, 20px 100%);
+}
+
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:hover,
+.skyscraper-chart.is-compact-grouped .skyscraper-tower:focus-visible {
+  transform: translate3d(var(--tower-x), calc(var(--tower-y) - 4px), 0) !important;
+}
+
+/* Pie, donut and gauge charts use the same projected glass-stage language as
+   the skyscraper charts without tilting their containing cards. */
+.radial-hologram-chart {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden !important;
+  border: 1px solid rgba(37,99,235,.14) !important;
+  border-radius: 9px;
+  background:
+    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
+    radial-gradient(circle at 50% 43%, rgba(125,211,252,.18), transparent 34%),
+    linear-gradient(180deg, rgba(250,253,255,.98), rgba(239,247,255,.98)) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow: inset 0 0 30px rgba(37,99,235,.04), 0 0 14px rgba(56,189,248,.06) !important;
+}
+
+.radial-hologram-chart::before {
+  position: absolute !important;
+  right: 13% !important;
+  bottom: 8% !important;
+  left: 13% !important;
+  z-index: 0 !important;
+  height: 34% !important;
+  content: "" !important;
+  pointer-events: none;
+  border: 1px solid rgba(14,165,233,.28) !important;
+  border-radius: 50% !important;
+  background:
+    repeating-radial-gradient(ellipse, rgba(37,99,235,.09) 0 1px, transparent 1px 13px),
+    radial-gradient(ellipse, rgba(56,189,248,.20), rgba(219,234,254,.10) 62%, transparent 73%) !important;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,.16)) !important;
+  transform: perspective(480px) rotateX(66deg) !important;
+  transform-origin: 50% 100% !important;
+}
+
+.radial-hologram-platform {
+  position: absolute;
+  right: 22%;
+  bottom: 15%;
+  left: 22%;
+  z-index: 0;
+  height: 18%;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.82), rgba(56,189,248,.18) 48%, transparent 72%);
+  box-shadow: 0 8px 22px rgba(37,99,235,.12), 0 0 18px rgba(14,165,233,.13);
+  transform: perspective(480px) rotateX(66deg);
+}
+
+.radial-hologram-chart .signal-chart-canvas {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(7px 10px 8px rgba(30,64,175,.14)) drop-shadow(0 0 6px rgba(14,165,233,.10));
+}
+
 @media (max-width: 900px) {
   :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
     .peer-analysis-grid, .insights-grid) {
