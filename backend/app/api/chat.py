@@ -91,17 +91,18 @@ def representative_filter(message: str, entities: dict[str, Any]) -> str | None:
     cleaned_message = re.sub(r"([A-Za-z])['’]s\b", r"\1", message)
     name_token = r"([A-Za-z0-9][A-Za-z0-9' -]{1,60})"
     patterns = (
-        rf"(?:fetch|get|find|show|give me|tell me about|look up|lookup|retrieve|display|details? (?:for|of)|information (?:for|on|about)|profile (?:for|of))\s+(?:me\s+)?(?:the\s+)?(?:rep(?:resentative)?\s+)?(?:(?:details?|information|profile|records?)\s+(?:for|of|on|about)\s+)?{name_token}",
+        rf"(?:fetch|get|find|show|give|give me|tell me about|look up|lookup|retrieve|display|open|pull up|bring me|details? (?:for|of)|information (?:for|on|about)|profile (?:for|of))\s+(?:me\s+)?(?:the\s+)?(?:rep(?:resentative)?\s+)?(?:(?:details?|information|profile|records?)\s+(?:for|of|on|about)\s+)?{name_token}",
         rf"(?:i want|only|just)\s+{name_token}",
-        rf"^\s*{name_token}\s+(?:rep(?:resentative)?\s+)?(?:details?|information|profile|record)\s*[?.!]*\s*$",
+        rf"^\s*{name_token}\s+(?:rep(?:resentative)?\s+)?(?:details?|information|profile|record)(?:\s+please)?\s*[?.!]*\s*$",
     )
     for pattern in patterns:
         match = re.search(pattern, cleaned_message, flags=re.IGNORECASE)
         if match:
             value = match.group(1).strip()
-            value = re.sub(r"\s+(?:rep(?:resentative)?\s+)?(?:details?|records?|information|profile)$", "", value, flags=re.IGNORECASE)
+            value = re.sub(r"\s+(?:rep(?:resentative)?\s+)?(?:details?|records?|information|profile)(?:\s+to me)?$", "", value, flags=re.IGNORECASE)
             value = re.sub(r"\s+(?:rep|representative)$", "", value, flags=re.IGNORECASE)
-            if value and not re.fullmatch(r"(?:(?:all|active|inactive)\s+)?(?:reps?|representatives?)", value, flags=re.IGNORECASE):
+            generic_scope = r"(?:(?:display|get|show|fetch|retrieve|list)\s+)?(?:database(?: information)?|data|governed data|operational(?: records?)?|stored(?: information)?|application data|table|records?)"
+            if value and not re.fullmatch(rf"(?:(?:all|active|inactive)\s+)?(?:reps?|representatives?)|{generic_scope}", value, flags=re.IGNORECASE):
                 return value
     return None
 
@@ -109,7 +110,26 @@ def representative_filter(message: str, entities: dict[str, Any]) -> str | None:
 def is_representative_detail_request(message: str, entities: dict[str, Any] | None = None) -> bool:
     lowered = message.lower()
     asks_for_detail = any(word in lowered for word in ("detail", "information", "profile", "record"))
-    return asks_for_detail and representative_filter(message, entities or {}) is not None
+    conversational_lookup = bool(re.search(r"\b(?:tell me about|open|pull up|bring me)\b", lowered) and re.search(r"\b(?:rep|representative)\b", lowered))
+    return (asks_for_detail or conversational_lookup) and representative_filter(message, entities or {}) is not None
+
+
+def has_any(text_value: str, phrases: tuple[str, ...]) -> bool:
+    return any(phrase in text_value for phrase in phrases)
+
+
+def capability_question(lowered: str) -> bool:
+    return lowered.startswith(("can you ", "could you ", "what can you ", "are your ", "do you "))
+
+
+def guarded_request(lowered: str) -> dict[str, Any] | None:
+    secret_terms = ("password", "credential", "secret", "api key", "access token", "auth token", "connection string", "private key", "environment variable", "system prompt", "authentication cookie")
+    write_terms = ("delete ", "drop table", "update ", "insert ", "overwrite ", "disable read-only", "bypass confirmation", "execute database writes", "set anika", "change anika", "change p022", "modify doctor", "create a new payout", "mark the payout as paid")
+    if has_any(lowered, secret_terms):
+        return {"action": "ANSWER", "message": "I can’t expose credentials, secrets or private authentication data. I can explain the governed API and workspace requirements instead."}
+    if has_any(lowered, write_terms) or re.search(r"\bdrop\b.+\btable\b", lowered):
+        return {"action": "ANSWER", "message": "Copilot database access is read-only. I can inspect the relevant records or propose a governed action for confirmation, but I cannot directly modify or delete them."}
+    return None
 
 
 async def resolve_representative(db: AsyncSession, representative_name: str) -> dict[str, Any]:
@@ -423,38 +443,74 @@ def printable_summary(context: InvestigationContext | None) -> dict[str, Any]:
 @router.post("/investigation")
 async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(get_db)):
     lowered = request.message.lower()
+    guarded = guarded_request(lowered)
+    if guarded:
+        return guarded
+    is_capability = capability_question(lowered)
+    is_navigation = has_any(lowered, ("open data control", "go to data control", "open document processing", "go to document processing", "open database management", "show investigation workflow", "open investigation workflow", "open investigation evidence", "go to risk summary", "show investigation decision", "open the analysis tab", "open sales and products", "go to peer benchmark", "open doctor and territory", "show trend history", "scroll to document processing", "focus database management", "open the copilot", "close the copilot", "clear the chat", "focus the chat input", "return to the top", "show the investigation form"))
+    is_analytical_query = has_any(lowered, ("calculate", "average", "count", "group", "rank", "top ", "bottom ", "growth", "ratio", "total", "sum ", "variance", "month-over-month", "organization average"))
     # Phase 2 commands are deterministic and evaluated before the LLM. This
     # prevents an earlier investigation intent in conversation history from
     # hijacking explicit follow-up actions.
-    if "root cause" in lowered or "drill down" in lowered or "investigate further" in lowered:
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("root cause", "root-cause", "drill down", "investigate further", "causal analysis"))
+        or has_any(lowered, ("investigate the cause", "why did this anomaly happen", "drove the finding", "possible explanations"))
+        or (has_any(lowered, ("cause", "caused", "driver", "driving", "drove")) and has_any(lowered, ("finding", "anomaly", "mismatch", "likely", "leading", "primary", "alternative", "possible")))
+    ):
         return root_cause_analysis(request.context)
-    if ("focus" in lowered and "chart" in lowered) or any(phrase in lowered for phrase in ("show chart", "explain chart", "highlight", "spike", "which bar")):
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("show chart", "explain chart", "highlight", "spike", "which bar", "focus chart"))
+        or ("table" not in lowered and has_any(lowered, ("chart", "graph", "visualization", "visualisation", "analytical evidence")) and has_any(lowered, ("focus", "show", "open", "explain", "navigate", "take me", "inspect", "relevant", "support")))
+        or ("table" not in lowered and has_any(lowered, ("focus", "open")) and has_any(lowered, ("sales performance", "sales prescription", "payout", "peer", "finding")))
+    ):
         return chart_insight(request.context, request.message)
-    if ("review" in lowered and "evidence" in lowered) or any(phrase in lowered for phrase in ("reviewer", "review checks", "unsupported conclusion", "missing evidence")):
+    if request.context and request.context.result and not is_capability and has_any(lowered, ("print", "printable", "export", "report", "print-ready", "printout", "pdf-ready", "print preview", "print view", "reviewer output", "audit summary")):
+        return printable_summary(request.context)
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("mark for human review", "escalate for review", "flag for review", "human reviewer", "manual review", "manual verification", "review escalation", "route this for", "send this to", "send the investigation", "flag this investigation", "flag the evidence", "flag the case", "escalate this case", "ask a reviewer", "escalate the current finding", "escalate due to missing evidence"))
+        or (has_any(lowered, ("mark", "escalate", "flag", "send", "route", "request", "propose")) and has_any(lowered, ("human review", "review required", "governance review", "manual verification", "reviewer")))
+    ):
+        return controlled_action_proposal(request.context, request.message)
+    if request.context and request.context.result and not is_capability and (
+        ("review" in lowered and "evidence" in lowered)
+        or has_any(lowered, ("reviewer", "review checks", "unsupported conclusion", "unsupported findings", "findings unsupported", "missing evidence", "evidence completeness", "evidence complete", "governance checks", "review warnings", "evidence gaps", "review checklist", "human review is needed", "review requirements"))
+        or (has_any(lowered, ("review", "audit", "validate", "evaluate", "check")) and has_any(lowered, ("investigation", "evidence", "supporting records", "reviewer package", "escalation", "human-review")))
+    ):
         return reviewer_assistance(request.context)
-    if "peer" in lowered and any(word in lowered for word in ("table", "list", "show")):
+    if request.context and request.context.result and "peer" in lowered and any(word in lowered for word in ("table", "list", "show", "rows", "tabulate", "comparable")):
         response = peer_comparison(request.context)
         response["display"] = "table"
         return response
-    if "compare with peer" in lowered or "peer comparison" in lowered or "compare to peer" in lowered:
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("compare with peer", "peer comparison", "compare to peer", "peer average", "peer benchmark", "benchmark against peer", "benchmark p", "territory comparison", "product peer", "comparable rep"))
+        or has_any(lowered, ("current rep to the group", "current representative to the group"))
+        or (has_any(lowered, ("peer", "benchmark")) and has_any(lowered, ("compare", "comparison", "difference", "rank", "contrast", "analyze", "performance", "average")))
+    ):
         return peer_comparison(request.context)
-    if any(phrase in lowered for phrase in ("summary of the findings", "summarize the findings", "summarise the findings", "findings summary")):
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("summary of the findings", "summarize the findings", "summarise the findings", "findings summary", "key findings"))
+        or has_any(lowered, ("what findings were detected", "how many findings", "show all finding severities", "what did the investigation find", "show the result summary", "overview the detected issues"))
+        or (has_any(lowered, ("finding", "findings", "anomalies", "investigation result", "investigation outcome", "detected issues")) and has_any(lowered, ("summary", "summarize", "summarise", "overview", "recap", "list", "count", "how many", "what did", "describe", "present", "severities")))
+    ):
         return findings_summary(request.context)
-    if "explain this finding" in lowered or "explain current finding" in lowered:
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("explain this finding", "explain current finding", "what does this finding mean", "interpret this finding", "current analytical result", "help me understand this result", "simple explanation of this finding"))
+        or (has_any(lowered, ("explain", "explanation", "why", "interpret", "describe", "understand", "break down", "what does")) and has_any(lowered, ("finding", "flagged", "severity", "normal", "low", "medium", "high", "critical", "mismatch", "deviation", "discrepancy", "concentration", "supporting metrics", "p022", "evidence")))
+    ):
         return explain_finding(request.context, request.message)
-    if "playbook" in lowered:
+    if request.context and request.context.result and not is_capability and not is_navigation and has_any(lowered, ("playbook", "governed workflow", "investigation workflows", "investigation routine", "investigation procedure", "what workflows", "workflows are available")):
         return playbook_response(request.context, request.message)
-    if any(phrase in lowered for phrase in ("proactive scan", "suggest anomalies", "prioritize anomalies", "what should i investigate next")):
+    if request.context and request.context.result and not is_capability and (
+        has_any(lowered, ("proactive scan", "suggest anomalies", "prioritize anomalies", "what should i investigate next", "anomaly scan", "proactive signal", "signals worth", "investigative leads"))
+        or has_any(lowered, ("scan for unusual activity", "what stands out", "suggest the next analysis", "deserves attention next", "emerging issues", "hidden anomalies"))
+        or (has_any(lowered, ("anomaly", "anomalies", "signal", "signals", "finding", "findings", "issues")) and has_any(lowered, ("scan", "prioritize", "prioritise", "prioritizing", "suggest", "recommend", "strongest", "stands out", "top three", "next", "noteworthy", "find hidden")))
+    ):
         return proactive_anomaly_scan(request.context)
-    if any(phrase in lowered for phrase in ("mark for human review", "escalate for review", "flag for review")):
-        return controlled_action_proposal(request.context, request.message)
-    if any(word in lowered for word in ("print", "printable", "export summary")):
-        return printable_summary(request.context)
     if any(word in lowered for word in ("finding", "evidence supports", "why was")) and request.context and request.context.result:
         return explain_finding(request.context, request.message)
     query_table = requested_table(request.message, {})
     is_rep_detail_request = is_representative_detail_request(request.message)
-    if (query_table and any(word in lowered for word in ("show", "list", "table", "query", "find", "fetch", "get"))) or is_rep_detail_request:
+    if not is_navigation and not is_analytical_query and ((query_table and any(word in lowered for word in ("show", "list", "table", "query", "find", "fetch", "get", "display", "retrieve", "open", "pull", "bring"))) or is_rep_detail_request):
         return await run_read_only_query(db, request.message, {"table": query_table or "representatives"})
     intent = await investigation_chat_agent(message=request.message, conversation=request.conversation, context=request.context.model_dump() if request.context else {})
     intent_name = intent.get("intent")
@@ -465,9 +521,9 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
             if prior_table:
                 entities = {**entities, "table": prior_table}
         return await run_read_only_query(db, request.message, entities)
-    if intent_name == "FINDING_QUERY" or any(word in lowered for word in ("finding", "explain this", "why was")):
+    if intent_name == "FINDING_QUERY" or (request.context and request.context.result and any(word in lowered for word in ("finding", "explain this", "why was"))):
         return explain_finding(request.context, request.message)
-    if intent_name == "PRINT_SUMMARY" or any(word in lowered for word in ("print", "printable", "export summary")):
+    if intent_name == "PRINT_SUMMARY" or (request.context and request.context.result and any(word in lowered for word in ("print", "printable", "export summary"))):
         return printable_summary(request.context)
     if intent_name != "INVESTIGATION_REQUEST":
         return {**intent, "action": "ANSWER", "message": intent.get("message") or "I can help investigate, query governed data, explain findings or prepare a printable summary.", "suggestions": ["Investigate a representative", "Show active representatives", "Explain the current finding"]}
