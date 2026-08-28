@@ -19,7 +19,7 @@ type BarChartType = "sales" | "sales_rx" | "payout" | "historical" | "peer";
 
 const CHART_PALETTES: Record<BarChartType, string[]> = {
   sales: [SIGNAL_CHART.steel, SIGNAL_CHART.lime],
-  sales_rx: [SIGNAL_CHART.lime, SIGNAL_CHART.mint],
+  sales_rx: [SIGNAL_CHART.danger, SIGNAL_CHART.lime],
   payout: [SIGNAL_CHART.mint, SIGNAL_CHART.amber],
   historical: [SIGNAL_CHART.steel, SIGNAL_CHART.lime],
   peer: [SIGNAL_CHART.lime, SIGNAL_CHART.amber],
