@@ -691,6 +691,16 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   const [selectedCategories, setSelectedCategories] = useState<Set<number>>(() => new Set());
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useInView(viewportRef, { once: true, amount: .18 });
+  const sampleFormatted = typeof valueFormatter === "function"
+    ? String((valueFormatter as (raw: unknown) => unknown)(maximum))
+    : "";
+  const valueKind = sampleFormatted.includes("%") ? "percent" : sampleFormatted.includes("₹") ? "money" : "number";
+  const formatAxisValue = (value: number) => {
+    if (valueKind === "percent") return `${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 1 }).format(value)}%`;
+    if (valueKind === "money") return `₹${new Intl.NumberFormat("en-IN", { notation: "compact", maximumFractionDigits: 1 }).format(value)}`;
+    return new Intl.NumberFormat("en-IN", { notation: "compact", maximumFractionDigits: 1 }).format(value);
+  };
+  const axisTicks = [1, .75, .5, .25, 0].map((ratio) => ({ ratio, label: formatAxisValue(maximum * ratio) }));
 
   const categoryRows = (categoryIndex: number) => series.map((item, seriesIndex) => {
     const data = Array.isArray(item.data) ? item.data : [];
@@ -708,14 +718,20 @@ function SkyscraperChart({ option, height, ariaLabel, className }: SignalChartPr
   return (
     <div ref={viewportRef} className={`signal-chart skyscraper-chart${compactGroupedBars ? " is-compact-grouped" : ""}${isVisible ? " is-entered" : ""}${selectedCategories.size > 0 ? " has-selected-categories" : ""} ${className ?? ""}`.trim()} style={{ height }} role="img" aria-label={ariaLabel}>
       <div className="skyscraper-horizon" aria-hidden="true" />
-      <span className="skyscraper-reference-label" aria-hidden="true">0 · Reference baseline</span>
+      <div className="skyscraper-value-axis" aria-hidden="true">
+        {axisTicks.map((tick) => <span key={tick.ratio} style={{ top: `${(1 - tick.ratio) * 100}%` }}>{tick.label}</span>)}
+      </div>
+      <span className="skyscraper-reference-label" aria-hidden="true">{formatAxisValue(0)} · Reference</span>
       <div className="skyscraper-floor" aria-hidden="true" />
       <div className="skyscraper-city">
         {categories.map((category, categoryIndex) => (
           <div
             className={`skyscraper-block${selectedCategories.has(categoryIndex) ? " is-selected-category" : ""}`}
             key={`${category}-${categoryIndex}`}
-            style={{ left: `${((categoryIndex + .5) / Math.max(1, categories.length)) * 100}%` }}
+            style={{
+              left: `${(categoryIndex / Math.max(1, categories.length)) * 100}%`,
+              width: `${100 / Math.max(1, categories.length)}%`,
+            }}
             role="button"
             tabIndex={0}
             aria-pressed={selectedCategories.has(categoryIndex)}

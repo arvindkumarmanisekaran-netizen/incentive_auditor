@@ -588,14 +588,14 @@
   transform: rotateX(64deg);
   transform-origin: 50% 100%;
 }
-.skyscraper-city { position: absolute; inset: 18px 4% 38px; z-index: 3; }
-.skyscraper-block { position: absolute; bottom: 18px; width: 1px; height: 190px; cursor: pointer; transform-style: preserve-3d; }
+.skyscraper-city { position: absolute; inset: 18px 5.5% 46px 10%; z-index: 3; }
+.skyscraper-block { position: absolute; bottom: 18px; height: 190px; cursor: pointer; transform-style: preserve-3d; }
 .skyscraper-block::before {
   position: absolute;
   bottom: 4px;
   left: 50%;
   z-index: -1;
-  width: clamp(64px, 10vw, 132px);
+  width: min(calc(100% - 8px), 132px);
   height: 172px;
   content: "";
   pointer-events: none;
@@ -608,7 +608,7 @@
 .skyscraper-block::after {
   position: absolute;
   inset: 0 auto -22px 50%;
-  width: clamp(70px, 11vw, 142px);
+  width: min(100%, 142px);
   content: "";
   transform: translateX(-50%);
 }
@@ -619,7 +619,7 @@
   background: linear-gradient(180deg, rgba(219,234,254,.24), rgba(56,189,248,.10));
   box-shadow: inset 0 0 24px rgba(56,189,248,.11), 0 0 16px rgba(37,99,235,.12);
 }
-.skyscraper-cluster { position: absolute; bottom: 18px; left: 0; width: 1px; height: 160px; transform-style: preserve-3d; }
+.skyscraper-cluster { position: absolute; bottom: 18px; left: 50%; width: 1px; height: 160px; transform-style: preserve-3d; }
 .skyscraper-tower {
   position: absolute;
   bottom: 0;
@@ -656,7 +656,7 @@
   width: 15px;
   height: calc(100% + 10px);
   border: 1px solid rgba(96,165,250,.66);
-  background: color-mix(in srgb, var(--tower-color) 42%, rgba(30,64,175,.58));
+  background: color-mix(in srgb, var(--tower-color) 74%, #0f172a 26%);
   clip-path: polygon(0 10px, 100% 0, 100% calc(100% - 10px), 0 100%);
 }
 .tower-roof {
@@ -665,7 +665,7 @@
   width: 49px;
   height: 11px;
   border: 1px solid rgba(224,242,254,.92);
-  background: linear-gradient(90deg, rgba(224,242,254,.76), color-mix(in srgb, var(--tower-color) 58%, white));
+  background: color-mix(in srgb, var(--tower-color) 48%, white 52%);
   clip-path: polygon(0 100%, 15px 0, 100% 0, 34px 100%);
   box-shadow: 0 0 8px rgba(34,211,238,.4);
 }
@@ -678,7 +678,8 @@
 }
 .skyscraper-label {
   position: absolute;
-  top: 188px;
+  top: auto;
+  bottom: -29px;
   left: 50%;
   width: 120px;
   color: #334155;
@@ -690,8 +691,8 @@
 }
 .skyscraper-reference-label {
   position: absolute;
-  right: 4%;
-  bottom: 30px;
+  left: 10%;
+  bottom: 34px;
   z-index: 5;
   padding: 2px 7px;
   border: 1px solid rgba(6,182,212,.22);
@@ -702,6 +703,25 @@
   font-size: 8.5px;
   font-weight: 720;
   letter-spacing: .01em;
+}
+.skyscraper-value-axis {
+  position: absolute;
+  top: 30px;
+  bottom: 47px;
+  left: 1.2%;
+  z-index: 5;
+  width: 8%;
+  pointer-events: none;
+  border-right: 1px solid rgba(37,99,235,.20);
+}
+.skyscraper-value-axis span {
+  position: absolute;
+  right: 7px;
+  color: #334155;
+  font-size: 8.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  transform: translateY(-50%);
 }
 .tower-tooltip {
   position: absolute;
@@ -723,7 +743,9 @@
 .tower-tooltip strong, .tower-tooltip span, .tower-tooltip b { display: block; color: inherit !important; }
 .tower-tooltip span { margin: 2px 0; color: #8fb8e8 !important; }
 .skyscraper-tower:hover .tower-tooltip, .skyscraper-tower:focus-visible .tower-tooltip { display: block; }
-.skyscraper-tower.is-negative .tower-front { background: linear-gradient(90deg, rgba(244,63,94,.38), rgba(251,113,133,.72)); }
+.skyscraper-tower.is-negative .tower-front {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tower-color) 52%, transparent), color-mix(in srgb, var(--tower-color) 78%, transparent));
+}
 
 
 .chart-card:has(.skyscraper-chart) { --base-tilt-x: 0deg; --base-tilt-y: 0deg; transform: none !important; }
