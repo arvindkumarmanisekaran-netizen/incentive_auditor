@@ -1,0 +1,94 @@
+/* White assistant surface with a clearly separated, top-aligned example row. */
+.chatbot-window,
+.chatbot-messages,
+.chatbot-input {
+  color: #334155 !important;
+  background: #fff !important;
+}
+
+.chatbot-window {
+  border-color: rgba(37,99,235,.16) !important;
+  box-shadow: 0 24px 60px rgba(30,64,175,.18) !important;
+}
+
+.chatbot-messages {
+  align-items: stretch;
+  padding: 12px !important;
+}
+
+.chatbot-placeholder {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  gap: 5px;
+  width: 100%;
+  margin: 0 !important;
+  padding: 9px 10px !important;
+  overflow: visible;
+  color: #526176 !important;
+  border: 1px solid rgba(37,99,235,.12);
+  border-radius: 9px;
+  background: #f7faff;
+  font-size: .67rem !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+  white-space: normal;
+}
+
+.chatbot-placeholder strong {
+  padding: 0;
+  color: #1e40af;
+  border: 0;
+  font-weight: 800;
+  font-size: inherit;
+}
+
+.chatbot-placeholder span {
+  display: block;
+  width: 100%;
+  font-size: inherit;
+  text-align: center;
+}
+
+.chatbot-input {
+  border-top-color: rgba(37,99,235,.12) !important;
+}
+
+.chatbot-input input {
+  color: #0f172a !important;
+  border-color: rgba(37,99,235,.18) !important;
+  background: #fff !important;
+  caret-color: #2563eb !important;
+}
+
+/* Multi-point sparkle field around the assistant icon. */
+.chatbot-floating-button::after {
+  position: absolute;
+  inset: -12px;
+  content: "";
+  pointer-events: none;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 16% 22%, #fff 0 1.5px, transparent 2px),
+    radial-gradient(circle at 84% 16%, #bfdbfe 0 2px, transparent 2.5px),
+    radial-gradient(circle at 92% 74%, #fff 0 1.5px, transparent 2px),
+    radial-gradient(circle at 22% 88%, #93c5fd 0 2px, transparent 2.5px);
+  filter: drop-shadow(0 0 5px rgba(255,255,255,.95));
+  animation: assistant-glitter 1.8s ease-in-out infinite;
+}
+
+@keyframes assistant-glitter {
+  0%, 100% { opacity: .24; transform: rotate(0deg) scale(.94); }
+  45% { opacity: 1; transform: rotate(7deg) scale(1.06); }
+  70% { opacity: .5; transform: rotate(-3deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-floating-button::after,
+  .analysis-tab-signal::after,
+  .ambient-tracer {
+    animation: none !important;
+  }
+}
