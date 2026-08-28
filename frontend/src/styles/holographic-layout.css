@@ -1,0 +1,110 @@
+/* Final chart-layout refinements. */
+.skyscraper-city {
+  inset: 30px 4% 30px !important;
+}
+
+.skyscraper-label {
+  top: 164px !important;
+}
+
+.skyscraper-chart.is-compact-grouped .skyscraper-label {
+  top: 166px !important;
+  width: 112px;
+  font-size: 8px !important;
+  line-height: 1.15;
+}
+
+.insight-chart .skyscraper-chart.is-compact-grouped .skyscraper-label {
+  top: 154px !important;
+  width: 56px;
+  font-size: 7.5px !important;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+/* The horizontal peer-index canvas and its projection remain within the card. */
+.peer-analysis-grid > .chart-card:has(.peer-dumbbell-chart) {
+  min-height: 382px !important;
+  padding-bottom: 14px !important;
+}
+
+.peer-dumbbell-chart,
+.peer-dumbbell-chart .peer-index-chart-transition,
+.peer-dumbbell-chart .signal-chart {
+  height: 275px !important;
+  min-height: 275px !important;
+  max-height: 275px !important;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+/* Keep callout pills clear of chart horizons and projection lines. */
+.payout-chart-difference,
+.risk-findings-label {
+  top: 10px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 8 !important;
+  transform: none !important;
+  color: #334155 !important;
+  border: 1px solid rgba(37,99,235,.16) !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow: 0 8px 20px rgba(30,64,175,.10), 0 0 10px rgba(56,189,248,.08);
+}
+
+.payout-chart-difference span,
+.risk-findings-label span { color: #475569 !important; }
+.payout-chart-difference strong,
+.risk-findings-label strong { color: #0f172a !important; text-shadow: none !important; }
+
+/* Historical Position uses a projected luminous rail rather than a flat bar. */
+.historical-position-card .historical-diverging-bar {
+  position: relative;
+  height: 16px !important;
+  overflow: visible !important;
+  border-color: rgba(37,99,235,.28) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(219,234,254,.72)) !important;
+  box-shadow: inset 0 2px 4px rgba(30,64,175,.08), 0 7px 15px rgba(30,64,175,.12), 0 0 12px rgba(56,189,248,.10) !important;
+  transform: perspective(520px) rotateX(5deg);
+}
+
+.historical-position-card .historical-diverging-bar::after {
+  position: absolute;
+  right: 4%;
+  bottom: -13px;
+  left: 4%;
+  height: 13px;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(14,165,233,.20);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(56,189,248,.18), transparent 70%);
+  filter: blur(2px);
+  transform: rotateX(66deg);
+}
+
+.historical-position-card .position-fill {
+  box-shadow: inset 0 1px rgba(255,255,255,.55), 0 0 12px currentColor;
+  animation: historical-hologram-grow .72s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+@keyframes historical-hologram-grow {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyscraper-chart .skyscraper-tower,
+  .holographic-pie-svg,
+  .holographic-pie-segment,
+  .historical-position-card .position-fill { animation: none !important; opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  :where(.product-analysis-grid, .overall-behaviour-grid, .historical-analysis-grid,
+    .peer-analysis-grid, .insights-grid) {
+    padding: 12px 14px 22px !important;
+    row-gap: 24px !important;
+  }
+}
