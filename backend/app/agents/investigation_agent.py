@@ -4,6 +4,7 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 from ..services.investigation_stream import emit_workflow_event
+from ..utils.display_labels import investigation_text
 from ..core.investigation_summary_validator import (
     validate_investigation_summary,
 )
@@ -223,7 +224,7 @@ async def investigation_agent(
         emit_workflow_event(
             event_type="commentary",
             agent=agent_id,
-            message=str(executive_summary),
+            message=investigation_text(executive_summary, state),
         )
 
     priorities = parsed.get(

@@ -2,11 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import type { WorkflowAgent } from "../types/workflow";
+import type { Finding } from "../types/investigation";
+import { replaceProductIds, replaceRepresentativeId } from "../utils/displayLabels";
 
 type Props = {
   agents: WorkflowAgent[];
   loading: boolean;
   statusMessage: string;
+  findings?: Finding[];
+  representativeId?: string;
+  representativeName?: string;
 };
 
 function getStatusSymbol(status: WorkflowAgent["status"]) {
@@ -41,8 +46,20 @@ function getStatusLabel(status: WorkflowAgent["status"]) {
   }
 }
 
-function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
+function InvestigationWorkflow({
+  agents,
+  loading,
+  statusMessage,
+  findings = [],
+  representativeId,
+  representativeName,
+}: Props) {
   const [expanded, setExpanded] = useState(true);
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, findings),
+    representativeName,
+    representativeId,
+  );
 
   /*
    * Keep refs for every workflow agent so we can
@@ -184,7 +201,9 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
             {hasError && <span className="workflow-error-badge">Error</span>}
           </div>
 
-          {statusMessage && <p className="investigation-workflow-status">{statusMessage}</p>}
+          {statusMessage && (
+            <p className="investigation-workflow-status">{displayText(statusMessage)}</p>
+          )}
         </div>
 
         <span className="investigation-workflow-toggle" aria-hidden="true">
@@ -231,7 +250,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
                 <div key={`planner-reason-${index}`} className="workflow-commentary-line">
                   <span className="workflow-commentary-marker">›</span>
 
-                  <span>{reason}</span>
+                  <span>{displayText(reason)}</span>
                 </div>
               ))}
             </div>
@@ -241,7 +260,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
                 <div key={commentary.timestamp ?? index} className="workflow-commentary-line">
                   <span className="workflow-commentary-marker">›</span>
 
-                  <span>{commentary.message}</span>
+                  <span>{displayText(commentary.message)}</span>
                 </div>
               ))}
             </div>
@@ -328,7 +347,7 @@ function InvestigationWorkflow({ agents, loading, statusMessage }: Props) {
                         >
                           <span className="workflow-commentary-marker">›</span>
 
-                          <span>{commentary.message}</span>
+                          <span>{displayText(commentary.message)}</span>
                         </div>
                       ))}
                     </div>

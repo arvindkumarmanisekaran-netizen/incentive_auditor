@@ -626,6 +626,25 @@ function App() {
                 agents={workflowAgents}
                 loading={loading}
                 statusMessage={workflowStatusMessage}
+                findings={result?.findings ?? []}
+                representativeId={representativeId}
+                representativeName={
+                  representatives.find(
+                    (representative) => representative.representative_id === representativeId,
+                  )
+                    ? `${
+                        representatives.find(
+                          (representative) =>
+                            representative.representative_id === representativeId,
+                        )!.first_name
+                      } ${
+                        representatives.find(
+                          (representative) =>
+                            representative.representative_id === representativeId,
+                        )!.last_name
+                      }`
+                    : undefined
+                }
               />
             </motion.div>
           )}

@@ -4,6 +4,7 @@ from typing import Any
 from ..graph.state import InvestigationState
 from ..core.llm import gemini_chat_with_fallback
 from ..services.investigation_stream import emit_workflow_event
+from ..utils.display_labels import investigation_text
 
 SYSTEM_PROMPT = """
 You are the Doctor and Territory Evidence Analysis Agent
@@ -260,7 +261,7 @@ async def doctor_territory_agent(
         emit_workflow_event(
             event_type="commentary",
             agent=agent_id,
-            message=str(summary),
+            message=investigation_text(summary, state),
         )
 
     emit_workflow_event(
