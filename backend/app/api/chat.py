@@ -243,7 +243,25 @@ def explain_finding(context: InvestigationContext | None, message: str) -> dict[
     finding_type = str(selected.get("type", "finding")).replace("_", " ").title()
     severity = str(selected.get("severity", "Unknown")).title()
     evidence = selected.get("evidence") or {}
-    details = [f"{key.replace('_', ' ').title()}: {value}" for key, value in list(evidence.items())[:8]]
+    failed_checks = evidence.get("failed_checks") or []
+    details = []
+    for check in failed_checks[:8]:
+        if not isinstance(check, dict):
+            continue
+        label = str(check.get("subtype") or "failed rule").replace("_", " ").title()
+        rule = str(check.get("rule") or "Review the recorded and calculated values.")
+        recorded = check.get("recorded_value")
+        calculated = check.get("calculated_value")
+        value_context = ""
+        if recorded is not None or calculated is not None:
+            value_context = f" Recorded: {recorded}; calculated: {calculated}."
+        details.append(f"{label}: {rule}{value_context}")
+
+    if not details:
+        details = [
+            f"{key.replace('_', ' ').title()}: {value}"
+            for key, value in list(evidence.items())[:8]
+        ]
     product = product_label(selected)
     return {
         "action": "FINDING_EXPLANATION",

@@ -16,6 +16,11 @@ from ..analytics.sales_prescription_mismatch import (
 from ..analytics.doctor_concentration import (
     calculate_doctor_concentration,
 )
+from ..analytics.payout_reconciliation import (
+    missing_payout_finding,
+    reconcile_payout_record,
+    temporal_payout_findings,
+)
 
 
 def safe_float(value):
@@ -643,35 +648,112 @@ async def investigate(
     # ==================================================
 
     payout_query = text("""
+        WITH representative_sales AS (
+            SELECT s.*
+            FROM sales s
+            WHERE s.sale_date >= DATE_TRUNC('month', CAST(:start_date AS DATE))::date
+              AND s.sale_date < (
+                  DATE_TRUNC('month', CAST(:end_date AS DATE)) + INTERVAL '1 month'
+              )
+              AND EXISTS (
+                  SELECT 1
+                  FROM representative_doctor_assignments assignment
+                  WHERE assignment.representative_id = :representative_id
+                    AND assignment.doctor_id = s.doctor_id
+              )
+        ),
+        assignment_sales AS (
+            SELECT
+                :representative_id AS representative_id,
+                s.product_id,
+                DATE_TRUNC('month', s.sale_date)::date AS payout_month,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Valid', 'Adjusted')
+                      AND EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS attributed_actual_sales,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Cancelled', 'Returned')
+                      AND EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS excluded_status_sales,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Valid', 'Adjusted')
+                      AND NOT EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS outside_assignment_sales
+            FROM representative_sales s
+            GROUP BY
+                s.product_id,
+                DATE_TRUNC('month', s.sale_date)::date
+        ),
+        payout_records AS (
+            SELECT
+                ip.*,
+                COUNT(*) OVER (
+                    PARTITION BY ip.representative_id, ip.product_id, ip.payout_month
+                ) AS duplicate_count
+            FROM incentive_payouts ip
+            WHERE ip.representative_id = :representative_id
+              AND ip.payout_month BETWEEN
+                  DATE_TRUNC('month', CAST(:start_date AS DATE))::date
+                  AND DATE_TRUNC('month', CAST(:end_date AS DATE))::date
+        )
         SELECT
-        ip.payout_id,
-        ip.product_id,
-        p.product_name,
-        ip.expected_payout,
-        ip.actual_payout,
-        ip.payout_difference,
-        ip.status
-
-    FROM incentive_payouts ip
-
-    LEFT JOIN products p
-        ON p.product_id = ip.product_id
-
-        WHERE
-            ip.representative_id = :representative_id
-
-            AND ip.payout_month BETWEEN
-                DATE_TRUNC(
-                    'month',
-                    CAST(:start_date AS DATE)
-                )::date
-
-                AND
-
-                DATE_TRUNC(
-                    'month',
-                    CAST(:end_date AS DATE)
-                )::date
+            ip.payout_id,
+            COALESCE(ip.product_id, sales.product_id) AS product_id,
+            p.product_name,
+            COALESCE(ip.payout_month, sales.payout_month) AS payout_month,
+            ip.sales_target,
+            ip.actual_sales,
+            ip.sales_achievement,
+            ip.base_incentive,
+            ip.achievement_multiplier,
+            ip.calculated_payout,
+            ip.maximum_payout,
+            ip.expected_payout,
+            ip.actual_payout,
+            ip.payout_difference,
+            ip.status,
+            COALESCE(ip.duplicate_count, 0) AS duplicate_count,
+            COALESCE(sales.attributed_actual_sales, 0) AS attributed_actual_sales,
+            COALESCE(sales.excluded_status_sales, 0) AS excluded_status_sales,
+            COALESCE(sales.outside_assignment_sales, 0) AS outside_assignment_sales
+        FROM payout_records ip
+        FULL OUTER JOIN assignment_sales sales
+          ON sales.representative_id = ip.representative_id
+         AND sales.product_id = ip.product_id
+         AND sales.payout_month = ip.payout_month
+        LEFT JOIN products p
+          ON p.product_id = COALESCE(ip.product_id, sales.product_id)
+        ORDER BY payout_month, product_id, payout_id
         """)
 
     payout_result = await db.execute(
@@ -683,51 +765,19 @@ async def investigate(
         },
     )
 
-    payout_rows = payout_result.fetchall()
+    payout_rows = [dict(row._mapping) for row in payout_result.fetchall()]
+    recorded_payout_rows = []
 
     for payout in payout_rows:
+        if payout.get("payout_id") is None:
+            if safe_float(payout.get("attributed_actual_sales")) > 0:
+                findings.append(missing_payout_finding(payout))
+            continue
 
-        difference = safe_float(payout.payout_difference)
+        recorded_payout_rows.append(payout)
+        findings.append(reconcile_payout_record(payout))
 
-        expected = safe_float(payout.expected_payout)
-
-        actual = safe_float(payout.actual_payout)
-
-        if expected == 0 and actual > 0:
-
-            severity = "HIGH"
-
-        elif abs(difference) >= 5000:
-
-            severity = "HIGH"
-
-        elif abs(difference) >= 1000:
-
-            severity = "MEDIUM"
-
-        elif abs(difference) > 0:
-
-            severity = "LOW"
-
-        else:
-
-            severity = "NORMAL"
-
-        findings.append(
-            {
-                "type": "payout_discrepancy",
-                "product_id": payout.product_id,
-                "product_name": payout.product_name,
-                "severity": severity,
-                "evidence": {
-                    "payout_id": payout.payout_id,
-                    "expected_payout": expected,
-                    "actual_payout": actual,
-                    "payout_difference": difference,
-                    "status": payout.status,
-                },
-            }
-        )
+    findings.extend(temporal_payout_findings(recorded_payout_rows))
 
     # ==================================================
     # OVERALL RISK SCORE

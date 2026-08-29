@@ -233,12 +233,16 @@ function InvestigationInsights({ result }: Props) {
 
   const payoutFindings = findings.filter((finding) => finding.type === "payout_discrepancy");
 
-  const totalExpectedPayout = payoutFindings.reduce(
+  const payoutRecordFindings = payoutFindings.filter(
+    (finding) => finding.evidence?.include_in_payout_totals !== false,
+  );
+
+  const totalExpectedPayout = payoutRecordFindings.reduce(
     (total, finding) => total + safeNumber(finding.evidence?.expected_payout),
     0,
   );
 
-  const totalActualPayout = payoutFindings.reduce(
+  const totalActualPayout = payoutRecordFindings.reduce(
     (total, finding) => total + safeNumber(finding.evidence?.actual_payout),
     0,
   );
@@ -259,7 +263,9 @@ function InvestigationInsights({ result }: Props) {
   ];
 
   const payoutMismatchCount = payoutFindings.filter(
-    (finding) => Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
+    (finding) =>
+      (finding.evidence?.discrepancy_subtypes as unknown[] | undefined)?.length ||
+      Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
   ).length;
 
   /* =======================================================
