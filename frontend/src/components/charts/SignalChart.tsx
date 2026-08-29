@@ -240,9 +240,12 @@ export default function SignalChart({
   const introTimerRef = useRef<number>(0);
   const hasAnimatedRef = useRef(false);
   const latestOptionRef = useRef(option);
-  latestOptionRef.current = option;
   const reducedMotion = useReducedMotion();
   const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
+
+  useEffect(() => {
+    latestOptionRef.current = option;
+  }, [option]);
 
   useEffect(() => {
     const element = containerRef.current;
@@ -271,8 +274,15 @@ export default function SignalChart({
     });
     observer.observe(element);
 
+    // A tooltip opened by touch otherwise remains attached to the page while
+    // the user scrolls into the next mobile card. Dismiss it as soon as the
+    // viewport moves so chart overlays never obscure unrelated content.
+    const hideTooltipOnViewportMove = () => chart.dispatchAction({ type: "hideTip" });
+    window.addEventListener("scroll", hideTooltipOnViewportMove, { passive: true, capture: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", hideTooltipOnViewportMove, { capture: true });
       cancelAnimationFrame(resizeFrame);
       clearTimeout(introTimerRef.current);
       chart.dispose();
