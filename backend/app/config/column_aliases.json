@@ -114,5 +114,13 @@
     "actual_payout": ["actual payout", "paid amount", "actual incentive"],
     "payout_difference": ["payout difference", "difference", "variance"],
     "status": ["status", "payout status", "payment status"]
+  },
+
+  "incentive_programs": {
+    "incentive_program_id": ["incentive program id", "program id", "scheme id"],
+    "start_date": ["start date", "effective from", "program start date"],
+    "end_date": ["end date", "effective to", "program end date"],
+    "products": ["products", "product ids", "eligible products", "covered products"],
+    "percentage": ["percentage", "cap percentage", "maximum payout percentage"]
   }
 }

@@ -745,7 +745,10 @@ async def investigate(
             COALESCE(ip.duplicate_count, 0) AS duplicate_count,
             COALESCE(sales.attributed_actual_sales, 0) AS attributed_actual_sales,
             COALESCE(sales.excluded_status_sales, 0) AS excluded_status_sales,
-            COALESCE(sales.outside_assignment_sales, 0) AS outside_assignment_sales
+            COALESCE(sales.outside_assignment_sales, 0) AS outside_assignment_sales,
+            program.incentive_program_id,
+            COALESCE(program.percentage, 150.0) AS cap_percentage,
+            (program.incentive_program_id IS NULL) AS used_default_cap
         FROM payout_records ip
         FULL OUTER JOIN assignment_sales sales
           ON sales.representative_id = ip.representative_id
@@ -753,6 +756,22 @@ async def investigate(
          AND sales.payout_month = ip.payout_month
         LEFT JOIN products p
           ON p.product_id = COALESCE(ip.product_id, sales.product_id)
+        LEFT JOIN LATERAL (
+            SELECT
+                configured_program.incentive_program_id,
+                configured_program.percentage
+            FROM incentive_programs configured_program
+            WHERE COALESCE(ip.payout_month, sales.payout_month)
+                  BETWEEN configured_program.start_date AND configured_program.end_date
+              AND (
+                  UPPER(TRIM(configured_program.products)) = 'ALL'
+                  OR COALESCE(ip.product_id, sales.product_id) = ANY(
+                      STRING_TO_ARRAY(REPLACE(configured_program.products, ' ', ''), ',')
+                  )
+              )
+            ORDER BY configured_program.start_date DESC, configured_program.incentive_program_id
+            LIMIT 1
+        ) program ON TRUE
         ORDER BY payout_month, product_id, payout_id
         """)
 

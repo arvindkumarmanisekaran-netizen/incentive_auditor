@@ -52,6 +52,8 @@ DATE_COLUMNS = {
     "sale_date",
     "prescription_date",
     "payout_month",
+    "start_date",
+    "end_date",
 }
 
 
@@ -72,6 +74,7 @@ DECIMAL_COLUMNS = {
     "expected_payout",
     "actual_payout",
     "payout_difference",
+    "percentage",
 }
 
 
@@ -86,6 +89,7 @@ NON_NEGATIVE_COLUMNS = {
     "maximum_payout",
     "expected_payout",
     "actual_payout",
+    "percentage",
 }
 
 
@@ -404,7 +408,7 @@ def validate_date_ranges(
     table_name: str,
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    if table_name != "representative_doctor_assignments":
+    if table_name not in {"representative_doctor_assignments", "incentive_programs"}:
         return []
 
     errors: list[dict[str, Any]] = []
@@ -413,17 +417,22 @@ def validate_date_ranges(
         records,
         start=1,
     ):
-        effective_from = parse_date_value(record.get("effective_from"))
-
-        effective_to = parse_date_value(record.get("effective_to"))
+        if table_name == "incentive_programs":
+            effective_from = parse_date_value(record.get("start_date"))
+            effective_to = parse_date_value(record.get("end_date"))
+            end_column = "end_date"
+        else:
+            effective_from = parse_date_value(record.get("effective_from"))
+            effective_to = parse_date_value(record.get("effective_to"))
+            end_column = "effective_to"
 
         if effective_from and effective_to and effective_to < effective_from:
             errors.append(
                 {
                     "row": row_number,
-                    "column": "effective_to",
+                    "column": end_column,
                     "code": "invalid_date_range",
-                    "message": ("effective_to cannot " "be earlier than " "effective_from."),
+                    "message": (f"{end_column} cannot be earlier than the start date."),
                 }
             )
 

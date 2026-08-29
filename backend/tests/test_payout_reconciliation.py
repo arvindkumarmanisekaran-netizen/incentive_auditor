@@ -20,6 +20,9 @@ def valid_row(**overrides):
         "attributed_actual_sales": 100000,
         "excluded_status_sales": 0,
         "outside_assignment_sales": 0,
+        "incentive_program_id": None,
+        "cap_percentage": 150,
+        "used_default_cap": True,
         "sales_achievement": 100,
         "base_incentive": 5000,
         "achievement_multiplier": 1.25,
@@ -47,6 +50,21 @@ class PayoutReconciliationTests(unittest.TestCase):
         self.assertEqual(finding["severity"], "NORMAL")
         self.assertEqual(finding["evidence"]["failed_checks"], [])
         self.assertEqual(finding["evidence"]["reconstructed_expected_payout"], 6250.0)
+        self.assertEqual(finding["evidence"]["cap_rule_source"], "Default fallback: 150% of base incentive")
+
+    def test_active_program_percentage_controls_maximum_payout(self):
+        finding = reconcile_payout_record(
+            valid_row(
+                incentive_program_id="IP001",
+                cap_percentage=125,
+                used_default_cap=False,
+                maximum_payout=6250,
+            )
+        )
+        self.assertEqual(finding["severity"], "NORMAL")
+        self.assertEqual(finding["evidence"]["incentive_program_id"], "IP001")
+        self.assertEqual(finding["evidence"]["cap_percentage"], 125.0)
+        self.assertEqual(finding["evidence"]["cap_rule_source"], "Active incentive program")
 
     def test_rebuild_detects_each_tampered_calculation_stage(self):
         row = valid_row(

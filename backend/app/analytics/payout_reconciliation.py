@@ -102,7 +102,8 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
     calculated_multiplier = expected_multiplier(calculated_achievement)
     calculated_base = _money(attributed_sales * Decimal("0.05"))
     independently_calculated_payout = _money(calculated_base * calculated_multiplier)
-    calculated_maximum = _money(calculated_base * Decimal("1.50"))
+    cap_percentage = _decimal(row.get("cap_percentage") or 150)
+    calculated_maximum = _money(calculated_base * cap_percentage / Decimal("100"))
     calculated_expected = min(independently_calculated_payout, calculated_maximum)
     calculated_difference = _money(actual_payout - calculated_expected)
     difference_from_stored_expected = _money(actual_payout - recorded_expected)
@@ -175,7 +176,7 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
         "maximum_cap_mismatch",
         recorded_maximum,
         calculated_maximum,
-        "Maximum payout must equal 150% of the independently calculated base incentive.",
+        "Maximum payout must equal the active incentive-program percentage applied to the independently calculated base incentive.",
     )
     compare_money(
         "expected_payout_mismatch",
@@ -360,6 +361,16 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             "calculated_base_incentive": _number(calculated_base),
             "independently_calculated_payout": _number(independently_calculated_payout),
             "calculated_maximum_payout": _number(calculated_maximum),
+            "incentive_program_id": row.get("incentive_program_id"),
+            "cap_percentage": float(cap_percentage),
+            "cap_rule_source": (
+                "Default fallback: 150% of base incentive"
+                if row.get(
+                    "used_default_cap",
+                    row.get("incentive_program_id") is None,
+                )
+                else "Active incentive program"
+            ),
             "reconstructed_expected_payout": _number(calculated_expected),
             "failed_checks": checks,
             "discrepancy_subtypes": [check["subtype"] for check in checks],

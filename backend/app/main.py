@@ -10,6 +10,7 @@ from .api.doctors import router as doctors_router
 from .api.territories import router as territories_router
 from .api.assignments import router as assignments_router
 from .api.incentive_payouts import router as incentive_payouts_router
+from .api.incentive_programs import router as incentive_programs_router
 from .api.sales import router as sales_router
 from .api.prescriptions import router as prescriptions_router
 from .api.chat import router as chat_router
@@ -44,6 +45,7 @@ app.include_router(products_router)
 app.include_router(territories_router)
 app.include_router(assignments_router)
 app.include_router(incentive_payouts_router)
+app.include_router(incentive_programs_router)
 app.include_router(sales_router)
 app.include_router(prescriptions_router)
 app.include_router(chat_router)

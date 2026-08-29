@@ -50,6 +50,11 @@ def generate_canonical_data(
         num_products,
     )
 
+    incentive_programs = generate_incentive_programs(
+        products=products,
+        months=months,
+    )
+
     doctors = generate_doctors(
         num_doctors,
         territories,
@@ -71,18 +76,48 @@ def generate_canonical_data(
     payouts = generate_payouts(
         sales=sales,
         assignments=assignments,
+        incentive_programs=incentive_programs,
     )
 
     return {
         "territories": territories,
         "representatives": representatives,
         "products": products,
+        "incentive_programs": incentive_programs,
         "doctors": doctors,
         "assignments": assignments,
         "sales": sales,
         "prescriptions": prescriptions,
         "payouts": payouts,
     }
+
+
+def generate_incentive_programs(
+    products: list[dict],
+    months: list[str],
+) -> list[dict]:
+    """Generate dated product groups with a maximum-payout percentage."""
+    if not products or not months:
+        return []
+
+    covered_products = products[: max(1, int(len(products) * 0.70))]
+    group_size = max(1, (len(covered_products) + 2) // 3)
+    percentages = (125.0, 150.0, 175.0)
+    programs = []
+
+    for index, start in enumerate(range(0, len(covered_products), group_size), start=1):
+        group = covered_products[start : start + group_size]
+        programs.append(
+            {
+                "incentive_program_id": f"IP{index:03d}",
+                "start_date": f"{min(months)}-01",
+                "end_date": f"{max(months)}-28",
+                "products": ",".join(product["product_id"] for product in group),
+                "percentage": percentages[(index - 1) % len(percentages)],
+            }
+        )
+
+    return programs
 
 
 # =====================================================
@@ -621,6 +656,7 @@ def choose_prescription_status() -> str:
 def generate_payouts(
     sales: list[dict],
     assignments: list[dict],
+    incentive_programs: list[dict] | None = None,
 ) -> list[dict]:
 
     # -------------------------------------------------
@@ -728,7 +764,23 @@ def generate_payouts(
 
         calculated_payout = base_incentive * achievement_multiplier
 
-        maximum_payout = base_incentive * 1.50
+        payout_date = f"{month}-01"
+        active_program = next(
+            (
+                program
+                for program in (incentive_programs or [])
+                if program["start_date"] <= payout_date <= program["end_date"]
+                and product_id
+                in {
+                    item.strip()
+                    for item in str(program.get("products") or "").split(",")
+                    if item.strip()
+                }
+            ),
+            None,
+        )
+        cap_percentage = float(active_program["percentage"]) if active_program else 150.0
+        maximum_payout = base_incentive * (cap_percentage / 100.0)
 
         expected_payout = min(
             calculated_payout,
@@ -769,10 +821,6 @@ def generate_payouts(
                 "payout_id": (f"PAYOUT_{payout_id:07d}"),
                 "representative_id": (representative_id),
                 "product_id": product_id,
-                # incentive_programs table was removed,
-                # but program_id is still present on
-                # incentive_payouts.
-                "program_id": "PG001",
                 "payout_month": (f"{month}-01"),
                 "sales_target": round(
                     sales_target,
