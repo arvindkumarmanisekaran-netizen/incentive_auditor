@@ -619,7 +619,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {payoutBreakdowns.length > 0 && (
-                <details className="payout-breakdown" open>
+                <details className="payout-breakdown">
                   <summary>Incentive calculation breakup ({payoutBreakdowns.length})</summary>
 
                   <div
