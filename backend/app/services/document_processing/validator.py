@@ -75,6 +75,9 @@ DECIMAL_COLUMNS = {
     "actual_payout",
     "payout_difference",
     "percentage",
+    "minimum_achievement",
+    "maximum_achievement",
+    "multiplier",
 }
 
 
@@ -90,6 +93,9 @@ NON_NEGATIVE_COLUMNS = {
     "expected_payout",
     "actual_payout",
     "percentage",
+    "minimum_achievement",
+    "maximum_achievement",
+    "multiplier",
 }
 
 
@@ -439,6 +445,53 @@ def validate_date_ranges(
     return errors
 
 
+def validate_incentive_tiers(
+    table_name: str,
+    records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if table_name != "incentive_program_tiers":
+        return []
+
+    errors: list[dict[str, Any]] = []
+    valid_ranges: list[tuple[int, str, Decimal, Decimal | None]] = []
+    for row_number, record in enumerate(records, start=1):
+        minimum = parse_decimal_value(record.get("minimum_achievement"))
+        maximum = parse_decimal_value(record.get("maximum_achievement"))
+        program_id = str(record.get("incentive_program_id") or "").strip()
+        if minimum is None:
+            continue
+        if maximum is not None and maximum <= minimum:
+            errors.append(
+                {
+                    "row": row_number,
+                    "column": "maximum_achievement",
+                    "code": "invalid_tier_range",
+                    "message": "maximum_achievement must be greater than minimum_achievement.",
+                }
+            )
+            continue
+        valid_ranges.append((row_number, program_id, minimum, maximum))
+
+    for index, (row_number, program_id, minimum, maximum) in enumerate(valid_ranges):
+        upper = maximum if maximum is not None else Decimal("1000000000")
+        for other_row, other_program, other_minimum, other_maximum in valid_ranges[index + 1 :]:
+            if program_id != other_program:
+                continue
+            other_upper = (
+                other_maximum if other_maximum is not None else Decimal("1000000000")
+            )
+            if minimum < other_upper and other_minimum < upper:
+                errors.append(
+                    {
+                        "row": other_row,
+                        "column": "minimum_achievement",
+                        "code": "overlapping_tier",
+                        "message": f"Achievement tier overlaps row {row_number} for program {program_id}.",
+                    }
+                )
+    return errors
+
+
 def validate_records(
     table_name: str,
     records: list[dict[str, Any]],
@@ -480,6 +533,8 @@ def validate_records(
             records,
         )
     )
+
+    validation_errors.extend(validate_incentive_tiers(table_name, records))
 
     # -----------------------------------------
     # Attach frontend-friendly metadata

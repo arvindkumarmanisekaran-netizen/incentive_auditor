@@ -122,5 +122,13 @@
     "end_date": ["end date", "effective to", "program end date"],
     "products": ["products", "product ids", "eligible products", "covered products"],
     "percentage": ["percentage", "cap percentage", "maximum payout percentage"]
+  },
+
+  "incentive_program_tiers": {
+    "incentive_program_tier_id": ["incentive program tier id", "tier id", "band id"],
+    "incentive_program_id": ["incentive program id", "program id", "scheme id"],
+    "minimum_achievement": ["minimum achievement", "min achievement", "achievement from"],
+    "maximum_achievement": ["maximum achievement", "max achievement", "achievement to"],
+    "multiplier": ["multiplier", "achievement multiplier", "payout multiplier"]
   }
 }

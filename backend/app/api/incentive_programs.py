@@ -178,6 +178,12 @@ async def bulk_delete_incentive_programs(
     ids = payload.get("ids", [])
     if not ids:
         raise HTTPException(status_code=400, detail="No incentive program IDs supplied")
+    await db.execute(
+        text("DELETE FROM incentive_program_tiers WHERE incentive_program_id IN :ids").bindparams(
+            bindparam("ids", expanding=True)
+        ),
+        {"ids": ids},
+    )
     result = await db.execute(
         text("DELETE FROM incentive_programs WHERE incentive_program_id IN :ids").bindparams(
             bindparam("ids", expanding=True)
@@ -193,6 +199,10 @@ async def delete_incentive_program(
     incentive_program_id: str,
     db: AsyncSession = Depends(get_db),
 ):
+    await db.execute(
+        text("DELETE FROM incentive_program_tiers WHERE incentive_program_id = :id"),
+        {"id": incentive_program_id},
+    )
     result = await db.execute(
         text("DELETE FROM incentive_programs WHERE incentive_program_id = :id"),
         {"id": incentive_program_id},

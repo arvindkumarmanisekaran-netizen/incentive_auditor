@@ -99,5 +99,17 @@
     ],
     "optional_columns": [],
     "duplicate_keys": ["incentive_program_id"]
+  },
+
+  "incentive_program_tier": {
+    "table": "incentive_program_tiers",
+    "required_columns": [
+      "incentive_program_tier_id",
+      "incentive_program_id",
+      "minimum_achievement",
+      "multiplier"
+    ],
+    "optional_columns": ["maximum_achievement"],
+    "duplicate_keys": ["incentive_program_tier_id"]
   }
 }

@@ -44,6 +44,9 @@ TABLE_ALIASES = {
     "payout": "incentive_payouts", "payouts": "incentive_payouts",
     "incentive program": "incentive_programs", "incentive programs": "incentive_programs",
     "program": "incentive_programs", "programs": "incentive_programs",
+    "incentive program tier": "incentive_program_tiers",
+    "incentive program tiers": "incentive_program_tiers",
+    "program tier": "incentive_program_tiers", "program tiers": "incentive_program_tiers",
 }
 
 DISPLAY_COLUMNS = {
@@ -56,6 +59,7 @@ DISPLAY_COLUMNS = {
     "prescriptions": ["prescription_id", "prescription_date", "doctor_id", "product_id", "quantity", "status"],
     "incentive_payouts": ["payout_id", "representative_id", "product_id", "payout_month", "expected_payout", "actual_payout", "payout_difference", "status"],
     "incentive_programs": ["incentive_program_id", "start_date", "end_date", "products", "percentage"],
+    "incentive_program_tiers": ["incentive_program_tier_id", "incentive_program_id", "minimum_achievement", "maximum_achievement", "multiplier"],
 }
 
 
@@ -200,7 +204,7 @@ async def run_read_only_query(db: AsyncSession, message: str, entities: dict[str
     if not table:
         return {
             "action": "NEED_QUERY_SCOPE",
-            "message": "Which records should I query? I can read representatives, doctors, products, territories, assignments, sales, prescriptions, incentive programs or payouts.",
+            "message": "Which records should I query? I can read representatives, doctors, products, territories, assignments, sales, prescriptions, incentive programs, program tiers or payouts.",
         }
     columns = DISPLAY_COLUMNS[table]
     lowered = message.lower()

@@ -752,7 +752,11 @@ async def investigate(
             program.program_products,
             program.program_products_display,
             COALESCE(program.percentage, 150.0) AS cap_percentage,
-            (program.incentive_program_id IS NULL) AS used_default_cap
+            (program.incentive_program_id IS NULL) AS used_default_cap,
+            tier.incentive_program_tier_id,
+            tier.minimum_achievement AS tier_minimum_achievement,
+            tier.maximum_achievement AS tier_maximum_achievement,
+            tier.multiplier AS tier_multiplier
         FROM payout_records ip
         FULL OUTER JOIN assignment_sales sales
           ON sales.representative_id = ip.representative_id
@@ -794,6 +798,35 @@ async def investigate(
             ORDER BY configured_program.start_date DESC, configured_program.incentive_program_id
             LIMIT 1
         ) program ON TRUE
+        LEFT JOIN LATERAL (
+            SELECT
+                configured_tier.incentive_program_tier_id,
+                configured_tier.minimum_achievement,
+                configured_tier.maximum_achievement,
+                configured_tier.multiplier
+            FROM incentive_program_tiers configured_tier
+            WHERE configured_tier.incentive_program_id = program.incentive_program_id
+              AND (
+                  CASE
+                      WHEN COALESCE(ip.sales_target, 0) = 0 THEN 0
+                      ELSE COALESCE(sales.attributed_actual_sales, 0)
+                           / ip.sales_target * 100
+                  END
+              ) >= configured_tier.minimum_achievement
+              AND (
+                  configured_tier.maximum_achievement IS NULL
+                  OR (
+                      CASE
+                          WHEN COALESCE(ip.sales_target, 0) = 0 THEN 0
+                          ELSE COALESCE(sales.attributed_actual_sales, 0)
+                               / ip.sales_target * 100
+                      END
+                  ) < configured_tier.maximum_achievement
+              )
+            ORDER BY configured_tier.minimum_achievement DESC,
+                     configured_tier.incentive_program_tier_id
+            LIMIT 1
+        ) tier ON program.incentive_program_id IS NOT NULL
         ORDER BY payout_month, product_id, payout_id
         """)
 

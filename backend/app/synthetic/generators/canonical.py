@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-from calendar import monthrange
 from datetime import date
 import random
 
 from faker import Faker
 import secrets
+
+from .incentive_programs import (
+    generate_incentive_program_tiers,
+    generate_incentive_programs,
+)
 
 fake = Faker("en_IN")
 
@@ -36,6 +40,7 @@ def generate_canonical_data(
             "2026-05",
             "2026-06",
             "2026-07",
+            "2026-08",
         ]
 
     territories = generate_territories(
@@ -54,6 +59,10 @@ def generate_canonical_data(
     incentive_programs = generate_incentive_programs(
         products=products,
         months=months,
+    )
+
+    incentive_program_tiers = generate_incentive_program_tiers(
+        incentive_programs,
     )
 
     doctors = generate_doctors(
@@ -78,6 +87,7 @@ def generate_canonical_data(
         sales=sales,
         assignments=assignments,
         incentive_programs=incentive_programs,
+        incentive_program_tiers=incentive_program_tiers,
     )
 
     return {
@@ -85,42 +95,13 @@ def generate_canonical_data(
         "representatives": representatives,
         "products": products,
         "incentive_programs": incentive_programs,
+        "incentive_program_tiers": incentive_program_tiers,
         "doctors": doctors,
         "assignments": assignments,
         "sales": sales,
         "prescriptions": prescriptions,
         "payouts": payouts,
     }
-
-
-def generate_incentive_programs(
-    products: list[dict],
-    months: list[str],
-) -> list[dict]:
-    """Generate dated product groups with a maximum-payout percentage."""
-    if not products or not months:
-        return []
-
-    covered_products = products[: max(1, int(len(products) * 0.70))]
-    group_size = max(1, (len(covered_products) + 2) // 3)
-    percentages = (125.0, 150.0, 175.0)
-    programs = []
-    final_year, final_month = (int(part) for part in max(months).split("-"))
-    final_day = monthrange(final_year, final_month)[1]
-
-    for index, start in enumerate(range(0, len(covered_products), group_size), start=1):
-        group = covered_products[start : start + group_size]
-        programs.append(
-            {
-                "incentive_program_id": f"IP{index:03d}",
-                "start_date": f"{min(months)}-01",
-                "end_date": f"{max(months)}-{final_day:02d}",
-                "products": ",".join(product["product_id"] for product in group),
-                "percentage": percentages[(index - 1) % len(percentages)],
-            }
-        )
-
-    return programs
 
 
 # =====================================================
@@ -660,6 +641,7 @@ def generate_payouts(
     sales: list[dict],
     assignments: list[dict],
     incentive_programs: list[dict] | None = None,
+    incentive_program_tiers: list[dict] | None = None,
 ) -> list[dict]:
 
     # -------------------------------------------------
@@ -740,24 +722,61 @@ def generate_payouts(
         else:
             sales_achievement = actual_sales / sales_target * 100
 
-        # -------------------------------------------------
-        # Achievement multiplier
-        # -------------------------------------------------
+        payout_date = f"{month}-01"
+        active_program = next(
+            (
+                program
+                for program in sorted(
+                    incentive_programs or [],
+                    key=lambda item: (item["start_date"], item["incentive_program_id"]),
+                    reverse=True,
+                )
+                if program["start_date"] <= payout_date <= program["end_date"]
+                and (
+                    str(program.get("products") or "").strip().upper() == "ALL"
+                    or product_id
+                    in {
+                        item.strip()
+                        for item in str(program.get("products") or "").split(",")
+                        if item.strip()
+                    }
+                )
+            ),
+            None,
+        )
 
-        if sales_achievement < 50:
-            achievement_multiplier = 0.50
-
-        elif sales_achievement < 75:
-            achievement_multiplier = 0.75
-
-        elif sales_achievement < 100:
-            achievement_multiplier = 1.00
-
-        elif sales_achievement < 125:
-            achievement_multiplier = 1.25
-
+        if active_program:
+            active_tier = next(
+                (
+                    tier
+                    for tier in (incentive_program_tiers or [])
+                    if tier["incentive_program_id"] == active_program["incentive_program_id"]
+                    and sales_achievement >= float(tier["minimum_achievement"])
+                    and (
+                        tier.get("maximum_achievement") is None
+                        or sales_achievement < float(tier["maximum_achievement"])
+                    )
+                ),
+                None,
+            )
+            if active_tier is None:
+                raise ValueError(
+                    "Generated incentive program has no tier for "
+                    f"{sales_achievement:.2f}% achievement: "
+                    f"{active_program['incentive_program_id']}"
+                )
+            achievement_multiplier = float(active_tier["multiplier"])
         else:
-            achievement_multiplier = 1.50
+            if sales_achievement < 50:
+                achievement_multiplier = 0.50
+            elif sales_achievement < 75:
+                achievement_multiplier = 0.75
+            elif sales_achievement < 100:
+                achievement_multiplier = 1.00
+            elif sales_achievement < 125:
+                achievement_multiplier = 1.25
+            else:
+                achievement_multiplier = 1.50
 
         # -------------------------------------------------
         # Payout calculation
@@ -767,21 +786,6 @@ def generate_payouts(
 
         calculated_payout = base_incentive * achievement_multiplier
 
-        payout_date = f"{month}-01"
-        active_program = next(
-            (
-                program
-                for program in (incentive_programs or [])
-                if program["start_date"] <= payout_date <= program["end_date"]
-                and product_id
-                in {
-                    item.strip()
-                    for item in str(program.get("products") or "").split(",")
-                    if item.strip()
-                }
-            ),
-            None,
-        )
         cap_percentage = float(active_program["percentage"]) if active_program else 150.0
         maximum_payout = base_incentive * (cap_percentage / 100.0)
 

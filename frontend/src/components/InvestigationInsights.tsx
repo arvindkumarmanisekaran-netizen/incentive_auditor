@@ -290,6 +290,17 @@ function InvestigationInsights({ result }: Props) {
           evidence.incentive_program_products ??
           "—",
       ),
+      tier: String(evidence.incentive_program_tier_id ?? "Default bands"),
+      tierRange:
+        evidence.tier_minimum_achievement !== null &&
+        evidence.tier_minimum_achievement !== undefined
+          ? `${formatExactNumber(evidence.tier_minimum_achievement)}% – ${
+              evidence.tier_maximum_achievement === null ||
+              evidence.tier_maximum_achievement === undefined
+                ? "No maximum"
+                : `${formatExactNumber(evidence.tier_maximum_achievement)}%`
+            }`
+          : "Global fallback schedule",
       percentage: safeNumber(evidence.cap_percentage || 150),
       attributedSales: safeNumber(evidence.attributed_actual_sales),
       baseIncentive: safeNumber(evidence.calculated_base_incentive),
@@ -565,6 +576,8 @@ function InvestigationInsights({ result }: Props) {
                           <th>Month</th>
                           <th>Program</th>
                           <th>Program products</th>
+                          <th>Program tier</th>
+                          <th>Achievement band</th>
                           <th>Cap</th>
                           <th>Attributed sales</th>
                           <th>Base incentive</th>
@@ -582,6 +595,8 @@ function InvestigationInsights({ result }: Props) {
                             <td>{item.month}</td>
                             <td>{item.program}</td>
                             <td>{item.programProducts}</td>
+                            <td>{item.tier}</td>
+                            <td>{item.tierRange}</td>
                             <td>{formatExactNumber(item.percentage)}%</td>
                             <td>{formatMoney(item.attributedSales)}</td>
                             <td>{formatMoney(item.baseIncentive)}</td>

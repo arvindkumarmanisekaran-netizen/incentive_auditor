@@ -93,6 +93,18 @@ CREATE TABLE IF NOT EXISTS {schema}.incentive_programs (
     CHECK (end_date >= start_date),
     CHECK (percentage > 0)
 );
+CREATE TABLE IF NOT EXISTS {schema}.incentive_program_tiers (
+    incentive_program_tier_id VARCHAR(20) PRIMARY KEY,
+    incentive_program_id VARCHAR(20) NOT NULL,
+    minimum_achievement NUMERIC(8,2) NOT NULL,
+    maximum_achievement NUMERIC(8,2),
+    multiplier NUMERIC(8,2) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (minimum_achievement >= 0),
+    CHECK (maximum_achievement IS NULL OR maximum_achievement > minimum_achievement),
+    CHECK (multiplier >= 0)
+);
 CREATE TABLE IF NOT EXISTS {schema}.incentive_payouts (
     payout_id VARCHAR(20) PRIMARY KEY, representative_id VARCHAR(20) NOT NULL,
     product_id VARCHAR(20) NOT NULL, payout_month DATE NOT NULL,
@@ -147,6 +159,17 @@ SEED_TABLES = {
         "incentive_programs",
         ["incentive_program_id", "start_date", "end_date", "products", "percentage"],
         {"start_date", "end_date"},
+    ),
+    "incentive_program_tiers": (
+        "incentive_program_tiers",
+        [
+            "incentive_program_tier_id",
+            "incentive_program_id",
+            "minimum_achievement",
+            "maximum_achievement",
+            "multiplier",
+        ],
+        set(),
     ),
     "payouts": (
         "incentive_payouts",

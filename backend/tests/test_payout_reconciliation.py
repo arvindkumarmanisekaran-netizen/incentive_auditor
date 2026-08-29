@@ -25,6 +25,10 @@ def valid_row(**overrides):
         "program_end_date": None,
         "program_products": None,
         "program_products_display": None,
+        "incentive_program_tier_id": None,
+        "tier_minimum_achievement": None,
+        "tier_maximum_achievement": None,
+        "tier_multiplier": None,
         "cap_percentage": 150,
         "used_default_cap": True,
         "sales_achievement": 100,
@@ -64,6 +68,10 @@ class PayoutReconciliationTests(unittest.TestCase):
                 program_end_date="2026-12-31",
                 program_products="P005,P010",
                 program_products_display="MolestiaeCare 5 (P005), CorruptiCare 10 (P010)",
+                incentive_program_tier_id="IPT0004",
+                tier_minimum_achievement=100,
+                tier_maximum_achievement=125,
+                tier_multiplier=1.25,
                 cap_percentage=125,
                 used_default_cap=False,
                 maximum_payout=6250,
@@ -79,6 +87,21 @@ class PayoutReconciliationTests(unittest.TestCase):
             finding["evidence"]["incentive_program_products_display"],
             "MolestiaeCare 5 (P005), CorruptiCare 10 (P010)",
         )
+        self.assertEqual(finding["evidence"]["incentive_program_tier_id"], "IPT0004")
+        self.assertEqual(finding["evidence"]["tier_multiplier"], 1.25)
+
+    def test_active_program_without_matching_tier_is_configuration_discrepancy(self):
+        finding = reconcile_payout_record(
+            valid_row(
+                incentive_program_id="IP001",
+                cap_percentage=150,
+                used_default_cap=False,
+            )
+        )
+        self.assertEqual(finding["severity"], "HIGH")
+        self.assertIn("missing_program_tier", finding["evidence"]["discrepancy_subtypes"])
+        self.assertFalse(finding["evidence"]["calculation_reconstruction_complete"])
+        self.assertIsNone(finding["evidence"]["calculated_achievement_multiplier"])
 
     def test_rebuild_detects_each_tampered_calculation_stage(self):
         row = valid_row(

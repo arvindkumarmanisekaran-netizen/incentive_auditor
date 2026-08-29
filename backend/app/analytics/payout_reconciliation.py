@@ -99,7 +99,16 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
     calculated_achievement = (
         Decimal("0") if target == 0 else _money(attributed_sales / target * 100)
     )
-    calculated_multiplier = expected_multiplier(calculated_achievement)
+    program_id = row.get("incentive_program_id")
+    tier_id = row.get("incentive_program_tier_id")
+    missing_program_tier = bool(program_id) and not tier_id
+    calculated_multiplier = (
+        recorded_multiplier
+        if missing_program_tier
+        else _decimal(row.get("tier_multiplier"))
+        if program_id
+        else expected_multiplier(calculated_achievement)
+    )
     calculated_base = _money(attributed_sales * Decimal("0.05"))
     independently_calculated_payout = _money(calculated_base * calculated_multiplier)
     cap_percentage = _decimal(row.get("cap_percentage") or 150)
@@ -109,6 +118,17 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
     difference_from_stored_expected = _money(actual_payout - recorded_expected)
 
     checks: list[dict[str, Any]] = []
+
+    if missing_program_tier:
+        _failed_check(
+            checks,
+            subtype="missing_program_tier",
+            recorded=None,
+            calculated=f"Tier required for {float(calculated_achievement)}% achievement",
+            difference=None,
+            severity="HIGH",
+            rule="An active incentive program must define a non-overlapping achievement tier covering the calculated achievement percentage.",
+        )
 
     def compare_money(subtype: str, recorded: Decimal, calculated: Decimal, rule: str) -> None:
         difference = _money(recorded - calculated)
@@ -149,7 +169,7 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             rule="Sales achievement must equal attributed sales divided by sales target, multiplied by 100.",
         )
 
-    if abs(recorded_multiplier - calculated_multiplier) > MULTIPLIER_TOLERANCE:
+    if not missing_program_tier and abs(recorded_multiplier - calculated_multiplier) > MULTIPLIER_TOLERANCE:
         _failed_check(
             checks,
             subtype="multiplier_mismatch",
@@ -166,26 +186,28 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
         calculated_base,
         "Base incentive must equal 5% of independently attributed sales.",
     )
-    compare_money(
-        "calculated_payout_mismatch",
-        recorded_calculated,
-        independently_calculated_payout,
-        "Calculated payout must equal the independently calculated base incentive multiplied by the valid achievement multiplier.",
-    )
+    if not missing_program_tier:
+        compare_money(
+            "calculated_payout_mismatch",
+            recorded_calculated,
+            independently_calculated_payout,
+            "Calculated payout must equal the independently calculated base incentive multiplied by the valid achievement multiplier.",
+        )
     compare_money(
         "maximum_cap_mismatch",
         recorded_maximum,
         calculated_maximum,
         "Maximum payout must equal the active incentive-program percentage applied to the independently calculated base incentive.",
     )
-    compare_money(
-        "expected_payout_mismatch",
-        recorded_expected,
-        calculated_expected,
-        "Expected payout must be the lower of independently calculated payout and maximum payout.",
-    )
+    if not missing_program_tier:
+        compare_money(
+            "expected_payout_mismatch",
+            recorded_expected,
+            calculated_expected,
+            "Expected payout must be the lower of independently calculated payout and maximum payout.",
+        )
 
-    if abs(calculated_difference) > MONEY_TOLERANCE:
+    if not missing_program_tier and abs(calculated_difference) > MONEY_TOLERANCE:
         _failed_check(
             checks,
             subtype="actual_payout_variance",
@@ -196,7 +218,7 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             rule="Actual payout must equal the independently reconstructed expected payout.",
         )
 
-    if calculated_expected == 0 and actual_payout > MONEY_TOLERANCE:
+    if not missing_program_tier and calculated_expected == 0 and actual_payout > MONEY_TOLERANCE:
         _failed_check(
             checks,
             subtype="unexpected_positive_payout",
@@ -347,19 +369,38 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             "status": status,
             "expected_payout": _number(recorded_expected),
             "actual_payout": _number(actual_payout),
-            "payout_difference": _number(calculated_difference),
+            "payout_difference": _number(
+                difference_from_stored_expected if missing_program_tier else calculated_difference
+            ),
             "payout_difference_percent": (
                 None
-                if calculated_expected == 0
-                else float(_money(calculated_difference / abs(calculated_expected) * 100))
+                if (recorded_expected if missing_program_tier else calculated_expected) == 0
+                else float(
+                    _money(
+                        (difference_from_stored_expected if missing_program_tier else calculated_difference)
+                        / abs(recorded_expected if missing_program_tier else calculated_expected)
+                        * 100
+                    )
+                )
             ),
             "recorded_payout_difference": _number(recorded_difference),
             "attributed_actual_sales": _number(attributed_sales),
             "recorded_actual_sales": _number(recorded_sales),
             "calculated_sales_achievement": float(calculated_achievement),
-            "calculated_achievement_multiplier": float(calculated_multiplier),
+            "calculated_achievement_multiplier": (
+                None if missing_program_tier else float(calculated_multiplier)
+            ),
+            "achievement_multiplier_rule_source": (
+                "Missing program tier"
+                if missing_program_tier
+                else "Active incentive program tier"
+                if program_id
+                else "Default achievement bands"
+            ),
             "calculated_base_incentive": _number(calculated_base),
-            "independently_calculated_payout": _number(independently_calculated_payout),
+            "independently_calculated_payout": (
+                None if missing_program_tier else _number(independently_calculated_payout)
+            ),
             "calculated_maximum_payout": _number(calculated_maximum),
             "incentive_program_id": row.get("incentive_program_id"),
             "incentive_program_start_date": (
@@ -370,6 +411,18 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             ),
             "incentive_program_products": row.get("program_products"),
             "incentive_program_products_display": row.get("program_products_display"),
+            "incentive_program_tier_id": tier_id,
+            "tier_minimum_achievement": (
+                float(_decimal(row.get("tier_minimum_achievement"))) if tier_id else None
+            ),
+            "tier_maximum_achievement": (
+                float(_decimal(row.get("tier_maximum_achievement")))
+                if tier_id and row.get("tier_maximum_achievement") is not None
+                else None
+            ),
+            "tier_multiplier": (
+                float(_decimal(row.get("tier_multiplier"))) if tier_id else None
+            ),
             "cap_percentage": float(cap_percentage),
             "cap_rule_source": (
                 "Default fallback: 150% of base incentive"
@@ -379,7 +432,10 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
                 )
                 else "Active incentive program"
             ),
-            "reconstructed_expected_payout": _number(calculated_expected),
+            "reconstructed_expected_payout": (
+                None if missing_program_tier else _number(calculated_expected)
+            ),
+            "calculation_reconstruction_complete": not missing_program_tier,
             "failed_checks": checks,
             "discrepancy_subtypes": [check["subtype"] for check in checks],
             "include_in_payout_totals": True,
@@ -389,6 +445,7 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
 
 def missing_payout_finding(row: dict[str, Any]) -> dict[str, Any]:
     attributed_sales = _decimal(row.get("attributed_actual_sales"))
+    tier_id = row.get("incentive_program_tier_id")
     return {
         "type": "payout_discrepancy",
         "product_id": row.get("product_id"),
@@ -410,6 +467,18 @@ def missing_payout_finding(row: dict[str, Any]) -> dict[str, Any]:
             ),
             "incentive_program_products": row.get("program_products"),
             "incentive_program_products_display": row.get("program_products_display"),
+            "incentive_program_tier_id": tier_id,
+            "tier_minimum_achievement": (
+                float(_decimal(row.get("tier_minimum_achievement"))) if tier_id else None
+            ),
+            "tier_maximum_achievement": (
+                float(_decimal(row.get("tier_maximum_achievement")))
+                if tier_id and row.get("tier_maximum_achievement") is not None
+                else None
+            ),
+            "tier_multiplier": (
+                float(_decimal(row.get("tier_multiplier"))) if tier_id else None
+            ),
             "cap_percentage": float(_decimal(row.get("cap_percentage") or 150)),
             "cap_rule_source": (
                 "Default fallback: 150% of base incentive"

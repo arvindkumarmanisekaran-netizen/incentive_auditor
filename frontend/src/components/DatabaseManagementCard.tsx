@@ -11,6 +11,7 @@ import {
   getDoctors,
   getPayouts,
   getIncentivePrograms,
+  getIncentiveProgramTiers,
   getPrescriptions,
   getProducts,
   getSales,
@@ -19,6 +20,7 @@ import {
   type DoctorRow,
   type IncentivePayoutRow,
   type IncentiveProgramRow,
+  type IncentiveProgramTierRow,
   type PrescriptionRow,
   type ProductRow,
   type RepresentativeRow,
@@ -35,6 +37,7 @@ type Section =
   | "prescriptions"
   | "sales"
   | "incentive_programs"
+  | "incentive_program_tiers"
   | "payouts";
 
 type RowData =
@@ -46,6 +49,7 @@ type RowData =
   | PrescriptionRow
   | SaleRow
   | IncentiveProgramRow
+  | IncentiveProgramTierRow
   | IncentivePayoutRow;
 
 interface SectionConfig {
@@ -105,6 +109,12 @@ const SECTIONS: SectionConfig[] = [
     title: "Incentive Programs",
     primaryKey: "incentive_program_id",
     apiPath: "/api/incentive-programs",
+  },
+  {
+    id: "incentive_program_tiers",
+    title: "Program Tiers",
+    primaryKey: "incentive_program_tier_id",
+    apiPath: "/api/incentive-program-tiers",
   },
   {
     id: "payouts",
@@ -351,6 +361,15 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
         case "incentive_programs": {
           const response = await getIncentivePrograms(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+
+          break;
+        }
+
+        case "incentive_program_tiers": {
+          const response = await getIncentiveProgramTiers(PAGE_SIZE, currentOffset);
 
           records = response.records;
           total = response.total;
@@ -1055,6 +1074,9 @@ function getInputType(column: string) {
     "actual_payout",
     "payout_difference",
     "percentage",
+    "minimum_achievement",
+    "maximum_achievement",
+    "multiplier",
   ]);
 
   if (dateColumns.has(column)) {
