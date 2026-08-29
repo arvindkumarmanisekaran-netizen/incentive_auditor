@@ -204,7 +204,9 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     legend: incoming.legend ? mergeChartComponent({
       textStyle: { color: SIGNAL_CHART.text, fontSize: 10, fontFamily: SIGNAL_FONT },
     }, incoming.legend) : incoming.legend,
-    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", appendToBody: true, confine: false, axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+      appendToBody: false,
+      confine: true,
       formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
       position: incomingTooltip.position ?? keepTooltipInsideChart,
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
