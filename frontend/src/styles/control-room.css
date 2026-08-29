@@ -2517,11 +2517,19 @@ body > div[style*="z-index"] {
   }
   .database-pagination {
     display: grid !important;
-    grid-template-columns: minmax(82px, 108px) auto minmax(82px, 108px) !important;
+    grid-template-columns: repeat(2, minmax(88px, 108px)) !important;
     justify-content: center !important;
     gap: 8px !important;
     align-items: center !important;
   }
+  .database-pagination > span {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .database-pagination > button:first-of-type { grid-column: 1 !important; grid-row: 2 !important; }
+  .database-pagination > button:last-of-type { grid-column: 2 !important; grid-row: 2 !important; }
   .database-pagination .secondary-button { width: 100% !important; min-width: 0 !important; min-height: 40px !important; }
 
   /* Duplicate review uses the same readable light cards as the dashboard. */
@@ -2546,6 +2554,11 @@ body > div[style*="z-index"] {
     color: #0f766e !important;
     border-color: rgba(13,148,136,.20) !important;
     background: #f0fdfa !important;
+  }
+  .duplicate-mobile-resolution .duplicate-resolution.replace {
+    color: #b42318 !important;
+    border-color: rgba(220,38,38,.24) !important;
+    background: #fff1f2 !important;
   }
   .document-duplicate-inline {
     width: 100% !important;
@@ -2590,6 +2603,71 @@ body > div[style*="z-index"] {
   .sidebar-synthetic-action .synthetic-data-button { grid-template-columns: 1fr !important; justify-items: center !important; width: 44px !important; min-height: 44px !important; padding: 0 !important; }
   .chatbot-floating-button { right: 16px !important; bottom: 82px !important; width: 52px !important; height: 52px !important; }
   .chatbot-window { right: 8px !important; bottom: 82px !important; left: 8px !important; width: auto !important; height: min(72vh, 620px) !important; }
+
+  /* Centered, blocking edit modal. */
+  body:has(.database-edit-form.inline) { overflow: hidden !important; }
+  body:has(.database-edit-form.inline)::after {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    content: "";
+    background: rgba(15,23,42,.48);
+    backdrop-filter: blur(3px);
+  }
+  .database-table-container:has(.database-edit-form.inline) {
+    position: relative !important;
+    z-index: 12001 !important;
+    pointer-events: none !important;
+  }
+  .database-edit-form.inline {
+    top: 50% !important;
+    right: 12px !important;
+    bottom: auto !important;
+    left: 12px !important;
+    max-height: calc(100dvh - 32px) !important;
+    transform: translateY(-50%) !important;
+    pointer-events: auto !important;
+    box-shadow: 0 0 0 100vmax rgba(15,23,42,.48), 0 24px 70px rgba(15,23,42,.30) !important;
+    clip-path: inset(-100vmax);
+  }
+
+  /* Mobile breakup: two compact records per page with native finger panning. */
+  .payout-breakdown-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    touch-action: pan-x !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .payout-breakdown table { min-width: max-content !important; }
+  .payout-breakdown th,
+  .payout-breakdown td {
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    overflow-wrap: normal !important;
+    white-space: nowrap !important;
+  }
+  .payout-breakdown-pagination {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    padding: 10px;
+    border-top: 1px solid rgba(37,99,235,.09);
+  }
+  .payout-breakdown-pagination > span { color: #64748b; font-size: .62rem; }
+  .payout-breakdown-pagination > div { display: grid; grid-template-columns: repeat(2, 96px); gap: 8px; }
+  .payout-breakdown-pagination button {
+    min-height: 36px;
+    border: 1px solid rgba(37,99,235,.18);
+    border-radius: 8px;
+    color: #1d4ed8;
+    background: #fff;
+    font-size: .65rem;
+    font-weight: 750;
+  }
+  .payout-breakdown-pagination button:disabled { color: #94a3b8; background: #f1f5f9; opacity: .72; }
 }
 
 @media (max-width: 390px) {

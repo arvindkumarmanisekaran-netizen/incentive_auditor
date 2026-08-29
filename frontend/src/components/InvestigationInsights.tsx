@@ -1,5 +1,5 @@
 import type { EChartsCoreOption } from "echarts/core";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
@@ -154,6 +154,8 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
 ========================================================= */
 
 function InvestigationInsights({ result }: Props) {
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [payoutBreakdownPage, setPayoutBreakdownPage] = useState(0);
   const payoutBreakdownScrollRef = useRef<HTMLDivElement | null>(null);
   const payoutBreakdownDragRef = useRef({
     dragging: false,
@@ -163,6 +165,15 @@ function InvestigationInsights({ result }: Props) {
     scrollLeft: 0,
     scrollTop: 0,
   });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 760px)");
+    const updateViewport = () => setIsMobileViewport(mediaQuery.matches);
+
+    updateViewport();
+    mediaQuery.addEventListener("change", updateViewport);
+    return () => mediaQuery.removeEventListener("change", updateViewport);
+  }, []);
 
   function handlePayoutBreakdownPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
@@ -366,6 +377,21 @@ function InvestigationInsights({ result }: Props) {
       ruleSource: String(evidence.cap_rule_source ?? "Default fallback: 150% of base incentive"),
     };
   });
+  const mobileBreakdownPageSize = 2;
+  const mobileBreakdownPageCount = Math.max(
+    1,
+    Math.ceil(payoutBreakdowns.length / mobileBreakdownPageSize),
+  );
+  const safePayoutBreakdownPage = Math.min(
+    payoutBreakdownPage,
+    mobileBreakdownPageCount - 1,
+  );
+  const visiblePayoutBreakdowns = isMobileViewport
+    ? payoutBreakdowns.slice(
+        safePayoutBreakdownPage * mobileBreakdownPageSize,
+        (safePayoutBreakdownPage + 1) * mobileBreakdownPageSize,
+      )
+    : payoutBreakdowns;
 
   const appliedPrograms = Array.from(
     new Map(
@@ -650,7 +676,7 @@ function InvestigationInsights({ result }: Props) {
                         </tr>
                       </thead>
                       <tbody>
-                        {payoutBreakdowns.map((item) => (
+                        {visiblePayoutBreakdowns.map((item) => (
                           <tr key={item.key} title={item.ruleSource}>
                             <td>{item.product}</td>
                             <td>{item.month}</td>
@@ -671,6 +697,34 @@ function InvestigationInsights({ result }: Props) {
                       </tbody>
                     </table>
                   </div>
+
+                  {isMobileViewport && mobileBreakdownPageCount > 1 && (
+                    <div className="payout-breakdown-pagination">
+                      <span>
+                        Page {safePayoutBreakdownPage + 1} of {mobileBreakdownPageCount}
+                      </span>
+                      <div>
+                        <button
+                          type="button"
+                          disabled={safePayoutBreakdownPage === 0}
+                          onClick={() => setPayoutBreakdownPage((page) => Math.max(0, page - 1))}
+                        >
+                          Previous
+                        </button>
+                        <button
+                          type="button"
+                          disabled={safePayoutBreakdownPage >= mobileBreakdownPageCount - 1}
+                          onClick={() =>
+                            setPayoutBreakdownPage((page) =>
+                              Math.min(mobileBreakdownPageCount - 1, page + 1),
+                            )
+                          }
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </details>
               )}
 
