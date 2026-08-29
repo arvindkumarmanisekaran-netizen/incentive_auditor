@@ -1,0 +1,5008 @@
+{
+  "title": "AI Copilot — 1,000 Current-Data Question Catalog",
+  "generated": "2026-08-29",
+  "total": 1000,
+  "categoryCount": 25,
+  "questions": [
+    {
+      "id": "Q0001",
+      "category": "Representative profile and lookup",
+      "question": "Show me Anika’s representative details."
+    },
+    {
+      "id": "Q0002",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me Anika’s representative details?"
+    },
+    {
+      "id": "Q0003",
+      "category": "Representative profile and lookup",
+      "question": "Please provide Anika’s representative details."
+    },
+    {
+      "id": "Q0004",
+      "category": "Representative profile and lookup",
+      "question": "I need to see Anika’s representative details."
+    },
+    {
+      "id": "Q0005",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand Anika’s representative details."
+    },
+    {
+      "id": "Q0006",
+      "category": "Representative profile and lookup",
+      "question": "Show me the profile for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0007",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me the profile for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0008",
+      "category": "Representative profile and lookup",
+      "question": "Please provide the profile for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0009",
+      "category": "Representative profile and lookup",
+      "question": "I need to see the profile for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0010",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand the profile for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0011",
+      "category": "Representative profile and lookup",
+      "question": "Show me the representative assigned to territory T045."
+    },
+    {
+      "id": "Q0012",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me the representative assigned to territory T045?"
+    },
+    {
+      "id": "Q0013",
+      "category": "Representative profile and lookup",
+      "question": "Please provide the representative assigned to territory T045."
+    },
+    {
+      "id": "Q0014",
+      "category": "Representative profile and lookup",
+      "question": "I need to see the representative assigned to territory T045."
+    },
+    {
+      "id": "Q0015",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand the representative assigned to territory T045."
+    },
+    {
+      "id": "Q0016",
+      "category": "Representative profile and lookup",
+      "question": "Show me all active representatives."
+    },
+    {
+      "id": "Q0017",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me all active representatives?"
+    },
+    {
+      "id": "Q0018",
+      "category": "Representative profile and lookup",
+      "question": "Please provide all active representatives."
+    },
+    {
+      "id": "Q0019",
+      "category": "Representative profile and lookup",
+      "question": "I need to see all active representatives."
+    },
+    {
+      "id": "Q0020",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand all active representatives."
+    },
+    {
+      "id": "Q0021",
+      "category": "Representative profile and lookup",
+      "question": "Show me representatives who joined during the selected period."
+    },
+    {
+      "id": "Q0022",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me representatives who joined during the selected period?"
+    },
+    {
+      "id": "Q0023",
+      "category": "Representative profile and lookup",
+      "question": "Please provide representatives who joined during the selected period."
+    },
+    {
+      "id": "Q0024",
+      "category": "Representative profile and lookup",
+      "question": "I need to see representatives who joined during the selected period."
+    },
+    {
+      "id": "Q0025",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand representatives who joined during the selected period."
+    },
+    {
+      "id": "Q0026",
+      "category": "Representative profile and lookup",
+      "question": "Show me a representative’s territory and joining date."
+    },
+    {
+      "id": "Q0027",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me a representative’s territory and joining date?"
+    },
+    {
+      "id": "Q0028",
+      "category": "Representative profile and lookup",
+      "question": "Please provide a representative’s territory and joining date."
+    },
+    {
+      "id": "Q0029",
+      "category": "Representative profile and lookup",
+      "question": "I need to see a representative’s territory and joining date."
+    },
+    {
+      "id": "Q0030",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand a representative’s territory and joining date."
+    },
+    {
+      "id": "Q0031",
+      "category": "Representative profile and lookup",
+      "question": "Show me the status of a specified representative."
+    },
+    {
+      "id": "Q0032",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me the status of a specified representative?"
+    },
+    {
+      "id": "Q0033",
+      "category": "Representative profile and lookup",
+      "question": "Please provide the status of a specified representative."
+    },
+    {
+      "id": "Q0034",
+      "category": "Representative profile and lookup",
+      "question": "I need to see the status of a specified representative."
+    },
+    {
+      "id": "Q0035",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand the status of a specified representative."
+    },
+    {
+      "id": "Q0036",
+      "category": "Representative profile and lookup",
+      "question": "Show me representatives matching a partial name."
+    },
+    {
+      "id": "Q0037",
+      "category": "Representative profile and lookup",
+      "question": "Can you show me representatives matching a partial name?"
+    },
+    {
+      "id": "Q0038",
+      "category": "Representative profile and lookup",
+      "question": "Please provide representatives matching a partial name."
+    },
+    {
+      "id": "Q0039",
+      "category": "Representative profile and lookup",
+      "question": "I need to see representatives matching a partial name."
+    },
+    {
+      "id": "Q0040",
+      "category": "Representative profile and lookup",
+      "question": "Help me understand representatives matching a partial name."
+    },
+    {
+      "id": "Q0041",
+      "category": "Doctor profile and lookup",
+      "question": "Show me Dr Upasna Mahal’s details."
+    },
+    {
+      "id": "Q0042",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me Dr Upasna Mahal’s details?"
+    },
+    {
+      "id": "Q0043",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide Dr Upasna Mahal’s details."
+    },
+    {
+      "id": "Q0044",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see Dr Upasna Mahal’s details."
+    },
+    {
+      "id": "Q0045",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand Dr Upasna Mahal’s details."
+    },
+    {
+      "id": "Q0046",
+      "category": "Doctor profile and lookup",
+      "question": "Show me the profile for a specified doctor ID."
+    },
+    {
+      "id": "Q0047",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me the profile for a specified doctor ID?"
+    },
+    {
+      "id": "Q0048",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide the profile for a specified doctor ID."
+    },
+    {
+      "id": "Q0049",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see the profile for a specified doctor ID."
+    },
+    {
+      "id": "Q0050",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand the profile for a specified doctor ID."
+    },
+    {
+      "id": "Q0051",
+      "category": "Doctor profile and lookup",
+      "question": "Show me the territory assigned to a doctor."
+    },
+    {
+      "id": "Q0052",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me the territory assigned to a doctor?"
+    },
+    {
+      "id": "Q0053",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide the territory assigned to a doctor."
+    },
+    {
+      "id": "Q0054",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see the territory assigned to a doctor."
+    },
+    {
+      "id": "Q0055",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand the territory assigned to a doctor."
+    },
+    {
+      "id": "Q0056",
+      "category": "Doctor profile and lookup",
+      "question": "Show me all doctors handled by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0057",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me all doctors handled by Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0058",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide all doctors handled by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0059",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see all doctors handled by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0060",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand all doctors handled by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0061",
+      "category": "Doctor profile and lookup",
+      "question": "Show me active doctors in a selected territory."
+    },
+    {
+      "id": "Q0062",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me active doctors in a selected territory?"
+    },
+    {
+      "id": "Q0063",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide active doctors in a selected territory."
+    },
+    {
+      "id": "Q0064",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see active doctors in a selected territory."
+    },
+    {
+      "id": "Q0065",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand active doctors in a selected territory."
+    },
+    {
+      "id": "Q0066",
+      "category": "Doctor profile and lookup",
+      "question": "Show me doctors matching a partial name."
+    },
+    {
+      "id": "Q0067",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me doctors matching a partial name?"
+    },
+    {
+      "id": "Q0068",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide doctors matching a partial name."
+    },
+    {
+      "id": "Q0069",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see doctors matching a partial name."
+    },
+    {
+      "id": "Q0070",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand doctors matching a partial name."
+    },
+    {
+      "id": "Q0071",
+      "category": "Doctor profile and lookup",
+      "question": "Show me a doctor’s specialty and status."
+    },
+    {
+      "id": "Q0072",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me a doctor’s specialty and status?"
+    },
+    {
+      "id": "Q0073",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide a doctor’s specialty and status."
+    },
+    {
+      "id": "Q0074",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see a doctor’s specialty and status."
+    },
+    {
+      "id": "Q0075",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand a doctor’s specialty and status."
+    },
+    {
+      "id": "Q0076",
+      "category": "Doctor profile and lookup",
+      "question": "Show me doctors without an active representative assignment."
+    },
+    {
+      "id": "Q0077",
+      "category": "Doctor profile and lookup",
+      "question": "Can you show me doctors without an active representative assignment?"
+    },
+    {
+      "id": "Q0078",
+      "category": "Doctor profile and lookup",
+      "question": "Please provide doctors without an active representative assignment."
+    },
+    {
+      "id": "Q0079",
+      "category": "Doctor profile and lookup",
+      "question": "I need to see doctors without an active representative assignment."
+    },
+    {
+      "id": "Q0080",
+      "category": "Doctor profile and lookup",
+      "question": "Help me understand doctors without an active representative assignment."
+    },
+    {
+      "id": "Q0081",
+      "category": "Product profile and lookup",
+      "question": "Show me details for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0082",
+      "category": "Product profile and lookup",
+      "question": "Can you show me details for MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0083",
+      "category": "Product profile and lookup",
+      "question": "Please provide details for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0084",
+      "category": "Product profile and lookup",
+      "question": "I need to see details for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0085",
+      "category": "Product profile and lookup",
+      "question": "Help me understand details for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0086",
+      "category": "Product profile and lookup",
+      "question": "Show me the name of product P029."
+    },
+    {
+      "id": "Q0087",
+      "category": "Product profile and lookup",
+      "question": "Can you show me the name of product P029?"
+    },
+    {
+      "id": "Q0088",
+      "category": "Product profile and lookup",
+      "question": "Please provide the name of product P029."
+    },
+    {
+      "id": "Q0089",
+      "category": "Product profile and lookup",
+      "question": "I need to see the name of product P029."
+    },
+    {
+      "id": "Q0090",
+      "category": "Product profile and lookup",
+      "question": "Help me understand the name of product P029."
+    },
+    {
+      "id": "Q0091",
+      "category": "Product profile and lookup",
+      "question": "Show me all active products."
+    },
+    {
+      "id": "Q0092",
+      "category": "Product profile and lookup",
+      "question": "Can you show me all active products?"
+    },
+    {
+      "id": "Q0093",
+      "category": "Product profile and lookup",
+      "question": "Please provide all active products."
+    },
+    {
+      "id": "Q0094",
+      "category": "Product profile and lookup",
+      "question": "I need to see all active products."
+    },
+    {
+      "id": "Q0095",
+      "category": "Product profile and lookup",
+      "question": "Help me understand all active products."
+    },
+    {
+      "id": "Q0096",
+      "category": "Product profile and lookup",
+      "question": "Show me products matching a partial name."
+    },
+    {
+      "id": "Q0097",
+      "category": "Product profile and lookup",
+      "question": "Can you show me products matching a partial name?"
+    },
+    {
+      "id": "Q0098",
+      "category": "Product profile and lookup",
+      "question": "Please provide products matching a partial name."
+    },
+    {
+      "id": "Q0099",
+      "category": "Product profile and lookup",
+      "question": "I need to see products matching a partial name."
+    },
+    {
+      "id": "Q0100",
+      "category": "Product profile and lookup",
+      "question": "Help me understand products matching a partial name."
+    },
+    {
+      "id": "Q0101",
+      "category": "Product profile and lookup",
+      "question": "Show me product details for the selected investigation."
+    },
+    {
+      "id": "Q0102",
+      "category": "Product profile and lookup",
+      "question": "Can you show me product details for the selected investigation?"
+    },
+    {
+      "id": "Q0103",
+      "category": "Product profile and lookup",
+      "question": "Please provide product details for the selected investigation."
+    },
+    {
+      "id": "Q0104",
+      "category": "Product profile and lookup",
+      "question": "I need to see product details for the selected investigation."
+    },
+    {
+      "id": "Q0105",
+      "category": "Product profile and lookup",
+      "question": "Help me understand product details for the selected investigation."
+    },
+    {
+      "id": "Q0106",
+      "category": "Product profile and lookup",
+      "question": "Show me products sold by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0107",
+      "category": "Product profile and lookup",
+      "question": "Can you show me products sold by Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0108",
+      "category": "Product profile and lookup",
+      "question": "Please provide products sold by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0109",
+      "category": "Product profile and lookup",
+      "question": "I need to see products sold by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0110",
+      "category": "Product profile and lookup",
+      "question": "Help me understand products sold by Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0111",
+      "category": "Product profile and lookup",
+      "question": "Show me products with prescriptions in the selected period."
+    },
+    {
+      "id": "Q0112",
+      "category": "Product profile and lookup",
+      "question": "Can you show me products with prescriptions in the selected period?"
+    },
+    {
+      "id": "Q0113",
+      "category": "Product profile and lookup",
+      "question": "Please provide products with prescriptions in the selected period."
+    },
+    {
+      "id": "Q0114",
+      "category": "Product profile and lookup",
+      "question": "I need to see products with prescriptions in the selected period."
+    },
+    {
+      "id": "Q0115",
+      "category": "Product profile and lookup",
+      "question": "Help me understand products with prescriptions in the selected period."
+    },
+    {
+      "id": "Q0116",
+      "category": "Product profile and lookup",
+      "question": "Show me products without sales in the selected period."
+    },
+    {
+      "id": "Q0117",
+      "category": "Product profile and lookup",
+      "question": "Can you show me products without sales in the selected period?"
+    },
+    {
+      "id": "Q0118",
+      "category": "Product profile and lookup",
+      "question": "Please provide products without sales in the selected period."
+    },
+    {
+      "id": "Q0119",
+      "category": "Product profile and lookup",
+      "question": "I need to see products without sales in the selected period."
+    },
+    {
+      "id": "Q0120",
+      "category": "Product profile and lookup",
+      "question": "Help me understand products without sales in the selected period."
+    },
+    {
+      "id": "Q0121",
+      "category": "Territory profile and lookup",
+      "question": "Show me details for territory T045."
+    },
+    {
+      "id": "Q0122",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me details for territory T045?"
+    },
+    {
+      "id": "Q0123",
+      "category": "Territory profile and lookup",
+      "question": "Please provide details for territory T045."
+    },
+    {
+      "id": "Q0124",
+      "category": "Territory profile and lookup",
+      "question": "I need to see details for territory T045."
+    },
+    {
+      "id": "Q0125",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand details for territory T045."
+    },
+    {
+      "id": "Q0126",
+      "category": "Territory profile and lookup",
+      "question": "Show me the home territory of Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0127",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me the home territory of Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0128",
+      "category": "Territory profile and lookup",
+      "question": "Please provide the home territory of Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0129",
+      "category": "Territory profile and lookup",
+      "question": "I need to see the home territory of Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0130",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand the home territory of Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0131",
+      "category": "Territory profile and lookup",
+      "question": "Show me all active territories."
+    },
+    {
+      "id": "Q0132",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me all active territories?"
+    },
+    {
+      "id": "Q0133",
+      "category": "Territory profile and lookup",
+      "question": "Please provide all active territories."
+    },
+    {
+      "id": "Q0134",
+      "category": "Territory profile and lookup",
+      "question": "I need to see all active territories."
+    },
+    {
+      "id": "Q0135",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand all active territories."
+    },
+    {
+      "id": "Q0136",
+      "category": "Territory profile and lookup",
+      "question": "Show me representatives working in a selected territory."
+    },
+    {
+      "id": "Q0137",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me representatives working in a selected territory?"
+    },
+    {
+      "id": "Q0138",
+      "category": "Territory profile and lookup",
+      "question": "Please provide representatives working in a selected territory."
+    },
+    {
+      "id": "Q0139",
+      "category": "Territory profile and lookup",
+      "question": "I need to see representatives working in a selected territory."
+    },
+    {
+      "id": "Q0140",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand representatives working in a selected territory."
+    },
+    {
+      "id": "Q0141",
+      "category": "Territory profile and lookup",
+      "question": "Show me doctors located in a selected territory."
+    },
+    {
+      "id": "Q0142",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me doctors located in a selected territory?"
+    },
+    {
+      "id": "Q0143",
+      "category": "Territory profile and lookup",
+      "question": "Please provide doctors located in a selected territory."
+    },
+    {
+      "id": "Q0144",
+      "category": "Territory profile and lookup",
+      "question": "I need to see doctors located in a selected territory."
+    },
+    {
+      "id": "Q0145",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand doctors located in a selected territory."
+    },
+    {
+      "id": "Q0146",
+      "category": "Territory profile and lookup",
+      "question": "Show me sales attributed to a selected territory."
+    },
+    {
+      "id": "Q0147",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me sales attributed to a selected territory?"
+    },
+    {
+      "id": "Q0148",
+      "category": "Territory profile and lookup",
+      "question": "Please provide sales attributed to a selected territory."
+    },
+    {
+      "id": "Q0149",
+      "category": "Territory profile and lookup",
+      "question": "I need to see sales attributed to a selected territory."
+    },
+    {
+      "id": "Q0150",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand sales attributed to a selected territory."
+    },
+    {
+      "id": "Q0151",
+      "category": "Territory profile and lookup",
+      "question": "Show me territories matching a partial name or ID."
+    },
+    {
+      "id": "Q0152",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me territories matching a partial name or ID?"
+    },
+    {
+      "id": "Q0153",
+      "category": "Territory profile and lookup",
+      "question": "Please provide territories matching a partial name or ID."
+    },
+    {
+      "id": "Q0154",
+      "category": "Territory profile and lookup",
+      "question": "I need to see territories matching a partial name or ID."
+    },
+    {
+      "id": "Q0155",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand territories matching a partial name or ID."
+    },
+    {
+      "id": "Q0156",
+      "category": "Territory profile and lookup",
+      "question": "Show me territories with no activity in the selected period."
+    },
+    {
+      "id": "Q0157",
+      "category": "Territory profile and lookup",
+      "question": "Can you show me territories with no activity in the selected period?"
+    },
+    {
+      "id": "Q0158",
+      "category": "Territory profile and lookup",
+      "question": "Please provide territories with no activity in the selected period."
+    },
+    {
+      "id": "Q0159",
+      "category": "Territory profile and lookup",
+      "question": "I need to see territories with no activity in the selected period."
+    },
+    {
+      "id": "Q0160",
+      "category": "Territory profile and lookup",
+      "question": "Help me understand territories with no activity in the selected period."
+    },
+    {
+      "id": "Q0161",
+      "category": "Representative-doctor assignments",
+      "question": "Show me current doctor assignments for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0162",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me current doctor assignments for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0163",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide current doctor assignments for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0164",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see current doctor assignments for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0165",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand current doctor assignments for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0166",
+      "category": "Representative-doctor assignments",
+      "question": "Show me the representative assigned to Dr Upasna Mahal."
+    },
+    {
+      "id": "Q0167",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me the representative assigned to Dr Upasna Mahal?"
+    },
+    {
+      "id": "Q0168",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide the representative assigned to Dr Upasna Mahal."
+    },
+    {
+      "id": "Q0169",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see the representative assigned to Dr Upasna Mahal."
+    },
+    {
+      "id": "Q0170",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand the representative assigned to Dr Upasna Mahal."
+    },
+    {
+      "id": "Q0171",
+      "category": "Representative-doctor assignments",
+      "question": "Show me assignments active on a specified date."
+    },
+    {
+      "id": "Q0172",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me assignments active on a specified date?"
+    },
+    {
+      "id": "Q0173",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide assignments active on a specified date."
+    },
+    {
+      "id": "Q0174",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see assignments active on a specified date."
+    },
+    {
+      "id": "Q0175",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand assignments active on a specified date."
+    },
+    {
+      "id": "Q0176",
+      "category": "Representative-doctor assignments",
+      "question": "Show me assignments ending during the selected period."
+    },
+    {
+      "id": "Q0177",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me assignments ending during the selected period?"
+    },
+    {
+      "id": "Q0178",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide assignments ending during the selected period."
+    },
+    {
+      "id": "Q0179",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see assignments ending during the selected period."
+    },
+    {
+      "id": "Q0180",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand assignments ending during the selected period."
+    },
+    {
+      "id": "Q0181",
+      "category": "Representative-doctor assignments",
+      "question": "Show me inactive representative-doctor assignments."
+    },
+    {
+      "id": "Q0182",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me inactive representative-doctor assignments?"
+    },
+    {
+      "id": "Q0183",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide inactive representative-doctor assignments."
+    },
+    {
+      "id": "Q0184",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see inactive representative-doctor assignments."
+    },
+    {
+      "id": "Q0185",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand inactive representative-doctor assignments."
+    },
+    {
+      "id": "Q0186",
+      "category": "Representative-doctor assignments",
+      "question": "Show me duplicate assignment records."
+    },
+    {
+      "id": "Q0187",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me duplicate assignment records?"
+    },
+    {
+      "id": "Q0188",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide duplicate assignment records."
+    },
+    {
+      "id": "Q0189",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see duplicate assignment records."
+    },
+    {
+      "id": "Q0190",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand duplicate assignment records."
+    },
+    {
+      "id": "Q0191",
+      "category": "Representative-doctor assignments",
+      "question": "Show me doctors assigned to multiple representatives."
+    },
+    {
+      "id": "Q0192",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me doctors assigned to multiple representatives?"
+    },
+    {
+      "id": "Q0193",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide doctors assigned to multiple representatives."
+    },
+    {
+      "id": "Q0194",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see doctors assigned to multiple representatives."
+    },
+    {
+      "id": "Q0195",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand doctors assigned to multiple representatives."
+    },
+    {
+      "id": "Q0196",
+      "category": "Representative-doctor assignments",
+      "question": "Show me assignment history for a selected doctor."
+    },
+    {
+      "id": "Q0197",
+      "category": "Representative-doctor assignments",
+      "question": "Can you show me assignment history for a selected doctor?"
+    },
+    {
+      "id": "Q0198",
+      "category": "Representative-doctor assignments",
+      "question": "Please provide assignment history for a selected doctor."
+    },
+    {
+      "id": "Q0199",
+      "category": "Representative-doctor assignments",
+      "question": "I need to see assignment history for a selected doctor."
+    },
+    {
+      "id": "Q0200",
+      "category": "Representative-doctor assignments",
+      "question": "Help me understand assignment history for a selected doctor."
+    },
+    {
+      "id": "Q0201",
+      "category": "Sales totals and summaries",
+      "question": "Show me total sales for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0202",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me total sales for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0203",
+      "category": "Sales totals and summaries",
+      "question": "Please provide total sales for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0204",
+      "category": "Sales totals and summaries",
+      "question": "I need to see total sales for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0205",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand total sales for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0206",
+      "category": "Sales totals and summaries",
+      "question": "Show me total sales for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0207",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me total sales for MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0208",
+      "category": "Sales totals and summaries",
+      "question": "Please provide total sales for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0209",
+      "category": "Sales totals and summaries",
+      "question": "I need to see total sales for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0210",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand total sales for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0211",
+      "category": "Sales totals and summaries",
+      "question": "Show me sales by product in the selected period."
+    },
+    {
+      "id": "Q0212",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me sales by product in the selected period?"
+    },
+    {
+      "id": "Q0213",
+      "category": "Sales totals and summaries",
+      "question": "Please provide sales by product in the selected period."
+    },
+    {
+      "id": "Q0214",
+      "category": "Sales totals and summaries",
+      "question": "I need to see sales by product in the selected period."
+    },
+    {
+      "id": "Q0215",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand sales by product in the selected period."
+    },
+    {
+      "id": "Q0216",
+      "category": "Sales totals and summaries",
+      "question": "Show me sales by doctor in the selected period."
+    },
+    {
+      "id": "Q0217",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me sales by doctor in the selected period?"
+    },
+    {
+      "id": "Q0218",
+      "category": "Sales totals and summaries",
+      "question": "Please provide sales by doctor in the selected period."
+    },
+    {
+      "id": "Q0219",
+      "category": "Sales totals and summaries",
+      "question": "I need to see sales by doctor in the selected period."
+    },
+    {
+      "id": "Q0220",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand sales by doctor in the selected period."
+    },
+    {
+      "id": "Q0221",
+      "category": "Sales totals and summaries",
+      "question": "Show me sales by territory in the selected period."
+    },
+    {
+      "id": "Q0222",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me sales by territory in the selected period?"
+    },
+    {
+      "id": "Q0223",
+      "category": "Sales totals and summaries",
+      "question": "Please provide sales by territory in the selected period."
+    },
+    {
+      "id": "Q0224",
+      "category": "Sales totals and summaries",
+      "question": "I need to see sales by territory in the selected period."
+    },
+    {
+      "id": "Q0225",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand sales by territory in the selected period."
+    },
+    {
+      "id": "Q0226",
+      "category": "Sales totals and summaries",
+      "question": "Show me the average sale value."
+    },
+    {
+      "id": "Q0227",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me the average sale value?"
+    },
+    {
+      "id": "Q0228",
+      "category": "Sales totals and summaries",
+      "question": "Please provide the average sale value."
+    },
+    {
+      "id": "Q0229",
+      "category": "Sales totals and summaries",
+      "question": "I need to see the average sale value."
+    },
+    {
+      "id": "Q0230",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand the average sale value."
+    },
+    {
+      "id": "Q0231",
+      "category": "Sales totals and summaries",
+      "question": "Show me the number of sales records."
+    },
+    {
+      "id": "Q0232",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me the number of sales records?"
+    },
+    {
+      "id": "Q0233",
+      "category": "Sales totals and summaries",
+      "question": "Please provide the number of sales records."
+    },
+    {
+      "id": "Q0234",
+      "category": "Sales totals and summaries",
+      "question": "I need to see the number of sales records."
+    },
+    {
+      "id": "Q0235",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand the number of sales records."
+    },
+    {
+      "id": "Q0236",
+      "category": "Sales totals and summaries",
+      "question": "Show me a concise summary of selected-period sales."
+    },
+    {
+      "id": "Q0237",
+      "category": "Sales totals and summaries",
+      "question": "Can you show me a concise summary of selected-period sales?"
+    },
+    {
+      "id": "Q0238",
+      "category": "Sales totals and summaries",
+      "question": "Please provide a concise summary of selected-period sales."
+    },
+    {
+      "id": "Q0239",
+      "category": "Sales totals and summaries",
+      "question": "I need to see a concise summary of selected-period sales."
+    },
+    {
+      "id": "Q0240",
+      "category": "Sales totals and summaries",
+      "question": "Help me understand a concise summary of selected-period sales."
+    },
+    {
+      "id": "Q0241",
+      "category": "Sales trends and movement",
+      "question": "Show me monthly sales trends."
+    },
+    {
+      "id": "Q0242",
+      "category": "Sales trends and movement",
+      "question": "Can you show me monthly sales trends?"
+    },
+    {
+      "id": "Q0243",
+      "category": "Sales trends and movement",
+      "question": "Please provide monthly sales trends."
+    },
+    {
+      "id": "Q0244",
+      "category": "Sales trends and movement",
+      "question": "I need to see monthly sales trends."
+    },
+    {
+      "id": "Q0245",
+      "category": "Sales trends and movement",
+      "question": "Help me understand monthly sales trends."
+    },
+    {
+      "id": "Q0246",
+      "category": "Sales trends and movement",
+      "question": "Show me sales growth versus the previous period."
+    },
+    {
+      "id": "Q0247",
+      "category": "Sales trends and movement",
+      "question": "Can you show me sales growth versus the previous period?"
+    },
+    {
+      "id": "Q0248",
+      "category": "Sales trends and movement",
+      "question": "Please provide sales growth versus the previous period."
+    },
+    {
+      "id": "Q0249",
+      "category": "Sales trends and movement",
+      "question": "I need to see sales growth versus the previous period."
+    },
+    {
+      "id": "Q0250",
+      "category": "Sales trends and movement",
+      "question": "Help me understand sales growth versus the previous period."
+    },
+    {
+      "id": "Q0251",
+      "category": "Sales trends and movement",
+      "question": "Show me products with declining sales."
+    },
+    {
+      "id": "Q0252",
+      "category": "Sales trends and movement",
+      "question": "Can you show me products with declining sales?"
+    },
+    {
+      "id": "Q0253",
+      "category": "Sales trends and movement",
+      "question": "Please provide products with declining sales."
+    },
+    {
+      "id": "Q0254",
+      "category": "Sales trends and movement",
+      "question": "I need to see products with declining sales."
+    },
+    {
+      "id": "Q0255",
+      "category": "Sales trends and movement",
+      "question": "Help me understand products with declining sales."
+    },
+    {
+      "id": "Q0256",
+      "category": "Sales trends and movement",
+      "question": "Show me the largest sales increase."
+    },
+    {
+      "id": "Q0257",
+      "category": "Sales trends and movement",
+      "question": "Can you show me the largest sales increase?"
+    },
+    {
+      "id": "Q0258",
+      "category": "Sales trends and movement",
+      "question": "Please provide the largest sales increase."
+    },
+    {
+      "id": "Q0259",
+      "category": "Sales trends and movement",
+      "question": "I need to see the largest sales increase."
+    },
+    {
+      "id": "Q0260",
+      "category": "Sales trends and movement",
+      "question": "Help me understand the largest sales increase."
+    },
+    {
+      "id": "Q0261",
+      "category": "Sales trends and movement",
+      "question": "Show me daily sales movement in the selected period."
+    },
+    {
+      "id": "Q0262",
+      "category": "Sales trends and movement",
+      "question": "Can you show me daily sales movement in the selected period?"
+    },
+    {
+      "id": "Q0263",
+      "category": "Sales trends and movement",
+      "question": "Please provide daily sales movement in the selected period."
+    },
+    {
+      "id": "Q0264",
+      "category": "Sales trends and movement",
+      "question": "I need to see daily sales movement in the selected period."
+    },
+    {
+      "id": "Q0265",
+      "category": "Sales trends and movement",
+      "question": "Help me understand daily sales movement in the selected period."
+    },
+    {
+      "id": "Q0266",
+      "category": "Sales trends and movement",
+      "question": "Show me historical sales for a selected product."
+    },
+    {
+      "id": "Q0267",
+      "category": "Sales trends and movement",
+      "question": "Can you show me historical sales for a selected product?"
+    },
+    {
+      "id": "Q0268",
+      "category": "Sales trends and movement",
+      "question": "Please provide historical sales for a selected product."
+    },
+    {
+      "id": "Q0269",
+      "category": "Sales trends and movement",
+      "question": "I need to see historical sales for a selected product."
+    },
+    {
+      "id": "Q0270",
+      "category": "Sales trends and movement",
+      "question": "Help me understand historical sales for a selected product."
+    },
+    {
+      "id": "Q0271",
+      "category": "Sales trends and movement",
+      "question": "Show me sales changes for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0272",
+      "category": "Sales trends and movement",
+      "question": "Can you show me sales changes for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0273",
+      "category": "Sales trends and movement",
+      "question": "Please provide sales changes for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0274",
+      "category": "Sales trends and movement",
+      "question": "I need to see sales changes for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0275",
+      "category": "Sales trends and movement",
+      "question": "Help me understand sales changes for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0276",
+      "category": "Sales trends and movement",
+      "question": "Show me unusual spikes or drops in sales."
+    },
+    {
+      "id": "Q0277",
+      "category": "Sales trends and movement",
+      "question": "Can you show me unusual spikes or drops in sales?"
+    },
+    {
+      "id": "Q0278",
+      "category": "Sales trends and movement",
+      "question": "Please provide unusual spikes or drops in sales."
+    },
+    {
+      "id": "Q0279",
+      "category": "Sales trends and movement",
+      "question": "I need to see unusual spikes or drops in sales."
+    },
+    {
+      "id": "Q0280",
+      "category": "Sales trends and movement",
+      "question": "Help me understand unusual spikes or drops in sales."
+    },
+    {
+      "id": "Q0281",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me top products by sales."
+    },
+    {
+      "id": "Q0282",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me top products by sales?"
+    },
+    {
+      "id": "Q0283",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide top products by sales."
+    },
+    {
+      "id": "Q0284",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see top products by sales."
+    },
+    {
+      "id": "Q0285",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand top products by sales."
+    },
+    {
+      "id": "Q0286",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me bottom products by sales."
+    },
+    {
+      "id": "Q0287",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me bottom products by sales?"
+    },
+    {
+      "id": "Q0288",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide bottom products by sales."
+    },
+    {
+      "id": "Q0289",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see bottom products by sales."
+    },
+    {
+      "id": "Q0290",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand bottom products by sales."
+    },
+    {
+      "id": "Q0291",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me top doctors by attributed sales."
+    },
+    {
+      "id": "Q0292",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me top doctors by attributed sales?"
+    },
+    {
+      "id": "Q0293",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide top doctors by attributed sales."
+    },
+    {
+      "id": "Q0294",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see top doctors by attributed sales."
+    },
+    {
+      "id": "Q0295",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand top doctors by attributed sales."
+    },
+    {
+      "id": "Q0296",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me representative sales rankings."
+    },
+    {
+      "id": "Q0297",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me representative sales rankings?"
+    },
+    {
+      "id": "Q0298",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide representative sales rankings."
+    },
+    {
+      "id": "Q0299",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see representative sales rankings."
+    },
+    {
+      "id": "Q0300",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand representative sales rankings."
+    },
+    {
+      "id": "Q0301",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me territory sales rankings."
+    },
+    {
+      "id": "Q0302",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me territory sales rankings?"
+    },
+    {
+      "id": "Q0303",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide territory sales rankings."
+    },
+    {
+      "id": "Q0304",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see territory sales rankings."
+    },
+    {
+      "id": "Q0305",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand territory sales rankings."
+    },
+    {
+      "id": "Q0306",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me sales for one product compared with another."
+    },
+    {
+      "id": "Q0307",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me sales for one product compared with another?"
+    },
+    {
+      "id": "Q0308",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide sales for one product compared with another."
+    },
+    {
+      "id": "Q0309",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see sales for one product compared with another."
+    },
+    {
+      "id": "Q0310",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand sales for one product compared with another."
+    },
+    {
+      "id": "Q0311",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me a representative compared with their peers."
+    },
+    {
+      "id": "Q0312",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me a representative compared with their peers?"
+    },
+    {
+      "id": "Q0313",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide a representative compared with their peers."
+    },
+    {
+      "id": "Q0314",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see a representative compared with their peers."
+    },
+    {
+      "id": "Q0315",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand a representative compared with their peers."
+    },
+    {
+      "id": "Q0316",
+      "category": "Sales rankings and comparisons",
+      "question": "Show me the contribution percentage of each product."
+    },
+    {
+      "id": "Q0317",
+      "category": "Sales rankings and comparisons",
+      "question": "Can you show me the contribution percentage of each product?"
+    },
+    {
+      "id": "Q0318",
+      "category": "Sales rankings and comparisons",
+      "question": "Please provide the contribution percentage of each product."
+    },
+    {
+      "id": "Q0319",
+      "category": "Sales rankings and comparisons",
+      "question": "I need to see the contribution percentage of each product."
+    },
+    {
+      "id": "Q0320",
+      "category": "Sales rankings and comparisons",
+      "question": "Help me understand the contribution percentage of each product."
+    },
+    {
+      "id": "Q0321",
+      "category": "Prescription totals and patterns",
+      "question": "Show me total prescriptions for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0322",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me total prescriptions for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0323",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide total prescriptions for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0324",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see total prescriptions for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0325",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand total prescriptions for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0326",
+      "category": "Prescription totals and patterns",
+      "question": "Show me prescriptions for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0327",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me prescriptions for MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0328",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide prescriptions for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0329",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see prescriptions for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0330",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand prescriptions for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0331",
+      "category": "Prescription totals and patterns",
+      "question": "Show me prescriptions by product."
+    },
+    {
+      "id": "Q0332",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me prescriptions by product?"
+    },
+    {
+      "id": "Q0333",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide prescriptions by product."
+    },
+    {
+      "id": "Q0334",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see prescriptions by product."
+    },
+    {
+      "id": "Q0335",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand prescriptions by product."
+    },
+    {
+      "id": "Q0336",
+      "category": "Prescription totals and patterns",
+      "question": "Show me prescriptions by doctor."
+    },
+    {
+      "id": "Q0337",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me prescriptions by doctor?"
+    },
+    {
+      "id": "Q0338",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide prescriptions by doctor."
+    },
+    {
+      "id": "Q0339",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see prescriptions by doctor."
+    },
+    {
+      "id": "Q0340",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand prescriptions by doctor."
+    },
+    {
+      "id": "Q0341",
+      "category": "Prescription totals and patterns",
+      "question": "Show me monthly prescription trends."
+    },
+    {
+      "id": "Q0342",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me monthly prescription trends?"
+    },
+    {
+      "id": "Q0343",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide monthly prescription trends."
+    },
+    {
+      "id": "Q0344",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see monthly prescription trends."
+    },
+    {
+      "id": "Q0345",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand monthly prescription trends."
+    },
+    {
+      "id": "Q0346",
+      "category": "Prescription totals and patterns",
+      "question": "Show me products with declining prescription volume."
+    },
+    {
+      "id": "Q0347",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me products with declining prescription volume?"
+    },
+    {
+      "id": "Q0348",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide products with declining prescription volume."
+    },
+    {
+      "id": "Q0349",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see products with declining prescription volume."
+    },
+    {
+      "id": "Q0350",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand products with declining prescription volume."
+    },
+    {
+      "id": "Q0351",
+      "category": "Prescription totals and patterns",
+      "question": "Show me top doctors by prescriptions."
+    },
+    {
+      "id": "Q0352",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me top doctors by prescriptions?"
+    },
+    {
+      "id": "Q0353",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide top doctors by prescriptions."
+    },
+    {
+      "id": "Q0354",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see top doctors by prescriptions."
+    },
+    {
+      "id": "Q0355",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand top doctors by prescriptions."
+    },
+    {
+      "id": "Q0356",
+      "category": "Prescription totals and patterns",
+      "question": "Show me unusual prescription spikes or drops."
+    },
+    {
+      "id": "Q0357",
+      "category": "Prescription totals and patterns",
+      "question": "Can you show me unusual prescription spikes or drops?"
+    },
+    {
+      "id": "Q0358",
+      "category": "Prescription totals and patterns",
+      "question": "Please provide unusual prescription spikes or drops."
+    },
+    {
+      "id": "Q0359",
+      "category": "Prescription totals and patterns",
+      "question": "I need to see unusual prescription spikes or drops."
+    },
+    {
+      "id": "Q0360",
+      "category": "Prescription totals and patterns",
+      "question": "Help me understand unusual prescription spikes or drops."
+    },
+    {
+      "id": "Q0361",
+      "category": "Sales-prescription alignment",
+      "question": "Show me sales change compared with prescription change."
+    },
+    {
+      "id": "Q0362",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me sales change compared with prescription change?"
+    },
+    {
+      "id": "Q0363",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide sales change compared with prescription change."
+    },
+    {
+      "id": "Q0364",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see sales change compared with prescription change."
+    },
+    {
+      "id": "Q0365",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand sales change compared with prescription change."
+    },
+    {
+      "id": "Q0366",
+      "category": "Sales-prescription alignment",
+      "question": "Show me products where sales and prescriptions moved in opposite directions."
+    },
+    {
+      "id": "Q0367",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me products where sales and prescriptions moved in opposite directions?"
+    },
+    {
+      "id": "Q0368",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide products where sales and prescriptions moved in opposite directions."
+    },
+    {
+      "id": "Q0369",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see products where sales and prescriptions moved in opposite directions."
+    },
+    {
+      "id": "Q0370",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand products where sales and prescriptions moved in opposite directions."
+    },
+    {
+      "id": "Q0371",
+      "category": "Sales-prescription alignment",
+      "question": "Show me the highest sales-prescription mismatch."
+    },
+    {
+      "id": "Q0372",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me the highest sales-prescription mismatch?"
+    },
+    {
+      "id": "Q0373",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide the highest sales-prescription mismatch."
+    },
+    {
+      "id": "Q0374",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see the highest sales-prescription mismatch."
+    },
+    {
+      "id": "Q0375",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand the highest sales-prescription mismatch."
+    },
+    {
+      "id": "Q0376",
+      "category": "Sales-prescription alignment",
+      "question": "Show me the mismatch score for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0377",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me the mismatch score for MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0378",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide the mismatch score for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0379",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see the mismatch score for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0380",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand the mismatch score for MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0381",
+      "category": "Sales-prescription alignment",
+      "question": "Show me products with aligned sales and prescription growth."
+    },
+    {
+      "id": "Q0382",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me products with aligned sales and prescription growth?"
+    },
+    {
+      "id": "Q0383",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide products with aligned sales and prescription growth."
+    },
+    {
+      "id": "Q0384",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see products with aligned sales and prescription growth."
+    },
+    {
+      "id": "Q0385",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand products with aligned sales and prescription growth."
+    },
+    {
+      "id": "Q0386",
+      "category": "Sales-prescription alignment",
+      "question": "Show me why a selected product was flagged for mismatch."
+    },
+    {
+      "id": "Q0387",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me why a selected product was flagged for mismatch?"
+    },
+    {
+      "id": "Q0388",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide why a selected product was flagged for mismatch."
+    },
+    {
+      "id": "Q0389",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see why a selected product was flagged for mismatch."
+    },
+    {
+      "id": "Q0390",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand why a selected product was flagged for mismatch."
+    },
+    {
+      "id": "Q0391",
+      "category": "Sales-prescription alignment",
+      "question": "Show me sales-prescription alignment for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0392",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me sales-prescription alignment for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0393",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide sales-prescription alignment for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0394",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see sales-prescription alignment for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0395",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand sales-prescription alignment for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0396",
+      "category": "Sales-prescription alignment",
+      "question": "Show me all mismatch findings by severity."
+    },
+    {
+      "id": "Q0397",
+      "category": "Sales-prescription alignment",
+      "question": "Can you show me all mismatch findings by severity?"
+    },
+    {
+      "id": "Q0398",
+      "category": "Sales-prescription alignment",
+      "question": "Please provide all mismatch findings by severity."
+    },
+    {
+      "id": "Q0399",
+      "category": "Sales-prescription alignment",
+      "question": "I need to see all mismatch findings by severity."
+    },
+    {
+      "id": "Q0400",
+      "category": "Sales-prescription alignment",
+      "question": "Help me understand all mismatch findings by severity."
+    },
+    {
+      "id": "Q0401",
+      "category": "Doctor concentration analysis",
+      "question": "Show me the top doctor by sales share."
+    },
+    {
+      "id": "Q0402",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me the top doctor by sales share?"
+    },
+    {
+      "id": "Q0403",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide the top doctor by sales share."
+    },
+    {
+      "id": "Q0404",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see the top doctor by sales share."
+    },
+    {
+      "id": "Q0405",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand the top doctor by sales share."
+    },
+    {
+      "id": "Q0406",
+      "category": "Doctor concentration analysis",
+      "question": "Show me the top doctor’s name and share."
+    },
+    {
+      "id": "Q0407",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me the top doctor’s name and share?"
+    },
+    {
+      "id": "Q0408",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide the top doctor’s name and share."
+    },
+    {
+      "id": "Q0409",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see the top doctor’s name and share."
+    },
+    {
+      "id": "Q0410",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand the top doctor’s name and share."
+    },
+    {
+      "id": "Q0411",
+      "category": "Doctor concentration analysis",
+      "question": "Show me the top three doctors’ combined share."
+    },
+    {
+      "id": "Q0412",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me the top three doctors’ combined share?"
+    },
+    {
+      "id": "Q0413",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide the top three doctors’ combined share."
+    },
+    {
+      "id": "Q0414",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see the top three doctors’ combined share."
+    },
+    {
+      "id": "Q0415",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand the top three doctors’ combined share."
+    },
+    {
+      "id": "Q0416",
+      "category": "Doctor concentration analysis",
+      "question": "Show me doctor concentration for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0417",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me doctor concentration for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0418",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide doctor concentration for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0419",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see doctor concentration for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0420",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand doctor concentration for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0421",
+      "category": "Doctor concentration analysis",
+      "question": "Show me sales distribution across assigned doctors."
+    },
+    {
+      "id": "Q0422",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me sales distribution across assigned doctors?"
+    },
+    {
+      "id": "Q0423",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide sales distribution across assigned doctors."
+    },
+    {
+      "id": "Q0424",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see sales distribution across assigned doctors."
+    },
+    {
+      "id": "Q0425",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand sales distribution across assigned doctors."
+    },
+    {
+      "id": "Q0426",
+      "category": "Doctor concentration analysis",
+      "question": "Show me whether doctor concentration is risky."
+    },
+    {
+      "id": "Q0427",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me whether doctor concentration is risky?"
+    },
+    {
+      "id": "Q0428",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide whether doctor concentration is risky."
+    },
+    {
+      "id": "Q0429",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see whether doctor concentration is risky."
+    },
+    {
+      "id": "Q0430",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand whether doctor concentration is risky."
+    },
+    {
+      "id": "Q0431",
+      "category": "Doctor concentration analysis",
+      "question": "Show me the least active assigned doctors."
+    },
+    {
+      "id": "Q0432",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me the least active assigned doctors?"
+    },
+    {
+      "id": "Q0433",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide the least active assigned doctors."
+    },
+    {
+      "id": "Q0434",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see the least active assigned doctors."
+    },
+    {
+      "id": "Q0435",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand the least active assigned doctors."
+    },
+    {
+      "id": "Q0436",
+      "category": "Doctor concentration analysis",
+      "question": "Show me doctor concentration compared with peers."
+    },
+    {
+      "id": "Q0437",
+      "category": "Doctor concentration analysis",
+      "question": "Can you show me doctor concentration compared with peers?"
+    },
+    {
+      "id": "Q0438",
+      "category": "Doctor concentration analysis",
+      "question": "Please provide doctor concentration compared with peers."
+    },
+    {
+      "id": "Q0439",
+      "category": "Doctor concentration analysis",
+      "question": "I need to see doctor concentration compared with peers."
+    },
+    {
+      "id": "Q0440",
+      "category": "Doctor concentration analysis",
+      "question": "Help me understand doctor concentration compared with peers."
+    },
+    {
+      "id": "Q0441",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me home-territory sales share."
+    },
+    {
+      "id": "Q0442",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me home-territory sales share?"
+    },
+    {
+      "id": "Q0443",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide home-territory sales share."
+    },
+    {
+      "id": "Q0444",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see home-territory sales share."
+    },
+    {
+      "id": "Q0445",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand home-territory sales share."
+    },
+    {
+      "id": "Q0446",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me cross-territory sales share."
+    },
+    {
+      "id": "Q0447",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me cross-territory sales share?"
+    },
+    {
+      "id": "Q0448",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide cross-territory sales share."
+    },
+    {
+      "id": "Q0449",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see cross-territory sales share."
+    },
+    {
+      "id": "Q0450",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand cross-territory sales share."
+    },
+    {
+      "id": "Q0451",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me territories receiving attributed sales."
+    },
+    {
+      "id": "Q0452",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me territories receiving attributed sales?"
+    },
+    {
+      "id": "Q0453",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide territories receiving attributed sales."
+    },
+    {
+      "id": "Q0454",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see territories receiving attributed sales."
+    },
+    {
+      "id": "Q0455",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand territories receiving attributed sales."
+    },
+    {
+      "id": "Q0456",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me territory behavior for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0457",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me territory behavior for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0458",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide territory behavior for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0459",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see territory behavior for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0460",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand territory behavior for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0461",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me doctors generating cross-territory sales."
+    },
+    {
+      "id": "Q0462",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me doctors generating cross-territory sales?"
+    },
+    {
+      "id": "Q0463",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide doctors generating cross-territory sales."
+    },
+    {
+      "id": "Q0464",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see doctors generating cross-territory sales."
+    },
+    {
+      "id": "Q0465",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand doctors generating cross-territory sales."
+    },
+    {
+      "id": "Q0466",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me products sold outside the home territory."
+    },
+    {
+      "id": "Q0467",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me products sold outside the home territory?"
+    },
+    {
+      "id": "Q0468",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide products sold outside the home territory."
+    },
+    {
+      "id": "Q0469",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see products sold outside the home territory."
+    },
+    {
+      "id": "Q0470",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand products sold outside the home territory."
+    },
+    {
+      "id": "Q0471",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me whether cross-territory behavior is anomalous."
+    },
+    {
+      "id": "Q0472",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me whether cross-territory behavior is anomalous?"
+    },
+    {
+      "id": "Q0473",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide whether cross-territory behavior is anomalous."
+    },
+    {
+      "id": "Q0474",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see whether cross-territory behavior is anomalous."
+    },
+    {
+      "id": "Q0475",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand whether cross-territory behavior is anomalous."
+    },
+    {
+      "id": "Q0476",
+      "category": "Territory and cross-territory behavior",
+      "question": "Show me territory distribution compared with peers."
+    },
+    {
+      "id": "Q0477",
+      "category": "Territory and cross-territory behavior",
+      "question": "Can you show me territory distribution compared with peers?"
+    },
+    {
+      "id": "Q0478",
+      "category": "Territory and cross-territory behavior",
+      "question": "Please provide territory distribution compared with peers."
+    },
+    {
+      "id": "Q0479",
+      "category": "Territory and cross-territory behavior",
+      "question": "I need to see territory distribution compared with peers."
+    },
+    {
+      "id": "Q0480",
+      "category": "Territory and cross-territory behavior",
+      "question": "Help me understand territory distribution compared with peers."
+    },
+    {
+      "id": "Q0481",
+      "category": "Payout totals and status",
+      "question": "Show me total expected payout."
+    },
+    {
+      "id": "Q0482",
+      "category": "Payout totals and status",
+      "question": "Can you show me total expected payout?"
+    },
+    {
+      "id": "Q0483",
+      "category": "Payout totals and status",
+      "question": "Please provide total expected payout."
+    },
+    {
+      "id": "Q0484",
+      "category": "Payout totals and status",
+      "question": "I need to see total expected payout."
+    },
+    {
+      "id": "Q0485",
+      "category": "Payout totals and status",
+      "question": "Help me understand total expected payout."
+    },
+    {
+      "id": "Q0486",
+      "category": "Payout totals and status",
+      "question": "Show me total recorded payout."
+    },
+    {
+      "id": "Q0487",
+      "category": "Payout totals and status",
+      "question": "Can you show me total recorded payout?"
+    },
+    {
+      "id": "Q0488",
+      "category": "Payout totals and status",
+      "question": "Please provide total recorded payout."
+    },
+    {
+      "id": "Q0489",
+      "category": "Payout totals and status",
+      "question": "I need to see total recorded payout."
+    },
+    {
+      "id": "Q0490",
+      "category": "Payout totals and status",
+      "question": "Help me understand total recorded payout."
+    },
+    {
+      "id": "Q0491",
+      "category": "Payout totals and status",
+      "question": "Show me the net payout difference."
+    },
+    {
+      "id": "Q0492",
+      "category": "Payout totals and status",
+      "question": "Can you show me the net payout difference?"
+    },
+    {
+      "id": "Q0493",
+      "category": "Payout totals and status",
+      "question": "Please provide the net payout difference."
+    },
+    {
+      "id": "Q0494",
+      "category": "Payout totals and status",
+      "question": "I need to see the net payout difference."
+    },
+    {
+      "id": "Q0495",
+      "category": "Payout totals and status",
+      "question": "Help me understand the net payout difference."
+    },
+    {
+      "id": "Q0496",
+      "category": "Payout totals and status",
+      "question": "Show me payouts by product."
+    },
+    {
+      "id": "Q0497",
+      "category": "Payout totals and status",
+      "question": "Can you show me payouts by product?"
+    },
+    {
+      "id": "Q0498",
+      "category": "Payout totals and status",
+      "question": "Please provide payouts by product."
+    },
+    {
+      "id": "Q0499",
+      "category": "Payout totals and status",
+      "question": "I need to see payouts by product."
+    },
+    {
+      "id": "Q0500",
+      "category": "Payout totals and status",
+      "question": "Help me understand payouts by product."
+    },
+    {
+      "id": "Q0501",
+      "category": "Payout totals and status",
+      "question": "Show me payouts by month."
+    },
+    {
+      "id": "Q0502",
+      "category": "Payout totals and status",
+      "question": "Can you show me payouts by month?"
+    },
+    {
+      "id": "Q0503",
+      "category": "Payout totals and status",
+      "question": "Please provide payouts by month."
+    },
+    {
+      "id": "Q0504",
+      "category": "Payout totals and status",
+      "question": "I need to see payouts by month."
+    },
+    {
+      "id": "Q0505",
+      "category": "Payout totals and status",
+      "question": "Help me understand payouts by month."
+    },
+    {
+      "id": "Q0506",
+      "category": "Payout totals and status",
+      "question": "Show me payout records by status."
+    },
+    {
+      "id": "Q0507",
+      "category": "Payout totals and status",
+      "question": "Can you show me payout records by status?"
+    },
+    {
+      "id": "Q0508",
+      "category": "Payout totals and status",
+      "question": "Please provide payout records by status."
+    },
+    {
+      "id": "Q0509",
+      "category": "Payout totals and status",
+      "question": "I need to see payout records by status."
+    },
+    {
+      "id": "Q0510",
+      "category": "Payout totals and status",
+      "question": "Help me understand payout records by status."
+    },
+    {
+      "id": "Q0511",
+      "category": "Payout totals and status",
+      "question": "Show me products with missing payouts."
+    },
+    {
+      "id": "Q0512",
+      "category": "Payout totals and status",
+      "question": "Can you show me products with missing payouts?"
+    },
+    {
+      "id": "Q0513",
+      "category": "Payout totals and status",
+      "question": "Please provide products with missing payouts."
+    },
+    {
+      "id": "Q0514",
+      "category": "Payout totals and status",
+      "question": "I need to see products with missing payouts."
+    },
+    {
+      "id": "Q0515",
+      "category": "Payout totals and status",
+      "question": "Help me understand products with missing payouts."
+    },
+    {
+      "id": "Q0516",
+      "category": "Payout totals and status",
+      "question": "Show me a payout summary for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0517",
+      "category": "Payout totals and status",
+      "question": "Can you show me a payout summary for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0518",
+      "category": "Payout totals and status",
+      "question": "Please provide a payout summary for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0519",
+      "category": "Payout totals and status",
+      "question": "I need to see a payout summary for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0520",
+      "category": "Payout totals and status",
+      "question": "Help me understand a payout summary for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0521",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me all payout discrepancies."
+    },
+    {
+      "id": "Q0522",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me all payout discrepancies?"
+    },
+    {
+      "id": "Q0523",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide all payout discrepancies."
+    },
+    {
+      "id": "Q0524",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see all payout discrepancies."
+    },
+    {
+      "id": "Q0525",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand all payout discrepancies."
+    },
+    {
+      "id": "Q0526",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me missing payout findings."
+    },
+    {
+      "id": "Q0527",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me missing payout findings?"
+    },
+    {
+      "id": "Q0528",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide missing payout findings."
+    },
+    {
+      "id": "Q0529",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see missing payout findings."
+    },
+    {
+      "id": "Q0530",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand missing payout findings."
+    },
+    {
+      "id": "Q0531",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me duplicate payout findings."
+    },
+    {
+      "id": "Q0532",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me duplicate payout findings?"
+    },
+    {
+      "id": "Q0533",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide duplicate payout findings."
+    },
+    {
+      "id": "Q0534",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see duplicate payout findings."
+    },
+    {
+      "id": "Q0535",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand duplicate payout findings."
+    },
+    {
+      "id": "Q0536",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me multiplier mismatch findings."
+    },
+    {
+      "id": "Q0537",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me multiplier mismatch findings?"
+    },
+    {
+      "id": "Q0538",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide multiplier mismatch findings."
+    },
+    {
+      "id": "Q0539",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see multiplier mismatch findings."
+    },
+    {
+      "id": "Q0540",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand multiplier mismatch findings."
+    },
+    {
+      "id": "Q0541",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me maximum-cap mismatch findings."
+    },
+    {
+      "id": "Q0542",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me maximum-cap mismatch findings?"
+    },
+    {
+      "id": "Q0543",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide maximum-cap mismatch findings."
+    },
+    {
+      "id": "Q0544",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see maximum-cap mismatch findings."
+    },
+    {
+      "id": "Q0545",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand maximum-cap mismatch findings."
+    },
+    {
+      "id": "Q0546",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me payout discrepancies by severity."
+    },
+    {
+      "id": "Q0547",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me payout discrepancies by severity?"
+    },
+    {
+      "id": "Q0548",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide payout discrepancies by severity."
+    },
+    {
+      "id": "Q0549",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see payout discrepancies by severity."
+    },
+    {
+      "id": "Q0550",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand payout discrepancies by severity."
+    },
+    {
+      "id": "Q0551",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me the largest payout variance."
+    },
+    {
+      "id": "Q0552",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me the largest payout variance?"
+    },
+    {
+      "id": "Q0553",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide the largest payout variance."
+    },
+    {
+      "id": "Q0554",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see the largest payout variance."
+    },
+    {
+      "id": "Q0555",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand the largest payout variance."
+    },
+    {
+      "id": "Q0556",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Show me why ExcepturiCare 29 (P029) has a payout discrepancy."
+    },
+    {
+      "id": "Q0557",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Can you show me why ExcepturiCare 29 (P029) has a payout discrepancy?"
+    },
+    {
+      "id": "Q0558",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Please provide why ExcepturiCare 29 (P029) has a payout discrepancy."
+    },
+    {
+      "id": "Q0559",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "I need to see why ExcepturiCare 29 (P029) has a payout discrepancy."
+    },
+    {
+      "id": "Q0560",
+      "category": "Payout discrepancies and anomaly subtypes",
+      "question": "Help me understand why ExcepturiCare 29 (P029) has a payout discrepancy."
+    },
+    {
+      "id": "Q0561",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me the payout calculation breakup."
+    },
+    {
+      "id": "Q0562",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me the payout calculation breakup?"
+    },
+    {
+      "id": "Q0563",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide the payout calculation breakup."
+    },
+    {
+      "id": "Q0564",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see the payout calculation breakup."
+    },
+    {
+      "id": "Q0565",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand the payout calculation breakup."
+    },
+    {
+      "id": "Q0566",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me recorded versus calculated payout at each stage."
+    },
+    {
+      "id": "Q0567",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me recorded versus calculated payout at each stage?"
+    },
+    {
+      "id": "Q0568",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide recorded versus calculated payout at each stage."
+    },
+    {
+      "id": "Q0569",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see recorded versus calculated payout at each stage."
+    },
+    {
+      "id": "Q0570",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand recorded versus calculated payout at each stage."
+    },
+    {
+      "id": "Q0571",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me base incentive by product."
+    },
+    {
+      "id": "Q0572",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me base incentive by product?"
+    },
+    {
+      "id": "Q0573",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide base incentive by product."
+    },
+    {
+      "id": "Q0574",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see base incentive by product."
+    },
+    {
+      "id": "Q0575",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand base incentive by product."
+    },
+    {
+      "id": "Q0576",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me the applied program percentage."
+    },
+    {
+      "id": "Q0577",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me the applied program percentage?"
+    },
+    {
+      "id": "Q0578",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide the applied program percentage."
+    },
+    {
+      "id": "Q0579",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see the applied program percentage."
+    },
+    {
+      "id": "Q0580",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand the applied program percentage."
+    },
+    {
+      "id": "Q0581",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me the achievement tier and multiplier used."
+    },
+    {
+      "id": "Q0582",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me the achievement tier and multiplier used?"
+    },
+    {
+      "id": "Q0583",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide the achievement tier and multiplier used."
+    },
+    {
+      "id": "Q0584",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see the achievement tier and multiplier used."
+    },
+    {
+      "id": "Q0585",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand the achievement tier and multiplier used."
+    },
+    {
+      "id": "Q0586",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me the capped and uncapped incentive values."
+    },
+    {
+      "id": "Q0587",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me the capped and uncapped incentive values?"
+    },
+    {
+      "id": "Q0588",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide the capped and uncapped incentive values."
+    },
+    {
+      "id": "Q0589",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see the capped and uncapped incentive values."
+    },
+    {
+      "id": "Q0590",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand the capped and uncapped incentive values."
+    },
+    {
+      "id": "Q0591",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me a detailed payout reconciliation table."
+    },
+    {
+      "id": "Q0592",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me a detailed payout reconciliation table?"
+    },
+    {
+      "id": "Q0593",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide a detailed payout reconciliation table."
+    },
+    {
+      "id": "Q0594",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see a detailed payout reconciliation table."
+    },
+    {
+      "id": "Q0595",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand a detailed payout reconciliation table."
+    },
+    {
+      "id": "Q0596",
+      "category": "Payout calculation and reconciliation",
+      "question": "Show me the formula used to calculate a selected payout."
+    },
+    {
+      "id": "Q0597",
+      "category": "Payout calculation and reconciliation",
+      "question": "Can you show me the formula used to calculate a selected payout?"
+    },
+    {
+      "id": "Q0598",
+      "category": "Payout calculation and reconciliation",
+      "question": "Please provide the formula used to calculate a selected payout."
+    },
+    {
+      "id": "Q0599",
+      "category": "Payout calculation and reconciliation",
+      "question": "I need to see the formula used to calculate a selected payout."
+    },
+    {
+      "id": "Q0600",
+      "category": "Payout calculation and reconciliation",
+      "question": "Help me understand the formula used to calculate a selected payout."
+    },
+    {
+      "id": "Q0601",
+      "category": "Incentive programs",
+      "question": "Show me active incentive programs in the selected period."
+    },
+    {
+      "id": "Q0602",
+      "category": "Incentive programs",
+      "question": "Can you show me active incentive programs in the selected period?"
+    },
+    {
+      "id": "Q0603",
+      "category": "Incentive programs",
+      "question": "Please provide active incentive programs in the selected period."
+    },
+    {
+      "id": "Q0604",
+      "category": "Incentive programs",
+      "question": "I need to see active incentive programs in the selected period."
+    },
+    {
+      "id": "Q0605",
+      "category": "Incentive programs",
+      "question": "Help me understand active incentive programs in the selected period."
+    },
+    {
+      "id": "Q0606",
+      "category": "Incentive programs",
+      "question": "Show me the program covering MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0607",
+      "category": "Incentive programs",
+      "question": "Can you show me the program covering MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0608",
+      "category": "Incentive programs",
+      "question": "Please provide the program covering MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0609",
+      "category": "Incentive programs",
+      "question": "I need to see the program covering MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0610",
+      "category": "Incentive programs",
+      "question": "Help me understand the program covering MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0611",
+      "category": "Incentive programs",
+      "question": "Show me products included in a specified program."
+    },
+    {
+      "id": "Q0612",
+      "category": "Incentive programs",
+      "question": "Can you show me products included in a specified program?"
+    },
+    {
+      "id": "Q0613",
+      "category": "Incentive programs",
+      "question": "Please provide products included in a specified program."
+    },
+    {
+      "id": "Q0614",
+      "category": "Incentive programs",
+      "question": "I need to see products included in a specified program."
+    },
+    {
+      "id": "Q0615",
+      "category": "Incentive programs",
+      "question": "Help me understand products included in a specified program."
+    },
+    {
+      "id": "Q0616",
+      "category": "Incentive programs",
+      "question": "Show me a program’s start and end dates."
+    },
+    {
+      "id": "Q0617",
+      "category": "Incentive programs",
+      "question": "Can you show me a program’s start and end dates?"
+    },
+    {
+      "id": "Q0618",
+      "category": "Incentive programs",
+      "question": "Please provide a program’s start and end dates."
+    },
+    {
+      "id": "Q0619",
+      "category": "Incentive programs",
+      "question": "I need to see a program’s start and end dates."
+    },
+    {
+      "id": "Q0620",
+      "category": "Incentive programs",
+      "question": "Help me understand a program’s start and end dates."
+    },
+    {
+      "id": "Q0621",
+      "category": "Incentive programs",
+      "question": "Show me the percentage offered by a program."
+    },
+    {
+      "id": "Q0622",
+      "category": "Incentive programs",
+      "question": "Can you show me the percentage offered by a program?"
+    },
+    {
+      "id": "Q0623",
+      "category": "Incentive programs",
+      "question": "Please provide the percentage offered by a program."
+    },
+    {
+      "id": "Q0624",
+      "category": "Incentive programs",
+      "question": "I need to see the percentage offered by a program."
+    },
+    {
+      "id": "Q0625",
+      "category": "Incentive programs",
+      "question": "Help me understand the percentage offered by a program."
+    },
+    {
+      "id": "Q0626",
+      "category": "Incentive programs",
+      "question": "Show me overlapping incentive programs."
+    },
+    {
+      "id": "Q0627",
+      "category": "Incentive programs",
+      "question": "Can you show me overlapping incentive programs?"
+    },
+    {
+      "id": "Q0628",
+      "category": "Incentive programs",
+      "question": "Please provide overlapping incentive programs."
+    },
+    {
+      "id": "Q0629",
+      "category": "Incentive programs",
+      "question": "I need to see overlapping incentive programs."
+    },
+    {
+      "id": "Q0630",
+      "category": "Incentive programs",
+      "question": "Help me understand overlapping incentive programs."
+    },
+    {
+      "id": "Q0631",
+      "category": "Incentive programs",
+      "question": "Show me programs expiring soon."
+    },
+    {
+      "id": "Q0632",
+      "category": "Incentive programs",
+      "question": "Can you show me programs expiring soon?"
+    },
+    {
+      "id": "Q0633",
+      "category": "Incentive programs",
+      "question": "Please provide programs expiring soon."
+    },
+    {
+      "id": "Q0634",
+      "category": "Incentive programs",
+      "question": "I need to see programs expiring soon."
+    },
+    {
+      "id": "Q0635",
+      "category": "Incentive programs",
+      "question": "Help me understand programs expiring soon."
+    },
+    {
+      "id": "Q0636",
+      "category": "Incentive programs",
+      "question": "Show me incentive program details used in a payout."
+    },
+    {
+      "id": "Q0637",
+      "category": "Incentive programs",
+      "question": "Can you show me incentive program details used in a payout?"
+    },
+    {
+      "id": "Q0638",
+      "category": "Incentive programs",
+      "question": "Please provide incentive program details used in a payout."
+    },
+    {
+      "id": "Q0639",
+      "category": "Incentive programs",
+      "question": "I need to see incentive program details used in a payout."
+    },
+    {
+      "id": "Q0640",
+      "category": "Incentive programs",
+      "question": "Help me understand incentive program details used in a payout."
+    },
+    {
+      "id": "Q0641",
+      "category": "Incentive program tiers",
+      "question": "Show me tiers for a specified incentive program."
+    },
+    {
+      "id": "Q0642",
+      "category": "Incentive program tiers",
+      "question": "Can you show me tiers for a specified incentive program?"
+    },
+    {
+      "id": "Q0643",
+      "category": "Incentive program tiers",
+      "question": "Please provide tiers for a specified incentive program."
+    },
+    {
+      "id": "Q0644",
+      "category": "Incentive program tiers",
+      "question": "I need to see tiers for a specified incentive program."
+    },
+    {
+      "id": "Q0645",
+      "category": "Incentive program tiers",
+      "question": "Help me understand tiers for a specified incentive program."
+    },
+    {
+      "id": "Q0646",
+      "category": "Incentive program tiers",
+      "question": "Show me the achievement bands and multipliers."
+    },
+    {
+      "id": "Q0647",
+      "category": "Incentive program tiers",
+      "question": "Can you show me the achievement bands and multipliers?"
+    },
+    {
+      "id": "Q0648",
+      "category": "Incentive program tiers",
+      "question": "Please provide the achievement bands and multipliers."
+    },
+    {
+      "id": "Q0649",
+      "category": "Incentive program tiers",
+      "question": "I need to see the achievement bands and multipliers."
+    },
+    {
+      "id": "Q0650",
+      "category": "Incentive program tiers",
+      "question": "Help me understand the achievement bands and multipliers."
+    },
+    {
+      "id": "Q0651",
+      "category": "Incentive program tiers",
+      "question": "Show me the tier reached by MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0652",
+      "category": "Incentive program tiers",
+      "question": "Can you show me the tier reached by MolestiaeCare 5 (P005)?"
+    },
+    {
+      "id": "Q0653",
+      "category": "Incentive program tiers",
+      "question": "Please provide the tier reached by MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0654",
+      "category": "Incentive program tiers",
+      "question": "I need to see the tier reached by MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0655",
+      "category": "Incentive program tiers",
+      "question": "Help me understand the tier reached by MolestiaeCare 5 (P005)."
+    },
+    {
+      "id": "Q0656",
+      "category": "Incentive program tiers",
+      "question": "Show me why an achievement multiplier is below one."
+    },
+    {
+      "id": "Q0657",
+      "category": "Incentive program tiers",
+      "question": "Can you show me why an achievement multiplier is below one?"
+    },
+    {
+      "id": "Q0658",
+      "category": "Incentive program tiers",
+      "question": "Please provide why an achievement multiplier is below one."
+    },
+    {
+      "id": "Q0659",
+      "category": "Incentive program tiers",
+      "question": "I need to see why an achievement multiplier is below one."
+    },
+    {
+      "id": "Q0660",
+      "category": "Incentive program tiers",
+      "question": "Help me understand why an achievement multiplier is below one."
+    },
+    {
+      "id": "Q0661",
+      "category": "Incentive program tiers",
+      "question": "Show me the next tier threshold."
+    },
+    {
+      "id": "Q0662",
+      "category": "Incentive program tiers",
+      "question": "Can you show me the next tier threshold?"
+    },
+    {
+      "id": "Q0663",
+      "category": "Incentive program tiers",
+      "question": "Please provide the next tier threshold."
+    },
+    {
+      "id": "Q0664",
+      "category": "Incentive program tiers",
+      "question": "I need to see the next tier threshold."
+    },
+    {
+      "id": "Q0665",
+      "category": "Incentive program tiers",
+      "question": "Help me understand the next tier threshold."
+    },
+    {
+      "id": "Q0666",
+      "category": "Incentive program tiers",
+      "question": "Show me products using a selected tier rule."
+    },
+    {
+      "id": "Q0667",
+      "category": "Incentive program tiers",
+      "question": "Can you show me products using a selected tier rule?"
+    },
+    {
+      "id": "Q0668",
+      "category": "Incentive program tiers",
+      "question": "Please provide products using a selected tier rule."
+    },
+    {
+      "id": "Q0669",
+      "category": "Incentive program tiers",
+      "question": "I need to see products using a selected tier rule."
+    },
+    {
+      "id": "Q0670",
+      "category": "Incentive program tiers",
+      "question": "Help me understand products using a selected tier rule."
+    },
+    {
+      "id": "Q0671",
+      "category": "Incentive program tiers",
+      "question": "Show me tier rules active on a specified date."
+    },
+    {
+      "id": "Q0672",
+      "category": "Incentive program tiers",
+      "question": "Can you show me tier rules active on a specified date?"
+    },
+    {
+      "id": "Q0673",
+      "category": "Incentive program tiers",
+      "question": "Please provide tier rules active on a specified date."
+    },
+    {
+      "id": "Q0674",
+      "category": "Incentive program tiers",
+      "question": "I need to see tier rules active on a specified date."
+    },
+    {
+      "id": "Q0675",
+      "category": "Incentive program tiers",
+      "question": "Help me understand tier rules active on a specified date."
+    },
+    {
+      "id": "Q0676",
+      "category": "Incentive program tiers",
+      "question": "Show me how payout changes at each achievement band."
+    },
+    {
+      "id": "Q0677",
+      "category": "Incentive program tiers",
+      "question": "Can you show me how payout changes at each achievement band?"
+    },
+    {
+      "id": "Q0678",
+      "category": "Incentive program tiers",
+      "question": "Please provide how payout changes at each achievement band."
+    },
+    {
+      "id": "Q0679",
+      "category": "Incentive program tiers",
+      "question": "I need to see how payout changes at each achievement band."
+    },
+    {
+      "id": "Q0680",
+      "category": "Incentive program tiers",
+      "question": "Help me understand how payout changes at each achievement band."
+    },
+    {
+      "id": "Q0681",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me whether a product was eligible on a specified date."
+    },
+    {
+      "id": "Q0682",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me whether a product was eligible on a specified date?"
+    },
+    {
+      "id": "Q0683",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide whether a product was eligible on a specified date."
+    },
+    {
+      "id": "Q0684",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see whether a product was eligible on a specified date."
+    },
+    {
+      "id": "Q0685",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand whether a product was eligible on a specified date."
+    },
+    {
+      "id": "Q0686",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me products without program coverage."
+    },
+    {
+      "id": "Q0687",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me products without program coverage?"
+    },
+    {
+      "id": "Q0688",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide products without program coverage."
+    },
+    {
+      "id": "Q0689",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see products without program coverage."
+    },
+    {
+      "id": "Q0690",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand products without program coverage."
+    },
+    {
+      "id": "Q0691",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me periods using the default base-incentive rule."
+    },
+    {
+      "id": "Q0692",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me periods using the default base-incentive rule?"
+    },
+    {
+      "id": "Q0693",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide periods using the default base-incentive rule."
+    },
+    {
+      "id": "Q0694",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see periods using the default base-incentive rule."
+    },
+    {
+      "id": "Q0695",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand periods using the default base-incentive rule."
+    },
+    {
+      "id": "Q0696",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me why the 1.5 fallback multiplier was applied."
+    },
+    {
+      "id": "Q0697",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me why the 1.5 fallback multiplier was applied?"
+    },
+    {
+      "id": "Q0698",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide why the 1.5 fallback multiplier was applied."
+    },
+    {
+      "id": "Q0699",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see why the 1.5 fallback multiplier was applied."
+    },
+    {
+      "id": "Q0700",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand why the 1.5 fallback multiplier was applied."
+    },
+    {
+      "id": "Q0701",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me program eligibility for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0702",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me program eligibility for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0703",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide program eligibility for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0704",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see program eligibility for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0705",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand program eligibility for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0706",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me coverage gaps between incentive programs."
+    },
+    {
+      "id": "Q0707",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me coverage gaps between incentive programs?"
+    },
+    {
+      "id": "Q0708",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide coverage gaps between incentive programs."
+    },
+    {
+      "id": "Q0709",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see coverage gaps between incentive programs."
+    },
+    {
+      "id": "Q0710",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand coverage gaps between incentive programs."
+    },
+    {
+      "id": "Q0711",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me eligible products for a selected month."
+    },
+    {
+      "id": "Q0712",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me eligible products for a selected month?"
+    },
+    {
+      "id": "Q0713",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide eligible products for a selected month."
+    },
+    {
+      "id": "Q0714",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see eligible products for a selected month."
+    },
+    {
+      "id": "Q0715",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand eligible products for a selected month."
+    },
+    {
+      "id": "Q0716",
+      "category": "Program eligibility and date coverage",
+      "question": "Show me the rule chosen when programs overlap."
+    },
+    {
+      "id": "Q0717",
+      "category": "Program eligibility and date coverage",
+      "question": "Can you show me the rule chosen when programs overlap?"
+    },
+    {
+      "id": "Q0718",
+      "category": "Program eligibility and date coverage",
+      "question": "Please provide the rule chosen when programs overlap."
+    },
+    {
+      "id": "Q0719",
+      "category": "Program eligibility and date coverage",
+      "question": "I need to see the rule chosen when programs overlap."
+    },
+    {
+      "id": "Q0720",
+      "category": "Program eligibility and date coverage",
+      "question": "Help me understand the rule chosen when programs overlap."
+    },
+    {
+      "id": "Q0721",
+      "category": "Peer benchmarking",
+      "question": "Show me Aahana Bassi (FR0011) compared with peers."
+    },
+    {
+      "id": "Q0722",
+      "category": "Peer benchmarking",
+      "question": "Can you show me Aahana Bassi (FR0011) compared with peers?"
+    },
+    {
+      "id": "Q0723",
+      "category": "Peer benchmarking",
+      "question": "Please provide Aahana Bassi (FR0011) compared with peers."
+    },
+    {
+      "id": "Q0724",
+      "category": "Peer benchmarking",
+      "question": "I need to see Aahana Bassi (FR0011) compared with peers."
+    },
+    {
+      "id": "Q0725",
+      "category": "Peer benchmarking",
+      "question": "Help me understand Aahana Bassi (FR0011) compared with peers."
+    },
+    {
+      "id": "Q0726",
+      "category": "Peer benchmarking",
+      "question": "Show me the representative-versus-peer sales index."
+    },
+    {
+      "id": "Q0727",
+      "category": "Peer benchmarking",
+      "question": "Can you show me the representative-versus-peer sales index?"
+    },
+    {
+      "id": "Q0728",
+      "category": "Peer benchmarking",
+      "question": "Please provide the representative-versus-peer sales index."
+    },
+    {
+      "id": "Q0729",
+      "category": "Peer benchmarking",
+      "question": "I need to see the representative-versus-peer sales index."
+    },
+    {
+      "id": "Q0730",
+      "category": "Peer benchmarking",
+      "question": "Help me understand the representative-versus-peer sales index."
+    },
+    {
+      "id": "Q0731",
+      "category": "Peer benchmarking",
+      "question": "Show me the representative-versus-peer prescription index."
+    },
+    {
+      "id": "Q0732",
+      "category": "Peer benchmarking",
+      "question": "Can you show me the representative-versus-peer prescription index?"
+    },
+    {
+      "id": "Q0733",
+      "category": "Peer benchmarking",
+      "question": "Please provide the representative-versus-peer prescription index."
+    },
+    {
+      "id": "Q0734",
+      "category": "Peer benchmarking",
+      "question": "I need to see the representative-versus-peer prescription index."
+    },
+    {
+      "id": "Q0735",
+      "category": "Peer benchmarking",
+      "question": "Help me understand the representative-versus-peer prescription index."
+    },
+    {
+      "id": "Q0736",
+      "category": "Peer benchmarking",
+      "question": "Show me the representative-versus-peer payout index."
+    },
+    {
+      "id": "Q0737",
+      "category": "Peer benchmarking",
+      "question": "Can you show me the representative-versus-peer payout index?"
+    },
+    {
+      "id": "Q0738",
+      "category": "Peer benchmarking",
+      "question": "Please provide the representative-versus-peer payout index."
+    },
+    {
+      "id": "Q0739",
+      "category": "Peer benchmarking",
+      "question": "I need to see the representative-versus-peer payout index."
+    },
+    {
+      "id": "Q0740",
+      "category": "Peer benchmarking",
+      "question": "Help me understand the representative-versus-peer payout index."
+    },
+    {
+      "id": "Q0741",
+      "category": "Peer benchmarking",
+      "question": "Show me peer percentile rankings."
+    },
+    {
+      "id": "Q0742",
+      "category": "Peer benchmarking",
+      "question": "Can you show me peer percentile rankings?"
+    },
+    {
+      "id": "Q0743",
+      "category": "Peer benchmarking",
+      "question": "Please provide peer percentile rankings."
+    },
+    {
+      "id": "Q0744",
+      "category": "Peer benchmarking",
+      "question": "I need to see peer percentile rankings."
+    },
+    {
+      "id": "Q0745",
+      "category": "Peer benchmarking",
+      "question": "Help me understand peer percentile rankings."
+    },
+    {
+      "id": "Q0746",
+      "category": "Peer benchmarking",
+      "question": "Show me the peer group used for comparison."
+    },
+    {
+      "id": "Q0747",
+      "category": "Peer benchmarking",
+      "question": "Can you show me the peer group used for comparison?"
+    },
+    {
+      "id": "Q0748",
+      "category": "Peer benchmarking",
+      "question": "Please provide the peer group used for comparison."
+    },
+    {
+      "id": "Q0749",
+      "category": "Peer benchmarking",
+      "question": "I need to see the peer group used for comparison."
+    },
+    {
+      "id": "Q0750",
+      "category": "Peer benchmarking",
+      "question": "Help me understand the peer group used for comparison."
+    },
+    {
+      "id": "Q0751",
+      "category": "Peer benchmarking",
+      "question": "Show me metrics below the peer average."
+    },
+    {
+      "id": "Q0752",
+      "category": "Peer benchmarking",
+      "question": "Can you show me metrics below the peer average?"
+    },
+    {
+      "id": "Q0753",
+      "category": "Peer benchmarking",
+      "question": "Please provide metrics below the peer average."
+    },
+    {
+      "id": "Q0754",
+      "category": "Peer benchmarking",
+      "question": "I need to see metrics below the peer average."
+    },
+    {
+      "id": "Q0755",
+      "category": "Peer benchmarking",
+      "question": "Help me understand metrics below the peer average."
+    },
+    {
+      "id": "Q0756",
+      "category": "Peer benchmarking",
+      "question": "Show me the strongest metric relative to peers."
+    },
+    {
+      "id": "Q0757",
+      "category": "Peer benchmarking",
+      "question": "Can you show me the strongest metric relative to peers?"
+    },
+    {
+      "id": "Q0758",
+      "category": "Peer benchmarking",
+      "question": "Please provide the strongest metric relative to peers."
+    },
+    {
+      "id": "Q0759",
+      "category": "Peer benchmarking",
+      "question": "I need to see the strongest metric relative to peers."
+    },
+    {
+      "id": "Q0760",
+      "category": "Peer benchmarking",
+      "question": "Help me understand the strongest metric relative to peers."
+    },
+    {
+      "id": "Q0761",
+      "category": "Historical comparisons",
+      "question": "Show me current sales versus the historical average."
+    },
+    {
+      "id": "Q0762",
+      "category": "Historical comparisons",
+      "question": "Can you show me current sales versus the historical average?"
+    },
+    {
+      "id": "Q0763",
+      "category": "Historical comparisons",
+      "question": "Please provide current sales versus the historical average."
+    },
+    {
+      "id": "Q0764",
+      "category": "Historical comparisons",
+      "question": "I need to see current sales versus the historical average."
+    },
+    {
+      "id": "Q0765",
+      "category": "Historical comparisons",
+      "question": "Help me understand current sales versus the historical average."
+    },
+    {
+      "id": "Q0766",
+      "category": "Historical comparisons",
+      "question": "Show me historical position for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0767",
+      "category": "Historical comparisons",
+      "question": "Can you show me historical position for Aahana Bassi (FR0011)?"
+    },
+    {
+      "id": "Q0768",
+      "category": "Historical comparisons",
+      "question": "Please provide historical position for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0769",
+      "category": "Historical comparisons",
+      "question": "I need to see historical position for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0770",
+      "category": "Historical comparisons",
+      "question": "Help me understand historical position for Aahana Bassi (FR0011)."
+    },
+    {
+      "id": "Q0771",
+      "category": "Historical comparisons",
+      "question": "Show me the historical baseline period."
+    },
+    {
+      "id": "Q0772",
+      "category": "Historical comparisons",
+      "question": "Can you show me the historical baseline period?"
+    },
+    {
+      "id": "Q0773",
+      "category": "Historical comparisons",
+      "question": "Please provide the historical baseline period."
+    },
+    {
+      "id": "Q0774",
+      "category": "Historical comparisons",
+      "question": "I need to see the historical baseline period."
+    },
+    {
+      "id": "Q0775",
+      "category": "Historical comparisons",
+      "question": "Help me understand the historical baseline period."
+    },
+    {
+      "id": "Q0776",
+      "category": "Historical comparisons",
+      "question": "Show me products below their historical sales average."
+    },
+    {
+      "id": "Q0777",
+      "category": "Historical comparisons",
+      "question": "Can you show me products below their historical sales average?"
+    },
+    {
+      "id": "Q0778",
+      "category": "Historical comparisons",
+      "question": "Please provide products below their historical sales average."
+    },
+    {
+      "id": "Q0779",
+      "category": "Historical comparisons",
+      "question": "I need to see products below their historical sales average."
+    },
+    {
+      "id": "Q0780",
+      "category": "Historical comparisons",
+      "question": "Help me understand products below their historical sales average."
+    },
+    {
+      "id": "Q0781",
+      "category": "Historical comparisons",
+      "question": "Show me prescriptions versus the historical baseline."
+    },
+    {
+      "id": "Q0782",
+      "category": "Historical comparisons",
+      "question": "Can you show me prescriptions versus the historical baseline?"
+    },
+    {
+      "id": "Q0783",
+      "category": "Historical comparisons",
+      "question": "Please provide prescriptions versus the historical baseline."
+    },
+    {
+      "id": "Q0784",
+      "category": "Historical comparisons",
+      "question": "I need to see prescriptions versus the historical baseline."
+    },
+    {
+      "id": "Q0785",
+      "category": "Historical comparisons",
+      "question": "Help me understand prescriptions versus the historical baseline."
+    },
+    {
+      "id": "Q0786",
+      "category": "Historical comparisons",
+      "question": "Show me payout versus historical payouts."
+    },
+    {
+      "id": "Q0787",
+      "category": "Historical comparisons",
+      "question": "Can you show me payout versus historical payouts?"
+    },
+    {
+      "id": "Q0788",
+      "category": "Historical comparisons",
+      "question": "Please provide payout versus historical payouts."
+    },
+    {
+      "id": "Q0789",
+      "category": "Historical comparisons",
+      "question": "I need to see payout versus historical payouts."
+    },
+    {
+      "id": "Q0790",
+      "category": "Historical comparisons",
+      "question": "Help me understand payout versus historical payouts."
+    },
+    {
+      "id": "Q0791",
+      "category": "Historical comparisons",
+      "question": "Show me the largest historical deviation."
+    },
+    {
+      "id": "Q0792",
+      "category": "Historical comparisons",
+      "question": "Can you show me the largest historical deviation?"
+    },
+    {
+      "id": "Q0793",
+      "category": "Historical comparisons",
+      "question": "Please provide the largest historical deviation."
+    },
+    {
+      "id": "Q0794",
+      "category": "Historical comparisons",
+      "question": "I need to see the largest historical deviation."
+    },
+    {
+      "id": "Q0795",
+      "category": "Historical comparisons",
+      "question": "Help me understand the largest historical deviation."
+    },
+    {
+      "id": "Q0796",
+      "category": "Historical comparisons",
+      "question": "Show me whether movement is within the normal analytical range."
+    },
+    {
+      "id": "Q0797",
+      "category": "Historical comparisons",
+      "question": "Can you show me whether movement is within the normal analytical range?"
+    },
+    {
+      "id": "Q0798",
+      "category": "Historical comparisons",
+      "question": "Please provide whether movement is within the normal analytical range."
+    },
+    {
+      "id": "Q0799",
+      "category": "Historical comparisons",
+      "question": "I need to see whether movement is within the normal analytical range."
+    },
+    {
+      "id": "Q0800",
+      "category": "Historical comparisons",
+      "question": "Help me understand whether movement is within the normal analytical range."
+    },
+    {
+      "id": "Q0801",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me the current investigation status."
+    },
+    {
+      "id": "Q0802",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me the current investigation status?"
+    },
+    {
+      "id": "Q0803",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide the current investigation status."
+    },
+    {
+      "id": "Q0804",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see the current investigation status."
+    },
+    {
+      "id": "Q0805",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand the current investigation status."
+    },
+    {
+      "id": "Q0806",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me completed investigation stages."
+    },
+    {
+      "id": "Q0807",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me completed investigation stages?"
+    },
+    {
+      "id": "Q0808",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide completed investigation stages."
+    },
+    {
+      "id": "Q0809",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see completed investigation stages."
+    },
+    {
+      "id": "Q0810",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand completed investigation stages."
+    },
+    {
+      "id": "Q0811",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me stages still running or waiting."
+    },
+    {
+      "id": "Q0812",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me stages still running or waiting?"
+    },
+    {
+      "id": "Q0813",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide stages still running or waiting."
+    },
+    {
+      "id": "Q0814",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see stages still running or waiting."
+    },
+    {
+      "id": "Q0815",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand stages still running or waiting."
+    },
+    {
+      "id": "Q0816",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me the Investigation Planner’s findings."
+    },
+    {
+      "id": "Q0817",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me the Investigation Planner’s findings?"
+    },
+    {
+      "id": "Q0818",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide the Investigation Planner’s findings."
+    },
+    {
+      "id": "Q0819",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see the Investigation Planner’s findings."
+    },
+    {
+      "id": "Q0820",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand the Investigation Planner’s findings."
+    },
+    {
+      "id": "Q0821",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me sales and prescription evidence."
+    },
+    {
+      "id": "Q0822",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me sales and prescription evidence?"
+    },
+    {
+      "id": "Q0823",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide sales and prescription evidence."
+    },
+    {
+      "id": "Q0824",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see sales and prescription evidence."
+    },
+    {
+      "id": "Q0825",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand sales and prescription evidence."
+    },
+    {
+      "id": "Q0826",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me territory behavior evidence."
+    },
+    {
+      "id": "Q0827",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me territory behavior evidence?"
+    },
+    {
+      "id": "Q0828",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide territory behavior evidence."
+    },
+    {
+      "id": "Q0829",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see territory behavior evidence."
+    },
+    {
+      "id": "Q0830",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand territory behavior evidence."
+    },
+    {
+      "id": "Q0831",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me payout validation evidence."
+    },
+    {
+      "id": "Q0832",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me payout validation evidence?"
+    },
+    {
+      "id": "Q0833",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide payout validation evidence."
+    },
+    {
+      "id": "Q0834",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see payout validation evidence."
+    },
+    {
+      "id": "Q0835",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand payout validation evidence."
+    },
+    {
+      "id": "Q0836",
+      "category": "Investigation workflow and evidence",
+      "question": "Show me the evidence supporting the final decision."
+    },
+    {
+      "id": "Q0837",
+      "category": "Investigation workflow and evidence",
+      "question": "Can you show me the evidence supporting the final decision?"
+    },
+    {
+      "id": "Q0838",
+      "category": "Investigation workflow and evidence",
+      "question": "Please provide the evidence supporting the final decision."
+    },
+    {
+      "id": "Q0839",
+      "category": "Investigation workflow and evidence",
+      "question": "I need to see the evidence supporting the final decision."
+    },
+    {
+      "id": "Q0840",
+      "category": "Investigation workflow and evidence",
+      "question": "Help me understand the evidence supporting the final decision."
+    },
+    {
+      "id": "Q0841",
+      "category": "Risk severity and review decision",
+      "question": "Show me the overall investigation risk score."
+    },
+    {
+      "id": "Q0842",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me the overall investigation risk score?"
+    },
+    {
+      "id": "Q0843",
+      "category": "Risk severity and review decision",
+      "question": "Please provide the overall investigation risk score."
+    },
+    {
+      "id": "Q0844",
+      "category": "Risk severity and review decision",
+      "question": "I need to see the overall investigation risk score."
+    },
+    {
+      "id": "Q0845",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand the overall investigation risk score."
+    },
+    {
+      "id": "Q0846",
+      "category": "Risk severity and review decision",
+      "question": "Show me all high-severity findings."
+    },
+    {
+      "id": "Q0847",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me all high-severity findings?"
+    },
+    {
+      "id": "Q0848",
+      "category": "Risk severity and review decision",
+      "question": "Please provide all high-severity findings."
+    },
+    {
+      "id": "Q0849",
+      "category": "Risk severity and review decision",
+      "question": "I need to see all high-severity findings."
+    },
+    {
+      "id": "Q0850",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand all high-severity findings."
+    },
+    {
+      "id": "Q0851",
+      "category": "Risk severity and review decision",
+      "question": "Show me findings grouped by severity."
+    },
+    {
+      "id": "Q0852",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me findings grouped by severity?"
+    },
+    {
+      "id": "Q0853",
+      "category": "Risk severity and review decision",
+      "question": "Please provide findings grouped by severity."
+    },
+    {
+      "id": "Q0854",
+      "category": "Risk severity and review decision",
+      "question": "I need to see findings grouped by severity."
+    },
+    {
+      "id": "Q0855",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand findings grouped by severity."
+    },
+    {
+      "id": "Q0856",
+      "category": "Risk severity and review decision",
+      "question": "Show me why human review is required."
+    },
+    {
+      "id": "Q0857",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me why human review is required?"
+    },
+    {
+      "id": "Q0858",
+      "category": "Risk severity and review decision",
+      "question": "Please provide why human review is required."
+    },
+    {
+      "id": "Q0859",
+      "category": "Risk severity and review decision",
+      "question": "I need to see why human review is required."
+    },
+    {
+      "id": "Q0860",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand why human review is required."
+    },
+    {
+      "id": "Q0861",
+      "category": "Risk severity and review decision",
+      "question": "Show me the factors contributing to the risk score."
+    },
+    {
+      "id": "Q0862",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me the factors contributing to the risk score?"
+    },
+    {
+      "id": "Q0863",
+      "category": "Risk severity and review decision",
+      "question": "Please provide the factors contributing to the risk score."
+    },
+    {
+      "id": "Q0864",
+      "category": "Risk severity and review decision",
+      "question": "I need to see the factors contributing to the risk score."
+    },
+    {
+      "id": "Q0865",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand the factors contributing to the risk score."
+    },
+    {
+      "id": "Q0866",
+      "category": "Risk severity and review decision",
+      "question": "Show me the final investigation assessment."
+    },
+    {
+      "id": "Q0867",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me the final investigation assessment?"
+    },
+    {
+      "id": "Q0868",
+      "category": "Risk severity and review decision",
+      "question": "Please provide the final investigation assessment."
+    },
+    {
+      "id": "Q0869",
+      "category": "Risk severity and review decision",
+      "question": "I need to see the final investigation assessment."
+    },
+    {
+      "id": "Q0870",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand the final investigation assessment."
+    },
+    {
+      "id": "Q0871",
+      "category": "Risk severity and review decision",
+      "question": "Show me recommended next actions."
+    },
+    {
+      "id": "Q0872",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me recommended next actions?"
+    },
+    {
+      "id": "Q0873",
+      "category": "Risk severity and review decision",
+      "question": "Please provide recommended next actions."
+    },
+    {
+      "id": "Q0874",
+      "category": "Risk severity and review decision",
+      "question": "I need to see recommended next actions."
+    },
+    {
+      "id": "Q0875",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand recommended next actions."
+    },
+    {
+      "id": "Q0876",
+      "category": "Risk severity and review decision",
+      "question": "Show me whether the investigation can be closed."
+    },
+    {
+      "id": "Q0877",
+      "category": "Risk severity and review decision",
+      "question": "Can you show me whether the investigation can be closed?"
+    },
+    {
+      "id": "Q0878",
+      "category": "Risk severity and review decision",
+      "question": "Please provide whether the investigation can be closed."
+    },
+    {
+      "id": "Q0879",
+      "category": "Risk severity and review decision",
+      "question": "I need to see whether the investigation can be closed."
+    },
+    {
+      "id": "Q0880",
+      "category": "Risk severity and review decision",
+      "question": "Help me understand whether the investigation can be closed."
+    },
+    {
+      "id": "Q0881",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me results for a custom date range."
+    },
+    {
+      "id": "Q0882",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me results for a custom date range?"
+    },
+    {
+      "id": "Q0883",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide results for a custom date range."
+    },
+    {
+      "id": "Q0884",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see results for a custom date range."
+    },
+    {
+      "id": "Q0885",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand results for a custom date range."
+    },
+    {
+      "id": "Q0886",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me this month compared with last month."
+    },
+    {
+      "id": "Q0887",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me this month compared with last month?"
+    },
+    {
+      "id": "Q0888",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide this month compared with last month."
+    },
+    {
+      "id": "Q0889",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see this month compared with last month."
+    },
+    {
+      "id": "Q0890",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand this month compared with last month."
+    },
+    {
+      "id": "Q0891",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me the selected quarter compared with the prior quarter."
+    },
+    {
+      "id": "Q0892",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me the selected quarter compared with the prior quarter?"
+    },
+    {
+      "id": "Q0893",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide the selected quarter compared with the prior quarter."
+    },
+    {
+      "id": "Q0894",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see the selected quarter compared with the prior quarter."
+    },
+    {
+      "id": "Q0895",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand the selected quarter compared with the prior quarter."
+    },
+    {
+      "id": "Q0896",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me year-to-date sales and payouts."
+    },
+    {
+      "id": "Q0897",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me year-to-date sales and payouts?"
+    },
+    {
+      "id": "Q0898",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide year-to-date sales and payouts."
+    },
+    {
+      "id": "Q0899",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see year-to-date sales and payouts."
+    },
+    {
+      "id": "Q0900",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand year-to-date sales and payouts."
+    },
+    {
+      "id": "Q0901",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me results before and after a specified date."
+    },
+    {
+      "id": "Q0902",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me results before and after a specified date?"
+    },
+    {
+      "id": "Q0903",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide results before and after a specified date."
+    },
+    {
+      "id": "Q0904",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see results before and after a specified date."
+    },
+    {
+      "id": "Q0905",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand results before and after a specified date."
+    },
+    {
+      "id": "Q0906",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me the best-performing month."
+    },
+    {
+      "id": "Q0907",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me the best-performing month?"
+    },
+    {
+      "id": "Q0908",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide the best-performing month."
+    },
+    {
+      "id": "Q0909",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see the best-performing month."
+    },
+    {
+      "id": "Q0910",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand the best-performing month."
+    },
+    {
+      "id": "Q0911",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me the worst-performing month."
+    },
+    {
+      "id": "Q0912",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me the worst-performing month?"
+    },
+    {
+      "id": "Q0913",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide the worst-performing month."
+    },
+    {
+      "id": "Q0914",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see the worst-performing month."
+    },
+    {
+      "id": "Q0915",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand the worst-performing month."
+    },
+    {
+      "id": "Q0916",
+      "category": "Date-filtered comparative analysis",
+      "question": "Show me the same analysis for a different period."
+    },
+    {
+      "id": "Q0917",
+      "category": "Date-filtered comparative analysis",
+      "question": "Can you show me the same analysis for a different period?"
+    },
+    {
+      "id": "Q0918",
+      "category": "Date-filtered comparative analysis",
+      "question": "Please provide the same analysis for a different period."
+    },
+    {
+      "id": "Q0919",
+      "category": "Date-filtered comparative analysis",
+      "question": "I need to see the same analysis for a different period."
+    },
+    {
+      "id": "Q0920",
+      "category": "Date-filtered comparative analysis",
+      "question": "Help me understand the same analysis for a different period."
+    },
+    {
+      "id": "Q0921",
+      "category": "Status exceptions and data quality",
+      "question": "Show me inactive records used in calculations."
+    },
+    {
+      "id": "Q0922",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me inactive records used in calculations?"
+    },
+    {
+      "id": "Q0923",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide inactive records used in calculations."
+    },
+    {
+      "id": "Q0924",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see inactive records used in calculations."
+    },
+    {
+      "id": "Q0925",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand inactive records used in calculations."
+    },
+    {
+      "id": "Q0926",
+      "category": "Status exceptions and data quality",
+      "question": "Show me records with missing required values."
+    },
+    {
+      "id": "Q0927",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me records with missing required values?"
+    },
+    {
+      "id": "Q0928",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide records with missing required values."
+    },
+    {
+      "id": "Q0929",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see records with missing required values."
+    },
+    {
+      "id": "Q0930",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand records with missing required values."
+    },
+    {
+      "id": "Q0931",
+      "category": "Status exceptions and data quality",
+      "question": "Show me duplicate operational records."
+    },
+    {
+      "id": "Q0932",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me duplicate operational records?"
+    },
+    {
+      "id": "Q0933",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide duplicate operational records."
+    },
+    {
+      "id": "Q0934",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see duplicate operational records."
+    },
+    {
+      "id": "Q0935",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand duplicate operational records."
+    },
+    {
+      "id": "Q0936",
+      "category": "Status exceptions and data quality",
+      "question": "Show me orphaned sales or prescription records."
+    },
+    {
+      "id": "Q0937",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me orphaned sales or prescription records?"
+    },
+    {
+      "id": "Q0938",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide orphaned sales or prescription records."
+    },
+    {
+      "id": "Q0939",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see orphaned sales or prescription records."
+    },
+    {
+      "id": "Q0940",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand orphaned sales or prescription records."
+    },
+    {
+      "id": "Q0941",
+      "category": "Status exceptions and data quality",
+      "question": "Show me invalid date ranges."
+    },
+    {
+      "id": "Q0942",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me invalid date ranges?"
+    },
+    {
+      "id": "Q0943",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide invalid date ranges."
+    },
+    {
+      "id": "Q0944",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see invalid date ranges."
+    },
+    {
+      "id": "Q0945",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand invalid date ranges."
+    },
+    {
+      "id": "Q0946",
+      "category": "Status exceptions and data quality",
+      "question": "Show me unknown product or representative IDs."
+    },
+    {
+      "id": "Q0947",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me unknown product or representative IDs?"
+    },
+    {
+      "id": "Q0948",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide unknown product or representative IDs."
+    },
+    {
+      "id": "Q0949",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see unknown product or representative IDs."
+    },
+    {
+      "id": "Q0950",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand unknown product or representative IDs."
+    },
+    {
+      "id": "Q0951",
+      "category": "Status exceptions and data quality",
+      "question": "Show me data-quality issues affecting the investigation."
+    },
+    {
+      "id": "Q0952",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me data-quality issues affecting the investigation?"
+    },
+    {
+      "id": "Q0953",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide data-quality issues affecting the investigation."
+    },
+    {
+      "id": "Q0954",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see data-quality issues affecting the investigation."
+    },
+    {
+      "id": "Q0955",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand data-quality issues affecting the investigation."
+    },
+    {
+      "id": "Q0956",
+      "category": "Status exceptions and data quality",
+      "question": "Show me a count of clean versus problematic records."
+    },
+    {
+      "id": "Q0957",
+      "category": "Status exceptions and data quality",
+      "question": "Can you show me a count of clean versus problematic records?"
+    },
+    {
+      "id": "Q0958",
+      "category": "Status exceptions and data quality",
+      "question": "Please provide a count of clean versus problematic records."
+    },
+    {
+      "id": "Q0959",
+      "category": "Status exceptions and data quality",
+      "question": "I need to see a count of clean versus problematic records."
+    },
+    {
+      "id": "Q0960",
+      "category": "Status exceptions and data quality",
+      "question": "Help me understand a count of clean versus problematic records."
+    },
+    {
+      "id": "Q0961",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me more details about that representative."
+    },
+    {
+      "id": "Q0962",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me more details about that representative?"
+    },
+    {
+      "id": "Q0963",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide more details about that representative."
+    },
+    {
+      "id": "Q0964",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see more details about that representative."
+    },
+    {
+      "id": "Q0965",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand more details about that representative."
+    },
+    {
+      "id": "Q0966",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me the same analysis for Anika."
+    },
+    {
+      "id": "Q0967",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me the same analysis for Anika?"
+    },
+    {
+      "id": "Q0968",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide the same analysis for Anika."
+    },
+    {
+      "id": "Q0969",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see the same analysis for Anika."
+    },
+    {
+      "id": "Q0970",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand the same analysis for Anika."
+    },
+    {
+      "id": "Q0971",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me the products behind that finding."
+    },
+    {
+      "id": "Q0972",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me the products behind that finding?"
+    },
+    {
+      "id": "Q0973",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide the products behind that finding."
+    },
+    {
+      "id": "Q0974",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see the products behind that finding."
+    },
+    {
+      "id": "Q0975",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand the products behind that finding."
+    },
+    {
+      "id": "Q0976",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me why that result is considered unusual."
+    },
+    {
+      "id": "Q0977",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me why that result is considered unusual?"
+    },
+    {
+      "id": "Q0978",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide why that result is considered unusual."
+    },
+    {
+      "id": "Q0979",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see why that result is considered unusual."
+    },
+    {
+      "id": "Q0980",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand why that result is considered unusual."
+    },
+    {
+      "id": "Q0981",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me the calculation behind that number."
+    },
+    {
+      "id": "Q0982",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me the calculation behind that number?"
+    },
+    {
+      "id": "Q0983",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide the calculation behind that number."
+    },
+    {
+      "id": "Q0984",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see the calculation behind that number."
+    },
+    {
+      "id": "Q0985",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand the calculation behind that number."
+    },
+    {
+      "id": "Q0986",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me the same comparison for the previous month."
+    },
+    {
+      "id": "Q0987",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me the same comparison for the previous month?"
+    },
+    {
+      "id": "Q0988",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide the same comparison for the previous month."
+    },
+    {
+      "id": "Q0989",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see the same comparison for the previous month."
+    },
+    {
+      "id": "Q0990",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand the same comparison for the previous month."
+    },
+    {
+      "id": "Q0991",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me a simpler explanation of the finding."
+    },
+    {
+      "id": "Q0992",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me a simpler explanation of the finding?"
+    },
+    {
+      "id": "Q0993",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide a simpler explanation of the finding."
+    },
+    {
+      "id": "Q0994",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see a simpler explanation of the finding."
+    },
+    {
+      "id": "Q0995",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand a simpler explanation of the finding."
+    },
+    {
+      "id": "Q0996",
+      "category": "Conversational follow-ups and references",
+      "question": "Show me a concise executive summary of these results."
+    },
+    {
+      "id": "Q0997",
+      "category": "Conversational follow-ups and references",
+      "question": "Can you show me a concise executive summary of these results?"
+    },
+    {
+      "id": "Q0998",
+      "category": "Conversational follow-ups and references",
+      "question": "Please provide a concise executive summary of these results."
+    },
+    {
+      "id": "Q0999",
+      "category": "Conversational follow-ups and references",
+      "question": "I need to see a concise executive summary of these results."
+    },
+    {
+      "id": "Q1000",
+      "category": "Conversational follow-ups and references",
+      "question": "Help me understand a concise executive summary of these results."
+    }
+  ]
+}

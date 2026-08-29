@@ -505,6 +505,32 @@ def printable_summary(context: InvestigationContext | None) -> dict[str, Any]:
     }
 
 
+def analytical_query_response(context: InvestigationContext | None, message: str) -> dict[str, Any]:
+    """Answer broad analytical intents from governed investigation context.
+
+    The intent agent identifies the requested analysis, while this dispatcher
+    prevents invented metrics: it either selects an existing evidence-backed
+    view or asks the user to run an investigation first.
+    """
+    if not context or not context.result:
+        return {
+            "action": "NEED_INVESTIGATION",
+            "message": "Run an investigation for a representative and date range first so I can answer this analytical question from governed sales, prescription, payout, program, peer and historical evidence.",
+            "suggestions": ["Investigate a representative", "Choose a date range"],
+        }
+
+    lowered = message.lower()
+    if "peer" in lowered or "benchmark" in lowered or "percentile" in lowered:
+        return peer_comparison(context)
+    if any(term in lowered for term in ("why", "explain", "formula", "calculation", "breakup", "reconciliation", "multiplier", "tier", "program", "eligib", "fallback")):
+        return explain_finding(context, message)
+    if any(term in lowered for term in ("risk", "severity", "finding", "workflow", "status", "decision", "review", "evidence", "summary", "quality", "duplicate", "missing", "invalid")):
+        return findings_summary(context)
+    if any(term in lowered for term in ("chart", "trend", "histor", "growth", "movement", "spike", "drop", "rank", "top ", "bottom ", "concentration", "territory", "doctor", "sales", "prescription", "payout")):
+        return chart_insight(context, message)
+    return findings_summary(context)
+
+
 @router.post("/investigation")
 async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(get_db)):
     lowered = request.message.lower()
@@ -590,6 +616,8 @@ async def investigation_chat(request: ChatRequest, db: AsyncSession = Depends(ge
         return explain_finding(request.context, request.message)
     if intent_name == "PRINT_SUMMARY" or (request.context and request.context.result and any(word in lowered for word in ("print", "printable", "export summary"))):
         return printable_summary(request.context)
+    if intent_name == "ANALYTICAL_QUERY":
+        return analytical_query_response(request.context, request.message)
     if intent_name != "INVESTIGATION_REQUEST":
         return {**intent, "action": "ANSWER", "message": intent.get("message") or "I can help investigate, query governed data, explain findings or prepare a printable summary.", "suggestions": ["Investigate a representative", "Show active representatives", "Explain the current finding"]}
     representative_name = entities.get("representative_name") or entities.get("representative_id")

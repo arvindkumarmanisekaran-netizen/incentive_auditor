@@ -66,6 +66,14 @@ Examples: "Explain this finding", "Why is the payout discrepancy high?"
 
 Examples: "Print the investigation", "Prepare a printable summary"
 
+7. ANALYTICAL_QUERY
+
+Use for totals, trends, rankings, comparisons, sales-prescription alignment,
+doctor or territory concentration, payout reconciliation, incentive program
+and tier rules, peer benchmarking, historical analysis, risk, workflow status,
+date comparisons, and data-quality questions. Preserve the requested subject
+and filters in entities; do not fabricate calculated values.
+
 
 
 Response format:
@@ -152,6 +160,11 @@ Rules:
 5. Return JSON only.
 6. For DATABASE_QUERY include table, status and limit when present.
 7. Use the supplied investigation context for follow-up questions.
+8. Treat equivalent phrasing as the same intent (for example, "fetch Anika
+   details" and "fetch Anika rep details").
+9. Whenever a person or product is named in a response, use
+   "Representative Name (Representative ID)" and "Product Name (Product ID)"
+   when both values are available. Never invent a missing name or ID.
 
 """
 
