@@ -144,6 +144,7 @@ interface DatabaseManagementCardProps {
 
 export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManagementCardProps) {
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
+  const sectionTabsRef = useRef<HTMLDivElement | null>(null);
   const loadRequestRef = useRef(0);
 
   const dragStateRef = useRef({
@@ -218,6 +219,11 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   const [editingRow, setEditingRow] = useState<RowData | null>(null);
   const [editError, setEditError] = useState<string | null>(null);
   const [editValues, setEditValues] = useState<Record<string, unknown>>({});
+
+  useEffect(() => {
+    const activeTab = sectionTabsRef.current?.querySelector<HTMLElement>(".database-section.active");
+    activeTab?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+  }, [activeSection]);
 
   const [offset, setOffset] = useState(0);
   const [totalRecords, setTotalRecords] = useState(0);
@@ -705,7 +711,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
             TABLE SELECTOR
         ----------------------------------------- */}
 
-        <div className="database-sections">
+        <div ref={sectionTabsRef} className="database-sections">
           {SECTIONS.map((section) => (
             <motion.button
               key={section.id}

@@ -142,6 +142,24 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     const type = (entry as Record<string, unknown>).type;
     return type === "bar" || type === "line" || type === "scatter";
   });
+  const keepTooltipInsideChart = (
+    point: number[],
+    _params: unknown,
+    _element: HTMLElement,
+    _rect: unknown,
+    size: { contentSize: number[]; viewSize: number[] },
+  ) => {
+    const gap = 8;
+    const preferredX = point[0] + 12;
+    const preferredY = point[1] + 12;
+    const maximumX = Math.max(gap, size.viewSize[0] - size.contentSize[0] - gap);
+    const maximumY = Math.max(gap, size.viewSize[1] - size.contentSize[1] - gap);
+
+    return [
+      Math.min(Math.max(preferredX, gap), maximumX),
+      Math.min(Math.max(preferredY, gap), maximumY),
+    ];
+  };
 
   return {
     animation: true,
@@ -188,9 +206,10 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     }, incoming.legend) : incoming.legend,
     tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", appendToBody: true, confine: false, axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
       formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
+      position: incomingTooltip.position ?? keepTooltipInsideChart,
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
       borderWidth: 1, borderRadius: 10, padding: [9, 11],
-      extraCssText: `z-index:10000;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
+      extraCssText: `z-index:10000;max-width:min(260px,calc(100vw - 24px));box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
       textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11, fontFamily: SIGNAL_FONT },
     },
     series,
