@@ -1,4 +1,6 @@
 import type { EChartsCoreOption } from "echarts/core";
+import { useRef } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
@@ -152,6 +154,58 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
 ========================================================= */
 
 function InvestigationInsights({ result }: Props) {
+  const payoutBreakdownScrollRef = useRef<HTMLDivElement | null>(null);
+  const payoutBreakdownDragRef = useRef({
+    dragging: false,
+    pointerId: null as number | null,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+  });
+
+  function handlePayoutBreakdownPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+
+    const target = event.target as HTMLElement;
+    if (target.closest("button, input, select, textarea, a, summary")) return;
+
+    const container = payoutBreakdownScrollRef.current;
+    if (!container) return;
+
+    payoutBreakdownDragRef.current = {
+      dragging: true,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: container.scrollLeft,
+      scrollTop: container.scrollTop,
+    };
+    container.classList.add("is-dragging");
+    container.setPointerCapture(event.pointerId);
+  }
+
+  function handlePayoutBreakdownPointerMove(event: ReactPointerEvent<HTMLDivElement>) {
+    const container = payoutBreakdownScrollRef.current;
+    const state = payoutBreakdownDragRef.current;
+    if (!container || !state.dragging || state.pointerId !== event.pointerId) return;
+
+    container.scrollLeft = state.scrollLeft - (event.clientX - state.startX);
+    container.scrollTop = state.scrollTop - (event.clientY - state.startY);
+  }
+
+  function stopPayoutBreakdownDrag(event: ReactPointerEvent<HTMLDivElement>) {
+    const container = payoutBreakdownScrollRef.current;
+    const state = payoutBreakdownDragRef.current;
+    if (state.pointerId !== event.pointerId) return;
+
+    if (container?.hasPointerCapture(event.pointerId)) {
+      container.releasePointerCapture(event.pointerId);
+    }
+    container?.classList.remove("is-dragging");
+    payoutBreakdownDragRef.current.dragging = false;
+    payoutBreakdownDragRef.current.pointerId = null;
+  }
   const findings = result.findings ?? [];
   const displayText = (value: string) => replaceRepresentativeId(
     replaceProductIds(value, findings),
@@ -565,10 +619,17 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {payoutBreakdowns.length > 0 && (
-                <details className="payout-breakdown" open>
+                <details className="payout-breakdown">
                   <summary>Incentive calculation breakup ({payoutBreakdowns.length})</summary>
 
-                  <div className="payout-breakdown-table-wrap">
+                  <div
+                    ref={payoutBreakdownScrollRef}
+                    className="payout-breakdown-table-wrap"
+                    onPointerDown={handlePayoutBreakdownPointerDown}
+                    onPointerMove={handlePayoutBreakdownPointerMove}
+                    onPointerUp={stopPayoutBreakdownDrag}
+                    onPointerCancel={stopPayoutBreakdownDrag}
+                  >
                     <table>
                       <thead>
                         <tr>
