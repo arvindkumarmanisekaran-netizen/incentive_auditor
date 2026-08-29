@@ -65,6 +65,10 @@ export default function BehaviourAnalysis({ findings = [] }: Props) {
     fill: TERRITORY_COLORS[index % TERRITORY_COLORS.length],
   }));
 
+  const topDoctorName = String(
+    doctorEvidence.top_doctor_name ?? doctorData[0]?.doctor_name ?? "Top Doctor",
+  );
+
   return (
     <section className="analysis-panel overall-behaviour-section">
       {/* ==================================================
@@ -100,6 +104,8 @@ export default function BehaviourAnalysis({ findings = [] }: Props) {
           <strong>{formatPercent(Number(doctorEvidence.top_doctor_share_percent ?? 0))}</strong>
 
           <small>{doctorFinding?.severity ?? "NORMAL"}</small>
+
+          <small>{topDoctorName}</small>
         </div>
 
         <div className="behaviour-summary-card">

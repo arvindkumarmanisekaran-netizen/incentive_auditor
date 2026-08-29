@@ -10,6 +10,8 @@ import {
   getDatabaseRepresentatives,
   getDoctors,
   getPayouts,
+  getIncentivePrograms,
+  getIncentiveProgramTiers,
   getPrescriptions,
   getProducts,
   getSales,
@@ -17,6 +19,8 @@ import {
   type AssignmentRow,
   type DoctorRow,
   type IncentivePayoutRow,
+  type IncentiveProgramRow,
+  type IncentiveProgramTierRow,
   type PrescriptionRow,
   type ProductRow,
   type RepresentativeRow,
@@ -32,6 +36,8 @@ type Section =
   | "assignments"
   | "prescriptions"
   | "sales"
+  | "incentive_programs"
+  | "incentive_program_tiers"
   | "payouts";
 
 type RowData =
@@ -42,6 +48,8 @@ type RowData =
   | AssignmentRow
   | PrescriptionRow
   | SaleRow
+  | IncentiveProgramRow
+  | IncentiveProgramTierRow
   | IncentivePayoutRow;
 
 interface SectionConfig {
@@ -95,6 +103,18 @@ const SECTIONS: SectionConfig[] = [
     title: "Sales",
     primaryKey: "sale_id",
     apiPath: "/api/sales",
+  },
+  {
+    id: "incentive_programs",
+    title: "Incentive Programs",
+    primaryKey: "incentive_program_id",
+    apiPath: "/api/incentive-programs",
+  },
+  {
+    id: "incentive_program_tiers",
+    title: "Program Tiers",
+    primaryKey: "incentive_program_tier_id",
+    apiPath: "/api/incentive-program-tiers",
   },
   {
     id: "payouts",
@@ -332,6 +352,24 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
 
         case "payouts": {
           const response = await getPayouts(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+
+          break;
+        }
+
+        case "incentive_programs": {
+          const response = await getIncentivePrograms(PAGE_SIZE, currentOffset);
+
+          records = response.records;
+          total = response.total;
+
+          break;
+        }
+
+        case "incentive_program_tiers": {
+          const response = await getIncentiveProgramTiers(PAGE_SIZE, currentOffset);
 
           records = response.records;
           total = response.total;
@@ -1018,6 +1056,8 @@ function getInputType(column: string) {
     "sale_date",
     "prescription_date",
     "payout_month",
+    "start_date",
+    "end_date",
   ]);
 
   const numberColumns = new Set([
@@ -1033,6 +1073,10 @@ function getInputType(column: string) {
     "expected_payout",
     "actual_payout",
     "payout_difference",
+    "percentage",
+    "minimum_achievement",
+    "maximum_achievement",
+    "multiplier",
   ]);
 
   if (dateColumns.has(column)) {

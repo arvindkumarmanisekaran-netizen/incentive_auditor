@@ -223,9 +223,7 @@ function InvestigationForm({
 
         {(Array.isArray(representatives) ? representatives : []).map((rep) => (
           <option key={rep.representative_id} value={rep.representative_id}>
-            {rep.representative_id}
-            {" - "}
-            {rep.first_name} {rep.last_name}
+            {rep.first_name} {rep.last_name} ({rep.representative_id})
           </option>
         ))}
       </select>

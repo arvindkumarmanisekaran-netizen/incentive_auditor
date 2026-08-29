@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import AppIcon from "./AppIcon";
 import { CustomDatePicker } from "./InvestigationForm";
 import type { InvestigationResult } from "../types/investigation";
+import {
+  formatRepresentativeLabel,
+  productLabelFromFinding,
+  replaceProductIds,
+  replaceRepresentativeId,
+} from "../utils/displayLabels";
 
 interface Props {
   representativeId: string;
@@ -19,11 +25,11 @@ interface DataResult { table: string; columns: string[]; records: Record<string,
 interface ReportData {
   title: string; representative?: string; representative_id?: string; period?: string;
   risk_score?: number; severity?: string; products?: string[];
-  findings?: Array<{ type: string; severity: string; product_id?: string; evidence?: Record<string, unknown> }>;
+  findings?: Array<{ type: string; severity: string; product_id?: string; product_name?: string; evidence?: Record<string, unknown> }>;
   executive_summary?: string; recommended_actions?: string[];
   selected_evidence?: EvidenceItem[];
 }
-interface EvidenceItem { type: string; severity: string; product_id?: string; evidence?: Record<string, unknown>; }
+interface EvidenceItem { type: string; severity: string; product_id?: string; product_name?: string; evidence?: Record<string, unknown>; }
 interface RootCauseDriver { finding: string; product: string; severity: string; strongest_metric: string; }
 interface ReviewerCheck { status: string; label: string; detail: string; }
 interface FindingSummaryItem { type: string; product: string; severity: string; evidence_count: number; }
@@ -38,7 +44,7 @@ interface AssistantResponse {
   report?: ReportData; sources?: Source[]; suggestions?: string[];
   finding?: EvidenceItem; drivers?: RootCauseDriver[]; hypotheses?: string[]; next_steps?: string[];
   checks?: ReviewerCheck[]; review_questions?: string[];
-  focus?: { finding_type: string; product_id: string };
+  focus?: { finding_type: string; product_id: string; product_name?: string };
   severity_counts?: Record<string, number>; finding_items?: FindingSummaryItem[];
   peer_comparisons?: PeerComparisonItem[];
   display?: string; signals?: ProactiveSignal[]; playbooks?: Playbook[]; playbook?: Playbook;
@@ -79,21 +85,26 @@ function reportValue(value: unknown): string {
 function printReport(report: ReportData) {
   const popup = window.open("", "_blank", "width=980,height=760");
   if (!popup) return;
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, report.findings ?? []),
+    report.representative,
+    report.representative_id,
+  );
   const findings = (report.findings ?? []).map((finding) => `
     <section><h3>${escapeHtml(finding.type.replaceAll("_", " "))}</h3>
-    <p><b>Severity:</b> ${escapeHtml(finding.severity)} &nbsp; <b>Product:</b> ${escapeHtml(finding.product_id ?? "All products")}</p>
+    <p><b>Severity:</b> ${escapeHtml(finding.severity)} &nbsp; <b>Product:</b> ${escapeHtml(productLabelFromFinding(finding))}</p>
     <div class="evidence">${Object.entries(finding.evidence ?? {}).map(([key, value]) => `<div><span>${escapeHtml(humanLabel(key))}</span><b>${escapeHtml(reportValue(value))}</b></div>`).join("") || "<p>No supporting metrics recorded.</p>"}</div></section>`).join("");
-  const selectedEvidence = (report.selected_evidence ?? []).map((item) => `<li><b>${escapeHtml(humanLabel(item.type))}</b> · ${escapeHtml(item.product_id ?? "All products")} · ${escapeHtml(item.severity)}</li>`).join("");
+  const selectedEvidence = (report.selected_evidence ?? []).map((item) => `<li><b>${escapeHtml(humanLabel(item.type))}</b> · ${escapeHtml(productLabelFromFinding(item))} · ${escapeHtml(item.severity)}</li>`).join("");
   popup.document.write(`<!doctype html><html><head><title>${report.title}</title><style>
     body{font-family:Arial,sans-serif;color:#172033;margin:36px;line-height:1.5}h1{color:#1d4ed8}h3{text-transform:capitalize}
     .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.meta div,section{border:1px solid #dbe5f5;border-radius:10px;padding:14px}
     .evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.evidence div{display:grid;gap:3px;background:#f7faff;border-radius:7px;padding:9px}.evidence span{color:#64748b;font-size:12px}.evidence b{overflow-wrap:anywhere;font-size:13px}@media print{body{margin:18px}.no-print{display:none}}
   </style></head><body><button class="no-print" onclick="window.print()">Print</button><h1>${report.title}</h1>
-  <div class="meta"><div><b>Representative</b><br>${escapeHtml(report.representative ?? report.representative_id ?? "—")}</div><div><b>Period</b><br>${escapeHtml(report.period ?? "—")}</div><div><b>Risk</b><br>${escapeHtml(report.risk_score ?? "—")} · ${escapeHtml(report.severity ?? "—")}</div></div>
-  ${report.executive_summary ? `<section><h2>Executive summary</h2><p>${escapeHtml(report.executive_summary)}</p></section>` : ""}
+  <div class="meta"><div><b>Representative</b><br>${escapeHtml(formatRepresentativeLabel(report.representative, report.representative_id))}</div><div><b>Period</b><br>${escapeHtml(report.period ?? "—")}</div><div><b>Risk</b><br>${escapeHtml(report.risk_score ?? "—")} · ${escapeHtml(report.severity ?? "—")}</div></div>
+  ${report.executive_summary ? `<section><h2>Executive summary</h2><p>${escapeHtml(displayText(report.executive_summary))}</p></section>` : ""}
   <h2>Findings</h2>${findings || "<p>No findings recorded.</p>"}
   ${selectedEvidence ? `<section><h2>Evidence selected by investigator</h2><ul>${selectedEvidence}</ul></section>` : ""}
-  <section><h2>Recommended actions</h2><ul>${(report.recommended_actions ?? []).map((item) => `<li>${escapeHtml(item)}</li>`).join("") || "<li>None recorded</li>"}</ul></section>
+  <section><h2>Recommended actions</h2><ul>${(report.recommended_actions ?? []).map((item) => `<li>${escapeHtml(displayText(item))}</li>`).join("") || "<li>None recorded</li>"}</ul></section>
   <p><small>Generated from the current investigation context. Verify evidence before taking action.</small></p></body></html>`);
   popup.document.close();
   popup.opener = null;
@@ -111,6 +122,12 @@ export default function AIChatAssistant({ representativeId, representativeName, 
   const [focusedFinding, setFocusedFinding] = useState<EvidenceItem | null>(null);
   const messagesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const displayRepresentativeText = (value: string, response?: AssistantResponse) =>
+    replaceRepresentativeId(
+      value,
+      response?.representative_name ?? representativeName,
+      response?.representative_id ?? representativeId,
+    );
 
   useEffect(() => { messagesRef.current?.scrollTo({ top: messagesRef.current.scrollHeight, behavior: "smooth" }); }, [chat, loading]);
   useEffect(() => {
@@ -197,7 +214,7 @@ export default function AIChatAssistant({ representativeId, representativeName, 
     if (!response) return null;
     return <>
       {response.action === "PROPOSE_FILTERS" && <div className="assistant-action-card">
-        <span><b>{response.representative_name}</b><small>{response.representative_id}</small></span>
+        <span><b>{formatRepresentativeLabel(response.representative_name, response.representative_id)}</b></span>
         <span><b>{response.start_date}</b><small>Start date</small></span><span><b>{response.end_date}</b><small>End date</small></span>
         <div className="assistant-card-actions"><button onClick={() => { if (response.representative_id && response.start_date && response.end_date) onApplyFilters(response.representative_id, response.start_date, response.end_date); }}>Apply to form</button><button className="primary" onClick={() => void applyAndRun(response)}>Apply & run</button></div>
       </div>}
@@ -224,15 +241,15 @@ export default function AIChatAssistant({ representativeId, representativeName, 
         window.localStorage.setItem("incentive-copilot-sessions", JSON.stringify([session, ...sessions].slice(0, 20)));
         setChat((current) => [...current, { sender: "Copilot", text: "Investigation session saved locally with its evidence collection." }]);
       }}>Confirm save</button></div>}
-      {response.sessions && <div className="assistant-saved-sessions">{response.sessions.map((session) => <div key={session.id}><b>{session.representative_name || session.representative_id}</b><span>{session.start_date} to {session.end_date}</span><small>Saved {new Date(session.saved_at).toLocaleString()} · {session.selected_evidence.length} evidence item(s)</small></div>)}</div>}
-      {response.proposed_action && <div className="assistant-confirm-card"><b>{response.proposed_action.label}</b><span>{response.proposed_action.representative_id} · {response.proposed_action.period}</span><small>{response.proposed_action.reason}</small><button type="button" onClick={() => setChat((current) => [...current, { sender: "Copilot", text: "Confirmed: this investigation is marked for human review in the current copilot session. No database record was modified." }])}>Confirm action</button></div>}
-      {response.focus && <button className="assistant-focus-button" type="button" onClick={focusAnalysis}>Focus chart · {humanLabel(response.focus.finding_type)}</button>}
+      {response.sessions && <div className="assistant-saved-sessions">{response.sessions.map((session) => <div key={session.id}><b>{formatRepresentativeLabel(session.representative_name, session.representative_id)}</b><span>{session.start_date} to {session.end_date}</span><small>Saved {new Date(session.saved_at).toLocaleString()} · {session.selected_evidence.length} evidence item(s)</small></div>)}</div>}
+      {response.proposed_action && <div className="assistant-confirm-card"><b>{response.proposed_action.label}</b><span>{formatRepresentativeLabel(representativeName, response.proposed_action.representative_id)} · {response.proposed_action.period}</span><small>{response.proposed_action.reason}</small><button type="button" onClick={() => setChat((current) => [...current, { sender: "Copilot", text: "Confirmed: this investigation is marked for human review in the current copilot session. No database record was modified." }])}>Confirm action</button></div>}
+      {response.focus && <button className="assistant-focus-button" type="button" onClick={focusAnalysis}>Focus chart · {humanLabel(response.focus.finding_type)} · {productLabelFromFinding(response.focus)}</button>}
       {response.finding && <button className="assistant-evidence-button" type="button" disabled={isEvidenceSelected(response.finding)} onClick={() => addEvidence(response.finding)}>{isEvidenceSelected(response.finding) ? "Added to evidence collection" : "Add to evidence collection"}</button>}
       {response.details && <ul className="assistant-detail-list">{response.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
       {response.data && <div className="assistant-data-wrap"><div className="assistant-data-title"><b>{response.data.table.replaceAll("_", " ")}</b><span>{response.data.records.length} rows</span></div><div className="assistant-data-scroll"><table><thead><tr>{response.data.columns.map((column) => <th key={column}>{column.replaceAll("_", " ")}</th>)}</tr></thead><tbody>{response.data.records.map((record, rowIndex) => <tr key={rowIndex}>{response.data!.columns.map((column) => <td key={column}>{printableValue(record[column])}</td>)}</tr>)}</tbody></table></div></div>}
       {response.report && <button className="assistant-print-button" onClick={() => printReport(response.report!)}>Open printable summary</button>}
       {selectedEvidence.length > 0 && response.action === "PRINT_SUMMARY" && <div className="assistant-evidence-count">{selectedEvidence.length} selected evidence item(s) included</div>}
-      {response.sources && <details className="assistant-sources"><summary>Evidence & sources ({response.sources.length})</summary>{response.sources.map((source, index) => <div key={`${source.source}-${index}`}><b>{source.source}</b><span>{source.filters}</span><small>{source.record_count} record(s) · {source.access}</small></div>)}</details>}
+      {response.sources && <details className="assistant-sources"><summary>Evidence & sources ({response.sources.length})</summary>{response.sources.map((source, index) => <div key={`${source.source}-${index}`}><b>{source.source}</b><span>{displayRepresentativeText(replaceProductIds(source.filters, result?.findings ?? []), response)}</span><small>{source.record_count} record(s) · {source.access}</small></div>)}</details>}
       {response.suggestions && <div className="assistant-suggestions">{response.suggestions.map((suggestion) => <button key={suggestion} onClick={() => suggestion.toLowerCase() === "add this evidence" && response.finding ? addEvidence(response.finding) : void sendMessage(suggestion)}>{suggestion}</button>)}</div>}
     </>;
   }
@@ -243,7 +260,7 @@ export default function AIChatAssistant({ representativeId, representativeName, 
       <div className="chatbot-header"><AppIcon name="assistant" size={20} /><div><span>Investigation Copilot</span><small>Read-only data access · Confirmed actions</small></div></div>
       <div className="chatbot-messages" ref={messagesRef}>
         {chat.length === 0 && <div className="chatbot-placeholder"><strong>Ask anything · Examples</strong><span>“Investigate Steve for July 2026”</span><span>“Show active representatives”</span><span>“Explain the current finding”</span><span>“Print investigation summary”</span></div>}
-        {chat.map((item, index) => <div key={`${item.sender}-${index}`} className={item.sender === "You" ? "chat-user-message" : "chat-agent-message"}><strong>{item.sender}</strong><p>{item.text}</p>{renderResponse(item.response)}</div>)}
+        {chat.map((item, index) => <div key={`${item.sender}-${index}`} className={item.sender === "You" ? "chat-user-message" : "chat-agent-message"}><strong>{item.sender}</strong><p>{displayRepresentativeText(item.text, item.response)}</p>{renderResponse(item.response)}</div>)}
         {loading && <div className="chat-agent-message assistant-thinking"><span /> Thinking with investigation context…</div>}
       </div>
       <div className="chatbot-input"><input ref={inputRef} value={message} onChange={(event) => setMessage(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") void sendMessage(); }} placeholder="Ask, query, explain or print…" disabled={loading} /><button type="button" onClick={() => void sendMessage()} disabled={loading}>Send</button></div>

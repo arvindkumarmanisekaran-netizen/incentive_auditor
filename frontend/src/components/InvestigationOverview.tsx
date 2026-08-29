@@ -1,4 +1,9 @@
 import type { InvestigationResult } from "../types/investigation";
+import {
+  formatRepresentativeLabel,
+  replaceProductIds,
+  replaceRepresentativeId,
+} from "../utils/displayLabels";
 import { motion } from "motion/react";
 import AppIcon from "./AppIcon";
 
@@ -42,6 +47,11 @@ function FindingCard({ text }: { text: string }) {
 ========================================================= */
 
 export default function InvestigationOverview({ result }: Props) {
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, result.findings ?? []),
+    result.representative_name,
+    result.representative_id,
+  );
   const report = result.final_report;
 
   const riskDrivers = report?.top_risk_drivers ?? [];
@@ -110,7 +120,7 @@ export default function InvestigationOverview({ result }: Props) {
             <motion.div className="decision-assessment" whileHover={{ y: -2 }}>
               <h4>Assessment</h4>
 
-              <p>{report.overall_assessment}</p>
+              <p>{displayText(report.overall_assessment)}</p>
             </motion.div>
           )}
 
@@ -124,7 +134,7 @@ export default function InvestigationOverview({ result }: Props) {
             {riskDrivers.length > 0 ? (
               <div className="risk-driver-list">
                 {riskDrivers.map((item, index) => (
-                  <FindingCard key={`${index}-${item}`} text={item} />
+                  <FindingCard key={`${index}-${item}`} text={displayText(item)} />
                 ))}
               </div>
             ) : (
@@ -167,7 +177,7 @@ export default function InvestigationOverview({ result }: Props) {
               <div>
                 <h3>Representative</h3>
 
-                <p>{result.representative_id}</p>
+                <p>{formatRepresentativeLabel(result.representative_name, result.representative_id)}</p>
               </div>
 
               <div>
@@ -228,7 +238,7 @@ export default function InvestigationOverview({ result }: Props) {
                 </div>
 
                 <p className="workflow-summary">
-                  {sales?.summary ?? "No sales and prescription evidence available."}
+                  {sales?.summary ? displayText(sales.summary) : "No sales and prescription evidence available."}
                 </p>
 
                 {sales?.key_observations && sales.key_observations.length > 0 && (
@@ -237,7 +247,7 @@ export default function InvestigationOverview({ result }: Props) {
 
                     <ul>
                       {sales.key_observations.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index}>{displayText(item)}</li>
                       ))}
                     </ul>
                   </>
@@ -254,7 +264,7 @@ export default function InvestigationOverview({ result }: Props) {
                 </div>
 
                 <p className="workflow-summary">
-                  {doctor?.summary ?? "No doctor and territory evidence available."}
+                  {doctor?.summary ? displayText(doctor.summary) : "No doctor and territory evidence available."}
                 </p>
 
                 {doctor?.key_observations && doctor.key_observations.length > 0 && (
@@ -263,7 +273,7 @@ export default function InvestigationOverview({ result }: Props) {
 
                     <ul>
                       {doctor.key_observations.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index}>{displayText(item)}</li>
                       ))}
                     </ul>
                   </>
@@ -280,7 +290,7 @@ export default function InvestigationOverview({ result }: Props) {
                 </div>
 
                 <p className="workflow-summary">
-                  {payout?.summary ?? "No payout evidence available."}
+                  {payout?.summary ? displayText(payout.summary) : "No payout evidence available."}
                 </p>
 
                 {payout?.key_observations && payout.key_observations.length > 0 && (
@@ -289,7 +299,7 @@ export default function InvestigationOverview({ result }: Props) {
 
                     <ul>
                       {payout.key_observations.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index}>{displayText(item)}</li>
                       ))}
                     </ul>
                   </>

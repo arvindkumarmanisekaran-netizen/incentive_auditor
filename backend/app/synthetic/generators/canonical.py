@@ -6,6 +6,11 @@ import random
 from faker import Faker
 import secrets
 
+from .incentive_programs import (
+    generate_incentive_program_tiers,
+    generate_incentive_programs,
+)
+
 fake = Faker("en_IN")
 
 # =====================================================
@@ -35,6 +40,7 @@ def generate_canonical_data(
             "2026-05",
             "2026-06",
             "2026-07",
+            "2026-08",
         ]
 
     territories = generate_territories(
@@ -48,6 +54,15 @@ def generate_canonical_data(
 
     products = generate_products(
         num_products,
+    )
+
+    incentive_programs = generate_incentive_programs(
+        products=products,
+        months=months,
+    )
+
+    incentive_program_tiers = generate_incentive_program_tiers(
+        incentive_programs,
     )
 
     doctors = generate_doctors(
@@ -71,12 +86,16 @@ def generate_canonical_data(
     payouts = generate_payouts(
         sales=sales,
         assignments=assignments,
+        incentive_programs=incentive_programs,
+        incentive_program_tiers=incentive_program_tiers,
     )
 
     return {
         "territories": territories,
         "representatives": representatives,
         "products": products,
+        "incentive_programs": incentive_programs,
+        "incentive_program_tiers": incentive_program_tiers,
         "doctors": doctors,
         "assignments": assignments,
         "sales": sales,
@@ -621,6 +640,8 @@ def choose_prescription_status() -> str:
 def generate_payouts(
     sales: list[dict],
     assignments: list[dict],
+    incentive_programs: list[dict] | None = None,
+    incentive_program_tiers: list[dict] | None = None,
 ) -> list[dict]:
 
     # -------------------------------------------------
@@ -701,24 +722,61 @@ def generate_payouts(
         else:
             sales_achievement = actual_sales / sales_target * 100
 
-        # -------------------------------------------------
-        # Achievement multiplier
-        # -------------------------------------------------
+        payout_date = f"{month}-01"
+        active_program = next(
+            (
+                program
+                for program in sorted(
+                    incentive_programs or [],
+                    key=lambda item: (item["start_date"], item["incentive_program_id"]),
+                    reverse=True,
+                )
+                if program["start_date"] <= payout_date <= program["end_date"]
+                and (
+                    str(program.get("products") or "").strip().upper() == "ALL"
+                    or product_id
+                    in {
+                        item.strip()
+                        for item in str(program.get("products") or "").split(",")
+                        if item.strip()
+                    }
+                )
+            ),
+            None,
+        )
 
-        if sales_achievement < 50:
-            achievement_multiplier = 0.50
-
-        elif sales_achievement < 75:
-            achievement_multiplier = 0.75
-
-        elif sales_achievement < 100:
-            achievement_multiplier = 1.00
-
-        elif sales_achievement < 125:
-            achievement_multiplier = 1.25
-
+        if active_program:
+            active_tier = next(
+                (
+                    tier
+                    for tier in (incentive_program_tiers or [])
+                    if tier["incentive_program_id"] == active_program["incentive_program_id"]
+                    and sales_achievement >= float(tier["minimum_achievement"])
+                    and (
+                        tier.get("maximum_achievement") is None
+                        or sales_achievement < float(tier["maximum_achievement"])
+                    )
+                ),
+                None,
+            )
+            if active_tier is None:
+                raise ValueError(
+                    "Generated incentive program has no tier for "
+                    f"{sales_achievement:.2f}% achievement: "
+                    f"{active_program['incentive_program_id']}"
+                )
+            achievement_multiplier = float(active_tier["multiplier"])
         else:
-            achievement_multiplier = 1.50
+            if sales_achievement < 50:
+                achievement_multiplier = 0.50
+            elif sales_achievement < 75:
+                achievement_multiplier = 0.75
+            elif sales_achievement < 100:
+                achievement_multiplier = 1.00
+            elif sales_achievement < 125:
+                achievement_multiplier = 1.25
+            else:
+                achievement_multiplier = 1.50
 
         # -------------------------------------------------
         # Payout calculation
@@ -728,7 +786,8 @@ def generate_payouts(
 
         calculated_payout = base_incentive * achievement_multiplier
 
-        maximum_payout = base_incentive * 1.50
+        cap_percentage = float(active_program["percentage"]) if active_program else 150.0
+        maximum_payout = base_incentive * (cap_percentage / 100.0)
 
         expected_payout = min(
             calculated_payout,
@@ -769,10 +828,6 @@ def generate_payouts(
                 "payout_id": (f"PAYOUT_{payout_id:07d}"),
                 "representative_id": (representative_id),
                 "product_id": product_id,
-                # incentive_programs table was removed,
-                # but program_id is still present on
-                # incentive_payouts.
-                "program_id": "PG001",
                 "payout_month": (f"{month}-01"),
                 "sales_target": round(
                     sales_target,

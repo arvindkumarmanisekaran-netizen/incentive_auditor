@@ -168,6 +168,25 @@ async def sales_rx_agent(
             "product_metrics": {},
         }
 
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="No sales or prescription evidence was available for specialist review.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_result",
+            agent=agent_id,
+            status="complete",
+            output=result,
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="complete",
+        )
+
         return {"sales_rx_analysis": result}
 
     evidence = {
@@ -200,6 +219,18 @@ async def sales_rx_agent(
         response = await gemini_chat_with_fallback(prompt)
 
     except Exception:
+
+        emit_workflow_event(
+            event_type="commentary",
+            agent=agent_id,
+            message="Sales and prescription specialist analysis could not be completed.",
+        )
+
+        emit_workflow_event(
+            event_type="agent_status",
+            agent=agent_id,
+            status="error",
+        )
 
         raise
 
@@ -236,6 +267,18 @@ async def sales_rx_agent(
     # for peer comparison
 
     parsed["product_metrics"] = product_metrics
+
+    severity = parsed.get("severity", "UNKNOWN")
+    priority = parsed.get("investigation_priority", "LOW")
+
+    emit_workflow_event(
+        event_type="commentary",
+        agent=agent_id,
+        message=(
+            "Sales and prescription review completed with "
+            f"{severity} severity and {priority} investigation priority."
+        ),
+    )
 
     emit_workflow_event(
         event_type="agent_result",

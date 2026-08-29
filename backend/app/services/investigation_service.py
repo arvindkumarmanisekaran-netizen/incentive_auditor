@@ -16,6 +16,11 @@ from ..analytics.sales_prescription_mismatch import (
 from ..analytics.doctor_concentration import (
     calculate_doctor_concentration,
 )
+from ..analytics.payout_reconciliation import (
+    missing_payout_finding,
+    reconcile_payout_record,
+    temporal_payout_findings,
+)
 
 
 def safe_float(value):
@@ -643,35 +648,186 @@ async def investigate(
     # ==================================================
 
     payout_query = text("""
+        WITH representative_sales AS (
+            SELECT s.*
+            FROM sales s
+            WHERE s.sale_date >= DATE_TRUNC('month', CAST(:start_date AS DATE))::date
+              AND s.sale_date < (
+                  DATE_TRUNC('month', CAST(:end_date AS DATE)) + INTERVAL '1 month'
+              )
+              AND EXISTS (
+                  SELECT 1
+                  FROM representative_doctor_assignments assignment
+                  WHERE assignment.representative_id = :representative_id
+                    AND assignment.doctor_id = s.doctor_id
+              )
+        ),
+        assignment_sales AS (
+            SELECT
+                :representative_id AS representative_id,
+                s.product_id,
+                DATE_TRUNC('month', s.sale_date)::date AS payout_month,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Valid', 'Adjusted')
+                      AND EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS attributed_actual_sales,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Cancelled', 'Returned')
+                      AND EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS excluded_status_sales,
+                SUM(s.sales_amount) FILTER (
+                    WHERE s.status IN ('Valid', 'Adjusted')
+                      AND NOT EXISTS (
+                          SELECT 1
+                          FROM representative_doctor_assignments effective_assignment
+                          WHERE effective_assignment.representative_id = :representative_id
+                            AND effective_assignment.doctor_id = s.doctor_id
+                            AND s.sale_date >= effective_assignment.effective_from
+                            AND (
+                                effective_assignment.effective_to IS NULL
+                                OR s.sale_date <= effective_assignment.effective_to
+                            )
+                      )
+                ) AS outside_assignment_sales
+            FROM representative_sales s
+            GROUP BY
+                s.product_id,
+                DATE_TRUNC('month', s.sale_date)::date
+        ),
+        payout_records AS (
+            SELECT
+                ip.*,
+                COUNT(*) OVER (
+                    PARTITION BY ip.representative_id, ip.product_id, ip.payout_month
+                ) AS duplicate_count
+            FROM incentive_payouts ip
+            WHERE ip.representative_id = :representative_id
+              AND ip.payout_month BETWEEN
+                  DATE_TRUNC('month', CAST(:start_date AS DATE))::date
+                  AND DATE_TRUNC('month', CAST(:end_date AS DATE))::date
+        )
         SELECT
-        ip.payout_id,
-        ip.product_id,
-        p.product_name,
-        ip.expected_payout,
-        ip.actual_payout,
-        ip.payout_difference,
-        ip.status
-
-    FROM incentive_payouts ip
-
-    LEFT JOIN products p
-        ON p.product_id = ip.product_id
-
-        WHERE
-            ip.representative_id = :representative_id
-
-            AND ip.payout_month BETWEEN
-                DATE_TRUNC(
-                    'month',
-                    CAST(:start_date AS DATE)
-                )::date
-
-                AND
-
-                DATE_TRUNC(
-                    'month',
-                    CAST(:end_date AS DATE)
-                )::date
+            ip.payout_id,
+            COALESCE(ip.product_id, sales.product_id) AS product_id,
+            p.product_name,
+            COALESCE(ip.payout_month, sales.payout_month) AS payout_month,
+            ip.sales_target,
+            ip.actual_sales,
+            ip.sales_achievement,
+            ip.base_incentive,
+            ip.achievement_multiplier,
+            ip.calculated_payout,
+            ip.maximum_payout,
+            ip.expected_payout,
+            ip.actual_payout,
+            ip.payout_difference,
+            ip.status,
+            COALESCE(ip.duplicate_count, 0) AS duplicate_count,
+            COALESCE(sales.attributed_actual_sales, 0) AS attributed_actual_sales,
+            COALESCE(sales.excluded_status_sales, 0) AS excluded_status_sales,
+            COALESCE(sales.outside_assignment_sales, 0) AS outside_assignment_sales,
+            program.incentive_program_id,
+            program.program_start_date,
+            program.program_end_date,
+            program.program_products,
+            program.program_products_display,
+            COALESCE(program.percentage, 150.0) AS cap_percentage,
+            (program.incentive_program_id IS NULL) AS used_default_cap,
+            tier.incentive_program_tier_id,
+            tier.minimum_achievement AS tier_minimum_achievement,
+            tier.maximum_achievement AS tier_maximum_achievement,
+            tier.multiplier AS tier_multiplier
+        FROM payout_records ip
+        FULL OUTER JOIN assignment_sales sales
+          ON sales.representative_id = ip.representative_id
+         AND sales.product_id = ip.product_id
+         AND sales.payout_month = ip.payout_month
+        LEFT JOIN products p
+          ON p.product_id = COALESCE(ip.product_id, sales.product_id)
+        LEFT JOIN LATERAL (
+            SELECT
+                configured_program.incentive_program_id,
+                configured_program.start_date AS program_start_date,
+                configured_program.end_date AS program_end_date,
+                configured_program.products AS program_products,
+                CASE
+                    WHEN UPPER(TRIM(configured_program.products)) = 'ALL'
+                        THEN 'All Products'
+                    ELSE (
+                        SELECT STRING_AGG(
+                            product.product_name || ' (' || configured_product.product_id || ')',
+                            ', ' ORDER BY configured_product.ordinality
+                        )
+                        FROM UNNEST(
+                            STRING_TO_ARRAY(REPLACE(configured_program.products, ' ', ''), ',')
+                        ) WITH ORDINALITY AS configured_product(product_id, ordinality)
+                        JOIN products product
+                          ON product.product_id = configured_product.product_id
+                    )
+                END AS program_products_display,
+                configured_program.percentage
+            FROM incentive_programs configured_program
+            WHERE COALESCE(ip.payout_month, sales.payout_month)
+                  BETWEEN configured_program.start_date AND configured_program.end_date
+              AND (
+                  UPPER(TRIM(configured_program.products)) = 'ALL'
+                  OR COALESCE(ip.product_id, sales.product_id) = ANY(
+                      STRING_TO_ARRAY(REPLACE(configured_program.products, ' ', ''), ',')
+                  )
+              )
+            ORDER BY configured_program.start_date DESC, configured_program.incentive_program_id
+            LIMIT 1
+        ) program ON TRUE
+        LEFT JOIN LATERAL (
+            SELECT
+                configured_tier.incentive_program_tier_id,
+                configured_tier.minimum_achievement,
+                configured_tier.maximum_achievement,
+                configured_tier.multiplier
+            FROM incentive_program_tiers configured_tier
+            WHERE configured_tier.incentive_program_id = program.incentive_program_id
+              AND (
+                  CASE
+                      WHEN COALESCE(ip.sales_target, 0) = 0 THEN 0
+                      ELSE COALESCE(sales.attributed_actual_sales, 0)
+                           / ip.sales_target * 100
+                  END
+              ) >= configured_tier.minimum_achievement
+              AND (
+                  configured_tier.maximum_achievement IS NULL
+                  OR (
+                      CASE
+                          WHEN COALESCE(ip.sales_target, 0) = 0 THEN 0
+                          ELSE COALESCE(sales.attributed_actual_sales, 0)
+                               / ip.sales_target * 100
+                      END
+                  ) < configured_tier.maximum_achievement
+              )
+            ORDER BY configured_tier.minimum_achievement DESC,
+                     configured_tier.incentive_program_tier_id
+            LIMIT 1
+        ) tier ON program.incentive_program_id IS NOT NULL
+        ORDER BY payout_month, product_id, payout_id
         """)
 
     payout_result = await db.execute(
@@ -683,51 +839,19 @@ async def investigate(
         },
     )
 
-    payout_rows = payout_result.fetchall()
+    payout_rows = [dict(row._mapping) for row in payout_result.fetchall()]
+    recorded_payout_rows = []
 
     for payout in payout_rows:
+        if payout.get("payout_id") is None:
+            if safe_float(payout.get("attributed_actual_sales")) > 0:
+                findings.append(missing_payout_finding(payout))
+            continue
 
-        difference = safe_float(payout.payout_difference)
+        recorded_payout_rows.append(payout)
+        findings.append(reconcile_payout_record(payout))
 
-        expected = safe_float(payout.expected_payout)
-
-        actual = safe_float(payout.actual_payout)
-
-        if expected == 0 and actual > 0:
-
-            severity = "HIGH"
-
-        elif abs(difference) >= 5000:
-
-            severity = "HIGH"
-
-        elif abs(difference) >= 1000:
-
-            severity = "MEDIUM"
-
-        elif abs(difference) > 0:
-
-            severity = "LOW"
-
-        else:
-
-            severity = "NORMAL"
-
-        findings.append(
-            {
-                "type": "payout_discrepancy",
-                "product_id": payout.product_id,
-                "product_name": payout.product_name,
-                "severity": severity,
-                "evidence": {
-                    "payout_id": payout.payout_id,
-                    "expected_payout": expected,
-                    "actual_payout": actual,
-                    "payout_difference": difference,
-                    "status": payout.status,
-                },
-            }
-        )
+    findings.extend(temporal_payout_findings(recorded_payout_rows))
 
     # ==================================================
     # OVERALL RISK SCORE

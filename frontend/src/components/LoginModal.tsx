@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import ControlGraph from "./ControlGraph";
 import AmbientSignals from "./AmbientSignals";
@@ -11,6 +11,17 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const usernameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const input = usernameInputRef.current;
+    if (!input) {
+      return;
+    }
+
+    input.focus();
+    input.select();
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,6 +68,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
         <form onSubmit={handleSubmit}>
           <label htmlFor="workspace-username">Username</label>
           <input
+            ref={usernameInputRef}
             id="workspace-username"
             name="username"
             value={username}

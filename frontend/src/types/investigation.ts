@@ -9,6 +9,8 @@ export interface Finding {
 
   product_id?: string;
 
+  product_name?: string;
+
   evidence: FindingEvidence;
 }
 
@@ -165,6 +167,8 @@ export interface FinalReport {
 }
 export interface InvestigationResult {
   representative_id: string;
+
+  representative_name?: string;
 
   start_date: string;
 

@@ -96,6 +96,26 @@ export interface IncentivePayoutRow {
   updated_at?: string;
 }
 
+export interface IncentiveProgramRow {
+  incentive_program_id: string;
+  start_date: string;
+  end_date: string;
+  products: string;
+  percentage: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface IncentiveProgramTierRow {
+  incentive_program_tier_id: string;
+  incentive_program_id: string;
+  minimum_achievement: number;
+  maximum_achievement?: number | null;
+  multiplier: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface PaginatedResponse<T> {
   records: T[];
   total: number;
@@ -169,4 +189,12 @@ export function getSales(limit = 50, offset = 0) {
 
 export function getPayouts(limit = 50, offset = 0) {
   return fetchPage<IncentivePayoutRow>("/api/incentive-payouts", limit, offset);
+}
+
+export function getIncentivePrograms(limit = 50, offset = 0) {
+  return fetchPage<IncentiveProgramRow>("/api/incentive-programs", limit, offset);
+}
+
+export function getIncentiveProgramTiers(limit = 50, offset = 0) {
+  return fetchPage<IncentiveProgramTierRow>("/api/incentive-program-tiers", limit, offset);
 }

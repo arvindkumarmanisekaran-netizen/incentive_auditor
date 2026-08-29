@@ -82,6 +82,29 @@ CREATE TABLE IF NOT EXISTS {schema}.sales (
     status VARCHAR(20) NOT NULL DEFAULT 'Valid', created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS {schema}.incentive_programs (
+    incentive_program_id VARCHAR(20) PRIMARY KEY,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    products TEXT NOT NULL,
+    percentage NUMERIC(7,2) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (end_date >= start_date),
+    CHECK (percentage > 0)
+);
+CREATE TABLE IF NOT EXISTS {schema}.incentive_program_tiers (
+    incentive_program_tier_id VARCHAR(20) PRIMARY KEY,
+    incentive_program_id VARCHAR(20) NOT NULL,
+    minimum_achievement NUMERIC(8,2) NOT NULL,
+    maximum_achievement NUMERIC(8,2),
+    multiplier NUMERIC(8,2) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (minimum_achievement >= 0),
+    CHECK (maximum_achievement IS NULL OR maximum_achievement > minimum_achievement),
+    CHECK (multiplier >= 0)
+);
 CREATE TABLE IF NOT EXISTS {schema}.incentive_payouts (
     payout_id VARCHAR(20) PRIMARY KEY, representative_id VARCHAR(20) NOT NULL,
     product_id VARCHAR(20) NOT NULL, payout_month DATE NOT NULL,
@@ -131,6 +154,22 @@ SEED_TABLES = {
         "sales",
         ["sale_id", "sale_date", "doctor_id", "product_id", "selling_territory_id", "quantity", "sales_amount", "status"],
         {"sale_date"},
+    ),
+    "incentive_programs": (
+        "incentive_programs",
+        ["incentive_program_id", "start_date", "end_date", "products", "percentage"],
+        {"start_date", "end_date"},
+    ),
+    "incentive_program_tiers": (
+        "incentive_program_tiers",
+        [
+            "incentive_program_tier_id",
+            "incentive_program_id",
+            "minimum_achievement",
+            "maximum_achievement",
+            "multiplier",
+        ],
+        set(),
     ),
     "payouts": (
         "incentive_payouts",
@@ -218,6 +257,9 @@ async def login(payload: WorkspaceLogin):
                 )
             else:
                 schema = existing_schema
+                # Apply additive workspace schema updates on every login so
+                # existing workspaces receive newly introduced tables.
+                await execute_statements(connection, WORKSPACE_DDL.format(schema=f'"{schema}"'))
                 await connection.execute(
                     text("UPDATE public.workspaces SET last_login_at = CURRENT_TIMESTAMP WHERE username_key = :username_key"),
                     {"username_key": payload.username.casefold()},

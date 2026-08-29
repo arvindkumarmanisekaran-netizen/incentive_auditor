@@ -86,5 +86,30 @@
       "status"
     ],
     "duplicate_keys": ["representative_id", "product_id", "payout_month"]
+  },
+
+  "incentive_program": {
+    "table": "incentive_programs",
+    "required_columns": [
+      "incentive_program_id",
+      "start_date",
+      "end_date",
+      "products",
+      "percentage"
+    ],
+    "optional_columns": [],
+    "duplicate_keys": ["incentive_program_id"]
+  },
+
+  "incentive_program_tier": {
+    "table": "incentive_program_tiers",
+    "required_columns": [
+      "incentive_program_tier_id",
+      "incentive_program_id",
+      "minimum_achievement",
+      "multiplier"
+    ],
+    "optional_columns": ["maximum_achievement"],
+    "duplicate_keys": ["incentive_program_tier_id"]
   }
 }

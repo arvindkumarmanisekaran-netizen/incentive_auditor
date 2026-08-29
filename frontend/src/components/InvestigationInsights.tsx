@@ -2,6 +2,12 @@ import type { EChartsCoreOption } from "echarts/core";
 import SignalChart, { SIGNAL_CHART } from "./charts/SignalChart";
 
 import type { InvestigationResult } from "../types/investigation";
+import {
+  formatProductLabel,
+  productLabelFromFinding,
+  replaceProductIds,
+  replaceRepresentativeId,
+} from "../utils/displayLabels";
 
 import "../styles/index.css";
 
@@ -66,19 +72,11 @@ function safeNumber(value: unknown): number {
   return Number.isFinite(number) ? number : 0;
 }
 
-function getProductName(finding: unknown) {
-  const record = finding as {
-    product_name?: string;
-    product_id?: string;
-    evidence?: { product_name?: string };
-  };
-  return record?.product_name ?? record?.evidence?.product_name ?? record?.product_id ?? "";
-}
-
 function insightBarOption(
   categories: string[],
   series: Array<{ name: string; values: number[]; color: string }>,
   formatter: "percent" | "money",
+  hideCategoryLabels = false,
 ): EChartsCoreOption {
   return {
     legend: { top: 0, textStyle: { color: SIGNAL_CHART.text, fontSize: 9 } },
@@ -89,6 +87,7 @@ function insightBarOption(
     xAxis: {
       type: "category",
       data: categories,
+      axisLabel: { show: !hideCategoryLabels },
       axisLine: { show: true, lineStyle: { color: "rgba(37,99,235,.42)", width: 1.25 } },
     },
     yAxis: {
@@ -154,6 +153,11 @@ function gaugeOption(value: number, color: string, label: string): EChartsCoreOp
 
 function InvestigationInsights({ result }: Props) {
   const findings = result.findings ?? [];
+  const displayText = (value: string) => replaceRepresentativeId(
+    replaceProductIds(value, findings),
+    result.representative_name,
+    result.representative_id,
+  );
 
   /* =======================================================
      SALES / PRESCRIPTION
@@ -173,8 +177,11 @@ function InvestigationInsights({ result }: Props) {
     );
 
     return {
-      product: productId,
-      productName: getProductName(mismatchFinding),
+      productId,
+      product: productLabelFromFinding(mismatchFinding),
+      productName: String(
+        mismatchFinding.product_name ?? mismatchFinding.evidence?.product_name ?? "",
+      ),
 
       salesChange: safeNumber(
         salesFinding?.evidence?.deviation_percent ?? mismatchFinding.evidence?.sales_change_percent,
@@ -211,6 +218,13 @@ function InvestigationInsights({ result }: Props) {
 
   const doctorConcentration = safeNumber(doctorFinding?.evidence?.top_doctor_share_percent);
 
+  const topDoctorName = String(
+    doctorFinding?.evidence?.top_doctor_name ??
+      (doctorFinding?.evidence?.doctor_breakdown as Array<{ doctor_name?: string }> | undefined)?.[0]
+        ?.doctor_name ??
+      "Top Doctor",
+  );
+
   const crossTerritory = safeNumber(territoryFinding?.evidence?.cross_territory_share_percent);
 
   /* =======================================================
@@ -219,12 +233,16 @@ function InvestigationInsights({ result }: Props) {
 
   const payoutFindings = findings.filter((finding) => finding.type === "payout_discrepancy");
 
-  const totalExpectedPayout = payoutFindings.reduce(
+  const payoutRecordFindings = payoutFindings.filter(
+    (finding) => finding.evidence?.include_in_payout_totals !== false,
+  );
+
+  const totalExpectedPayout = payoutRecordFindings.reduce(
     (total, finding) => total + safeNumber(finding.evidence?.expected_payout),
     0,
   );
 
-  const totalActualPayout = payoutFindings.reduce(
+  const totalActualPayout = payoutRecordFindings.reduce(
     (total, finding) => total + safeNumber(finding.evidence?.actual_payout),
     0,
   );
@@ -245,8 +263,64 @@ function InvestigationInsights({ result }: Props) {
   ];
 
   const payoutMismatchCount = payoutFindings.filter(
-    (finding) => Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
+    (finding) =>
+      (finding.evidence?.discrepancy_subtypes as unknown[] | undefined)?.length ||
+      Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
   ).length;
+
+  const payoutProductsChecked = new Set(
+    payoutRecordFindings.map((finding) => String(finding.product_id ?? "")),
+  ).size;
+
+  const payoutBreakdowns = payoutRecordFindings.map((finding) => {
+    const evidence = finding.evidence ?? {};
+    const programId = String(evidence.incentive_program_id ?? "").trim();
+
+    return {
+      key: String(evidence.payout_id ?? `${finding.product_id}-${evidence.payout_month}`),
+      product: productLabelFromFinding(finding),
+      month: String(evidence.payout_month ?? "—"),
+      program: programId || "Default fallback",
+      period:
+        evidence.incentive_program_start_date && evidence.incentive_program_end_date
+          ? `${evidence.incentive_program_start_date} – ${evidence.incentive_program_end_date}`
+          : "No matching program",
+      programProducts: String(
+        evidence.incentive_program_products_display ??
+          evidence.incentive_program_products ??
+          "—",
+      ),
+      tier: String(evidence.incentive_program_tier_id ?? "Default bands"),
+      tierRange:
+        evidence.tier_minimum_achievement !== null &&
+        evidence.tier_minimum_achievement !== undefined
+          ? `${formatExactNumber(evidence.tier_minimum_achievement)}% – ${
+              evidence.tier_maximum_achievement === null ||
+              evidence.tier_maximum_achievement === undefined
+                ? "No maximum"
+                : `${formatExactNumber(evidence.tier_maximum_achievement)}%`
+            }`
+          : "Global fallback schedule",
+      percentage: safeNumber(evidence.cap_percentage || 150),
+      attributedSales: safeNumber(evidence.attributed_actual_sales),
+      baseIncentive: safeNumber(evidence.calculated_base_incentive),
+      multiplier: safeNumber(evidence.calculated_achievement_multiplier),
+      calculatedPayout: safeNumber(evidence.independently_calculated_payout),
+      maximumPayout: safeNumber(evidence.calculated_maximum_payout),
+      expectedPayout: safeNumber(evidence.reconstructed_expected_payout),
+      actualPayout: safeNumber(evidence.actual_payout),
+      ruleSource: String(evidence.cap_rule_source ?? "Default fallback: 150% of base incentive"),
+    };
+  });
+
+  const appliedPrograms = Array.from(
+    new Map(
+      payoutBreakdowns.map((item) => [
+        `${item.program}-${item.percentage}-${item.period}`,
+        item,
+      ]),
+    ).values(),
+  );
 
   /* =======================================================
      RISK
@@ -315,12 +389,13 @@ function InvestigationInsights({ result }: Props) {
             <div className="insight-chart">
               <SignalChart
                 option={insightBarOption(
-                  salesRxData.map((item) => item.product),
+                  salesRxData.map((item) => formatProductLabel(item.productName, item.productId)),
                   [
                     { name: "Sales change", values: salesRxData.map((item) => item.salesChange), color: COLORS.sales },
                     { name: "Prescription change", values: salesRxData.map((item) => item.prescriptionChange), color: COLORS.prescription },
                   ],
                   "percent",
+                  true,
                 )}
                 ariaLabel="Sales and prescription changes"
               />
@@ -353,7 +428,7 @@ function InvestigationInsights({ result }: Props) {
                 )}
               </div>
 
-              {salesAnalysis?.summary && <p className="insight-summary">{salesAnalysis.summary}</p>}
+              {salesAnalysis?.summary && <p className="insight-summary">{displayText(salesAnalysis.summary)}</p>}
             </div>
           </div>
         </article>
@@ -377,7 +452,7 @@ function InvestigationInsights({ result }: Props) {
 
           <div className="insight-body">
             <div className="insight-chart concentration-chart">
-              <SignalChart option={gaugeOption(doctorConcentration, COLORS.doctor, "Top doctor")} ariaLabel="Doctor concentration" />
+              <SignalChart option={gaugeOption(doctorConcentration, COLORS.doctor, topDoctorName)} ariaLabel="Doctor concentration" />
             </div>
 
             <div className="insight-text">
@@ -385,7 +460,7 @@ function InvestigationInsights({ result }: Props) {
 
               <div className="insight-kpi-list">
                 <div>
-                  <span>Top doctor share</span>
+                  <span>Top doctor share · {topDoctorName}</span>
 
                   <strong>{doctorConcentration.toFixed(2)}%</strong>
                 </div>
@@ -406,7 +481,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {doctorAnalysis?.summary && (
-                <p className="insight-summary">{doctorAnalysis.summary}</p>
+                <p className="insight-summary">{displayText(doctorAnalysis.summary)}</p>
               )}
             </div>
           </div>
@@ -459,7 +534,7 @@ function InvestigationInsights({ result }: Props) {
                 <div>
                   <span>Products checked</span>
 
-                  <strong>{payoutFindings.length}</strong>
+                  <strong>{payoutProductsChecked}</strong>
                 </div>
 
                 <div>
@@ -475,8 +550,71 @@ function InvestigationInsights({ result }: Props) {
                 </div>
               </div>
 
+              <div className="payout-program-summary">
+                <span className="ai-label">Applied Incentive Programs</span>
+
+                <div className="payout-program-chips">
+                  {appliedPrograms.map((item) => (
+                    <div key={`${item.program}-${item.percentage}-${item.period}`}>
+                      <strong>{item.program}</strong>
+                      <span>{formatExactNumber(item.percentage)}% cap</span>
+                      <small>{item.period}</small>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {payoutBreakdowns.length > 0 && (
+                <details className="payout-breakdown" open>
+                  <summary>Incentive calculation breakup ({payoutBreakdowns.length})</summary>
+
+                  <div className="payout-breakdown-table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Month</th>
+                          <th>Program</th>
+                          <th>Program products</th>
+                          <th>Program tier</th>
+                          <th>Achievement band</th>
+                          <th>Cap</th>
+                          <th>Attributed sales</th>
+                          <th>Base incentive</th>
+                          <th>Achievement multiplier</th>
+                          <th>Calculated payout</th>
+                          <th>Maximum payout</th>
+                          <th>Expected payout</th>
+                          <th>Actual payout</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {payoutBreakdowns.map((item) => (
+                          <tr key={item.key} title={item.ruleSource}>
+                            <td>{item.product}</td>
+                            <td>{item.month}</td>
+                            <td>{item.program}</td>
+                            <td>{item.programProducts}</td>
+                            <td>{item.tier}</td>
+                            <td>{item.tierRange}</td>
+                            <td>{formatExactNumber(item.percentage)}%</td>
+                            <td>{formatMoney(item.attributedSales)}</td>
+                            <td>{formatMoney(item.baseIncentive)}</td>
+                            <td>{formatExactNumber(item.multiplier)}×</td>
+                            <td>{formatMoney(item.calculatedPayout)}</td>
+                            <td>{formatMoney(item.maximumPayout)}</td>
+                            <td>{formatMoney(item.expectedPayout)}</td>
+                            <td>{formatMoney(item.actualPayout)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </details>
+              )}
+
               {payoutAnalysis?.summary && (
-                <p className="insight-summary">{payoutAnalysis.summary}</p>
+                <p className="insight-summary">{displayText(payoutAnalysis.summary)}</p>
               )}
             </div>
           </div>
@@ -536,7 +674,7 @@ function InvestigationInsights({ result }: Props) {
               </div>
 
               {finalReport?.overall_assessment && (
-                <p className="insight-summary final-summary">{finalReport.overall_assessment}</p>
+                <p className="insight-summary final-summary">{displayText(finalReport.overall_assessment)}</p>
               )}
             </div>
           </div>

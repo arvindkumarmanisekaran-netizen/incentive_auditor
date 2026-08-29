@@ -1629,6 +1629,37 @@ textarea {
   letter-spacing: .04em;
 }
 
+/* Text carets belong only to editable text-entry controls. */
+body,
+body * {
+  caret-color: transparent;
+}
+
+input[type="text"]:not(:disabled):not([readonly]),
+input[type="number"]:not(:disabled):not([readonly]),
+input[type="email"]:not(:disabled):not([readonly]),
+input[type="search"]:not(:disabled):not([readonly]),
+input[type="tel"]:not(:disabled):not([readonly]),
+input[type="url"]:not(:disabled):not([readonly]),
+input[type="password"]:not(:disabled):not([readonly]),
+textarea:not(:disabled):not([readonly]) {
+  caret-color: #2563eb !important;
+}
+
+.custom-date-input,
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[readonly],
+input:disabled,
+select,
+button,
+[role="button"] {
+  caret-color: transparent !important;
+}
+
 .database-table td.database-primary-key-cell,
 .database-table tbody tr:hover td.database-primary-key-cell {
   color: #64748b !important;

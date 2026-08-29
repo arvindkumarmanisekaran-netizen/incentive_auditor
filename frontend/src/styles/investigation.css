@@ -1926,6 +1926,97 @@
   text-align: right;
 }
 
+.payout-program-summary {
+  margin: 10px 0;
+}
+
+.payout-program-chips {
+  display: grid;
+  gap: 6px;
+}
+
+.payout-program-chips > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  padding: 7px 8px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  border-radius: 7px;
+  background: #f8faff;
+}
+
+.payout-program-chips strong {
+  overflow-wrap: anywhere;
+  color: #0f172a;
+  font-size: 0.68rem;
+}
+
+.payout-program-chips span {
+  color: #1d4ed8;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.payout-program-chips small {
+  grid-column: 1 / -1;
+  color: #64748b;
+  font-size: 0.58rem;
+}
+
+.payout-breakdown {
+  margin: 10px 0;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.payout-breakdown > summary {
+  padding: 8px 10px;
+  color: #1e3a8a;
+  font-size: 0.65rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.payout-breakdown-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border-top: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.payout-breakdown table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.58rem;
+}
+
+.payout-breakdown th,
+.payout-breakdown td {
+  max-width: 170px;
+  padding: 6px 8px;
+  overflow-wrap: anywhere;
+  border-right: 1px solid rgba(37, 99, 235, 0.06);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.06);
+  color: #334155;
+  text-align: left;
+  vertical-align: top;
+}
+
+.payout-breakdown th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  color: #475569;
+  background: #f1f5ff;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.payout-breakdown tbody tr:hover td {
+  background: #f8fbff;
+}
+
 .payout-chart-difference,
 .risk-findings-label {
   position: absolute;
