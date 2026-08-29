@@ -12,6 +12,7 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const usernameInputRef = useRef<HTMLInputElement>(null);
+  const displayName = username.trim() || "Your name";
 
   useEffect(() => {
     const input = usernameInputRef.current;
@@ -58,48 +59,80 @@ export default function LoginModal({ onLogin }: LoginModalProps) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
       >
-        <div className="login-brand" aria-hidden="true"><span>IA</span></div>
-        <p className="login-eyebrow">INCENTIVE AUDITOR</p>
-        <h1 id="login-title">Open your workspace</h1>
-        <p className="login-description">
-          Enter your username. We’ll load your existing workspace or prepare a new one.
-        </p>
+        <div className="login-content">
+          <div className="login-intro">
+            <div className="login-brand" aria-hidden="true"><span>IA</span></div>
+            <p className="login-eyebrow">INCENTIVE AUDITOR</p>
+            <h1 id="login-title">Your name opens your workspace</h1>
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="workspace-username">Username</label>
-          <input
-            ref={usernameInputRef}
-            id="workspace-username"
-            name="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            placeholder="Enter username"
-            autoComplete="off"
-            autoFocus
-            minLength={3}
-            maxLength={50}
-            pattern={"[A-Za-z0-9_.\\-]+"}
-            required
-            disabled={loading}
-          />
-          <AnimatePresence initial={false}>
-            {error && (
+            <div className="login-workspace-visual" aria-hidden="true">
               <motion.div
-                className="login-error"
-                role="alert"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
+                className="login-person-node"
+                animate={{ boxShadow: ["0 0 0 0 rgba(185,255,102,0)", "0 0 0 9px rgba(185,255,102,.08)", "0 0 0 0 rgba(185,255,102,0)"] }}
+                transition={{ duration: 2.4, repeat: Infinity }}
               >
-                {error}
+                <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0" /></svg>
+                <span>{displayName}</span>
               </motion.div>
-            )}
-          </AnimatePresence>
-          <button type="submit" disabled={loading || username.trim().length < 3}>
-            {loading ? "Preparing workspace…" : "Continue"}
-          </button>
-        </form>
-        <p className="login-note">Your login ends when this page is refreshed.</p>
+
+              <div className="login-route">
+                <motion.span
+                  animate={{ x: [0, 34], opacity: [0, 1, 0] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
+
+              <div className="login-workspace-node">
+                <svg viewBox="0 0 24 24"><path d="M4 7.5h6l1.6 2H20v9.5H4z" /><path d="M4 7.5V5h6l1.6 2H20v2.5" /></svg>
+                <div><strong>Personal workspace</strong><span>Private to this name</span></div>
+              </div>
+            </div>
+
+            <div className="login-outcomes" aria-hidden="true">
+              <div><span className="login-outcome-icon existing">↗</span><p><strong>Name found</strong><small>Open your saved workspace</small></p></div>
+              <div><span className="login-outcome-icon new">＋</span><p><strong>First visit</strong><small>Create a new workspace</small></p></div>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="workspace-username">Enter your name</label>
+            <div className="login-input-shell">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0" /></svg>
+              <input
+                ref={usernameInputRef}
+                id="workspace-username"
+                name="username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                placeholder="e.g. Arvind Kumar"
+                autoComplete="name"
+                autoFocus
+                minLength={3}
+                maxLength={50}
+                required
+                disabled={loading}
+              />
+            </div>
+            <p className="login-field-hint"><span>●</span> Use the same name next time to return here</p>
+            <AnimatePresence initial={false}>
+              {error && (
+                <motion.div
+                  className="login-error"
+                  role="alert"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  {error}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <button type="submit" disabled={loading || username.trim().length < 3}>
+              {loading ? "Preparing your workspace…" : "Open my workspace"}
+            </button>
+          </form>
+        </div>
+        <p className="login-note">One name → one personal workspace</p>
       </motion.section>
     </motion.div>
   );

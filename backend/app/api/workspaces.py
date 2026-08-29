@@ -20,11 +20,11 @@ class WorkspaceLogin(BaseModel):
     @field_validator("username")
     @classmethod
     def validate_username(cls, value: str) -> str:
-        value = value.strip()
+        value = " ".join(value.split())
         if not 3 <= len(value) <= 50:
-            raise ValueError("Username must contain between 3 and 50 characters")
-        if not re.fullmatch(r"[A-Za-z0-9_.-]+", value):
-            raise ValueError("Username may contain letters, numbers, dots, hyphens and underscores")
+            raise ValueError("Name must contain between 3 and 50 characters")
+        if not re.fullmatch(r"[\w .'-]+", value, flags=re.UNICODE):
+            raise ValueError("Name may contain letters, numbers, spaces, dots, apostrophes and hyphens")
         return value
 
 

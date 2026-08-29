@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useMemo, useState, useRef } from "react";
+import { Fragment, useEffect, useMemo, useState, useRef, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 
 import { API_BASE_URL } from "../config";
@@ -218,6 +219,20 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
   const [editingRow, setEditingRow] = useState<RowData | null>(null);
   const [editError, setEditError] = useState<string | null>(null);
   const [editValues, setEditValues] = useState<Record<string, unknown>>({});
+
+  useEffect(() => {
+    if (!editingRow) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "none";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.style.overscrollBehavior = previousOverscroll;
+    };
+  }, [editingRow]);
 
   const [offset, setOffset] = useState(0);
   const [totalRecords, setTotalRecords] = useState(0);
@@ -616,6 +631,33 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
     setEditError(null);
   }
 
+  function handleEditModalKeyDown(event: ReactKeyboardEvent<HTMLElement>) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      cancelEdit();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const controls = Array.from(
+      event.currentTarget.querySelectorAll<HTMLElement>(
+        'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])',
+      ),
+    );
+    if (controls.length === 0) return;
+
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
   // --------------------------------------------------
   // Save edit.
   // --------------------------------------------------
@@ -691,6 +733,7 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
     selectableRowIds.length > 0 && selectableRowIds.every((id) => selectedIds.includes(id));
 
   return (
+    <>
     <article className="admin-card database-card">
       <div className="admin-card-icon"><AppIcon name="database" size={23} /></div>
 
@@ -815,9 +858,6 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                         ? `${activeSection}-${id}`
                         : `${activeSection}-row-${offset + rowIndex}`;
 
-                    const isEditing =
-                      editingRow !== null && id !== null && getRowId(editingRow) === id;
-
                     return (
                       <Fragment key={rowKey}>
                         <motion.tr
@@ -874,121 +914,6 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
                           </td>
                         </motion.tr>
 
-                        {/* ------------------------
-                                INLINE EDIT FORM
-                            ------------------------ */}
-
-                        {isEditing && (
-                          <tr className="database-inline-edit-row">
-                            <td colSpan={columns.length + 2} className="database-inline-edit-cell">
-                              <div className="database-edit-form inline">
-                                <div className="database-edit-header">
-                                  <h4>Edit Record</h4>
-
-                                  <button
-                                    type="button"
-                                    className="database-edit-close"
-                                    onClick={cancelEdit}
-                                    aria-label="Close edit form"
-                                  >
-                                    ×
-                                  </button>
-                                </div>
-
-                                <div className="database-edit-grid">
-                                  {Object.entries(editValues).map(([column, value], index) => (
-                                    <label
-                                      key={`${column}-${index}`}
-                                      className={
-                                        column === displayedConfig.primaryKey
-                                          ? "database-edit-field database-primary-key-field"
-                                          : "database-edit-field"
-                                      }
-                                    >
-                                      <span>
-                                        {formatColumnName(column)}
-                                        {column === displayedConfig.primaryKey && (
-                                          <small className="database-locked-label">Primary key · locked</small>
-                                        )}
-                                      </span>
-
-                                      {column === "status" && STATUS_OPTIONS[activeSection] ? (
-                                        <select
-                                          value={value == null ? "" : String(value)}
-                                          disabled={column === displayedConfig.primaryKey}
-                                          onChange={(event) =>
-                                            setEditValues((current) => ({
-                                              ...current,
-
-                                              [column]: event.target.value,
-                                            }))
-                                          }
-                                        >
-                                          {STATUS_OPTIONS[activeSection]?.map((status) => (
-                                            <option
-                                              key={`${activeSection}-${status}`}
-                                              value={status}
-                                            >
-                                              {status}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      ) : getInputType(column) === "date" ? (
-                                        <CustomDatePicker
-                                          value={value == null ? "" : String(value).slice(0, 10)}
-                                          disabled={column === displayedConfig.primaryKey}
-                                          ariaLabel={`Select ${formatColumnName(column)}`}
-                                          onChange={(nextValue) =>
-                                            setEditValues((current) => ({
-                                              ...current,
-                                              [column]: nextValue,
-                                            }))
-                                          }
-                                        />
-                                      ) : (
-                                        <input
-                                          type={getInputType(column)}
-                                          step={getInputStep(column)}
-                                          value={value == null ? "" : String(value)}
-                                          disabled={column === displayedConfig.primaryKey}
-                                          onChange={(event) =>
-                                            setEditValues((current) => ({
-                                              ...current,
-
-                                              [column]: event.target.value,
-                                            }))
-                                          }
-                                        />
-                                      )}
-                                    </label>
-                                  ))}
-                                </div>
-
-                                {editError && (
-                                  <div className="database-edit-error">{editError}</div>
-                                )}
-
-                                <div className="database-edit-actions">
-                                  <button
-                                    type="button"
-                                    className="secondary-button"
-                                    onClick={cancelEdit}
-                                  >
-                                    Cancel
-                                  </button>
-
-                                  <button
-                                    type="button"
-                                    className="primary-button"
-                                    onClick={() => void saveEdit()}
-                                  >
-                                    Save Changes
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        )}
                       </Fragment>
                     );
                   })}
@@ -1029,6 +954,108 @@ export default function DatabaseManagementCard({ refreshKey = 0 }: DatabaseManag
         </div>
       </div>
     </article>
+    {editingRow && createPortal(
+      <div className="database-edit-modal-backdrop">
+        <section
+          className="database-edit-form database-edit-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="database-edit-modal-title"
+          onKeyDown={handleEditModalKeyDown}
+        >
+          <div className="database-edit-header">
+            <h4 id="database-edit-modal-title">Edit Record</h4>
+
+            <button
+              type="button"
+              className="database-edit-close"
+              onClick={cancelEdit}
+              aria-label="Close edit form"
+              autoFocus
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="database-edit-grid">
+            {Object.entries(editValues).map(([column, value], index) => (
+              <label
+                key={`${column}-${index}`}
+                className={
+                  column === displayedConfig.primaryKey
+                    ? "database-edit-field database-primary-key-field"
+                    : "database-edit-field"
+                }
+              >
+                <span>
+                  {formatColumnName(column)}
+                  {column === displayedConfig.primaryKey && (
+                    <small className="database-locked-label">Primary key · locked</small>
+                  )}
+                </span>
+
+                {column === "status" && STATUS_OPTIONS[activeSection] ? (
+                  <select
+                    value={value == null ? "" : String(value)}
+                    disabled={column === displayedConfig.primaryKey}
+                    onChange={(event) =>
+                      setEditValues((current) => ({
+                        ...current,
+                        [column]: event.target.value,
+                      }))
+                    }
+                  >
+                    {STATUS_OPTIONS[activeSection]?.map((status) => (
+                      <option key={`${activeSection}-${status}`} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                ) : getInputType(column) === "date" ? (
+                  <CustomDatePicker
+                    value={value == null ? "" : String(value).slice(0, 10)}
+                    disabled={column === displayedConfig.primaryKey}
+                    ariaLabel={`Select ${formatColumnName(column)}`}
+                    onChange={(nextValue) =>
+                      setEditValues((current) => ({
+                        ...current,
+                        [column]: nextValue,
+                      }))
+                    }
+                  />
+                ) : (
+                  <input
+                    type={getInputType(column)}
+                    step={getInputStep(column)}
+                    value={value == null ? "" : String(value)}
+                    disabled={column === displayedConfig.primaryKey}
+                    onChange={(event) =>
+                      setEditValues((current) => ({
+                        ...current,
+                        [column]: event.target.value,
+                      }))
+                    }
+                  />
+                )}
+              </label>
+            ))}
+          </div>
+
+          {editError && <div className="database-edit-error">{editError}</div>}
+
+          <div className="database-edit-actions">
+            <button type="button" className="secondary-button" onClick={cancelEdit}>
+              Cancel
+            </button>
+            <button type="button" className="primary-button" onClick={() => void saveEdit()}>
+              Save Changes
+            </button>
+          </div>
+        </section>
+      </div>,
+      document.body,
+    )}
+    </>
   );
 }
 

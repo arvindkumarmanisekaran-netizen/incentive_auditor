@@ -142,6 +142,24 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     const type = (entry as Record<string, unknown>).type;
     return type === "bar" || type === "line" || type === "scatter";
   });
+  const keepTooltipInsideChart = (
+    point: number[],
+    _params: unknown,
+    _element: HTMLElement,
+    _rect: unknown,
+    size: { contentSize: number[]; viewSize: number[] },
+  ) => {
+    const gap = 8;
+    const preferredX = point[0] + 12;
+    const preferredY = point[1] + 12;
+    const maximumX = Math.max(gap, size.viewSize[0] - size.contentSize[0] - gap);
+    const maximumY = Math.max(gap, size.viewSize[1] - size.contentSize[1] - gap);
+
+    return [
+      Math.min(Math.max(preferredX, gap), maximumX),
+      Math.min(Math.max(preferredY, gap), maximumY),
+    ];
+  };
 
   return {
     animation: true,
@@ -186,11 +204,14 @@ function withSignalTheme(option: EChartsCoreOption): EChartsCoreOption {
     legend: incoming.legend ? mergeChartComponent({
       textStyle: { color: SIGNAL_CHART.text, fontSize: 10, fontFamily: SIGNAL_FONT },
     }, incoming.legend) : incoming.legend,
-    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", appendToBody: true, confine: false, axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+    tooltip: { show: true, trigger: isAxisChart ? "axis" : "item", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(37,99,235,0.055)" } }, ...(option.tooltip as object),
+      appendToBody: false,
+      confine: true,
       formatter: incomingTooltip.formatter ?? (isAxisChart ? compactTooltipFormatter : undefined),
+      position: incomingTooltip.position ?? keepTooltipInsideChart,
       backgroundColor: "rgba(255,255,255,0.98)", borderColor: "rgba(37,99,235,0.16)",
       borderWidth: 1, borderRadius: 10, padding: [9, 11],
-      extraCssText: `z-index:10000;max-width:260px;box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
+      extraCssText: `z-index:10000;max-width:min(260px,calc(100vw - 24px));box-shadow:0 14px 38px rgba(15,23,42,.14);font-family:${SIGNAL_FONT};line-height:1.4;`,
       textStyle: { color: SIGNAL_CHART.textStrong, fontSize: 11, fontFamily: SIGNAL_FONT },
     },
     series,
@@ -240,9 +261,12 @@ export default function SignalChart({
   const introTimerRef = useRef<number>(0);
   const hasAnimatedRef = useRef(false);
   const latestOptionRef = useRef(option);
-  latestOptionRef.current = option;
   const reducedMotion = useReducedMotion();
   const isFirstView = useInView(viewportRef, { once: true, amount: 0.2 });
+
+  useEffect(() => {
+    latestOptionRef.current = option;
+  }, [option]);
 
   useEffect(() => {
     const element = containerRef.current;
@@ -271,8 +295,15 @@ export default function SignalChart({
     });
     observer.observe(element);
 
+    // A tooltip opened by touch otherwise remains attached to the page while
+    // the user scrolls into the next mobile card. Dismiss it as soon as the
+    // viewport moves so chart overlays never obscure unrelated content.
+    const hideTooltipOnViewportMove = () => chart.dispatchAction({ type: "hideTip" });
+    window.addEventListener("scroll", hideTooltipOnViewportMove, { passive: true, capture: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", hideTooltipOnViewportMove, { capture: true });
       cancelAnimationFrame(resizeFrame);
       clearTimeout(introTimerRef.current);
       chart.dispose();

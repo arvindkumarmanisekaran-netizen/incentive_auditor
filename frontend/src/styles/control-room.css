@@ -269,7 +269,7 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
 .login-screen { overflow: hidden; background: #070908; }
 .login-backdrop { background: radial-gradient(circle at 50% 45%, rgba(185,255,102,.085), transparent 34%); }
 .login-grid-glow { position: absolute; inset: 0; background-image: linear-gradient(rgba(185,255,102,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(185,255,102,.025) 1px, transparent 1px); background-size: 46px 46px; mask-image: radial-gradient(circle at center, black, transparent 70%); }
-.login-modal { width: min(100%, 440px); border-color: rgba(185,255,102,.2); border-radius: 14px; background: rgba(11,14,12,.93); box-shadow: 0 34px 100px rgba(0,0,0,.65), 0 0 80px rgba(185,255,102,.045); backdrop-filter: blur(20px); text-align: left; }
+.login-modal { width: min(100%, 780px); border-color: rgba(185,255,102,.2); border-radius: 14px; background: rgba(11,14,12,.93); box-shadow: 0 34px 100px rgba(0,0,0,.65), 0 0 80px rgba(185,255,102,.045); backdrop-filter: blur(20px); text-align: left; }
 .login-modal::before { position: absolute; top: -1px; left: 32px; width: 72px; height: 1px; content: ""; background: var(--primary); box-shadow: 0 0 15px var(--primary); }
 .login-brand { display: grid; place-items: center; width: 46px; height: 46px; margin-bottom: 24px; border: 1px solid rgba(185,255,102,.3); border-radius: 10px; color: #071000; background: var(--primary); font-size: 12px; font-weight: 900; }
 .login-eyebrow { color: var(--primary); font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .18em; }
@@ -2248,5 +2248,504 @@ body > div[style*="z-index"] {
   .analysis-tab-signal::after,
   .ambient-tracer {
     animation: none !important;
+  }
+}
+/* =========================================================
+   AUTHORITATIVE MOBILE LAYOUT
+
+   This final layer intentionally follows all desktop feature rules. It keeps
+   phone layouts from inheriting later two-column and fixed-width declarations.
+========================================================= */
+@media (max-width: 760px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .login-screen { align-items: start !important; padding: 12px !important; overflow-y: auto !important; }
+  .login-modal { width: min(100%, 460px) !important; padding: 24px 18px !important; }
+  .login-content { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .login-modal h1 { font-size: 1.65rem !important; }
+  .login-workspace-visual { grid-template-columns: minmax(76px, auto) 34px minmax(128px, 1fr) !important; margin-block: 20px 14px !important; }
+  .login-outcomes { grid-template-columns: 1fr 1fr !important; }
+  .login-modal form { padding: 18px !important; }
+
+  .dashboard {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 8px 8px 112px !important;
+  }
+
+  .dashboard-tab-content,
+  .investigation-result-stack,
+  .investigation-result-stack > div,
+  .investigation-overview,
+  .analysis-workspace,
+  .insights-section,
+  .database-page,
+  .database-management-center {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Header and investigation controls */
+  .app-command-header {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    min-height: 100px !important;
+    padding: 16px !important;
+    border-radius: 13px !important;
+  }
+
+  .app-title-copy { min-width: 0; }
+  .command-eyebrow { font-size: 6.5px !important; letter-spacing: .14em !important; }
+  .app-title-row { align-items: center; gap: 7px !important; }
+  .app-title-row h1 { font-size: clamp(1.15rem, 5.4vw, 1.42rem) !important; white-space: normal; }
+  .app-title-copy p { max-width: 245px !important; font-size: .57rem !important; line-height: 1.45 !important; }
+  .live-chip { flex: 0 0 auto; }
+  .workspace-identity { flex: 0 0 auto; padding-left: 10px !important; }
+  .workspace-avatar { width: 36px !important; height: 36px !important; }
+
+  .dashboard-tab-content > .investigation-form,
+  .investigation-form {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 8px 0 4px !important;
+    padding: 12px !important;
+  }
+
+  .investigation-form .form-input,
+  .investigation-form .custom-date-picker,
+  .investigation-form .custom-date-input,
+  .investigation-form .primary-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+  }
+
+  /* Workflow, risk summary and decision */
+  .investigation-workflow,
+  .risk-summary-section,
+  .investigation-overview-card,
+  .analysis-workspace,
+  .insights-section {
+    border-radius: 12px !important;
+  }
+
+  .investigation-workflow { padding: 12px !important; }
+  .investigation-workflow-header,
+  .workflow-agent-header {
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .investigation-workflow-title-row { align-items: flex-start !important; flex-wrap: wrap !important; }
+  .workflow-agent { padding: 11px !important; }
+  .workflow-agent-result,
+  .workflow-commentary-line { overflow-wrap: anywhere; }
+  .workflow-plan-meta,
+  .workflow-focus-areas { gap: 6px !important; }
+  .workflow-focus-pill { white-space: normal !important; text-align: center; }
+
+  .risk-summary-section { padding: 15px !important; }
+  .risk-summary-heading { display: block !important; }
+  .kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .kpi-item { min-width: 0 !important; min-height: 70px !important; padding: 11px !important; }
+  .kpi-item.kpi-risk { grid-column: 1 / -1; }
+
+  .investigation-overview-card { overflow: hidden !important; }
+  .investigation-decision-section,
+  .investigation-evidence-section { padding: 16px !important; }
+  .decision-header { align-items: flex-start !important; flex-direction: column !important; gap: 12px !important; }
+  .decision-status,
+  .decision-assessment,
+  .decision-findings { padding: 12px !important; }
+  .decision-assessment p,
+  .decision-findings p,
+  .finding-card { overflow-wrap: anywhere; }
+  .workflow-summary-card { grid-template-columns: 1fr !important; }
+
+  /* Evidence workspace and every analysis tab */
+  .analysis-workspace { margin: 8px 0 !important; padding: 13px !important; }
+  .analysis-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+    overflow: visible !important;
+  }
+  .analysis-tab { width: 100% !important; min-width: 0 !important; min-height: 40px !important; padding: 6px 8px !important; white-space: normal !important; }
+  .analysis-workspace-content,
+  .analysis-workspace-content > div,
+  .analysis-panel,
+  .historical-analysis-section,
+  .peer-analysis-section { width: 100% !important; min-width: 0 !important; }
+  .analysis-panel,
+  .historical-analysis-section,
+  .peer-analysis-section { padding: 11px !important; }
+  .analysis-panel-header,
+  .analysis-section-header,
+  .product-mismatch-header {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+  }
+  .analysis-product-selector,
+  .product-analysis-selector,
+  .analysis-product-selector select,
+  .product-analysis-selector select { width: 100% !important; min-width: 0 !important; }
+  .product-analysis-context { border-radius: 9px !important; }
+  .product-mismatch-metrics,
+  .behaviour-summary-grid,
+  .historical-summary-grid,
+  .peer-summary-grid,
+  .product-status-grid { grid-template-columns: 1fr !important; }
+  .analysis-chart-grid,
+  .product-analysis-grid,
+  .overall-behaviour-grid,
+  .historical-analysis-grid,
+  .peer-analysis-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .chart-card,
+  .product-analysis-grid .chart-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+    overflow: hidden !important;
+  }
+  .chart-container,
+  .product-analysis-grid .chart-container {
+    width: 100% !important;
+    height: 270px !important;
+    min-height: 270px !important;
+    margin: 4px 0 0 !important;
+  }
+  .pie-chart-container { height: 300px !important; min-height: 300px !important; }
+  .dynamic-pie-wrapper { min-height: 290px !important; }
+  .product-analysis-grid .recharts-wrapper { transform: none !important; }
+
+  /* Insights must be cards in a vertical feed, never compressed columns. */
+  .insights-section { margin: 8px 0 !important; padding: 14px !important; overflow: hidden !important; }
+  .insights-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
+  .insight-card { width: 100% !important; min-width: 0 !important; padding: 12px !important; overflow: hidden !important; }
+  .insight-card-header { align-items: flex-start !important; }
+  .insight-card-header > div { min-width: 0; }
+  .insight-body { display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; }
+  .insight-chart { width: 100% !important; min-height: 270px !important; height: 270px !important; }
+  .insight-text { width: 100% !important; min-width: 0 !important; padding: 12px !important; }
+  .insight-kpi-list > div { align-items: flex-start !important; }
+  .insight-kpi-list span { min-width: 0; overflow-wrap: anywhere; }
+  .insight-kpi-list strong { flex: 0 0 auto; max-width: 56%; overflow-wrap: anywhere; }
+  .insight-summary { font-size: .72rem !important; line-height: 1.55 !important; }
+  .payout-chart-difference,
+  .risk-findings-label { bottom: 7px !important; max-width: calc(100% - 16px); }
+  .payout-breakdown-table-wrap { max-width: calc(100vw - 82px) !important; }
+
+  /* Database: compact actions, usable horizontal table, full-screen edit sheet. */
+  .database-card { padding: 14px 10px !important; overflow: hidden !important; }
+  .database-card .admin-card-content { width: 100% !important; min-width: 0 !important; }
+  .database-card .database-sections {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    width: 100% !important;
+    overflow: visible !important;
+    padding: 4px 2px 10px !important;
+  }
+  .database-section {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 36px !important;
+    padding: 6px 7px !important;
+    font-size: .64rem !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+  }
+  .database-card .database-table-container { width: 100% !important; max-width: 100% !important; overflow: hidden !important; }
+  .database-table-header { padding: 13px !important; }
+  .database-table-scroll { width: 100% !important; max-width: 100% !important; max-height: 62vh !important; overflow: auto !important; }
+  .database-table { min-width: 700px !important; }
+  .database-table th,
+  .database-table td { padding: 9px 10px !important; }
+  .database-table th.database-primary-key-column,
+  .database-table td.database-primary-key-cell { position: static !important; box-shadow: none !important; }
+  .database-actions-column { width: 82px !important; min-width: 82px !important; }
+  .database-row-actions { gap: 4px !important; }
+  .database-row-actions button { width: 34px !important; min-width: 34px !important; height: 32px !important; padding: 0 !important; }
+  .database-row-actions button span { display: none !important; }
+  .database-inline-edit-cell { padding: 0 !important; }
+  .database-edit-form.inline {
+    position: fixed !important;
+    z-index: 12000 !important;
+    inset: auto 10px 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 20px) !important;
+    margin: 0 !important;
+    padding: 16px 12px 0 !important;
+    overflow-y: auto !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 70px rgba(15,23,42,.28) !important;
+  }
+  body:has(.database-edit-form.inline) .dashboard-sidebar,
+  body:has(.database-edit-form.inline) .chatbot-floating-button,
+  body:has(.database-edit-form.inline) .chatbot-window {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .database-edit-grid { grid-template-columns: 1fr !important; gap: 11px !important; }
+  .database-edit-actions {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 2 !important;
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px -12px 0 !important;
+    padding: 11px 12px !important;
+    background: rgba(255,255,255,.97) !important;
+    backdrop-filter: blur(8px);
+  }
+  .database-pagination {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(88px, 108px)) !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+  .database-pagination > span {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .database-pagination > button:first-of-type { grid-column: 1 !important; grid-row: 2 !important; }
+  .database-pagination > button:last-of-type { grid-column: 2 !important; grid-row: 2 !important; }
+  .database-pagination .secondary-button { width: 100% !important; min-width: 0 !important; min-height: 40px !important; }
+
+  /* Duplicate review uses the same readable light cards as the dashboard. */
+  .duplicate-mobile-card {
+    color: #334155 !important;
+    border-color: rgba(37,99,235,.14) !important;
+    background: #fff !important;
+    box-shadow: 0 7px 20px rgba(30,64,175,.09) !important;
+  }
+  .duplicate-mobile-card-header {
+    border-bottom-color: rgba(37,99,235,.11) !important;
+    background: #eef4ff !important;
+  }
+  .duplicate-mobile-card-header span { color: #1e293b !important; }
+  .duplicate-mobile-card-header strong { color: #2563eb !important; }
+  .duplicate-mobile-field { border-bottom-color: rgba(37,99,235,.08) !important; }
+  .duplicate-mobile-field > span { color: #64748b !important; }
+  .duplicate-mobile-field > strong { color: #0f172a !important; }
+  .duplicate-mobile-resolution { background: #f8fbff !important; }
+  .duplicate-mobile-resolution > span { color: #475569 !important; }
+  .duplicate-mobile-resolution .duplicate-resolution {
+    color: #0f766e !important;
+    border-color: rgba(13,148,136,.20) !important;
+    background: #f0fdfa !important;
+  }
+  .duplicate-mobile-resolution .duplicate-resolution.replace {
+    color: #b42318 !important;
+    border-color: rgba(220,38,38,.24) !important;
+    background: #fff1f2 !important;
+  }
+  .document-duplicate-inline {
+    width: 100% !important;
+    padding: 12px !important;
+    border-color: rgba(37,99,235,.14) !important;
+    border-radius: 12px !important;
+    background: #f8fbff !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.8) !important;
+  }
+  .duplicate-header {
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 11px !important;
+    border-bottom: 1px solid rgba(37,99,235,.10) !important;
+  }
+  .duplicate-header h4 { color: #0f172a !important; }
+  .duplicate-header p { color: #64748b !important; }
+  .duplicate-header-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    width: 100% !important;
+    gap: 7px !important;
+  }
+  .duplicate-bulk-resolution {
+    width: 100% !important;
+    min-width: 0 !important;
+    color: #334155 !important;
+    border-color: rgba(37,99,235,.18) !important;
+    background: #fff !important;
+  }
+  .document-result-status .secondary-button {
+    color: #1d4ed8 !important;
+    border-color: rgba(37,99,235,.22) !important;
+    background: #eff6ff !important;
+  }
+
+  /* Fixed controls must not cover content or each other. */
+  .dashboard-sidebar { right: 8px !important; bottom: 8px !important; left: 8px !important; height: 62px !important; }
+  .sidebar-synthetic-action { width: 54px !important; flex: 0 0 54px !important; }
+  .sidebar-synthetic-action .synthetic-data-title { display: none !important; }
+  .sidebar-synthetic-action .synthetic-data-button { grid-template-columns: 1fr !important; justify-items: center !important; width: 44px !important; min-height: 44px !important; padding: 0 !important; }
+  .chatbot-floating-button { right: 16px !important; bottom: 82px !important; width: 52px !important; height: 52px !important; }
+  .chatbot-window { right: 8px !important; bottom: 82px !important; left: 8px !important; width: auto !important; height: min(72vh, 620px) !important; }
+
+  /* Centered, blocking edit modal. */
+  body:has(.database-edit-form.inline) { overflow: hidden !important; }
+  body:has(.database-edit-form.inline)::after {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    content: "";
+    background: rgba(15,23,42,.48);
+    backdrop-filter: blur(3px);
+  }
+  .database-table-container:has(.database-edit-form.inline) {
+    position: relative !important;
+    z-index: 12001 !important;
+    pointer-events: none !important;
+  }
+  .database-edit-form.inline {
+    top: 50% !important;
+    right: 12px !important;
+    bottom: auto !important;
+    left: 12px !important;
+    max-height: calc(100dvh - 32px) !important;
+    transform: translateY(-50%) !important;
+    pointer-events: auto !important;
+    box-shadow: 0 0 0 100vmax rgba(15,23,42,.48), 0 24px 70px rgba(15,23,42,.30) !important;
+    clip-path: inset(-100vmax);
+  }
+
+  /* Mobile breakup: two compact records per page with native finger panning. */
+  .payout-breakdown-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    touch-action: pan-x !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .payout-breakdown table { min-width: max-content !important; }
+  .payout-breakdown th,
+  .payout-breakdown td {
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    overflow-wrap: normal !important;
+    white-space: nowrap !important;
+  }
+  .payout-breakdown-pagination {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    padding: 10px;
+    border-top: 1px solid rgba(37,99,235,.09);
+  }
+  .payout-breakdown-pagination > span { color: #64748b; font-size: .62rem; }
+  .payout-breakdown-pagination > div { display: grid; grid-template-columns: repeat(2, 96px); gap: 8px; }
+  .payout-breakdown-pagination button {
+    min-height: 36px;
+    border: 1px solid rgba(37,99,235,.18);
+    border-radius: 8px;
+    color: #1d4ed8;
+    background: #fff;
+    font-size: .65rem;
+    font-weight: 750;
+  }
+  .payout-breakdown-pagination button:disabled { color: #94a3b8; background: #f1f5f9; opacity: .72; }
+}
+
+@media (max-width: 390px) {
+  .login-outcomes { grid-template-columns: 1fr !important; }
+  .login-modal { padding-inline: 15px !important; }
+  .dashboard { padding-inline: 6px !important; }
+  .app-command-header { padding: 14px !important; }
+  .app-title-copy p { max-width: 220px !important; }
+  .investigation-workflow,
+  .risk-summary-section,
+  .analysis-workspace,
+  .insights-section { padding: 11px !important; }
+  .kpi-strip { grid-template-columns: 1fr !important; }
+  .kpi-item.kpi-risk { grid-column: auto; }
+  .chart-container,
+  .product-analysis-grid .chart-container,
+  .insight-chart { height: 250px !important; min-height: 250px !important; }
+  .pie-chart-container { height: 280px !important; min-height: 280px !important; }
+  .payout-breakdown-table-wrap { max-width: calc(100vw - 64px) !important; }
+}
+
+/* Database edit dialog is portalled to the document root so no table stacking
+   context can cover it or leak pointer/scroll interaction to the page. */
+.database-edit-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  background: rgba(15,23,42,.52);
+  backdrop-filter: blur(4px);
+}
+
+.database-edit-modal {
+  width: min(860px, calc(100vw - 40px));
+  max-height: calc(100dvh - 40px);
+  margin: 0 !important;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: 0 28px 90px rgba(15,23,42,.32) !important;
+}
+
+@media (max-width: 760px) {
+  .database-edit-modal-backdrop { padding: 14px; }
+  .database-edit-modal {
+    width: min(430px, calc(100vw - 28px));
+    max-height: calc(100dvh - 28px);
+    padding: 16px 12px 0 !important;
+  }
+  .database-edit-modal .database-edit-grid { grid-template-columns: 1fr !important; gap: 11px !important; }
+  .database-edit-modal .database-edit-actions {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 2 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    margin: 16px -12px 0 !important;
+    padding: 11px 12px !important;
+    background: rgba(255,255,255,.97) !important;
+  }
+
+  /* The entire header row remains vertically sticky. Primary-key values still
+     move horizontally with the other record values. */
+  .database-table th.database-primary-key-column {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 13 !important;
+    box-shadow: none !important;
+  }
+  .database-table td.database-primary-key-cell {
+    position: static !important;
+    box-shadow: none !important;
   }
 }
