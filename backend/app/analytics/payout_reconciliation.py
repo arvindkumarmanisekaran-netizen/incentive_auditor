@@ -362,6 +362,14 @@ def reconcile_payout_record(row: dict[str, Any]) -> dict[str, Any]:
             "independently_calculated_payout": _number(independently_calculated_payout),
             "calculated_maximum_payout": _number(calculated_maximum),
             "incentive_program_id": row.get("incentive_program_id"),
+            "incentive_program_start_date": (
+                str(row.get("program_start_date")) if row.get("program_start_date") else None
+            ),
+            "incentive_program_end_date": (
+                str(row.get("program_end_date")) if row.get("program_end_date") else None
+            ),
+            "incentive_program_products": row.get("program_products"),
+            "incentive_program_products_display": row.get("program_products_display"),
             "cap_percentage": float(cap_percentage),
             "cap_rule_source": (
                 "Default fallback: 150% of base incentive"
@@ -393,6 +401,21 @@ def missing_payout_finding(row: dict[str, Any]) -> dict[str, Any]:
             "actual_payout": 0.0,
             "payout_difference": 0.0,
             "attributed_actual_sales": _number(attributed_sales),
+            "incentive_program_id": row.get("incentive_program_id"),
+            "incentive_program_start_date": (
+                str(row.get("program_start_date")) if row.get("program_start_date") else None
+            ),
+            "incentive_program_end_date": (
+                str(row.get("program_end_date")) if row.get("program_end_date") else None
+            ),
+            "incentive_program_products": row.get("program_products"),
+            "incentive_program_products_display": row.get("program_products_display"),
+            "cap_percentage": float(_decimal(row.get("cap_percentage") or 150)),
+            "cap_rule_source": (
+                "Default fallback: 150% of base incentive"
+                if row.get("used_default_cap", row.get("incentive_program_id") is None)
+                else "Active incentive program"
+            ),
             "failed_checks": [
                 {
                     "subtype": "missing_payout",

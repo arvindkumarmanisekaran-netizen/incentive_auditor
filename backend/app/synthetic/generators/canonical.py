@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from calendar import monthrange
 from datetime import date
 import random
 
@@ -104,6 +105,8 @@ def generate_incentive_programs(
     group_size = max(1, (len(covered_products) + 2) // 3)
     percentages = (125.0, 150.0, 175.0)
     programs = []
+    final_year, final_month = (int(part) for part in max(months).split("-"))
+    final_day = monthrange(final_year, final_month)[1]
 
     for index, start in enumerate(range(0, len(covered_products), group_size), start=1):
         group = covered_products[start : start + group_size]
@@ -111,7 +114,7 @@ def generate_incentive_programs(
             {
                 "incentive_program_id": f"IP{index:03d}",
                 "start_date": f"{min(months)}-01",
-                "end_date": f"{max(months)}-28",
+                "end_date": f"{max(months)}-{final_day:02d}",
                 "products": ",".join(product["product_id"] for product in group),
                 "percentage": percentages[(index - 1) % len(percentages)],
             }

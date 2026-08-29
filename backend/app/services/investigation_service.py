@@ -747,6 +747,10 @@ async def investigate(
             COALESCE(sales.excluded_status_sales, 0) AS excluded_status_sales,
             COALESCE(sales.outside_assignment_sales, 0) AS outside_assignment_sales,
             program.incentive_program_id,
+            program.program_start_date,
+            program.program_end_date,
+            program.program_products,
+            program.program_products_display,
             COALESCE(program.percentage, 150.0) AS cap_percentage,
             (program.incentive_program_id IS NULL) AS used_default_cap
         FROM payout_records ip
@@ -759,6 +763,24 @@ async def investigate(
         LEFT JOIN LATERAL (
             SELECT
                 configured_program.incentive_program_id,
+                configured_program.start_date AS program_start_date,
+                configured_program.end_date AS program_end_date,
+                configured_program.products AS program_products,
+                CASE
+                    WHEN UPPER(TRIM(configured_program.products)) = 'ALL'
+                        THEN 'All Products'
+                    ELSE (
+                        SELECT STRING_AGG(
+                            product.product_name || ' (' || configured_product.product_id || ')',
+                            ', ' ORDER BY configured_product.ordinality
+                        )
+                        FROM UNNEST(
+                            STRING_TO_ARRAY(REPLACE(configured_program.products, ' ', ''), ',')
+                        ) WITH ORDINALITY AS configured_product(product_id, ordinality)
+                        JOIN products product
+                          ON product.product_id = configured_product.product_id
+                    )
+                END AS program_products_display,
                 configured_program.percentage
             FROM incentive_programs configured_program
             WHERE COALESCE(ip.payout_month, sales.payout_month)

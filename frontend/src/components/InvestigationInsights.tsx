@@ -268,6 +268,49 @@ function InvestigationInsights({ result }: Props) {
       Math.abs(safeNumber(finding.evidence?.payout_difference)) > 0,
   ).length;
 
+  const payoutProductsChecked = new Set(
+    payoutRecordFindings.map((finding) => String(finding.product_id ?? "")),
+  ).size;
+
+  const payoutBreakdowns = payoutRecordFindings.map((finding) => {
+    const evidence = finding.evidence ?? {};
+    const programId = String(evidence.incentive_program_id ?? "").trim();
+
+    return {
+      key: String(evidence.payout_id ?? `${finding.product_id}-${evidence.payout_month}`),
+      product: productLabelFromFinding(finding),
+      month: String(evidence.payout_month ?? "—"),
+      program: programId || "Default fallback",
+      period:
+        evidence.incentive_program_start_date && evidence.incentive_program_end_date
+          ? `${evidence.incentive_program_start_date} – ${evidence.incentive_program_end_date}`
+          : "No matching program",
+      programProducts: String(
+        evidence.incentive_program_products_display ??
+          evidence.incentive_program_products ??
+          "—",
+      ),
+      percentage: safeNumber(evidence.cap_percentage || 150),
+      attributedSales: safeNumber(evidence.attributed_actual_sales),
+      baseIncentive: safeNumber(evidence.calculated_base_incentive),
+      multiplier: safeNumber(evidence.calculated_achievement_multiplier),
+      calculatedPayout: safeNumber(evidence.independently_calculated_payout),
+      maximumPayout: safeNumber(evidence.calculated_maximum_payout),
+      expectedPayout: safeNumber(evidence.reconstructed_expected_payout),
+      actualPayout: safeNumber(evidence.actual_payout),
+      ruleSource: String(evidence.cap_rule_source ?? "Default fallback: 150% of base incentive"),
+    };
+  });
+
+  const appliedPrograms = Array.from(
+    new Map(
+      payoutBreakdowns.map((item) => [
+        `${item.program}-${item.percentage}-${item.period}`,
+        item,
+      ]),
+    ).values(),
+  );
+
   /* =======================================================
      RISK
   ======================================================= */
@@ -480,7 +523,7 @@ function InvestigationInsights({ result }: Props) {
                 <div>
                   <span>Products checked</span>
 
-                  <strong>{payoutFindings.length}</strong>
+                  <strong>{payoutProductsChecked}</strong>
                 </div>
 
                 <div>
@@ -495,6 +538,65 @@ function InvestigationInsights({ result }: Props) {
                   <strong>{formatMoney(totalPayoutDifference)}</strong>
                 </div>
               </div>
+
+              <div className="payout-program-summary">
+                <span className="ai-label">Applied Incentive Programs</span>
+
+                <div className="payout-program-chips">
+                  {appliedPrograms.map((item) => (
+                    <div key={`${item.program}-${item.percentage}-${item.period}`}>
+                      <strong>{item.program}</strong>
+                      <span>{formatExactNumber(item.percentage)}% cap</span>
+                      <small>{item.period}</small>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {payoutBreakdowns.length > 0 && (
+                <details className="payout-breakdown" open>
+                  <summary>Incentive calculation breakup ({payoutBreakdowns.length})</summary>
+
+                  <div className="payout-breakdown-table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Month</th>
+                          <th>Program</th>
+                          <th>Program products</th>
+                          <th>Cap</th>
+                          <th>Attributed sales</th>
+                          <th>Base incentive</th>
+                          <th>Achievement multiplier</th>
+                          <th>Calculated payout</th>
+                          <th>Maximum payout</th>
+                          <th>Expected payout</th>
+                          <th>Actual payout</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {payoutBreakdowns.map((item) => (
+                          <tr key={item.key} title={item.ruleSource}>
+                            <td>{item.product}</td>
+                            <td>{item.month}</td>
+                            <td>{item.program}</td>
+                            <td>{item.programProducts}</td>
+                            <td>{formatExactNumber(item.percentage)}%</td>
+                            <td>{formatMoney(item.attributedSales)}</td>
+                            <td>{formatMoney(item.baseIncentive)}</td>
+                            <td>{formatExactNumber(item.multiplier)}×</td>
+                            <td>{formatMoney(item.calculatedPayout)}</td>
+                            <td>{formatMoney(item.maximumPayout)}</td>
+                            <td>{formatMoney(item.expectedPayout)}</td>
+                            <td>{formatMoney(item.actualPayout)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </details>
+              )}
 
               {payoutAnalysis?.summary && (
                 <p className="insight-summary">{displayText(payoutAnalysis.summary)}</p>

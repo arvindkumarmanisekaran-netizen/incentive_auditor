@@ -21,6 +21,10 @@ def valid_row(**overrides):
         "excluded_status_sales": 0,
         "outside_assignment_sales": 0,
         "incentive_program_id": None,
+        "program_start_date": None,
+        "program_end_date": None,
+        "program_products": None,
+        "program_products_display": None,
         "cap_percentage": 150,
         "used_default_cap": True,
         "sales_achievement": 100,
@@ -56,6 +60,10 @@ class PayoutReconciliationTests(unittest.TestCase):
         finding = reconcile_payout_record(
             valid_row(
                 incentive_program_id="IP001",
+                program_start_date="2026-01-01",
+                program_end_date="2026-12-31",
+                program_products="P005,P010",
+                program_products_display="MolestiaeCare 5 (P005), CorruptiCare 10 (P010)",
                 cap_percentage=125,
                 used_default_cap=False,
                 maximum_payout=6250,
@@ -65,6 +73,12 @@ class PayoutReconciliationTests(unittest.TestCase):
         self.assertEqual(finding["evidence"]["incentive_program_id"], "IP001")
         self.assertEqual(finding["evidence"]["cap_percentage"], 125.0)
         self.assertEqual(finding["evidence"]["cap_rule_source"], "Active incentive program")
+        self.assertEqual(finding["evidence"]["incentive_program_start_date"], "2026-01-01")
+        self.assertEqual(finding["evidence"]["incentive_program_products"], "P005,P010")
+        self.assertEqual(
+            finding["evidence"]["incentive_program_products_display"],
+            "MolestiaeCare 5 (P005), CorruptiCare 10 (P010)",
+        )
 
     def test_rebuild_detects_each_tampered_calculation_stage(self):
         row = valid_row(
