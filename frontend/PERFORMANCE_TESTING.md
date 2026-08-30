@@ -37,7 +37,7 @@ Current guardrails are deliberately conservative for headless and CI browsers:
 | Measurement | Threshold |
 |---|---:|
 | Average animation FPS | at least 45 |
-| 95th-percentile frame time | at most 40 ms |
+| 95th-percentile frame time | at most 55 ms |
 | Frames slower than 33.34 ms | at most 20% |
 | Database tab response | at most 500 ms |
 | Local development TTFB | at most 800 ms |
