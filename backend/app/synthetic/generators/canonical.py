@@ -821,7 +821,15 @@ def generate_payouts(
                 ),
             )
 
-        payout_difference = actual_payout - expected_payout
+        # Reconcile using the same precision persisted in the output record.
+        # Calculating from the unrounded intermediate values can otherwise
+        # produce a one-cent mismatch between the three stored fields.
+        rounded_expected_payout = round(expected_payout, 2)
+        rounded_actual_payout = round(actual_payout, 2)
+        payout_difference = round(
+            rounded_actual_payout - rounded_expected_payout,
+            2,
+        )
 
         payouts.append(
             {
@@ -857,18 +865,9 @@ def generate_payouts(
                     maximum_payout,
                     2,
                 ),
-                "expected_payout": round(
-                    expected_payout,
-                    2,
-                ),
-                "actual_payout": round(
-                    actual_payout,
-                    2,
-                ),
-                "payout_difference": round(
-                    payout_difference,
-                    2,
-                ),
+                "expected_payout": rounded_expected_payout,
+                "actual_payout": rounded_actual_payout,
+                "payout_difference": payout_difference,
                 "status": choose_payout_status(),
             }
         )
