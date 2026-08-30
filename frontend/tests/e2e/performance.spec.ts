@@ -20,6 +20,14 @@ async function mockApplicationApi(page: Page) {
   await page.route("**/api/**", async (route) => {
     const path = new URL(route.request().url()).pathname;
 
+    // Vite serves application modules from paths such as
+    // /src/api/workspace.ts. The broad route glob also matches those module
+    // requests, so allow them through and mock only actual backend endpoints.
+    if (!path.startsWith("/api/")) {
+      await route.continue();
+      return;
+    }
+
     if (path === "/api/workspaces/login") {
       await route.fulfill({
         json: { username: "Performance Tester", workspace: "ws_performance", created: false },
