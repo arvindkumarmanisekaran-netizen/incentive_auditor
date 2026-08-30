@@ -101,7 +101,8 @@ function InvestigationWorkflow({
 
   useEffect(() => {
     if (loading) {
-      setExpanded(true);
+      const task = window.setTimeout(() => setExpanded(true), 0);
+      return () => window.clearTimeout(task);
     }
   }, [loading]);
 
@@ -111,9 +112,9 @@ function InvestigationWorkflow({
 
   useEffect(() => {
     if (workflowComplete && !loading) {
-      setExpanded(false);
+      const collapseTask = window.setTimeout(() => setExpanded(false), 0);
 
-      const timer = window.setTimeout(() => {
+      const scrollTask = window.setTimeout(() => {
         workflowSectionRef.current?.scrollIntoView({
           behavior: "smooth",
           block: "start",
@@ -122,7 +123,8 @@ function InvestigationWorkflow({
       }, 180);
 
       return () => {
-        window.clearTimeout(timer);
+        window.clearTimeout(collapseTask);
+        window.clearTimeout(scrollTask);
       };
     }
   }, [workflowComplete, loading]);
@@ -157,7 +159,7 @@ function InvestigationWorkflow({
     return () => {
       window.clearTimeout(timer);
     };
-  }, [runningAgent?.id, loading, expanded]);
+  }, [runningAgent, loading, expanded]);
 
   // ==================================================
   // TOGGLE

@@ -151,6 +151,7 @@ function App() {
   // ==================================================
 
   const [representativeId, setRepresentativeId] = useState("");
+  const representativeIdRef = useRef("");
 
   const [startDate, setStartDate] = useState("2026-07-01");
 
@@ -201,10 +202,10 @@ function App() {
   // LOAD MASTER DATA
   // ==================================================
 
-  async function loadRepresentatives(preferredId?: string) {
+  const loadRepresentatives = useCallback(async (preferredId?: string) => {
     setMasterDataLoading(true);
 
-    const currentId = preferredId ?? representativeId;
+    const currentId = preferredId ?? representativeIdRef.current;
 
     setError(null);
 
@@ -229,13 +230,21 @@ function App() {
     } finally {
       setMasterDataLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    representativeIdRef.current = representativeId;
+  }, [representativeId]);
 
   useEffect(() => {
     if (workspaceUser && activeTab === "analysis") {
-      void loadRepresentatives();
+      const task = window.setTimeout(() => {
+        void loadRepresentatives();
+      }, 0);
+
+      return () => window.clearTimeout(task);
     }
-  }, [activeTab, workspaceUser]);
+  }, [activeTab, workspaceUser, loadRepresentatives]);
 
   // ==================================================
   // LIVE WORKFLOW EVENT HANDLER
@@ -470,7 +479,7 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }, [representativeId, startDate, endDate, handleWorkflowEvent]);
+  }, [representativeId, startDate, endDate, handleWorkflowEvent, representatives]);
 
   // ==================================================
   // RUN CHAT-TRIGGERED INVESTIGATION
@@ -481,9 +490,12 @@ function App() {
       return;
     }
 
-    setPendingChatRun(false);
+    const task = window.setTimeout(() => {
+      setPendingChatRun(false);
+      void handleInvestigation();
+    }, 0);
 
-    void handleInvestigation();
+    return () => window.clearTimeout(task);
   }, [pendingChatRun, representativeId, startDate, endDate, handleInvestigation]);
 
   // ==================================================

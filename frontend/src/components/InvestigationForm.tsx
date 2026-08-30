@@ -50,12 +50,6 @@ export function CustomDatePicker({ value, onChange, ariaLabel, disabled = false 
     };
   }, []);
 
-  useEffect(() => {
-    if (value) {
-      setViewDate(parseDate(value));
-    }
-  }, [value]);
-
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
 
@@ -97,7 +91,12 @@ export function CustomDatePicker({ value, onChange, ariaLabel, disabled = false 
       <button
         type="button"
         className="custom-date-input"
-        onClick={() => setOpen((current) => !current)}
+        onClick={() => {
+          if (!open && value) {
+            setViewDate(parseDate(value));
+          }
+          setOpen((current) => !current);
+        }}
         aria-label={ariaLabel}
         aria-expanded={open}
         disabled={disabled}

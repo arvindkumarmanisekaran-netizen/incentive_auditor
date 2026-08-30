@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { EChartsCoreOption } from "echarts/core";
 
@@ -97,26 +97,19 @@ export default function HistoricalAnalysis({ findings }: Props) {
     [salesFindings],
   );
 
-  useEffect(() => {
-    if (!productOptions.length) {
-      setSelectedProductId("");
-      return;
-    }
-
-    if (!productOptions.some((product) => product.id === selectedProductId)) {
-      setSelectedProductId(productOptions[0].id);
-    }
-  }, [productOptions, selectedProductId]);
+  const activeProductId = productOptions.some((product) => product.id === selectedProductId)
+    ? selectedProductId
+    : (productOptions[0]?.id ?? "");
 
   /* ==================================================
       SELECTED PRODUCT
   ================================================== */
 
   const salesFinding = salesFindings.find(
-    (finding) => String(finding.product_id) === selectedProductId,
+    (finding) => String(finding.product_id) === activeProductId,
   );
 
-  const selectedProduct = productOptions.find((product) => product.id === selectedProductId);
+  const selectedProduct = productOptions.find((product) => product.id === activeProductId);
 
   const historicalAverage = Number(salesFinding?.evidence?.historical_average ?? 0);
 
@@ -169,7 +162,7 @@ export default function HistoricalAnalysis({ findings }: Props) {
 
         <div className="analysis-product-selector">
           <select
-            value={selectedProductId}
+            value={activeProductId}
             onChange={(event) => setSelectedProductId(event.target.value)}
           >
             {productOptions.map((product) => (
@@ -277,7 +270,7 @@ export default function HistoricalAnalysis({ findings }: Props) {
 
             {deviation !== 0 && (
               <div
-                key={selectedProductId}
+                key={activeProductId}
                 className={`position-fill ${
                   deviation < 0 ? "position-negative" : "position-positive"
                 }`}

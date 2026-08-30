@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { EChartsCoreOption } from "echarts/core";
 
@@ -163,26 +163,19 @@ export default function ProductAnalysis({ findings = [] }: Props) {
     return Array.from(products.values());
   }, [findings]);
 
-  useEffect(() => {
-    if (!productOptions.length) {
-      setSelectedProductId("");
-      return;
-    }
+  const activeProductId = productOptions.some((product) => product.id === selectedProductId)
+    ? selectedProductId
+    : (productOptions[0]?.id ?? "");
 
-    if (!productOptions.some((p) => p.id === selectedProductId)) {
-      setSelectedProductId(productOptions[0].id);
-    }
-  }, [productOptions, selectedProductId]);
-
-  const salesFinding = getProductFinding(findings, "sales_deviation", selectedProductId);
+  const salesFinding = getProductFinding(findings, "sales_deviation", activeProductId);
 
   const mismatchFinding = getProductFinding(
     findings,
     "sales_prescription_mismatch",
-    selectedProductId,
+    activeProductId,
   );
 
-  const payoutFinding = getProductFinding(findings, "payout_discrepancy", selectedProductId);
+  const payoutFinding = getProductFinding(findings, "payout_discrepancy", activeProductId);
 
   const salesData = salesFinding
     ? [
@@ -227,7 +220,7 @@ export default function ProductAnalysis({ findings = [] }: Props) {
       ]
     : [];
 
-  const selectedProduct = productOptions.find((p) => p.id === selectedProductId);
+  const selectedProduct = productOptions.find((p) => p.id === activeProductId);
 
   return (
     <section className="analysis-panel product-analysis-section">
@@ -243,7 +236,7 @@ export default function ProductAnalysis({ findings = [] }: Props) {
         </div>
 
         <div className="analysis-product-selector product-analysis-selector">
-          <select value={selectedProductId} onChange={(e) => setSelectedProductId(e.target.value)}>
+          <select value={activeProductId} onChange={(e) => setSelectedProductId(e.target.value)}>
             {productOptions.map((product) => (
               <option key={product.id} value={product.id}>
                 {formatProductLabel(product.name, product.id)}

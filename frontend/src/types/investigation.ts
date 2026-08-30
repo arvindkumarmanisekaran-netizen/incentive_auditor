@@ -1,5 +1,5 @@
 export interface FindingEvidence {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface Finding {

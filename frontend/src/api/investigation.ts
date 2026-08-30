@@ -108,10 +108,10 @@ export async function runInvestigationStream(
 
       const rawData = dataLines.join("\n");
 
-      let parsed: any;
+      let parsed: Record<string, unknown>;
 
       try {
-        parsed = JSON.parse(rawData);
+        parsed = JSON.parse(rawData) as Record<string, unknown>;
       } catch (error) {
         console.error("Unable to parse investigation stream event:", rawData, error);
 
@@ -142,7 +142,10 @@ export async function runInvestigationStream(
        * Backend-reported error.
        */
       if (eventName === "error") {
-        throw new Error(parsed?.message ?? "Investigation workflow failed.");
+        const message = typeof parsed.message === "string"
+          ? parsed.message
+          : "Investigation workflow failed.";
+        throw new Error(message);
       }
     }
   }
