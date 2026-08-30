@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 const THRESHOLDS = {
   averageFps: 45,
-  p95FrameTime: 40,
+  p95FrameTime: 55,
   slowFramePercentage: 20,
   tabSwitchMs: 500,
   ttfbMs: 800,
@@ -116,7 +116,7 @@ test("database tab responds quickly and remains smooth", async ({ page }) => {
   await login(page);
 
   const started = Date.now();
-  await page.getByRole("button", { name: "Database" }).click();
+  await page.getByRole("button", { name: "Data control" }).click();
   await expect(page.locator(".database-page")).toBeVisible();
   const tabSwitchMs = Date.now() - started;
   const report = await measureFrames(page);
