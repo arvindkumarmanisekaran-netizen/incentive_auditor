@@ -10,6 +10,7 @@
     "test": "vitest run src",
     "test:e2e": "playwright test",
     "test:performance": "playwright test tests/e2e/performance.spec.ts",
+    "test:performance:backend": "PERF_USE_BACKEND=1 playwright test tests/e2e/performance.spec.ts",
     "test:performance:diagnostics": "PERF_DIAGNOSTICS=1 playwright test tests/e2e/performance.spec.ts",
     "playwright:install": "playwright install chromium",
     "preview": "vite preview"

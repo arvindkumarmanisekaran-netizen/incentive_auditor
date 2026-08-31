@@ -43,6 +43,30 @@ npm run test:performance:diagnostics
 Diagnostic recordings are intentionally not suitable for comparing FPS against
 the benchmark thresholds.
 
+## Tests with the real backend
+
+The default suite mocks API responses. To include FastAPI, PostgreSQL and the
+workspace data path, start the backend from the repository root in one terminal:
+
+```bash
+source .venv/bin/activate
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+
+Then run the real-backend suite from `frontend/` in another terminal:
+
+```bash
+npm run test:performance:backend
+```
+
+This mode checks backend availability before the suite, performs a real
+workspace login, and waits for the real database table request to finish. Set
+`PERF_BACKEND_URL` when the API is hosted elsewhere:
+
+```bash
+PERF_BACKEND_URL=http://192.168.1.10:8000 npm run test:performance:backend
+```
+
 Current guardrails are deliberately conservative for headless and CI browsers:
 
 | Measurement | Threshold |

@@ -1,5 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
+const USE_REAL_BACKEND = process.env.PERF_USE_BACKEND === "1";
+const BACKEND_URL = process.env.PERF_BACKEND_URL ?? "http://127.0.0.1:8000";
+
 const THRESHOLDS = {
   averageFps: 45,
   p95FrameTime: 55,
@@ -84,7 +87,16 @@ async function measureFrames(page: Page, durationMs = 1800): Promise<FrameReport
   }, durationMs);
 }
 
-test.beforeEach(async ({ page }) => mockApplicationApi(page));
+test.beforeAll(async ({ request }) => {
+  if (!USE_REAL_BACKEND) return;
+
+  const response = await request.get(`${BACKEND_URL}/`);
+  expect(response.ok(), `Backend is not available at ${BACKEND_URL}`).toBe(true);
+});
+
+test.beforeEach(async ({ page }) => {
+  if (!USE_REAL_BACKEND) await mockApplicationApi(page);
+});
 
 test("development monitors and Web Vitals initialize", async ({ page }) => {
   await page.goto("/?perf=1");
@@ -119,6 +131,7 @@ test("database tab responds quickly and remains smooth", async ({ page }) => {
   await page.getByRole("button", { name: "Data control" }).click();
   await expect(page.locator(".database-page")).toBeVisible();
   await expect(page.locator(".database-table-container")).toBeVisible();
+  await expect(page.locator(".database-table-container")).not.toHaveClass(/is-loading/);
   await expect(page.locator(".database-table-container .error-message")).toHaveCount(0);
   const tabSwitchMs = Date.now() - started;
   const report = await measureFrames(page);
