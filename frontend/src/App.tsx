@@ -569,7 +569,7 @@ function App() {
   }
 
   return (
-    <main className="dashboard">
+    <main className={activeTab === "database" ? "dashboard database-active" : "dashboard"}>
       <AmbientSignals />
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand" aria-label="Incentive Auditor">
@@ -620,7 +620,7 @@ function App() {
           <p>Investigate signals, validate evidence and control incentive risk.</p>
         </div>
 
-        <SignalField3D />
+        <SignalField3D paused={activeTab === "database"} />
 
         <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
           <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>

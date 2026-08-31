@@ -2250,6 +2250,27 @@ body > div[style*="z-index"] {
     animation: none !important;
   }
 }
+
+/* Data control renders dense tables and document-management controls. Pause
+   decorative repaint-only effects there so interaction frames remain available
+   to scrolling, table updates and pointer gestures. */
+.dashboard.database-active > .ambient-signals .ambient-tracer,
+.dashboard.database-active .database-page .ambient-tracer,
+.dashboard.database-active .database-table-container::before,
+.dashboard.database-active .chatbot-floating-button::before,
+.dashboard.database-active .chatbot-floating-button::after,
+.dashboard.database-active .app-command-header::before {
+  animation: none !important;
+}
+
+.dashboard.database-active > .ambient-signals .ambient-tracer,
+.dashboard.database-active .database-page .ambient-tracer {
+  filter: none;
+}
+
+.dashboard.database-active .app-command-header::before {
+  --command-border-angle: 45deg;
+}
 /* =========================================================
    AUTHORITATIVE MOBILE LAYOUT
 
