@@ -2275,9 +2275,9 @@ body > div[style*="z-index"] {
 }
 
 .dashboard.database-active .app-command-header::before {
-  animation: data-header-glow 4.8s ease-in-out infinite;
+  animation: none;
   --command-border-angle: 45deg;
-  will-change: transform, opacity;
+  background: linear-gradient(135deg, rgba(147,197,253,.5), rgba(37,99,235,.16), rgba(147,197,253,.42));
 }
 
 .dashboard.database-active .chatbot-floating-button::before,
@@ -2293,13 +2293,41 @@ body > div[style*="z-index"] {
   84%, 100% { opacity: 0; transform: translate3d(395%, 0, 0); }
 }
 
-@keyframes data-header-glow {
-  0%, 100% { opacity: .72; transform: translate3d(-2px, 0, 0); }
-  50% { opacity: 1; transform: translate3d(2px, 0, 0); }
-}
-
 .dashboard.database-active .app-command-header::before {
   filter: drop-shadow(0 0 7px rgba(37,99,235,.72));
+}
+
+.command-header-runner {
+  display: none;
+}
+
+.dashboard.database-active .command-header-runner {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1 !important;
+  display: block;
+  width: 82px;
+  height: 3px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #93c5fd 24%, #2563eb 55%, #60a5fa 78%, transparent);
+  box-shadow: 0 0 7px rgba(37,99,235,.72), 0 0 14px rgba(96,165,250,.38);
+  offset-path: inset(2px round 14px);
+  offset-distance: 0%;
+  offset-rotate: auto;
+  animation: data-header-runner 4.8s linear infinite;
+  will-change: offset-distance, transform;
+}
+
+@keyframes data-header-runner {
+  to { offset-distance: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard.database-active .command-header-runner {
+    animation: none;
+  }
 }
 /* =========================================================
    AUTHORITATIVE MOBILE LAYOUT

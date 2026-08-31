@@ -614,6 +614,7 @@ function App() {
       </aside>
 
       <header className="app-command-header">
+        <span className="command-header-runner" aria-hidden="true" />
         <div className="app-title-copy">
           <span className="command-eyebrow">AI GOVERNANCE / AUDIT WORKSPACE</span>
           <div className="app-title-row"><h1>Incentive intelligence</h1><span className="live-chip">LIVE</span></div>
