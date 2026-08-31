@@ -12,6 +12,16 @@ export default function AmbientSignals({ login = false, section = false }: { log
           <g key={path}>
             <path className="ambient-track" d={path} />
             <path
+              className="ambient-tracer-glow"
+              d={path}
+              pathLength={1}
+              strokeDasharray="0.025 0.975"
+              style={{
+                animationDuration: `${8 + index * 2}s`,
+                animationDelay: `${index * .7}s`,
+              }}
+            />
+            <path
               className="ambient-tracer"
               d={path}
               pathLength={1}

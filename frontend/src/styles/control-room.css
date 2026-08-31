@@ -312,7 +312,8 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
 }
 
 /* First-paint ambient motion, restricted above result sections. */
-.ambient-tracer {
+.ambient-tracer,
+.ambient-tracer-glow {
   stroke-dashoffset: 1;
   animation-name: ambient-tracer-travel;
   animation-timing-function: linear;
@@ -718,10 +719,12 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 .dashboard-tab-content > :not(.ambient-signals) { position: relative; z-index: 1; }
 .ambient-signals.section { position: absolute; inset: -24px -18px; z-index: 0; opacity: .42; }
 .ambient-signals.section .ambient-track { stroke: rgba(37,99,235,.11); }
+.ambient-signals.section .ambient-tracer-glow { stroke-width: 7; }
 .ambient-signals.section .ambient-tracer { stroke-width: 2.4; }
 .ambient-signals svg { width: 100%; height: 100%; }
 .ambient-track { fill: none; stroke: rgba(37,99,235,.075); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.ambient-tracer { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(37,99,235,.3)); }
+.ambient-tracer-glow { fill: none; stroke: rgba(37,99,235,.16); stroke-width: 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.ambient-tracer { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .signal-field-3d::after { background: linear-gradient(90deg, transparent, rgba(37,99,235,.22), transparent); }
 
 /* Transform/opacity-only interaction effects keep scrolling smooth. */
@@ -2246,7 +2249,8 @@ body > div[style*="z-index"] {
 @media (prefers-reduced-motion: reduce) {
   .chatbot-floating-button::after,
   .analysis-tab-signal::after,
-  .ambient-tracer {
+  .ambient-tracer,
+  .ambient-tracer-glow {
     animation: none !important;
   }
 }
@@ -2255,7 +2259,9 @@ body > div[style*="z-index"] {
    its visual motion with isolated transform/opacity layers instead of animating
    large painted backgrounds, SVG filters and gradient custom properties. */
 .dashboard.database-active > .ambient-signals .ambient-tracer,
-.dashboard.database-active .database-page .ambient-tracer {
+.dashboard.database-active > .ambient-signals .ambient-tracer-glow,
+.dashboard.database-active .database-page .ambient-tracer,
+.dashboard.database-active .database-page .ambient-tracer-glow {
   animation: none !important;
   filter: none;
 }
