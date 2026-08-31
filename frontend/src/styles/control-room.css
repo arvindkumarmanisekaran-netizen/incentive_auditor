@@ -2251,25 +2251,69 @@ body > div[style*="z-index"] {
   }
 }
 
-/* Data control renders dense tables and document-management controls. Pause
-   decorative repaint-only effects there so interaction frames remain available
-   to scrolling, table updates and pointer gestures. */
-.dashboard.database-active > .ambient-signals .ambient-tracer,
-.dashboard.database-active .database-page .ambient-tracer,
-.dashboard.database-active .database-table-container::before,
-.dashboard.database-active .chatbot-floating-button::before,
-.dashboard.database-active .chatbot-floating-button::after,
-.dashboard.database-active .app-command-header::before {
-  animation: none !important;
-}
-
+/* Data control renders dense tables and document-management controls. Preserve
+   its visual motion with isolated transform/opacity layers instead of animating
+   large painted backgrounds, SVG filters and gradient custom properties. */
 .dashboard.database-active > .ambient-signals .ambient-tracer,
 .dashboard.database-active .database-page .ambient-tracer {
+  animation: none !important;
   filter: none;
 }
 
+.dashboard.database-active > .ambient-signals,
+.dashboard.database-active .database-page > .ambient-signals,
+.dashboard.database-active .database-table-container {
+  contain: paint;
+}
+
+.dashboard.database-active > .ambient-signals svg,
+.dashboard.database-active .database-page > .ambient-signals svg {
+  animation: data-ambient-drift 10s ease-in-out infinite alternate;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.dashboard.database-active .database-table-container::before {
+  inset: 0 auto 0 0;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,.055), transparent);
+  background-size: 100% 100%;
+  animation: data-table-scan 7s linear infinite;
+  transform: translate3d(-115%, 0, 0);
+  will-change: transform, opacity;
+}
+
 .dashboard.database-active .app-command-header::before {
+  animation: data-header-glow 4.8s ease-in-out infinite;
   --command-border-angle: 45deg;
+  will-change: transform, opacity;
+}
+
+.dashboard.database-active .chatbot-floating-button::before,
+.dashboard.database-active .chatbot-floating-button::after,
+.dashboard.database-active .signal-network-halo {
+  will-change: transform, opacity;
+}
+
+@keyframes data-ambient-drift {
+  from { opacity: .72; transform: translate3d(-.45%, 0, 0) scale3d(1.008, 1.008, 1); }
+  to { opacity: 1; transform: translate3d(.45%, -.8%, 0) scale3d(1.015, 1.015, 1); }
+}
+
+@keyframes data-table-scan {
+  0%, 12% { opacity: 0; transform: translate3d(-115%, 0, 0); }
+  22% { opacity: .8; }
+  72% { opacity: .8; }
+  84%, 100% { opacity: 0; transform: translate3d(395%, 0, 0); }
+}
+
+@keyframes data-header-glow {
+  0%, 100% { opacity: .72; transform: translate3d(-2px, 0, 0); }
+  50% { opacity: 1; transform: translate3d(2px, 0, 0); }
+}
+
+.dashboard.database-active .app-command-header::before {
+  filter: drop-shadow(0 0 7px rgba(37,99,235,.72));
 }
 /* =========================================================
    AUTHORITATIVE MOBILE LAYOUT

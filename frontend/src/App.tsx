@@ -620,7 +620,7 @@ function App() {
           <p>Investigate signals, validate evidence and control incentive risk.</p>
         </div>
 
-        <SignalField3D paused={activeTab === "database"} />
+        <SignalField3D />
 
         <div className="workspace-identity" title={`Workspace: ${workspaceUser}`}>
           <span className="workspace-avatar">{workspaceUser.slice(0, 2).toUpperCase()}</span>
