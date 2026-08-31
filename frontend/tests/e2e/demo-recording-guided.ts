@@ -389,9 +389,8 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
           const productName = (await indicator.locator(".product-title").innerText()).trim();
           await subtitle(page, `Selecting ${productName} from Peer Indicators refreshes the relative index and peer distribution for that product.`, 900);
           await clickHuman(page, indicator, 260);
-          await pause(1200);
-          const changedCharts = peerSection.locator(".chart-card").filter({ has: peerSection.locator(".signal-chart") });
-          await moveTo(page, changedCharts.nth(Math.min(1, Math.max(0, (await changedCharts.count()) - 1))), 220).catch(() => false);
+          await pause(1100);
+          status(`Peer Indicators update complete for ${productName}`);
         }
         continue;
       }
