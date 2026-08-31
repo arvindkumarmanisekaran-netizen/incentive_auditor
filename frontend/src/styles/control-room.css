@@ -312,7 +312,8 @@ button:hover:not(:disabled) { transform: translateY(-1px); }
 }
 
 /* First-paint ambient motion, restricted above result sections. */
-.ambient-tracer {
+.ambient-tracer,
+.ambient-tracer-glow {
   stroke-dashoffset: 1;
   animation-name: ambient-tracer-travel;
   animation-timing-function: linear;
@@ -718,10 +719,12 @@ p, li, td, label, button, input, select, textarea, .dashboard-tab,
 .dashboard-tab-content > :not(.ambient-signals) { position: relative; z-index: 1; }
 .ambient-signals.section { position: absolute; inset: -24px -18px; z-index: 0; opacity: .42; }
 .ambient-signals.section .ambient-track { stroke: rgba(37,99,235,.11); }
+.ambient-signals.section .ambient-tracer-glow { stroke-width: 7; }
 .ambient-signals.section .ambient-tracer { stroke-width: 2.4; }
 .ambient-signals svg { width: 100%; height: 100%; }
 .ambient-track { fill: none; stroke: rgba(37,99,235,.075); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.ambient-tracer { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(37,99,235,.3)); }
+.ambient-tracer-glow { fill: none; stroke: rgba(37,99,235,.16); stroke-width: 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.ambient-tracer { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .signal-field-3d::after { background: linear-gradient(90deg, transparent, rgba(37,99,235,.22), transparent); }
 
 /* Transform/opacity-only interaction effects keep scrolling smooth. */
@@ -2246,8 +2249,80 @@ body > div[style*="z-index"] {
 @media (prefers-reduced-motion: reduce) {
   .chatbot-floating-button::after,
   .analysis-tab-signal::after,
-  .ambient-tracer {
+  .ambient-tracer,
+  .ambient-tracer-glow {
     animation: none !important;
+  }
+}
+
+/* Data control renders dense tables and document-management controls. Preserve
+   its visual motion with isolated transform/opacity layers instead of animating
+   large painted backgrounds, SVG filters and gradient custom properties. */
+.dashboard.database-active > .ambient-signals,
+.dashboard.database-active .database-page > .ambient-signals,
+.dashboard.database-active .database-table-container {
+  contain: paint;
+}
+
+.dashboard.database-active .database-table-container::before {
+  inset: 0 auto 0 0;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,.055), transparent);
+  background-size: 100% 100%;
+  animation: data-table-scan 7s linear infinite;
+  transform: translate3d(-115%, 0, 0);
+  will-change: transform, opacity;
+}
+
+.app-command-header::before {
+  animation: none;
+  --command-border-angle: 45deg;
+  background: linear-gradient(135deg, rgba(147,197,253,.5), rgba(37,99,235,.16), rgba(147,197,253,.42));
+}
+
+.dashboard.database-active .chatbot-floating-button::before,
+.dashboard.database-active .chatbot-floating-button::after,
+.dashboard.database-active .signal-network-halo {
+  will-change: transform, opacity;
+}
+
+@keyframes data-table-scan {
+  0%, 12% { opacity: 0; transform: translate3d(-115%, 0, 0); }
+  22% { opacity: .8; }
+  72% { opacity: .8; }
+  84%, 100% { opacity: 0; transform: translate3d(395%, 0, 0); }
+}
+
+.app-command-header::before {
+  filter: drop-shadow(0 0 7px rgba(37,99,235,.72));
+}
+
+.command-header-runner {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1 !important;
+  display: block;
+  width: 82px;
+  height: 3px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #93c5fd 24%, #2563eb 55%, #60a5fa 78%, transparent);
+  box-shadow: 0 0 7px rgba(37,99,235,.72), 0 0 14px rgba(96,165,250,.38);
+  offset-path: inset(2px round 14px);
+  offset-distance: 0%;
+  offset-rotate: auto;
+  animation: data-header-runner 4.8s linear infinite;
+  will-change: offset-distance, transform;
+}
+
+@keyframes data-header-runner {
+  to { offset-distance: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .command-header-runner {
+    animation: none;
   }
 }
 /* =========================================================

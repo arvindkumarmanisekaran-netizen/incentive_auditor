@@ -130,6 +130,7 @@ function withCompletionCommentary(agent: WorkflowAgent): WorkflowAgent {
 function App() {
   const [workspaceUser, setWorkspaceUser] = useState("");
   const [databaseRefreshKey, setDatabaseRefreshKey] = useState(0);
+  const [databaseContentReady, setDatabaseContentReady] = useState(false);
 
   const refreshDatabaseManagement = useCallback(() => {
     setDatabaseRefreshKey((current) => current + 1);
@@ -145,6 +146,13 @@ function App() {
   // ==================================================
 
   const [activeTab, setActiveTab] = useState<DashboardTab>("analysis");
+
+  useEffect(() => {
+    if (activeTab !== "database") return;
+
+    const frame = window.requestAnimationFrame(() => setDatabaseContentReady(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeTab]);
 
   // ==================================================
   // FILTERS
@@ -569,7 +577,7 @@ function App() {
   }
 
   return (
-    <main className="dashboard">
+    <main className={activeTab === "database" ? "dashboard database-active" : "dashboard"}>
       <AmbientSignals />
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand" aria-label="Incentive Auditor">
@@ -597,7 +605,10 @@ function App() {
         <motion.button
           type="button"
           className={activeTab === "database" ? "dashboard-tab active" : "dashboard-tab"}
-          onClick={() => setActiveTab("database")}
+          onClick={() => {
+            setDatabaseContentReady(false);
+            setActiveTab("database");
+          }}
           whileTap={{ scale: 0.97 }}
         >
           <span className="dashboard-tab-icon" aria-hidden="true">▦</span>
@@ -614,6 +625,7 @@ function App() {
       </aside>
 
       <header className="app-command-header">
+        <span className="command-header-runner" aria-hidden="true" />
         <div className="app-title-copy">
           <span className="command-eyebrow">AI GOVERNANCE / AUDIT WORKSPACE</span>
           <div className="app-title-row"><h1>Incentive intelligence</h1><span className="live-chip">LIVE</span></div>
@@ -784,13 +796,19 @@ function App() {
             exit={{ opacity: 0, y: -6 }}
           >
           <AmbientSignals section />
-          <div className="document-processing-expand">
-            <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
-          </div>
+          {databaseContentReady ? (
+            <>
+              <div className="document-processing-expand">
+                <DocumentProcessingCard onProcessingFinished={refreshDatabaseManagement} />
+              </div>
 
-          <div className="database-management-center">
-            <DatabaseManagementCard refreshKey={databaseRefreshKey} />
-          </div>
+              <div className="database-management-center">
+                <DatabaseManagementCard refreshKey={databaseRefreshKey} />
+              </div>
+            </>
+          ) : (
+            <div className="loading-message" role="status">Opening data controls…</div>
+          )}
           </motion.section>
         )}
       </AnimatePresence>
