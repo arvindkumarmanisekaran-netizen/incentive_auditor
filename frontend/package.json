@@ -9,10 +9,13 @@
     "lint": "eslint .",
     "test": "vitest run src",
     "test:e2e": "playwright test",
-    "test:performance": "playwright test tests/e2e/performance.spec.ts",
+    "test:performance": "PERF_USE_BACKEND=1 playwright test tests/e2e/performance.spec.ts",
     "test:performance:backend": "PERF_USE_BACKEND=1 playwright test tests/e2e/performance.spec.ts",
-    "test:performance:diagnostics": "PERF_DIAGNOSTICS=1 playwright test tests/e2e/performance.spec.ts",
-    "playwright:install": "playwright install chromium",
+    "test:performance:desktop": "PERF_USE_BACKEND=1 playwright test tests/e2e/performance.spec.ts --project=desktop-chromium",
+    "test:performance:mobile": "PERF_USE_BACKEND=1 playwright test tests/e2e/performance.spec.ts --project='mobile-*'",
+    "test:performance:mocked": "playwright test tests/e2e/performance.spec.ts",
+    "test:performance:diagnostics": "PERF_USE_BACKEND=1 PERF_DIAGNOSTICS=1 playwright test tests/e2e/performance.spec.ts",
+    "playwright:install": "playwright install chromium webkit",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -21,7 +21,14 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: diagnosticsEnabled ? "retain-on-failure" : "off",
   },
-  projects: [{ name: "chromium-performance", use: { ...devices["Desktop Chrome"] } }],
+  projects: [
+    { name: "desktop-chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "mobile-chrome-pixel-7", use: { ...devices["Pixel 7"] } },
+    { name: "mobile-chrome-galaxy-s24", use: { ...devices["Galaxy S24"] } },
+    { name: "mobile-chrome-galaxy-a55", use: { ...devices["Galaxy A55"] } },
+    { name: "mobile-safari-iphone-13", use: { ...devices["iPhone 13"] } },
+    { name: "mobile-safari-iphone-15", use: { ...devices["iPhone 15"] } },
+  ],
   webServer: {
     command: "npm run dev -- --host 127.0.0.1",
     url: "http://127.0.0.1:5173",

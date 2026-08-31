@@ -29,8 +29,13 @@ npm run playwright:install
 npm run test:performance
 ```
 
-The tests mock API responses, so PostgreSQL, FastAPI, and an LLM are not required.
-Reports are written to `playwright-report/` and `test-results/`.
+The default suite uses the real FastAPI and PostgreSQL backend. Reports are
+written to `playwright-report/` and `test-results/`. For a fast frontend-only
+run with mocked API responses, use:
+
+```bash
+npm run test:performance:mocked
+```
 
 The normal benchmark disables Playwright trace screenshots and video because
 recording them competes with `requestAnimationFrame` and distorts FPS. To retain
@@ -45,18 +50,19 @@ the benchmark thresholds.
 
 ## Tests with the real backend
 
-The default suite mocks API responses. To include FastAPI, PostgreSQL and the
-workspace data path, start the backend from the repository root in one terminal:
+The default suite includes FastAPI, PostgreSQL and the workspace data path.
+Start the backend from the repository root in one terminal:
 
 ```bash
 source .venv/bin/activate
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Then run the real-backend suite from `frontend/` in another terminal:
+Then run the complete desktop and mobile matrix from `frontend/` in another
+terminal:
 
 ```bash
-npm run test:performance:backend
+npm run test:performance
 ```
 
 This mode checks backend availability before the suite, performs a real
@@ -65,6 +71,31 @@ workspace login, and waits for the real database table request to finish. Set
 
 ```bash
 PERF_BACKEND_URL=http://192.168.1.10:8000 npm run test:performance:backend
+```
+
+## Desktop and mobile projects
+
+The default suite runs each scenario on six representative configurations:
+
+| Project | Engine | Viewport class |
+|---|---|---|
+| Desktop Chrome | Chromium | Desktop |
+| Pixel 7 | Chromium | Standard Android |
+| Galaxy S24 | Chromium | Compact flagship Android |
+| Galaxy A55 | Chromium | Large mid-range Android |
+| iPhone 13 | WebKit | Widely used iPhone |
+| iPhone 15 | WebKit | Current iPhone form factor |
+
+Run only the mobile matrix:
+
+```bash
+npm run test:performance:mobile
+```
+
+Run only desktop Chromium:
+
+```bash
+npm run test:performance:desktop
 ```
 
 Current guardrails are deliberately conservative for headless and CI browsers:
