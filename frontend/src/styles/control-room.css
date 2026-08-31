@@ -2258,25 +2258,10 @@ body > div[style*="z-index"] {
 /* Data control renders dense tables and document-management controls. Preserve
    its visual motion with isolated transform/opacity layers instead of animating
    large painted backgrounds, SVG filters and gradient custom properties. */
-.dashboard.database-active > .ambient-signals .ambient-tracer,
-.dashboard.database-active > .ambient-signals .ambient-tracer-glow,
-.dashboard.database-active .database-page .ambient-tracer,
-.dashboard.database-active .database-page .ambient-tracer-glow {
-  animation: none !important;
-  filter: none;
-}
-
 .dashboard.database-active > .ambient-signals,
 .dashboard.database-active .database-page > .ambient-signals,
 .dashboard.database-active .database-table-container {
   contain: paint;
-}
-
-.dashboard.database-active > .ambient-signals svg,
-.dashboard.database-active .database-page > .ambient-signals svg {
-  animation: data-ambient-drift 10s ease-in-out infinite alternate;
-  transform-origin: center;
-  will-change: transform, opacity;
 }
 
 .dashboard.database-active .database-table-container::before {
@@ -2299,11 +2284,6 @@ body > div[style*="z-index"] {
 .dashboard.database-active .chatbot-floating-button::after,
 .dashboard.database-active .signal-network-halo {
   will-change: transform, opacity;
-}
-
-@keyframes data-ambient-drift {
-  from { opacity: .72; transform: translate3d(-.45%, 0, 0) scale3d(1.008, 1.008, 1); }
-  to { opacity: 1; transform: translate3d(.45%, -.8%, 0) scale3d(1.015, 1.015, 1); }
 }
 
 @keyframes data-table-scan {
