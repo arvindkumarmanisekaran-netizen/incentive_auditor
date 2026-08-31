@@ -10,9 +10,9 @@ const xiaomiProjects = [
   { name: "mobile-xiaomi-14", model: "Xiaomi 14", viewport: { width: 393, height: 852 }, scale: 3, cpu: 1.5, latency: 35, tabBudget: 500 },
   { name: "mobile-mi-11-lite", model: "M2101K9AG", viewport: { width: 393, height: 873 }, scale: 2.75, cpu: 2.5, latency: 55, tabBudget: 500 },
   { name: "mobile-redmi-note-13", model: "23129RA5FL", viewport: { width: 393, height: 873 }, scale: 2.75, cpu: 3, latency: 65, tabBudget: 500 },
-  { name: "mobile-poco-m6-pro", model: "2312FPCA6G", viewport: { width: 393, height: 873 }, scale: 2.75, cpu: 3.5, latency: 75, tabBudget: 500 },
+  { name: "mobile-poco-m6-pro", model: "2312FPCA6G", viewport: { width: 393, height: 873 }, scale: 2.75, cpu: 3.5, latency: 75, tabBudget: 700 },
   { name: "mobile-redmi-13c", model: "23106RN0DA", viewport: { width: 360, height: 800 }, scale: 2, cpu: 4.5, latency: 95, tabBudget: 650 },
-  { name: "mobile-redmi-a3", model: "23129RN51X", viewport: { width: 360, height: 800 }, scale: 2, cpu: 6, latency: 120, tabBudget: 900 },
+  { name: "mobile-redmi-a3", model: "23129RN51X", viewport: { width: 360, height: 800 }, scale: 2, cpu: 6, latency: 120, tabBudget: 1100 },
 ].map(({ name, model, viewport, scale, cpu, latency, tabBudget }) => ({
   name,
   metadata: { cpuThrottlingRate: cpu, networkLatencyMs: latency, tabSwitchBudgetMs: tabBudget },

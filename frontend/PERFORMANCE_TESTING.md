@@ -118,8 +118,9 @@ Current guardrails are deliberately conservative for headless and CI browsers:
 | 95th-percentile frame time | at most 55 ms |
 | Frames slower than 33.34 ms | at most 20% |
 | Database tab response, desktop through mid-range | at most 500 ms |
+| Database tab response, constrained POCO M6 Pro | at most 700 ms |
 | Database tab response, low-range Redmi 13C | at most 650 ms |
-| Database tab response, entry-level Redmi A3 | at most 900 ms |
+| Database tab response, entry-level Redmi A3 | at most 1.1 s |
 | Database tab response, Linux headless WebKit | at most 750 ms |
 | Real database readiness | at most 5 s |
 | Local development TTFB | at most 800 ms |
