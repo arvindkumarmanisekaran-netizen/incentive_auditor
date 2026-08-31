@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const diagnosticsEnabled = process.env.PERF_DIAGNOSTICS === "1";
+
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: false,
@@ -13,9 +15,11 @@ export default defineConfig({
   ],
   use: {
     baseURL: "http://127.0.0.1:5173",
-    trace: "retain-on-failure",
+    // Trace screenshots and video encoding consume animation frames. Keep the
+    // benchmark clean by default and enable recording only for diagnosis.
+    trace: diagnosticsEnabled ? "retain-on-failure" : "off",
     screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    video: diagnosticsEnabled ? "retain-on-failure" : "off",
   },
   projects: [{ name: "chromium-performance", use: { ...devices["Desktop Chrome"] } }],
   webServer: {

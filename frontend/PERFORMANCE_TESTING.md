@@ -32,6 +32,17 @@ npm run test:performance
 The tests mock API responses, so PostgreSQL, FastAPI, and an LLM are not required.
 Reports are written to `playwright-report/` and `test-results/`.
 
+The normal benchmark disables Playwright trace screenshots and video because
+recording them competes with `requestAnimationFrame` and distorts FPS. To retain
+trace and video while diagnosing a functional failure, run:
+
+```bash
+npm run test:performance:diagnostics
+```
+
+Diagnostic recordings are intentionally not suitable for comparing FPS against
+the benchmark thresholds.
+
 Current guardrails are deliberately conservative for headless and CI browsers:
 
 | Measurement | Threshold |

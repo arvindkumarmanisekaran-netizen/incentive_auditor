@@ -45,7 +45,7 @@ async function mockApplicationApi(page: Page) {
       return;
     }
 
-    await route.fulfill({ json: { items: [], total: 0, limit: 50, offset: 0 } });
+    await route.fulfill({ json: { records: [], total: 0, limit: 50, offset: 0 } });
   });
 }
 
@@ -118,6 +118,8 @@ test("database tab responds quickly and remains smooth", async ({ page }) => {
   const started = Date.now();
   await page.getByRole("button", { name: "Data control" }).click();
   await expect(page.locator(".database-page")).toBeVisible();
+  await expect(page.locator(".database-table-container")).toBeVisible();
+  await expect(page.locator(".database-table-container .error-message")).toHaveCount(0);
   const tabSwitchMs = Date.now() - started;
   const report = await measureFrames(page);
 
