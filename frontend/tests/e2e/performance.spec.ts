@@ -94,7 +94,29 @@ test.beforeAll(async ({ request }) => {
   expect(response.ok(), `Backend is not available at ${BACKEND_URL}`).toBe(true);
 });
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, browserName }, testInfo) => {
+  const cpuThrottlingRate = Number(testInfo.project.metadata.cpuThrottlingRate ?? 1);
+  const networkLatencyMs = Number(testInfo.project.metadata.networkLatencyMs ?? 0);
+
+  if (browserName === "chromium" && (cpuThrottlingRate > 1 || networkLatencyMs > 0)) {
+    const cdp = await page.context().newCDPSession(page);
+
+    if (cpuThrottlingRate > 1) {
+      await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuThrottlingRate });
+    }
+
+    if (networkLatencyMs > 0) {
+      await cdp.send("Network.enable");
+      await cdp.send("Network.emulateNetworkConditions", {
+        offline: false,
+        latency: networkLatencyMs,
+        downloadThroughput: 4 * 1024 * 1024 / 8,
+        uploadThroughput: 1.5 * 1024 * 1024 / 8,
+        connectionType: "cellular4g",
+      });
+    }
+  }
+
   if (!USE_REAL_BACKEND) await mockApplicationApi(page);
 });
 

@@ -85,6 +85,18 @@ The default suite runs each scenario on six representative configurations:
 | Galaxy A55 | Chromium | Large mid-range Android |
 | iPhone 13 | WebKit | Widely used iPhone |
 | iPhone 15 | WebKit | Current iPhone form factor |
+| Xiaomi 14 | Chromium | Xiaomi flagship, 1.5× CPU slowdown |
+| Mi 11 Lite | Chromium | Older mid-range, 2.5× CPU slowdown |
+| Redmi Note 13 | Chromium | Mainstream mid-range, 3× CPU slowdown |
+| POCO M6 Pro | Chromium | Value mid-range, 3.5× CPU slowdown |
+| Redmi 13C | Chromium | Low range, 4.5× CPU slowdown |
+| Redmi A3 | Chromium | Entry level, 6× CPU slowdown |
+
+The Xiaomi, Mi, Redmi and POCO projects also emulate constrained 4G latency.
+CPU slowdown is applied through Chromium DevTools Protocol so these projects
+exercise more than responsive layout. It remains an approximation; real-device
+thermal throttling, GPU limits and vendor browser behavior require a physical
+device lab for final certification.
 
 Run only the mobile matrix:
 
