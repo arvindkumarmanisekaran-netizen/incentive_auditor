@@ -153,6 +153,10 @@ test("login animation sustains responsive frame delivery", async ({ page, browse
 });
 
 test("database tab responds quickly and remains smooth", async ({ page, browserName }, testInfo) => {
+  const tabSwitchBudgetMs = Number(
+    testInfo.project.metadata.tabSwitchBudgetMs ?? THRESHOLDS.tabSwitchMs,
+  );
+
   await page.goto("/");
   await applyProjectThrottling(page, browserName, testInfo);
   await login(page);
@@ -170,9 +174,9 @@ test("database tab responds quickly and remains smooth", async ({ page, browserN
 
   test.info().annotations.push({
     type: "performance",
-    description: JSON.stringify({ tabSwitchMs, databaseReadyMs, ...report }),
+    description: JSON.stringify({ tabSwitchMs, tabSwitchBudgetMs, databaseReadyMs, ...report }),
   });
-  expect(tabSwitchMs).toBeLessThanOrEqual(THRESHOLDS.tabSwitchMs);
+  expect(tabSwitchMs).toBeLessThanOrEqual(tabSwitchBudgetMs);
   expect(databaseReadyMs).toBeLessThanOrEqual(THRESHOLDS.databaseReadyMs);
   if (report) {
     expect(report.averageFps).toBeGreaterThanOrEqual(THRESHOLDS.averageFps);
