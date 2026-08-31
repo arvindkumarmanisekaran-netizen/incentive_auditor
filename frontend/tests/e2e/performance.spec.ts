@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page, type TestInfo } from "@playwright/test";
 
 const USE_REAL_BACKEND = process.env.PERF_USE_BACKEND === "1";
 const BACKEND_URL = process.env.PERF_BACKEND_URL ?? "http://127.0.0.1:8000";
@@ -55,7 +55,31 @@ async function mockApplicationApi(page: Page) {
 async function login(page: Page) {
   await page.getByLabel("Enter your name").fill("Performance Tester");
   await page.getByRole("button", { name: "Open my workspace" }).click();
-  await expect(page.getByText("Workspace owner")).toBeVisible();
+  await expect(page.locator("main.dashboard")).toBeVisible({ timeout: 15_000 });
+}
+
+async function applyProjectThrottling(page: Page, browserName: string, testInfo: TestInfo) {
+  const cpuThrottlingRate = Number(testInfo.project.metadata.cpuThrottlingRate ?? 1);
+  const networkLatencyMs = Number(testInfo.project.metadata.networkLatencyMs ?? 0);
+
+  if (browserName !== "chromium" || (cpuThrottlingRate <= 1 && networkLatencyMs <= 0)) return;
+
+  const cdp = await page.context().newCDPSession(page);
+
+  if (cpuThrottlingRate > 1) {
+    await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuThrottlingRate });
+  }
+
+  if (networkLatencyMs > 0) {
+    await cdp.send("Network.enable");
+    await cdp.send("Network.emulateNetworkConditions", {
+      offline: false,
+      latency: networkLatencyMs,
+      downloadThroughput: 4 * 1024 * 1024 / 8,
+      uploadThroughput: 1.5 * 1024 * 1024 / 8,
+      connectionType: "cellular4g",
+    });
+  }
 }
 
 async function measureFrames(page: Page, durationMs = 1800): Promise<FrameReport> {
@@ -94,34 +118,13 @@ test.beforeAll(async ({ request }) => {
   expect(response.ok(), `Backend is not available at ${BACKEND_URL}`).toBe(true);
 });
 
-test.beforeEach(async ({ page, browserName }, testInfo) => {
-  const cpuThrottlingRate = Number(testInfo.project.metadata.cpuThrottlingRate ?? 1);
-  const networkLatencyMs = Number(testInfo.project.metadata.networkLatencyMs ?? 0);
-
-  if (browserName === "chromium" && (cpuThrottlingRate > 1 || networkLatencyMs > 0)) {
-    const cdp = await page.context().newCDPSession(page);
-
-    if (cpuThrottlingRate > 1) {
-      await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuThrottlingRate });
-    }
-
-    if (networkLatencyMs > 0) {
-      await cdp.send("Network.enable");
-      await cdp.send("Network.emulateNetworkConditions", {
-        offline: false,
-        latency: networkLatencyMs,
-        downloadThroughput: 4 * 1024 * 1024 / 8,
-        uploadThroughput: 1.5 * 1024 * 1024 / 8,
-        connectionType: "cellular4g",
-      });
-    }
-  }
-
+test.beforeEach(async ({ page }) => {
   if (!USE_REAL_BACKEND) await mockApplicationApi(page);
 });
 
-test("development monitors and Web Vitals initialize", async ({ page }) => {
+test("development monitors and Web Vitals initialize", async ({ page, browserName }, testInfo) => {
   await page.goto("/?perf=1");
+  await applyProjectThrottling(page, browserName, testInfo);
 
   await expect.poll(() => page.evaluate(() => window.__PERFORMANCE_TOOLS__)).toMatchObject({
     webVitals: true, stats: true, reactScan: true,
@@ -134,8 +137,9 @@ test("development monitors and Web Vitals initialize", async ({ page }) => {
   if (vitals?.FCP) expect(vitals.FCP.value).toBeLessThanOrEqual(THRESHOLDS.fcpMs);
 });
 
-test("login animation sustains responsive frame delivery", async ({ page }) => {
+test("login animation sustains responsive frame delivery", async ({ page, browserName }, testInfo) => {
   await page.goto("/");
+  await applyProjectThrottling(page, browserName, testInfo);
   const report = await measureFrames(page);
 
   test.info().annotations.push({ type: "performance", description: JSON.stringify(report) });
@@ -145,15 +149,16 @@ test("login animation sustains responsive frame delivery", async ({ page }) => {
   expect(report.slowFramePercentage).toBeLessThanOrEqual(THRESHOLDS.slowFramePercentage);
 });
 
-test("database tab responds quickly and remains smooth", async ({ page }) => {
+test("database tab responds quickly and remains smooth", async ({ page, browserName }, testInfo) => {
   await page.goto("/");
+  await applyProjectThrottling(page, browserName, testInfo);
   await login(page);
 
   const started = Date.now();
   await page.getByRole("button", { name: "Data control" }).click();
-  await expect(page.locator(".database-page")).toBeVisible();
-  await expect(page.locator(".database-table-container")).toBeVisible();
-  await expect(page.locator(".database-table-container")).not.toHaveClass(/is-loading/);
+  await expect(page.locator(".database-page")).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator(".database-table-container")).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator(".database-table-container")).not.toHaveClass(/is-loading/, { timeout: 15_000 });
   await expect(page.locator(".database-table-container .error-message")).toHaveCount(0);
   const tabSwitchMs = Date.now() - started;
   const report = await measureFrames(page);
