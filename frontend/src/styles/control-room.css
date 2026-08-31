@@ -2274,7 +2274,7 @@ body > div[style*="z-index"] {
   will-change: transform, opacity;
 }
 
-.dashboard.database-active .app-command-header::before {
+.app-command-header::before {
   animation: none;
   --command-border-angle: 45deg;
   background: linear-gradient(135deg, rgba(147,197,253,.5), rgba(37,99,235,.16), rgba(147,197,253,.42));
@@ -2293,15 +2293,11 @@ body > div[style*="z-index"] {
   84%, 100% { opacity: 0; transform: translate3d(395%, 0, 0); }
 }
 
-.dashboard.database-active .app-command-header::before {
+.app-command-header::before {
   filter: drop-shadow(0 0 7px rgba(37,99,235,.72));
 }
 
 .command-header-runner {
-  display: none;
-}
-
-.dashboard.database-active .command-header-runner {
   position: absolute !important;
   top: 0;
   left: 0;
@@ -2325,7 +2321,7 @@ body > div[style*="z-index"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dashboard.database-active .command-header-runner {
+  .command-header-runner {
     animation: none;
   }
 }
