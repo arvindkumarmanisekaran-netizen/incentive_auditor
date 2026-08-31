@@ -241,17 +241,24 @@ function chartCommentary(title: string, description: string) {
 
 async function chartMetadata(chart: Locator) {
   return chart.evaluate((element) => {
-    let node: Element | null = element;
-    while (node && node !== document.body) {
-      const title = node.querySelector(".chart-heading h3, .chart-heading h4, :scope > h3, :scope > h4")?.textContent?.trim();
+    const card = element.closest(
+      ".chart-card, .insight-card, .insights-card, .risk-card, .analysis-card, .metric-card",
+    );
+    if (card) {
+      const title = card.querySelector(
+        ".chart-heading h3, .chart-heading h4, :scope > h3, :scope > h4, .section-heading h3, .section-heading h4",
+      )?.textContent?.trim();
       if (title) {
-        const description = node.querySelector(".chart-heading p, :scope > p")?.textContent?.trim() ?? "";
+        const description = card.querySelector(
+          ".chart-heading p, :scope > p, .section-heading p",
+        )?.textContent?.trim() ?? "";
         return { title, description };
       }
-      node = node.parentElement;
     }
+
+    const ariaLabel = element.getAttribute("aria-label")?.trim();
     return {
-      title: element.getAttribute("aria-label") ?? "Investigation chart",
+      title: ariaLabel || "Investigation chart",
       description: "",
     };
   });
@@ -503,12 +510,20 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
     const duplicateFileCount = await duplicateButtons.count();
     expect(duplicateFileCount).toBeGreaterThan(0);
     const duplicateButton = duplicateButtons.nth(randomIndex(duplicateFileCount));
-    const resultRow = duplicateButton.locator("xpath=ancestor::*[contains(@class,'document-result-row')][1]");
-    const fileName = (await resultRow.locator(".document-result-file strong").innerText().catch(() => "selected document")).trim();
+    const initialResultRow = duplicateButton.locator("xpath=ancestor::*[contains(@class,'document-result-row')][1]");
+    const fileName = (await initialResultRow.locator(".document-result-file strong").innerText().catch(() => "selected document")).trim();
     await subtitle(page, `${fileName} is selected for duplicate review so individual record conflicts can be resolved before import.`, 900);
     await clickHuman(page, duplicateButton, 280);
+
+    // The button text changes from View Duplicates to Hide Duplicates after opening.
+    // Re-anchor the row by its stable filename so the locator remains valid after React re-renders.
+    const resultRow = documentCard
+      .locator(".document-result-row")
+      .filter({ hasText: fileName })
+      .first();
     const duplicatePanel = resultRow.locator(".document-duplicate-inline");
     await expect(duplicatePanel).toBeVisible({ timeout: 20_000 });
+    status(`Duplicate panel opened for ${fileName}`);
     await spotlight(duplicatePanel, 650);
     const resolutions = duplicatePanel.locator(".duplicate-table .duplicate-resolution");
     const resolutionCount = await resolutions.count();
