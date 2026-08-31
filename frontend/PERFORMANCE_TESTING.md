@@ -118,9 +118,16 @@ Current guardrails are deliberately conservative for headless and CI browsers:
 | 95th-percentile frame time | at most 55 ms |
 | Frames slower than 33.34 ms | at most 20% |
 | Database tab response | at most 500 ms |
+| Real database readiness | at most 5 s |
 | Local development TTFB | at most 800 ms |
 | FCP, when reported | at most 1.8 s |
 
 FPS varies with hardware and runner load. Change thresholds only after comparing
 several runs on the same class of machine. GitHub Actions runs the suite for
 frontend pull requests and stores the HTML and JSON reports for 14 days.
+
+Headless WebKit on Linux can throttle `requestAnimationFrame` independently of
+page workload, so iPhone projects do not enforce synthetic FPS. They still test
+Web Vitals initialization, responsive rendering, real backend login, the 500 ms
+UI tab response and database readiness. Physical iPhones are required for a
+trustworthy Safari FPS measurement.
