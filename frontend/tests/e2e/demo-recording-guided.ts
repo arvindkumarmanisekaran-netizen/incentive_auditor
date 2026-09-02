@@ -376,6 +376,50 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
   return choice;
 }
 
+async function choosePeerProductWithinSalesRange(
+  page: Page,
+  peerSection: Locator,
+  maximumDifference = 20,
+) {
+  const indicators = peerSection.locator(".peer-indicator-card .product-status-card");
+  await expect(indicators.first()).toBeVisible();
+  const candidates = await indicators.evaluateAll((items, limit) =>
+    items
+      .map((item) => {
+        const difference = Number((item as HTMLElement).dataset.salesDifference);
+        const peerAverage = Number((item as HTMLElement).dataset.peerAverageSales);
+        return {
+          productId: (item as HTMLElement).dataset.productId ?? "",
+          label: item.querySelector(".product-title")?.textContent?.trim() ?? "",
+          difference,
+          peerAverage,
+        };
+      })
+      .filter((item) =>
+        item.productId
+        && Number.isFinite(item.difference)
+        && Number.isFinite(item.peerAverage)
+        && item.peerAverage > 0
+        && Math.abs(item.difference) <= Number(limit),
+      )
+      .sort((left, right) => Math.abs(left.difference) - Math.abs(right.difference)),
+    maximumDifference,
+  );
+  if (candidates.length === 0) {
+    throw new Error(
+      `No peer product has representative sales within ±${maximumDifference}% of peer average.`,
+    );
+  }
+
+  const choice = candidates[0];
+  const peerSelect = peerSection.locator(".analysis-product-selector select");
+  await clickHuman(page, peerSelect, 240);
+  await peerSelect.selectOption(choice.productId);
+  await expect(peerSelect).toHaveValue(choice.productId);
+  await pause(900);
+  return { ...choice, qualifyingProductCount: candidates.length };
+}
+
 async function selectCalendarDate(page: Page, ariaLabel: string, targetDate: string) {
   const trigger = page.getByRole("button", { name: ariaLabel, exact: true });
   await expect(trigger).toBeVisible();
@@ -594,24 +638,23 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
 
       if (tabName === "Peer Benchmark") {
         const peerSection = workspace.locator(".peer-analysis-section");
-        const peerSelect = peerSection.locator(".analysis-product-selector select");
-        if (await peerSelect.isVisible().catch(() => false)) {
-          const product = await chooseRandomOption(page, peerSelect, false);
-          if (product) await subtitle(page, `Peer Benchmark is now focused on ${product.label}, recalculating the representative's position against comparable peers.`, 900);
-        }
+        const product = await choosePeerProductWithinSalesRange(page, peerSection);
+        const signedDifference = `${product.difference >= 0 ? "+" : ""}${product.difference.toFixed(2)}%`;
+        await subtitle(
+          page,
+          `Peer Benchmark is focused on ${product.label}. Representative sales differ from peer-average sales by ${signedDifference}, which is within the selected plus or minus twenty percent comparison range.`,
+          1200,
+        );
         await tourCharts(page, peerSection);
-        const indicators = peerSection.locator(".peer-indicator-card .product-status-card");
-        const indicatorCount = await indicators.count();
-        if (indicatorCount > 1) {
-          const activeIndex = await indicators.evaluateAll((items) => items.findIndex((item) => item.classList.contains("active")));
-          const index = randomIndex(indicatorCount, activeIndex);
-          const indicator = indicators.nth(index);
-          const productName = (await indicator.locator(".product-title").innerText()).trim();
-          await subtitle(page, `Selecting ${productName} from Peer Indicators refreshes the relative index and peer distribution for that product.`, 900);
-          await clickHuman(page, indicator, 260);
-          await pause(1100);
-          status(`Peer Indicators update complete for ${productName}`);
-        }
+        const activeIndicator = peerSection
+          .locator(`.peer-indicator-card .product-status-card[data-product-id="${product.productId}"]`);
+        await spotlight(activeIndicator, 650);
+        await subtitle(
+          page,
+          `Peer Indicators keeps ${product.label} selected while the relative index and peer distribution remain within the twenty percent sales comparison range.`,
+          950,
+        );
+        await clearSpotlight(activeIndicator);
         continue;
       }
 

@@ -359,6 +359,9 @@ export default function PeerAnalysis({ representativeId, peerAnalysis }: Props) 
             {productEntries.map(([id, item]) => (
               <div
                 key={id}
+                data-product-id={id}
+                data-sales-difference={item.difference_percentage?.sales ?? 0}
+                data-peer-average-sales={item.peer_average.sales}
                 data-tooltip={formatProductLabel(item.product_name, id)}
                 className={
                   id === selectedId
