@@ -311,7 +311,7 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
     fetchAllRecords<IncentiveProgramRecord>(page, "/api/incentive-programs"),
   ]);
 
-  const periodStart = "2026-07-01";
+  const periodStart = "2026-01-01";
   const periodEnd = "2026-07-31";
   const activePrograms = programs.filter(
     (program) => String(program.start_date).slice(0, 10) <= periodEnd
@@ -334,7 +334,8 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
     const representativeId = String(payout.representative_id ?? "");
     const productId = String(payout.product_id ?? "");
     if (!availableById.has(representativeId)
-      || !String(payout.payout_month).startsWith("2026-07")
+      || String(payout.payout_month).slice(0, 10) < periodStart
+      || String(payout.payout_month).slice(0, 10) > periodEnd
       || !productId
       || (!coversAllProducts && !coveredProducts.has(productId))) continue;
 
@@ -358,7 +359,7 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
       || right.payoutValue - left.payoutValue,
   );
   if (ranked.length === 0) {
-    throw new Error("No July 2026 representative has complete demo incentive data. Generate or import the demo dataset first.");
+    throw new Error("No January-to-July 2026 representative has complete demo incentive data. Generate or import the demo dataset first.");
   }
 
   const [representativeId, coverage] = ranked[0];
@@ -370,6 +371,41 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
   await select.selectOption(choice.value);
   await pause(650);
   return choice;
+}
+
+async function selectCalendarDate(page: Page, ariaLabel: string, targetDate: string) {
+  const trigger = page.getByRole("button", { name: ariaLabel, exact: true });
+  await expect(trigger).toBeVisible();
+  if ((await trigger.innerText()).includes(targetDate)) return;
+
+  const [targetYear, targetMonth, targetDay] = targetDate.split("-").map(Number);
+  const targetMonthIndex = targetYear * 12 + targetMonth - 1;
+  await clickHuman(page, trigger, 220);
+  const picker = trigger.locator("xpath=..");
+  const calendar = picker.locator(".custom-calendar-popover");
+  await expect(calendar).toBeVisible();
+
+  for (let attempt = 0; attempt < 24; attempt += 1) {
+    const label = (await calendar.locator(".custom-calendar-header strong").innerText()).trim();
+    const current = new Date(`${label} 1`);
+    const currentMonthIndex = current.getFullYear() * 12 + current.getMonth();
+    if (currentMonthIndex === targetMonthIndex) break;
+    const direction = currentMonthIndex > targetMonthIndex ? "Previous month" : "Next month";
+    await clickHuman(page, calendar.getByRole("button", { name: direction, exact: true }), 90);
+  }
+
+  const selectedMonth = (await calendar.locator(".custom-calendar-header strong").innerText()).trim();
+  const selectedMonthDate = new Date(`${selectedMonth} 1`);
+  const selectedMonthIndex = selectedMonthDate.getFullYear() * 12 + selectedMonthDate.getMonth();
+  if (selectedMonthIndex !== targetMonthIndex) {
+    throw new Error(`Unable to navigate ${ariaLabel} to ${targetDate}`);
+  }
+  await clickHuman(
+    page,
+    calendar.getByRole("button", { name: String(targetDay), exact: true }),
+    140,
+  );
+  await expect(trigger).toContainText(targetDate);
 }
 
 function chartCommentary(title: string, description: string) {
@@ -500,7 +536,9 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
     status("STEP 2/11 — Select a representative and investigate");
     const representativeSelect = page.locator("select.form-input");
     await expect.poll(() => representativeSelect.locator("option").count(), { timeout: 30_000 }).toBeGreaterThan(1);
-    await subtitle(page, "We begin by choosing a field representative and the July 2026 investigation period.", 850);
+    await subtitle(page, "We begin by choosing a field representative and the investigation period from January through July 2026.", 950);
+    await selectCalendarDate(page, "Select start date", "2026-01-01");
+    await selectCalendarDate(page, "Select end date", "2026-07-31");
     const chosenRepresentative = await chooseCompleteRepresentative(page, representativeSelect);
     if (chosenRepresentative) await subtitle(page, `${chosenRepresentative.label} is selected for this investigation.`, 700);
     await clickHuman(page, page.getByRole("button", { name: "Run Investigation" }), 260);
