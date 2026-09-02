@@ -503,6 +503,7 @@ function resolveSyntheticOutputDirectory() {
 
 const firstNames = ["Meera", "Vikram", "Nisha", "Rahul", "Ananya", "Kiran", "Deepa", "Sanjay"];
 const lastNames = ["Rao", "Iyer", "Sharma", "Menon", "Kapoor", "Nair", "Patel", "Gupta"];
+const workspaceUsernames = ["ananya", "kavya", "meera", "nisha", "priya", "rahul", "rohan", "sanjay", "vikram"];
 
 test.setTimeout(1_200_000);
 
@@ -529,9 +530,28 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
     const username = page.getByLabel("Enter your name");
     await expect(username).toBeVisible({ timeout: 30_000 });
     await subtitle(page, "Incentive Auditor brings anomaly detection and incentive payout validation into a single Life Sciences audit workflow.", 1400);
-    await typeHuman(page, username, "arvind", 115);
+    await subtitle(page, "A username opens a private PostgreSQL workspace. When the name already exists, its saved tables are loaded. Otherwise, a new isolated workspace is created and initialized with demonstration data.", 1500);
+    const workspaceUsername = workspaceUsernames[randomIndex(workspaceUsernames.length)];
+    await subtitle(page, `${workspaceUsername} is selected as the username for this demonstration.`, 750);
+    await typeHuman(page, username, workspaceUsername, 115);
+    const workspaceResponsePromise = page.waitForResponse(
+      (response) => response.url().includes("/api/workspaces/login") && response.request().method() === "POST",
+    );
     await clickHuman(page, page.getByRole("button", { name: "Open my workspace" }), 260);
+    const workspaceResponse = await workspaceResponsePromise;
+    const workspaceResult = await workspaceResponse.json() as {
+      username?: string;
+      workspace?: string;
+      created?: boolean;
+    };
     await expect(page.locator("main.dashboard")).toBeVisible({ timeout: 60_000 });
+    await subtitle(
+      page,
+      workspaceResult.created
+        ? `No existing workspace was found for ${workspaceUsername}, so a new private workspace and its starter tables have been created.`
+        : `The existing workspace for ${workspaceUsername} was found, and its previously saved tables have been loaded.`,
+      1200,
+    );
 
     status("STEP 2/11 — Select a representative and investigate");
     const representativeSelect = page.locator("select.form-input");
