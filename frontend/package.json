@@ -20,8 +20,8 @@
     "playwright:install": "playwright install chromium webkit",
     "preview": "vite preview",
     "pretest:demo-recording": "playwright install chromium && python3 -m pip install -r scripts/demo-voiceover-requirements.txt",
-    "test:demo-recording": "playwright test tests/e2e/demo-recording.spec.ts --project=desktop-chromium",
-    "test:demo-recording:silent": "DEMO_SKIP_VOICEOVER=1 playwright test tests/e2e/demo-recording.spec.ts --project=desktop-chromium"
+    "test:demo-recording": "DEMO_RECORDING=1 playwright test tests/e2e/demo-recording.spec.ts --project=desktop-chromium",
+    "test:demo-recording:silent": "DEMO_RECORDING=1 DEMO_SKIP_VOICEOVER=1 playwright test tests/e2e/demo-recording.spec.ts --project=desktop-chromium"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.3.0",

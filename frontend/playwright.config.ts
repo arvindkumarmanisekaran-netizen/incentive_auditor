@@ -1,6 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const diagnosticsEnabled = process.env.PERF_DIAGNOSTICS === "1";
+const demoRecordingEnabled = process.env.DEMO_RECORDING === "1";
+const frontendPort = demoRecordingEnabled ? 5174 : 5173;
+const frontendBaseUrl = `http://127.0.0.1:${frontendPort}`;
 
 const androidUserAgent = (model: string) =>
   `Mozilla/5.0 (Linux; Android 14; ${model}) AppleWebKit/537.36 `
@@ -40,7 +43,7 @@ export default defineConfig({
     ["json", { outputFile: "test-results/performance-results.json" }],
   ],
   use: {
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: frontendBaseUrl,
     // Trace screenshots and video encoding consume animation frames. Keep the
     // benchmark clean by default and enable recording only for diagnosis.
     trace: diagnosticsEnabled ? "retain-on-failure" : "off",
@@ -57,9 +60,9 @@ export default defineConfig({
     ...xiaomiProjects,
   ],
   webServer: {
-    command: "npm run dev -- --host 127.0.0.1",
-    url: "http://127.0.0.1:5173",
-    reuseExistingServer: !process.env.CI,
+    command: `npm run dev -- --host 127.0.0.1 --port ${frontendPort} --strictPort`,
+    url: frontendBaseUrl,
+    reuseExistingServer: demoRecordingEnabled ? false : !process.env.CI,
     timeout: 120_000,
   },
 });

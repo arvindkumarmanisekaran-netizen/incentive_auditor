@@ -11,6 +11,9 @@ const CURSOR_ID = "incentive-auditor-demo-cursor";
 const cursorPositions = new WeakMap<Page, { x: number; y: number }>();
 const demoStartTime = Date.now();
 const narrationWordsPerSecond = Number(process.env.DEMO_SPEECH_WORDS_PER_SECOND ?? "2.2");
+const demoBaseUrl = process.env.DEMO_RECORDING === "1"
+  ? "http://127.0.0.1:5174"
+  : "http://127.0.0.1:5173";
 type CommentaryCue = {
   index: number;
   text: string;
@@ -512,7 +515,7 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
   recordingStartTime = Date.now();
   status("Starting 1920x1080 guided demo recording");
   const context = await browser.newContext({
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: demoBaseUrl,
     viewport: { width: 1920, height: 1080 },
     screen: { width: 1920, height: 1080 },
     deviceScaleFactor: 1,
@@ -525,7 +528,8 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
 
   try {
     status("STEP 1/11 — Login");
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(page.locator("#root")).not.toBeEmpty({ timeout: 30_000 });
     await installCursor(page);
     const username = page.getByLabel("Enter your name");
     await expect(username).toBeVisible({ timeout: 30_000 });
