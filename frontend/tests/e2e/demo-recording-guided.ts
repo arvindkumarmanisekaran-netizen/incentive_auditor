@@ -1,12 +1,25 @@
-import { existsSync } from "node:fs";
+import { execFile } from "node:child_process";
+import { existsSync, promises as fs } from "node:fs";
 import path from "node:path";
+import { promisify } from "node:util";
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const execFileAsync = promisify(execFile);
 const CAPTION_ID = "incentive-auditor-demo-caption";
 const CURSOR_ID = "incentive-auditor-demo-cursor";
 const cursorPositions = new WeakMap<Page, { x: number; y: number }>();
 const demoStartTime = Date.now();
+const narrationWordsPerSecond = Number(process.env.DEMO_SPEECH_WORDS_PER_SECOND ?? "3.1");
+type CommentaryCue = {
+  index: number;
+  text: string;
+  startMs: number;
+  endMs: number;
+  durationMs: number;
+};
+const commentaryTimeline: CommentaryCue[] = [];
+let recordingStartTime = 0;
 let forceCaptionTop = false;
 
 function elapsed() {
@@ -112,8 +125,16 @@ async function clickHuman(page: Page, locator: Locator, hover = 180) {
   await pause(280);
 }
 
+function spokenDuration(text: string, minimumMs: number) {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  const estimatedMs = Math.ceil((words / Math.max(narrationWordsPerSecond, 1)) * 1000 + 550);
+  return Math.max(minimumMs, estimatedMs);
+}
+
 async function subtitle(page: Page, text: string, duration = 950) {
+  const effectiveDuration = spokenDuration(text, duration);
   status(text);
+  const startedAt = Math.max(0, Date.now() - recordingStartTime);
   await page.evaluate(
     ({ id, message, forcedTop }) => {
       let caption = document.getElementById(id);
@@ -162,7 +183,15 @@ async function subtitle(page: Page, text: string, duration = 950) {
     },
     { id: CAPTION_ID, message: text, forcedTop: forceCaptionTop },
   );
-  await pause(duration);
+  await pause(effectiveDuration);
+  const endedAt = Math.max(startedAt + effectiveDuration, Date.now() - recordingStartTime);
+  commentaryTimeline.push({
+    index: commentaryTimeline.length + 1,
+    text,
+    startMs: startedAt,
+    endMs: endedAt,
+    durationMs: endedAt - startedAt,
+  });
 }
 
 async function spotlight(locator: Locator, hold = 450) {
@@ -322,6 +351,8 @@ const lastNames = ["Rao", "Iyer", "Sharma", "Menon", "Kapoor", "Nair", "Patel", 
 test.setTimeout(900_000);
 
 test("record complete Incentive Auditor hackathon demo in 1080p", async ({ browser }, testInfo) => {
+  commentaryTimeline.length = 0;
+  recordingStartTime = Date.now();
   status("Starting 1920x1080 guided demo recording");
   const context = await browser.newContext({
     baseURL: "http://127.0.0.1:5173",
@@ -570,9 +601,53 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
     await context.close();
     if (video) {
       const finalVideo = testInfo.outputPath("Incentive-Auditor-Demo-1920x1080.webm");
+      const timelinePath = testInfo.outputPath("commentary-timeline.json");
+      const voiceoverDir = testInfo.outputPath("voiceover");
       await video.saveAs(finalVideo);
+      await fs.writeFile(timelinePath, JSON.stringify({
+        version: 1,
+        recordingStartedAt: new Date(Date.now() - (Date.now() - recordingStartTime)).toISOString(),
+        voice: process.env.DEMO_TTS_VOICE ?? "en-IN-PrabhatNeural",
+        rate: process.env.DEMO_TTS_RATE ?? "+15%",
+        cues: commentaryTimeline,
+      }, null, 2));
       await testInfo.attach("Incentive Auditor Demo 1920x1080", { path: finalVideo, contentType: "video/webm" });
+      await testInfo.attach("Commentary timeline", { path: timelinePath, contentType: "application/json" });
       status(`✓ Video saved: ${finalVideo}`);
+
+      if (process.env.DEMO_SKIP_VOICEOVER !== "1" && commentaryTimeline.length > 0) {
+        try {
+          await fs.mkdir(voiceoverDir, { recursive: true });
+          status("Generating synchronized Indian-English voice-over");
+          const python = process.env.PYTHON ?? "python3";
+          const renderer = path.resolve(process.cwd(), "scripts/render_demo_voiceover.py");
+          const { stdout, stderr } = await execFileAsync(python, [
+            renderer,
+            "--video", finalVideo,
+            "--timeline", timelinePath,
+            "--output-dir", voiceoverDir,
+            "--voice", process.env.DEMO_TTS_VOICE ?? "en-IN-PrabhatNeural",
+            "--rate", process.env.DEMO_TTS_RATE ?? "+15%",
+          ], { maxBuffer: 10 * 1024 * 1024 });
+          if (stdout.trim()) console.log(stdout.trim());
+          if (stderr.trim()) console.error(stderr.trim());
+
+          const outputs = [
+            ["Voiced demo MP4", "Incentive-Auditor-Demo-Voiceover.mp4", "video/mp4"],
+            ["Voiced demo WebM", "Incentive-Auditor-Demo-Voiceover.webm", "video/webm"],
+            ["Narration audio", "Incentive-Auditor-Demo-Narration.mp3", "audio/mpeg"],
+            ["Narration subtitles", "Incentive-Auditor-Demo.srt", "application/x-subrip"],
+          ] as const;
+          for (const [name, fileName, contentType] of outputs) {
+            const outputPath = path.join(voiceoverDir, fileName);
+            if (existsSync(outputPath)) await testInfo.attach(name, { path: outputPath, contentType });
+          }
+          status(`✓ Voice-over outputs saved: ${voiceoverDir}`);
+        } catch (voiceoverError) {
+          console.error("[DEMO] Voice-over generation failed", voiceoverError);
+          if (!failure) failure = voiceoverError;
+        }
+      }
     }
   }
 
