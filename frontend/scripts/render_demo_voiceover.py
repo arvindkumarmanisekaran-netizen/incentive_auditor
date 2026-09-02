@@ -195,8 +195,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--video", required=True)
     parser.add_argument("--timeline", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--voice", default="en-IN-PrabhatNeural")
-    parser.add_argument("--rate", default="+15%")
+    parser.add_argument("--voice", default="en-IN-NeerjaNeural")
+    parser.add_argument("--rate", default="-20%")
     parser.add_argument("--volume", default="+0%")
     return parser.parse_args()
 

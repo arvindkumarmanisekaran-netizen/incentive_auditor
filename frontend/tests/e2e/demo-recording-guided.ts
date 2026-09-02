@@ -10,7 +10,7 @@ const CAPTION_ID = "incentive-auditor-demo-caption";
 const CURSOR_ID = "incentive-auditor-demo-cursor";
 const cursorPositions = new WeakMap<Page, { x: number; y: number }>();
 const demoStartTime = Date.now();
-const narrationWordsPerSecond = Number(process.env.DEMO_SPEECH_WORDS_PER_SECOND ?? "3.1");
+const narrationWordsPerSecond = Number(process.env.DEMO_SPEECH_WORDS_PER_SECOND ?? "2.2");
 type CommentaryCue = {
   index: number;
   text: string;
@@ -252,6 +252,113 @@ async function chooseRandomOption(page: Page, select: Locator, skipPlaceholder =
   return choice;
 }
 
+type PayoutRecord = {
+  representative_id: string;
+  product_id: string;
+  payout_month: string;
+  expected_payout?: number | string | null;
+  actual_payout?: number | string | null;
+};
+
+type IncentiveProgramRecord = {
+  start_date: string;
+  end_date: string;
+  products: string;
+};
+
+async function fetchAllRecords<T>(page: Page, endpoint: string): Promise<T[]> {
+  const records: T[] = [];
+  const limit = 500;
+  for (let offset = 0; ; offset += limit) {
+    const response = await page.request.get(`${endpoint}?limit=${limit}&offset=${offset}`);
+    if (!response.ok()) {
+      throw new Error(`Unable to verify demo data from ${endpoint}: ${response.status()}`);
+    }
+    const payload = await response.json() as { records?: T[]; total?: number };
+    const batch = Array.isArray(payload.records) ? payload.records : [];
+    records.push(...batch);
+    if (records.length >= Number(payload.total ?? records.length) || batch.length < limit) break;
+  }
+  return records;
+}
+
+async function chooseCompleteRepresentative(page: Page, select: Locator) {
+  await expect(select).toBeVisible();
+  const availableOptions = await select.locator("option").evaluateAll((options) =>
+    options
+      .map((option) => ({
+        value: (option as HTMLOptionElement).value,
+        label: (option.textContent ?? "").trim(),
+      }))
+      .filter((option) => option.value),
+  );
+  const availableById = new Map(availableOptions.map((option) => [option.value, option]));
+  const [payouts, programs] = await Promise.all([
+    fetchAllRecords<PayoutRecord>(page, "/api/incentive-payouts"),
+    fetchAllRecords<IncentiveProgramRecord>(page, "/api/incentive-programs"),
+  ]);
+
+  const periodStart = "2026-07-01";
+  const periodEnd = "2026-07-31";
+  const activePrograms = programs.filter(
+    (program) => String(program.start_date).slice(0, 10) <= periodEnd
+      && String(program.end_date).slice(0, 10) >= periodStart,
+  );
+  const coversAllProducts = activePrograms.some(
+    (program) => String(program.products).trim().toUpperCase() === "ALL",
+  );
+  const coveredProducts = new Set(
+    activePrograms.flatMap((program) =>
+      String(program.products)
+        .split(",")
+        .map((productId) => productId.trim())
+        .filter((productId) => productId && productId.toUpperCase() !== "ALL"),
+    ),
+  );
+
+  const candidates = new Map<string, { productIds: Set<string>; payoutRows: number; payoutValue: number }>();
+  for (const payout of payouts) {
+    const representativeId = String(payout.representative_id ?? "");
+    const productId = String(payout.product_id ?? "");
+    if (!availableById.has(representativeId)
+      || !String(payout.payout_month).startsWith("2026-07")
+      || !productId
+      || (!coversAllProducts && !coveredProducts.has(productId))) continue;
+
+    const expected = Number(payout.expected_payout ?? 0);
+    const actual = Number(payout.actual_payout ?? 0);
+    if (!Number.isFinite(expected) || !Number.isFinite(actual) || (expected <= 0 && actual <= 0)) continue;
+    const candidate = candidates.get(representativeId) ?? {
+      productIds: new Set<string>(),
+      payoutRows: 0,
+      payoutValue: 0,
+    };
+    candidate.productIds.add(productId);
+    candidate.payoutRows += 1;
+    candidate.payoutValue += Math.max(expected, actual);
+    candidates.set(representativeId, candidate);
+  }
+
+  const ranked = [...candidates.entries()].sort(([, left], [, right]) =>
+    right.productIds.size - left.productIds.size
+      || right.payoutRows - left.payoutRows
+      || right.payoutValue - left.payoutValue,
+  );
+  if (ranked.length === 0) {
+    throw new Error("No July 2026 representative has complete demo incentive data. Generate or import the demo dataset first.");
+  }
+
+  const [representativeId, coverage] = ranked[0];
+  const choice = availableById.get(representativeId);
+  if (!choice) throw new Error(`Representative ${representativeId} is unavailable in the investigation form.`);
+  status(`Preflight selected ${choice.label} with ${coverage.productIds.size} covered products and ${coverage.payoutRows} payout records`);
+  await clickHuman(page, select, 260);
+  await pause(280);
+  await select.selectOption(choice.value);
+  await pause(650);
+  return choice;
+}
+
 function chartCommentary(title: string, description: string) {
   const key = title.toLowerCase();
   if (key.includes("sales performance")) return `${title} compares current sales with the historical baseline, making unusual movement easy to spot.`;
@@ -348,7 +455,7 @@ function resolveSyntheticOutputDirectory() {
 const firstNames = ["Meera", "Vikram", "Nisha", "Rahul", "Ananya", "Kiran", "Deepa", "Sanjay"];
 const lastNames = ["Rao", "Iyer", "Sharma", "Menon", "Kapoor", "Nair", "Patel", "Gupta"];
 
-test.setTimeout(900_000);
+test.setTimeout(1_200_000);
 
 test("record complete Incentive Auditor hackathon demo in 1080p", async ({ browser }, testInfo) => {
   commentaryTimeline.length = 0;
@@ -381,7 +488,7 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
     const representativeSelect = page.locator("select.form-input");
     await expect.poll(() => representativeSelect.locator("option").count(), { timeout: 30_000 }).toBeGreaterThan(1);
     await subtitle(page, "We begin by choosing a field representative and the July 2026 investigation period.", 850);
-    const chosenRepresentative = await chooseRandomOption(page, representativeSelect);
+    const chosenRepresentative = await chooseCompleteRepresentative(page, representativeSelect);
     if (chosenRepresentative) await subtitle(page, `${chosenRepresentative.label} is selected for this investigation.`, 700);
     await clickHuman(page, page.getByRole("button", { name: "Run Investigation" }), 260);
     await subtitle(page, "The investigation agents now evaluate sales and prescriptions, doctor and territory behaviour, payout reconstruction, peer context and overall risk.", 1400);
@@ -607,8 +714,8 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
       await fs.writeFile(timelinePath, JSON.stringify({
         version: 1,
         recordingStartedAt: new Date(Date.now() - (Date.now() - recordingStartTime)).toISOString(),
-        voice: process.env.DEMO_TTS_VOICE ?? "en-IN-PrabhatNeural",
-        rate: process.env.DEMO_TTS_RATE ?? "+15%",
+        voice: process.env.DEMO_TTS_VOICE ?? "en-IN-NeerjaNeural",
+        rate: process.env.DEMO_TTS_RATE ?? "-20%",
         cues: commentaryTimeline,
       }, null, 2));
       await testInfo.attach("Incentive Auditor Demo 1920x1080", { path: finalVideo, contentType: "video/webm" });
@@ -626,8 +733,8 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
             "--video", finalVideo,
             "--timeline", timelinePath,
             "--output-dir", voiceoverDir,
-            "--voice", process.env.DEMO_TTS_VOICE ?? "en-IN-PrabhatNeural",
-            "--rate", process.env.DEMO_TTS_RATE ?? "+15%",
+            "--voice", process.env.DEMO_TTS_VOICE ?? "en-IN-NeerjaNeural",
+            "--rate", process.env.DEMO_TTS_RATE ?? "-20%",
           ], { maxBuffer: 10 * 1024 * 1024 });
           if (stdout.trim()) console.log(stdout.trim());
           if (stderr.trim()) console.error(stderr.trim());

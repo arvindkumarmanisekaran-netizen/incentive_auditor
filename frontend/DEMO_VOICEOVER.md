@@ -25,8 +25,8 @@ sudo apt install ffmpeg
 
 Defaults:
 
-- Voice: `en-IN-PrabhatNeural`
-- Rate: `+15%`
+- Voice: `en-IN-NeerjaNeural`
+- Rate: `-20%` (approximately 30% slower than the previous `+15%` setting)
 - Volume: `+0%`
 - Caption timing: at least the original requested pause, automatically extended
   using the configured narration word rate.
@@ -34,7 +34,7 @@ Defaults:
 Override the voice or pace:
 
 ```bash
-DEMO_TTS_VOICE=en-IN-NeerjaNeural DEMO_TTS_RATE=+10% npm run test:demo-recording
+DEMO_TTS_VOICE=en-IN-PrabhatNeural DEMO_TTS_RATE=-10% npm run test:demo-recording
 ```
 
 Record without generating narration:
@@ -43,6 +43,9 @@ Record without generating narration:
 npm run test:demo-recording:silent
 ```
 
-The renderer accelerates only an individual narration clip that exceeds its
-recorded caption window. This prevents adjacent voice clips from overlapping
+The recorder preflights July investigation data and selects a representative with covered
+incentive and payout records so the analytical views are populated. This selection detail
+is intentionally excluded from the audience-facing subtitles. The slower caption pacing
+keeps the neural narration natural; the renderer accelerates only an individual narration
+clip that still exceeds its recorded caption window. This prevents adjacent voice clips from overlapping
 while preserving the Playwright action timeline.
