@@ -80,6 +80,47 @@ async def synthesize_with_retry(
     raise RuntimeError(f"Unable to synthesize {destination.name}") from last_error
 
 
+def valid_audio(path: Path) -> bool:
+    if not path.exists() or path.stat().st_size < 1024:
+        return False
+    try:
+        return len(AudioSegment.from_file(path)) > 0
+    except Exception:
+        path.unlink(missing_ok=True)
+        return False
+
+
+async def synthesize_cues(
+    cues: list[dict],
+    clips_dir: Path,
+    args: argparse.Namespace,
+) -> list[Path]:
+    concurrency = max(1, int(args.concurrency))
+    semaphore = asyncio.Semaphore(concurrency)
+
+    async def synthesize_one(index: int, cue: dict) -> Path:
+        source = clips_dir / f"{index:03}.mp3"
+        if valid_audio(source):
+            print(f"[{index}/{len(cues)}] Reusing cached narration")
+            return source
+
+        text = " ".join(str(cue["text"]).split())
+        temporary = clips_dir / f"{index:03}.part.mp3"
+        temporary.unlink(missing_ok=True)
+        async with semaphore:
+            print(f"[{index}/{len(cues)}] Synthesizing: {text}")
+            await synthesize_with_retry(
+                text, temporary, args.voice, args.rate, args.volume
+            )
+        temporary.replace(source)
+        return source
+
+    return list(await asyncio.gather(*(
+        synthesize_one(index, cue)
+        for index, cue in enumerate(cues, start=1)
+    )))
+
+
 def atempo_filter(speed: float) -> str:
     factors: list[float] = []
     remaining = speed
@@ -135,14 +176,9 @@ async def render(args: argparse.Namespace) -> None:
         frame_rate=48_000,
     ).set_channels(2)
 
-    for index, cue in enumerate(cues, start=1):
-        text = " ".join(str(cue["text"]).split())
-        source = clips_dir / f"{index:03}.mp3"
+    sources = await synthesize_cues(cues, clips_dir, args)
+    for index, (cue, source) in enumerate(zip(cues, sources), start=1):
         fitted = clips_dir / f"{index:03}-fitted.wav"
-        print(f"[{index}/{len(cues)}] {text}")
-        await synthesize_with_retry(
-            text, source, args.voice, args.rate, args.volume
-        )
         start_ms = max(0, int(cue["startMs"]))
         end_ms = max(start_ms + 250, int(cue["endMs"]))
         clip = fit_clip(source, end_ms - start_ms, fitted)
@@ -198,6 +234,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--voice", default="en-IN-NeerjaNeural")
     parser.add_argument("--rate", default="-20%")
     parser.add_argument("--volume", default="+0%")
+    parser.add_argument("--concurrency", type=int, default=4)
     return parser.parse_args()
 
 

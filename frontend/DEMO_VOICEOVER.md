@@ -49,3 +49,21 @@ is intentionally excluded from the audience-facing subtitles. The slower caption
 keeps the neural narration natural; the renderer accelerates only an individual narration
 clip that still exceeds its recorded caption window. This prevents adjacent voice clips from overlapping
 while preserving the Playwright action timeline.
+
+
+## Resume voice-over without recording again
+
+If the guided recording finishes but narration is interrupted, rerun only the renderer
+with the existing video and timeline. Completed narration clips are validated and reused,
+while missing clips are synthesized with four bounded concurrent requests:
+
+```bash
+python3 scripts/render_demo_voiceover.py \
+  --video "<test-result>/Incentive-Auditor-Demo-1920x1080.webm" \
+  --timeline "<test-result>/commentary-timeline.json" \
+  --output-dir "<test-result>/voiceover" \
+  --voice en-IN-NeerjaNeural \
+  --rate=-20%
+```
+
+Set `--concurrency 1` if the TTS service rate-limits the connection.

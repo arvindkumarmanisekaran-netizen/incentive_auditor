@@ -508,7 +508,7 @@ const firstNames = ["Meera", "Vikram", "Nisha", "Rahul", "Ananya", "Kiran", "Dee
 const lastNames = ["Rao", "Iyer", "Sharma", "Menon", "Kapoor", "Nair", "Patel", "Gupta"];
 const workspaceUsernames = ["ananya", "kavya", "meera", "nisha", "priya", "rahul", "rohan", "sanjay", "vikram"];
 
-test.setTimeout(1_200_000);
+test.setTimeout(3_600_000);
 
 test("record complete Incentive Auditor hackathon demo in 1080p", async ({ browser }, testInfo) => {
   commentaryTimeline.length = 0;
