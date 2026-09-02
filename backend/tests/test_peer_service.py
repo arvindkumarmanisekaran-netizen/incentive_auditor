@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from backend.app.services.peer_service import PeerService
+from backend.app.services.peer_service import PeerService, inclusive_month_count
 from backend.app.utils.peer_metrics import calculate_peer_comparison
 
 
@@ -65,6 +65,8 @@ async def test_product_peer_metrics_aggregate_sources_before_joining():
     assert "representative_doctor_assignments" in session.statement
     assert "p.doctor_id = s.doctor_id" not in session.statement
     assert "ip.product_id = s.product_id" not in session.statement
+    assert "/ CAST(:period_months AS NUMERIC)" in session.statement
+    assert session.parameters["period_months"] == 7
     assert session.parameters["representative_id_0"] == "R2"
     assert session.parameters["product_id_0"] == "P1"
     assert "representative_id_1" not in session.parameters
@@ -86,6 +88,19 @@ async def test_territory_peer_metrics_keep_all_requested_peer_product_pairs():
     assert session.parameters["peer_ids"] == ["R2", "R3"]
     assert session.parameters["product_ids"] == ["P1", "P2"]
     assert "s.selling_territory_id" not in session.statement
+    assert session.parameters["period_months"] == 7
+
+
+@pytest.mark.parametrize(
+    ("start_date", "end_date", "expected"),
+    [
+        ("2026-07-01", "2026-07-31", 1),
+        ("2026-01-01", "2026-07-31", 7),
+        (date(2025, 12, 15), date(2026, 2, 1), 3),
+    ],
+)
+def test_inclusive_month_count(start_date, end_date, expected):
+    assert inclusive_month_count(start_date, end_date) == expected
 
 
 def test_peer_average_includes_qualifying_zero_sales_peer():

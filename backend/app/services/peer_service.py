@@ -1,7 +1,16 @@
+from datetime import date, datetime
 from typing import Any
 
 from sqlalchemy import bindparam, text
 from sqlalchemy.ext.asyncio import AsyncSession
+
+
+def inclusive_month_count(start_date: date | datetime | str, end_date: date | datetime | str) -> int:
+    def month_index(value: date | datetime | str) -> int:
+        parsed = value if isinstance(value, (date, datetime)) else date.fromisoformat(str(value)[:10])
+        return parsed.year * 12 + parsed.month
+
+    return max(1, month_index(end_date) - month_index(start_date) + 1)
 
 
 class PeerService:
@@ -62,7 +71,8 @@ class PeerService:
                 SELECT
                     cp.representative_id,
                     cp.product_id,
-                    COALESCE(SUM(s.sales_amount), 0) AS sales,
+                    COALESCE(SUM(s.sales_amount), 0)
+                        / CAST(:period_months AS NUMERIC) AS sales,
                     COALESCE(SUM(s.quantity), 0) AS units
                 FROM candidate_pairs cp
                 LEFT JOIN sales s
@@ -154,7 +164,11 @@ class PeerService:
             return []
 
         pair_selects: list[str] = []
-        parameters: dict[str, Any] = {"start_date": start_date, "end_date": end_date}
+        parameters: dict[str, Any] = {
+            "start_date": start_date,
+            "end_date": end_date,
+            "period_months": inclusive_month_count(start_date, end_date),
+        }
         for index, (representative_id, product_id) in enumerate(unique_pairs):
             pair_selects.append(
                 f"SELECT :representative_id_{index} AS representative_id, "
@@ -193,6 +207,7 @@ class PeerService:
                 "product_ids": unique_product_ids,
                 "start_date": start_date,
                 "end_date": end_date,
+                "period_months": inclusive_month_count(start_date, end_date),
             },
             expanding_parameters=("peer_ids", "product_ids"),
         )
