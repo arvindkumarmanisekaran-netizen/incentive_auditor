@@ -270,14 +270,27 @@ async function fetchAllRecords<T>(page: Page, endpoint: string): Promise<T[]> {
   const records: T[] = [];
   const limit = 500;
   for (let offset = 0; ; offset += limit) {
-    const response = await page.request.get(`${endpoint}?limit=${limit}&offset=${offset}`);
-    if (!response.ok()) {
-      throw new Error(`Unable to verify demo data from ${endpoint}: ${response.status()}`);
+    const payload = await page.evaluate(
+      async ({ requestEndpoint, requestLimit, requestOffset }) => {
+        const response = await window.fetch(
+          `${requestEndpoint}?limit=${requestLimit}&offset=${requestOffset}`,
+        );
+        return {
+          ok: response.ok,
+          status: response.status,
+          body: response.ok
+            ? await response.json() as { records?: unknown[]; total?: number }
+            : null,
+        };
+      },
+      { requestEndpoint: endpoint, requestLimit: limit, requestOffset: offset },
+    );
+    if (!payload.ok || !payload.body) {
+      throw new Error(`Unable to verify demo data from ${endpoint}: ${payload.status}`);
     }
-    const payload = await response.json() as { records?: T[]; total?: number };
-    const batch = Array.isArray(payload.records) ? payload.records : [];
+    const batch = Array.isArray(payload.body.records) ? payload.body.records as T[] : [];
     records.push(...batch);
-    if (records.length >= Number(payload.total ?? records.length) || batch.length < limit) break;
+    if (records.length >= Number(payload.body.total ?? records.length) || batch.length < limit) break;
   }
   return records;
 }
@@ -734,7 +747,7 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
             "--timeline", timelinePath,
             "--output-dir", voiceoverDir,
             "--voice", process.env.DEMO_TTS_VOICE ?? "en-IN-NeerjaNeural",
-            "--rate", process.env.DEMO_TTS_RATE ?? "-20%",
+            `--rate=${process.env.DEMO_TTS_RATE ?? "-20%"}`,
           ], { maxBuffer: 10 * 1024 * 1024 });
           if (stdout.trim()) console.log(stdout.trim());
           if (stderr.trim()) console.error(stderr.trim());
