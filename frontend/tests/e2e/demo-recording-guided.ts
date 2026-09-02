@@ -379,7 +379,7 @@ async function chooseCompleteRepresentative(page: Page, select: Locator) {
 async function choosePeerProductWithinSalesRange(
   page: Page,
   peerSection: Locator,
-  maximumDifference = 20,
+  maximumDifference = 40,
 ) {
   const indicators = peerSection.locator(".peer-indicator-card .product-status-card");
   await expect(indicators.first()).toBeVisible();
@@ -642,7 +642,7 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
         const signedDifference = `${product.difference >= 0 ? "+" : ""}${product.difference.toFixed(2)}%`;
         await subtitle(
           page,
-          `Peer Benchmark is focused on ${product.label}. Representative sales differ from peer-average sales by ${signedDifference}, which is within the selected plus or minus twenty percent comparison range.`,
+          `Peer Benchmark is focused on ${product.label}. Representative sales differ from peer-average sales by ${signedDifference}, which is within the selected plus or minus forty percent comparison range.`,
           1200,
         );
         await tourCharts(page, peerSection);
@@ -651,7 +651,7 @@ test("record complete Incentive Auditor hackathon demo in 1080p", async ({ brows
         await spotlight(activeIndicator, 650);
         await subtitle(
           page,
-          `Peer Indicators keeps ${product.label} selected while the relative index and peer distribution remain within the twenty percent sales comparison range.`,
+          `Peer Indicators keeps ${product.label} selected while the relative index and peer distribution remain within the forty percent sales comparison range.`,
           950,
         );
         await clearSpotlight(activeIndicator);
